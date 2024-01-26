@@ -17,6 +17,7 @@ add_library(${PROJECT_NAME}
   BarcodeAssign.h
   BarcodePOAllocate.h
   BarcodePOReceive.h
+  BarcodeSOAllocate.h
   BarcodeUnassign.h
   BlankEnum.h
   BomImportExtract.h
@@ -248,6 +249,7 @@ add_library(${PROJECT_NAME}
   PluginConfigInstall.h
   PluginRegistryError.h
   PluginRegistryStatus.h
+  PluginReload.h
   PluginSetting.h
   ProjectCode.h
   PurchaseOrder.h
@@ -362,6 +364,7 @@ add_library(${PROJECT_NAME}
   BarcodeAssign.cpp
   BarcodePOAllocate.cpp
   BarcodePOReceive.cpp
+  BarcodeSOAllocate.cpp
   BarcodeUnassign.cpp
   BlankEnum.cpp
   BomImportExtract.cpp
@@ -593,6 +596,7 @@ add_library(${PROJECT_NAME}
   PluginConfigInstall.cpp
   PluginRegistryError.cpp
   PluginRegistryStatus.cpp
+  PluginReload.cpp
   PluginSetting.cpp
   ProjectCode.cpp
   PurchaseOrder.cpp

@@ -8,14 +8,45 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    InvenTree_dialogs/dialogselectinventreelocation.cpp \
+    InvenTree_dialogs/inventreecategorymodel.cpp \
+    inventreepartimportwizard.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    supplier/abstractsupplier.cpp \
+    supplier/supplierattachment.cpp \
+    supplier/supplierpart.cpp \
+    supplier/supplierpartproperty.cpp \
+    supplier/supplierregistry.cpp \
+    supplier/suppliers/tme.cpp \
+    supplier/suppliers/tmepart.cpp \
+    wizard/models/propertymappingmodel.cpp \
+    wizard/wizardpagestockandpricing.cpp \
+    wizard/wizardpagesupplierdataenter.cpp
 
 HEADERS += \
-    mainwindow.h
+    InvenTree_dialogs/dialogselectinventreelocation.h \
+    InvenTree_dialogs/inventreecategorymodel.h \
+    inventreepartimportwizard.h \
+    mainwindow.h \
+    qt_goodies/qobjectsingleton.h \
+    supplier/abstractsupplier.h \
+    supplier/supplierattachment.h \
+    supplier/supplierpart.h \
+    supplier/supplierpartproperty.h \
+    supplier/supplierregistry.h \
+    supplier/suppliers/tme.h \
+    supplier/suppliers/tmepart.h \
+    wizard/models/propertymappingmodel.h \
+    wizard/wizardpagestockandpricing.h \
+    wizard/wizardpagesupplierdataenter.h
 
 FORMS += \
-    mainwindow.ui
+    InvenTree_dialogs/dialogselectinventreelocation.ui \
+    inventreepartimportwizard.ui \
+    mainwindow.ui \
+    wizard/wizardpagestockandpricing.ui \
+    wizard/wizardpagesupplierdataenter.ui
 
 
 # Default rules for deployment.

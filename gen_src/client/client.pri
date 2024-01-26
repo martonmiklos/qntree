@@ -11,6 +11,7 @@ HEADERS += \
     $${PWD}/BarcodeAssign.h \
     $${PWD}/BarcodePOAllocate.h \
     $${PWD}/BarcodePOReceive.h \
+    $${PWD}/BarcodeSOAllocate.h \
     $${PWD}/BarcodeUnassign.h \
     $${PWD}/BlankEnum.h \
     $${PWD}/BomImportExtract.h \
@@ -242,6 +243,7 @@ HEADERS += \
     $${PWD}/PluginConfigInstall.h \
     $${PWD}/PluginRegistryError.h \
     $${PWD}/PluginRegistryStatus.h \
+    $${PWD}/PluginReload.h \
     $${PWD}/PluginSetting.h \
     $${PWD}/ProjectCode.h \
     $${PWD}/PurchaseOrder.h \
@@ -361,6 +363,7 @@ SOURCES += \
     $${PWD}/BarcodeAssign.cpp \
     $${PWD}/BarcodePOAllocate.cpp \
     $${PWD}/BarcodePOReceive.cpp \
+    $${PWD}/BarcodeSOAllocate.cpp \
     $${PWD}/BarcodeUnassign.cpp \
     $${PWD}/BlankEnum.cpp \
     $${PWD}/BomImportExtract.cpp \
@@ -592,6 +595,7 @@ SOURCES += \
     $${PWD}/PluginConfigInstall.cpp \
     $${PWD}/PluginRegistryError.cpp \
     $${PWD}/PluginRegistryStatus.cpp \
+    $${PWD}/PluginReload.cpp \
     $${PWD}/PluginSetting.cpp \
     $${PWD}/ProjectCode.cpp \
     $${PWD}/PurchaseOrder.cpp \

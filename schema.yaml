@@ -1,7 +1,9 @@
 openapi: 3.0.3
+servers:
+    - url: http://localhost:8000
 info:
   title: InvenTree API
-  version: 158
+  version: 160
   description: API for InvenTree - the intuitive open source inventory management
     system
   license:
@@ -763,6 +765,45 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BarcodePOReceive'
+          description: ''
+  /api/barcode/so-allocate/:
+    post:
+      operationId: barcode_so_allocate_create
+      description: |-
+        Endpoint for allocating stock to a sales order, by scanning barcode.
+
+        The scanned barcode should map to a StockItem object.
+
+        Additional fields can be passed to the endpoint:
+
+        - SalesOrder (Required)
+        - Line Item
+        - Shipment
+        - Quantity
+      tags:
+      - barcode
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BarcodeSOAllocate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/BarcodeSOAllocate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/BarcodeSOAllocate'
+        required: true
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BarcodeSOAllocate'
           description: ''
   /api/barcode/unlink/:
     post:
@@ -11320,6 +11361,10 @@ paths:
         description: Which field to use when ordering the results.
         schema:
           type: string
+      - in: query
+        name: parent
+        schema:
+          type: integer
       - name: search
         required: false
         in: query
@@ -14096,6 +14141,34 @@ paths:
       responses:
         '200':
           description: No response body
+  /api/plugins/reload/:
+    post:
+      operationId: plugins_reload_create
+      description: Endpoint for reloading all plugins.
+      tags:
+      - plugins
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PluginReload'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PluginReload'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PluginReload'
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PluginReload'
+          description: ''
   /api/plugins/settings/{plugin}/{key}/:
     get:
       operationId: plugins_settings_retrieve
@@ -18453,6 +18526,110 @@ paths:
       responses:
         '200':
           description: No response body
+  /api/stock/test-statistics/.*:
+    get:
+      operationId: stock_test_statistics_.*_list
+      description: API endpoint for listing (and creating) a StockItemTestResult object.
+      parameters:
+      - name: limit
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: offset
+        required: false
+        in: query
+        description: The initial index from which to return the results.
+        schema:
+          type: integer
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - in: query
+        name: result
+        schema:
+          type: boolean
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      - in: query
+        name: test
+        schema:
+          type: string
+      - in: query
+        name: user
+        schema:
+          type: integer
+      - in: query
+        name: value
+        schema:
+          type: string
+      tags:
+      - stock
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedStockItemTestResultList'
+          description: ''
+    post:
+      operationId: stock_test_statistics_.*_create
+      description: API endpoint for listing (and creating) a StockItemTestResult object.
+      tags:
+      - stock
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StockItemTestResult'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/StockItemTestResult'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/StockItemTestResult'
+        required: true
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StockItemTestResult'
+          description: ''
+    delete:
+      operationId: stock_test_statistics_.*_destroy
+      description: |-
+        Perform a DELETE operation against this list endpoint.
+
+        We expect a list of primary-key (ID) values to be supplied as a JSON object, e.g.
+        {
+            items: [4, 8, 15, 16, 23, 42]
+        }
+      tags:
+      - stock
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
   /api/stock/test/{id}/.*:
     get:
       operationId: stock_test_.*_retrieve
@@ -18719,6 +18896,45 @@ paths:
       - tokenAuth: []
       responses:
         '204':
+          description: No response body
+  /api/stock/test/statistics/by_build_order/{id}/.*:
+    get:
+      operationId: stock_test_statistics_by_build_order_.*_retrieve
+      description: Return test execution count matrix broken downs by test result.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - stock
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
+          description: No response body
+  /api/stock/test/statistics/by_part/{id}/.*:
+    get:
+      operationId: stock_test_statistics_by_part_.*_retrieve
+      description: API endpoint for accessing a test statistics broken down by test
+        templates
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - stock
+      security:
+      - basicAuth: []
+      - cookieAuth: []
+      - tokenAuth: []
+      responses:
+        '200':
           description: No response body
   /api/stock/track/{id}/:
     get:
@@ -19860,7 +20076,7 @@ components:
           maxLength: 4095
         purchase_order:
           type: integer
-          description: PurchaseOrder to allocate items against
+          description: Purchase Order to allocate items against
       required:
       - barcode
       - purchase_order
@@ -19888,6 +20104,34 @@ components:
           description: Location to receive items into
       required:
       - barcode
+    BarcodeSOAllocate:
+      type: object
+      description: |-
+        Serializr for allocating stock items to a sales order
+
+        The scanned barcode must map to a StockItem object
+      properties:
+        barcode:
+          type: string
+          description: Scanned barcode data
+          maxLength: 4095
+        sales_order:
+          type: integer
+          description: Sales Order to allocate items against
+        line:
+          type: integer
+          nullable: true
+          description: Sales order line item to allocate items against
+        shipment:
+          type: integer
+          nullable: true
+          description: Sales order shipment to allocate items against
+        quantity:
+          type: integer
+          description: Quantity to allocate
+      required:
+      - barcode
+      - sales_order
     BarcodeUnassign:
       type: object
       description: Serializer class for unlinking a barcode from an internal model
@@ -20948,13 +21192,9 @@ components:
           description: |-
             Beszállító által használt alapértelmezett pénznem
 
-            * `AUD` - Australian Dollar
-            * `CAD` - Canadian Dollar
-            * `CNY` - Chinese Yuan
+            * `HUF` - Hungarian Forint
             * `EUR` - Euro
             * `GBP` - British Pound
-            * `JPY` - Japanese Yen
-            * `NZD` - New Zealand Dollar
             * `USD` - US Dollar
         contact:
           type: string
@@ -21167,7 +21407,7 @@ components:
         email:
           type: string
           format: email
-          title: E-mail address
+          title: E-mail cím
           maxLength: 254
         verified:
           type: boolean
@@ -23738,13 +23978,9 @@ components:
           description: |-
             Beszerzési pénzneme ennek a készlet tételnek
 
-            * `AUD` - Australian Dollar
-            * `CAD` - Canadian Dollar
-            * `CNY` - Chinese Yuan
+            * `HUF` - Hungarian Forint
             * `EUR` - Euro
             * `GBP` - British Pound
-            * `JPY` - Japanese Yen
-            * `NZD` - New Zealand Dollar
             * `USD` - US Dollar
       required:
       - part
@@ -24072,13 +24308,9 @@ components:
           description: |-
             Beszerzési pénzneme ennek a készlet tételnek
 
-            * `AUD` - Australian Dollar
-            * `CAD` - Canadian Dollar
-            * `CNY` - Chinese Yuan
+            * `HUF` - Hungarian Forint
             * `EUR` - Euro
             * `GBP` - British Pound
-            * `JPY` - Japanese Yen
-            * `NZD` - New Zealand Dollar
             * `USD` - US Dollar
       required:
       - part
@@ -24140,13 +24372,9 @@ components:
           description: |-
             Válassz pénznemet a lehetőségek közül
 
-            * `AUD` - Australian Dollar
-            * `CAD` - Canadian Dollar
-            * `CNY` - Chinese Yuan
+            * `HUF` - Hungarian Forint
             * `EUR` - Euro
             * `GBP` - British Pound
-            * `JPY` - Japanese Yen
-            * `NZD` - New Zealand Dollar
             * `USD` - US Dollar
         cost_max:
           type: string
@@ -24160,13 +24388,9 @@ components:
           description: |-
             Válassz pénznemet a lehetőségek közül
 
-            * `AUD` - Australian Dollar
-            * `CAD` - Canadian Dollar
-            * `CNY` - Chinese Yuan
+            * `HUF` - Hungarian Forint
             * `EUR` - Euro
             * `GBP` - British Pound
-            * `JPY` - Japanese Yen
-            * `NZD` - New Zealand Dollar
             * `USD` - US Dollar
         note:
           type: string
@@ -25074,13 +25298,9 @@ components:
           description: |-
             Beszállító által használt alapértelmezett pénznem
 
-            * `AUD` - Australian Dollar
-            * `CAD` - Canadian Dollar
-            * `CNY` - Chinese Yuan
+            * `HUF` - Hungarian Forint
             * `EUR` - Euro
             * `GBP` - British Pound
-            * `JPY` - Japanese Yen
-            * `NZD` - New Zealand Dollar
             * `USD` - US Dollar
         contact:
           type: string
@@ -25896,13 +26116,9 @@ components:
           description: |-
             Beszerzési pénzneme ennek a készlet tételnek
 
-            * `AUD` - Australian Dollar
-            * `CAD` - Canadian Dollar
-            * `CNY` - Chinese Yuan
+            * `HUF` - Hungarian Forint
             * `EUR` - Euro
             * `GBP` - British Pound
-            * `JPY` - Japanese Yen
-            * `NZD` - New Zealand Dollar
             * `USD` - US Dollar
     PatchedPartLabel:
       type: object
@@ -26187,13 +26403,9 @@ components:
           description: |-
             Beszerzési pénzneme ennek a készlet tételnek
 
-            * `AUD` - Australian Dollar
-            * `CAD` - Canadian Dollar
-            * `CNY` - Chinese Yuan
+            * `HUF` - Hungarian Forint
             * `EUR` - Euro
             * `GBP` - British Pound
-            * `JPY` - Japanese Yen
-            * `NZD` - New Zealand Dollar
             * `USD` - US Dollar
     PatchedPartStocktake:
       type: object
@@ -26234,13 +26446,9 @@ components:
           description: |-
             Válassz pénznemet a lehetőségek közül
 
-            * `AUD` - Australian Dollar
-            * `CAD` - Canadian Dollar
-            * `CNY` - Chinese Yuan
+            * `HUF` - Hungarian Forint
             * `EUR` - Euro
             * `GBP` - British Pound
-            * `JPY` - Japanese Yen
-            * `NZD` - New Zealand Dollar
             * `USD` - US Dollar
         cost_max:
           type: string
@@ -26254,13 +26462,9 @@ components:
           description: |-
             Válassz pénznemet a lehetőségek közül
 
-            * `AUD` - Australian Dollar
-            * `CAD` - Canadian Dollar
-            * `CNY` - Chinese Yuan
+            * `HUF` - Hungarian Forint
             * `EUR` - Euro
             * `GBP` - British Pound
-            * `JPY` - Japanese Yen
-            * `NZD` - New Zealand Dollar
             * `USD` - US Dollar
         note:
           type: string
@@ -26573,13 +26777,9 @@ components:
             Megrendeléshez használt pénznem (hagyd üresen a cégnél alapértelmezetthez)
 
             * `` - ---------
-            * `AUD` - Australian Dollar
-            * `CAD` - Canadian Dollar
-            * `CNY` - Chinese Yuan
+            * `HUF` - Hungarian Forint
             * `EUR` - Euro
             * `GBP` - British Pound
-            * `JPY` - Japanese Yen
-            * `NZD` - New Zealand Dollar
             * `USD` - US Dollar
           oneOf:
           - $ref: '#/components/schemas/SalePriceCurrencyEnum'
@@ -26673,13 +26873,9 @@ components:
           description: |-
             Válassz pénznemet a lehetőségek közül
 
-            * `AUD` - Australian Dollar
-            * `CAD` - Canadian Dollar
-            * `CNY` - Chinese Yuan
+            * `HUF` - Hungarian Forint
             * `EUR` - Euro
             * `GBP` - British Pound
-            * `JPY` - Japanese Yen
-            * `NZD` - New Zealand Dollar
             * `USD` - US Dollar
         link:
           type: string
@@ -26737,13 +26933,9 @@ components:
           description: |-
             Beszérzési ár pénzneme
 
-            * `AUD` - Australian Dollar
-            * `CAD` - Canadian Dollar
-            * `CNY` - Chinese Yuan
+            * `HUF` - Hungarian Forint
             * `EUR` - Euro
             * `GBP` - British Pound
-            * `JPY` - Japanese Yen
-            * `NZD` - New Zealand Dollar
             * `USD` - US Dollar
         destination:
           type: integer
@@ -26910,13 +27102,9 @@ components:
             Megrendeléshez használt pénznem (hagyd üresen a cégnél alapértelmezetthez)
 
             * `` - ---------
-            * `AUD` - Australian Dollar
-            * `CAD` - Canadian Dollar
-            * `CNY` - Chinese Yuan
+            * `HUF` - Hungarian Forint
             * `EUR` - Euro
             * `GBP` - British Pound
-            * `JPY` - Japanese Yen
-            * `NZD` - New Zealand Dollar
             * `USD` - US Dollar
           oneOf:
           - $ref: '#/components/schemas/SalePriceCurrencyEnum'
@@ -27016,13 +27204,9 @@ components:
           description: |-
             Válassz pénznemet a lehetőségek közül
 
-            * `AUD` - Australian Dollar
-            * `CAD` - Canadian Dollar
-            * `CNY` - Chinese Yuan
+            * `HUF` - Hungarian Forint
             * `EUR` - Euro
             * `GBP` - British Pound
-            * `JPY` - Japanese Yen
-            * `NZD` - New Zealand Dollar
             * `USD` - US Dollar
         link:
           type: string
@@ -27082,13 +27266,9 @@ components:
           description: |-
             Sortétel pénzneme
 
-            * `AUD` - Australian Dollar
-            * `CAD` - Canadian Dollar
-            * `CNY` - Chinese Yuan
+            * `HUF` - Hungarian Forint
             * `EUR` - Euro
             * `GBP` - British Pound
-            * `JPY` - Japanese Yen
-            * `NZD` - New Zealand Dollar
             * `USD` - US Dollar
         link:
           type: string
@@ -27264,13 +27444,9 @@ components:
             Megrendeléshez használt pénznem (hagyd üresen a cégnél alapértelmezetthez)
 
             * `` - ---------
-            * `AUD` - Australian Dollar
-            * `CAD` - Canadian Dollar
-            * `CNY` - Chinese Yuan
+            * `HUF` - Hungarian Forint
             * `EUR` - Euro
             * `GBP` - British Pound
-            * `JPY` - Japanese Yen
-            * `NZD` - New Zealand Dollar
             * `USD` - US Dollar
           oneOf:
           - $ref: '#/components/schemas/SalePriceCurrencyEnum'
@@ -27413,13 +27589,9 @@ components:
           description: |-
             Válassz pénznemet a lehetőségek közül
 
-            * `AUD` - Australian Dollar
-            * `CAD` - Canadian Dollar
-            * `CNY` - Chinese Yuan
+            * `HUF` - Hungarian Forint
             * `EUR` - Euro
             * `GBP` - British Pound
-            * `JPY` - Japanese Yen
-            * `NZD` - New Zealand Dollar
             * `USD` - US Dollar
         link:
           type: string
@@ -27483,13 +27655,9 @@ components:
           description: |-
             Eladási ár pénzneme
 
-            * `AUD` - Australian Dollar
-            * `CAD` - Canadian Dollar
-            * `CNY` - Chinese Yuan
+            * `HUF` - Hungarian Forint
             * `EUR` - Euro
             * `GBP` - British Pound
-            * `JPY` - Japanese Yen
-            * `NZD` - New Zealand Dollar
             * `USD` - US Dollar
         shipped:
           type: number
@@ -27765,13 +27933,9 @@ components:
           description: |-
             Beszerzési pénzneme ennek a készlet tételnek
 
-            * `AUD` - Australian Dollar
-            * `CAD` - Canadian Dollar
-            * `CNY` - Chinese Yuan
+            * `HUF` - Hungarian Forint
             * `EUR` - Euro
             * `GBP` - British Pound
-            * `JPY` - Japanese Yen
-            * `NZD` - New Zealand Dollar
             * `USD` - US Dollar
         use_pack_size:
           type: boolean
@@ -27904,6 +28068,20 @@ components:
           title: Megjegyzések
           description: Tesztek megjegyzései
           maxLength: 500
+        test_station:
+          type: string
+          description: The identifier of the test station where the test was performed
+          maxLength: 500
+        started_datetime:
+          type: string
+          format: date-time
+          title: Started
+          description: The timestamp of the test start
+        finished_datetime:
+          type: string
+          format: date-time
+          title: Finished
+          description: The timestamp of the test finish
         user:
           type: integer
           readOnly: true
@@ -28138,13 +28316,9 @@ components:
           description: |-
             Válassz pénznemet a lehetőségek közül
 
-            * `AUD` - Australian Dollar
-            * `CAD` - Canadian Dollar
-            * `CNY` - Chinese Yuan
+            * `HUF` - Hungarian Forint
             * `EUR` - Euro
             * `GBP` - British Pound
-            * `JPY` - Japanese Yen
-            * `NZD` - New Zealand Dollar
             * `USD` - US Dollar
         supplier:
           type: integer
@@ -28362,6 +28536,23 @@ components:
             $ref: '#/components/schemas/PluginRegistryError'
       required:
       - registry_errors
+    PluginReload:
+      type: object
+      description: Serializer for remotely forcing plugin registry reload
+      properties:
+        full_reload:
+          type: boolean
+          default: false
+          description: Perform a full reload of the plugin registry
+        force_reload:
+          type: boolean
+          default: false
+          description: Force a reload of the plugin registry, even if it is already
+            loaded
+        collect_plugins:
+          type: boolean
+          default: false
+          description: Collect plugins and add them to the registry
     PluginSetting:
       type: object
       description: Serializer for the PluginSetting model.
@@ -28572,13 +28763,9 @@ components:
             Megrendeléshez használt pénznem (hagyd üresen a cégnél alapértelmezetthez)
 
             * `` - ---------
-            * `AUD` - Australian Dollar
-            * `CAD` - Canadian Dollar
-            * `CNY` - Chinese Yuan
+            * `HUF` - Hungarian Forint
             * `EUR` - Euro
             * `GBP` - British Pound
-            * `JPY` - Japanese Yen
-            * `NZD` - New Zealand Dollar
             * `USD` - US Dollar
           oneOf:
           - $ref: '#/components/schemas/SalePriceCurrencyEnum'
@@ -28704,13 +28891,9 @@ components:
           description: |-
             Válassz pénznemet a lehetőségek közül
 
-            * `AUD` - Australian Dollar
-            * `CAD` - Canadian Dollar
-            * `CNY` - Chinese Yuan
+            * `HUF` - Hungarian Forint
             * `EUR` - Euro
             * `GBP` - British Pound
-            * `JPY` - Japanese Yen
-            * `NZD` - New Zealand Dollar
             * `USD` - US Dollar
         link:
           type: string
@@ -28772,13 +28955,9 @@ components:
           description: |-
             Beszérzési ár pénzneme
 
-            * `AUD` - Australian Dollar
-            * `CAD` - Canadian Dollar
-            * `CNY` - Chinese Yuan
+            * `HUF` - Hungarian Forint
             * `EUR` - Euro
             * `GBP` - British Pound
-            * `JPY` - Japanese Yen
-            * `NZD` - New Zealand Dollar
             * `USD` - US Dollar
         destination:
           type: integer
@@ -29049,13 +29228,9 @@ components:
             Megrendeléshez használt pénznem (hagyd üresen a cégnél alapértelmezetthez)
 
             * `` - ---------
-            * `AUD` - Australian Dollar
-            * `CAD` - Canadian Dollar
-            * `CNY` - Chinese Yuan
+            * `HUF` - Hungarian Forint
             * `EUR` - Euro
             * `GBP` - British Pound
-            * `JPY` - Japanese Yen
-            * `NZD` - New Zealand Dollar
             * `USD` - US Dollar
           oneOf:
           - $ref: '#/components/schemas/SalePriceCurrencyEnum'
@@ -29175,13 +29350,9 @@ components:
           description: |-
             Válassz pénznemet a lehetőségek közül
 
-            * `AUD` - Australian Dollar
-            * `CAD` - Canadian Dollar
-            * `CNY` - Chinese Yuan
+            * `HUF` - Hungarian Forint
             * `EUR` - Euro
             * `GBP` - British Pound
-            * `JPY` - Japanese Yen
-            * `NZD` - New Zealand Dollar
             * `USD` - US Dollar
         link:
           type: string
@@ -29245,13 +29416,9 @@ components:
           description: |-
             Sortétel pénzneme
 
-            * `AUD` - Australian Dollar
-            * `CAD` - Canadian Dollar
-            * `CNY` - Chinese Yuan
+            * `HUF` - Hungarian Forint
             * `EUR` - Euro
             * `GBP` - British Pound
-            * `JPY` - Japanese Yen
-            * `NZD` - New Zealand Dollar
             * `USD` - US Dollar
         link:
           type: string
@@ -29355,23 +29522,15 @@ components:
       - location
     SalePriceCurrencyEnum:
       enum:
-      - AUD
-      - CAD
-      - CNY
+      - HUF
       - EUR
       - GBP
-      - JPY
-      - NZD
       - USD
       type: string
       description: |-
-        * `AUD` - Australian Dollar
-        * `CAD` - Canadian Dollar
-        * `CNY` - Chinese Yuan
+        * `HUF` - Hungarian Forint
         * `EUR` - Euro
         * `GBP` - British Pound
-        * `JPY` - Japanese Yen
-        * `NZD` - New Zealand Dollar
         * `USD` - US Dollar
     SalesOrder:
       type: object
@@ -29495,13 +29654,9 @@ components:
             Megrendeléshez használt pénznem (hagyd üresen a cégnél alapértelmezetthez)
 
             * `` - ---------
-            * `AUD` - Australian Dollar
-            * `CAD` - Canadian Dollar
-            * `CNY` - Chinese Yuan
+            * `HUF` - Hungarian Forint
             * `EUR` - Euro
             * `GBP` - British Pound
-            * `JPY` - Japanese Yen
-            * `NZD` - New Zealand Dollar
             * `USD` - US Dollar
           oneOf:
           - $ref: '#/components/schemas/SalePriceCurrencyEnum'
@@ -29687,13 +29842,9 @@ components:
           description: |-
             Válassz pénznemet a lehetőségek közül
 
-            * `AUD` - Australian Dollar
-            * `CAD` - Canadian Dollar
-            * `CNY` - Chinese Yuan
+            * `HUF` - Hungarian Forint
             * `EUR` - Euro
             * `GBP` - British Pound
-            * `JPY` - Japanese Yen
-            * `NZD` - New Zealand Dollar
             * `USD` - US Dollar
         link:
           type: string
@@ -29761,13 +29912,9 @@ components:
           description: |-
             Eladási ár pénzneme
 
-            * `AUD` - Australian Dollar
-            * `CAD` - Canadian Dollar
-            * `CNY` - Chinese Yuan
+            * `HUF` - Hungarian Forint
             * `EUR` - Euro
             * `GBP` - British Pound
-            * `JPY` - Japanese Yen
-            * `NZD` - New Zealand Dollar
             * `USD` - US Dollar
         shipped:
           type: number
@@ -30030,7 +30177,7 @@ components:
           readOnly: true
         provider:
           type: string
-          maxLength: 30
+          maxLength: 200
         uid:
           type: string
           maxLength: 191
@@ -30371,13 +30518,9 @@ components:
           description: |-
             Beszerzési pénzneme ennek a készlet tételnek
 
-            * `AUD` - Australian Dollar
-            * `CAD` - Canadian Dollar
-            * `CNY` - Chinese Yuan
+            * `HUF` - Hungarian Forint
             * `EUR` - Euro
             * `GBP` - British Pound
-            * `JPY` - Japanese Yen
-            * `NZD` - New Zealand Dollar
             * `USD` - US Dollar
         use_pack_size:
           type: boolean
@@ -30533,6 +30676,20 @@ components:
           title: Megjegyzések
           description: Tesztek megjegyzései
           maxLength: 500
+        test_station:
+          type: string
+          description: The identifier of the test station where the test was performed
+          maxLength: 500
+        started_datetime:
+          type: string
+          format: date-time
+          title: Started
+          description: The timestamp of the test start
+        finished_datetime:
+          type: string
+          format: date-time
+          title: Finished
+          description: The timestamp of the test finish
         user:
           type: integer
           readOnly: true
@@ -30918,13 +31075,9 @@ components:
           description: |-
             Válassz pénznemet a lehetőségek közül
 
-            * `AUD` - Australian Dollar
-            * `CAD` - Canadian Dollar
-            * `CNY` - Chinese Yuan
+            * `HUF` - Hungarian Forint
             * `EUR` - Euro
             * `GBP` - British Pound
-            * `JPY` - Japanese Yen
-            * `NZD` - New Zealand Dollar
             * `USD` - US Dollar
         supplier:
           type: integer

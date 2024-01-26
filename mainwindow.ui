@@ -11,22 +11,18 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>QnTree</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="pushButtonConnect">
-    <property name="geometry">
-     <rect>
-      <x>50</x>
-      <y>20</y>
-      <width>80</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Connect</string>
-    </property>
-   </widget>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QPushButton" name="pushButtonImportParts">
+      <property name="text">
+       <string>Import parts from suppiers</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -47,6 +43,7 @@
      <string>Settings</string>
     </property>
     <addaction name="actionInvenTree_access"/>
+    <addaction name="actionSupplier_settings"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuSettings"/>
@@ -55,6 +52,11 @@
   <action name="actionInvenTree_access">
    <property name="text">
     <string>InvenTree access</string>
+   </property>
+  </action>
+  <action name="actionSupplier_settings">
+   <property name="text">
+    <string>Supplier settings</string>
    </property>
   </action>
  </widget>

@@ -25,6 +25,8 @@ client/BarcodePOAllocate.cpp
 client/BarcodePOAllocate.h
 client/BarcodePOReceive.cpp
 client/BarcodePOReceive.h
+client/BarcodeSOAllocate.cpp
+client/BarcodeSOAllocate.h
 client/BarcodeUnassign.cpp
 client/BarcodeUnassign.h
 client/BlankEnum.cpp
@@ -527,6 +529,8 @@ client/PluginRegistryError.cpp
 client/PluginRegistryError.h
 client/PluginRegistryStatus.cpp
 client/PluginRegistryStatus.h
+client/PluginReload.cpp
+client/PluginReload.h
 client/PluginSetting.cpp
 client/PluginSetting.h
 client/PluginsApi.cpp

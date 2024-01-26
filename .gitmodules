@@ -1,0 +1,3 @@
+[submodule "qt_goodies"]
+	path = qt_goodies
+	url = git@github.com:martonmiklos/qt_goodies.git

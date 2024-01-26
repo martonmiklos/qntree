@@ -6,8 +6,10 @@
 
 int main(int argc, char *argv[])
 {
+    QCoreApplication::setOrganizationName("MM");
+    QCoreApplication::setApplicationName("QnTree");
     QApplication a(argc, argv);
-
+    qputenv("QT_ASSUME_STDERR_HAS_CONSOLE", "1");
     QTranslator translator;
     const QStringList uiLanguages = QLocale::system().uiLanguages();
     for (const QString &locale : uiLanguages) {
