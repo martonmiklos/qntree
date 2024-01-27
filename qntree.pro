@@ -8,7 +8,7 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    InvenTree_dialogs/dialogselectinventreelocation.cpp \
+    InvenTree_dialogs/dialogselectinventreecategory.cpp \
     InvenTree_dialogs/inventreecategorymodel.cpp \
     inventreepartimportwizard.cpp \
     main.cpp \
@@ -25,7 +25,7 @@ SOURCES += \
     wizard/wizardpagesupplierdataenter.cpp
 
 HEADERS += \
-    InvenTree_dialogs/dialogselectinventreelocation.h \
+    InvenTree_dialogs/dialogselectinventreecategory.h \
     InvenTree_dialogs/inventreecategorymodel.h \
     inventreepartimportwizard.h \
     mainwindow.h \
@@ -42,7 +42,7 @@ HEADERS += \
     wizard/wizardpagesupplierdataenter.h
 
 FORMS += \
-    InvenTree_dialogs/dialogselectinventreelocation.ui \
+    InvenTree_dialogs/dialogselectinventreecategory.ui \
     inventreepartimportwizard.ui \
     mainwindow.ui \
     wizard/wizardpagestockandpricing.ui \

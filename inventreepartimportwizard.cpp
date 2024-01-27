@@ -6,7 +6,7 @@
 #include "wizard/wizardpagesupplierdataenter.h"
 #include "wizard/wizardpagestockandpricing.h"
 
-#include "InvenTree_dialogs/dialogselectinventreelocation.h"
+#include "InvenTree_dialogs/dialogselectinventreecategory.h"
 
 InvenTreePartImportWizard::InvenTreePartImportWizard(InvenTree::PartApi *api, QWidget *parent)
     : QWizard(parent),
@@ -27,10 +27,17 @@ InvenTreePartImportWizard::InvenTreePartImportWizard(InvenTree::PartApi *api, QW
     ui->tableViewPropertyMapping->horizontalHeader()->setSectionResizeMode(PropertyMappingModel::Columns::Name, QHeaderView::ResizeToContents);
     ui->tableViewPropertyMapping->horizontalHeader()->setSectionResizeMode(PropertyMappingModel::Columns::Value, QHeaderView::ResizeToContents);
     ui->tableViewPropertyMapping->horizontalHeader()->setSectionResizeMode(PropertyMappingModel::Columns::Action, QHeaderView::Stretch);
+
+    m_settings.beginGroup("InvenTreePartImportWizard");
+    restoreGeometry(m_settings.value("geometry").toByteArray());
+    m_settings.endGroup();
 }
 
 InvenTreePartImportWizard::~InvenTreePartImportWizard()
 {
+    m_settings.beginGroup("InvenTreePartImportWizard");
+    m_settings.setValue("geometry", saveGeometry());
+    m_settings.endGroup();
     delete ui;
 }
 
@@ -57,7 +64,7 @@ InvenTreePartImportWizardPage::InvenTreePartImportWizardPage(InvenTreePartImport
 
 void InvenTreePartImportWizard::on_InvenTreePartImportWizard_currentIdChanged(int id)
 {
-    if (id == InvenTreeData) {
+    if (id == PropertyMapping) {
         // update the unit suffix
         m_stockAndPricingPage->update();
     }
@@ -66,17 +73,26 @@ void InvenTreePartImportWizard::on_InvenTreePartImportWizard_currentIdChanged(in
 void InvenTreePartImportWizard::on_tableViewPropertyMapping_customContextMenuRequested(const QPoint &pos)
 {
     QMenu contextMenu = QMenu();
-
-    auto skipAction = contextMenu.addAction(tr("Skip"));
-    skipAction->setCheckable(true);
-
-
     bool showSplit = true;
+    bool allToSave = true;
+    int templateCategoryId = -1;
+    bool allShareSameTemplateCategoryId = true;
+    QString templateCategoryName;
     for (auto row : ui->tableViewPropertyMapping->selectionModel()->selectedRows()) {
-        if (!m_propertyModel->rowUnitSplittable(row.row())) {
+        if (!m_propertyModel->rowUnitSplittable(row.row()))
             showSplit = false;
-            break;
+
+        if (!m_propertyModel->data(row, PropertyMappingModel::SaveRole).toBool())
+            allToSave = false;
+
+        if (templateCategoryId == -1) {
+            templateCategoryId = m_propertyModel->data(row, PropertyMappingModel::TemplateCategoryPkRole).toInt();
+            templateCategoryName = m_propertyModel->data(row, PropertyMappingModel::TemplateCategoryNameRole).toString();
+        } else {
+            if (templateCategoryId != m_propertyModel->data(row, PropertyMappingModel::TemplateCategoryPkRole).toInt())
+                allShareSameTemplateCategoryId = false;
         }
+
     }
 
     QAction *splitAction = nullptr;
@@ -85,29 +101,62 @@ void InvenTreePartImportWizard::on_tableViewPropertyMapping_customContextMenuReq
         contextMenu.addAction(splitAction);
     }
 
+    QAction *saveAction = contextMenu.addAction(tr("Save as parameter"));
+    saveAction->setCheckable(true);
+    saveAction->setChecked(allToSave);
+
+    QAction *templateAction = nullptr;
+    if (allToSave) {
+        auto templateMenu = contextMenu.addMenu(tr("Template creation"));
+        QString templateActionString;
+        if (allShareSameTemplateCategoryId && templateCategoryId != -1) {
+            templateActionString = tr("Unassign template creation from the %1 category").arg(templateCategoryName);
+        } else {
+            templateActionString = tr("Select category for template creation");
+        }
+        templateAction = templateMenu->addAction(templateActionString);
+    }
+
+
+    /// Anddd action....
     auto selectedAction = contextMenu.exec(ui->tableViewPropertyMapping->mapToGlobal(pos));
     if (!selectedAction)
         return;
 
     if (selectedAction == splitAction) {
-        for (auto row : ui->tableViewPropertyMapping->selectionModel()->selectedRows()) {
+        for (auto row : ui->tableViewPropertyMapping->selectionModel()->selectedRows())
             m_propertyModel->splitRowUnit(row.row());
+    } else if (selectedAction == saveAction) {
+        for (auto row : ui->tableViewPropertyMapping->selectionModel()->selectedRows())
+            m_propertyModel->setParameterToSave(row.row(), saveAction->isChecked());
+    } else if (selectedAction == templateAction) {
+        if (allShareSameTemplateCategoryId && templateCategoryId != -1) {
+            // unassign from the current category
+            for (auto row : ui->tableViewPropertyMapping->selectionModel()->selectedRows())
+                m_propertyModel->setTemplateTargetCategory(row.row(), false);
+        } else {
+            auto dlg = new DialogSelectInvenTreeCategory(m_api, 0, this);
+            dlg->setWindowTitle(tr("Select category for the parameter template"));
+            connect(dlg, &DialogSelectInvenTreeCategory::categorySelected, this, [=](int pk, const QString &name, const QString &path) {
+                Q_UNUSED(path)
+                for (auto row : ui->tableViewPropertyMapping->selectionModel()->selectedRows())
+                    m_propertyModel->setTemplateTargetCategory(row.row(), true, pk, name);
+                dlg->close();
+            });
+            dlg->show();
         }
     }
-
 }
-
 
 void InvenTreePartImportWizard::on_tableViewAttachmentMapping_customContextMenuRequested(const QPoint &pos)
 {
 
 }
 
-
 void InvenTreePartImportWizard::on_toolButtonEditInventTreeCategory_clicked()
 {
-    auto dlg = new DialogSelectInvenTreeLocation(m_api, this);
-    connect(dlg, &DialogSelectInvenTreeLocation::categorySelected, this, [=](int pk, const QString &categoryName, const QString &categoryPath) {
+    auto dlg = new DialogSelectInvenTreeCategory(m_api, m_invenTreeTargetCategoryPk, this);
+    connect(dlg, &DialogSelectInvenTreeCategory::categorySelected, this, [=](int pk, const QString &categoryName, const QString &categoryPath) {
         ui->labelInvenTreeCategory->setText(categoryName);
         ui->labelInvenTreeCategory->setToolTip(categoryPath);
         m_invenTreeTargetCategoryPk = pk;

@@ -23,6 +23,8 @@ public:
     QModelIndex index() const;
     void setIndex(const QModelIndex &newIndex);
 
+    QModelIndex findIndexOfCategory(int pk, bool *found = nullptr) const;
+
 private:
     QList<InvenTreeCategoryItem *> m_childItems;
     InvenTreeCategoryItem *m_parentItem = nullptr;
@@ -50,6 +52,8 @@ public:
     explicit InvenTreeCategoryModel(InvenTree::PartApi *api, QObject *parent = nullptr);
     ~InvenTreeCategoryModel();
 
+    void addCategory(int pk);
+
     // Header:
     QVariant headerData(int section,
                         Qt::Orientation orientation,
@@ -67,6 +71,8 @@ public:
 
     bool canFetchMore(const QModelIndex &parent) const override;
     void fetchMore(const QModelIndex &parent) override;
+
+    void addPk(int pk);
 
 private slots:
     void itemsChildsFetched(int childCount);

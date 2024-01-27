@@ -18,6 +18,15 @@ InvenTreeCategoryModel::~InvenTreeCategoryModel()
     delete m_rootItem;
 }
 
+void InvenTreeCategoryModel::addCategory(int pk)
+{
+    bool found = false;
+    m_rootItem->findIndexOfCategory(pk, &found);
+    if (!found) {
+        // TODO recursive query upwards until a parent category found
+    }
+}
+
 QVariant InvenTreeCategoryModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
     Q_UNUSED(section)
@@ -133,6 +142,11 @@ void InvenTreeCategoryModel::fetchMore(const QModelIndex &parent)
     }
 }
 
+void InvenTreeCategoryModel::addPk(int pk)
+{
+    // recursively add the category upwards in the category tree
+}
+
 void InvenTreeCategoryModel::itemsChildsFetched(int childCount)
 {
     auto parentItem = static_cast<InvenTreeCategoryItem*>(this->sender());
@@ -189,6 +203,23 @@ QModelIndex InvenTreeCategoryItem::index() const
 void InvenTreeCategoryItem::setIndex(const QModelIndex &newIndex)
 {
     m_index = newIndex;
+}
+
+QModelIndex InvenTreeCategoryItem::findIndexOfCategory(int pk, bool *found) const
+{
+    if (categoryData.getPk() == pk)
+        return m_index;
+
+    for (const auto &child : m_childItems) {
+        bool found_ = false;
+        auto index = child->findIndexOfCategory(pk, &found_);
+        if (found_) {
+            if (found)
+                *found = found_;
+            return index;
+        }
+    }
+    return QModelIndex();
 }
 
 void InvenTreeCategoryItem::subCategoriesReceieved(InvenTree::PaginatedCategoryList summary)

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QMainWindow>
+#include <QSettings>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -26,4 +27,5 @@ private:
     Ui::MainWindow *ui;
     InvenTree::ActionApi *m_apiInstance = nullptr;
     InvenTree::PartApi *m_partApi = nullptr;
+    QSettings m_settings;
 };

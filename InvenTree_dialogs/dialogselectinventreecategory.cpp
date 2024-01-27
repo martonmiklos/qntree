@@ -1,24 +1,31 @@
-#include "dialogselectinventreelocation.h"
-#include "ui_dialogselectinventreelocation.h"
+#include "dialogselectinventreecategory.h"
+#include "ui_dialogselectinventreecategory.h"
 
 #include <QMessageBox>
 
-DialogSelectInvenTreeLocation::DialogSelectInvenTreeLocation(InvenTree::PartApi *api, QWidget *parent)
+DialogSelectInvenTreeCategory::DialogSelectInvenTreeCategory(InvenTree::PartApi *api, int selectedPk, QWidget *parent)
     : QDialog(parent)
-    , ui(new Ui::DialogSelectInvenTreeLocation)
+    , ui(new Ui::DialogSelectInvenTreeCategory)
 {
     ui->setupUi(this);
 
     m_model = new InvenTreeCategoryModel(api, this);
     ui->treeViewCategory->setModel(m_model);
+
+    m_settings.beginGroup("DialogSelectInvenTreeCategory");
+    restoreGeometry(m_settings.value("geometry").toByteArray());
+    m_settings.endGroup();
 }
 
-DialogSelectInvenTreeLocation::~DialogSelectInvenTreeLocation()
+DialogSelectInvenTreeCategory::~DialogSelectInvenTreeCategory()
 {
+    m_settings.beginGroup("DialogSelectInvenTreeCategory");
+    m_settings.setValue("geometry", saveGeometry());
+    m_settings.endGroup();
     delete ui;
 }
 
-void DialogSelectInvenTreeLocation::on_treeViewCategory_doubleClicked(const QModelIndex &index)
+void DialogSelectInvenTreeCategory::on_treeViewCategory_doubleClicked(const QModelIndex &index)
 {
     if (m_filterForNonStructural && m_model->data(index, InvenTreeCategoryModel::IsStructuralRole).toBool()) {
         QMessageBox::warning(this, tr("Unable to select"), tr("The %1 category is structural and cannot be selected.\n"
@@ -30,7 +37,7 @@ void DialogSelectInvenTreeLocation::on_treeViewCategory_doubleClicked(const QMod
                           m_model->data(index, InvenTreeCategoryModel::CategoryPathRole).toString());
 }
 
-void DialogSelectInvenTreeLocation::setFilterForNonStructural(bool newFilterForNonStructural)
+void DialogSelectInvenTreeCategory::setFilterForNonStructural(bool newFilterForNonStructural)
 {
     m_filterForNonStructural = newFilterForNonStructural;
 }

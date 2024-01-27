@@ -18,10 +18,17 @@ MainWindow::MainWindow(QWidget *parent)
     m_partApi->addHeaders("Authorization", "Token inv-d7e8312f7b53a59290faa71708264247f0c21c11-20231228");
 
     on_pushButtonImportParts_clicked();
+
+    m_settings.beginGroup("MainWindow");
+    restoreGeometry(m_settings.value("geometry").toByteArray());
+    m_settings.endGroup();
 }
 
 MainWindow::~MainWindow()
 {
+    m_settings.beginGroup("MainWindow");
+    m_settings.setValue("geometry", saveGeometry());
+    m_settings.endGroup();
     delete ui;
 }
 

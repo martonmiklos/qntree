@@ -101,7 +101,8 @@ void WizardPageSupplierDataEnter::update()
 
 void WizardPageSupplierDataEnter::on_comboBoxSupplier_currentIndexChanged(int index)
 {
-   auto selectedSupplier = SupplierRegistry::instance()->getSupplierByUId(ui->comboBoxSupplier->currentData().toString());
+    Q_UNUSED(index)
+    auto selectedSupplier = SupplierRegistry::instance()->getSupplierByUId(ui->comboBoxSupplier->currentData().toString());
     ui->lineEditPartNumber->setMaxLength(selectedSupplier->pnLengthLimit());
 }
 

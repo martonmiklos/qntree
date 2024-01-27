@@ -19,13 +19,19 @@ public:
     };
 
     enum ValueAction {
-        Skip,
-        Save
+        SkipValue,
+        SaveValue
     };
 
     enum TemplateAction {
         NoTemplate,
         SaveTemplateToCategory,
+    };
+
+    enum Roles {
+        SaveRole = Qt::UserRole + 1,
+        TemplateCategoryPkRole,
+        TemplateCategoryNameRole,
     };
 
     explicit PropertyMappingModel(QObject *parent = nullptr);
@@ -34,10 +40,17 @@ public:
     int rowCount(const QModelIndex &parent) const;
     int columnCount(const QModelIndex &parent) const;
     QVariant data(const QModelIndex &index, int role) const;
+    bool setData(const QModelIndex &index, const QVariant &value, int role);
+
     QVariant headerData(int section, Qt::Orientation orientation, int role) const;
+    Qt::ItemFlags flags(const QModelIndex &index) const;
 
     bool rowUnitSplittable(int row) const;
     void splitRowUnit(int row);
+
+    void setParameterToSave(int row, bool save);
+
+    void setTemplateTargetCategory(int row, bool save, int pk = -1, const QString &name = QString());
 
 private:
     QList<PropertyMappingLine> m_lines;
@@ -49,7 +62,21 @@ public:
     PropertyMappingLine() = default;
     QString actionText() const;
     SupplierPartProperty supplierPartProperty;
-    int targetCategoryPk = -1;
-    PropertyMappingModel::ValueAction m_valueAction = PropertyMappingModel::Save;
-    PropertyMappingModel::TemplateAction m_templateAction = PropertyMappingModel::SaveTemplateToCategory;
+
+    PropertyMappingModel::ValueAction valueAction() const;
+    void setValueAction(PropertyMappingModel::ValueAction newValueAction);
+
+    PropertyMappingModel::TemplateAction templateAction() const;
+    void setTemplateAction(PropertyMappingModel::TemplateAction newTemplateAction, int pk = -1, const QString &name = QString());
+
+    int templateTargetCategoryPk() const;
+    QString templateTargetCategoryName() const;
+
+private:
+    PropertyMappingModel::ValueAction m_valueAction = PropertyMappingModel::SaveValue;
+    PropertyMappingModel::TemplateAction m_templateAction = PropertyMappingModel::NoTemplate;
+
+    int m_templateTargetCategoryPk = -1;
+    QString m_templateTargetCategoryName;
+
 };

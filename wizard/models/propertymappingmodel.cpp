@@ -29,6 +29,18 @@ void PropertyMappingModel::splitRowUnit(int row)
     emit dataChanged(index(row, Value), index(row, Value));
 }
 
+void PropertyMappingModel::setParameterToSave(int row, bool save)
+{
+    m_lines[row].setValueAction(save ? SaveValue : SkipValue);
+    emit dataChanged(index(row, Action), index(row, Action));
+}
+
+void PropertyMappingModel::setTemplateTargetCategory(int row, bool save, int pk, const QString &name)
+{
+    m_lines[row].setTemplateAction(save ? SaveTemplateToCategory : NoTemplate, pk, name);
+    emit dataChanged(index(row, Action), index(row, Action));
+}
+
 int PropertyMappingModel::rowCount(const QModelIndex &parent) const
 {
     if (parent.isValid())
@@ -56,8 +68,24 @@ QVariant PropertyMappingModel::data(const QModelIndex &index, int role) const
         case Col_Invalid:
             break;
         }
+    } else if (role == SaveRole) {
+        return m_lines.at(index.row()).valueAction() == SaveValue;
+    } else if (role == TemplateCategoryPkRole) {
+        return m_lines.at(index.row()).templateTargetCategoryPk();
+    } else if (role == TemplateCategoryNameRole) {
+        return m_lines.at(index.row()).templateTargetCategoryName();
+    } else if (role == Qt::EditRole && index.column() == Name) {
+        return m_lines.at(index.row()).supplierPartProperty.m_name;
     }
     return QVariant();
+}
+
+bool PropertyMappingModel::setData(const QModelIndex &index, const QVariant &value, int role)
+{
+    if (role == Qt::EditRole) {
+        m_lines[index.row()].supplierPartProperty.m_name = value.toString();
+    }
+    return false;
 }
 
 QVariant PropertyMappingModel::headerData(int section, Qt::Orientation orientation, int role) const
@@ -77,7 +105,67 @@ QVariant PropertyMappingModel::headerData(int section, Qt::Orientation orientati
     return QVariant();
 }
 
+Qt::ItemFlags PropertyMappingModel::flags(const QModelIndex &index) const
+{
+    if (index.column() == Name)
+        return Qt::ItemIsEnabled | Qt::ItemIsEditable | Qt::ItemIsSelectable;
+    return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
+}
+
 QString PropertyMappingLine::actionText() const
 {
-    return "foo";
+    switch (m_valueAction) {
+    case PropertyMappingModel::SkipValue:
+        return QObject::tr("Do not save this parameter");
+    case PropertyMappingModel::SaveValue: {
+        if (m_templateAction == PropertyMappingModel::NoTemplate) {
+            return QObject::tr("Save as parameter");
+        } else {
+            auto catName = m_templateTargetCategoryName;
+            if (m_templateTargetCategoryPk == 0)
+                catName = QObject::tr("global");
+            return QObject::tr("Save as property, create parameter template to the %1 category").arg(catName);
+        }
+    }
+    }
+}
+
+PropertyMappingModel::TemplateAction PropertyMappingLine::templateAction() const
+{
+    return m_templateAction;
+}
+
+void PropertyMappingLine::setTemplateAction(PropertyMappingModel::TemplateAction newTemplateAction, int pk, const QString &name)
+{
+    if (newTemplateAction == PropertyMappingModel::SaveTemplateToCategory && m_valueAction != PropertyMappingModel::SaveValue)
+        m_valueAction = PropertyMappingModel::SaveValue;
+
+    m_templateAction = newTemplateAction;
+    m_templateTargetCategoryPk = pk;
+    m_templateTargetCategoryName = name;
+}
+
+int PropertyMappingLine::templateTargetCategoryPk() const
+{
+    return m_templateTargetCategoryPk;
+}
+
+QString PropertyMappingLine::templateTargetCategoryName() const
+{
+    return m_templateTargetCategoryName;
+}
+
+PropertyMappingModel::ValueAction PropertyMappingLine::valueAction() const
+{
+    return m_valueAction;
+}
+
+void PropertyMappingLine::setValueAction(PropertyMappingModel::ValueAction newValueAction)
+{
+    m_valueAction = newValueAction;
+    if (newValueAction != PropertyMappingModel::SaveValue) {
+        m_templateAction = PropertyMappingModel::NoTemplate;
+        m_templateTargetCategoryPk = -1;
+        m_templateTargetCategoryName.clear();
+    }
 }
