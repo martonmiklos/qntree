@@ -23,3 +23,30 @@ void TMEPart::parseParametersResponse(const QJsonArray &paramsJson)
         m_properties.append(prop);
     }
 }
+
+void TMEPart::parseAttachmentsResponse(const QJsonArray &documentListJson)
+{
+    for (int i = 0; i<documentListJson.count(); i++) {
+        auto obj = documentListJson.at(i).toObject();
+        SupplierAttachment attachment;
+        attachment.url = QUrl("http:" + obj["DocumentUrl"].toString());
+        attachment.sizeInBytes = obj["Filesize"].toInt();
+        m_attachments.append(attachment);
+    }
+}
+
+void TMEPart::parsePricingResponse(const QJsonArray &paramsJson)
+{
+    for (int i = 0; i<paramsJson.count(); i++) {
+        auto obj = paramsJson.at(i).toObject();
+        SupplierPartPricingRange priceRange;
+        priceRange.price = obj["PriceValue"].toDouble();
+        priceRange.qtyMin = obj["Amount"].toDouble();
+        m_priceRanges.append(priceRange);
+    }
+}
+
+void TMEPart::parseImageResponse(const QByteArray &replyData)
+{
+    m_image.loadFromData(replyData);
+}

@@ -10,14 +10,27 @@ class TME : public AbstractSupplier
 public:
     explicit TME(QObject *parent = nullptr);
     void retrivePart(const QString &partNumber) override;
-
     int pnLengthLimit() const override;
+
+    QString currency() const;
+    void setCurrency(const QString &newCurrency);
+
+    bool grossPrices() const;
+    void setGrossPrices(bool newGrossPrices);
+
 private:
     QString m_secret, m_token, m_country, m_language;
     QNetworkReply* apiCall(const QString &action, QList<QPair<QString, QString> > params);
     QNetworkAccessManager * m_manager = nullptr;
-    QNetworkReply *m_partDetailQueryReply = nullptr, *m_partPropertiesQueryReply = nullptr;
+    QNetworkReply *m_partDetailQueryReply = nullptr;
+    QNetworkReply *m_partPropertiesQueryReply = nullptr;
+    QNetworkReply *m_partAttachementsQueryReply = nullptr;
+    QNetworkReply *m_partPricingQueryReply = nullptr;
+    QNetworkReply *m_imageReply = nullptr;
     TMEPart m_part;
+
+    QString m_currency = QStringLiteral("EUR");
+    bool m_grossPrices = true;
 
 private slots:
     void networkReplyFinished(QNetworkReply *reply);

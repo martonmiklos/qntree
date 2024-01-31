@@ -3172,7 +3172,7 @@ void StockApi::stockLocation_DestroyCallback(HttpRequestWorker *worker) {
     }
 }
 
-void StockApi::stockLocation_List(const ::InvenTree::OptionalParam<bool> &has_location_type, const ::InvenTree::OptionalParam<qint32> &limit, const ::InvenTree::OptionalParam<qint32> &location_type, const ::InvenTree::OptionalParam<qint32> &offset, const ::InvenTree::OptionalParam<QString> &ordering, const ::InvenTree::OptionalParam<QString> &search) {
+void StockApi::stockLocation_List(const ::InvenTree::OptionalParam<bool> &has_location_type, const ::InvenTree::OptionalParam<qint32> &limit, const ::InvenTree::OptionalParam<qint32> &location_type, const ::InvenTree::OptionalParam<qint32> &offset, const ::InvenTree::OptionalParam<QString> &ordering, const ::InvenTree::OptionalParam<qint32> &parent, const ::InvenTree::OptionalParam<QString> &search, const ::InvenTree::OptionalParam<bool> &structural) {
     QString fullPath = QString(_serverConfigs["stockLocation_List"][_serverIndices.value("stockLocation_List")].URL()+"/api/stock/location/.*");
     
     if (!_username.isEmpty() && !_password.isEmpty()) {
@@ -3260,6 +3260,21 @@ void StockApi::stockLocation_List(const ::InvenTree::OptionalParam<bool> &has_lo
 
         fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(ordering.value())));
     }
+    if (parent.hasValue())
+    {
+        queryStyle = "form";
+        if (queryStyle == "")
+            queryStyle = "form";
+        queryPrefix = getParamStylePrefix(queryStyle);
+        querySuffix = getParamStyleSuffix(queryStyle);
+        queryDelimiter = getParamStyleDelimiter(queryStyle, "parent", true);
+        if (fullPath.indexOf("?") > 0)
+            fullPath.append(queryPrefix);
+        else
+            fullPath.append("?");
+
+        fullPath.append(QUrl::toPercentEncoding("parent")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(parent.value())));
+    }
     if (search.hasValue())
     {
         queryStyle = "form";
@@ -3274,6 +3289,21 @@ void StockApi::stockLocation_List(const ::InvenTree::OptionalParam<bool> &has_lo
             fullPath.append("?");
 
         fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(search.value())));
+    }
+    if (structural.hasValue())
+    {
+        queryStyle = "form";
+        if (queryStyle == "")
+            queryStyle = "form";
+        queryPrefix = getParamStylePrefix(queryStyle);
+        querySuffix = getParamStyleSuffix(queryStyle);
+        queryDelimiter = getParamStyleDelimiter(queryStyle, "structural", true);
+        if (fullPath.indexOf("?") > 0)
+            fullPath.append(queryPrefix);
+        else
+            fullPath.append("?");
+
+        fullPath.append(QUrl::toPercentEncoding("structural")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(structural.value())));
     }
     HttpRequestWorker *worker = new HttpRequestWorker(this, _manager);
     worker->setTimeOut(_timeOut);

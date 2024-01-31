@@ -1,9 +1,12 @@
 #include "wizardpagestockandpricing.h"
 #include "ui_wizardpagestockandpricing.h"
 
-WizardPageStockAndPricing::WizardPageStockAndPricing(InvenTreePartImportWizard *parent)
+#include "InvenTree_dialogs/dialogselectinventreestocklocation.h"
+
+WizardPageStockAndPricing::WizardPageStockAndPricing(InvenTree::StockApi *api, InvenTreePartImportWizard *parent)
     : InvenTreePartImportWizardPage(parent)
-    , ui(new Ui::WizardPageStockAndPricing)
+    , ui(new Ui::WizardPageStockAndPricing),
+    m_stockApi(api)
 {
     ui->setupUi(this);
     m_stockWidgets
@@ -11,7 +14,11 @@ WizardPageStockAndPricing::WizardPageStockAndPricing(InvenTreePartImportWizard *
         << ui->textEditStockNotes
         << ui->doubleSpinBoxStockQuantity
         << ui->doubleSpinBoxUnitPrice
-        << ui->comboBoxUnitPrice;
+        << ui->comboBoxUnitPrice
+        << ui->toolButtonChangeTargetLocation;
+    m_priceBreakModel = new PricebreaksModel(this);
+    ui->tableViewPriceBreaks->setModel(m_priceBreakModel);
+    ui->tableViewPriceBreaks->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Stretch);
 }
 
 WizardPageStockAndPricing::~WizardPageStockAndPricing()
@@ -29,12 +36,16 @@ void WizardPageStockAndPricing::update()
     ui->doubleSpinBoxStockQuantity->setSuffix(" " + m_wizard->m_selectedPart.unit());
 }
 
+void WizardPageStockAndPricing::setPart(SupplierPart *part)
+{
+    m_priceBreakModel->setPart(part);
+}
+
 void WizardPageStockAndPricing::on_doubleSpinBoxUnitPrice_valueChanged(double arg1)
 {
     Q_UNUSED(arg1);
     emit completeChanged();
 }
-
 
 void WizardPageStockAndPricing::on_checkBoxCreateStock_toggled(bool checked)
 {
@@ -42,5 +53,23 @@ void WizardPageStockAndPricing::on_checkBoxCreateStock_toggled(bool checked)
         widget->setEnabled(checked);
     }
     emit completeChanged();
+}
+
+void WizardPageStockAndPricing::on_toolButtonChangeTargetLocation_clicked()
+{
+    auto dlg = new DialogSelectInvenTreeStockLocation(m_stockApi, this);
+    dlg->show();
+    connect(dlg, &DialogSelectInvenTreeStockLocation::stockLocationSelected,
+            this, [=](int pk, const QString &locationName, const QString &locationPath) {
+        ui->labelStockLocation->setText(locationName);
+        ui->labelStockLocation->setToolTip(locationPath);
+        m_selectedLocationPk = pk;
+        dlg->close();
+    });
+}
+
+int WizardPageStockAndPricing::selectedLocationPk() const
+{
+    return m_selectedLocationPk;
 }
 

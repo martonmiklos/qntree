@@ -15,9 +15,6 @@ QList<QPair<QString, QString> > SupplierRegistry::getSuppliersDisplayInfo()
     return ret;
 }
 
-
-
-
 AbstractSupplier *SupplierRegistry::getSupplierByUId(const QString &uid)
 {
     for (auto supplier : m_suppliers)

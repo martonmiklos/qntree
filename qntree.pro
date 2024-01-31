@@ -9,7 +9,9 @@ CONFIG += c++17
 
 SOURCES += \
     InvenTree_dialogs/dialogselectinventreecategory.cpp \
+    InvenTree_dialogs/dialogselectinventreestocklocation.cpp \
     InvenTree_dialogs/inventreecategorymodel.cpp \
+    InvenTree_dialogs/inventreestocklocationmodel.cpp \
     inventreepartimportwizard.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -20,13 +22,17 @@ SOURCES += \
     supplier/supplierregistry.cpp \
     supplier/suppliers/tme.cpp \
     supplier/suppliers/tmepart.cpp \
+    wizard/models/pricebreaksmodel.cpp \
     wizard/models/propertymappingmodel.cpp \
+    wizard/models/supplierattachmentsmodel.cpp \
     wizard/wizardpagestockandpricing.cpp \
     wizard/wizardpagesupplierdataenter.cpp
 
 HEADERS += \
     InvenTree_dialogs/dialogselectinventreecategory.h \
+    InvenTree_dialogs/dialogselectinventreestocklocation.h \
     InvenTree_dialogs/inventreecategorymodel.h \
+    InvenTree_dialogs/inventreestocklocationmodel.h \
     inventreepartimportwizard.h \
     mainwindow.h \
     qt_goodies/qobjectsingleton.h \
@@ -37,12 +43,15 @@ HEADERS += \
     supplier/supplierregistry.h \
     supplier/suppliers/tme.h \
     supplier/suppliers/tmepart.h \
+    wizard/models/pricebreaksmodel.h \
     wizard/models/propertymappingmodel.h \
+    wizard/models/supplierattachmentsmodel.h \
     wizard/wizardpagestockandpricing.h \
     wizard/wizardpagesupplierdataenter.h
 
 FORMS += \
     InvenTree_dialogs/dialogselectinventreecategory.ui \
+    InvenTree_dialogs/dialogselectinventreestocklocation.ui \
     inventreepartimportwizard.ui \
     mainwindow.ui \
     wizard/wizardpagestockandpricing.ui \

@@ -2,13 +2,15 @@
 
 PropertyMappingModel::PropertyMappingModel(QObject *parent)
     : QAbstractTableModel{parent}
-{}
+{
 
-void PropertyMappingModel::loadFromSupplierPart(const SupplierPart &part)
+}
+
+void PropertyMappingModel::setPart(::SupplierPart *part)
 {
     beginResetModel();
     m_lines.clear();
-    for (const auto &prop : part.properties()) {
+    for (const auto &prop : part->properties()) {
         PropertyMappingLine line;
         line.supplierPartProperty = prop;
         m_lines.append(line);
@@ -117,7 +119,7 @@ QString PropertyMappingLine::actionText() const
     switch (m_valueAction) {
     case PropertyMappingModel::SkipValue:
         return QObject::tr("Do not save this parameter");
-    case PropertyMappingModel::SaveValue: {
+    case PropertyMappingModel::SaveValue:
         if (m_templateAction == PropertyMappingModel::NoTemplate) {
             return QObject::tr("Save as parameter");
         } else {
@@ -127,7 +129,7 @@ QString PropertyMappingLine::actionText() const
             return QObject::tr("Save as property, create parameter template to the %1 category").arg(catName);
         }
     }
-    }
+    return QString();
 }
 
 PropertyMappingModel::TemplateAction PropertyMappingLine::templateAction() const

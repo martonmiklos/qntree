@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include "gen_src/client/StockApi.h"
 #include "ui_mainwindow.h"
 
 using namespace InvenTree;
@@ -16,6 +17,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     m_partApi = new InvenTree::PartApi();
     m_partApi->addHeaders("Authorization", "Token inv-d7e8312f7b53a59290faa71708264247f0c21c11-20231228");
+
+    m_stockApi = new InvenTree::StockApi();
+    m_stockApi->addHeaders("Authorization", "Token inv-d7e8312f7b53a59290faa71708264247f0c21c11-20231228");
 
     on_pushButtonImportParts_clicked();
 
@@ -41,7 +45,7 @@ void MainWindow::on_pushButtonConnect_clicked()
 
 void MainWindow::on_pushButtonImportParts_clicked()
 {
-    InvenTreePartImportWizard *wizard = new InvenTreePartImportWizard(m_partApi, this);
+    InvenTreePartImportWizard *wizard = new InvenTreePartImportWizard(m_partApi, m_stockApi, this);
     wizard->show();
 }
 

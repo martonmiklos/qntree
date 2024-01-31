@@ -1,9 +1,10 @@
 #pragma once
 
 #include "supplier/supplierpart.h"
+#include "supplier/supplierpartproperty.h"
+
 #include <QAbstractTableModel>
 #include <QObject>
-
 
 class PropertyMappingLine;
 
@@ -35,7 +36,7 @@ public:
     };
 
     explicit PropertyMappingModel(QObject *parent = nullptr);
-    void loadFromSupplierPart(const SupplierPart &part);
+    void setPart(::SupplierPart *part);
 
     int rowCount(const QModelIndex &parent) const;
     int columnCount(const QModelIndex &parent) const;
@@ -53,7 +54,7 @@ public:
     void setTemplateTargetCategory(int row, bool save, int pk = -1, const QString &name = QString());
 
 private:
-    QList<PropertyMappingLine> m_lines;
+    QList<PropertyMappingLine> m_lines;    
 };
 
 class PropertyMappingLine

@@ -73,8 +73,38 @@ QNetworkReply *TME::apiCall(const QString &action, QList<QPair<QString, QString>
     return m_manager->post(req, paramString.toLocal8Bit());
 }
 
+bool TME::grossPrices() const
+{
+    return m_grossPrices;
+}
+
+void TME::setGrossPrices(bool newGrossPrices)
+{
+    m_grossPrices = newGrossPrices;
+}
+
+QString TME::currency() const
+{
+    return m_currency;
+}
+
+void TME::setCurrency(const QString &newCurrency)
+{
+    m_currency = newCurrency;
+}
+
 void TME::networkReplyFinished(QNetworkReply *reply)
 {
+    // handle non-JSON responses first
+    if (reply == m_imageReply) {
+        qWarning() << reply;
+        m_part.parseImageResponse(reply->readAll());
+
+        QList<QPair<QString, QString>> params;
+        params.append(QPair<QString,QString>(QUrl::toPercentEncoding("SymbolList[0]"), m_part.name()));
+        m_partPropertiesQueryReply = apiCall("Products/GetParameters", params);
+        return;
+    }
 
     auto json = QJsonDocument::fromJson(reply->readAll());
     qWarning().noquote() << json.toJson(QJsonDocument::Indented);
@@ -85,15 +115,37 @@ void TME::networkReplyFinished(QNetworkReply *reply)
             ob = ob["ProductList"].toArray().first().toObject();
             m_part = TMEPart(ob);
 
-            QList<QPair<QString, QString>> params;
-            params.append(QPair<QString,QString>(QUrl::toPercentEncoding("SymbolList[0]"), m_part.name()));
-            m_partPropertiesQueryReply = apiCall("Products/GetParameters", params);
+            QNetworkRequest req =  QNetworkRequest(QUrl("http:" + ob["Photo"].toString()));
+            m_imageReply = m_manager->get(req);
         }
     } else if (reply == m_partPropertiesQueryReply) {
         if (!reply->error()) {
             QJsonObject ob = json.object()["Data"].toObject();
             ob = ob["ProductList"].toArray().first().toObject();
             m_part.parseParametersResponse(ob["ParameterList"].toArray());
+
+            QList<QPair<QString, QString>> params;
+            params.append(QPair<QString,QString>(QUrl::toPercentEncoding("SymbolList[0]"), m_part.name()));
+            m_partAttachementsQueryReply = apiCall("Products/GetProductsFiles", params);
+        }
+    } else if (reply == m_partAttachementsQueryReply) {
+        if (!reply->error()) {
+            QJsonObject ob = json.object()["Data"].toObject();
+            ob = ob["ProductList"].toArray().first().toObject();
+            ob = ob["Files"].toObject();
+            m_part.parseAttachmentsResponse(ob["DocumentList"].toArray());
+
+            QList<QPair<QString, QString>> params;
+            params.append(QPair<QString,QString>(QUrl::toPercentEncoding("SymbolList[0]"), m_part.name()));
+            params.append(QPair<QString,QString>("Currency", m_currency));
+            params.append(QPair<QString,QString>("GrossPrices", m_grossPrices ? "true" : "false"));
+            m_partPricingQueryReply = apiCall("Products/GetPrices", params);
+        }
+    } else if (reply == m_partPricingQueryReply) {
+        if (!reply->error()) {
+            QJsonObject ob = json.object()["Data"].toObject();
+            ob = ob["ProductList"].toArray().first().toObject();
+            m_part.parsePricingResponse(ob["PriceList"].toArray());
             emit supplierPartRetrived(m_part);
         }
     }

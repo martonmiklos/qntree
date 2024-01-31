@@ -39,3 +39,13 @@ QList<SupplierPartProperty> SupplierPart::properties() const
 {
     return m_properties;
 }
+
+QList<SupplierPartPricingRange> SupplierPart::priceRanges() const
+{
+    return m_priceRanges;
+}
+
+QImage SupplierPart::image() const
+{
+    return m_image;
+}

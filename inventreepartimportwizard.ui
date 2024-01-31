@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>500</width>
-    <height>360</height>
+    <width>924</width>
+    <height>532</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,59 +23,51 @@
    <attribute name="pageId">
     <string notr="true">2</string>
    </attribute>
-   <layout class="QGridLayout" name="gridLayout_3">
-    <item row="0" column="1" colspan="2">
-     <widget class="QLineEdit" name="lineEditPartName"/>
-    </item>
-    <item row="0" column="0">
-     <widget class="QLabel" name="label_3">
-      <property name="text">
-       <string>Part name:</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="1" colspan="2">
-     <widget class="QLineEdit" name="lineEditKeyWords"/>
-    </item>
-    <item row="3" column="0">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="9" column="0">
      <widget class="QLabel" name="label_5">
       <property name="text">
        <string>Keywords:</string>
       </property>
      </widget>
     </item>
-    <item row="2" column="0" colspan="3">
-     <widget class="QGroupBox" name="groupBox">
-      <property name="title">
-       <string>Description</string>
-      </property>
-      <layout class="QGridLayout" name="gridLayout_6">
-       <item row="0" column="0">
-        <widget class="QTextEdit" name="textEditDescription"/>
-       </item>
-      </layout>
-     </widget>
-    </item>
-    <item row="1" column="0">
-     <widget class="QLabel" name="label">
+    <item row="1" column="5">
+     <widget class="QToolButton" name="toolButtonEditInventTreeCategory">
       <property name="text">
-       <string>Unit:</string>
+       <string/>
       </property>
      </widget>
     </item>
-    <item row="1" column="1">
+    <item row="9" column="1" colspan="5">
+     <widget class="QLineEdit" name="lineEditKeyWords"/>
+    </item>
+    <item row="0" column="0">
+     <widget class="QLabel" name="labelInvenTreeIPN">
+      <property name="text">
+       <string>InvenTree IPN:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="1" rowspan="2">
      <widget class="QLineEdit" name="lineEditUnit"/>
     </item>
-   </layout>
-  </widget>
-  <widget class="QWizardPage" name="wizardPageInvenTreeDetails">
-   <property name="title">
-    <string>InvenTree basic details</string>
-   </property>
-   <attribute name="pageId">
-    <string notr="true">3</string>
-   </attribute>
-   <layout class="QGridLayout" name="gridLayout_7">
+    <item row="3" column="1">
+     <widget class="QCheckBox" name="checkBoxSaveCategorBinding">
+      <property name="text">
+       <string>Save category binding</string>
+      </property>
+      <property name="checked">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1" colspan="5">
+     <widget class="QLineEdit" name="lineEditIPN">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
     <item row="1" column="0">
      <widget class="QLabel" name="label_4">
       <property name="sizePolicy">
@@ -96,52 +88,71 @@
       </property>
      </widget>
     </item>
-    <item row="0" column="0">
-     <widget class="QLabel" name="labelInvenTreeIPN">
+    <item row="4" column="0">
+     <widget class="QLabel" name="labelUnit">
       <property name="text">
-       <string>IPN:</string>
+       <string>Unit:</string>
       </property>
      </widget>
     </item>
-    <item row="3" column="1">
-     <widget class="QCheckBox" name="checkBoxSaveCategorBinding">
-      <property name="text">
-       <string>Save category binding</string>
+    <item row="6" column="0" colspan="6">
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <property name="bottomMargin">
+       <number>0</number>
       </property>
-      <property name="checked">
-       <bool>true</bool>
-      </property>
-     </widget>
+      <item>
+       <widget class="QGroupBox" name="groupBox">
+        <property name="title">
+         <string>Description</string>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_6">
+         <item row="0" column="0">
+          <widget class="QTextEdit" name="textEditDescription">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="labelPartImage">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </item>
-    <item row="2" column="1">
+    <item row="2" column="1" colspan="4">
      <widget class="QLabel" name="labelSupplierCategory">
+      <property name="minimumSize">
+       <size>
+        <width>40</width>
+        <height>0</height>
+       </size>
+      </property>
       <property name="text">
        <string/>
       </property>
      </widget>
     </item>
-    <item row="1" column="1">
+    <item row="1" column="1" colspan="2">
      <widget class="QLabel" name="labelInvenTreeCategory">
       <property name="text">
        <string/>
       </property>
      </widget>
     </item>
-    <item row="1" column="2">
-     <widget class="QToolButton" name="toolButtonEditInventTreeCategory">
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="1" colspan="2">
-     <widget class="QLineEdit" name="lineEditIPN"/>
-    </item>
    </layout>
   </widget>
-  <widget class="QWizardPage" name="wizardPageProperties">
+  <widget class="QWizardPage" name="wizardPageParameters">
    <property name="title">
-    <string>Part properties</string>
+    <string>Part parameters</string>
    </property>
    <attribute name="pageId">
     <string notr="true">4</string>
@@ -174,12 +185,8 @@
   </widget>
  </widget>
  <tabstops>
-  <tabstop>lineEditPartName</tabstop>
   <tabstop>textEditDescription</tabstop>
   <tabstop>lineEditKeyWords</tabstop>
-  <tabstop>lineEditIPN</tabstop>
-  <tabstop>toolButtonEditInventTreeCategory</tabstop>
-  <tabstop>checkBoxSaveCategorBinding</tabstop>
   <tabstop>tableViewAttachmentMapping</tabstop>
   <tabstop>tableViewPropertyMapping</tabstop>
  </tabstops>

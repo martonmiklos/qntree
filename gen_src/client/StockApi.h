@@ -244,9 +244,11 @@ public:
     * @param[in]  location_type qint32 [optional]
     * @param[in]  offset qint32 [optional]
     * @param[in]  ordering QString [optional]
+    * @param[in]  parent qint32 [optional]
     * @param[in]  search QString [optional]
+    * @param[in]  structural bool [optional]
     */
-    void stockLocation_List(const ::InvenTree::OptionalParam<bool> &has_location_type = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &location_type = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>());
+    void stockLocation_List(const ::InvenTree::OptionalParam<bool> &has_location_type = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &location_type = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &parent = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<bool> &structural = ::InvenTree::OptionalParam<bool>());
 
     /**
     * @param[in]  id qint32 [required]

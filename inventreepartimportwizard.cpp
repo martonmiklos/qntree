@@ -8,10 +8,12 @@
 
 #include "InvenTree_dialogs/dialogselectinventreecategory.h"
 
-InvenTreePartImportWizard::InvenTreePartImportWizard(InvenTree::PartApi *api, QWidget *parent)
+InvenTreePartImportWizard::InvenTreePartImportWizard(InvenTree::PartApi *api,
+                                                     InvenTree::StockApi *stockApi,
+                                                     QWidget *parent)
     : QWizard(parent),
     ui(new Ui::InvenTreePartImportWizard),
-    m_api(api)
+    m_partApi(api)
 {
     ui->setupUi(this);
     setAttribute(Qt::WA_DeleteOnClose);
@@ -19,7 +21,7 @@ InvenTreePartImportWizard::InvenTreePartImportWizard(InvenTree::PartApi *api, QW
     m_startPage = new WizardPageSupplierDataEnter(this);
     setPage(1, m_startPage);
 
-    m_stockAndPricingPage = new WizardPageStockAndPricing(this);
+    m_stockAndPricingPage = new WizardPageStockAndPricing(stockApi, this);
     setPage(6, m_stockAndPricingPage);
     m_propertyModel = new PropertyMappingModel(this);
     ui->tableViewPropertyMapping->setModel(m_propertyModel);
@@ -31,6 +33,13 @@ InvenTreePartImportWizard::InvenTreePartImportWizard(InvenTree::PartApi *api, QW
     m_settings.beginGroup("InvenTreePartImportWizard");
     restoreGeometry(m_settings.value("geometry").toByteArray());
     m_settings.endGroup();
+
+    m_attachmentsModel = new SupplierAttachmentsModel(this);
+    ui->tableViewAttachmentMapping->setModel(m_attachmentsModel);
+
+    ui->tableViewAttachmentMapping->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Stretch);
+
+    m_networkAccessManager = new QNetworkAccessManager(this);
 }
 
 InvenTreePartImportWizard::~InvenTreePartImportWizard()
@@ -46,13 +55,17 @@ void InvenTreePartImportWizard::setSelectedPart(SupplierPart &part)
     m_selectedPart = part;
 
     ui->lineEditIPN->setText(m_selectedPart.name());
-    ui->lineEditPartName->setText(m_selectedPart.name());
     ui->labelSupplierCategory->setText(m_selectedPart.categoryName());
     ui->textEditDescription->setText(m_selectedPart.description());
     ui->lineEditUnit->setText(m_selectedPart.unit());
+    
+    m_propertyModel->setPart(&m_selectedPart);
+    m_attachmentsModel->setPart(&m_selectedPart);
+    m_stockAndPricingPage->setPart(&m_selectedPart);
 
-    m_propertyModel->loadFromSupplierPart(m_selectedPart);
     m_stockAndPricingPage->update();
+
+    ui->labelPartImage->setPixmap(QPixmap::fromImage(m_selectedPart.image()));
 }
 
 InvenTreePartImportWizardPage::InvenTreePartImportWizardPage(InvenTreePartImportWizard *parent) :
@@ -135,7 +148,7 @@ void InvenTreePartImportWizard::on_tableViewPropertyMapping_customContextMenuReq
             for (auto row : ui->tableViewPropertyMapping->selectionModel()->selectedRows())
                 m_propertyModel->setTemplateTargetCategory(row.row(), false);
         } else {
-            auto dlg = new DialogSelectInvenTreeCategory(m_api, 0, this);
+            auto dlg = new DialogSelectInvenTreeCategory(m_partApi, 0, this);
             dlg->setWindowTitle(tr("Select category for the parameter template"));
             connect(dlg, &DialogSelectInvenTreeCategory::categorySelected, this, [=](int pk, const QString &name, const QString &path) {
                 Q_UNUSED(path)
@@ -155,7 +168,7 @@ void InvenTreePartImportWizard::on_tableViewAttachmentMapping_customContextMenuR
 
 void InvenTreePartImportWizard::on_toolButtonEditInventTreeCategory_clicked()
 {
-    auto dlg = new DialogSelectInvenTreeCategory(m_api, m_invenTreeTargetCategoryPk, this);
+    auto dlg = new DialogSelectInvenTreeCategory(m_partApi, m_invenTreeTargetCategoryPk, this);
     connect(dlg, &DialogSelectInvenTreeCategory::categorySelected, this, [=](int pk, const QString &categoryName, const QString &categoryPath) {
         ui->labelInvenTreeCategory->setText(categoryName);
         ui->labelInvenTreeCategory->setToolTip(categoryPath);
@@ -163,5 +176,39 @@ void InvenTreePartImportWizard::on_toolButtonEditInventTreeCategory_clicked()
         dlg->close();
     });
     dlg->show();
+}
+
+
+void InvenTreePartImportWizard::on_labelPartImage_customContextMenuRequested(const QPoint &pos)
+{
+    // TOOD add a right click menu to change the product image
+}
+
+
+void InvenTreePartImportWizard::on_tableViewAttachmentMapping_clicked(const QModelIndex &index)
+{
+    if (index.column() == SupplierAttachmentsModel::Col_FileName) {
+        auto fn = m_attachmentsModel->data(m_attachmentsModel->index(index.row(), SupplierAttachmentsModel::Col_FileName), Qt::DisplayRole).toString();
+        fn = QDir::tempPath() + QDir::separator() + fn;
+        QFileInfo fi(fn);
+        if (fi.exists() && fi.size() == m_attachmentsModel->data(index, SupplierAttachmentsModel::Role_Size)) {
+            QDesktopServices::openUrl(QUrl::fromLocalFile(fn));
+        } else {
+            QNetworkRequest req;
+            req.setUrl(m_attachmentsModel->data(index, SupplierAttachmentsModel::Role_Url).toUrl());
+            req.setAttribute(QNetworkRequest::RedirectPolicyAttribute, QNetworkRequest::NoLessSafeRedirectPolicy);
+            // TODO make user agent settable
+            req.setHeader(QNetworkRequest::UserAgentHeader, QStringLiteral("Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/115.0"));
+            auto reply = m_networkAccessManager->get(req);
+            connect(reply, &QNetworkReply::finished, this, [=]() {
+                QFile file(fn);
+                if (file.open(QFile::WriteOnly)) {
+                    file.write(reply->readAll());
+                }
+                file.close();
+                QDesktopServices::openUrl(QUrl::fromLocalFile(fn));
+            });
+        }
+    }
 }
 
