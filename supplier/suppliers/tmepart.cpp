@@ -35,13 +35,14 @@ void TMEPart::parseAttachmentsResponse(const QJsonArray &documentListJson)
     }
 }
 
-void TMEPart::parsePricingResponse(const QJsonArray &paramsJson)
+void TMEPart::parsePricingResponse(const QJsonArray &paramsJson, const QString &currency)
 {
     for (int i = 0; i<paramsJson.count(); i++) {
         auto obj = paramsJson.at(i).toObject();
         SupplierPartPricingRange priceRange;
         priceRange.price = obj["PriceValue"].toDouble();
         priceRange.qtyMin = obj["Amount"].toDouble();
+        priceRange.currency = currency;
         m_priceRanges.append(priceRange);
     }
 }

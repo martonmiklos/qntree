@@ -28,7 +28,11 @@
     <widget class="QComboBox" name="comboBoxSupplier"/>
    </item>
    <item row="1" column="0">
-    <widget class="QLineEdit" name="lineEditPartNumber"/>
+    <widget class="QLineEdit" name="lineEditPartNumber">
+     <property name="text">
+      <string>1N4148-A0G</string>
+     </property>
+    </widget>
    </item>
    <item row="0" column="0">
     <widget class="QLabel" name="label">

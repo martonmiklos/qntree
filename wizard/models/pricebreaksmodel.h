@@ -28,6 +28,8 @@ public:
 
     void setPart(SupplierPart *newPart);
 
+    qreal getPriceForQuantity(qreal quantity, QString *currency = nullptr);
+
 private:
     SupplierPart *m_part = nullptr;
 };

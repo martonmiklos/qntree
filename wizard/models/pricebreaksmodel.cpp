@@ -62,3 +62,16 @@ void PricebreaksModel::setPart(SupplierPart *newPart)
     m_part = newPart;
     endResetModel();
 }
+
+qreal PricebreaksModel::getPriceForQuantity(qreal quantity, QString *currency)
+{
+    for (int i = m_part->priceRanges().count(); i>0; i--) {
+        auto pr = m_part->priceRanges().at(i-1);
+        if (quantity >= pr.qtyMin) {
+            if (currency)
+                *currency = pr.currency;
+            return pr.price;
+        }
+    }
+    return 0.0;
+}

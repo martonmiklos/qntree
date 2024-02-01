@@ -10,11 +10,11 @@ WizardPageStockAndPricing::WizardPageStockAndPricing(InvenTree::StockApi *api, I
 {
     ui->setupUi(this);
     m_stockWidgets
-        << ui->checkBoxMakeStockLocatioDefault
+        << ui->checkBoxMakeStockLocationDefault
         << ui->textEditStockNotes
         << ui->doubleSpinBoxStockQuantity
         << ui->doubleSpinBoxUnitPrice
-        << ui->comboBoxUnitPrice
+        << ui->comboBoxUnitPriceCurrency
         << ui->toolButtonChangeTargetLocation;
     m_priceBreakModel = new PricebreaksModel(this);
     ui->tableViewPriceBreaks->setModel(m_priceBreakModel);
@@ -39,6 +39,8 @@ void WizardPageStockAndPricing::update()
 void WizardPageStockAndPricing::setPart(SupplierPart *part)
 {
     m_priceBreakModel->setPart(part);
+    m_priceWasEdited = false;
+    updatePriceFromPriceBreaks();
 }
 
 void WizardPageStockAndPricing::on_doubleSpinBoxUnitPrice_valueChanged(double arg1)
@@ -71,5 +73,32 @@ void WizardPageStockAndPricing::on_toolButtonChangeTargetLocation_clicked()
 int WizardPageStockAndPricing::selectedLocationPk() const
 {
     return m_selectedLocationPk;
+}
+
+void WizardPageStockAndPricing::updatePriceFromPriceBreaks()
+{
+    QString currency;
+    qreal calculatedPrice = m_priceBreakModel->getPriceForQuantity(ui->doubleSpinBoxStockQuantity->value(), &currency);
+    if (calculatedPrice > 0) {
+        ui->doubleSpinBoxUnitPrice->setValue(calculatedPrice);
+        auto currencyIndex = ui->comboBoxUnitPriceCurrency->findData(currency);
+        if (currencyIndex != -1)
+            ui->comboBoxUnitPriceCurrency->setCurrentIndex(currencyIndex);
+        else
+            ui->comboBoxUnitPriceCurrency->addItem(currency, currency);
+    }
+}
+
+void WizardPageStockAndPricing::on_doubleSpinBoxStockQuantity_valueChanged(double arg1)
+{
+    if (m_priceWasEdited)
+        return;
+    updatePriceFromPriceBreaks();
+}
+
+
+void WizardPageStockAndPricing::on_doubleSpinBoxUnitPrice_editingFinished()
+{
+    m_priceWasEdited = true;
 }
 

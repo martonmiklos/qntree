@@ -29,7 +29,7 @@
       <item row="1" column="0">
        <widget class="QCheckBox" name="checkBoxSavePriceBreaks">
         <property name="text">
-         <string>Save price breaks</string>
+         <string>Save price breaks to InvenTree</string>
         </property>
        </widget>
       </item>
@@ -41,7 +41,7 @@
      <item row="0" column="0">
       <widget class="QLabel" name="label_9">
        <property name="text">
-        <string>Quantity:</string>
+        <string>Stock quantity:</string>
        </property>
       </widget>
      </item>
@@ -52,6 +52,9 @@
        </property>
        <property name="maximum">
         <double>9999999.000000000000000</double>
+       </property>
+       <property name="value">
+        <double>1.000000000000000</double>
        </property>
       </widget>
      </item>
@@ -73,7 +76,7 @@
       </widget>
      </item>
      <item row="1" column="2">
-      <widget class="QComboBox" name="comboBoxUnitPrice">
+      <widget class="QComboBox" name="comboBoxUnitPriceCurrency">
        <property name="enabled">
         <bool>false</bool>
        </property>
@@ -108,16 +111,6 @@
        </widget>
       </item>
      </layout>
-    </widget>
-   </item>
-   <item row="2" column="0" colspan="4">
-    <widget class="QCheckBox" name="checkBoxMakeStockLocatioDefault">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
-     <property name="text">
-      <string>Make this location the default location of the new item</string>
-     </property>
     </widget>
    </item>
    <item row="1" column="0" colspan="6">
@@ -156,6 +149,16 @@
       </widget>
      </item>
     </layout>
+   </item>
+   <item row="2" column="0" colspan="6">
+    <widget class="QCheckBox" name="checkBoxMakeStockLocationDefault">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="text">
+      <string>Make this location the default location of the new item</string>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>

@@ -144,8 +144,8 @@ void TME::networkReplyFinished(QNetworkReply *reply)
     } else if (reply == m_partPricingQueryReply) {
         if (!reply->error()) {
             QJsonObject ob = json.object()["Data"].toObject();
-            ob = ob["ProductList"].toArray().first().toObject();
-            m_part.parsePricingResponse(ob["PriceList"].toArray());
+            auto prodList = ob["ProductList"].toArray().first().toObject();
+            m_part.parsePricingResponse(prodList["PriceList"].toArray(), ob["Currency"].toString());
             emit supplierPartRetrived(m_part);
         }
     }

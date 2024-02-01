@@ -26,6 +26,8 @@ private slots:
     void on_doubleSpinBoxUnitPrice_valueChanged(double arg1);
     void on_checkBoxCreateStock_toggled(bool checked);
     void on_toolButtonChangeTargetLocation_clicked();
+    void on_doubleSpinBoxStockQuantity_valueChanged(double arg1);
+    void on_doubleSpinBoxUnitPrice_editingFinished();
 
 private:
     Ui::WizardPageStockAndPricing *ui;
@@ -33,4 +35,6 @@ private:
     PricebreaksModel *m_priceBreakModel = nullptr;
     int m_selectedLocationPk = -1;
     InvenTree::StockApi *m_stockApi = nullptr;
+    bool m_priceWasEdited = false;
+    void updatePriceFromPriceBreaks();
 };
