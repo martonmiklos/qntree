@@ -1,3 +1,6 @@
 [submodule "qt_goodies"]
 	path = qt_goodies
 	url = git@github.com:martonmiklos/qt_goodies.git
+[submodule "db/Nut"]
+	path = db/Nut
+	url = git@github.com:martonmiklos/Nut.git

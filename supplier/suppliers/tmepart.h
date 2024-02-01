@@ -2,6 +2,9 @@
 
 #include "supplier/supplierpart.h"
 
+class QJsonArray;
+class QJsonObject;
+
 class TMEPart : public SupplierPart
 {
 public:

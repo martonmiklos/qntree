@@ -35,9 +35,10 @@ class InvenTreePartImportWizard : public QWizard
 public:
     enum PageIndexes {
         SupplierDataEnter,
-        SupplierData,
-        PropertyMapping,
-        StockAndPricing
+        SupplierDataReview,
+        ParameterMapping,
+        StockAndPricing,
+        FinishPage
     };
     explicit InvenTreePartImportWizard(InvenTree::PartApi *api,
                                        InvenTree::StockApi *stockApi,

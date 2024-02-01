@@ -7,6 +7,9 @@ CONFIG += c++17
 # In order to do so, uncomment the following line.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
+include(db/Nut/nut.pri)
+include(db/gen_src/qntree.pri)
+
 SOURCES += \
     InvenTree_dialogs/dialogselectinventreecategory.cpp \
     InvenTree_dialogs/dialogselectinventreestocklocation.cpp \
@@ -24,6 +27,7 @@ SOURCES += \
     supplier/suppliers/tmepart.cpp \
     wizard/models/pricebreaksmodel.cpp \
     wizard/models/propertymappingmodel.cpp \
+    wizard/models/supplierattachmentactiondelegate.cpp \
     wizard/models/supplierattachmentsmodel.cpp \
     wizard/wizardpagestockandpricing.cpp \
     wizard/wizardpagesupplierdataenter.cpp
@@ -45,6 +49,7 @@ HEADERS += \
     supplier/suppliers/tmepart.h \
     wizard/models/pricebreaksmodel.h \
     wizard/models/propertymappingmodel.h \
+    wizard/models/supplierattachmentactiondelegate.h \
     wizard/models/supplierattachmentsmodel.h \
     wizard/wizardpagestockandpricing.h \
     wizard/wizardpagesupplierdataenter.h

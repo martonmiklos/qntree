@@ -5,6 +5,7 @@
 #include "wizard/models/propertymappingmodel.h"
 #include "wizard/wizardpagesupplierdataenter.h"
 #include "wizard/wizardpagestockandpricing.h"
+#include "wizard/models/supplierattachmentactiondelegate.h"
 
 #include "InvenTree_dialogs/dialogselectinventreecategory.h"
 
@@ -38,6 +39,7 @@ InvenTreePartImportWizard::InvenTreePartImportWizard(InvenTree::PartApi *api,
     ui->tableViewAttachmentMapping->setModel(m_attachmentsModel);
 
     ui->tableViewAttachmentMapping->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Stretch);
+    ui->tableViewAttachmentMapping->setItemDelegateForColumn(SupplierAttachmentsModel::Col_Action, new SupplierAttachmentActionDelegate(ui->tableViewAttachmentMapping));
 
     m_networkAccessManager = new QNetworkAccessManager(this);
 }
@@ -77,7 +79,7 @@ InvenTreePartImportWizardPage::InvenTreePartImportWizardPage(InvenTreePartImport
 
 void InvenTreePartImportWizard::on_InvenTreePartImportWizard_currentIdChanged(int id)
 {
-    if (id == PropertyMapping) {
+    if (id == ParameterMapping) {
         // update the unit suffix
         m_stockAndPricingPage->update();
     }
