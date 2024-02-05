@@ -15,6 +15,7 @@ SOURCES += \
     InvenTree_dialogs/dialogselectinventreestocklocation.cpp \
     InvenTree_dialogs/inventreecategorymodel.cpp \
     InvenTree_dialogs/inventreestocklocationmodel.cpp \
+    db/config_db.cpp \
     inventreepartimportwizard.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -29,6 +30,7 @@ SOURCES += \
     wizard/models/propertymappingmodel.cpp \
     wizard/models/supplierattachmentactiondelegate.cpp \
     wizard/models/supplierattachmentsmodel.cpp \
+    wizard/wizardpagepartdetails.cpp \
     wizard/wizardpagestockandpricing.cpp \
     wizard/wizardpagesupplierdataenter.cpp
 
@@ -37,6 +39,7 @@ HEADERS += \
     InvenTree_dialogs/dialogselectinventreestocklocation.h \
     InvenTree_dialogs/inventreecategorymodel.h \
     InvenTree_dialogs/inventreestocklocationmodel.h \
+    db/config_db.h \
     inventreepartimportwizard.h \
     mainwindow.h \
     qt_goodies/qobjectsingleton.h \
@@ -51,6 +54,7 @@ HEADERS += \
     wizard/models/propertymappingmodel.h \
     wizard/models/supplierattachmentactiondelegate.h \
     wizard/models/supplierattachmentsmodel.h \
+    wizard/wizardpagepartdetails.h \
     wizard/wizardpagestockandpricing.h \
     wizard/wizardpagesupplierdataenter.h
 
@@ -59,6 +63,7 @@ FORMS += \
     InvenTree_dialogs/dialogselectinventreestocklocation.ui \
     inventreepartimportwizard.ui \
     mainwindow.ui \
+    wizard/wizardpagepartdetails.ui \
     wizard/wizardpagestockandpricing.ui \
     wizard/wizardpagesupplierdataenter.ui
 
@@ -70,3 +75,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 
 include(gen_src/client/client.pri)
+
+RESOURCES += \
+    resources.qrc

@@ -5,9 +5,14 @@
 #include "wizard/models/propertymappingmodel.h"
 #include "wizard/wizardpagesupplierdataenter.h"
 #include "wizard/wizardpagestockandpricing.h"
+#include "wizard/wizardpagepartdetails.h"
 #include "wizard/models/supplierattachmentactiondelegate.h"
 
 #include "InvenTree_dialogs/dialogselectinventreecategory.h"
+
+#include "db/config_db.h"
+
+#include <QMessageBox>
 
 InvenTreePartImportWizard::InvenTreePartImportWizard(InvenTree::PartApi *api,
                                                      InvenTree::StockApi *stockApi,
@@ -20,10 +25,14 @@ InvenTreePartImportWizard::InvenTreePartImportWizard(InvenTree::PartApi *api,
     setAttribute(Qt::WA_DeleteOnClose);
 
     m_startPage = new WizardPageSupplierDataEnter(this);
-    setPage(1, m_startPage);
+    setPage(SupplierDataEnter, m_startPage);
+
+    m_partDetailsPage = new WizardPagePartDetails(m_partApi, stockApi, this);
+    setPage(SupplierDataReview, m_partDetailsPage);
 
     m_stockAndPricingPage = new WizardPageStockAndPricing(stockApi, this);
-    setPage(6, m_stockAndPricingPage);
+    setPage(StockAndPricing, m_stockAndPricingPage);
+
     m_propertyModel = new PropertyMappingModel(this);
     ui->tableViewPropertyMapping->setModel(m_propertyModel);
 
@@ -56,18 +65,12 @@ void InvenTreePartImportWizard::setSelectedPart(SupplierPart &part)
 {
     m_selectedPart = part;
 
-    ui->lineEditIPN->setText(m_selectedPart.name());
-    ui->labelSupplierCategory->setText(m_selectedPart.categoryName());
-    ui->textEditDescription->setText(m_selectedPart.description());
-    ui->lineEditUnit->setText(m_selectedPart.unit());
-    
+    m_partDetailsPage->setSelectedPart(part);
     m_propertyModel->setPart(&m_selectedPart);
     m_attachmentsModel->setPart(&m_selectedPart);
     m_stockAndPricingPage->setPart(&m_selectedPart);
 
     m_stockAndPricingPage->update();
-
-    ui->labelPartImage->setPixmap(QPixmap::fromImage(m_selectedPart.image()));
 }
 
 InvenTreePartImportWizardPage::InvenTreePartImportWizardPage(InvenTreePartImportWizard *parent) :
@@ -77,9 +80,13 @@ InvenTreePartImportWizardPage::InvenTreePartImportWizardPage(InvenTreePartImport
 
 }
 
-void InvenTreePartImportWizard::on_InvenTreePartImportWizard_currentIdChanged(int id)
+void InvenTreePartImportWizard::on_InvenTreePartImportWizard_currentIdChanged(int newId)
 {
-    if (id == ParameterMapping) {
+    if (newId == SupplierDataReview) {
+        m_partDetailsPage->setSupplierUuid(m_startPage->selectedSupplier()->uid());
+        m_partDetailsPage->updateCategoryMapping();
+    } else if (newId == ParameterMapping) {
+        m_partDetailsPage->saveMapping();
         // update the unit suffix
         m_stockAndPricingPage->update();
     }
@@ -168,19 +175,6 @@ void InvenTreePartImportWizard::on_tableViewAttachmentMapping_customContextMenuR
 
 }
 
-void InvenTreePartImportWizard::on_toolButtonEditInventTreeCategory_clicked()
-{
-    auto dlg = new DialogSelectInvenTreeCategory(m_partApi, m_invenTreeTargetCategoryPk, this);
-    connect(dlg, &DialogSelectInvenTreeCategory::categorySelected, this, [=](int pk, const QString &categoryName, const QString &categoryPath) {
-        ui->labelInvenTreeCategory->setText(categoryName);
-        ui->labelInvenTreeCategory->setToolTip(categoryPath);
-        m_invenTreeTargetCategoryPk = pk;
-        dlg->close();
-    });
-    dlg->show();
-}
-
-
 void InvenTreePartImportWizard::on_labelPartImage_customContextMenuRequested(const QPoint &pos)
 {
     // TOOD add a right click menu to change the product image
@@ -213,4 +207,5 @@ void InvenTreePartImportWizard::on_tableViewAttachmentMapping_clicked(const QMod
         }
     }
 }
+
 

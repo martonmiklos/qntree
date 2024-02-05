@@ -3,8 +3,8 @@
 
 #include <Database>
 #include <Query>
-#include "suppliers.h"
 #include "supplier_parameter_map.h"
+#include "suppliers.h"
 #include "supplier_category_map.h"
 
 class Database;
@@ -16,8 +16,8 @@ class Qntree : public Nut::Database
 
   NUT_DB_VERSION(1)
 
-  NUT_DECLARE_TABLE(Suppliers, suppliers)
   NUT_DECLARE_TABLE(SupplierParameterMap, supplier_parameter_map)
+  NUT_DECLARE_TABLE(Suppliers, suppliers)
   NUT_DECLARE_TABLE(SupplierCategoryMap, supplier_category_map)
   public:
     Q_INVOKABLE Qntree();

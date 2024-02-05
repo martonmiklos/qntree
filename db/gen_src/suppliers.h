@@ -13,6 +13,8 @@ class Suppliers : public Nut::Table
 
   NUT_DECLARE_FIELD(QString, name, name, setName, QString())
 
+  NUT_DECLARE_FIELD(QString, uuid, uuid, setUuid, QString())
+
   public:
     Q_INVOKABLE Suppliers( QObject *parent = nullptr );
 

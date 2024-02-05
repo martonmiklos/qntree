@@ -16,6 +16,7 @@ class InvenTreePartImportWizard;
 class WizardPageSupplierDataEnter;
 class WizardPageStockAndPricing;
 class QNetworkAccessManager;
+class WizardPagePartDetails;
 
 class InvenTreePartImportWizardPage : public QWizardPage
 {
@@ -49,9 +50,7 @@ private slots:
     void on_InvenTreePartImportWizard_currentIdChanged(int id);
     void on_tableViewPropertyMapping_customContextMenuRequested(const QPoint &pos);
     void on_tableViewAttachmentMapping_customContextMenuRequested(const QPoint &pos);
-    void on_toolButtonEditInventTreeCategory_clicked();
     void on_labelPartImage_customContextMenuRequested(const QPoint &pos);
-
     void on_tableViewAttachmentMapping_clicked(const QModelIndex &index);
 
 private:
@@ -59,10 +58,9 @@ private:
     ::SupplierPart m_selectedPart;
     WizardPageSupplierDataEnter *m_startPage;
     WizardPageStockAndPricing *m_stockAndPricingPage;
+    WizardPagePartDetails *m_partDetailsPage;
     PropertyMappingModel *m_propertyModel = nullptr;
     InvenTree::PartApi *m_partApi = nullptr;
-    InvenTree::StockApi *m_stockApi = nullptr;
-    int m_invenTreeTargetCategoryPk = 0;
     QSettings m_settings;
     SupplierAttachmentsModel *m_attachmentsModel = nullptr;
     QNetworkAccessManager *m_networkAccessManager = nullptr;

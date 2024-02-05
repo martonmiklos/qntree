@@ -106,3 +106,8 @@ void WizardPageSupplierDataEnter::on_comboBoxSupplier_currentIndexChanged(int in
     ui->lineEditPartNumber->setMaxLength(selectedSupplier->pnLengthLimit());
 }
 
+AbstractSupplier *WizardPageSupplierDataEnter::selectedSupplier() const
+{
+    return m_selectedSupplier;
+}
+

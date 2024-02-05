@@ -9,12 +9,12 @@ using namespace NUT_NAMESPACE;
 
 Qntree::Qntree()
   : Database(),
-  m_suppliers(new Nut::TableSet<Suppliers>(this)),
   m_supplier_parameter_map(new Nut::TableSet<SupplierParameterMap>(this)),
+  m_suppliers(new Nut::TableSet<Suppliers>(this)),
   m_supplier_category_map(new Nut::TableSet<SupplierCategoryMap>(this))
 {
-  qRegisterMetaType<Suppliers*>();
   qRegisterMetaType<SupplierParameterMap*>();
+  qRegisterMetaType<Suppliers*>();
   qRegisterMetaType<SupplierCategoryMap*>();
 }
 

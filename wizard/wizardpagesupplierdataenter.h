@@ -18,9 +18,10 @@ public:
     bool validatePage() override;
     void update() override;
 
+    AbstractSupplier *selectedSupplier() const;
+
 private slots:
     void on_lineEditPartNumber_textChanged(const QString &arg1);
-
     void on_comboBoxSupplier_currentIndexChanged(int index);
 
 private:

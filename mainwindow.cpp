@@ -6,6 +6,8 @@ using namespace InvenTree;
 
 #include "inventreepartimportwizard.h"
 
+#include "db/config_db.h"
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -26,6 +28,8 @@ MainWindow::MainWindow(QWidget *parent)
     m_settings.beginGroup("MainWindow");
     restoreGeometry(m_settings.value("geometry").toByteArray());
     m_settings.endGroup();
+
+    ConfigDb::instance()->init();
 }
 
 MainWindow::~MainWindow()

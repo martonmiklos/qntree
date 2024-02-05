@@ -11,11 +11,11 @@ class SupplierCategoryMap : public Nut::Table
   NUT_PRIMARY_AUTO_INCREMENT(id)
   NUT_DECLARE_FIELD(int, id, id, setId, 0)
 
-  NUT_DECLARE_FIELD(int, display_name, display_name, setDisplay_name, 0)
-
-  NUT_DECLARE_FIELD(QString, identifier, identifier, setIdentifier, QString())
-
   NUT_DECLARE_FIELD(int, supplier_id, supplier_id, setSupplier_id, 0)
+
+  NUT_DECLARE_FIELD(QString, supplier_category_name, supplier_category_name, setSupplier_category_name, QString())
+
+  NUT_DECLARE_FIELD(QString, supplier_category_id, supplier_category_id, setSupplier_category_id, QString())
 
   NUT_DECLARE_FIELD(int, inventree_category_id, inventree_category_id, setInventree_category_id, 0)
 
