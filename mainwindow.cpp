@@ -43,7 +43,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButtonConnect_clicked()
 {
-    m_partApi->partCategoryParameters_List(1000, 0);
+    m_partApi->partCategoryParametersList(1000, 0);
 }
 
 

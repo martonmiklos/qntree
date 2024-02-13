@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.2)
+cmake_minimum_required(VERSION 3.5)
 
 project(QtOpenAPIClient)
 
@@ -8,7 +8,9 @@ include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
 
 add_library(${PROJECT_NAME}
+  APISearchView.h
   AcceptOverallocatedEnum.h
+  ActionPlugin.h
   Address.h
   AddressBrief.h
   BOMReport.h
@@ -55,11 +57,15 @@ add_library(${PROJECT_NAME}
   ConvertStockItem.h
   CustomUnit.h
   EmailAddress.h
+  ErrorMessage.h
   ExendedUser.h
+  FailedTask.h
   GetSimpleLogin.h
   GlobalSettings.h
   Group.h
   InstallStockItem.h
+  Link.h
+  LocatePlugin.h
   Location.h
   LocationBrief.h
   LocationTree.h
@@ -92,6 +98,8 @@ add_library(${PROJECT_NAME}
   PaginatedContactList.h
   PaginatedCustomUnitList.h
   PaginatedEmailAddressList.h
+  PaginatedErrorMessageList.h
+  PaginatedFailedTaskList.h
   PaginatedGlobalSettingsList.h
   PaginatedGroupList.h
   PaginatedLocationList.h
@@ -116,6 +124,7 @@ add_library(${PROJECT_NAME}
   PaginatedPartStocktakeReportList.h
   PaginatedPartTestTemplateList.h
   PaginatedPartThumbList.h
+  PaginatedPendingTaskList.h
   PaginatedPluginConfigList.h
   PaginatedPluginSettingList.h
   PaginatedProjectCodeList.h
@@ -136,7 +145,9 @@ add_library(${PROJECT_NAME}
   PaginatedSalesOrderList.h
   PaginatedSalesOrderReportList.h
   PaginatedSalesOrderShipmentList.h
+  PaginatedScheduledTaskList.h
   PaginatedSocialAccountList.h
+  PaginatedSocialProviderListResponseList.h
   PaginatedStockItemAttachmentList.h
   PaginatedStockItemLabelList.h
   PaginatedStockItemList.h
@@ -150,6 +161,7 @@ add_library(${PROJECT_NAME}
   PaginatedTestReportList.h
   PaginatedUserCreateList.h
   PaginatedUserSettingsList.h
+  PaginatedVersionList.h
   Part.h
   PartAttachment.h
   PartBrief.h
@@ -189,6 +201,7 @@ add_library(${PROJECT_NAME}
   PatchedCompanyAttachment.h
   PatchedContact.h
   PatchedCustomUnit.h
+  PatchedErrorMessage.h
   PatchedExendedUser.h
   PatchedGlobalSettings.h
   PatchedGroup.h
@@ -214,6 +227,7 @@ add_library(${PROJECT_NAME}
   PatchedPluginActivate.h
   PatchedPluginConfig.h
   PatchedPluginSetting.h
+  PatchedPluginUninstall.h
   PatchedProjectCode.h
   PatchedPurchaseOrder.h
   PatchedPurchaseOrderAttachment.h
@@ -244,6 +258,7 @@ add_library(${PROJECT_NAME}
   PatchedTestReport.h
   PatchedUserDetails.h
   PatchedUserSettings.h
+  PendingTask.h
   PluginActivate.h
   PluginConfig.h
   PluginConfigInstall.h
@@ -251,6 +266,9 @@ add_library(${PROJECT_NAME}
   PluginRegistryStatus.h
   PluginReload.h
   PluginSetting.h
+  PluginUninstall.h
+  Preferred.h
+  PreferredMethodEnum.h
   ProjectCode.h
   PurchaseOrder.h
   PurchaseOrderAttachment.h
@@ -285,10 +303,14 @@ add_library(${PROJECT_NAME}
   SalesOrderShipmentAllocation.h
   SalesOrderShipmentAllocationItem.h
   SalesOrderShipmentComplete.h
+  ScheduleTypeEnum.h
+  ScheduledTask.h
   SerializeStockItem.h
   SocialAccount.h
   SocialConnect.h
-  Status46bEnum.h
+  SocialProvider.h
+  SocialProviderListResponse.h
+  StatusC28Enum.h
   StockAdd.h
   StockAdjustmentItem.h
   StockAssignment.h
@@ -298,6 +320,7 @@ add_library(${PROJECT_NAME}
   StockItem.h
   StockItemAttachment.h
   StockItemLabel.h
+  StockItemSerializerBrief.h
   StockItemTestResult.h
   StockLocationLabel.h
   StockLocationReport.h
@@ -317,16 +340,20 @@ add_library(${PROJECT_NAME}
   UserDetails.h
   UserSettings.h
   VerifyEmail.h
+  Version.h
+  VersionView.h
   _llapot.h
   ActionApi.h
   AdminApi.h
   AuthApi.h
+  BackgroundTaskApi.h
   BarcodeApi.h
   BomApi.h
   BuildApi.h
   CompanyApi.h
   CurrencyApi.h
   EmailApi.h
+  ErrorReportApi.h
   FlagsApi.h
   GenericApi.h
   LabelApi.h
@@ -346,6 +373,7 @@ add_library(${PROJECT_NAME}
   UserApi.h
   VersionApi.h
   VersionTextApi.h
+  WebApi.h
   WebhookApi.h
   Helpers.h
   HttpRequest.h
@@ -355,7 +383,9 @@ add_library(${PROJECT_NAME}
   ServerConfiguration.h
   ServerVariable.h
   Oauth.h
+  APISearchView.cpp
   AcceptOverallocatedEnum.cpp
+  ActionPlugin.cpp
   Address.cpp
   AddressBrief.cpp
   BOMReport.cpp
@@ -402,11 +432,15 @@ add_library(${PROJECT_NAME}
   ConvertStockItem.cpp
   CustomUnit.cpp
   EmailAddress.cpp
+  ErrorMessage.cpp
   ExendedUser.cpp
+  FailedTask.cpp
   GetSimpleLogin.cpp
   GlobalSettings.cpp
   Group.cpp
   InstallStockItem.cpp
+  Link.cpp
+  LocatePlugin.cpp
   Location.cpp
   LocationBrief.cpp
   LocationTree.cpp
@@ -439,6 +473,8 @@ add_library(${PROJECT_NAME}
   PaginatedContactList.cpp
   PaginatedCustomUnitList.cpp
   PaginatedEmailAddressList.cpp
+  PaginatedErrorMessageList.cpp
+  PaginatedFailedTaskList.cpp
   PaginatedGlobalSettingsList.cpp
   PaginatedGroupList.cpp
   PaginatedLocationList.cpp
@@ -463,6 +499,7 @@ add_library(${PROJECT_NAME}
   PaginatedPartStocktakeReportList.cpp
   PaginatedPartTestTemplateList.cpp
   PaginatedPartThumbList.cpp
+  PaginatedPendingTaskList.cpp
   PaginatedPluginConfigList.cpp
   PaginatedPluginSettingList.cpp
   PaginatedProjectCodeList.cpp
@@ -483,7 +520,9 @@ add_library(${PROJECT_NAME}
   PaginatedSalesOrderList.cpp
   PaginatedSalesOrderReportList.cpp
   PaginatedSalesOrderShipmentList.cpp
+  PaginatedScheduledTaskList.cpp
   PaginatedSocialAccountList.cpp
+  PaginatedSocialProviderListResponseList.cpp
   PaginatedStockItemAttachmentList.cpp
   PaginatedStockItemLabelList.cpp
   PaginatedStockItemList.cpp
@@ -497,6 +536,7 @@ add_library(${PROJECT_NAME}
   PaginatedTestReportList.cpp
   PaginatedUserCreateList.cpp
   PaginatedUserSettingsList.cpp
+  PaginatedVersionList.cpp
   Part.cpp
   PartAttachment.cpp
   PartBrief.cpp
@@ -536,6 +576,7 @@ add_library(${PROJECT_NAME}
   PatchedCompanyAttachment.cpp
   PatchedContact.cpp
   PatchedCustomUnit.cpp
+  PatchedErrorMessage.cpp
   PatchedExendedUser.cpp
   PatchedGlobalSettings.cpp
   PatchedGroup.cpp
@@ -561,6 +602,7 @@ add_library(${PROJECT_NAME}
   PatchedPluginActivate.cpp
   PatchedPluginConfig.cpp
   PatchedPluginSetting.cpp
+  PatchedPluginUninstall.cpp
   PatchedProjectCode.cpp
   PatchedPurchaseOrder.cpp
   PatchedPurchaseOrderAttachment.cpp
@@ -591,6 +633,7 @@ add_library(${PROJECT_NAME}
   PatchedTestReport.cpp
   PatchedUserDetails.cpp
   PatchedUserSettings.cpp
+  PendingTask.cpp
   PluginActivate.cpp
   PluginConfig.cpp
   PluginConfigInstall.cpp
@@ -598,6 +641,9 @@ add_library(${PROJECT_NAME}
   PluginRegistryStatus.cpp
   PluginReload.cpp
   PluginSetting.cpp
+  PluginUninstall.cpp
+  Preferred.cpp
+  PreferredMethodEnum.cpp
   ProjectCode.cpp
   PurchaseOrder.cpp
   PurchaseOrderAttachment.cpp
@@ -632,10 +678,14 @@ add_library(${PROJECT_NAME}
   SalesOrderShipmentAllocation.cpp
   SalesOrderShipmentAllocationItem.cpp
   SalesOrderShipmentComplete.cpp
+  ScheduleTypeEnum.cpp
+  ScheduledTask.cpp
   SerializeStockItem.cpp
   SocialAccount.cpp
   SocialConnect.cpp
-  Status46bEnum.cpp
+  SocialProvider.cpp
+  SocialProviderListResponse.cpp
+  StatusC28Enum.cpp
   StockAdd.cpp
   StockAdjustmentItem.cpp
   StockAssignment.cpp
@@ -645,6 +695,7 @@ add_library(${PROJECT_NAME}
   StockItem.cpp
   StockItemAttachment.cpp
   StockItemLabel.cpp
+  StockItemSerializerBrief.cpp
   StockItemTestResult.cpp
   StockLocationLabel.cpp
   StockLocationReport.cpp
@@ -664,16 +715,20 @@ add_library(${PROJECT_NAME}
   UserDetails.cpp
   UserSettings.cpp
   VerifyEmail.cpp
+  Version.cpp
+  VersionView.cpp
   _llapot.cpp
   ActionApi.cpp
   AdminApi.cpp
   AuthApi.cpp
+  BackgroundTaskApi.cpp
   BarcodeApi.cpp
   BomApi.cpp
   BuildApi.cpp
   CompanyApi.cpp
   CurrencyApi.cpp
   EmailApi.cpp
+  ErrorReportApi.cpp
   FlagsApi.cpp
   GenericApi.cpp
   LabelApi.cpp
@@ -693,6 +748,7 @@ add_library(${PROJECT_NAME}
   UserApi.cpp
   VersionApi.cpp
   VersionTextApi.cpp
+  WebApi.cpp
   WebhookApi.cpp
   Helpers.cpp
   HttpRequest.cpp

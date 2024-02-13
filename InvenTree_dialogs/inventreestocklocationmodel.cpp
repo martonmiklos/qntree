@@ -177,12 +177,10 @@ void InvenTreeStockLocationItem::fetchChilds()
     if (m_childsFetched || m_fetchInProgress)
         return;
     m_fetchInProgress = true;
-    InvenTree::OptionalParam<qint32> parent(0);
-    if (locationData.getPk() != 0)
-        parent.m_Value = locationData.getPk();
-    connect(m_api, &InvenTree::StockApi::stockLocation_ListSignal, this, &InvenTreeStockLocationItem::subLocationsReceieved);
+    InvenTree::OptionalParam<qint32> parent(locationData.getPk(), locationData.getPk() == 0);
+    connect(m_api, &InvenTree::StockApi::stockLocationListSignal, this, &InvenTreeStockLocationItem::subLocationsReceieved);
     //  const ::InvenTree::OptionalParam<QString> &ordering, const ::InvenTree::OptionalParam<QString> &search
-    m_api->stockLocation_List(
+    /*m_api->stockLocation_List(
         InvenTree::OptionalParam<bool>(), //has_location_type
         InvenTree::OptionalParam<qint32>(65535), //limit,
         InvenTree::OptionalParam<qint32>(), // location_type,
@@ -191,7 +189,7 @@ void InvenTreeStockLocationItem::fetchChilds()
         parent,
         InvenTree::OptionalParam<QString>(), // search,
         InvenTree::OptionalParam<bool>() // structural
-        );
+        );*/
 }
 
 bool InvenTreeStockLocationItem::areChildsFetched() const
@@ -228,7 +226,7 @@ QModelIndex InvenTreeStockLocationItem::findIndexOfLocation(int pk, bool *found)
 
 void InvenTreeStockLocationItem::subLocationsReceieved(InvenTree::PaginatedLocationList summary)
 {
-    disconnect(m_api, &InvenTree::StockApi::stockLocation_ListSignal, this, &InvenTreeStockLocationItem::subLocationsReceieved);
+    disconnect(m_api, &InvenTree::StockApi::stockLocationListSignal, this, &InvenTreeStockLocationItem::subLocationsReceieved);
 
     auto locations = summary.getResults();
     for (const auto &location : locations) {

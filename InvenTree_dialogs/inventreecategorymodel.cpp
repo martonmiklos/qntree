@@ -175,11 +175,9 @@ void InvenTreeCategoryItem::fetchChilds()
     if (m_childsFetched || m_fetchInProgress)
         return;
     m_fetchInProgress = true;
-    InvenTree::OptionalParam<qint32> parent(0);
-    if (categoryData.getPk() != 0)
-        parent.m_Value = categoryData.getPk();
+    InvenTree::OptionalParam<qint32> parent(categoryData.getPk(), categoryData.getPk() == 0);
     connect(m_api, &InvenTree::PartApi::partCategoryListSignal, this, &InvenTreeCategoryItem::subCategoriesReceieved);
-    m_api->partCategoryList(InvenTree::OptionalParam<QString>(), //description
+    /*m_api->partCategoryList(InvenTree::OptionalParam<QString>(), //description
                             InvenTree::OptionalParam<qint32>(65535), //limit,
                             InvenTree::OptionalParam<QString>(), //name,
                             InvenTree::OptionalParam<qint32>(0), //offset,
@@ -187,7 +185,7 @@ void InvenTreeCategoryItem::fetchChilds()
                             parent,
                             InvenTree::OptionalParam<QString>(), // search,
                             InvenTree::OptionalParam<bool>() //structural
-                            );
+                            );*/
 }
 
 bool InvenTreeCategoryItem::areChildsFetched() const

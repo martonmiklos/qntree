@@ -40,8 +40,8 @@ void WizardPagePartDetails::updateCategoryMapping()
                                                 && SupplierCategoryMap::supplier_category_idField() == m_selectedPart.categoryId())
                                         ->first();
         if (savedCategoryBinding) {
-            connect(m_partApi, &InvenTree::PartApi::partCategory_RetrieveSignal, this, &WizardPagePartDetails::categoryDetailsRetrived);
-            m_partApi->partCategory_Retrieve(savedCategoryBinding->inventree_category_id());
+            connect(m_partApi, &InvenTree::PartApi::partCategoryRetrieveSignal, this, &WizardPagePartDetails::categoryDetailsRetrived);
+            m_partApi->partCategoryRetrieve(savedCategoryBinding->inventree_category_id());
         }
     }
 }
@@ -63,7 +63,7 @@ void WizardPagePartDetails::categoryDetailsRetrived(InvenTree::Category category
     ui->labelInvenTreeCategory->setText(category.getName());
     ui->labelInvenTreeCategory->setToolTip(category.getPathstring());
     m_invenTreeTargetCategoryPk = category.getPk();
-    disconnect(m_partApi, &InvenTree::PartApi::partCategory_RetrieveSignal, this, &WizardPagePartDetails::categoryDetailsRetrived);
+    disconnect(m_partApi, &InvenTree::PartApi::partCategoryRetrieveSignal, this, &WizardPagePartDetails::categoryDetailsRetrived);
     emit completeChanged();
 }
 

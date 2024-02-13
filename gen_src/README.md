@@ -4,7 +4,7 @@
 
 InvenTree API
 
-- API version: 160
+- API version: 166
 
 API for InvenTree - the intuitive open source inventory management system
 
@@ -32,7 +32,8 @@ using namespace test_namespace;
 
 class Example : public QObject {
     Q_OBJECT
-public slots:
+    ActionPlugin create();
+public Q_SLOTS:
    void exampleFunction1();
 };
 
@@ -46,6 +47,8 @@ example.cpp:
 #include <QTimer>
 #include <QEventLoop>
 
+ActionPlugin Example::create(){
+    ActionPlugin obj;
  return obj;
 }
 
@@ -56,12 +59,23 @@ void Example::exampleFunction1(){
       apiInstance.setUsername("YOUR USERNAME");
       apiInstance.setPassword("YOUR PASSWORD");
 
+      // Configure API key authorization: tokenAuth
+      apiInstance.setApiKey("YOUR API KEY NAME","YOUR API KEY");
+
       // Configure API key authorization: cookieAuth
       apiInstance.setApiKey("YOUR API KEY NAME","YOUR API KEY");
 
-      // Configure API key authorization: tokenAuth
-      apiInstance.setApiKey("YOUR API KEY NAME","YOUR API KEY");
-      apiInstance.actionCreate();
+      QEventLoop loop;
+      connect(&apiInstance, &ActionApi::actionCreateSignal, [&]() {
+          loop.quit();
+      });
+      connect(&apiInstance, &ActionApi::actionCreateSignalE, [&](QNetworkReply::NetworkError, QString error_str) {
+          qDebug() << "Error happened while issuing request : " << error_str;
+          loop.quit();
+      });
+
+      ActionPlugin action_plugin = create(); // ActionPlugin | 
+      apiInstance.actionCreate(action_plugin);
       QTimer::singleShot(5000, &loop, &QEventLoop::quit);
       loop.exec();
   }
@@ -149,4 +163,4 @@ Authentication schemes defined for the API:
 
 ## License
 
- for more information visit []()
+MIT for more information visit [MIT](https://github.com/inventree/InvenTree/blob/master/LICENSE)

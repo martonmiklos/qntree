@@ -26,7 +26,7 @@ TME::TME(QObject *parent)
 void TME::retrivePart(const QString &partNumber)
 {
     QList<QPair<QString, QString>> params;
-    params.append(QPair<QString,QString>(QUrl::toPercentEncoding("SymbolList[0]"), partNumber));
+    params.append(QPair<QString,QString>("SymbolList%5B0%5D", partNumber));
     m_partDetailQueryReply = apiCall("Products/GetProducts", params);
 }
 
@@ -59,7 +59,7 @@ QNetworkReply *TME::apiCall(const QString &action, QList<QPair<QString, QString>
     code.addData(signature_base.toLocal8Bit());
 
     auto apiSignature = QUrl::toPercentEncoding(code.result().toBase64());
-    encodedParams.append("%26" + QUrl::toPercentEncoding("ApiSignature") + "%3D" + apiSignature);
+    encodedParams.append("%26ApiSignature%3D" + apiSignature);
 
     params.append(QPair<QString,QString>("ApiSignature", apiSignature));
 
@@ -101,7 +101,7 @@ void TME::networkReplyFinished(QNetworkReply *reply)
         m_part.parseImageResponse(reply->readAll());
 
         QList<QPair<QString, QString>> params;
-        params.append(QPair<QString,QString>(QUrl::toPercentEncoding("SymbolList[0]"), m_part.name()));
+        params.append(QPair<QString,QString>("SymbolList%5B0%5D", m_part.name()));
         m_partPropertiesQueryReply = apiCall("Products/GetParameters", params);
         return;
     }
@@ -125,7 +125,7 @@ void TME::networkReplyFinished(QNetworkReply *reply)
             m_part.parseParametersResponse(ob["ParameterList"].toArray());
 
             QList<QPair<QString, QString>> params;
-            params.append(QPair<QString,QString>(QUrl::toPercentEncoding("SymbolList[0]"), m_part.name()));
+            params.append(QPair<QString,QString>("SymbolList%5B0%5D", m_part.name()));
             m_partAttachementsQueryReply = apiCall("Products/GetProductsFiles", params);
         }
     } else if (reply == m_partAttachementsQueryReply) {
@@ -136,7 +136,7 @@ void TME::networkReplyFinished(QNetworkReply *reply)
             m_part.parseAttachmentsResponse(ob["DocumentList"].toArray());
 
             QList<QPair<QString, QString>> params;
-            params.append(QPair<QString,QString>(QUrl::toPercentEncoding("SymbolList[0]"), m_part.name()));
+            params.append(QPair<QString,QString>("SymbolList%5B0%5D", m_part.name()));
             params.append(QPair<QString,QString>("Currency", m_currency));
             params.append(QPair<QString,QString>("GrossPrices", m_grossPrices ? "true" : "false"));
             m_partPricingQueryReply = apiCall("Products/GetPrices", params);
