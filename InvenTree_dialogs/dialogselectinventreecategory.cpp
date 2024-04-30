@@ -10,6 +10,7 @@ DialogSelectInvenTreeCategory::DialogSelectInvenTreeCategory(InvenTree::PartApi 
     ui->setupUi(this);
 
     m_model = new InvenTreeCategoryModel(api, this);
+    m_model->setVisiblePk(selectedPk);
     ui->treeViewCategory->setModel(m_model);
 
     m_settings.beginGroup("DialogSelectInvenTreeCategory");

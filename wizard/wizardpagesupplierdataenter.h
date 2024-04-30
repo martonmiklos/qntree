@@ -1,6 +1,7 @@
 #pragma once
 
 #include "inventreepartimportwizard.h"
+#include "inventreepartimportwizardpage.h"
 #include "supplier/abstractsupplier.h"
 
 namespace Ui {
@@ -26,7 +27,6 @@ private slots:
 
 private:
     Ui::WizardPageSupplierDataEnter *ui;
-    InvenTreePartImportWizard *m_wizard = nullptr;
     AbstractSupplier *m_selectedSupplier = nullptr;
 
     bool partDataRetrived = false;

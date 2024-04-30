@@ -6,12 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1148</width>
-    <height>693</height>
+    <width>1050</width>
+    <height>461</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>WizardPage</string>
+  </property>
+  <property name="title">
+   <string>Edit part details</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="1" column="4">

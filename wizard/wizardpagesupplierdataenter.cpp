@@ -15,7 +15,7 @@ WizardPageSupplierDataEnter::WizardPageSupplierDataEnter(InvenTreePartImportWiza
 {
     m_wizard = static_cast<InvenTreePartImportWizard*>(parent);
     ui->setupUi(this);
-    for (const auto &supplierData : SupplierRegistry::instance(this)->getSuppliersDisplayInfo()) {
+    for (const auto &supplierData : SupplierRegistry::instance()->getSuppliersDisplayInfo()) {
         ui->comboBoxSupplier->addItem(supplierData.first, supplierData.second);
     }
 
@@ -35,6 +35,7 @@ WizardPageSupplierDataEnter::~WizardPageSupplierDataEnter()
 
 void WizardPageSupplierDataEnter::on_lineEditPartNumber_textChanged(const QString &arg1)
 {
+    Q_UNUSED(arg1)
     emit completeChanged();
 }
 

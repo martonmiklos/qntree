@@ -28,19 +28,14 @@ WizardPageStockAndPricing::~WizardPageStockAndPricing()
 
 bool WizardPageStockAndPricing::isComplete() const
 {
-    return ui->checkBoxCreateStock->isChecked() && !qFuzzyIsNull(ui->doubleSpinBoxStockQuantity->value());
+    if (!ui->checkBoxCreateStock->isChecked())
+        return true;
+    return !qFuzzyIsNull(ui->doubleSpinBoxStockQuantity->value());
 }
 
 void WizardPageStockAndPricing::update()
 {
-    ui->doubleSpinBoxStockQuantity->setSuffix(" " + m_wizard->m_selectedPart.unit());
-}
-
-void WizardPageStockAndPricing::setPart(SupplierPart *part)
-{
-    m_priceBreakModel->setPart(part);
-    m_priceWasEdited = false;
-    updatePriceFromPriceBreaks();
+    ui->doubleSpinBoxStockQuantity->setSuffix(" " + m_selectedPart->unit());
 }
 
 void WizardPageStockAndPricing::on_doubleSpinBoxUnitPrice_valueChanged(double arg1)
@@ -51,7 +46,7 @@ void WizardPageStockAndPricing::on_doubleSpinBoxUnitPrice_valueChanged(double ar
 
 void WizardPageStockAndPricing::on_checkBoxCreateStock_toggled(bool checked)
 {
-    for (auto widget : qAsConst(m_stockWidgets)) {
+    for (auto widget : std::as_const(m_stockWidgets)) {
         widget->setEnabled(checked);
     }
     emit completeChanged();
@@ -74,6 +69,13 @@ int WizardPageStockAndPricing::selectedLocationPk() const
 {
     return m_selectedLocationPk;
 }
+
+void WizardPageStockAndPricing::setSelectedPart(SupplierPart *part)
+{
+    InvenTreePartImportWizardPage::setSelectedPart(part);
+    m_priceBreakModel->setPart(part);
+    m_priceWasEdited = false;
+    updatePriceFromPriceBreaks();}
 
 void WizardPageStockAndPricing::updatePriceFromPriceBreaks()
 {

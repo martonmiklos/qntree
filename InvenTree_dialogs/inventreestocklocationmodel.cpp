@@ -180,16 +180,34 @@ void InvenTreeStockLocationItem::fetchChilds()
     InvenTree::OptionalParam<qint32> parent(locationData.getPk(), locationData.getPk() == 0);
     connect(m_api, &InvenTree::StockApi::stockLocationListSignal, this, &InvenTreeStockLocationItem::subLocationsReceieved);
     //  const ::InvenTree::OptionalParam<QString> &ordering, const ::InvenTree::OptionalParam<QString> &search
-    /*m_api->stockLocation_List(
+    /*    void stockLocationList(
+     *    const ::InvenTree::OptionalParam<bool> &cascade = ::InvenTree::OptionalParam<bool>(),
+     *    const ::InvenTree::OptionalParam<double> &depth = ::InvenTree::OptionalParam<double>(),
+     *    const ::InvenTree::OptionalParam<bool> &external = ::InvenTree::OptionalParam<bool>(),
+     *    const ::InvenTree::OptionalParam<bool> &has_location_type = ::InvenTree::OptionalParam<bool>(),
+     *    const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(),
+     *    const ::InvenTree::OptionalParam<qint32> &location_type = ::InvenTree::OptionalParam<qint32>(),
+     *    const ::InvenTree::OptionalParam<QString> &name = ::InvenTree::OptionalParam<QString>(),
+     *    const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(),
+     *    const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(),
+     *    const ::InvenTree::OptionalParam<qint32> &parent = ::InvenTree::OptionalParam<qint32>(),
+     *    const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>(),
+     *    const ::InvenTree::OptionalParam<bool> &structural = ::InvenTree::OptionalParam<bool>()); */
+
+    m_api->stockLocationList(
+        InvenTree::OptionalParam<bool>(false), // cascade
+        InvenTree::OptionalParam<double>(1), // depth
+        InvenTree::OptionalParam<bool>(), // external
         InvenTree::OptionalParam<bool>(), //has_location_type
         InvenTree::OptionalParam<qint32>(65535), //limit,
         InvenTree::OptionalParam<qint32>(), // location_type,
+        InvenTree::OptionalParam<QString>(), // name
         InvenTree::OptionalParam<qint32>(0), //offset,
         InvenTree::OptionalParam<QString>(), //ordering,
         parent,
         InvenTree::OptionalParam<QString>(), // search,
         InvenTree::OptionalParam<bool>() // structural
-        );*/
+        );
 }
 
 bool InvenTreeStockLocationItem::areChildsFetched() const

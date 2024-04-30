@@ -70,6 +70,9 @@
        <property name="enabled">
         <bool>false</bool>
        </property>
+       <property name="decimals">
+        <number>3</number>
+       </property>
        <property name="maximum">
         <double>999999999.000000000000000</double>
        </property>

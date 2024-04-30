@@ -6,9 +6,11 @@
 #include "db/config_db.h"
 
 #include <QMessageBox>
+#include <QMenu>
+#include <QFileDialog>
 
-WizardPagePartDetails::WizardPagePartDetails(InvenTree::PartApi *partApi, InvenTree::StockApi *stockApi, QWidget *parent)
-    : QWizardPage(parent),
+WizardPagePartDetails::WizardPagePartDetails(InvenTree::PartApi *partApi, InvenTree::StockApi *stockApi, InvenTreePartImportWizard *parent)
+    : InvenTreePartImportWizardPage(parent),
     ui(new Ui::WizardPagePartDetails),
     m_partApi(partApi),
     m_stockApi(stockApi)
@@ -37,7 +39,7 @@ void WizardPagePartDetails::updateCategoryMapping()
         auto savedCategoryBinding = ConfigDb::instance()->supplier_category_map()
                                         ->query()
                                         ->where(SupplierCategoryMap::supplier_idField() == supplierId
-                                                && SupplierCategoryMap::supplier_category_idField() == m_selectedPart.categoryId())
+                                                && SupplierCategoryMap::supplier_category_idField() == m_selectedPart->categoryId())
                                         ->first();
         if (savedCategoryBinding) {
             connect(m_partApi, &InvenTree::PartApi::partCategoryRetrieveSignal, this, &WizardPagePartDetails::categoryDetailsRetrived);
@@ -46,16 +48,14 @@ void WizardPagePartDetails::updateCategoryMapping()
     }
 }
 
-void WizardPagePartDetails::setSelectedPart(SupplierPart &part)
+void WizardPagePartDetails::setSelectedPart(SupplierPart *part)
 {
-    m_selectedPart = part;
-
-    ui->lineEditIPN->setText(m_selectedPart.name());
-    ui->labelSupplierCategory->setText(m_selectedPart.categoryName());
-    ui->textEditDescription->setText(m_selectedPart.description());
-    ui->lineEditUnit->setText(m_selectedPart.unit());
-
-    ui->labelPartImage->setPixmap(QPixmap::fromImage(m_selectedPart.image()));
+    InvenTreePartImportWizardPage::setSelectedPart(part);
+    ui->lineEditIPN->setText(m_selectedPart->name());
+    ui->labelSupplierCategory->setText(m_selectedPart->categoryName());
+    ui->textEditDescription->setText(m_selectedPart->description());
+    ui->lineEditUnit->setText(m_selectedPart->unit());
+    ui->labelPartImage->setPixmap(QPixmap::fromImage(m_selectedPart->image()));
 }
 
 void WizardPagePartDetails::categoryDetailsRetrived(InvenTree::Category category)
@@ -78,7 +78,7 @@ void WizardPagePartDetails::saveMapping()
         if (supplier)
             map->setSupplier_id(supplier->id());
         map->setInventree_category_id(m_invenTreeTargetCategoryPk);
-        map->setSupplier_category_id(m_selectedPart.categoryId());
+        map->setSupplier_category_id(m_selectedPart->categoryId());
         map->setSupplier_category_name(ui->labelSupplierCategory->text());
 
         if (!map->save(ConfigDb::instance())) {
@@ -115,5 +115,20 @@ bool WizardPagePartDetails::isComplete() const
     return m_invenTreeTargetCategoryPk != -1;
 }
 
+void WizardPagePartDetails::on_labelPartImage_customContextMenuRequested(const QPoint &pos)
+{
+    QMenu contextMenu = QMenu();
+    auto editImageAction = contextMenu.addAction(tr("Edit image"));
+    auto selectLocalImageAction = contextMenu.addAction(tr("Select local image"));
 
+    auto selectedAction = contextMenu.exec(ui->labelPartImage->mapToGlobal(pos));
+    if (!selectedAction)
+        return;
+
+    if (selectedAction == selectLocalImageAction) {
+        //QFileDialog::getOpenFileName(this, tr("Select image"), m_sett)
+    } else if (selectedAction == editImageAction) {
+        // TODO save image, open with editor
+    }
+}
 

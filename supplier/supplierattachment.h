@@ -8,4 +8,5 @@ public:
 
     QUrl url;
     quint64 sizeInBytes;
+    QString comment;
 };

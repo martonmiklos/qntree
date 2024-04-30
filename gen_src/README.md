@@ -4,7 +4,8 @@
 
 InvenTree API
 
-- API version: 166
+- API version: 185
+- Generator version: 7.5.0
 
 API for InvenTree - the intuitive open source inventory management system
 

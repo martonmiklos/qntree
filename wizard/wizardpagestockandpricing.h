@@ -2,6 +2,7 @@
 
 #include "gen_src/client/StockApi.h"
 #include "inventreepartimportwizard.h"
+#include "inventreepartimportwizardpage.h"
 #include "supplier/supplierpart.h"
 #include "wizard/models/pricebreaksmodel.h"
 
@@ -18,9 +19,9 @@ public:
     ~WizardPageStockAndPricing();
     bool isComplete() const override;
     void update() override;
-    void setPart(::SupplierPart *part);
 
     int selectedLocationPk() const;
+    void setSelectedPart(SupplierPart *newSelectedPart) override;
 
 private slots:
     void on_doubleSpinBoxUnitPrice_valueChanged(double arg1);

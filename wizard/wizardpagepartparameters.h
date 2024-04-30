@@ -1,0 +1,27 @@
+#pragma once
+
+#include "wizard/inventreepartimportwizardpage.h"
+#include <QWizardPage>
+
+class PropertyMappingModel;
+
+namespace Ui {
+class WizardPagePartParameters;
+}
+
+class WizardPagePartParameters : public InvenTreePartImportWizardPage
+{
+    Q_OBJECT
+
+public:
+    explicit WizardPagePartParameters(InvenTreePartImportWizard *parent = nullptr);
+    ~WizardPagePartParameters();
+
+    void setSelectedPart(SupplierPart *newSelectedPart) override;
+private slots:
+    void on_tableViewPropertyMapping_customContextMenuRequested(const QPoint &pos);
+
+private:
+    Ui::WizardPagePartParameters *ui;
+    PropertyMappingModel *m_propertyModel = nullptr;
+};

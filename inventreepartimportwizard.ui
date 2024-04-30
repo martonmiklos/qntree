@@ -16,51 +16,7 @@
   <property name="wizardStyle">
    <enum>QWizard::ClassicStyle</enum>
   </property>
-  <widget class="QWizardPage" name="wizardPageParameters">
-   <property name="title">
-    <string>Part parameters</string>
-   </property>
-   <attribute name="pageId">
-    <string notr="true">4</string>
-   </attribute>
-   <layout class="QGridLayout" name="gridLayout_2">
-    <item row="0" column="0">
-     <widget class="QTableView" name="tableViewPropertyMapping">
-      <property name="contextMenuPolicy">
-       <enum>Qt::CustomContextMenu</enum>
-      </property>
-      <property name="selectionBehavior">
-       <enum>QAbstractItemView::SelectRows</enum>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="0">
-     <widget class="QCheckBox" name="checkBox">
-      <property name="text">
-       <string>Auto split units</string>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QWizardPage" name="wizardPageAttachments">
-   <property name="title">
-    <string>Attachments</string>
-   </property>
-   <attribute name="pageId">
-    <string notr="true">5</string>
-   </attribute>
-   <layout class="QGridLayout" name="gridLayout_4">
-    <item row="0" column="0">
-     <widget class="QTableView" name="tableViewAttachmentMapping"/>
-    </item>
-   </layout>
-  </widget>
  </widget>
- <tabstops>
-  <tabstop>tableViewAttachmentMapping</tabstop>
-  <tabstop>tableViewPropertyMapping</tabstop>
- </tabstops>
  <resources/>
  <connections/>
 </ui>

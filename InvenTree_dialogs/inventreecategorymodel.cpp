@@ -147,6 +147,11 @@ void InvenTreeCategoryModel::addPk(int pk)
     // recursively add the category upwards in the category tree
 }
 
+void InvenTreeCategoryModel::setVisiblePk(int pk)
+{
+
+}
+
 void InvenTreeCategoryModel::itemsChildsFetched(int childCount)
 {
     auto parentItem = static_cast<InvenTreeCategoryItem*>(this->sender());
@@ -177,15 +182,30 @@ void InvenTreeCategoryItem::fetchChilds()
     m_fetchInProgress = true;
     InvenTree::OptionalParam<qint32> parent(categoryData.getPk(), categoryData.getPk() == 0);
     connect(m_api, &InvenTree::PartApi::partCategoryListSignal, this, &InvenTreeCategoryItem::subCategoriesReceieved);
-    /*m_api->partCategoryList(InvenTree::OptionalParam<QString>(), //description
-                            InvenTree::OptionalParam<qint32>(65535), //limit,
-                            InvenTree::OptionalParam<QString>(), //name,
-                            InvenTree::OptionalParam<qint32>(0), //offset,
-                            InvenTree::OptionalParam<QString>(), //ordering,
-                            parent,
-                            InvenTree::OptionalParam<QString>(), // search,
-                            InvenTree::OptionalParam<bool>() //structural
-                            );*/
+    /*
+     * const ::InvenTree::OptionalParam<bool> &cascade,
+     * const ::InvenTree::OptionalParam<double> &depth,
+     * const ::InvenTree::OptionalParam<qint32> &exclude_tree,
+     * const ::InvenTree::OptionalParam<qint32> &limit,
+     * const ::InvenTree::OptionalParam<QString> &name,
+     * const ::InvenTree::OptionalParam<qint32> &offset,
+     * const ::InvenTree::OptionalParam<QString> &ordering,
+     * const ::InvenTree::OptionalParam<qint32> &parent,
+     * const ::InvenTree::OptionalParam<QString> &search,
+     * const ::InvenTree::OptionalParam<bool> &starred,
+     * const ::InvenTree::OptionalParam<bool> &structural */
+    m_api->partCategoryList(
+        InvenTree::OptionalParam<bool>(false), // cascade
+        InvenTree::OptionalParam<double>(1), // depth
+        InvenTree::OptionalParam<qint32>(), // exclude_tree
+        InvenTree::OptionalParam<qint32>(65535), //limit,
+        InvenTree::OptionalParam<QString>(), //name,
+        InvenTree::OptionalParam<qint32>(0), //offset,
+        InvenTree::OptionalParam<QString>(), //ordering,
+        parent,
+        InvenTree::OptionalParam<QString>(), // search,
+        InvenTree::OptionalParam<bool>() //structural
+        );
 }
 
 bool InvenTreeCategoryItem::areChildsFetched() const

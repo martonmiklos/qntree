@@ -2,6 +2,9 @@ cmake_minimum_required(VERSION 3.5)
 
 project(QtOpenAPIClient)
 
+set(CMAKE_AUTOMOC ON)
+
+find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core Network Gui)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Network Gui)
 
 include(GNUInstallDirs)
@@ -53,6 +56,7 @@ add_library(${PROJECT_NAME}
   Company.h
   CompanyAttachment.h
   CompanyBrief.h
+  ConfigTypeEnum.h
   Contact.h
   ConvertStockItem.h
   CustomUnit.h
@@ -70,6 +74,14 @@ add_library(${PROJECT_NAME}
   LocationBrief.h
   LocationTree.h
   Login.h
+  MachineConfig.h
+  MachineConfigCreate.h
+  MachineDriver.h
+  MachineRegistryError.h
+  MachineRegistryStatus.h
+  MachineRestart.h
+  MachineSetting.h
+  MachineType.h
   ManufacturerPart.h
   ManufacturerPartAttachment.h
   ManufacturerPartParameter.h
@@ -104,6 +116,7 @@ add_library(${PROJECT_NAME}
   PaginatedGroupList.h
   PaginatedLocationList.h
   PaginatedLocationTreeList.h
+  PaginatedMachineConfigList.h
   PaginatedManufacturerPartAttachmentList.h
   PaginatedManufacturerPartList.h
   PaginatedManufacturerPartParameterList.h
@@ -133,6 +146,8 @@ add_library(${PROJECT_NAME}
   PaginatedPurchaseOrderLineItemList.h
   PaginatedPurchaseOrderList.h
   PaginatedPurchaseOrderReportList.h
+  PaginatedReportAssetList.h
+  PaginatedReportSnippetList.h
   PaginatedReturnOrderAttachmentList.h
   PaginatedReturnOrderExtraLineList.h
   PaginatedReturnOrderLineItemList.h
@@ -151,17 +166,17 @@ add_library(${PROJECT_NAME}
   PaginatedStockItemAttachmentList.h
   PaginatedStockItemLabelList.h
   PaginatedStockItemList.h
-  PaginatedStockItemTestResultList.h
   PaginatedStockLocationLabelList.h
   PaginatedStockLocationReportList.h
   PaginatedStockLocationTypeList.h
   PaginatedStockTrackingList.h
   PaginatedSupplierPartList.h
   PaginatedSupplierPriceBreakList.h
+  PaginatedTemplateList.h
   PaginatedTestReportList.h
   PaginatedUserCreateList.h
   PaginatedUserSettingsList.h
-  PaginatedVersionList.h
+  PaginatedVersionInformationList.h
   Part.h
   PartAttachment.h
   PartBrief.h
@@ -206,6 +221,8 @@ add_library(${PROJECT_NAME}
   PatchedGlobalSettings.h
   PatchedGroup.h
   PatchedLocation.h
+  PatchedMachineConfig.h
+  PatchedMachineSetting.h
   PatchedManufacturerPart.h
   PatchedManufacturerPartAttachment.h
   PatchedManufacturerPartParameter.h
@@ -234,6 +251,9 @@ add_library(${PROJECT_NAME}
   PatchedPurchaseOrderExtraLine.h
   PatchedPurchaseOrderLineItem.h
   PatchedPurchaseOrderReport.h
+  PatchedPurchaseOrder_order_currency.h
+  PatchedReportAsset.h
+  PatchedReportSnippet.h
   PatchedReturnOrder.h
   PatchedReturnOrderAttachment.h
   PatchedReturnOrderExtraLine.h
@@ -255,6 +275,7 @@ add_library(${PROJECT_NAME}
   PatchedStockLocationType.h
   PatchedSupplierPart.h
   PatchedSupplierPriceBreak.h
+  PatchedTemplate.h
   PatchedTestReport.h
   PatchedUserDetails.h
   PatchedUserSettings.h
@@ -279,7 +300,8 @@ add_library(${PROJECT_NAME}
   PurchaseOrderReceive.h
   PurchaseOrderReport.h
   Register.h
-  Rendel_s_p_nzneme.h
+  ReportAsset.h
+  ReportSnippet.h
   ResendEmailVerification.h
   RestAuthDetail.h
   ReturnOrder.h
@@ -310,9 +332,10 @@ add_library(${PROJECT_NAME}
   SocialConnect.h
   SocialProvider.h
   SocialProviderListResponse.h
-  StatusC28Enum.h
+  Status2a7Enum.h
   StockAdd.h
   StockAdjustmentItem.h
+  StockAdjustmentItem_status.h
   StockAssignment.h
   StockAssignmentItem.h
   StockChangeStatus.h
@@ -332,6 +355,7 @@ add_library(${PROJECT_NAME}
   StockTransfer.h
   SupplierPart.h
   SupplierPriceBreak.h
+  Template.h
   TestReport.h
   Token.h
   UninstallStockItem.h
@@ -341,8 +365,8 @@ add_library(${PROJECT_NAME}
   UserSettings.h
   VerifyEmail.h
   Version.h
+  VersionInformation.h
   VersionView.h
-  _llapot.h
   ActionApi.h
   AdminApi.h
   AuthApi.h
@@ -358,11 +382,13 @@ add_library(${PROJECT_NAME}
   GenericApi.h
   LabelApi.h
   LocateApi.h
+  MachineApi.h
   NewsApi.h
   NotesImageUploadApi.h
   NotificationsApi.h
   OrderApi.h
   PartApi.h
+  PluginApi.h
   PluginsApi.h
   ProjectCodeApi.h
   ReportApi.h
@@ -428,6 +454,7 @@ add_library(${PROJECT_NAME}
   Company.cpp
   CompanyAttachment.cpp
   CompanyBrief.cpp
+  ConfigTypeEnum.cpp
   Contact.cpp
   ConvertStockItem.cpp
   CustomUnit.cpp
@@ -445,6 +472,14 @@ add_library(${PROJECT_NAME}
   LocationBrief.cpp
   LocationTree.cpp
   Login.cpp
+  MachineConfig.cpp
+  MachineConfigCreate.cpp
+  MachineDriver.cpp
+  MachineRegistryError.cpp
+  MachineRegistryStatus.cpp
+  MachineRestart.cpp
+  MachineSetting.cpp
+  MachineType.cpp
   ManufacturerPart.cpp
   ManufacturerPartAttachment.cpp
   ManufacturerPartParameter.cpp
@@ -479,6 +514,7 @@ add_library(${PROJECT_NAME}
   PaginatedGroupList.cpp
   PaginatedLocationList.cpp
   PaginatedLocationTreeList.cpp
+  PaginatedMachineConfigList.cpp
   PaginatedManufacturerPartAttachmentList.cpp
   PaginatedManufacturerPartList.cpp
   PaginatedManufacturerPartParameterList.cpp
@@ -508,6 +544,8 @@ add_library(${PROJECT_NAME}
   PaginatedPurchaseOrderLineItemList.cpp
   PaginatedPurchaseOrderList.cpp
   PaginatedPurchaseOrderReportList.cpp
+  PaginatedReportAssetList.cpp
+  PaginatedReportSnippetList.cpp
   PaginatedReturnOrderAttachmentList.cpp
   PaginatedReturnOrderExtraLineList.cpp
   PaginatedReturnOrderLineItemList.cpp
@@ -526,17 +564,17 @@ add_library(${PROJECT_NAME}
   PaginatedStockItemAttachmentList.cpp
   PaginatedStockItemLabelList.cpp
   PaginatedStockItemList.cpp
-  PaginatedStockItemTestResultList.cpp
   PaginatedStockLocationLabelList.cpp
   PaginatedStockLocationReportList.cpp
   PaginatedStockLocationTypeList.cpp
   PaginatedStockTrackingList.cpp
   PaginatedSupplierPartList.cpp
   PaginatedSupplierPriceBreakList.cpp
+  PaginatedTemplateList.cpp
   PaginatedTestReportList.cpp
   PaginatedUserCreateList.cpp
   PaginatedUserSettingsList.cpp
-  PaginatedVersionList.cpp
+  PaginatedVersionInformationList.cpp
   Part.cpp
   PartAttachment.cpp
   PartBrief.cpp
@@ -581,6 +619,8 @@ add_library(${PROJECT_NAME}
   PatchedGlobalSettings.cpp
   PatchedGroup.cpp
   PatchedLocation.cpp
+  PatchedMachineConfig.cpp
+  PatchedMachineSetting.cpp
   PatchedManufacturerPart.cpp
   PatchedManufacturerPartAttachment.cpp
   PatchedManufacturerPartParameter.cpp
@@ -609,6 +649,9 @@ add_library(${PROJECT_NAME}
   PatchedPurchaseOrderExtraLine.cpp
   PatchedPurchaseOrderLineItem.cpp
   PatchedPurchaseOrderReport.cpp
+  PatchedPurchaseOrder_order_currency.cpp
+  PatchedReportAsset.cpp
+  PatchedReportSnippet.cpp
   PatchedReturnOrder.cpp
   PatchedReturnOrderAttachment.cpp
   PatchedReturnOrderExtraLine.cpp
@@ -630,6 +673,7 @@ add_library(${PROJECT_NAME}
   PatchedStockLocationType.cpp
   PatchedSupplierPart.cpp
   PatchedSupplierPriceBreak.cpp
+  PatchedTemplate.cpp
   PatchedTestReport.cpp
   PatchedUserDetails.cpp
   PatchedUserSettings.cpp
@@ -654,7 +698,8 @@ add_library(${PROJECT_NAME}
   PurchaseOrderReceive.cpp
   PurchaseOrderReport.cpp
   Register.cpp
-  Rendel_s_p_nzneme.cpp
+  ReportAsset.cpp
+  ReportSnippet.cpp
   ResendEmailVerification.cpp
   RestAuthDetail.cpp
   ReturnOrder.cpp
@@ -685,9 +730,10 @@ add_library(${PROJECT_NAME}
   SocialConnect.cpp
   SocialProvider.cpp
   SocialProviderListResponse.cpp
-  StatusC28Enum.cpp
+  Status2a7Enum.cpp
   StockAdd.cpp
   StockAdjustmentItem.cpp
+  StockAdjustmentItem_status.cpp
   StockAssignment.cpp
   StockAssignmentItem.cpp
   StockChangeStatus.cpp
@@ -707,6 +753,7 @@ add_library(${PROJECT_NAME}
   StockTransfer.cpp
   SupplierPart.cpp
   SupplierPriceBreak.cpp
+  Template.cpp
   TestReport.cpp
   Token.cpp
   UninstallStockItem.cpp
@@ -716,8 +763,8 @@ add_library(${PROJECT_NAME}
   UserSettings.cpp
   VerifyEmail.cpp
   Version.cpp
+  VersionInformation.cpp
   VersionView.cpp
-  _llapot.cpp
   ActionApi.cpp
   AdminApi.cpp
   AuthApi.cpp
@@ -733,11 +780,13 @@ add_library(${PROJECT_NAME}
   GenericApi.cpp
   LabelApi.cpp
   LocateApi.cpp
+  MachineApi.cpp
   NewsApi.cpp
   NotesImageUploadApi.cpp
   NotificationsApi.cpp
   OrderApi.cpp
   PartApi.cpp
+  PluginApi.cpp
   PluginsApi.cpp
   ProjectCodeApi.cpp
   ReportApi.cpp

@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "gen_src/client/StockApi.h"
 #include "ui_mainwindow.h"
+#include "supplier/supplierregistry.h"
 
 using namespace InvenTree;
 
@@ -22,6 +23,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     m_stockApi = new InvenTree::StockApi();
     m_stockApi->addHeaders("Authorization", "Token inv-d7e8312f7b53a59290faa71708264247f0c21c11-20231228");
+
+    SupplierRegistry::instance(this);
 
     on_pushButtonImportParts_clicked();
 

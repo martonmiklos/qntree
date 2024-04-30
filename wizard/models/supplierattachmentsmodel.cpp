@@ -20,6 +20,7 @@ QVariant SupplierAttachmentsModel::headerData(int section,
             return tr("Attachment name");
         case Col_Size:
             return tr("Size");
+
         case Col_Action:
             return tr("Action");
         default:
@@ -67,9 +68,15 @@ QVariant SupplierAttachmentsModel::data(const QModelIndex &index, int role) cons
             return m_attachmentsToSave.indexOf(&(m_part->attachments().at(index.row()))) != -1 ? tr("Save") : tr("Skip");
         case Col_Invalid:
             break;
+        case Col_Comment:
+            return m_part->attachments().at(index.row()).comment;
         }
-    } else if (role == Qt::EditRole && index.column() == Col_Action) {
-        return m_attachmentsToSave.indexOf(&(m_part->attachments().at(index.row()))) != -1 ? "save" : "skip";
+    } else if (role == Qt::EditRole) {
+        if (index.column() == Col_Action) {
+            return m_attachmentsToSave.indexOf(&(m_part->attachments().at(index.row()))) != -1 ? "save" : "skip";
+        } else if (index.row() == Col_Comment) {
+            return m_part->attachments().at(index.row()).comment;
+        }
     } else if (role == Role_Url) {
         return m_part->attachments().at(index.row()).url;
     } else if (role == Role_Size) {
@@ -97,7 +104,7 @@ bool SupplierAttachmentsModel::setData(const QModelIndex &index, const QVariant 
 Qt::ItemFlags SupplierAttachmentsModel::flags(const QModelIndex &index) const
 {
     auto ret = Qt::ItemIsSelectable | Qt::ItemIsEnabled;
-    if (index.column() == Col_Action)
+    if (index.column() == Col_Action || index.column() == Col_Comment)
         ret |= Qt::ItemIsEditable;
     return ret;
 }

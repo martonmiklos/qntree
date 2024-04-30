@@ -12,6 +12,7 @@ public:
     enum Columns {
         Col_FileName,
         Col_Size,
+        Col_Comment,
         Col_Action,
         Col_Invalid
     };

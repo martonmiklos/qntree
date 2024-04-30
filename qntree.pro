@@ -26,11 +26,15 @@ SOURCES += \
     supplier/supplierregistry.cpp \
     supplier/suppliers/tme.cpp \
     supplier/suppliers/tmepart.cpp \
+    wizard/inventreepartimportwizardpage.cpp \
     wizard/models/pricebreaksmodel.cpp \
     wizard/models/propertymappingmodel.cpp \
     wizard/models/supplierattachmentactiondelegate.cpp \
     wizard/models/supplierattachmentsmodel.cpp \
+    wizard/wizardpageattachments.cpp \
+    wizard/wizardpageinventreesyncstatus.cpp \
     wizard/wizardpagepartdetails.cpp \
+    wizard/wizardpagepartparameters.cpp \
     wizard/wizardpagestockandpricing.cpp \
     wizard/wizardpagesupplierdataenter.cpp
 
@@ -50,11 +54,15 @@ HEADERS += \
     supplier/supplierregistry.h \
     supplier/suppliers/tme.h \
     supplier/suppliers/tmepart.h \
+    wizard/inventreepartimportwizardpage.h \
     wizard/models/pricebreaksmodel.h \
     wizard/models/propertymappingmodel.h \
     wizard/models/supplierattachmentactiondelegate.h \
     wizard/models/supplierattachmentsmodel.h \
+    wizard/wizardpageattachments.h \
+    wizard/wizardpageinventreesyncstatus.h \
     wizard/wizardpagepartdetails.h \
+    wizard/wizardpagepartparameters.h \
     wizard/wizardpagestockandpricing.h \
     wizard/wizardpagesupplierdataenter.h
 
@@ -63,7 +71,10 @@ FORMS += \
     InvenTree_dialogs/dialogselectinventreestocklocation.ui \
     inventreepartimportwizard.ui \
     mainwindow.ui \
+    wizard/wizardpageattachments.ui \
+    wizard/wizardpageinventreesyncstatus.ui \
     wizard/wizardpagepartdetails.ui \
+    wizard/wizardpagepartparameters.ui \
     wizard/wizardpagestockandpricing.ui \
     wizard/wizardpagesupplierdataenter.ui
 

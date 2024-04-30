@@ -74,6 +74,8 @@ public:
 
     void addPk(int pk);
 
+    void setVisiblePk(int pk);
+
 private slots:
     void itemsChildsFetched(int childCount);
 

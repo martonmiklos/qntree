@@ -47,6 +47,7 @@ HEADERS += \
     $${PWD}/Company.h \
     $${PWD}/CompanyAttachment.h \
     $${PWD}/CompanyBrief.h \
+    $${PWD}/ConfigTypeEnum.h \
     $${PWD}/Contact.h \
     $${PWD}/ConvertStockItem.h \
     $${PWD}/CustomUnit.h \
@@ -64,6 +65,14 @@ HEADERS += \
     $${PWD}/LocationBrief.h \
     $${PWD}/LocationTree.h \
     $${PWD}/Login.h \
+    $${PWD}/MachineConfig.h \
+    $${PWD}/MachineConfigCreate.h \
+    $${PWD}/MachineDriver.h \
+    $${PWD}/MachineRegistryError.h \
+    $${PWD}/MachineRegistryStatus.h \
+    $${PWD}/MachineRestart.h \
+    $${PWD}/MachineSetting.h \
+    $${PWD}/MachineType.h \
     $${PWD}/ManufacturerPart.h \
     $${PWD}/ManufacturerPartAttachment.h \
     $${PWD}/ManufacturerPartParameter.h \
@@ -98,6 +107,7 @@ HEADERS += \
     $${PWD}/PaginatedGroupList.h \
     $${PWD}/PaginatedLocationList.h \
     $${PWD}/PaginatedLocationTreeList.h \
+    $${PWD}/PaginatedMachineConfigList.h \
     $${PWD}/PaginatedManufacturerPartAttachmentList.h \
     $${PWD}/PaginatedManufacturerPartList.h \
     $${PWD}/PaginatedManufacturerPartParameterList.h \
@@ -127,6 +137,8 @@ HEADERS += \
     $${PWD}/PaginatedPurchaseOrderLineItemList.h \
     $${PWD}/PaginatedPurchaseOrderList.h \
     $${PWD}/PaginatedPurchaseOrderReportList.h \
+    $${PWD}/PaginatedReportAssetList.h \
+    $${PWD}/PaginatedReportSnippetList.h \
     $${PWD}/PaginatedReturnOrderAttachmentList.h \
     $${PWD}/PaginatedReturnOrderExtraLineList.h \
     $${PWD}/PaginatedReturnOrderLineItemList.h \
@@ -145,17 +157,17 @@ HEADERS += \
     $${PWD}/PaginatedStockItemAttachmentList.h \
     $${PWD}/PaginatedStockItemLabelList.h \
     $${PWD}/PaginatedStockItemList.h \
-    $${PWD}/PaginatedStockItemTestResultList.h \
     $${PWD}/PaginatedStockLocationLabelList.h \
     $${PWD}/PaginatedStockLocationReportList.h \
     $${PWD}/PaginatedStockLocationTypeList.h \
     $${PWD}/PaginatedStockTrackingList.h \
     $${PWD}/PaginatedSupplierPartList.h \
     $${PWD}/PaginatedSupplierPriceBreakList.h \
+    $${PWD}/PaginatedTemplateList.h \
     $${PWD}/PaginatedTestReportList.h \
     $${PWD}/PaginatedUserCreateList.h \
     $${PWD}/PaginatedUserSettingsList.h \
-    $${PWD}/PaginatedVersionList.h \
+    $${PWD}/PaginatedVersionInformationList.h \
     $${PWD}/Part.h \
     $${PWD}/PartAttachment.h \
     $${PWD}/PartBrief.h \
@@ -200,6 +212,8 @@ HEADERS += \
     $${PWD}/PatchedGlobalSettings.h \
     $${PWD}/PatchedGroup.h \
     $${PWD}/PatchedLocation.h \
+    $${PWD}/PatchedMachineConfig.h \
+    $${PWD}/PatchedMachineSetting.h \
     $${PWD}/PatchedManufacturerPart.h \
     $${PWD}/PatchedManufacturerPartAttachment.h \
     $${PWD}/PatchedManufacturerPartParameter.h \
@@ -228,6 +242,9 @@ HEADERS += \
     $${PWD}/PatchedPurchaseOrderExtraLine.h \
     $${PWD}/PatchedPurchaseOrderLineItem.h \
     $${PWD}/PatchedPurchaseOrderReport.h \
+    $${PWD}/PatchedPurchaseOrder_order_currency.h \
+    $${PWD}/PatchedReportAsset.h \
+    $${PWD}/PatchedReportSnippet.h \
     $${PWD}/PatchedReturnOrder.h \
     $${PWD}/PatchedReturnOrderAttachment.h \
     $${PWD}/PatchedReturnOrderExtraLine.h \
@@ -249,6 +266,7 @@ HEADERS += \
     $${PWD}/PatchedStockLocationType.h \
     $${PWD}/PatchedSupplierPart.h \
     $${PWD}/PatchedSupplierPriceBreak.h \
+    $${PWD}/PatchedTemplate.h \
     $${PWD}/PatchedTestReport.h \
     $${PWD}/PatchedUserDetails.h \
     $${PWD}/PatchedUserSettings.h \
@@ -273,7 +291,8 @@ HEADERS += \
     $${PWD}/PurchaseOrderReceive.h \
     $${PWD}/PurchaseOrderReport.h \
     $${PWD}/Register.h \
-    $${PWD}/Rendel_s_p_nzneme.h \
+    $${PWD}/ReportAsset.h \
+    $${PWD}/ReportSnippet.h \
     $${PWD}/ResendEmailVerification.h \
     $${PWD}/RestAuthDetail.h \
     $${PWD}/ReturnOrder.h \
@@ -304,9 +323,10 @@ HEADERS += \
     $${PWD}/SocialConnect.h \
     $${PWD}/SocialProvider.h \
     $${PWD}/SocialProviderListResponse.h \
-    $${PWD}/StatusC28Enum.h \
+    $${PWD}/Status2a7Enum.h \
     $${PWD}/StockAdd.h \
     $${PWD}/StockAdjustmentItem.h \
+    $${PWD}/StockAdjustmentItem_status.h \
     $${PWD}/StockAssignment.h \
     $${PWD}/StockAssignmentItem.h \
     $${PWD}/StockChangeStatus.h \
@@ -326,6 +346,7 @@ HEADERS += \
     $${PWD}/StockTransfer.h \
     $${PWD}/SupplierPart.h \
     $${PWD}/SupplierPriceBreak.h \
+    $${PWD}/Template.h \
     $${PWD}/TestReport.h \
     $${PWD}/Token.h \
     $${PWD}/UninstallStockItem.h \
@@ -335,8 +356,8 @@ HEADERS += \
     $${PWD}/UserSettings.h \
     $${PWD}/VerifyEmail.h \
     $${PWD}/Version.h \
+    $${PWD}/VersionInformation.h \
     $${PWD}/VersionView.h \
-    $${PWD}/_llapot.h \
 # APIs
     $${PWD}/ActionApi.h \
     $${PWD}/AdminApi.h \
@@ -353,11 +374,13 @@ HEADERS += \
     $${PWD}/GenericApi.h \
     $${PWD}/LabelApi.h \
     $${PWD}/LocateApi.h \
+    $${PWD}/MachineApi.h \
     $${PWD}/NewsApi.h \
     $${PWD}/NotesImageUploadApi.h \
     $${PWD}/NotificationsApi.h \
     $${PWD}/OrderApi.h \
     $${PWD}/PartApi.h \
+    $${PWD}/PluginApi.h \
     $${PWD}/PluginsApi.h \
     $${PWD}/ProjectCodeApi.h \
     $${PWD}/ReportApi.h \
@@ -427,6 +450,7 @@ SOURCES += \
     $${PWD}/Company.cpp \
     $${PWD}/CompanyAttachment.cpp \
     $${PWD}/CompanyBrief.cpp \
+    $${PWD}/ConfigTypeEnum.cpp \
     $${PWD}/Contact.cpp \
     $${PWD}/ConvertStockItem.cpp \
     $${PWD}/CustomUnit.cpp \
@@ -444,6 +468,14 @@ SOURCES += \
     $${PWD}/LocationBrief.cpp \
     $${PWD}/LocationTree.cpp \
     $${PWD}/Login.cpp \
+    $${PWD}/MachineConfig.cpp \
+    $${PWD}/MachineConfigCreate.cpp \
+    $${PWD}/MachineDriver.cpp \
+    $${PWD}/MachineRegistryError.cpp \
+    $${PWD}/MachineRegistryStatus.cpp \
+    $${PWD}/MachineRestart.cpp \
+    $${PWD}/MachineSetting.cpp \
+    $${PWD}/MachineType.cpp \
     $${PWD}/ManufacturerPart.cpp \
     $${PWD}/ManufacturerPartAttachment.cpp \
     $${PWD}/ManufacturerPartParameter.cpp \
@@ -478,6 +510,7 @@ SOURCES += \
     $${PWD}/PaginatedGroupList.cpp \
     $${PWD}/PaginatedLocationList.cpp \
     $${PWD}/PaginatedLocationTreeList.cpp \
+    $${PWD}/PaginatedMachineConfigList.cpp \
     $${PWD}/PaginatedManufacturerPartAttachmentList.cpp \
     $${PWD}/PaginatedManufacturerPartList.cpp \
     $${PWD}/PaginatedManufacturerPartParameterList.cpp \
@@ -507,6 +540,8 @@ SOURCES += \
     $${PWD}/PaginatedPurchaseOrderLineItemList.cpp \
     $${PWD}/PaginatedPurchaseOrderList.cpp \
     $${PWD}/PaginatedPurchaseOrderReportList.cpp \
+    $${PWD}/PaginatedReportAssetList.cpp \
+    $${PWD}/PaginatedReportSnippetList.cpp \
     $${PWD}/PaginatedReturnOrderAttachmentList.cpp \
     $${PWD}/PaginatedReturnOrderExtraLineList.cpp \
     $${PWD}/PaginatedReturnOrderLineItemList.cpp \
@@ -525,17 +560,17 @@ SOURCES += \
     $${PWD}/PaginatedStockItemAttachmentList.cpp \
     $${PWD}/PaginatedStockItemLabelList.cpp \
     $${PWD}/PaginatedStockItemList.cpp \
-    $${PWD}/PaginatedStockItemTestResultList.cpp \
     $${PWD}/PaginatedStockLocationLabelList.cpp \
     $${PWD}/PaginatedStockLocationReportList.cpp \
     $${PWD}/PaginatedStockLocationTypeList.cpp \
     $${PWD}/PaginatedStockTrackingList.cpp \
     $${PWD}/PaginatedSupplierPartList.cpp \
     $${PWD}/PaginatedSupplierPriceBreakList.cpp \
+    $${PWD}/PaginatedTemplateList.cpp \
     $${PWD}/PaginatedTestReportList.cpp \
     $${PWD}/PaginatedUserCreateList.cpp \
     $${PWD}/PaginatedUserSettingsList.cpp \
-    $${PWD}/PaginatedVersionList.cpp \
+    $${PWD}/PaginatedVersionInformationList.cpp \
     $${PWD}/Part.cpp \
     $${PWD}/PartAttachment.cpp \
     $${PWD}/PartBrief.cpp \
@@ -580,6 +615,8 @@ SOURCES += \
     $${PWD}/PatchedGlobalSettings.cpp \
     $${PWD}/PatchedGroup.cpp \
     $${PWD}/PatchedLocation.cpp \
+    $${PWD}/PatchedMachineConfig.cpp \
+    $${PWD}/PatchedMachineSetting.cpp \
     $${PWD}/PatchedManufacturerPart.cpp \
     $${PWD}/PatchedManufacturerPartAttachment.cpp \
     $${PWD}/PatchedManufacturerPartParameter.cpp \
@@ -608,6 +645,9 @@ SOURCES += \
     $${PWD}/PatchedPurchaseOrderExtraLine.cpp \
     $${PWD}/PatchedPurchaseOrderLineItem.cpp \
     $${PWD}/PatchedPurchaseOrderReport.cpp \
+    $${PWD}/PatchedPurchaseOrder_order_currency.cpp \
+    $${PWD}/PatchedReportAsset.cpp \
+    $${PWD}/PatchedReportSnippet.cpp \
     $${PWD}/PatchedReturnOrder.cpp \
     $${PWD}/PatchedReturnOrderAttachment.cpp \
     $${PWD}/PatchedReturnOrderExtraLine.cpp \
@@ -629,6 +669,7 @@ SOURCES += \
     $${PWD}/PatchedStockLocationType.cpp \
     $${PWD}/PatchedSupplierPart.cpp \
     $${PWD}/PatchedSupplierPriceBreak.cpp \
+    $${PWD}/PatchedTemplate.cpp \
     $${PWD}/PatchedTestReport.cpp \
     $${PWD}/PatchedUserDetails.cpp \
     $${PWD}/PatchedUserSettings.cpp \
@@ -653,7 +694,8 @@ SOURCES += \
     $${PWD}/PurchaseOrderReceive.cpp \
     $${PWD}/PurchaseOrderReport.cpp \
     $${PWD}/Register.cpp \
-    $${PWD}/Rendel_s_p_nzneme.cpp \
+    $${PWD}/ReportAsset.cpp \
+    $${PWD}/ReportSnippet.cpp \
     $${PWD}/ResendEmailVerification.cpp \
     $${PWD}/RestAuthDetail.cpp \
     $${PWD}/ReturnOrder.cpp \
@@ -684,9 +726,10 @@ SOURCES += \
     $${PWD}/SocialConnect.cpp \
     $${PWD}/SocialProvider.cpp \
     $${PWD}/SocialProviderListResponse.cpp \
-    $${PWD}/StatusC28Enum.cpp \
+    $${PWD}/Status2a7Enum.cpp \
     $${PWD}/StockAdd.cpp \
     $${PWD}/StockAdjustmentItem.cpp \
+    $${PWD}/StockAdjustmentItem_status.cpp \
     $${PWD}/StockAssignment.cpp \
     $${PWD}/StockAssignmentItem.cpp \
     $${PWD}/StockChangeStatus.cpp \
@@ -706,6 +749,7 @@ SOURCES += \
     $${PWD}/StockTransfer.cpp \
     $${PWD}/SupplierPart.cpp \
     $${PWD}/SupplierPriceBreak.cpp \
+    $${PWD}/Template.cpp \
     $${PWD}/TestReport.cpp \
     $${PWD}/Token.cpp \
     $${PWD}/UninstallStockItem.cpp \
@@ -715,8 +759,8 @@ SOURCES += \
     $${PWD}/UserSettings.cpp \
     $${PWD}/VerifyEmail.cpp \
     $${PWD}/Version.cpp \
+    $${PWD}/VersionInformation.cpp \
     $${PWD}/VersionView.cpp \
-    $${PWD}/_llapot.cpp \
 # APIs
     $${PWD}/ActionApi.cpp \
     $${PWD}/AdminApi.cpp \
@@ -733,11 +777,13 @@ SOURCES += \
     $${PWD}/GenericApi.cpp \
     $${PWD}/LabelApi.cpp \
     $${PWD}/LocateApi.cpp \
+    $${PWD}/MachineApi.cpp \
     $${PWD}/NewsApi.cpp \
     $${PWD}/NotesImageUploadApi.cpp \
     $${PWD}/NotificationsApi.cpp \
     $${PWD}/OrderApi.cpp \
     $${PWD}/PartApi.cpp \
+    $${PWD}/PluginApi.cpp \
     $${PWD}/PluginsApi.cpp \
     $${PWD}/ProjectCodeApi.cpp \
     $${PWD}/ReportApi.cpp \
