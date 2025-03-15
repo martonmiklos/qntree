@@ -16,6 +16,7 @@ class WizardPageAttachments : public InvenTreePartImportWizardPage
 
 public:
     explicit WizardPageAttachments(InvenTreePartImportWizard *parent = nullptr);
+    virtual void setSelectedPart(::SupplierPart *newSelectedPart);
     ~WizardPageAttachments();
 
 private slots:

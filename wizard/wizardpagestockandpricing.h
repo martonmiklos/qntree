@@ -15,7 +15,7 @@ class WizardPageStockAndPricing : public InvenTreePartImportWizardPage
     Q_OBJECT
 
 public:
-    explicit WizardPageStockAndPricing(InvenTree::StockApi *api, InvenTreePartImportWizard *parent = nullptr);
+    explicit WizardPageStockAndPricing(InvenTreePartImportWizard *parent = nullptr);
     ~WizardPageStockAndPricing();
     bool isComplete() const override;
     void update() override;
@@ -35,7 +35,6 @@ private:
     QList<QWidget*> m_stockWidgets;
     PricebreaksModel *m_priceBreakModel = nullptr;
     int m_selectedLocationPk = -1;
-    InvenTree::StockApi *m_stockApi = nullptr;
     bool m_priceWasEdited = false;
     void updatePriceFromPriceBreaks();
 };

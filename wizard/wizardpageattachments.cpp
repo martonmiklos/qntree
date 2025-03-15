@@ -16,6 +16,11 @@ WizardPageAttachments::WizardPageAttachments(InvenTreePartImportWizard *parent)
     ui->tableViewAttachmentMapping->setItemDelegateForColumn(SupplierAttachmentsModel::Col_Action, new SupplierAttachmentActionDelegate(ui->tableViewAttachmentMapping));
 }
 
+void WizardPageAttachments::setSelectedPart(SupplierPart *newSelectedPart)
+{
+    m_attachmentsModel->setPart(newSelectedPart);
+}
+
 WizardPageAttachments::~WizardPageAttachments()
 {
     delete ui;

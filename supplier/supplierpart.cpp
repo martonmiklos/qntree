@@ -30,6 +30,11 @@ QString SupplierPart::description() const
     return m_description;
 }
 
+QString SupplierPart::manufacturer() const
+{
+    return m_manufacturerName;
+}
+
 QList<SupplierAttachment> SupplierPart::attachments() const
 {
     return m_attachments;
@@ -49,3 +54,14 @@ QImage SupplierPart::image() const
 {
     return m_image;
 }
+
+qint32 SupplierPart::existingPk() const
+{
+    return m_existingPk;
+}
+
+void SupplierPart::setExistingPk(qint32 newExistingPk)
+{
+    m_existingPk = newExistingPk;
+}
+

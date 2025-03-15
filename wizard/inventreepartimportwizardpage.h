@@ -12,6 +12,7 @@ public:
     InvenTreePartImportWizardPage(InvenTreePartImportWizard *parent);
     virtual void update() {}
     virtual void setSelectedPart(::SupplierPart *newSelectedPart);
+    virtual void saveSettings() {}
 
 protected:
     InvenTreePartImportWizard *m_wizard = nullptr;

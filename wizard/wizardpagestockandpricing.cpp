@@ -3,10 +3,9 @@
 
 #include "InvenTree_dialogs/dialogselectinventreestocklocation.h"
 
-WizardPageStockAndPricing::WizardPageStockAndPricing(InvenTree::StockApi *api, InvenTreePartImportWizard *parent)
+WizardPageStockAndPricing::WizardPageStockAndPricing(InvenTreePartImportWizard *parent)
     : InvenTreePartImportWizardPage(parent)
-    , ui(new Ui::WizardPageStockAndPricing),
-    m_stockApi(api)
+    , ui(new Ui::WizardPageStockAndPricing)
 {
     ui->setupUi(this);
     m_stockWidgets
@@ -54,7 +53,7 @@ void WizardPageStockAndPricing::on_checkBoxCreateStock_toggled(bool checked)
 
 void WizardPageStockAndPricing::on_toolButtonChangeTargetLocation_clicked()
 {
-    auto dlg = new DialogSelectInvenTreeStockLocation(m_stockApi, this);
+    auto dlg = new DialogSelectInvenTreeStockLocation(m_wizard->stockApi(), this);
     dlg->show();
     connect(dlg, &DialogSelectInvenTreeStockLocation::stockLocationSelected,
             this, [=](int pk, const QString &locationName, const QString &locationPath) {
@@ -97,7 +96,6 @@ void WizardPageStockAndPricing::on_doubleSpinBoxStockQuantity_valueChanged(doubl
         return;
     updatePriceFromPriceBreaks();
 }
-
 
 void WizardPageStockAndPricing::on_doubleSpinBoxUnitPrice_editingFinished()
 {

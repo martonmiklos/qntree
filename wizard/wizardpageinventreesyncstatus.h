@@ -2,6 +2,7 @@
 
 #include "inventreepartimportwizard.h"
 #include "inventreepartimportwizardpage.h"
+#include "inventreepartuploader.h"
 #include <QWizardPage>
 
 namespace Ui {
@@ -15,7 +16,14 @@ class WizardPageInvenTreeSyncStatus : public InvenTreePartImportWizardPage
 public:
     explicit WizardPageInvenTreeSyncStatus(InvenTreePartImportWizard *parent = nullptr);
     ~WizardPageInvenTreeSyncStatus();
+    bool isComplete() const override;
 
 private:
     Ui::WizardPageInvenTreeSyncStatus *ui;
+    bool m_completed = false;
+
+public slots:
+    void stateChanged(InvenTreePartUploader::State old, InvenTreePartUploader::State newState);
 };
+
+

@@ -14,15 +14,21 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
-    ui->setupUi(this);
+    ConfigDb::instance()->init();
 
-    m_apiInstance = new InvenTree::ActionApi();
+    ui->setupUi(this);
 
     m_partApi = new InvenTree::PartApi();
     m_partApi->addHeaders("Authorization", "Token inv-d7e8312f7b53a59290faa71708264247f0c21c11-20231228");
 
     m_stockApi = new InvenTree::StockApi();
     m_stockApi->addHeaders("Authorization", "Token inv-d7e8312f7b53a59290faa71708264247f0c21c11-20231228");
+
+    m_currencyApi = new InvenTree::CurrencyApi();
+    m_currencyApi->addHeaders("Authorization", "Token inv-d7e8312f7b53a59290faa71708264247f0c21c11-20231228");
+
+    m_companyApi = new InvenTree::CompanyApi();
+    m_companyApi->addHeaders("Authorization", "Token inv-d7e8312f7b53a59290faa71708264247f0c21c11-20231228");
 
     SupplierRegistry::instance(this);
 
@@ -31,8 +37,6 @@ MainWindow::MainWindow(QWidget *parent)
     m_settings.beginGroup("MainWindow");
     restoreGeometry(m_settings.value("geometry").toByteArray());
     m_settings.endGroup();
-
-    ConfigDb::instance()->init();
 }
 
 MainWindow::~MainWindow()
@@ -52,7 +56,7 @@ void MainWindow::on_pushButtonConnect_clicked()
 
 void MainWindow::on_pushButtonImportParts_clicked()
 {
-    InvenTreePartImportWizard *wizard = new InvenTreePartImportWizard(m_partApi, m_stockApi, this);
+    InvenTreePartImportWizard *wizard = new InvenTreePartImportWizard(m_partApi, m_stockApi, m_currencyApi, m_companyApi, this);
     wizard->show();
 }
 

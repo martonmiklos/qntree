@@ -149,7 +149,7 @@ void InvenTreeCategoryModel::addPk(int pk)
 
 void InvenTreeCategoryModel::setVisiblePk(int pk)
 {
-
+    // TODO add ability to retrive a subtree dynamically
 }
 
 void InvenTreeCategoryModel::itemsChildsFetched(int childCount)
@@ -182,20 +182,10 @@ void InvenTreeCategoryItem::fetchChilds()
     m_fetchInProgress = true;
     InvenTree::OptionalParam<qint32> parent(categoryData.getPk(), categoryData.getPk() == 0);
     connect(m_api, &InvenTree::PartApi::partCategoryListSignal, this, &InvenTreeCategoryItem::subCategoriesReceieved);
-    /*
-     * const ::InvenTree::OptionalParam<bool> &cascade,
-     * const ::InvenTree::OptionalParam<double> &depth,
-     * const ::InvenTree::OptionalParam<qint32> &exclude_tree,
-     * const ::InvenTree::OptionalParam<qint32> &limit,
-     * const ::InvenTree::OptionalParam<QString> &name,
-     * const ::InvenTree::OptionalParam<qint32> &offset,
-     * const ::InvenTree::OptionalParam<QString> &ordering,
-     * const ::InvenTree::OptionalParam<qint32> &parent,
-     * const ::InvenTree::OptionalParam<QString> &search,
-     * const ::InvenTree::OptionalParam<bool> &starred,
-     * const ::InvenTree::OptionalParam<bool> &structural */
+    // FIXME connect(m_api, &InvenTree::PartApi::partCategoryListSignalError, this, &InvenTreeCategoryItem::subCategoriesReceieveError);
+    bool cascade = parent.stringValue() != "";
     m_api->partCategoryList(
-        InvenTree::OptionalParam<bool>(false), // cascade
+        InvenTree::OptionalParam<bool>(cascade), // cascade
         InvenTree::OptionalParam<double>(1), // depth
         InvenTree::OptionalParam<qint32>(), // exclude_tree
         InvenTree::OptionalParam<qint32>(65535), //limit,
@@ -255,4 +245,10 @@ void InvenTreeCategoryItem::subCategoriesReceieved(InvenTree::PaginatedCategoryL
     }
     m_childsFetched = true;
     emit childsFetched(summary.getCount());
+}
+
+void InvenTreeCategoryItem::subCategoriesReceieveError(InvenTree::PaginatedCategoryTreeList summary, QNetworkReply::NetworkError error_type, const QString &error_str)
+{
+    disconnect(m_api, &InvenTree::PartApi::partCategoryTreeListSignalError, this, &InvenTreeCategoryItem::subCategoriesReceieveError);
+
 }

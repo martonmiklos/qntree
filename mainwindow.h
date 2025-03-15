@@ -1,5 +1,6 @@
 #pragma once
 
+#include "gen_src/client/CompanyApi.h"
 #include <QMainWindow>
 #include <QSettings>
 
@@ -7,9 +8,9 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
-#include "gen_src/client/ActionApi.h"
 #include "gen_src/client/PartApi.h"
 #include "gen_src/client/StockApi.h"
+#include "gen_src/client/CurrencyApi.h"
 
 class MainWindow : public QMainWindow
 {
@@ -25,8 +26,9 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    InvenTree::ActionApi *m_apiInstance = nullptr;
     InvenTree::PartApi *m_partApi = nullptr;
     InvenTree::StockApi *m_stockApi = nullptr;
+    InvenTree::CurrencyApi *m_currencyApi = nullptr;
+    InvenTree::CompanyApi *m_companyApi = nullptr;
     QSettings m_settings;
 };

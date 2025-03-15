@@ -15,11 +15,17 @@ public:
 
     virtual int pnLengthLimit() const  {return 32767;}
 
+    virtual int invenTreeId() const = 0;
+
+    int getId() const;
+
 signals:
     void supplierPartRetrived(SupplierPart &part);
     void error(const QString &error);
     void partNotFound();
+
 protected:
+    int m_id;
     QString m_uid;
     QString m_name;
 };

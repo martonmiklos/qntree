@@ -35,6 +35,7 @@ private:
 
 private slots:
     void subCategoriesReceieved(InvenTree::PaginatedCategoryList summary);
+    void subCategoriesReceieveError(InvenTree::PaginatedCategoryTreeList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
 
 signals:
     void childsFetched(int childCount);

@@ -29,7 +29,7 @@ WizardPageSupplierDataEnter::WizardPageSupplierDataEnter(InvenTreePartImportWiza
 
 WizardPageSupplierDataEnter::~WizardPageSupplierDataEnter()
 {
-    partDataError = true;
+    m_partDataError = true;
     delete ui;
 }
 
@@ -48,33 +48,47 @@ bool WizardPageSupplierDataEnter::validatePage()
 {
     m_selectedSupplier = SupplierRegistry::instance()->getSupplierByUId(ui->comboBoxSupplier->currentData().toString());
     connect(m_selectedSupplier, &AbstractSupplier::supplierPartRetrived, this, [=](SupplierPart &part) {
-        partDataRetrived = true;
+        m_partDataRetrived = true;
         m_wizard->setSelectedPart(part);
     });
 
+    connect(m_selectedSupplier, &AbstractSupplier::partNotFound, this, [=]() {
+        ui->labelMessage->setText(tr("The searched part not found at the supplier"));
+        ui->lineEditPartNumber->setFocus();
+        ui->lineEditPartNumber->selectAll();
+        m_partDataError = true;
+    });
+
     connect(m_selectedSupplier, &AbstractSupplier::error, this, [=](const QString &error) {
-        partDataError = true;
-        ui->labelMessage->setText(error);
+        ui->labelMessage->setText(tr("Search error: %1").arg(error));
+         m_partDataError = true;
     });
 
     connect(m_selectedSupplier, &AbstractSupplier::partNotFound, this, [=]() {
-        partDataError = true;
+        m_partDataError = true;
         ui->labelMessage->setText(tr("No part data found for the %1 partnumber").arg(ui->lineEditPartNumber->text()));
     });
 
     m_selectedSupplier->retrivePart(ui->lineEditPartNumber->text());
 
-    partDataRetrived = false;
-    partDataError = false;
+    connect(m_wizard->currencyApi(), &InvenTree::CurrencyApi::currencyExchangeRetrieveSignal, this, [=](InvenTree::CurrencyExchange summary) {
+        // TODO
+        m_currenciesRetrived = true;
+    });
+    m_wizard->currencyApi()->currencyExchangeRetrieve();
+
+    m_partDataRetrived = false;
+    m_partDataError = false;
+    m_currenciesRetrived = false;
 
     int counter = 0, dotCounter = 0;
     ui->labelMessage->setText(tr("Keep calm retriving data"));
-    while (!partDataRetrived && !partDataError) {
-        if (partDataRetrived) {
+    while (!m_partDataRetrived && !m_partDataError) {
+        if (m_partDataRetrived) {
             return true;
         }
 
-        if (partDataError) {
+        if (m_partDataError) {
             return false;
         }
         QThread::msleep(50);
@@ -92,7 +106,11 @@ bool WizardPageSupplierDataEnter::validatePage()
             ui->labelMessage->setText(tr("Keep calm retriving data") + dotText);
         }
     }
-    return true;
+
+    if (m_partDataRetrived)
+        ui->labelMessage->clear();
+
+    return !m_partDataError;
 }
 
 void WizardPageSupplierDataEnter::update()

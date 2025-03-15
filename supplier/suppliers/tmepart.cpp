@@ -10,6 +10,7 @@ TMEPart::TMEPart(const QJsonObject &productJson)
     m_unit = productJson["Unit"].toString();
     m_description = productJson["Description"].toString();
     m_properties.append(SupplierPartProperty("Weight", QString::number(productJson["Weight"].toDouble()), productJson["WeightUnit"].toString()));
+    m_manufacturerName = productJson["Producer"].toString();
 }
 
 void TMEPart::parseParametersResponse(const QJsonArray &paramsJson)

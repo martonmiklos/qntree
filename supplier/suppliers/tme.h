@@ -18,6 +18,8 @@ public:
     bool grossPrices() const;
     void setGrossPrices(bool newGrossPrices);
 
+    int invenTreeId() const override;
+
 private:
     QString m_secret, m_token, m_country, m_language;
     QNetworkReply* apiCall(const QString &action, QList<QPair<QString, QString> > params);
@@ -34,6 +36,7 @@ private:
 
 private slots:
     void networkReplyFinished(QNetworkReply *reply);
+
 };
 
 

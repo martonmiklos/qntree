@@ -29,8 +29,9 @@ private:
     Ui::WizardPageSupplierDataEnter *ui;
     AbstractSupplier *m_selectedSupplier = nullptr;
 
-    bool partDataRetrived = false;
-    bool partDataError = false;
+    bool m_partDataRetrived = false;
+    bool m_partDataError = false;
+    bool m_currenciesRetrived = false;
 };
 
 

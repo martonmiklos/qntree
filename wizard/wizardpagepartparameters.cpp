@@ -17,6 +17,12 @@ WizardPagePartParameters::WizardPagePartParameters(InvenTreePartImportWizard *pa
     ui->tableViewPropertyMapping->horizontalHeader()->setSectionResizeMode(PropertyMappingModel::Columns::Name, QHeaderView::ResizeToContents);
     ui->tableViewPropertyMapping->horizontalHeader()->setSectionResizeMode(PropertyMappingModel::Columns::Value, QHeaderView::ResizeToContents);
     ui->tableViewPropertyMapping->horizontalHeader()->setSectionResizeMode(PropertyMappingModel::Columns::Action, QHeaderView::Stretch);
+
+    parent->m_settings.beginGroup("InvenTreePartImportWizard");
+    parent->m_settings.beginGroup("PartParameters");
+    ui->checkBoxAutoSplitUnits->setChecked(parent->m_settings.value("autoSplitUnits", false).toBool());
+    parent->m_settings.endGroup();
+    parent->m_settings.endGroup();
 }
 
 WizardPagePartParameters::~WizardPagePartParameters()
@@ -24,10 +30,24 @@ WizardPagePartParameters::~WizardPagePartParameters()
     delete ui;
 }
 
+void WizardPagePartParameters::saveSettings()
+{
+    m_wizard->m_settings.beginGroup("InvenTreePartImportWizard");
+    m_wizard->m_settings.beginGroup("PartParameters");
+    m_wizard->m_settings.setValue("autoSplitUnits", ui->checkBoxAutoSplitUnits->isChecked());
+    m_wizard->m_settings.endGroup();
+    m_wizard->m_settings.endGroup();
+}
+
 void WizardPagePartParameters::setSelectedPart(SupplierPart *newSelectedPart)
 {
     InvenTreePartImportWizardPage::setSelectedPart(newSelectedPart);
     m_propertyModel->setPart(newSelectedPart);
+    if (ui->checkBoxAutoSplitUnits->isChecked()) {
+        for (int i = 0; i<newSelectedPart->properties().count(); i++) {
+            m_propertyModel->splitRowUnit(i);
+        }
+    }
 }
 
 void WizardPagePartParameters::on_tableViewPropertyMapping_customContextMenuRequested(const QPoint &pos)
@@ -107,3 +127,5 @@ void WizardPagePartParameters::on_tableViewPropertyMapping_customContextMenuRequ
         }
     }
 }
+
+

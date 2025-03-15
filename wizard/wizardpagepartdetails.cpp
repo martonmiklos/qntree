@@ -1,5 +1,6 @@
 #include "wizardpagepartdetails.h"
 #include "InvenTree_dialogs/dialogselectinventreecategory.h"
+#include "InvenTree_dialogs/dialogselectinventreepart.h"
 #include "gen_src/client/PartApi.h"
 #include "supplier/supplierpart.h"
 #include "ui_wizardpagepartdetails.h"
@@ -9,13 +10,13 @@
 #include <QMenu>
 #include <QFileDialog>
 
-WizardPagePartDetails::WizardPagePartDetails(InvenTree::PartApi *partApi, InvenTree::StockApi *stockApi, InvenTreePartImportWizard *parent)
+WizardPagePartDetails::WizardPagePartDetails(InvenTree::PartApi *api, InvenTreePartImportWizard *parent)
     : InvenTreePartImportWizardPage(parent),
     ui(new Ui::WizardPagePartDetails),
-    m_partApi(partApi),
-    m_stockApi(stockApi)
+    m_partApi(api)
 {
     ui->setupUi(this);
+    ui->toolButtonSelectExistingPart->setVisible(false);
 }
 
 WizardPagePartDetails::~WizardPagePartDetails()
@@ -23,8 +24,16 @@ WizardPagePartDetails::~WizardPagePartDetails()
     delete ui;
 }
 
-void WizardPagePartDetails::updateCategoryMapping()
+void WizardPagePartDetails::setSelectedPart(SupplierPart *part)
 {
+    InvenTreePartImportWizardPage::setSelectedPart(part);
+    ui->lineEditIPN->setText(m_selectedPart->name());
+    ui->labelSupplierCategory->setText(m_selectedPart->categoryName());
+    ui->textEditDescription->setText(m_selectedPart->description());
+    ui->lineEditUnit->setText(m_selectedPart->unit());
+    ui->labelPartImage->setPixmap(QPixmap::fromImage(m_selectedPart->image()));
+    ui->labelSupplierManufacturerName->setText(part->manufacturer());
+
     m_invenTreeTargetCategoryPk = -1;
     ui->labelInvenTreeCategory->clear();
     ui->labelInvenTreeCategory->setToolTip(QString());
@@ -42,20 +51,36 @@ void WizardPagePartDetails::updateCategoryMapping()
                                                 && SupplierCategoryMap::supplier_category_idField() == m_selectedPart->categoryId())
                                         ->first();
         if (savedCategoryBinding) {
-            connect(m_partApi, &InvenTree::PartApi::partCategoryRetrieveSignal, this, &WizardPagePartDetails::categoryDetailsRetrived);
-            m_partApi->partCategoryRetrieve(savedCategoryBinding->inventree_category_id());
+            connect(m_wizard->partApi(), &InvenTree::PartApi::partCategoryRetrieveSignal, this, &WizardPagePartDetails::categoryDetailsRetrived);
+            m_wizard->partApi()->partCategoryRetrieve(savedCategoryBinding->inventree_category_id());
         }
     }
-}
 
-void WizardPagePartDetails::setSelectedPart(SupplierPart *part)
-{
-    InvenTreePartImportWizardPage::setSelectedPart(part);
-    ui->lineEditIPN->setText(m_selectedPart->name());
-    ui->labelSupplierCategory->setText(m_selectedPart->categoryName());
-    ui->textEditDescription->setText(m_selectedPart->description());
-    ui->lineEditUnit->setText(m_selectedPart->unit());
-    ui->labelPartImage->setPixmap(QPixmap::fromImage(m_selectedPart->image()));
+    auto existingManufacturerLink = ConfigDb::instance()->manufacturer_map()
+                                        ->query()
+                                        ->where(ManufacturerMap::manufacturer_nameField() == m_selectedPart->manufacturer() &&
+                                                ManufacturerMap::supplier_idField() == m_wizard->currentSupplierDbId())
+                                        ->first();
+    if (existingManufacturerLink) {
+        connect(m_wizard->companyApi(), &InvenTree::CompanyApi::companyRetrieveSignal, this, [=](InvenTree::Company summary) {
+            ui->labelInvenTreeManufacturerName->setText(summary.getName());
+            m_invenTreeManufacturerPk = summary.getPk();
+            disconnect(m_wizard->companyApi(), nullptr, this, nullptr);
+        });
+
+        connect(m_wizard->companyApi(), &InvenTree::CompanyApi::companyRetrieveSignalError,
+                this, [=](InvenTree::Company summary, QNetworkReply::NetworkError error_type, const QString &error_str) {
+            Q_UNUSED(summary)
+            Q_UNUSED(error_type)
+            ui->labelInvenTreeManufacturerName->setText(error_str);
+            m_invenTreeManufacturerPk = -1;
+            disconnect(m_wizard->companyApi(), nullptr, this, nullptr);
+        });
+        m_wizard->companyApi()->companyRetrieve(QString::number(existingManufacturerLink->inventree_company_pk()));
+    } else {
+        ui->labelInvenTreeManufacturerName->setText(tr("%1 (creating)").arg(m_selectedPart->manufacturer()));
+        m_invenTreeManufacturerPk = -1;
+    }
 }
 
 void WizardPagePartDetails::categoryDetailsRetrived(InvenTree::Category category)
@@ -63,7 +88,7 @@ void WizardPagePartDetails::categoryDetailsRetrived(InvenTree::Category category
     ui->labelInvenTreeCategory->setText(category.getName());
     ui->labelInvenTreeCategory->setToolTip(category.getPathstring());
     m_invenTreeTargetCategoryPk = category.getPk();
-    disconnect(m_partApi, &InvenTree::PartApi::partCategoryRetrieveSignal, this, &WizardPagePartDetails::categoryDetailsRetrived);
+    disconnect(m_wizard->partApi(), &InvenTree::PartApi::partCategoryRetrieveSignal, this, &WizardPagePartDetails::categoryDetailsRetrived);
     emit completeChanged();
 }
 
@@ -94,10 +119,15 @@ void WizardPagePartDetails::setSupplierUuid(const QString &newSupplierUuid)
 
 void WizardPagePartDetails::on_toolButtonEditInventTreeCategory_clicked()
 {
-    auto dlg = new DialogSelectInvenTreeCategory(m_partApi, m_invenTreeTargetCategoryPk, this);
+    if (ui->comboBoxCreateOrUseExistingPart->currentIndex() == 1) {
+        QMessageBox::information(this, tr("Existing part selected"), tr("The part will be added as a supplier part to an existing part.<br>"
+                                                                        "The category will be determined by the selected part"));
+        return;
+    }
+    auto dlg = new DialogSelectInvenTreeCategory(m_wizard->partApi(), m_invenTreeTargetCategoryPk, this);
     connect(dlg, &DialogSelectInvenTreeCategory::categorySelected, this, [=](int pk, const QString &categoryName, const QString &categoryPath) {
-        ui->labelInvenTreeCategory->setText(categoryName);
-        ui->labelInvenTreeCategory->setToolTip(categoryPath);
+        ui->labelInvenTreeSelectedCategory->setText(categoryName);
+        ui->labelInvenTreeSelectedCategory->setToolTip(categoryPath);
         m_invenTreeTargetCategoryPk = pk;
         emit completeChanged();
         dlg->close();
@@ -107,12 +137,12 @@ void WizardPagePartDetails::on_toolButtonEditInventTreeCategory_clicked()
 
 bool WizardPagePartDetails::validatePage()
 {
-    return m_invenTreeTargetCategoryPk != -1;
+    return m_invenTreeTargetCategoryPk != -1 || m_selectedPart->existingPk() != 0;
 }
 
 bool WizardPagePartDetails::isComplete() const
 {
-    return m_invenTreeTargetCategoryPk != -1;
+    return m_invenTreeTargetCategoryPk != -1 || m_selectedPart->existingPk() != 0;
 }
 
 void WizardPagePartDetails::on_labelPartImage_customContextMenuRequested(const QPoint &pos)
@@ -130,5 +160,46 @@ void WizardPagePartDetails::on_labelPartImage_customContextMenuRequested(const Q
     } else if (selectedAction == editImageAction) {
         // TODO save image, open with editor
     }
+}
+
+void WizardPagePartDetails::on_toolButtonSelectInvenTreeManufacturer_clicked()
+{
+    if (m_companySelectDialog == nullptr) {
+        m_companySelectDialog = new DialogSelectInvenTreeCompany(m_wizard->companyApi(), this);
+        connect(m_companySelectDialog, &DialogSelectInvenTreeCompany::companySelected, this, [=](int pk, const QString &name) {
+            m_invenTreeManufacturerPk = pk;
+            ui->labelInvenTreeManufacturerName->setText(name);
+        });
+    }
+    m_companySelectDialog->listOnlyManufacturers(true);
+    m_companySelectDialog->show();
+    m_companySelectDialog->update();
+}
+
+
+void WizardPagePartDetails::on_comboBoxCreateOrUseExistingPart_currentIndexChanged(int index)
+{
+    if (index == 0) {
+        // Create new part
+        ui->toolButtonSelectExistingPart->setVisible(false);
+        m_selectedPart->setExistingPk(0);
+    } else {
+        // Add to existing as supplier part
+        ui->toolButtonSelectExistingPart->setVisible(true);
+        ui->lineEditIPN->clear();
+    }
+}
+
+
+void WizardPagePartDetails::on_toolButtonSelectExistingPart_clicked()
+{
+    DialogSelectInvenTreePart *partSelectDlg = new DialogSelectInvenTreePart(m_partApi, this);
+    connect(partSelectDlg, &DialogSelectInvenTreePart::partSelected, this, [=](InvenTree::Part part) {
+        ui->lineEditIPN->setText(part.getIpn());
+        m_selectedPart->setExistingPk(part.getPk());
+        ui->labelInvenTreeSelectedCategory->setText(part.getCategoryName());
+        emit completeChanged();
+    });
+    partSelectDlg->show();
 }
 

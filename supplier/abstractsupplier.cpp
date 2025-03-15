@@ -15,3 +15,8 @@ QString AbstractSupplier::uid() const
 {
     return m_uid;
 }
+
+int AbstractSupplier::getId() const
+{
+    return m_id;
+}

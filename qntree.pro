@@ -12,10 +12,13 @@ include(db/gen_src/qntree.pri)
 
 SOURCES += \
     InvenTree_dialogs/dialogselectinventreecategory.cpp \
+    InvenTree_dialogs/dialogselectinventreecompany.cpp \
+    InvenTree_dialogs/dialogselectinventreepart.cpp \
     InvenTree_dialogs/dialogselectinventreestocklocation.cpp \
     InvenTree_dialogs/inventreecategorymodel.cpp \
     InvenTree_dialogs/inventreestocklocationmodel.cpp \
     db/config_db.cpp \
+    dialog.cpp \
     inventreepartimportwizard.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -27,6 +30,9 @@ SOURCES += \
     supplier/suppliers/tme.cpp \
     supplier/suppliers/tmepart.cpp \
     wizard/inventreepartimportwizardpage.cpp \
+    wizard/inventreepartuploader.cpp \
+    wizard/models/companymodel.cpp \
+    wizard/models/partlistmodel.cpp \
     wizard/models/pricebreaksmodel.cpp \
     wizard/models/propertymappingmodel.cpp \
     wizard/models/supplierattachmentactiondelegate.cpp \
@@ -40,10 +46,13 @@ SOURCES += \
 
 HEADERS += \
     InvenTree_dialogs/dialogselectinventreecategory.h \
+    InvenTree_dialogs/dialogselectinventreecompany.h \
+    InvenTree_dialogs/dialogselectinventreepart.h \
     InvenTree_dialogs/dialogselectinventreestocklocation.h \
     InvenTree_dialogs/inventreecategorymodel.h \
     InvenTree_dialogs/inventreestocklocationmodel.h \
     db/config_db.h \
+    dialog.h \
     inventreepartimportwizard.h \
     mainwindow.h \
     qt_goodies/qobjectsingleton.h \
@@ -55,6 +64,9 @@ HEADERS += \
     supplier/suppliers/tme.h \
     supplier/suppliers/tmepart.h \
     wizard/inventreepartimportwizardpage.h \
+    wizard/inventreepartuploader.h \
+    wizard/models/companymodel.h \
+    wizard/models/partlistmodel.h \
     wizard/models/pricebreaksmodel.h \
     wizard/models/propertymappingmodel.h \
     wizard/models/supplierattachmentactiondelegate.h \
@@ -68,7 +80,10 @@ HEADERS += \
 
 FORMS += \
     InvenTree_dialogs/dialogselectinventreecategory.ui \
+    InvenTree_dialogs/dialogselectinventreecompany.ui \
+    InvenTree_dialogs/dialogselectinventreepart.ui \
     InvenTree_dialogs/dialogselectinventreestocklocation.ui \
+    dialog.ui \
     inventreepartimportwizard.ui \
     mainwindow.ui \
     wizard/wizardpageattachments.ui \

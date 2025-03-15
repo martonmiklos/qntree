@@ -12,10 +12,10 @@ class WizardPagePartParameters;
 class WizardPagePartParameters : public InvenTreePartImportWizardPage
 {
     Q_OBJECT
-
 public:
     explicit WizardPagePartParameters(InvenTreePartImportWizard *parent = nullptr);
     ~WizardPagePartParameters();
+    void saveSettings() override;
 
     void setSelectedPart(SupplierPart *newSelectedPart) override;
 private slots:

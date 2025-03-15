@@ -6,6 +6,7 @@
 #include "qnetworkrequest.h"
 #include "supplier/suppliers/tmepart.h"
 #include "qjsonobject.h"
+#include "db/config_db.h"
 
 #include <QMessageAuthenticationCode>
 
@@ -15,9 +16,20 @@ TME::TME(QObject *parent)
     m_name = tr("TME");
     m_uid = QStringLiteral("ac01ab15-a375-492c-94c2-f5c4fa16d6a3");
 
-    m_secret ="99b2608090e382f814f7";
-    m_token = "e643dd91ccf2b11f07ccdfe892f8fd8c6bf95bbdfcb2c";
+    m_secret ="20948d40191f45adfebc";
+    m_token = "22ecd8bff75788af5b46130c83ec68f0326b0d53979ee4c9f1";
     m_country = m_language = "HU";
+
+    auto dbEntry = ConfigDb::instance()->suppliers()->query()
+        ->where(Suppliers::uuidField() == m_uid)
+        ->first();
+    if (!dbEntry) {
+        dbEntry = Nut::create<Suppliers>();
+        dbEntry->setUuid(m_uid);
+        dbEntry->setName(m_name);
+        dbEntry->save(ConfigDb::instance());
+    }
+    m_id = dbEntry->id();
 
     m_manager = new QNetworkAccessManager(this);
     connect(m_manager, &QNetworkAccessManager::finished, this, &TME::networkReplyFinished);
@@ -83,6 +95,12 @@ void TME::setGrossPrices(bool newGrossPrices)
     m_grossPrices = newGrossPrices;
 }
 
+int TME::invenTreeId() const
+{
+    // FIXME use settings
+    return 4;
+}
+
 QString TME::currency() const
 {
     return m_currency;
@@ -109,28 +127,36 @@ void TME::networkReplyFinished(QNetworkReply *reply)
     auto json = QJsonDocument::fromJson(reply->readAll());
     qWarning().noquote() << json.toJson(QJsonDocument::Indented);
 
+    auto jsonObject = json.object();
+    auto ob = jsonObject["Data"].toObject();
     if (reply == m_partDetailQueryReply) {
         if (!reply->error()) {
-            QJsonObject ob = json.object()["Data"].toObject();
             ob = ob["ProductList"].toArray().first().toObject();
             m_part = TMEPart(ob);
 
             QNetworkRequest req =  QNetworkRequest(QUrl("http:" + ob["Photo"].toString()));
             m_imageReply = m_manager->get(req);
+        } else {
+            auto errCode = jsonObject["ErrorCode"].toInt();
+            if (errCode == 6) {
+                emit partNotFound();
+            } else {
+                emit error(jsonObject["ErrorMessage"].toString());
+            }
         }
     } else if (reply == m_partPropertiesQueryReply) {
         if (!reply->error()) {
-            QJsonObject ob = json.object()["Data"].toObject();
             ob = ob["ProductList"].toArray().first().toObject();
             m_part.parseParametersResponse(ob["ParameterList"].toArray());
 
             QList<QPair<QString, QString>> params;
             params.append(QPair<QString,QString>("SymbolList%5B0%5D", m_part.name()));
             m_partAttachementsQueryReply = apiCall("Products/GetProductsFiles", params);
+        } else {
+            emit error(jsonObject["ErrorMessage"].toString());
         }
     } else if (reply == m_partAttachementsQueryReply) {
         if (!reply->error()) {
-            QJsonObject ob = json.object()["Data"].toObject();
             ob = ob["ProductList"].toArray().first().toObject();
             ob = ob["Files"].toObject();
             m_part.parseAttachmentsResponse(ob["DocumentList"].toArray());
@@ -138,15 +164,18 @@ void TME::networkReplyFinished(QNetworkReply *reply)
             QList<QPair<QString, QString>> params;
             params.append(QPair<QString,QString>("SymbolList%5B0%5D", m_part.name()));
             params.append(QPair<QString,QString>("Currency", m_currency));
-            params.append(QPair<QString,QString>("GrossPrices", m_grossPrices ? "true" : "false"));
+            //params.append(QPair<QString,QString>("GrossPrices", m_grossPrices ? "true" : "false"));
             m_partPricingQueryReply = apiCall("Products/GetPrices", params);
+        } else {
+            emit error(jsonObject["ErrorMessage"].toString());
         }
     } else if (reply == m_partPricingQueryReply) {
         if (!reply->error()) {
-            QJsonObject ob = json.object()["Data"].toObject();
             auto prodList = ob["ProductList"].toArray().first().toObject();
             m_part.parsePricingResponse(prodList["PriceList"].toArray(), ob["Currency"].toString());
             emit supplierPartRetrived(m_part);
+        } else {
+            emit error(jsonObject["ErrorMessage"].toString());
         }
     }
 }
