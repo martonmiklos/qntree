@@ -142,6 +142,11 @@ void WizardPagePartDetails::setSupplierUuid(const QString &newSupplierUuid)
     m_supplierUuid = newSupplierUuid;
 }
 
+int WizardPagePartDetails::invenTreeTargetCategoryPk() const
+{
+    return m_invenTreeTargetCategoryPk;
+}
+
 void WizardPagePartDetails::on_toolButtonEditInventTreeCategory_clicked()
 {
     if (ui->comboBoxCreateOrUseExistingPart->currentIndex() == 1) {

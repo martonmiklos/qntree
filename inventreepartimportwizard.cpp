@@ -59,6 +59,7 @@ InvenTreePartImportWizard::InvenTreePartImportWizard(InvenTree::PartApi *api,
 
     m_uploader = new InvenTreePartUploader(this);
     connect(m_uploader, &InvenTreePartUploader::stateChanged, m_uploadPage, &WizardPageInvenTreeSyncStatus::stateChanged);
+    connect(m_uploader, &InvenTreePartUploader::stateFailed, m_uploadPage, &WizardPageInvenTreeSyncStatus::stateError);
 }
 
 InvenTreePartImportWizard::~InvenTreePartImportWizard()
@@ -97,10 +98,11 @@ InvenTree::CurrencyApi *InvenTreePartImportWizard::currencyApi() const
 void InvenTreePartImportWizard::initNewInvenTreePart(InvenTree::Part *part)
 {
     part->setActive(true);
-    part->setCategory(m_selectedPart.categoryId().toInt());
+    part->setCategory(m_partDetailsPage->invenTreeTargetCategoryPk());
     part->setDescription(m_selectedPart.description());
     part->setName(m_selectedPart.name());
-    part->setDefaultSupplier(m_startPage->selectedSupplier()->invenTreeId());
+    //part->setImage();
+    //part->setDefaultSupplier(m_startPage->selectedSupplier()->invenTreeId());
 }
 
 int InvenTreePartImportWizard::currentSupplierDbId() const

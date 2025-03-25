@@ -25,6 +25,8 @@ public:
 
     void setSupplierUuid(const QString &newSupplierUuid);
 
+    int invenTreeTargetCategoryPk() const;
+
 private:
     Ui::WizardPagePartDetails *ui;
 

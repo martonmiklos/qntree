@@ -52,3 +52,26 @@ void WizardPageInvenTreeSyncStatus::stateChanged(InvenTreePartUploader::State ol
         emit completeChanged();
     }
 }
+
+void WizardPageInvenTreeSyncStatus::stateError(InvenTreePartUploader::State old, const QString &error)
+{
+    switch (old) {
+    case InvenTreePartUploader::CreatePart:
+        ui->labelPartStatusSprite->setText(error);
+        break;
+    case InvenTreePartUploader::CreateParameters:
+        ui->labelAttachmentsSprite->setText(error);
+        break;
+    case InvenTreePartUploader::SetupSuppliersAndPricing:
+        ui->labelPricingInfoStatusSprite->setText(error);
+        break;
+    case InvenTreePartUploader::UploadFiles:
+        ui->labelAttachmentsSprite->setText(error);
+        break;
+    case InvenTreePartUploader::Finished:
+        break;
+    case InvenTreePartUploader::Idle:
+        break;
+    }
+
+}
