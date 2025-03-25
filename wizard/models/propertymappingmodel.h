@@ -51,6 +51,7 @@ public:
     void splitRowUnit(int row);
 
     void setParameterToSave(int row, bool save);
+    QString propertyName(int row) const;
 
     void setTemplateTargetCategory(int row, bool save, int pk = -1, const QString &name = QString());
 

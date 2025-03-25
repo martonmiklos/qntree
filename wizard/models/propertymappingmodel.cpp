@@ -37,6 +37,11 @@ void PropertyMappingModel::setParameterToSave(int row, bool save)
     emit dataChanged(index(row, Action), index(row, Action));
 }
 
+QString PropertyMappingModel::propertyName(int row) const
+{
+    return m_lines[row].supplierPartProperty.m_name;
+}
+
 void PropertyMappingModel::setTemplateTargetCategory(int row, bool save, int pk, const QString &name)
 {
     m_lines[row].setTemplateAction(save ? SaveTemplateToCategory : NoTemplate, pk, name);

@@ -50,7 +50,7 @@ void WizardPagePartParameters::setSelectedPart(SupplierPart *newSelectedPart)
     for (int i = 0; i<newSelectedPart->properties().count(); i++) {
         if (ui->checkBoxAutoSplitUnits->isChecked())
             m_propertyModel->splitRowUnit(i);
-        QString propertyName = m_propertyModel->data(ui->tableViewPropertyMapping->selectionModel()->selectedRows().first(), static_cast<int>(PropertyMappingModel::Name)).toString();
+        const auto propertyName = m_propertyModel->propertyName(i);
         if (m_wizard->m_settings.value(propertyName, false).toBool())
             m_propertyModel->setParameterToSave(i, false);
     }
@@ -149,9 +149,9 @@ void WizardPagePartParameters::on_tableViewPropertyMapping_customContextMenuRequ
         m_wizard->m_settings.beginGroup("InvenTreePartImportWizard");
         m_wizard->m_settings.beginGroup("NonSaveableProperties");
         if (doNotSaveThisAction->isChecked()) {
-            m_settings.setValue(propertyName, true);
+            m_wizard->m_settings.setValue(propertyName, true);
         } else {
-            m_settings.remove(propertyName);
+            m_wizard->m_settings.remove(propertyName);
         }
         m_wizard->m_settings.endGroup();
         m_wizard->m_settings.endGroup();

@@ -38,7 +38,7 @@ void DialogSelectInvenTreeCategory::on_treeViewCategory_doubleClicked(const QMod
 {
     if (m_filterForNonStructural && m_model->data(index, InvenTreeCategoryModel::IsStructuralRole).toBool()) {
         QMessageBox::warning(this, tr("Unable to select"), tr("The %1 category is structural and cannot be selected.\n"
-                                                              "Please select an another non-structural category"));
+                                                              "Please select an another non-structural category").arg(m_model->data(index, Qt::DisplayRole).toString()));
         return;
     }
     emit categorySelected(m_model->data(index, InvenTreeCategoryModel::PkRole).toInt(),
