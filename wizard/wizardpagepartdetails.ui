@@ -232,19 +232,6 @@
     </layout>
    </item>
   </layout>
-  <widget class="QLabel" name="labelInvenTreeCategory">
-   <property name="geometry">
-    <rect>
-     <x>606</x>
-     <y>212</y>
-     <width>16</width>
-     <height>17</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-  </widget>
  </widget>
  <resources/>
  <connections/>

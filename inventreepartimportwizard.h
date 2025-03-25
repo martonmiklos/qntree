@@ -29,6 +29,7 @@ class InvenTreePartImportWizard : public QWizard
     Q_OBJECT
     friend class InvenTreePartImportWizardPage;
     friend class WizardPagePartParameters;
+    friend class WizardPagePartDetails;
 public:
     enum PageIndexes {
         SupplierDataEnter,

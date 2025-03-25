@@ -35,8 +35,8 @@ void WizardPagePartDetails::setSelectedPart(SupplierPart *part)
     ui->labelSupplierManufacturerName->setText(part->manufacturer());
 
     m_invenTreeTargetCategoryPk = -1;
-    ui->labelInvenTreeCategory->clear();
-    ui->labelInvenTreeCategory->setToolTip(QString());
+    ui->labelInvenTreeSelectedCategory->clear();
+    ui->labelInvenTreeSelectedCategory->setToolTip(QString());
     emit completeChanged();
 
     auto supplier = ConfigDb::instance()->suppliers()
@@ -81,12 +81,27 @@ void WizardPagePartDetails::setSelectedPart(SupplierPart *part)
         ui->labelInvenTreeManufacturerName->setText(tr("%1 (creating)").arg(m_selectedPart->manufacturer()));
         m_invenTreeManufacturerPk = -1;
     }
+
+    auto categoryMap = ConfigDb::instance()->supplier_category_map()
+                           ->query()
+                           ->where(SupplierCategoryMap::supplier_category_idField() == m_selectedPart->categoryId() &&
+                                   SupplierCategoryMap::supplier_idField() == m_wizard->currentSupplierDbId())
+                           ->first();
+    if (categoryMap) {
+        connect(m_wizard->partApi(), &InvenTree::PartApi::partCategoryRetrieveSignal, this, [=](InvenTree::Category summary) {
+            ui->labelInvenTreeSelectedCategory->setText(summary.getName());
+            m_invenTreeTargetCategoryPk = summary.getPk();
+            disconnect(m_wizard->partApi(), nullptr, this, nullptr);
+            emit completeChanged();
+        });
+        m_wizard->partApi()->partCategoryRetrieve(categoryMap->inventree_category_id());
+    }
 }
 
 void WizardPagePartDetails::categoryDetailsRetrived(InvenTree::Category category)
 {
-    ui->labelInvenTreeCategory->setText(category.getName());
-    ui->labelInvenTreeCategory->setToolTip(category.getPathstring());
+    ui->labelInvenTreeSelectedCategory->setText(category.getName());
+    ui->labelInvenTreeSelectedCategory->setToolTip(category.getPathstring());
     m_invenTreeTargetCategoryPk = category.getPk();
     disconnect(m_wizard->partApi(), &InvenTree::PartApi::partCategoryRetrieveSignal, this, &WizardPagePartDetails::categoryDetailsRetrived);
     emit completeChanged();
@@ -95,19 +110,29 @@ void WizardPagePartDetails::categoryDetailsRetrived(InvenTree::Category category
 void WizardPagePartDetails::saveMapping()
 {
     if (ui->checkBoxSaveCategoryBinding->isChecked() && m_invenTreeTargetCategoryPk != -1) {
-        auto map = Nut::create<SupplierCategoryMap>();
-        auto supplier = ConfigDb::instance()->suppliers()
-                            ->query()
-                            ->where(Suppliers::uuidField() == m_supplierUuid)
-                            ->first();
-        if (supplier)
-            map->setSupplier_id(supplier->id());
-        map->setInventree_category_id(m_invenTreeTargetCategoryPk);
-        map->setSupplier_category_id(m_selectedPart->categoryId());
-        map->setSupplier_category_name(ui->labelSupplierCategory->text());
+        auto categoryMap = ConfigDb::instance()->supplier_category_map()
+            ->query()
+            ->where(SupplierCategoryMap::supplier_category_idField() == m_selectedPart->categoryId() &&
+                    SupplierCategoryMap::supplier_idField() == m_wizard->currentSupplierDbId())
+            ->first();
+        if (categoryMap) {
+            categoryMap->setInventree_category_id(m_invenTreeTargetCategoryPk);
+            categoryMap->save(ConfigDb::instance());
+        } else {
+            auto map = Nut::create<SupplierCategoryMap>();
+            auto supplier = ConfigDb::instance()->suppliers()
+                                ->query()
+                                ->where(Suppliers::uuidField() == m_supplierUuid)
+                                ->first();
+            if (supplier)
+                map->setSupplier_id(supplier->id());
+            map->setInventree_category_id(m_invenTreeTargetCategoryPk);
+            map->setSupplier_category_id(m_selectedPart->categoryId());
+            map->setSupplier_category_name(ui->labelSupplierCategory->text());
 
-        if (!map->save(ConfigDb::instance())) {
-            QMessageBox::warning(this, tr("Error"), tr("Unable to save InvenTree - Supplier catergory relationship"));
+            if (!map->save(ConfigDb::instance())) {
+                QMessageBox::warning(this, tr("Error"), tr("Unable to save InvenTree - Supplier catergory relationship"));
+            }
         }
     }
 }

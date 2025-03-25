@@ -75,7 +75,7 @@ InvenTreePartImportWizard::~InvenTreePartImportWizard()
 void InvenTreePartImportWizard::setSelectedPart(SupplierPart &part)
 {
     m_selectedPart = part;
-    for (auto page : m_wizardPages)
+    for (auto page : std::as_const(m_wizardPages))
         page->setSelectedPart(&part);
 }
 
