@@ -19,16 +19,16 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     m_partApi = new InvenTree::PartApi();
-    m_partApi->addHeaders("Authorization", "Token inv-d7e8312f7b53a59290faa71708264247f0c21c11-20231228");
+    m_partApi->addHeaders("Authorization", "Token inv-cfdeb7eb1b8a30c013ecf21db9870816955dc557-20250325");
 
     m_stockApi = new InvenTree::StockApi();
-    m_stockApi->addHeaders("Authorization", "Token inv-d7e8312f7b53a59290faa71708264247f0c21c11-20231228");
+    m_stockApi->addHeaders("Authorization", "Token inv-cfdeb7eb1b8a30c013ecf21db9870816955dc557-20250325");
 
     m_currencyApi = new InvenTree::CurrencyApi();
-    m_currencyApi->addHeaders("Authorization", "Token inv-d7e8312f7b53a59290faa71708264247f0c21c11-20231228");
+    m_currencyApi->addHeaders("Authorization", "Token inv-cfdeb7eb1b8a30c013ecf21db9870816955dc557-20250325");
 
     m_companyApi = new InvenTree::CompanyApi();
-    m_companyApi->addHeaders("Authorization", "Token inv-d7e8312f7b53a59290faa71708264247f0c21c11-20231228");
+    m_companyApi->addHeaders("Authorization", "Token inv-cfdeb7eb1b8a30c013ecf21db9870816955dc557-20250325");
 
     SupplierRegistry::instance(this);
 

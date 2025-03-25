@@ -6,11 +6,13 @@ InvenTreeCategoryModel::InvenTreeCategoryModel(InvenTree::PartApi *api, QObject 
     InvenTree::Category category;
     category.setPk(0);
     m_rootItem = new InvenTreeCategoryItem(api, category);
-    m_rootItem->fetchChilds();
     connect(m_rootItem, &InvenTreeCategoryItem::childsFetched, this, [=](int childCount) {
         beginInsertRows(QModelIndex(), 0, childCount - 1);
         endInsertRows();
+        emit dataFetched();
     });
+    m_rootItem->fetchChilds();
+
 }
 
 InvenTreeCategoryModel::~InvenTreeCategoryModel()
@@ -158,6 +160,7 @@ void InvenTreeCategoryModel::itemsChildsFetched(int childCount)
     disconnect(parentItem, &InvenTreeCategoryItem::childsFetched, this, &InvenTreeCategoryModel::itemsChildsFetched);
     beginInsertRows(parentItem->index(), 0, childCount - 1);
     endInsertRows();
+    emit dataFetched();
 }
 
 InvenTreeCategoryItem::InvenTreeCategoryItem(InvenTree::PartApi *api, InvenTree::Category category, InvenTreeCategoryItem *parentItem) :
@@ -182,7 +185,6 @@ void InvenTreeCategoryItem::fetchChilds()
     m_fetchInProgress = true;
     InvenTree::OptionalParam<qint32> parent(categoryData.getPk(), categoryData.getPk() == 0);
     connect(m_api, &InvenTree::PartApi::partCategoryListSignal, this, &InvenTreeCategoryItem::subCategoriesReceieved);
-    // FIXME connect(m_api, &InvenTree::PartApi::partCategoryListSignalError, this, &InvenTreeCategoryItem::subCategoriesReceieveError);
     bool cascade = parent.stringValue() != "";
     m_api->partCategoryList(
         InvenTree::OptionalParam<bool>(cascade), // cascade
@@ -245,10 +247,4 @@ void InvenTreeCategoryItem::subCategoriesReceieved(InvenTree::PaginatedCategoryL
     }
     m_childsFetched = true;
     emit childsFetched(summary.getCount());
-}
-
-void InvenTreeCategoryItem::subCategoriesReceieveError(InvenTree::PaginatedCategoryTreeList summary, QNetworkReply::NetworkError error_type, const QString &error_str)
-{
-    disconnect(m_api, &InvenTree::PartApi::partCategoryTreeListSignalError, this, &InvenTreeCategoryItem::subCategoriesReceieveError);
-
 }

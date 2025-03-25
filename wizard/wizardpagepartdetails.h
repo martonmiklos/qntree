@@ -36,7 +36,6 @@ private:
 
     bool validatePage() override;
     bool isComplete() const override;
-    DialogSelectInvenTreeCompany *m_companySelectDialog = nullptr;
 
 private slots:
     void categoryDetailsRetrived(InvenTree::Category category);

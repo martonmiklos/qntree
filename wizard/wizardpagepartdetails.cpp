@@ -70,12 +70,12 @@ void WizardPagePartDetails::setSelectedPart(SupplierPart *part)
 
         connect(m_wizard->companyApi(), &InvenTree::CompanyApi::companyRetrieveSignalError,
                 this, [=](InvenTree::Company summary, QNetworkReply::NetworkError error_type, const QString &error_str) {
-            Q_UNUSED(summary)
-            Q_UNUSED(error_type)
-            ui->labelInvenTreeManufacturerName->setText(error_str);
-            m_invenTreeManufacturerPk = -1;
-            disconnect(m_wizard->companyApi(), nullptr, this, nullptr);
-        });
+                    Q_UNUSED(summary)
+                    Q_UNUSED(error_type)
+                    ui->labelInvenTreeManufacturerName->setText(error_str);
+                    m_invenTreeManufacturerPk = -1;
+                    disconnect(m_wizard->companyApi(), nullptr, this, nullptr);
+                });
         m_wizard->companyApi()->companyRetrieve(QString::number(existingManufacturerLink->inventree_company_pk()));
     } else {
         ui->labelInvenTreeManufacturerName->setText(tr("%1 (creating)").arg(m_selectedPart->manufacturer()));
@@ -164,16 +164,15 @@ void WizardPagePartDetails::on_labelPartImage_customContextMenuRequested(const Q
 
 void WizardPagePartDetails::on_toolButtonSelectInvenTreeManufacturer_clicked()
 {
-    if (m_companySelectDialog == nullptr) {
-        m_companySelectDialog = new DialogSelectInvenTreeCompany(m_wizard->companyApi(), this);
-        connect(m_companySelectDialog, &DialogSelectInvenTreeCompany::companySelected, this, [=](int pk, const QString &name) {
-            m_invenTreeManufacturerPk = pk;
-            ui->labelInvenTreeManufacturerName->setText(name);
-        });
-    }
-    m_companySelectDialog->listOnlyManufacturers(true);
-    m_companySelectDialog->show();
-    m_companySelectDialog->update();
+    auto companySelectDialog = new DialogSelectInvenTreeCompany(m_wizard->companyApi(), this);
+    connect(companySelectDialog, &DialogSelectInvenTreeCompany::companySelected, this, [=](int pk, const QString &name) {
+        m_invenTreeManufacturerPk = pk;
+        ui->labelInvenTreeManufacturerName->setText(name);
+    });
+
+    companySelectDialog->listOnlyManufacturers(true);
+    companySelectDialog->show();
+    companySelectDialog->update();
 }
 
 

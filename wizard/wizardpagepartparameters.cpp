@@ -42,12 +42,20 @@ void WizardPagePartParameters::saveSettings()
 void WizardPagePartParameters::setSelectedPart(SupplierPart *newSelectedPart)
 {
     InvenTreePartImportWizardPage::setSelectedPart(newSelectedPart);
+
+    m_wizard->m_settings.beginGroup("InvenTreePartImportWizard");
+    m_wizard->m_settings.beginGroup("NonSaveableProperties");
+
     m_propertyModel->setPart(newSelectedPart);
-    if (ui->checkBoxAutoSplitUnits->isChecked()) {
-        for (int i = 0; i<newSelectedPart->properties().count(); i++) {
+    for (int i = 0; i<newSelectedPart->properties().count(); i++) {
+        if (ui->checkBoxAutoSplitUnits->isChecked())
             m_propertyModel->splitRowUnit(i);
-        }
+        QString propertyName = m_propertyModel->data(ui->tableViewPropertyMapping->selectionModel()->selectedRows().first(), static_cast<int>(PropertyMappingModel::Name)).toString();
+        if (m_wizard->m_settings.value(propertyName, false).toBool())
+            m_propertyModel->setParameterToSave(i, false);
     }
+    m_wizard->m_settings.endGroup();
+    m_wizard->m_settings.endGroup();
 }
 
 void WizardPagePartParameters::on_tableViewPropertyMapping_customContextMenuRequested(const QPoint &pos)
@@ -97,6 +105,18 @@ void WizardPagePartParameters::on_tableViewPropertyMapping_customContextMenuRequ
         templateAction = templateMenu->addAction(templateActionString);
     }
 
+    QString propertyName = m_propertyModel->data(ui->tableViewPropertyMapping->selectionModel()->selectedRows().first(), static_cast<int>(PropertyMappingModel::Name)).toString();
+    QAction *doNotSaveThisAction = nullptr;
+    if (ui->tableViewPropertyMapping->selectionModel()->selectedRows().count() == 1 && !allToSave) {
+        doNotSaveThisAction = contextMenu.addAction(tr("Do not save the %1 property as parameter by default").arg(propertyName));
+        doNotSaveThisAction->setCheckable(true);
+
+        m_wizard->m_settings.beginGroup("InvenTreePartImportWizard");
+        m_wizard->m_settings.beginGroup("NonSaveableProperties");
+        doNotSaveThisAction->setChecked(m_wizard->m_settings.value(propertyName, false).toBool());
+        m_wizard->m_settings.endGroup();
+        m_wizard->m_settings.endGroup();
+    }
 
     /// Anddd action....
     auto selectedAction = contextMenu.exec(ui->tableViewPropertyMapping->mapToGlobal(pos));
@@ -125,6 +145,17 @@ void WizardPagePartParameters::on_tableViewPropertyMapping_customContextMenuRequ
             });
             dlg->show();
         }
+    } else if (selectedAction == doNotSaveThisAction) {
+        m_wizard->m_settings.beginGroup("InvenTreePartImportWizard");
+        m_wizard->m_settings.beginGroup("NonSaveableProperties");
+        if (doNotSaveThisAction->isChecked()) {
+            m_settings.setValue(propertyName, true);
+        } else {
+            m_settings.remove(propertyName);
+        }
+        m_wizard->m_settings.endGroup();
+        m_wizard->m_settings.endGroup();
+
     }
 }
 

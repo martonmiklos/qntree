@@ -7,15 +7,23 @@ DialogSelectInvenTreeCategory::DialogSelectInvenTreeCategory(InvenTree::PartApi 
     : QDialog(parent)
     , ui(new Ui::DialogSelectInvenTreeCategory)
 {
+    setAttribute(Qt::WA_DeleteOnClose);
     ui->setupUi(this);
 
     m_model = new InvenTreeCategoryModel(api, this);
     m_model->setVisiblePk(selectedPk);
     ui->treeViewCategory->setModel(m_model);
+    connect(m_model, &InvenTreeCategoryModel::dataFetched, this, [=]() {
+        ui->labelError->clear();
+    });
 
     m_settings.beginGroup("DialogSelectInvenTreeCategory");
     restoreGeometry(m_settings.value("geometry").toByteArray());
     m_settings.endGroup();
+
+    connect(api, &InvenTree::PartApi::partCategoryListSignalError, this, [=](InvenTree::PaginatedCategoryList, QNetworkReply::NetworkError, const QString &error_str) {
+        ui->labelError->setText(error_str);
+    });
 }
 
 DialogSelectInvenTreeCategory::~DialogSelectInvenTreeCategory()

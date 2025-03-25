@@ -15,6 +15,7 @@ public:
     enum Columns {
         Name,
         Value,
+        Unit,
         Action,
         Col_Invalid,
     };

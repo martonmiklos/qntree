@@ -2,6 +2,7 @@
 
 #include "wizard/inventreepartimportwizardpage.h"
 #include <QWizardPage>
+#include <QSettings>
 
 class PropertyMappingModel;
 
@@ -24,4 +25,5 @@ private slots:
 private:
     Ui::WizardPagePartParameters *ui;
     PropertyMappingModel *m_propertyModel = nullptr;
+    QSettings m_settings;
 };

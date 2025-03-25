@@ -28,7 +28,7 @@ bool PropertyMappingModel::rowUnitSplittable(int row) const
 void PropertyMappingModel::splitRowUnit(int row)
 {
     m_lines[row].supplierPartProperty.splitUnit();
-    emit dataChanged(index(row, Value), index(row, Value));
+    emit dataChanged(index(row, Value), index(row, Unit));
 }
 
 void PropertyMappingModel::setParameterToSave(int row, bool save)
@@ -59,16 +59,18 @@ int PropertyMappingModel::columnCount(const QModelIndex &parent) const
 
 QVariant PropertyMappingModel::data(const QModelIndex &index, int role) const
 {
-    if (role == Qt::DisplayRole) {
+    if (role == Qt::DisplayRole || role == Qt::EditRole) {
         switch (static_cast<Columns>(index.column())) {
         case Name:
             return m_lines.at(index.row()).supplierPartProperty.m_name;
         case Value:
-            return m_lines.at(index.row()).supplierPartProperty.valueString();
+            return m_lines.at(index.row()).supplierPartProperty.m_value;
         case Action:
             return m_lines.at(index.row()).actionText();
         case Col_Invalid:
             break;
+        case Unit:
+            return m_lines.at(index.row()).supplierPartProperty.m_unit;
         }
     } else if (role == SaveRole) {
         return m_lines.at(index.row()).valueAction() == SaveValue;
@@ -76,8 +78,6 @@ QVariant PropertyMappingModel::data(const QModelIndex &index, int role) const
         return m_lines.at(index.row()).templateTargetCategoryPk();
     } else if (role == TemplateCategoryNameRole) {
         return m_lines.at(index.row()).templateTargetCategoryName();
-    } else if (role == Qt::EditRole && index.column() == Name) {
-        return m_lines.at(index.row()).supplierPartProperty.m_name;
     }
     return QVariant();
 }
@@ -85,7 +85,20 @@ QVariant PropertyMappingModel::data(const QModelIndex &index, int role) const
 bool PropertyMappingModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
     if (role == Qt::EditRole) {
-        m_lines[index.row()].supplierPartProperty.m_name = value.toString();
+        switch (static_cast<PropertyMappingModel::Columns>(index.column())) {
+        case Name:
+            m_lines[index.row()].supplierPartProperty.m_name = value.toString();
+            break;
+        case Value:
+            m_lines[index.row()].supplierPartProperty.m_value = value.toString();
+            break;
+        case Unit:
+            m_lines[index.row()].supplierPartProperty.m_unit = value.toString();
+            break;
+        default:
+            return false;
+        }
+        return true;
     }
     return false;
 }
@@ -98,6 +111,8 @@ QVariant PropertyMappingModel::headerData(int section, Qt::Orientation orientati
             return tr("Name");
         case Value:
             return tr("Value");
+        case Unit:
+            return tr("Unit");
         case Action:
             return tr("Action");
         case Col_Invalid:
@@ -109,7 +124,7 @@ QVariant PropertyMappingModel::headerData(int section, Qt::Orientation orientati
 
 Qt::ItemFlags PropertyMappingModel::flags(const QModelIndex &index) const
 {
-    if (index.column() == Name)
+    if (index.column() == Name || index.column() == Value || index.column() == Unit)
         return Qt::ItemIsEnabled | Qt::ItemIsEditable | Qt::ItemIsSelectable;
     return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
 }
@@ -126,7 +141,7 @@ QString PropertyMappingLine::actionText() const
             auto catName = m_templateTargetCategoryName;
             if (m_templateTargetCategoryPk == 0)
                 catName = QObject::tr("global");
-            return QObject::tr("Save as property, create parameter template to the %1 category").arg(catName);
+            return QObject::tr("Save as parameter, create parameter template to the %1 category").arg(catName);
         }
     }
     return QString();

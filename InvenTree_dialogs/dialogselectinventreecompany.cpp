@@ -5,6 +5,7 @@ DialogSelectInvenTreeCompany::DialogSelectInvenTreeCompany(InvenTree::CompanyApi
     : QDialog(parent)
     , ui(new Ui::DialogSelectInvenTreeCompany)
 {
+    setAttribute(Qt::WA_DeleteOnClose);
     ui->setupUi(this);
 
     m_model = new InvenTreeCompanyModel(api, this);
@@ -12,6 +13,10 @@ DialogSelectInvenTreeCompany::DialogSelectInvenTreeCompany(InvenTree::CompanyApi
     ui->tableViewCompanyList->horizontalHeader()->setSectionResizeMode(InvenTreeCompanyModel::Id, QHeaderView::ResizeToContents);
     ui->tableViewCompanyList->horizontalHeader()->setSectionResizeMode(InvenTreeCompanyModel::CompanyName, QHeaderView::Stretch);
     ui->tableViewCompanyList->horizontalHeader()->setSectionResizeMode(InvenTreeCompanyModel::Website, QHeaderView::ResizeToContents);
+
+    connect(api, &InvenTree::CompanyApi::companyListSignalError, this, [=](InvenTree::PaginatedCompanyList, QNetworkReply::NetworkError, const QString &error_str) {
+        ui->labelError->setText(error_str);
+    });
 }
 
 DialogSelectInvenTreeCompany::~DialogSelectInvenTreeCompany()

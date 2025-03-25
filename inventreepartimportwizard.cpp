@@ -63,7 +63,7 @@ InvenTreePartImportWizard::InvenTreePartImportWizard(InvenTree::PartApi *api,
 
 InvenTreePartImportWizard::~InvenTreePartImportWizard()
 {
-    for (auto page : m_wizardPages) {
+    for (auto page : std::as_const(m_wizardPages)) {
         page->saveSettings();
     }
     m_settings.beginGroup("InvenTreePartImportWizard");
