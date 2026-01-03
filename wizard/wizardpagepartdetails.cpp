@@ -208,13 +208,16 @@ void WizardPagePartDetails::on_toolButtonSelectInvenTreeManufacturer_clicked()
 
 void WizardPagePartDetails::on_comboBoxCreateOrUseExistingPart_currentIndexChanged(int index)
 {
+    static QString shadowPn;
     if (index == 0) {
         // Create new part
         ui->toolButtonSelectExistingPart->setVisible(false);
         m_selectedPart->setExistingPk(0);
+        ui->lineEditIPN->setText(shadowPn);
     } else {
         // Add to existing as supplier part
         ui->toolButtonSelectExistingPart->setVisible(true);
+        shadowPn = ui->lineEditIPN->text();
         ui->lineEditIPN->clear();
     }
 }

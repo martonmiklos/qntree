@@ -101,8 +101,7 @@ void InvenTreePartImportWizard::initNewInvenTreePart(InvenTree::Part *part)
     part->setCategory(m_partDetailsPage->invenTreeTargetCategoryPk());
     part->setDescription(m_selectedPart.description());
     part->setName(m_selectedPart.name());
-    //part->setImage();
-    //part->setDefaultSupplier(m_startPage->selectedSupplier()->invenTreeId());
+    part->setDefaultSupplier(m_startPage->selectedSupplier()->invenTreeId());
 }
 
 int InvenTreePartImportWizard::currentSupplierDbId() const
