@@ -1,4 +1,5 @@
 #include "wizardpagepartparameters.h"
+#include "wizardpagepartdetails.h"
 #include "InvenTree_dialogs/dialogselectinventreecategory.h"
 #include "inventreepartimportwizard.h"
 #include "qmenu.h"
@@ -135,7 +136,7 @@ void WizardPagePartParameters::on_tableViewPropertyMapping_customContextMenuRequ
             for (auto row : ui->tableViewPropertyMapping->selectionModel()->selectedRows())
                 m_propertyModel->setTemplateTargetCategory(row.row(), false);
         } else {
-            auto dlg = new DialogSelectInvenTreeCategory(m_wizard->partApi(), 0, this);
+            auto dlg = new DialogSelectInvenTreeCategory(m_wizard->partApi(), m_wizard->m_partDetailsPage->invenTreeTargetCategoryPk(), this);
             dlg->setWindowTitle(tr("Select category for the parameter template"));
             connect(dlg, &DialogSelectInvenTreeCategory::categorySelected, this, [=](int pk, const QString &name, const QString &path) {
                 Q_UNUSED(path)

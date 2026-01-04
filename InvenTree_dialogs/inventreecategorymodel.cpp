@@ -1,4 +1,5 @@
 #include "inventreecategorymodel.h"
+#include "gen_src/client/Category.h"
 
 InvenTreeCategoryModel::InvenTreeCategoryModel(InvenTree::PartApi *api, QObject *parent)
     : QAbstractItemModel(parent), m_api(api)
@@ -21,15 +22,6 @@ InvenTreeCategoryModel::InvenTreeCategoryModel(InvenTree::PartApi *api, QObject 
 InvenTreeCategoryModel::~InvenTreeCategoryModel()
 {
     delete m_rootItem;
-}
-
-void InvenTreeCategoryModel::addCategory(int pk)
-{
-    bool found = false;
-    m_rootItem->findIndexOfCategory(pk, &found);
-    if (!found) {
-        // TODO recursive query upwards until a parent category found
-    }
 }
 
 QVariant InvenTreeCategoryModel::headerData(int section, Qt::Orientation orientation, int role) const
@@ -153,6 +145,17 @@ void InvenTreeCategoryModel::childItemsFetched(int childCount)
     disconnect(parentItem, &InvenTreeCategoryItem::childsFetched, this, &InvenTreeCategoryModel::childItemsFetched);
     beginInsertRows(parentItem->index(), 0, childCount - 1);
     endInsertRows();
+    if (m_categoryListToPopulate.length()) {
+        for (int i = 0; i<parentItem->childCount(); i++) {
+            if (parentItem->child(i)->categoryData.getPk() == m_categoryListToPopulate.last()) {
+                m_categoryListToPopulate.takeLast();
+                emit requestExpand(index(i, 0, parentItem->index()));
+                if (m_categoryListToPopulate.length() == 0)
+                    emit requestSelection(index(i, 0, parentItem->index()));
+                break;
+            }
+        }
+    }
     emit dataFetched();
 }
 
@@ -176,8 +179,8 @@ void InvenTreeCategoryModel::populateParentsRecursivelyToTop(int pk)
 {
     // recursively add the category upwards in the category tree
     m_populatetreeToSelectedCategory = false;
-    connect(m_api, &InvenTree::PartApi::partCategoryRetrieveSignal, this, &InvenTreeCategoryModel::parentCategoryFetched);
-    m_lastPopulatedTreeItem = nullptr;
+    connect(m_api, &InvenTree::PartApi::partCategoryRetrieveSignal, this, &InvenTreeCategoryModel::parentCategoryFetchedForSelection);
+    m_categoryListToPopulate.clear();
     fetchParentCategory(pk);
 }
 
@@ -186,22 +189,23 @@ void InvenTreeCategoryModel::fetchParentCategory(int pk)
     m_api->partCategoryRetrieve(pk);
 }
 
-void InvenTreeCategoryModel::parentCategoryFetched(InvenTree::Category categoryData)
+void InvenTreeCategoryModel::parentCategoryFetchedForSelection(InvenTree::Category categoryData)
 {
     if (m_rootItem->hasChildPk(categoryData.getPk())) {
         // we reached top level -> finished
-        disconnect(m_api, &InvenTree::PartApi::partCategoryRetrieveSignal, this, &InvenTreeCategoryModel::parentCategoryFetched);
+        disconnect(m_api, &InvenTree::PartApi::partCategoryRetrieveSignal, this, &InvenTreeCategoryModel::parentCategoryFetchedForSelection);
+        emit requestExpand(m_rootItem->childByPk(categoryData.getPk())->index());
     } else {
-        auto treeCategoryItem = new InvenTreeCategoryItem(m_api, categoryData);
-        if (m_lastPopulatedTreeItem) {
-            treeCategoryItem->appendChild(m_lastPopulatedTreeItem);
-            m_lastPopulatedTreeItem = treeCategoryItem;
-        }
-
         if (categoryData.getPk() == 0) {
             // for some reason we reached a top level item while it was not added to the rootitem
-            m_rootItem->appendChild(treeCategoryItem);
+            disconnect(m_api, &InvenTree::PartApi::partCategoryRetrieveSignal, this, &InvenTreeCategoryModel::parentCategoryFetchedForSelection);
+            beginInsertRows(QModelIndex(), m_rootItem->childCount(), 1);
+            auto newTopLevelItem = new InvenTreeCategoryItem(m_api, categoryData, m_rootItem);
+            m_rootItem->appendChild(newTopLevelItem);
+            endInsertRows();
+            emit requestExpand(index(m_rootItem->childCount() - 1, 0));
         } else {
+            m_categoryListToPopulate.append(categoryData.getPk());
             fetchParentCategory(categoryData.getParent());
         }
     }
@@ -213,6 +217,12 @@ InvenTreeCategoryItem::InvenTreeCategoryItem(InvenTree::PartApi *api, InvenTree:
     m_api(api)
 {
     categoryData = category;
+}
+
+void InvenTreeCategoryItem::appendChild(InvenTreeCategoryItem *child)
+{
+    child->setParentItem(this);
+    m_childItems.append(child);
 }
 
 int InvenTreeCategoryItem::row() const
@@ -242,6 +252,23 @@ void InvenTreeCategoryItem::fetchChilds()
         InvenTree::OptionalParam<QString>(), // search,
         InvenTree::OptionalParam<bool>() //structural
         );
+}
+
+void InvenTreeCategoryItem::subCategoriesReceieved(InvenTree::PaginatedCategoryList summary)
+{
+    disconnect(m_api, &InvenTree::PartApi::partCategoryListSignal, this, &InvenTreeCategoryItem::subCategoriesReceieved);
+    m_fetchInProgress = false;
+    auto categories = summary.getResults();
+    for (const auto &category : categories) {
+        if ((categoryData.getPk() == 0 && !category.is_parent_Set()) || category.getParent() == categoryData.getPk()) {
+            auto newChild = new InvenTreeCategoryItem(m_api, category, this);
+            m_childItems.append(newChild);
+        } else {
+            return;
+        }
+    }
+    m_childsFetched = true;
+    emit childsFetched(summary.getCount());
 }
 
 bool InvenTreeCategoryItem::areChildsFetched() const
@@ -285,19 +312,8 @@ bool InvenTreeCategoryItem::hasChildPk(const int pk) const
     return false;
 }
 
-void InvenTreeCategoryItem::subCategoriesReceieved(InvenTree::PaginatedCategoryList summary)
+void InvenTreeCategoryItem::setParentItem(InvenTreeCategoryItem *newParentItem)
 {
-    disconnect(m_api, &InvenTree::PartApi::partCategoryListSignal, this, &InvenTreeCategoryItem::subCategoriesReceieved);
-
-    auto categories = summary.getResults();
-    for (const auto &category : categories) {
-        if ((categoryData.getPk() == 0 && !category.is_parent_Set()) || category.getParent() == categoryData.getPk()) {
-            auto newChild = new InvenTreeCategoryItem(m_api, category, this);
-            m_childItems.append(newChild);
-        } else {
-            return;
-        }
-    }
-    m_childsFetched = true;
-    emit childsFetched(summary.getCount());
+    setParent(newParentItem);
+    m_parentItem = newParentItem;
 }

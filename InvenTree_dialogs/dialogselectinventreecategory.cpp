@@ -11,11 +11,21 @@ DialogSelectInvenTreeCategory::DialogSelectInvenTreeCategory(InvenTree::PartApi 
     ui->setupUi(this);
 
     m_model = new InvenTreeCategoryModel(api, this);
-    m_model->setVisiblePk(selectedPk);
+    connect(m_model, &InvenTreeCategoryModel::requestExpand, ui->treeViewCategory, [=](const QModelIndex &index) {
+        ui->treeViewCategory->setExpanded(index, true);
+    });
+
+    connect(m_model, &InvenTreeCategoryModel::requestSelection, ui->treeViewCategory, [=](const QModelIndex &index) {
+        ui->treeViewCategory->setCurrentIndex(index);
+        ui->treeViewCategory->scrollTo(index);
+    });
+
     ui->treeViewCategory->setModel(m_model);
     connect(m_model, &InvenTreeCategoryModel::dataFetched, this, [=]() {
         ui->labelError->clear();
     });
+
+    m_model->setVisiblePk(selectedPk);
 
     m_settings.beginGroup("DialogSelectInvenTreeCategory");
     restoreGeometry(m_settings.value("geometry").toByteArray());

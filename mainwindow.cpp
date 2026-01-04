@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include "InvenTree_dialogs/dialogselectinventreecategory.h"
 #include "gen_src/client/StockApi.h"
 #include "ui_mainwindow.h"
 #include "supplier/supplierregistry.h"

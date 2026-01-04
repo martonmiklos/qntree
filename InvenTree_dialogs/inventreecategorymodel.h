@@ -10,9 +10,19 @@ public:
     InvenTreeCategoryItem(InvenTree::PartApi *api, InvenTree::Category category, InvenTreeCategoryItem *parentItem = nullptr);
     InvenTree::Category categoryData;
 
-    void appendChild(InvenTreeCategoryItem *child) {m_childItems.append(child);}
+    void appendChild(InvenTreeCategoryItem *child);
 
     InvenTreeCategoryItem *child(int row) {return m_childItems.at(row);}
+    InvenTreeCategoryItem *childByPk(int pk)
+    {
+        for (auto child : std::as_const(m_childItems)) {
+            if (child->categoryData.getPk() == pk)
+                return child;
+        }
+
+        return nullptr;
+    }
+
     int childCount() const {return m_childItems.count();}
     int row() const;
     InvenTreeCategoryItem *parentItem() {return m_parentItem;}
@@ -26,6 +36,8 @@ public:
     QModelIndex findIndexOfCategory(int pk, bool *found = nullptr) const;
 
     bool hasChildPk(const int pk) const;
+
+    void setParentItem(InvenTreeCategoryItem *newParentItem);
 
 private:
     QList<InvenTreeCategoryItem *> m_childItems;
@@ -54,8 +66,6 @@ public:
     explicit InvenTreeCategoryModel(InvenTree::PartApi *api, QObject *parent = nullptr);
     ~InvenTreeCategoryModel();
 
-    void addCategory(int pk);
-
     // Header:
     QVariant headerData(int section,
                         Qt::Orientation orientation,
@@ -80,10 +90,13 @@ public:
 
 private slots:
     void childItemsFetched(int childCount);
-    void parentCategoryFetched(InvenTree::Category categoryData);
+    void parentCategoryFetchedForSelection(InvenTree::Category categoryData);
 
 private:
-    InvenTreeCategoryItem *m_rootItem = nullptr, *m_lastPopulatedTreeItem = nullptr;
+
+    void expandTreeToSelected();
+
+    InvenTreeCategoryItem *m_rootItem = nullptr;
     InvenTree::PartApi *m_api = nullptr;
     bool m_topLevelCategoriesFetched = false;
     bool m_populatetreeToSelectedCategory = false;
@@ -91,7 +104,10 @@ private:
     int m_preSelectedPk = -1;
 
     void populateParentsRecursivelyToTop(int pk);
+    QList<int> m_categoryListToPopulate;
 
 signals:
     void dataFetched();
+    void requestExpand(const QModelIndex & index);
+    void requestSelection(const QModelIndex & index);
 };
