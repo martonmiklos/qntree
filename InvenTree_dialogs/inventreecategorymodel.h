@@ -25,6 +25,8 @@ public:
 
     QModelIndex findIndexOfCategory(int pk, bool *found = nullptr) const;
 
+    bool hasChildPk(const int pk) const;
+
 private:
     QList<InvenTreeCategoryItem *> m_childItems;
     InvenTreeCategoryItem *m_parentItem = nullptr;
@@ -72,15 +74,23 @@ public:
     bool canFetchMore(const QModelIndex &parent) const override;
     void fetchMore(const QModelIndex &parent) override;
 
-    void addPk(int pk);
+    void fetchParentCategory(int pk);
 
     void setVisiblePk(int pk);
 
 private slots:
-    void itemsChildsFetched(int childCount);
+    void childItemsFetched(int childCount);
+    void parentCategoryFetched(InvenTree::Category categoryData);
 
 private:
-    InvenTreeCategoryItem *m_rootItem = nullptr;
+    InvenTreeCategoryItem *m_rootItem = nullptr, *m_lastPopulatedTreeItem = nullptr;
+    InvenTree::PartApi *m_api = nullptr;
+    bool m_topLevelCategoriesFetched = false;
+    bool m_populatetreeToSelectedCategory = false;
+
+    int m_preSelectedPk = -1;
+
+    void populateParentsRecursivelyToTop(int pk);
 
 signals:
     void dataFetched();

@@ -1,7 +1,7 @@
 #include "inventreecategorymodel.h"
 
 InvenTreeCategoryModel::InvenTreeCategoryModel(InvenTree::PartApi *api, QObject *parent)
-    : QAbstractItemModel(parent)
+    : QAbstractItemModel(parent), m_api(api)
 {
     InvenTree::Category category;
     category.setPk(0);
@@ -10,9 +10,12 @@ InvenTreeCategoryModel::InvenTreeCategoryModel(InvenTree::PartApi *api, QObject 
         beginInsertRows(QModelIndex(), 0, childCount - 1);
         endInsertRows();
         emit dataFetched();
+        m_topLevelCategoriesFetched = true;
+        if (m_populatetreeToSelectedCategory) {
+            populateParentsRecursivelyToTop(m_preSelectedPk);
+        }
     });
     m_rootItem->fetchChilds();
-
 }
 
 InvenTreeCategoryModel::~InvenTreeCategoryModel()
@@ -139,28 +142,69 @@ void InvenTreeCategoryModel::fetchMore(const QModelIndex &parent)
 {
     auto upper = static_cast<InvenTreeCategoryItem*>(parent.internalPointer());
     if (upper) {
-        connect(upper, &InvenTreeCategoryItem::childsFetched, this, &InvenTreeCategoryModel::itemsChildsFetched);
+        connect(upper, &InvenTreeCategoryItem::childsFetched, this, &InvenTreeCategoryModel::childItemsFetched);
         upper->fetchChilds();
     }
 }
 
-void InvenTreeCategoryModel::addPk(int pk)
+void InvenTreeCategoryModel::childItemsFetched(int childCount)
 {
-    // recursively add the category upwards in the category tree
+    auto parentItem = static_cast<InvenTreeCategoryItem*>(this->sender());
+    disconnect(parentItem, &InvenTreeCategoryItem::childsFetched, this, &InvenTreeCategoryModel::childItemsFetched);
+    beginInsertRows(parentItem->index(), 0, childCount - 1);
+    endInsertRows();
+    emit dataFetched();
 }
 
 void InvenTreeCategoryModel::setVisiblePk(int pk)
 {
-    // TODO add ability to retrive a subtree dynamically
+    m_preSelectedPk = pk;
+    if (m_rootItem->hasChildPk(pk)) {
+        // the selected category is a topmost category -> do nothing
+    } else {
+        // the selected category is not a topmost category -> start recursively selecting the parent categories
+        if (m_topLevelCategoriesFetched) {
+            populateParentsRecursivelyToTop(m_preSelectedPk);
+        } else {
+            // postpone recursive tree build until the top level categories are populated
+            m_populatetreeToSelectedCategory = true;
+        }
+    }
 }
 
-void InvenTreeCategoryModel::itemsChildsFetched(int childCount)
+void InvenTreeCategoryModel::populateParentsRecursivelyToTop(int pk)
 {
-    auto parentItem = static_cast<InvenTreeCategoryItem*>(this->sender());
-    disconnect(parentItem, &InvenTreeCategoryItem::childsFetched, this, &InvenTreeCategoryModel::itemsChildsFetched);
-    beginInsertRows(parentItem->index(), 0, childCount - 1);
-    endInsertRows();
-    emit dataFetched();
+    // recursively add the category upwards in the category tree
+    m_populatetreeToSelectedCategory = false;
+    connect(m_api, &InvenTree::PartApi::partCategoryRetrieveSignal, this, &InvenTreeCategoryModel::parentCategoryFetched);
+    m_lastPopulatedTreeItem = nullptr;
+    fetchParentCategory(pk);
+}
+
+void InvenTreeCategoryModel::fetchParentCategory(int pk)
+{
+    m_api->partCategoryRetrieve(pk);
+}
+
+void InvenTreeCategoryModel::parentCategoryFetched(InvenTree::Category categoryData)
+{
+    if (m_rootItem->hasChildPk(categoryData.getPk())) {
+        // we reached top level -> finished
+        disconnect(m_api, &InvenTree::PartApi::partCategoryRetrieveSignal, this, &InvenTreeCategoryModel::parentCategoryFetched);
+    } else {
+        auto treeCategoryItem = new InvenTreeCategoryItem(m_api, categoryData);
+        if (m_lastPopulatedTreeItem) {
+            treeCategoryItem->appendChild(m_lastPopulatedTreeItem);
+            m_lastPopulatedTreeItem = treeCategoryItem;
+        }
+
+        if (categoryData.getPk() == 0) {
+            // for some reason we reached a top level item while it was not added to the rootitem
+            m_rootItem->appendChild(treeCategoryItem);
+        } else {
+            fetchParentCategory(categoryData.getParent());
+        }
+    }
 }
 
 InvenTreeCategoryItem::InvenTreeCategoryItem(InvenTree::PartApi *api, InvenTree::Category category, InvenTreeCategoryItem *parentItem) :
@@ -230,6 +274,15 @@ QModelIndex InvenTreeCategoryItem::findIndexOfCategory(int pk, bool *found) cons
         }
     }
     return QModelIndex();
+}
+
+bool InvenTreeCategoryItem::hasChildPk(const int pk) const
+{
+    for (const auto &child : m_childItems) {
+        if (child->categoryData.getPk() == pk)
+            return true;
+    }
+    return false;
 }
 
 void InvenTreeCategoryItem::subCategoriesReceieved(InvenTree::PaginatedCategoryList summary)
