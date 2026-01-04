@@ -78,8 +78,29 @@ void WizardPagePartDetails::setSelectedPart(SupplierPart *part)
                 });
         m_wizard->companyApi()->companyRetrieve(QString::number(existingManufacturerLink->inventree_company_pk()));
     } else {
+        // no mapping is saved yet let's look for equal names
         ui->labelInvenTreeManufacturerName->setText(tr("%1 (creating)").arg(m_selectedPart->manufacturer()));
         m_invenTreeManufacturerPk = -1;
+
+        connect(m_wizard->companyApi(), &InvenTree::CompanyApi::companyListSignal, this, [=](InvenTree::PaginatedCompanyList summary) {
+            disconnect(m_wizard->companyApi(), nullptr, this, nullptr);
+            if (summary.getCount() == 1) {
+                // single exact name match
+                ui->labelInvenTreeManufacturerName->setText(tr("%1 (by name)").arg(m_selectedPart->manufacturer()));
+                m_invenTreeManufacturerPk = summary.getResults().first().getPk();
+                ui->checkBoxSaveMfrBinding->setChecked(true);
+            }
+        });
+
+        m_wizard->companyApi()->companyList(
+                true, // active
+               InvenTree::OptionalParam<bool>(),// isCustomer
+               true, // isManufacturer
+               InvenTree::OptionalParam<bool>(),
+               InvenTree::OptionalParam<qint32>(std::numeric_limits<qint32>().max()), // limit
+               m_selectedPart->manufacturer(), // name
+               InvenTree::OptionalParam<qint32>(0) // offset
+            );
     }
 
     auto categoryMap = ConfigDb::instance()->supplier_category_map()

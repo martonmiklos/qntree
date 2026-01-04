@@ -20,12 +20,13 @@ public:
     void update();
 
 private slots:
-    void on_tableView_doubleClicked(const QModelIndex &index);
     void on_tableViewCompanyList_doubleClicked(const QModelIndex &index);
+    void on_lineEditFilter_textChanged(const QString &arg1);
 
 private:
     Ui::DialogSelectInvenTreeCompany *ui;
     InvenTreeCompanyModel *m_model = nullptr;
+    QSortFilterProxyModel *m_proxyModel = nullptr;
 
 signals:
     void companySelected(int pk, const QString &companyName);

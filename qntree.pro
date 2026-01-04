@@ -42,6 +42,7 @@ SOURCES += \
     wizard/wizardpagepartdetails.cpp \
     wizard/wizardpagepartparameters.cpp \
     wizard/wizardpagestockandpricing.cpp \
+    wizard/wizardpagesummary.cpp \
     wizard/wizardpagesupplierdataenter.cpp
 
 HEADERS += \
@@ -76,6 +77,7 @@ HEADERS += \
     wizard/wizardpagepartdetails.h \
     wizard/wizardpagepartparameters.h \
     wizard/wizardpagestockandpricing.h \
+    wizard/wizardpagesummary.h \
     wizard/wizardpagesupplierdataenter.h
 
 FORMS += \
@@ -91,6 +93,7 @@ FORMS += \
     wizard/wizardpagepartdetails.ui \
     wizard/wizardpagepartparameters.ui \
     wizard/wizardpagestockandpricing.ui \
+    wizard/wizardpagesummary.ui \
     wizard/wizardpagesupplierdataenter.ui
 
 

@@ -24,7 +24,11 @@
      </property>
      <layout class="QGridLayout" name="gridLayout_2">
       <item row="0" column="0">
-       <widget class="QTableView" name="tableViewPriceBreaks"/>
+       <widget class="QTableView" name="tableViewPriceBreaks">
+        <property name="selectionBehavior">
+         <enum>QAbstractItemView::SelectionBehavior::SelectRows</enum>
+        </property>
+       </widget>
       </item>
       <item row="1" column="0">
        <widget class="QCheckBox" name="checkBoxSavePriceBreaks">
@@ -103,7 +107,7 @@
    <item row="4" column="0" colspan="3">
     <widget class="QGroupBox" name="groupBoxNotes">
      <property name="title">
-      <string>Notes</string>
+      <string>Stock notes</string>
      </property>
      <layout class="QGridLayout" name="gridLayout_8">
       <item row="0" column="0">
