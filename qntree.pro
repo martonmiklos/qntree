@@ -37,10 +37,12 @@ SOURCES += \
     wizard/models/propertymappingmodel.cpp \
     wizard/models/supplierattachmentactiondelegate.cpp \
     wizard/models/supplierattachmentsmodel.cpp \
+    wizard/stocklinewidget.cpp \
     wizard/wizardpageattachments.cpp \
     wizard/wizardpageinventreesyncstatus.cpp \
     wizard/wizardpagepartdetails.cpp \
     wizard/wizardpagepartparameters.cpp \
+    wizard/wizardpageselectpartcreationmode.cpp \
     wizard/wizardpagestockandpricing.cpp \
     wizard/wizardpagesummary.cpp \
     wizard/wizardpagesupplierdataenter.cpp
@@ -72,10 +74,12 @@ HEADERS += \
     wizard/models/propertymappingmodel.h \
     wizard/models/supplierattachmentactiondelegate.h \
     wizard/models/supplierattachmentsmodel.h \
+    wizard/stocklinewidget.h \
     wizard/wizardpageattachments.h \
     wizard/wizardpageinventreesyncstatus.h \
     wizard/wizardpagepartdetails.h \
     wizard/wizardpagepartparameters.h \
+    wizard/wizardpageselectpartcreationmode.h \
     wizard/wizardpagestockandpricing.h \
     wizard/wizardpagesummary.h \
     wizard/wizardpagesupplierdataenter.h
@@ -88,10 +92,12 @@ FORMS += \
     dialog.ui \
     inventreepartimportwizard.ui \
     mainwindow.ui \
+    wizard/stocklinewidget.ui \
     wizard/wizardpageattachments.ui \
     wizard/wizardpageinventreesyncstatus.ui \
     wizard/wizardpagepartdetails.ui \
     wizard/wizardpagepartparameters.ui \
+    wizard/wizardpageselectpartcreationmode.ui \
     wizard/wizardpagestockandpricing.ui \
     wizard/wizardpagesummary.ui \
     wizard/wizardpagesupplierdataenter.ui

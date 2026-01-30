@@ -81,6 +81,8 @@ QVariant SupplierAttachmentsModel::data(const QModelIndex &index, int role) cons
         return m_part->attachments().at(index.row()).url;
     } else if (role == Role_Size) {
         return m_part->attachments().at(index.row()).sizeInBytes;
+    } else if (role == Role_Save) {
+        return m_attachmentsToSave.contains(&(m_part->attachments().at(index.row())));
     }
     return QVariant();
 }
@@ -115,5 +117,10 @@ void SupplierAttachmentsModel::setPart(SupplierPart *part)
     m_attachmentsToSave.clear();
     m_part = part;
     endResetModel();
+}
+
+bool SupplierAttachmentsModel::hasSaveable() const
+{
+    return m_attachmentsToSave.count() > 0;
 }
 

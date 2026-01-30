@@ -13,6 +13,7 @@ class WizardPageSupplierDataEnter : public InvenTreePartImportWizardPage
     Q_OBJECT
 
 public:
+    friend class InvenTreePartImportWizard;
     explicit WizardPageSupplierDataEnter(InvenTreePartImportWizard *parent = nullptr);
     ~WizardPageSupplierDataEnter();
     bool isComplete() const override;

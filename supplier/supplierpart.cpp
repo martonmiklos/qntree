@@ -65,3 +65,18 @@ void SupplierPart::setExistingPk(qint32 newExistingPk)
     m_existingPk = newExistingPk;
 }
 
+QString SupplierPart::mpn() const
+{
+    return m_mpn;
+}
+
+QString SupplierPart::sku() const
+{
+    return m_sku;
+}
+
+QString SupplierPart::supplierLink() const
+{
+    return m_supplierLink;
+}
+

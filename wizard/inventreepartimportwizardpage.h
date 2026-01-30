@@ -13,6 +13,7 @@ public:
     virtual void update() {}
     virtual void setSelectedPart(::SupplierPart *newSelectedPart);
     virtual void saveSettings() {}
+    virtual QString summary() const {return QString();}
 
 protected:
     InvenTreePartImportWizard *m_wizard = nullptr;

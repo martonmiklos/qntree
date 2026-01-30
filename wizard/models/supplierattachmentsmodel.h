@@ -20,6 +20,7 @@ public:
     enum Roles {
         Role_Url = Qt::UserRole + 1,
         Role_Size,
+        Role_Save
     };
 
     explicit SupplierAttachmentsModel(QObject *parent = nullptr);
@@ -38,6 +39,8 @@ public:
     Qt::ItemFlags flags(const QModelIndex &index) const override;
 
     void setPart(::SupplierPart *part);
+
+    bool hasSaveable() const;
 
 private:
     QList<const SupplierAttachment*> m_attachmentsToSave;

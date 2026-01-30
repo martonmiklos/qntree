@@ -1,17 +1,18 @@
 #pragma once
 
-#include <QWizardPage>
+#include "wizard/inventreepartimportwizardpage.h"
 
 namespace Ui {
 class WizardPageSummary;
 }
 
-class WizardPageSummary : public QWizardPage
+class WizardPageSummary : public InvenTreePartImportWizardPage
 {
     Q_OBJECT
 
 public:
-    explicit WizardPageSummary(QWidget *parent = nullptr);
+    explicit WizardPageSummary(InvenTreePartImportWizard *parent = nullptr);
+    void updateSummary();
     ~WizardPageSummary();
 
 private:

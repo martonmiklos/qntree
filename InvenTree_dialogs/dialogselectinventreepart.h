@@ -20,6 +20,14 @@ private slots:
     void on_lineEditFilter_textChanged(const QString &arg1);
     void on_tableView_doubleClicked(const QModelIndex &index);
 
+    void on_toolButtonFirstPage_clicked();
+
+    void on_toolButtonLastPage_clicked();
+
+    void on_toolButtonNextPage_clicked();
+
+    void on_toolButtonPrevPage_clicked();
+
 private:
     Ui::DialogSelectInvenTreePart *ui;
     PartListModel *m_model = nullptr;

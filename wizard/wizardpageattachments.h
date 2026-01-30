@@ -16,8 +16,10 @@ class WizardPageAttachments : public InvenTreePartImportWizardPage
 
 public:
     explicit WizardPageAttachments(InvenTreePartImportWizard *parent = nullptr);
-    virtual void setSelectedPart(::SupplierPart *newSelectedPart);
+    virtual void setSelectedPart(::SupplierPart *newSelectedPart) override;
     ~WizardPageAttachments();
+
+    QString summary() const override;
 
 private slots:
     void on_tableViewAttachmentMapping_clicked(const QModelIndex &index);

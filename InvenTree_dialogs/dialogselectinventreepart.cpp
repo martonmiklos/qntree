@@ -33,3 +33,27 @@ void DialogSelectInvenTreePart::on_tableView_doubleClicked(const QModelIndex &in
     close();
 }
 
+
+void DialogSelectInvenTreePart::on_toolButtonFirstPage_clicked()
+{
+
+}
+
+
+void DialogSelectInvenTreePart::on_toolButtonLastPage_clicked()
+{
+
+}
+
+
+void DialogSelectInvenTreePart::on_toolButtonNextPage_clicked()
+{
+
+}
+
+
+void DialogSelectInvenTreePart::on_toolButtonPrevPage_clicked()
+{
+
+}
+

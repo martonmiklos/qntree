@@ -73,7 +73,7 @@ void PartListModel::setFilter(const QString &filterValue)
     connect(m_api, &InvenTree::PartApi::partListSignal, this, &PartListModel::partListReceived);
 
     m_api->partList(InvenTree::OptionalParam<QString>(), // ipn
-                    InvenTree::OptionalParam<QString>(),
+                    InvenTree::OptionalParam<QString>(), // ipn regex
                     InvenTree::OptionalParam<bool>(), // active
                     InvenTree::OptionalParam<qint32>(), // ancestor
                     InvenTree::OptionalParam<bool>(), // assembly
@@ -96,7 +96,7 @@ void PartListModel::setFilter(const QString &filterValue)
                     InvenTree::OptionalParam<qint32>(25), // limit
                     InvenTree::OptionalParam<bool>(), // locked
                     InvenTree::OptionalParam<bool>(), // low_stock
-                    InvenTree::OptionalParam<QString>(), // name_regex
+                    InvenTree::OptionalParam<QString>(".*" + filterValue + ".*"), // name_regex
                     InvenTree::OptionalParam<qint32>(m_offset), // offset
                     InvenTree::OptionalParam<QString>(), // ordering
                     InvenTree::OptionalParam<bool>(), // purchaseable

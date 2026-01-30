@@ -19,12 +19,12 @@ WizardPageSupplierDataEnter::WizardPageSupplierDataEnter(InvenTreePartImportWiza
         ui->comboBoxSupplier->addItem(supplierData.first, supplierData.second);
     }
 
-    QClipboard *clipboard = QGuiApplication::clipboard();
+    /*QClipboard *clipboard = QGuiApplication::clipboard();
     if (clipboard->mimeData()->hasText()) {
         auto clipText = clipboard->text();
         if (clipText.length() < 20)
             ui->lineEditPartNumber->setText(clipText);
-    }
+    }*/
 }
 
 WizardPageSupplierDataEnter::~WizardPageSupplierDataEnter()

@@ -34,11 +34,18 @@ public:
     qint32 existingPk() const;
     void setExistingPk(qint32 newExistingPk);
 
+    QString mpn() const;
+    QString sku() const;
+
+    QString supplierLink() const;
+
 protected:
+    QString m_sku;
     QString m_name;
     QString m_categoryName, m_categoryId, m_unit, m_description;
-    QString m_manufacturerName;
+    QString m_manufacturerName, m_mpn;
     QImage m_image;
+    QString m_supplierLink;
     QList<SupplierAttachment> m_attachments;
     QList<SupplierPartProperty> m_properties;
     QList<SupplierPartPricingRange> m_priceRanges;

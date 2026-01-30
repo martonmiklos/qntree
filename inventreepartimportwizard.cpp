@@ -1,14 +1,18 @@
 #include "inventreepartimportwizard.h"
 #include "ui_inventreepartimportwizard.h"
 
+#include "ui_wizardpagepartdetails.h"
+#include "ui_wizardpagesupplierdataenter.h"
+#include "wizard/wizardpagesummary.h"
 #include "wizard/wizardpagesupplierdataenter.h"
 #include "wizard/wizardpagestockandpricing.h"
 #include "wizard/wizardpagepartdetails.h"
 #include "wizard/wizardpageinventreesyncstatus.h"
 #include "wizard/wizardpageattachments.h"
 #include "wizard/wizardpagepartparameters.h"
+#include "wizard/wizardpagesupplierdataenter.h"
 #include "wizard/inventreepartuploader.h"
-
+#include "supplier/supplierregistry.h"
 
 #include <QMessageBox>
 
@@ -31,8 +35,12 @@ InvenTreePartImportWizard::InvenTreePartImportWizard(InvenTree::PartApi *api,
     setPage(SupplierDataEnter, m_startPage);
     m_wizardPages.append(m_startPage);
 
+    m_partSelectionModePage = new WizardPageSelectPartCreationMode(this);
+    setPage(PartCreationMode, m_partSelectionModePage);
+    m_wizardPages.append(m_partSelectionModePage);
+
     m_partDetailsPage = new WizardPagePartDetails(m_partApi, this);
-    setPage(SupplierDataReview, m_partDetailsPage);
+    setPage(NewPartSupplierDataReview, m_partDetailsPage);
     m_wizardPages.append(m_partDetailsPage);
 
     m_partParametersPage = new WizardPagePartParameters(this);
@@ -46,6 +54,10 @@ InvenTreePartImportWizard::InvenTreePartImportWizard(InvenTree::PartApi *api,
     m_attachmentsPage = new WizardPageAttachments(this);
     setPage(Attachments, m_attachmentsPage);
     m_wizardPages.append(m_attachmentsPage);
+
+    m_summaryPage = new WizardPageSummary(this);
+    setPage(Summary, m_summaryPage);
+    m_wizardPages.append(m_summaryPage);
 
     m_uploadPage = new WizardPageInvenTreeSyncStatus(this);
     setPage(UploadPage, m_uploadPage);
@@ -97,11 +109,55 @@ InvenTree::CurrencyApi *InvenTreePartImportWizard::currencyApi() const
 
 void InvenTreePartImportWizard::initNewInvenTreePart(InvenTree::Part *part)
 {
-    part->setActive(true);
-    part->setCategory(m_partDetailsPage->invenTreeTargetCategoryPk());
-    part->setDescription(m_selectedPart.description());
+    /*        part = Part.create(inventree_api, {
+            'name': name,
+            'description': description,
+            'category': category_id,
+            'keywords': keywords,
+            'revision': revision,
+            'IPN': ipn,
+            'active': True,
+            'virtual': False,
+            'component': True,
+            'purchaseable': True,
+        })*/
     part->setName(m_selectedPart.name());
-    part->setDefaultSupplier(m_startPage->selectedSupplier()->invenTreeId());
+    part->setDescription(m_selectedPart.description());
+    part->setCategory(m_partDetailsPage->invenTreeTargetCategoryPk());
+    part->setKeywords(m_partDetailsPage->ui->lineEditKeyWords->text());
+    part->setRevision(m_partDetailsPage->ui->lineEditRevision->text());
+    // TODO IPN???
+    part->setActive(false); // FIXME!!
+    part->setComponent(true);
+    part->setPurchaseable(true);
+
+
+    //part->setDefaultSupplier(m_startPage->selectedSupplier()->invenTreeId());
+}
+
+void InvenTreePartImportWizard::initNewManufacturerPart(int partPk, InvenTree::ManufacturerPart *mfrPart)
+{/*
+    part_id=part_pk,
+    manufacturer_name=manufacturer_name,
+    manufacturer_mpn=manufacturer_mpn,
+    datasheet=inventree_part['datasheet'],
+    description=inventree_part['description'],
+*/
+    mfrPart->setPart(partPk);
+    mfrPart->setManufacturer(m_partDetailsPage->m_invenTreeManufacturerPk);
+    mfrPart->setMpn(m_selectedPart.mpn());
+    mfrPart->setDescription(m_selectedPart.description());
+}
+
+void InvenTreePartImportWizard::initNewSupplierPart(int partPk, int mfrPart, InvenTree::SupplierPart *supplierPart)
+{
+    supplierPart->setManufacturerPart(mfrPart);
+    supplierPart->setPart(partPk);
+    supplierPart->setSku(m_partDetailsPage->ui->lineEditSupplierPn->text());
+    supplierPart->setMpn(m_partDetailsPage->ui->lineEditMpn->text());
+    supplierPart->setDescription(m_selectedPart.description());
+    supplierPart->setLink(m_selectedPart.supplierLink());
+    supplierPart->setSupplier(SupplierRegistry::instance()->getSupplierByUId(m_startPage->ui->comboBoxSupplier->currentData().toString())->invenTreeId());
 }
 
 int InvenTreePartImportWizard::currentSupplierDbId() const
@@ -116,12 +172,14 @@ InvenTree::CompanyApi *InvenTreePartImportWizard::companyApi() const
 
 void InvenTreePartImportWizard::on_InvenTreePartImportWizard_currentIdChanged(int newId)
 {
-    if (newId == SupplierDataReview) {
+    if (newId == NewPartSupplierDataReview) {
         m_partDetailsPage->setSupplierUuid(m_startPage->selectedSupplier()->uid());
     } else if (newId == ParameterMapping) {
         m_partDetailsPage->saveMapping();
         // update the unit suffix
         m_stockAndPricingPage->update();
+    } else if (newId == Summary) {
+        m_summaryPage->updateSummary();
     } else if (newId == UploadPage) {
         m_uploader->start();
     }

@@ -1,10 +1,11 @@
 #pragma once
 
-#include "gen_src/client/StockApi.h"
 #include "inventreepartimportwizard.h"
 #include "inventreepartimportwizardpage.h"
 #include "supplier/supplierpart.h"
 #include "wizard/models/pricebreaksmodel.h"
+
+class StockLineWidget;
 
 namespace Ui {
 class WizardPageStockAndPricing;
@@ -19,22 +20,22 @@ public:
     ~WizardPageStockAndPricing();
     bool isComplete() const override;
     void update() override;
-
-    int selectedLocationPk() const;
     void setSelectedPart(SupplierPart *newSelectedPart) override;
-
-private slots:
-    void on_doubleSpinBoxUnitPrice_valueChanged(double arg1);
-    void on_checkBoxCreateStock_toggled(bool checked);
-    void on_toolButtonChangeTargetLocation_clicked();
-    void on_doubleSpinBoxStockQuantity_valueChanged(double arg1);
-    void on_doubleSpinBoxUnitPrice_editingFinished();
+    QString summary() const override;
 
 private:
+    qreal totalQuantity() const;
+
     Ui::WizardPageStockAndPricing *ui;
-    QList<QWidget*> m_stockWidgets;
     PricebreaksModel *m_priceBreakModel = nullptr;
-    int m_selectedLocationPk = -1;
     bool m_priceWasEdited = false;
     void updatePriceFromPriceBreaks();
+
+    QList<StockLineWidget*> m_stockLines;
+    void addNewLineWidget();
+
+private slots:
+    void quantityChanged();
+    void on_doubleSpinBoxUnitPrice_editingFinished();
+    void on_doubleSpinBoxUnitPrice_valueChanged(double arg1);
 };

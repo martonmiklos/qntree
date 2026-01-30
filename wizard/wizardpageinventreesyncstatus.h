@@ -3,6 +3,7 @@
 #include "inventreepartimportwizard.h"
 #include "inventreepartimportwizardpage.h"
 #include "inventreepartuploader.h"
+#include "qlabel.h"
 #include <QWizardPage>
 
 namespace Ui {
@@ -21,6 +22,7 @@ public:
 private:
     Ui::WizardPageInvenTreeSyncStatus *ui;
     bool m_completed = false;
+    static QMap<InvenTreePartUploader::State, QLabel*> m_resultLabelMap;
 
 public slots:
     void stateChanged(InvenTreePartUploader::State old, InvenTreePartUploader::State newState);

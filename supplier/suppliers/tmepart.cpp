@@ -5,12 +5,15 @@
 TMEPart::TMEPart(const QJsonObject &productJson)
 {
     m_name = productJson["Symbol"].toString();
+    m_sku = productJson["Symbol"].toString();
     m_categoryName = productJson["Category"].toString();
     m_categoryId = QString::number(productJson["CategoryId"].toInt());
     m_unit = productJson["Unit"].toString();
     m_description = productJson["Description"].toString();
     m_properties.append(SupplierPartProperty("Weight", QString::number(productJson["Weight"].toDouble()), productJson["WeightUnit"].toString()));
     m_manufacturerName = productJson["Producer"].toString();
+    m_mpn = productJson["OriginalSymbol"].toString();
+    m_supplierLink = "https:" + productJson["ProductInformationPage"].toString();
 }
 
 void TMEPart::parseParametersResponse(const QJsonArray &paramsJson)

@@ -7,6 +7,7 @@
 #include "supplier/supplierpart.h"
 #include "wizard/inventreepartimportwizardpage.h"
 #include "wizard/models/supplierattachmentsmodel.h"
+#include "wizard/wizardpageselectpartcreationmode.h"
 #include <QWizard>
 #include <QSettings>
 
@@ -22,6 +23,7 @@ class WizardPagePartDetails;
 class WizardPageInvenTreeSyncStatus;
 class WizardPagePartParameters;
 class WizardPageAttachments;
+class WizardPageSummary;
 class InvenTreePartUploader;
 
 class InvenTreePartImportWizard : public QWizard
@@ -30,13 +32,18 @@ class InvenTreePartImportWizard : public QWizard
     friend class InvenTreePartImportWizardPage;
     friend class WizardPagePartParameters;
     friend class WizardPagePartDetails;
+    friend class WizardPageSummary;
 public:
     enum PageIndexes {
         SupplierDataEnter,
-        SupplierDataReview,
+        PartCreationMode,
+
+        NewPartSupplierDataReview,
         ParameterMapping,
         StockAndPricing,
         Attachments,
+
+        Summary,
         UploadPage
     };
     explicit InvenTreePartImportWizard(InvenTree::PartApi *api,
@@ -52,6 +59,8 @@ public:
     InvenTree::CurrencyApi *currencyApi() const;
 
     void initNewInvenTreePart(InvenTree::Part *part);
+    void initNewManufacturerPart(int partPk, InvenTree::ManufacturerPart *mfrPart);
+    void initNewSupplierPart(int partPk, int mfrPart, InvenTree::SupplierPart *part);
 
     int currentSupplierDbId() const;
 
@@ -60,12 +69,15 @@ public:
 protected:
     Ui::InvenTreePartImportWizard *ui;
     ::SupplierPart m_selectedPart;
+
     WizardPageSupplierDataEnter *m_startPage = nullptr;
-    WizardPageStockAndPricing *m_stockAndPricingPage = nullptr;
+    WizardPageSelectPartCreationMode *m_partSelectionModePage = nullptr;
     WizardPagePartDetails *m_partDetailsPage = nullptr;
-    WizardPageInvenTreeSyncStatus *m_uploadPage = nullptr;
-    WizardPageAttachments *m_attachmentsPage = nullptr;
     WizardPagePartParameters *m_partParametersPage  = nullptr;
+    WizardPageStockAndPricing *m_stockAndPricingPage = nullptr;
+    WizardPageAttachments *m_attachmentsPage = nullptr;
+    WizardPageSummary *m_summaryPage = nullptr;
+    WizardPageInvenTreeSyncStatus *m_uploadPage = nullptr;
 
     QList<InvenTreePartImportWizardPage*> m_wizardPages;
 

@@ -26,6 +26,26 @@ WizardPageAttachments::~WizardPageAttachments()
     delete ui;
 }
 
+QString WizardPageAttachments::summary() const
+{
+    if (!m_attachmentsModel->hasSaveable())
+        return QString();
+    QString ret = tr("<b>Save attachments</b><br>");
+    for (int i = 0; i<m_attachmentsModel->rowCount(); i++) {
+        if (m_attachmentsModel->data(m_attachmentsModel->index(i, SupplierAttachmentsModel::Col_Action), SupplierAttachmentsModel::Role_Save).toBool()) {
+            QString comment = m_attachmentsModel->data(m_attachmentsModel->index(i, SupplierAttachmentsModel::Col_Comment)).toString();
+            if (!comment.isEmpty()) {
+                comment = tr(" (%1)").arg(comment);
+            }
+            ret.append(tr("<li>%1%2</li>").arg(
+                m_attachmentsModel->data(m_attachmentsModel->index(i, SupplierAttachmentsModel::Col_FileName)).toString(),
+                comment));
+        }
+    }
+    ret.append("</ul>");
+    return ret;
+}
+
 void WizardPageAttachments::on_tableViewAttachmentMapping_clicked(const QModelIndex &index)
 {
     if (index.column() == SupplierAttachmentsModel::Col_FileName) {

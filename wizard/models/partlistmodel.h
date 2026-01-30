@@ -32,6 +32,7 @@ private:
     InvenTree::PartApi *m_api = nullptr;
     QList<InvenTree::Part> m_parts;
     quint32 m_offset = 0;
+    int paginationSize() const;
 
 private slots:
     void partListReceived(InvenTree::PaginatedPartList summary);

@@ -1,6 +1,11 @@
 #include "wizardpageinventreesyncstatus.h"
 #include "ui_wizardpageinventreesyncstatus.h"
 
+
+QMap<InvenTreePartUploader::State, QLabel*> WizardPageInvenTreeSyncStatus::m_resultLabelMap = {
+    {},
+};
+
 WizardPageInvenTreeSyncStatus::WizardPageInvenTreeSyncStatus(InvenTreePartImportWizard *parent)
     : InvenTreePartImportWizardPage(parent)
     , ui(new Ui::WizardPageInvenTreeSyncStatus)
@@ -35,7 +40,6 @@ void WizardPageInvenTreeSyncStatus::stateChanged(InvenTreePartUploader::State ol
         break;
     case InvenTreePartUploader::Finished:
         break;
-    default:
     case InvenTreePartUploader::Idle:
         ui->labelPartStatusSprite->setText("-");
         ui->labelAttributesStatusSprite->setText("-");
@@ -44,6 +48,15 @@ void WizardPageInvenTreeSyncStatus::stateChanged(InvenTreePartUploader::State ol
         ui->labelAttachmentsSprite->setText("-");
         m_completed = false;
         emit completeChanged();
+        break;
+    case InvenTreePartUploader::CreateManufacturerPart:
+        ui->labelMfrPartCreated->setText(tr("Done"));
+        break;
+    case InvenTreePartUploader::CreateSupplierPart:
+        ui->labelSupplierPartCreated->setText(tr("Done"));
+        break;
+    case InvenTreePartUploader::SetDefaultSupplierPart:
+        ui->labelSetSupplierAsDefault->setText(tr("Done"));
         break;
     }
 
@@ -55,7 +68,8 @@ void WizardPageInvenTreeSyncStatus::stateChanged(InvenTreePartUploader::State ol
 
 void WizardPageInvenTreeSyncStatus::stateError(InvenTreePartUploader::State old, const QString &error)
 {
-    switch (old) {
+    // TODO
+    /*switch (old) {
     case InvenTreePartUploader::CreatePart:
         ui->labelPartStatusSprite->setText(error);
         break;
@@ -72,6 +86,10 @@ void WizardPageInvenTreeSyncStatus::stateError(InvenTreePartUploader::State old,
         break;
     case InvenTreePartUploader::Idle:
         break;
-    }
-
+    case InvenTreePartUploader::CreateManufacturerPart:
+    case InvenTreePartUploader::CreateSupplierPart:
+    case InvenTreePartUploader::SetDefaultSupplierPart:
+        break;
+    }*/
+    ui->labelError->setText(error);
 }
