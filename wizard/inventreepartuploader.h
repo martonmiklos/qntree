@@ -13,7 +13,8 @@ public:
         CreateManufacturerPart,
         CreateSupplierPart,
         SetDefaultSupplierPart,
-        UploadImage,
+        UploadPartImage,
+        AddStockItems,
         CreateParameters,
         SetupSuppliersAndPricing,
         UploadFiles,
@@ -23,7 +24,7 @@ public:
     void start();
 
 signals:
-    void stateChanged(InvenTreePartUploader::State oldState, State newState);
+    void stateChanged(InvenTreePartUploader::State oldState, InvenTreePartUploader::State newState);
     void stateFailed(InvenTreePartUploader::State state, const QString &error);
 
 private:
@@ -32,6 +33,12 @@ private:
     InvenTree::SupplierPart m_supplierPart;
     InvenTree::ManufacturerPart m_mfrPart;
     State m_state = Idle;
+    int m_stockItemCreationLeft = 0;
+    int m_defaultLocationId = -1;
+    int m_paramsCreationLeft = 0;
+
+    void createParameters();
+    void setupPricing();
 
 private slots:
     void partCreated(InvenTree::Part summary);
@@ -45,4 +52,16 @@ private slots:
 
     void partUpdated(InvenTree::Part summary);
     void partUpdateError(InvenTree::Part summary, QNetworkReply::NetworkError error_type, const QString &error_str);
+
+    void imageUploaded(InvenTree::Part summary);
+    void imageUploadError(InvenTree::Part summary, QNetworkReply::NetworkError error_type, const QString &error_str);
+
+    void stockItemCreated(InvenTree::StockItem summary);
+    void stockItemCreateError(InvenTree::StockItem summary, QNetworkReply::NetworkError error_type, const QString &error_str);
+
+    void defaultStockLocationSet(InvenTree::Part summary);
+    void defaultStockLocationSetError(InvenTree::Part summary, QNetworkReply::NetworkError error_type, const QString &error_str);
+
+    void partParameterCreated(InvenTree::PartParameter summary);
+    void partParameterCreateError(InvenTree::PartParameter summary, QNetworkReply::NetworkError error_type, const QString &error_str);
 };

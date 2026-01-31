@@ -18,11 +18,12 @@ public:
     explicit WizardPageInvenTreeSyncStatus(InvenTreePartImportWizard *parent = nullptr);
     ~WizardPageInvenTreeSyncStatus();
     bool isComplete() const override;
+    void reset();
 
 private:
     Ui::WizardPageInvenTreeSyncStatus *ui;
     bool m_completed = false;
-    static QMap<InvenTreePartUploader::State, QLabel*> m_resultLabelMap;
+    QMap<InvenTreePartUploader::State, QLabel*> m_resultLabelMap;
 
 public slots:
     void stateChanged(InvenTreePartUploader::State old, InvenTreePartUploader::State newState);

@@ -13,7 +13,7 @@
 #include "wizard/wizardpagesupplierdataenter.h"
 #include "wizard/inventreepartuploader.h"
 #include "supplier/supplierregistry.h"
-
+#include "wizard/stocklinewidget.h"
 #include <QMessageBox>
 
 InvenTreePartImportWizard::InvenTreePartImportWizard(InvenTree::PartApi *api,
@@ -130,9 +130,6 @@ void InvenTreePartImportWizard::initNewInvenTreePart(InvenTree::Part *part)
     part->setActive(false); // FIXME!!
     part->setComponent(true);
     part->setPurchaseable(true);
-
-
-    //part->setDefaultSupplier(m_startPage->selectedSupplier()->invenTreeId());
 }
 
 void InvenTreePartImportWizard::initNewManufacturerPart(int partPk, InvenTree::ManufacturerPart *mfrPart)
@@ -160,6 +157,28 @@ void InvenTreePartImportWizard::initNewSupplierPart(int partPk, int mfrPart, Inv
     supplierPart->setSupplier(SupplierRegistry::instance()->getSupplierByUId(m_startPage->ui->comboBoxSupplier->currentData().toString())->invenTreeId());
 }
 
+void InvenTreePartImportWizard::initStockItems(int partPk, QList<InvenTree::StockItem> *items, int *defaultLocationId)
+{
+    for (auto sl : m_stockAndPricingPage->m_stockLines) {
+        if (sl->create()) {
+            InvenTree::StockItem siOut;
+            siOut.setPart(partPk);
+            siOut.setLocation(sl->selectedLocationPk());
+            siOut.setQuantity(sl->quantity());
+            siOut.setNotes(sl->m_notes);
+            items->append(siOut);
+
+            if (sl->isDefaultLocation() && defaultLocationId)
+                *defaultLocationId = sl->selectedLocationPk();
+        }
+    }
+}
+
+void InvenTreePartImportWizard::initParameterList(int partPk, QList<InvenTree::PartParameter> *params)
+{
+
+}
+
 int InvenTreePartImportWizard::currentSupplierDbId() const
 {
     return m_startPage->selectedSupplier()->getId();
@@ -181,6 +200,7 @@ void InvenTreePartImportWizard::on_InvenTreePartImportWizard_currentIdChanged(in
     } else if (newId == Summary) {
         m_summaryPage->updateSummary();
     } else if (newId == UploadPage) {
+        m_uploadPage->reset();
         m_uploader->start();
     }
 }

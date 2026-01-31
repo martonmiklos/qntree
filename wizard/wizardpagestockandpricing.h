@@ -14,8 +14,8 @@ class WizardPageStockAndPricing;
 class WizardPageStockAndPricing : public InvenTreePartImportWizardPage
 {
     Q_OBJECT
-
 public:
+    friend class InvenTreePartImportWizard;
     explicit WizardPageStockAndPricing(InvenTreePartImportWizard *parent = nullptr);
     ~WizardPageStockAndPricing();
     bool isComplete() const override;

@@ -69,7 +69,7 @@ bool WizardPageSupplierDataEnter::validatePage()
         ui->labelMessage->setText(tr("No part data found for the %1 partnumber").arg(ui->lineEditPartNumber->text()));
     });
 
-    m_selectedSupplier->retrivePart(ui->lineEditPartNumber->text());
+    m_selectedSupplier->retrivePart(ui->lineEditPartNumber->text().trimmed());
 
     connect(m_wizard->currencyApi(), &InvenTree::CurrencyApi::currencyExchangeRetrieveSignal, this, [=](InvenTree::CurrencyExchange summary) {
         // TODO

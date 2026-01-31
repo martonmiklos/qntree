@@ -2850,7 +2850,7 @@ void PartApi::partChangeCategoryCreateCallback(HttpRequestWorker *worker) {
     }
 }
 
-void PartApi::partCreate(const Part &part) {
+void PartApi::partCreate(const Part &part, QList<HttpFileElement> files) {
     QString fullPath = QString(_serverConfigs["partCreate"][_serverIndices.value("partCreate")].URL()+"/api/part/");
     
     if (!_username.isEmpty() && !_password.isEmpty()) {
@@ -2866,7 +2866,10 @@ void PartApi::partCreate(const Part &part) {
     worker->setTimeOut(_timeOut);
     worker->setWorkingDirectory(_workingDirectory);
     HttpRequestInput input(fullPath, "POST");
-
+    for (const auto &f : std::as_const(files))
+    {
+        input.add_file(f.variable_name, f.local_filename, f.request_filename, f.mime_type);
+    }
     {
 
         
@@ -6499,7 +6502,7 @@ void PartApi::partParameterUpdateCallback(HttpRequestWorker *worker) {
     }
 }
 
-void PartApi::partPartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedPart> &patched_part) {
+void PartApi::partPartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedPart> &patched_part, QList<HttpFileElement> files) {
     QString fullPath = QString(_serverConfigs["partPartialUpdate"][_serverIndices.value("partPartialUpdate")].URL()+"/api/part/{id}/");
     
     if (!_username.isEmpty() && !_password.isEmpty()) {
@@ -6529,7 +6532,7 @@ void PartApi::partPartialUpdate(const qint32 &id, const ::InvenTree::OptionalPar
     worker->setTimeOut(_timeOut);
     worker->setWorkingDirectory(_workingDirectory);
     HttpRequestInput input(fullPath, "PATCH");
-
+    input.files = files;
     if (patched_part.hasValue()){
 
         

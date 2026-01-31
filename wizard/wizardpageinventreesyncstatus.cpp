@@ -1,16 +1,27 @@
 #include "wizardpageinventreesyncstatus.h"
 #include "ui_wizardpageinventreesyncstatus.h"
 
+#include "ui_wizardpagesummary.h"
+#include "wizardpagesummary.h"
 
-QMap<InvenTreePartUploader::State, QLabel*> WizardPageInvenTreeSyncStatus::m_resultLabelMap = {
-    {},
-};
+#include <QDesktopServices>
 
 WizardPageInvenTreeSyncStatus::WizardPageInvenTreeSyncStatus(InvenTreePartImportWizard *parent)
     : InvenTreePartImportWizardPage(parent)
     , ui(new Ui::WizardPageInvenTreeSyncStatus)
 {
     ui->setupUi(this);
+    m_resultLabelMap = {
+        {InvenTreePartUploader::CreatePart, ui->labelPartStatusSprite},
+        {InvenTreePartUploader::CreateManufacturerPart, ui->labelMfrPartCreated},
+        {InvenTreePartUploader::CreateSupplierPart, ui->labelSupplierPartCreated},
+        {InvenTreePartUploader::SetDefaultSupplierPart, ui->labelSetSupplierAsDefault},
+        {InvenTreePartUploader::UploadPartImage, ui->labelPartImage},
+        {InvenTreePartUploader::CreateParameters, ui->labelAttributesStatusSprite},
+        {InvenTreePartUploader::AddStockItems, ui->labelStockItemsStatusSprite},
+        {InvenTreePartUploader::SetupSuppliersAndPricing, ui->labelPricingInfoStatusSprite},
+        {InvenTreePartUploader::UploadFiles, ui->labelAttachmentsSprite},
+    };
 }
 
 WizardPageInvenTreeSyncStatus::~WizardPageInvenTreeSyncStatus()
@@ -23,44 +34,25 @@ bool WizardPageInvenTreeSyncStatus::isComplete() const
     return m_completed;
 }
 
+void WizardPageInvenTreeSyncStatus::reset()
+{
+    ui->labelError->clear();
+    auto keys = m_resultLabelMap.keys();
+    for (auto key : keys) {
+        m_resultLabelMap[key]->setText("-");
+    }
+}
+
 void WizardPageInvenTreeSyncStatus::stateChanged(InvenTreePartUploader::State old, InvenTreePartUploader::State newState)
 {
-    switch (old) {
-    case InvenTreePartUploader::CreatePart:
-        ui->labelPartStatusSprite->setText(tr("Done"));
-        break;
-    case InvenTreePartUploader::CreateParameters:
-        ui->labelAttachmentsSprite->setText(tr("Done"));
-        break;
-    case InvenTreePartUploader::SetupSuppliersAndPricing:
-        ui->labelPricingInfoStatusSprite->setText(tr("Done"));
-        break;
-    case InvenTreePartUploader::UploadFiles:
-        ui->labelAttachmentsSprite->setText(tr("Done"));
-        break;
-    case InvenTreePartUploader::Finished:
-        break;
-    case InvenTreePartUploader::Idle:
-        ui->labelPartStatusSprite->setText("-");
-        ui->labelAttributesStatusSprite->setText("-");
-        ui->labelPricingInfoStatusSprite->setText("-");
-        ui->labelStockItemsStatusSprite->setText("-");
-        ui->labelAttachmentsSprite->setText("-");
-        m_completed = false;
-        emit completeChanged();
-        break;
-    case InvenTreePartUploader::CreateManufacturerPart:
-        ui->labelMfrPartCreated->setText(tr("Done"));
-        break;
-    case InvenTreePartUploader::CreateSupplierPart:
-        ui->labelSupplierPartCreated->setText(tr("Done"));
-        break;
-    case InvenTreePartUploader::SetDefaultSupplierPart:
-        ui->labelSetSupplierAsDefault->setText(tr("Done"));
-        break;
-    }
+    auto label = m_resultLabelMap[old];
+    if (label)
+        label->setText(tr("Done"));
 
     if (newState == InvenTreePartUploader::Idle) {
+        if (m_wizard->m_summaryPage->ui->checkBoxOpenInInvenTree->isChecked()) {
+            // TODO QDesktopServices::openUrl("http://");
+        }
         m_completed = true;
         emit completeChanged();
     }
@@ -68,28 +60,8 @@ void WizardPageInvenTreeSyncStatus::stateChanged(InvenTreePartUploader::State ol
 
 void WizardPageInvenTreeSyncStatus::stateError(InvenTreePartUploader::State old, const QString &error)
 {
-    // TODO
-    /*switch (old) {
-    case InvenTreePartUploader::CreatePart:
-        ui->labelPartStatusSprite->setText(error);
-        break;
-    case InvenTreePartUploader::CreateParameters:
-        ui->labelAttachmentsSprite->setText(error);
-        break;
-    case InvenTreePartUploader::SetupSuppliersAndPricing:
-        ui->labelPricingInfoStatusSprite->setText(error);
-        break;
-    case InvenTreePartUploader::UploadFiles:
-        ui->labelAttachmentsSprite->setText(error);
-        break;
-    case InvenTreePartUploader::Finished:
-        break;
-    case InvenTreePartUploader::Idle:
-        break;
-    case InvenTreePartUploader::CreateManufacturerPart:
-    case InvenTreePartUploader::CreateSupplierPart:
-    case InvenTreePartUploader::SetDefaultSupplierPart:
-        break;
-    }*/
+    auto label = m_resultLabelMap[old];
+    if (label)
+        label->setText(tr("Error"));
     ui->labelError->setText(error);
 }

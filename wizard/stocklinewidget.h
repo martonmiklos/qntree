@@ -11,8 +11,8 @@ class StockLineWidget;
 class StockLineWidget : public QWidget
 {
     Q_OBJECT
-
 public:
+    friend class InvenTreePartImportWizard;
     explicit StockLineWidget(InvenTreePartImportWizard *wizard, QWidget *parent = nullptr);
     ~StockLineWidget();
     void setRemovable(bool removable);
@@ -41,6 +41,7 @@ signals:
     void quantityChanged();
 
 private:
+    QString m_notes;
     Ui::StockLineWidget *ui;
     int m_selectedLocationPk = -1;
     QList<QWidget*> m_stockWidgets;

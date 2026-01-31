@@ -241,7 +241,7 @@ public:
     /**
     * @param[in]  part Part [required]
     */
-    virtual void partCreate(const Part &part);
+    virtual void partCreate(const Part &part, QList<HttpFileElement> files = QList<HttpFileElement>());
 
     /**
     * @param[in]  id qint32 [required]
@@ -456,7 +456,7 @@ public:
     * @param[in]  id qint32 [required]
     * @param[in]  patched_part PatchedPart [optional]
     */
-    virtual void partPartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedPart> &patched_part = ::InvenTree::OptionalParam<PatchedPart>());
+    virtual void partPartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedPart> &patched_part = ::InvenTree::OptionalParam<PatchedPart>(), QList<HttpFileElement> files = QList<HttpFileElement>());
 
     /**
     * @param[in]  id qint32 [required]
