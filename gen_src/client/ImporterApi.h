@@ -72,35 +72,35 @@ public:
     * @param[in]  search QString [optional]
     * @param[in]  session qint32 [optional]
     */
-    void importerColumnMappingList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &session = ::InvenTree::OptionalParam<qint32>());
+    virtual void importerColumnMappingList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &session = ::InvenTree::OptionalParam<qint32>());
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  patched_data_import_column_map PatchedDataImportColumnMap [optional]
     */
-    void importerColumnMappingPartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedDataImportColumnMap> &patched_data_import_column_map = ::InvenTree::OptionalParam<PatchedDataImportColumnMap>());
+    virtual void importerColumnMappingPartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedDataImportColumnMap> &patched_data_import_column_map = ::InvenTree::OptionalParam<PatchedDataImportColumnMap>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void importerColumnMappingRetrieve(const qint32 &id);
+    virtual void importerColumnMappingRetrieve(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  data_import_column_map DataImportColumnMap [optional]
     */
-    void importerColumnMappingUpdate(const qint32 &id, const ::InvenTree::OptionalParam<DataImportColumnMap> &data_import_column_map = ::InvenTree::OptionalParam<DataImportColumnMap>());
+    virtual void importerColumnMappingUpdate(const qint32 &id, const ::InvenTree::OptionalParam<DataImportColumnMap> &data_import_column_map = ::InvenTree::OptionalParam<DataImportColumnMap>());
 
 
-    void importerModelsRetrieve();
+    virtual void importerModelsRetrieve();
 
 
-    void importerRowDestroy();
+    virtual void importerRowDestroy();
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void importerRowDestroy2(const qint32 &id);
+    virtual void importerRowDestroy2(const qint32 &id);
 
     /**
     * @param[in]  complete bool [optional]
@@ -111,48 +111,48 @@ public:
     * @param[in]  session qint32 [optional]
     * @param[in]  r_valid bool [optional]
     */
-    void importerRowList(const ::InvenTree::OptionalParam<bool> &complete = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &session = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &r_valid = ::InvenTree::OptionalParam<bool>());
+    virtual void importerRowList(const ::InvenTree::OptionalParam<bool> &complete = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &session = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &r_valid = ::InvenTree::OptionalParam<bool>());
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  patched_data_import_row PatchedDataImportRow [optional]
     */
-    void importerRowPartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedDataImportRow> &patched_data_import_row = ::InvenTree::OptionalParam<PatchedDataImportRow>());
+    virtual void importerRowPartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedDataImportRow> &patched_data_import_row = ::InvenTree::OptionalParam<PatchedDataImportRow>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void importerRowRetrieve(const qint32 &id);
+    virtual void importerRowRetrieve(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  data_import_row DataImportRow [optional]
     */
-    void importerRowUpdate(const qint32 &id, const ::InvenTree::OptionalParam<DataImportRow> &data_import_row = ::InvenTree::OptionalParam<DataImportRow>());
+    virtual void importerRowUpdate(const qint32 &id, const ::InvenTree::OptionalParam<DataImportRow> &data_import_row = ::InvenTree::OptionalParam<DataImportRow>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void importerSessionAcceptFieldsCreate(const qint32 &id);
+    virtual void importerSessionAcceptFieldsCreate(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  data_import_accept_row DataImportAcceptRow [required]
     */
-    void importerSessionAcceptRowsCreate(const qint32 &id, const DataImportAcceptRow &data_import_accept_row);
+    virtual void importerSessionAcceptRowsCreate(const qint32 &id, const DataImportAcceptRow &data_import_accept_row);
 
     /**
     * @param[in]  data_import_session DataImportSession [required]
     */
-    void importerSessionCreate(const DataImportSession &data_import_session);
+    virtual void importerSessionCreate(const DataImportSession &data_import_session);
 
 
-    void importerSessionDestroy();
+    virtual void importerSessionDestroy();
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void importerSessionDestroy2(const qint32 &id);
+    virtual void importerSessionDestroy2(const qint32 &id);
 
     /**
     * @param[in]  limit qint32 [optional]
@@ -163,24 +163,24 @@ public:
     * @param[in]  status qint32 [optional]
     * @param[in]  user qint32 [optional]
     */
-    void importerSessionList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &model_type = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &status = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &user = ::InvenTree::OptionalParam<qint32>());
+    virtual void importerSessionList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &model_type = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &status = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &user = ::InvenTree::OptionalParam<qint32>());
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  patched_data_import_session PatchedDataImportSession [optional]
     */
-    void importerSessionPartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedDataImportSession> &patched_data_import_session = ::InvenTree::OptionalParam<PatchedDataImportSession>());
+    virtual void importerSessionPartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedDataImportSession> &patched_data_import_session = ::InvenTree::OptionalParam<PatchedDataImportSession>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void importerSessionRetrieve(const qint32 &id);
+    virtual void importerSessionRetrieve(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  data_import_session DataImportSession [required]
     */
-    void importerSessionUpdate(const qint32 &id, const DataImportSession &data_import_session);
+    virtual void importerSessionUpdate(const qint32 &id, const DataImportSession &data_import_session);
 
 
 private:
@@ -248,6 +248,7 @@ Q_SIGNALS:
     void importerSessionPartialUpdateSignal(DataImportSession summary);
     void importerSessionRetrieveSignal(DataImportSession summary);
     void importerSessionUpdateSignal(DataImportSession summary);
+
 
     void importerColumnMappingListSignalFull(HttpRequestWorker *worker, PaginatedDataImportColumnMapList summary);
     void importerColumnMappingPartialUpdateSignalFull(HttpRequestWorker *worker, DataImportColumnMap summary);

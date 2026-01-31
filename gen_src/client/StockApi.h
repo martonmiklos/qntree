@@ -85,47 +85,47 @@ public:
     /**
     * @param[in]  stock_add StockAdd [required]
     */
-    void stockAddCreate(const StockAdd &stock_add);
+    virtual void stockAddCreate(const StockAdd &stock_add);
 
     /**
     * @param[in]  stock_assignment StockAssignment [required]
     */
-    void stockAssignCreate(const StockAssignment &stock_assignment);
+    virtual void stockAssignCreate(const StockAssignment &stock_assignment);
 
     /**
     * @param[in]  stock_change_status StockChangeStatus [required]
     */
-    void stockChangeStatusCreate(const StockChangeStatus &stock_change_status);
+    virtual void stockChangeStatusCreate(const StockChangeStatus &stock_change_status);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  convert_stock_item ConvertStockItem [required]
     */
-    void stockConvertCreate(const qint32 &id, const ConvertStockItem &convert_stock_item);
+    virtual void stockConvertCreate(const qint32 &id, const ConvertStockItem &convert_stock_item);
 
     /**
     * @param[in]  stock_count StockCount [required]
     */
-    void stockCountCreate(const StockCount &stock_count);
+    virtual void stockCountCreate(const StockCount &stock_count);
 
     /**
     * @param[in]  stock_item StockItem [required]
     */
-    void stockCreate(const StockItem &stock_item);
+    virtual void stockCreate(const StockItem &stock_item);
 
 
-    void stockDestroy();
+    virtual void stockDestroy();
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void stockDestroy2(const qint32 &id);
+    virtual void stockDestroy2(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  install_stock_item InstallStockItem [required]
     */
-    void stockInstallCreate(const qint32 &id, const InstallStockItem &install_stock_item);
+    virtual void stockInstallCreate(const qint32 &id, const InstallStockItem &install_stock_item);
 
     /**
     * @param[in]  ipn QString [optional]
@@ -186,17 +186,17 @@ public:
     * @param[in]  updated_after QDate [optional]
     * @param[in]  updated_before QDate [optional]
     */
-    void stockList(const ::InvenTree::OptionalParam<QString> &ipn = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &ipn_contains = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &ipn_regex = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<bool> &active = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &allocated = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &ancestor = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &assembly = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &available = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<QString> &batch = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &batch_regex = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &belongs_to = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &bom_item = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &build = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &category = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &company = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &consumed_by = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &customer = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &depleted = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &expired = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<QDate> &expiry_date_gte = ::InvenTree::OptionalParam<QDate>(), const ::InvenTree::OptionalParam<QDate> &expiry_date_lte = ::InvenTree::OptionalParam<QDate>(), const ::InvenTree::OptionalParam<bool> &external = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &has_batch = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &has_child_items = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &has_installed_items = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &has_purchase_price = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &in_stock = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &installed = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &is_building = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &manufacturer = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<double> &max_stock = ::InvenTree::OptionalParam<double>(), const ::InvenTree::OptionalParam<double> &min_stock = ::InvenTree::OptionalParam<double>(), const ::InvenTree::OptionalParam<QString> &name = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &name_contains = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &name_regex = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &part_tree = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &purchase_order = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &salable = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &sales_order = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<bool> &sent_to_customer = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<QString> &serial = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &serial_gte = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &serial_lte = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &serialized = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &stale = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &status = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &supplier = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &supplier_part = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &tags__name = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &tags__slug = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<bool> &tracked = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<QDate> &updated_after = ::InvenTree::OptionalParam<QDate>(), const ::InvenTree::OptionalParam<QDate> &updated_before = ::InvenTree::OptionalParam<QDate>());
+    virtual void stockList(const ::InvenTree::OptionalParam<QString> &ipn = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &ipn_contains = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &ipn_regex = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<bool> &active = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &allocated = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &ancestor = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &assembly = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &available = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<QString> &batch = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &batch_regex = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &belongs_to = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &bom_item = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &build = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &category = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &company = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &consumed_by = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &customer = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &depleted = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &expired = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<QDate> &expiry_date_gte = ::InvenTree::OptionalParam<QDate>(), const ::InvenTree::OptionalParam<QDate> &expiry_date_lte = ::InvenTree::OptionalParam<QDate>(), const ::InvenTree::OptionalParam<bool> &external = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &has_batch = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &has_child_items = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &has_installed_items = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &has_purchase_price = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &in_stock = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &installed = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &is_building = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &manufacturer = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<double> &max_stock = ::InvenTree::OptionalParam<double>(), const ::InvenTree::OptionalParam<double> &min_stock = ::InvenTree::OptionalParam<double>(), const ::InvenTree::OptionalParam<QString> &name = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &name_contains = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &name_regex = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &part_tree = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &purchase_order = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &salable = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &sales_order = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<bool> &sent_to_customer = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<QString> &serial = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &serial_gte = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &serial_lte = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &serialized = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &stale = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &status = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &supplier = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &supplier_part = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &tags__name = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &tags__slug = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<bool> &tracked = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<QDate> &updated_after = ::InvenTree::OptionalParam<QDate>(), const ::InvenTree::OptionalParam<QDate> &updated_before = ::InvenTree::OptionalParam<QDate>());
 
     /**
     * @param[in]  location Location [required]
     */
-    void stockLocationCreate(const Location &location);
+    virtual void stockLocationCreate(const Location &location);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void stockLocationDestroy(const qint32 &id);
+    virtual void stockLocationDestroy(const qint32 &id);
 
     /**
     * @param[in]  cascade bool [optional]
@@ -213,50 +213,50 @@ public:
     * @param[in]  structural bool [optional]
     * @param[in]  top_level bool [optional]
     */
-    void stockLocationList(const ::InvenTree::OptionalParam<bool> &cascade = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<double> &depth = ::InvenTree::OptionalParam<double>(), const ::InvenTree::OptionalParam<bool> &external = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &has_location_type = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &location_type = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &name = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &parent = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<bool> &structural = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &top_level = ::InvenTree::OptionalParam<bool>());
+    virtual void stockLocationList(const ::InvenTree::OptionalParam<bool> &cascade = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<double> &depth = ::InvenTree::OptionalParam<double>(), const ::InvenTree::OptionalParam<bool> &external = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &has_location_type = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &location_type = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &name = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &parent = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<bool> &structural = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &top_level = ::InvenTree::OptionalParam<bool>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void stockLocationMetadataPartialUpdate(const qint32 &id);
+    virtual void stockLocationMetadataPartialUpdate(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void stockLocationMetadataRetrieve(const qint32 &id);
+    virtual void stockLocationMetadataRetrieve(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void stockLocationMetadataUpdate(const qint32 &id);
+    virtual void stockLocationMetadataUpdate(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  patched_location PatchedLocation [optional]
     */
-    void stockLocationPartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedLocation> &patched_location = ::InvenTree::OptionalParam<PatchedLocation>());
+    virtual void stockLocationPartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedLocation> &patched_location = ::InvenTree::OptionalParam<PatchedLocation>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void stockLocationRetrieve(const qint32 &id);
+    virtual void stockLocationRetrieve(const qint32 &id);
 
     /**
     * @param[in]  limit qint32 [optional]
     * @param[in]  offset qint32 [optional]
     * @param[in]  ordering QString [optional]
     */
-    void stockLocationTreeList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>());
+    virtual void stockLocationTreeList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>());
 
     /**
     * @param[in]  stock_location_type StockLocationType [required]
     */
-    void stockLocationTypeCreate(const StockLocationType &stock_location_type);
+    virtual void stockLocationTypeCreate(const StockLocationType &stock_location_type);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void stockLocationTypeDestroy(const qint32 &id);
+    virtual void stockLocationTypeDestroy(const qint32 &id);
 
     /**
     * @param[in]  limit qint32 [optional]
@@ -264,109 +264,109 @@ public:
     * @param[in]  ordering QString [optional]
     * @param[in]  search QString [optional]
     */
-    void stockLocationTypeList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>());
+    virtual void stockLocationTypeList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void stockLocationTypeMetadataPartialUpdate(const qint32 &id);
+    virtual void stockLocationTypeMetadataPartialUpdate(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void stockLocationTypeMetadataRetrieve(const qint32 &id);
+    virtual void stockLocationTypeMetadataRetrieve(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void stockLocationTypeMetadataUpdate(const qint32 &id);
+    virtual void stockLocationTypeMetadataUpdate(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  patched_stock_location_type PatchedStockLocationType [optional]
     */
-    void stockLocationTypePartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedStockLocationType> &patched_stock_location_type = ::InvenTree::OptionalParam<PatchedStockLocationType>());
+    virtual void stockLocationTypePartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedStockLocationType> &patched_stock_location_type = ::InvenTree::OptionalParam<PatchedStockLocationType>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void stockLocationTypeRetrieve(const qint32 &id);
+    virtual void stockLocationTypeRetrieve(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  stock_location_type StockLocationType [required]
     */
-    void stockLocationTypeUpdate(const qint32 &id, const StockLocationType &stock_location_type);
+    virtual void stockLocationTypeUpdate(const qint32 &id, const StockLocationType &stock_location_type);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  location Location [required]
     */
-    void stockLocationUpdate(const qint32 &id, const Location &location);
+    virtual void stockLocationUpdate(const qint32 &id, const Location &location);
 
     /**
     * @param[in]  stock_merge StockMerge [required]
     */
-    void stockMergeCreate(const StockMerge &stock_merge);
+    virtual void stockMergeCreate(const StockMerge &stock_merge);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void stockMetadataPartialUpdate(const qint32 &id);
+    virtual void stockMetadataPartialUpdate(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void stockMetadataRetrieve(const qint32 &id);
+    virtual void stockMetadataRetrieve(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void stockMetadataUpdate(const qint32 &id);
+    virtual void stockMetadataUpdate(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  patched_stock_item PatchedStockItem [optional]
     */
-    void stockPartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedStockItem> &patched_stock_item = ::InvenTree::OptionalParam<PatchedStockItem>());
+    virtual void stockPartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedStockItem> &patched_stock_item = ::InvenTree::OptionalParam<PatchedStockItem>());
 
     /**
     * @param[in]  stock_remove StockRemove [required]
     */
-    void stockRemoveCreate(const StockRemove &stock_remove);
+    virtual void stockRemoveCreate(const StockRemove &stock_remove);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void stockRetrieve(const qint32 &id);
+    virtual void stockRetrieve(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  return_stock_item ReturnStockItem [required]
     */
-    void stockReturnCreate(const qint32 &id, const ReturnStockItem &return_stock_item);
+    virtual void stockReturnCreate(const qint32 &id, const ReturnStockItem &return_stock_item);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  serialize_stock_item SerializeStockItem [required]
     */
-    void stockSerializeCreate(const qint32 &id, const SerializeStockItem &serialize_stock_item);
+    virtual void stockSerializeCreate(const qint32 &id, const SerializeStockItem &serialize_stock_item);
 
 
-    void stockStatusRetrieve();
+    virtual void stockStatusRetrieve();
 
     /**
     * @param[in]  stock_item_test_result StockItemTestResult [required]
     */
-    void stockTestCreate(const StockItemTestResult &stock_item_test_result);
+    virtual void stockTestCreate(const StockItemTestResult &stock_item_test_result);
 
 
-    void stockTestDestroy();
+    virtual void stockTestDestroy();
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void stockTestDestroy2(const qint32 &id);
+    virtual void stockTestDestroy2(const qint32 &id);
 
     /**
     * @param[in]  build qint32 [optional]
@@ -383,39 +383,39 @@ public:
     * @param[in]  user qint32 [optional]
     * @param[in]  value QString [optional]
     */
-    void stockTestList(const ::InvenTree::OptionalParam<qint32> &build = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &enabled = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &part = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &required = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &result = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &r_template = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &test = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &user = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &value = ::InvenTree::OptionalParam<QString>());
+    virtual void stockTestList(const ::InvenTree::OptionalParam<qint32> &build = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &enabled = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &part = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &required = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &result = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &r_template = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &test = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &user = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &value = ::InvenTree::OptionalParam<QString>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void stockTestMetadataPartialUpdate(const qint32 &id);
+    virtual void stockTestMetadataPartialUpdate(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void stockTestMetadataRetrieve(const qint32 &id);
+    virtual void stockTestMetadataRetrieve(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void stockTestMetadataUpdate(const qint32 &id);
+    virtual void stockTestMetadataUpdate(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  patched_stock_item_test_result PatchedStockItemTestResult [optional]
     */
-    void stockTestPartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedStockItemTestResult> &patched_stock_item_test_result = ::InvenTree::OptionalParam<PatchedStockItemTestResult>());
+    virtual void stockTestPartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedStockItemTestResult> &patched_stock_item_test_result = ::InvenTree::OptionalParam<PatchedStockItemTestResult>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void stockTestRetrieve(const qint32 &id);
+    virtual void stockTestRetrieve(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  stock_item_test_result StockItemTestResult [required]
     */
-    void stockTestUpdate(const qint32 &id, const StockItemTestResult &stock_item_test_result);
+    virtual void stockTestUpdate(const qint32 &id, const StockItemTestResult &stock_item_test_result);
 
     /**
     * @param[in]  item qint32 [optional]
@@ -425,32 +425,32 @@ public:
     * @param[in]  search QString [optional]
     * @param[in]  user qint32 [optional]
     */
-    void stockTrackList(const ::InvenTree::OptionalParam<qint32> &item = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &user = ::InvenTree::OptionalParam<qint32>());
+    virtual void stockTrackList(const ::InvenTree::OptionalParam<qint32> &item = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &user = ::InvenTree::OptionalParam<qint32>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void stockTrackRetrieve(const qint32 &id);
+    virtual void stockTrackRetrieve(const qint32 &id);
 
 
-    void stockTrackStatusRetrieve();
+    virtual void stockTrackStatusRetrieve();
 
     /**
     * @param[in]  stock_transfer StockTransfer [required]
     */
-    void stockTransferCreate(const StockTransfer &stock_transfer);
+    virtual void stockTransferCreate(const StockTransfer &stock_transfer);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  uninstall_stock_item UninstallStockItem [required]
     */
-    void stockUninstallCreate(const qint32 &id, const UninstallStockItem &uninstall_stock_item);
+    virtual void stockUninstallCreate(const qint32 &id, const UninstallStockItem &uninstall_stock_item);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  stock_item StockItem [required]
     */
-    void stockUpdate(const qint32 &id, const StockItem &stock_item);
+    virtual void stockUpdate(const qint32 &id, const StockItem &stock_item);
 
 
 private:
@@ -588,6 +588,7 @@ Q_SIGNALS:
     void stockTransferCreateSignal(StockTransfer summary);
     void stockUninstallCreateSignal(UninstallStockItem summary);
     void stockUpdateSignal(StockItem summary);
+
 
     void stockAddCreateSignalFull(HttpRequestWorker *worker, StockAdd summary);
     void stockAssignCreateSignalFull(HttpRequestWorker *worker, StockAssignment summary);

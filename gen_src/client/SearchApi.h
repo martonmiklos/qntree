@@ -59,7 +59,7 @@ public:
     /**
     * @param[in]  api_search_view APISearchView [required]
     */
-    void searchCreate(const APISearchView &api_search_view);
+    virtual void searchCreate(const APISearchView &api_search_view);
 
 
 private:
@@ -89,6 +89,7 @@ private:
 Q_SIGNALS:
 
     void searchCreateSignal(APISearchView summary);
+
 
     void searchCreateSignalFull(HttpRequestWorker *worker, APISearchView summary);
 

@@ -134,15 +134,9 @@ int SettingsApi::addServerConfiguration(const QString &operation, const QUrl &ur
     * @param variables A map between a variable name and its value. The value is used for substitution in the server's URL template.
     */
 void SettingsApi::setNewServerForAllOperations(const QUrl &url, const QString &description, const QMap<QString, ServerVariable> &variables) {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
     for (auto keyIt = _serverIndices.keyBegin(); keyIt != _serverIndices.keyEnd(); keyIt++) {
         setServerIndex(*keyIt, addServerConfiguration(*keyIt, url, description, variables));
     }
-#else
-    for (auto &e : _serverIndices.keys()) {
-        setServerIndex(e, addServerConfiguration(e, url, description, variables));
-    }
-#endif
 }
 
 /**
@@ -260,7 +254,7 @@ void SettingsApi::settingsGlobalList(const ::InvenTree::OptionalParam<qint32> &l
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(limit.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(limit.stringValue())));
     }
     if (offset.hasValue())
     {
@@ -275,7 +269,7 @@ void SettingsApi::settingsGlobalList(const ::InvenTree::OptionalParam<qint32> &l
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(offset.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(offset.stringValue())));
     }
     if (ordering.hasValue())
     {
@@ -290,7 +284,7 @@ void SettingsApi::settingsGlobalList(const ::InvenTree::OptionalParam<qint32> &l
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(ordering.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(ordering.stringValue())));
     }
     if (search.hasValue())
     {
@@ -305,7 +299,7 @@ void SettingsApi::settingsGlobalList(const ::InvenTree::OptionalParam<qint32> &l
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(search.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(search.stringValue())));
     }
     HttpRequestWorker *worker = new HttpRequestWorker(this, _manager);
     worker->setTimeOut(_timeOut);
@@ -313,19 +307,14 @@ void SettingsApi::settingsGlobalList(const ::InvenTree::OptionalParam<qint32> &l
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &SettingsApi::settingsGlobalListCallback);
     connect(this, &SettingsApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -416,19 +405,14 @@ void SettingsApi::settingsGlobalPartialUpdate(const QString &key, const ::InvenT
         QByteArray output = patched_global_settings.value().asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &SettingsApi::settingsGlobalPartialUpdateCallback);
     connect(this, &SettingsApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -514,19 +498,14 @@ void SettingsApi::settingsGlobalRetrieve(const QString &key) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &SettingsApi::settingsGlobalRetrieveCallback);
     connect(this, &SettingsApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -617,19 +596,14 @@ void SettingsApi::settingsGlobalUpdate(const QString &key, const GlobalSettings 
         QByteArray output = global_settings.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &SettingsApi::settingsGlobalUpdateCallback);
     connect(this, &SettingsApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -709,7 +683,7 @@ void SettingsApi::settingsNotificationList(const ::InvenTree::OptionalParam<qint
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(limit.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(limit.stringValue())));
     }
     if (offset.hasValue())
     {
@@ -724,7 +698,7 @@ void SettingsApi::settingsNotificationList(const ::InvenTree::OptionalParam<qint
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(offset.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(offset.stringValue())));
     }
     if (ordering.hasValue())
     {
@@ -739,7 +713,7 @@ void SettingsApi::settingsNotificationList(const ::InvenTree::OptionalParam<qint
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(ordering.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(ordering.stringValue())));
     }
     if (search.hasValue())
     {
@@ -754,7 +728,7 @@ void SettingsApi::settingsNotificationList(const ::InvenTree::OptionalParam<qint
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(search.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(search.stringValue())));
     }
     HttpRequestWorker *worker = new HttpRequestWorker(this, _manager);
     worker->setTimeOut(_timeOut);
@@ -762,19 +736,14 @@ void SettingsApi::settingsNotificationList(const ::InvenTree::OptionalParam<qint
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &SettingsApi::settingsNotificationListCallback);
     connect(this, &SettingsApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -865,19 +834,14 @@ void SettingsApi::settingsNotificationPartialUpdate(const qint32 &id, const ::In
         QByteArray output = patched_notification_user_setting.value().asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &SettingsApi::settingsNotificationPartialUpdateCallback);
     connect(this, &SettingsApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -963,19 +927,14 @@ void SettingsApi::settingsNotificationRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &SettingsApi::settingsNotificationRetrieveCallback);
     connect(this, &SettingsApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -1066,19 +1025,14 @@ void SettingsApi::settingsNotificationUpdate(const qint32 &id, const Notificatio
         QByteArray output = notification_user_setting.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &SettingsApi::settingsNotificationUpdateCallback);
     connect(this, &SettingsApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -1158,7 +1112,7 @@ void SettingsApi::settingsUserList(const ::InvenTree::OptionalParam<qint32> &lim
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(limit.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(limit.stringValue())));
     }
     if (offset.hasValue())
     {
@@ -1173,7 +1127,7 @@ void SettingsApi::settingsUserList(const ::InvenTree::OptionalParam<qint32> &lim
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(offset.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(offset.stringValue())));
     }
     if (ordering.hasValue())
     {
@@ -1188,7 +1142,7 @@ void SettingsApi::settingsUserList(const ::InvenTree::OptionalParam<qint32> &lim
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(ordering.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(ordering.stringValue())));
     }
     if (search.hasValue())
     {
@@ -1203,7 +1157,7 @@ void SettingsApi::settingsUserList(const ::InvenTree::OptionalParam<qint32> &lim
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(search.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(search.stringValue())));
     }
     HttpRequestWorker *worker = new HttpRequestWorker(this, _manager);
     worker->setTimeOut(_timeOut);
@@ -1211,19 +1165,14 @@ void SettingsApi::settingsUserList(const ::InvenTree::OptionalParam<qint32> &lim
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &SettingsApi::settingsUserListCallback);
     connect(this, &SettingsApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -1314,19 +1263,14 @@ void SettingsApi::settingsUserPartialUpdate(const QString &key, const ::InvenTre
         QByteArray output = patched_user_settings.value().asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &SettingsApi::settingsUserPartialUpdateCallback);
     connect(this, &SettingsApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -1412,19 +1356,14 @@ void SettingsApi::settingsUserRetrieve(const QString &key) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &SettingsApi::settingsUserRetrieveCallback);
     connect(this, &SettingsApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -1515,19 +1454,14 @@ void SettingsApi::settingsUserUpdate(const QString &key, const UserSettings &use
         QByteArray output = user_settings.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &SettingsApi::settingsUserUpdateCallback);
     connect(this, &SettingsApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }

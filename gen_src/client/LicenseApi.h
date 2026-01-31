@@ -57,7 +57,7 @@ public:
     QString getParamStyleDelimiter(const QString &style, const QString &name, bool isExplode);
 
 
-    void licenseRetrieve();
+    virtual void licenseRetrieve();
 
 
 private:
@@ -87,6 +87,7 @@ private:
 Q_SIGNALS:
 
     void licenseRetrieveSignal(LicenseView summary);
+
 
     void licenseRetrieveSignalFull(HttpRequestWorker *worker, LicenseView summary);
 

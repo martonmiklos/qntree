@@ -72,23 +72,23 @@ public:
     * @param[in]  plugin QString [required]
     * @param[in]  patched_plugin_activate PatchedPluginActivate [optional]
     */
-    void pluginsActivatePartialUpdate(const QString &plugin, const ::InvenTree::OptionalParam<PatchedPluginActivate> &patched_plugin_activate = ::InvenTree::OptionalParam<PatchedPluginActivate>());
+    virtual void pluginsActivatePartialUpdate(const QString &plugin, const ::InvenTree::OptionalParam<PatchedPluginActivate> &patched_plugin_activate = ::InvenTree::OptionalParam<PatchedPluginActivate>());
 
     /**
     * @param[in]  plugin QString [required]
     * @param[in]  plugin_activate PluginActivate [optional]
     */
-    void pluginsActivateUpdate(const QString &plugin, const ::InvenTree::OptionalParam<PluginActivate> &plugin_activate = ::InvenTree::OptionalParam<PluginActivate>());
+    virtual void pluginsActivateUpdate(const QString &plugin, const ::InvenTree::OptionalParam<PluginActivate> &plugin_activate = ::InvenTree::OptionalParam<PluginActivate>());
 
     /**
     * @param[in]  plugin QString [required]
     */
-    void pluginsDestroy(const QString &plugin);
+    virtual void pluginsDestroy(const QString &plugin);
 
     /**
     * @param[in]  plugin_config_install PluginConfigInstall [required]
     */
-    void pluginsInstallCreate(const PluginConfigInstall &plugin_config_install);
+    virtual void pluginsInstallCreate(const PluginConfigInstall &plugin_config_install);
 
     /**
     * @param[in]  active bool [optional]
@@ -101,38 +101,38 @@ public:
     * @param[in]  sample bool [optional]
     * @param[in]  search QString [optional]
     */
-    void pluginsList(const ::InvenTree::OptionalParam<bool> &active = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &builtin = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &installed = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &mixin = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<bool> &sample = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>());
+    virtual void pluginsList(const ::InvenTree::OptionalParam<bool> &active = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &builtin = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &installed = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &mixin = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<bool> &sample = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>());
 
     /**
     * @param[in]  plugin QString [required]
     */
-    void pluginsMetadataPartialUpdate(const QString &plugin);
+    virtual void pluginsMetadataPartialUpdate(const QString &plugin);
 
     /**
     * @param[in]  plugin QString [required]
     */
-    void pluginsMetadataRetrieve(const QString &plugin);
+    virtual void pluginsMetadataRetrieve(const QString &plugin);
 
     /**
     * @param[in]  plugin QString [required]
     */
-    void pluginsMetadataUpdate(const QString &plugin);
+    virtual void pluginsMetadataUpdate(const QString &plugin);
 
     /**
     * @param[in]  plugin QString [required]
     * @param[in]  patched_plugin_config PatchedPluginConfig [optional]
     */
-    void pluginsPartialUpdate(const QString &plugin, const ::InvenTree::OptionalParam<PatchedPluginConfig> &patched_plugin_config = ::InvenTree::OptionalParam<PatchedPluginConfig>());
+    virtual void pluginsPartialUpdate(const QString &plugin, const ::InvenTree::OptionalParam<PatchedPluginConfig> &patched_plugin_config = ::InvenTree::OptionalParam<PatchedPluginConfig>());
 
     /**
     * @param[in]  plugin_reload PluginReload [optional]
     */
-    void pluginsReloadCreate(const ::InvenTree::OptionalParam<PluginReload> &plugin_reload = ::InvenTree::OptionalParam<PluginReload>());
+    virtual void pluginsReloadCreate(const ::InvenTree::OptionalParam<PluginReload> &plugin_reload = ::InvenTree::OptionalParam<PluginReload>());
 
     /**
     * @param[in]  plugin QString [required]
     */
-    void pluginsRetrieve(const QString &plugin);
+    virtual void pluginsRetrieve(const QString &plugin);
 
     /**
     * @param[in]  limit qint32 [optional]
@@ -140,53 +140,53 @@ public:
     * @param[in]  plugin__active bool [optional]
     * @param[in]  plugin__key QString [optional]
     */
-    void pluginsSettingsList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &plugin__active = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<QString> &plugin__key = ::InvenTree::OptionalParam<QString>());
+    virtual void pluginsSettingsList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &plugin__active = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<QString> &plugin__key = ::InvenTree::OptionalParam<QString>());
 
     /**
     * @param[in]  plugin QString [required]
     */
-    void pluginsSettingsList2(const QString &plugin);
+    virtual void pluginsSettingsList2(const QString &plugin);
 
     /**
     * @param[in]  key QString [required]
     * @param[in]  plugin QString [required]
     * @param[in]  patched_plugin_setting PatchedPluginSetting [optional]
     */
-    void pluginsSettingsPartialUpdate(const QString &key, const QString &plugin, const ::InvenTree::OptionalParam<PatchedPluginSetting> &patched_plugin_setting = ::InvenTree::OptionalParam<PatchedPluginSetting>());
+    virtual void pluginsSettingsPartialUpdate(const QString &key, const QString &plugin, const ::InvenTree::OptionalParam<PatchedPluginSetting> &patched_plugin_setting = ::InvenTree::OptionalParam<PatchedPluginSetting>());
 
     /**
     * @param[in]  key QString [required]
     * @param[in]  plugin QString [required]
     */
-    void pluginsSettingsRetrieve(const QString &key, const QString &plugin);
+    virtual void pluginsSettingsRetrieve(const QString &key, const QString &plugin);
 
     /**
     * @param[in]  key QString [required]
     * @param[in]  plugin QString [required]
     * @param[in]  plugin_setting PluginSetting [required]
     */
-    void pluginsSettingsUpdate(const QString &key, const QString &plugin, const PluginSetting &plugin_setting);
+    virtual void pluginsSettingsUpdate(const QString &key, const QString &plugin, const PluginSetting &plugin_setting);
 
 
-    void pluginsStatusRetrieve();
+    virtual void pluginsStatusRetrieve();
 
     /**
     * @param[in]  plugin QString [required]
     * @param[in]  patched_plugin_uninstall PatchedPluginUninstall [optional]
     */
-    void pluginsUninstallPartialUpdate(const QString &plugin, const ::InvenTree::OptionalParam<PatchedPluginUninstall> &patched_plugin_uninstall = ::InvenTree::OptionalParam<PatchedPluginUninstall>());
+    virtual void pluginsUninstallPartialUpdate(const QString &plugin, const ::InvenTree::OptionalParam<PatchedPluginUninstall> &patched_plugin_uninstall = ::InvenTree::OptionalParam<PatchedPluginUninstall>());
 
     /**
     * @param[in]  plugin QString [required]
     * @param[in]  plugin_uninstall PluginUninstall [optional]
     */
-    void pluginsUninstallUpdate(const QString &plugin, const ::InvenTree::OptionalParam<PluginUninstall> &plugin_uninstall = ::InvenTree::OptionalParam<PluginUninstall>());
+    virtual void pluginsUninstallUpdate(const QString &plugin, const ::InvenTree::OptionalParam<PluginUninstall> &plugin_uninstall = ::InvenTree::OptionalParam<PluginUninstall>());
 
     /**
     * @param[in]  plugin QString [required]
     * @param[in]  plugin_config PluginConfig [optional]
     */
-    void pluginsUpdate(const QString &plugin, const ::InvenTree::OptionalParam<PluginConfig> &plugin_config = ::InvenTree::OptionalParam<PluginConfig>());
+    virtual void pluginsUpdate(const QString &plugin, const ::InvenTree::OptionalParam<PluginConfig> &plugin_config = ::InvenTree::OptionalParam<PluginConfig>());
 
 
 private:
@@ -254,6 +254,7 @@ Q_SIGNALS:
     void pluginsUninstallPartialUpdateSignal(PluginUninstall summary);
     void pluginsUninstallUpdateSignal(PluginUninstall summary);
     void pluginsUpdateSignal(PluginConfig summary);
+
 
     void pluginsActivatePartialUpdateSignalFull(HttpRequestWorker *worker, PluginActivate summary);
     void pluginsActivateUpdateSignalFull(HttpRequestWorker *worker, PluginActivate summary);

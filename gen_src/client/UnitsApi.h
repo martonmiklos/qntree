@@ -61,12 +61,12 @@ public:
     /**
     * @param[in]  custom_unit CustomUnit [required]
     */
-    void unitsCreate(const CustomUnit &custom_unit);
+    virtual void unitsCreate(const CustomUnit &custom_unit);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void unitsDestroy(const qint32 &id);
+    virtual void unitsDestroy(const qint32 &id);
 
     /**
     * @param[in]  limit qint32 [optional]
@@ -74,24 +74,24 @@ public:
     * @param[in]  ordering QString [optional]
     * @param[in]  search QString [optional]
     */
-    void unitsList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>());
+    virtual void unitsList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>());
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  patched_custom_unit PatchedCustomUnit [optional]
     */
-    void unitsPartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedCustomUnit> &patched_custom_unit = ::InvenTree::OptionalParam<PatchedCustomUnit>());
+    virtual void unitsPartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedCustomUnit> &patched_custom_unit = ::InvenTree::OptionalParam<PatchedCustomUnit>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void unitsRetrieve(const qint32 &id);
+    virtual void unitsRetrieve(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  custom_unit CustomUnit [required]
     */
-    void unitsUpdate(const qint32 &id, const CustomUnit &custom_unit);
+    virtual void unitsUpdate(const qint32 &id, const CustomUnit &custom_unit);
 
 
 private:
@@ -131,6 +131,7 @@ Q_SIGNALS:
     void unitsPartialUpdateSignal(CustomUnit summary);
     void unitsRetrieveSignal(CustomUnit summary);
     void unitsUpdateSignal(CustomUnit summary);
+
 
     void unitsCreateSignalFull(HttpRequestWorker *worker, CustomUnit summary);
     void unitsDestroySignalFull(HttpRequestWorker *worker);

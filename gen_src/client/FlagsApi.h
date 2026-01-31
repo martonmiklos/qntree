@@ -59,12 +59,12 @@ public:
     * @param[in]  limit qint32 [optional]
     * @param[in]  offset qint32 [optional]
     */
-    void flagsList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>());
+    virtual void flagsList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>());
 
     /**
     * @param[in]  key QString [required]
     */
-    void flagsRetrieve(const QString &key);
+    virtual void flagsRetrieve(const QString &key);
 
 
 private:
@@ -96,6 +96,7 @@ Q_SIGNALS:
 
     void flagsListSignal();
     void flagsRetrieveSignal();
+
 
     void flagsListSignalFull(HttpRequestWorker *worker);
     void flagsRetrieveSignalFull(HttpRequestWorker *worker);

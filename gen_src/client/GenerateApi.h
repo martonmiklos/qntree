@@ -60,12 +60,12 @@ public:
     /**
     * @param[in]  generate_batch_code GenerateBatchCode [optional]
     */
-    void generateBatchCodeCreate(const ::InvenTree::OptionalParam<GenerateBatchCode> &generate_batch_code = ::InvenTree::OptionalParam<GenerateBatchCode>());
+    virtual void generateBatchCodeCreate(const ::InvenTree::OptionalParam<GenerateBatchCode> &generate_batch_code = ::InvenTree::OptionalParam<GenerateBatchCode>());
 
     /**
     * @param[in]  generate_serial_number GenerateSerialNumber [optional]
     */
-    void generateSerialNumberCreate(const ::InvenTree::OptionalParam<GenerateSerialNumber> &generate_serial_number = ::InvenTree::OptionalParam<GenerateSerialNumber>());
+    virtual void generateSerialNumberCreate(const ::InvenTree::OptionalParam<GenerateSerialNumber> &generate_serial_number = ::InvenTree::OptionalParam<GenerateSerialNumber>());
 
 
 private:
@@ -97,6 +97,7 @@ Q_SIGNALS:
 
     void generateBatchCodeCreateSignal(GenerateBatchCode summary);
     void generateSerialNumberCreateSignal(GenerateSerialNumber summary);
+
 
     void generateBatchCodeCreateSignalFull(HttpRequestWorker *worker, GenerateBatchCode summary);
     void generateSerialNumberCreateSignalFull(HttpRequestWorker *worker, GenerateSerialNumber summary);

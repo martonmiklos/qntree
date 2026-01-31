@@ -57,10 +57,10 @@ public:
     QString getParamStyleDelimiter(const QString &style, const QString &name, bool isExplode);
 
 
-    void currencyExchangeRetrieve();
+    virtual void currencyExchangeRetrieve();
 
 
-    void currencyRefreshCreate();
+    virtual void currencyRefreshCreate();
 
 
 private:
@@ -92,6 +92,7 @@ Q_SIGNALS:
 
     void currencyExchangeRetrieveSignal(CurrencyExchange summary);
     void currencyRefreshCreateSignal();
+
 
     void currencyExchangeRetrieveSignalFull(HttpRequestWorker *worker, CurrencyExchange summary);
     void currencyRefreshCreateSignalFull(HttpRequestWorker *worker);

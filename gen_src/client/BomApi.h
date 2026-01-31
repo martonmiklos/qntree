@@ -69,30 +69,30 @@ public:
     /**
     * @param[in]  bom_item BomItem [required]
     */
-    void bomCreate(const BomItem &bom_item);
+    virtual void bomCreate(const BomItem &bom_item);
 
 
-    void bomDestroy();
+    virtual void bomDestroy();
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void bomDestroy2(const qint32 &id);
+    virtual void bomDestroy2(const qint32 &id);
 
     /**
     * @param[in]  bom_import_extract BomImportExtract [required]
     */
-    void bomImportExtractCreate(const BomImportExtract &bom_import_extract);
+    virtual void bomImportExtractCreate(const BomImportExtract &bom_import_extract);
 
     /**
     * @param[in]  bom_import_submit BomImportSubmit [required]
     */
-    void bomImportSubmitCreate(const BomImportSubmit &bom_import_submit);
+    virtual void bomImportSubmitCreate(const BomImportSubmit &bom_import_submit);
 
     /**
     * @param[in]  bom_import_upload BomImportUpload [required]
     */
-    void bomImportUploadCreate(const BomImportUpload &bom_import_upload);
+    virtual void bomImportUploadCreate(const BomImportUpload &bom_import_upload);
 
     /**
     * @param[in]  allow_variants bool [optional]
@@ -114,43 +114,43 @@ public:
     * @param[in]  uses qint32 [optional]
     * @param[in]  validated bool [optional]
     */
-    void bomList(const ::InvenTree::OptionalParam<bool> &allow_variants = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &available_stock = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &consumable = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &has_pricing = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &inherited = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &on_order = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &optional = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &part = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &part_active = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &part_trackable = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<bool> &sub_part_assembly = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &sub_part_trackable = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &uses = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &validated = ::InvenTree::OptionalParam<bool>());
+    virtual void bomList(const ::InvenTree::OptionalParam<bool> &allow_variants = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &available_stock = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &consumable = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &has_pricing = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &inherited = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &on_order = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &optional = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &part = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &part_active = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &part_trackable = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<bool> &sub_part_assembly = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &sub_part_trackable = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &uses = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &validated = ::InvenTree::OptionalParam<bool>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void bomMetadataPartialUpdate(const qint32 &id);
+    virtual void bomMetadataPartialUpdate(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void bomMetadataRetrieve(const qint32 &id);
+    virtual void bomMetadataRetrieve(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void bomMetadataUpdate(const qint32 &id);
+    virtual void bomMetadataUpdate(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  patched_bom_item PatchedBomItem [optional]
     */
-    void bomPartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedBomItem> &patched_bom_item = ::InvenTree::OptionalParam<PatchedBomItem>());
+    virtual void bomPartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedBomItem> &patched_bom_item = ::InvenTree::OptionalParam<PatchedBomItem>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void bomRetrieve(const qint32 &id);
+    virtual void bomRetrieve(const qint32 &id);
 
     /**
     * @param[in]  bom_item_substitute BomItemSubstitute [required]
     */
-    void bomSubstituteCreate(const BomItemSubstitute &bom_item_substitute);
+    virtual void bomSubstituteCreate(const BomItemSubstitute &bom_item_substitute);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void bomSubstituteDestroy(const qint32 &id);
+    virtual void bomSubstituteDestroy(const qint32 &id);
 
     /**
     * @param[in]  bom_item qint32 [optional]
@@ -160,57 +160,57 @@ public:
     * @param[in]  part qint32 [optional]
     * @param[in]  search QString [optional]
     */
-    void bomSubstituteList(const ::InvenTree::OptionalParam<qint32> &bom_item = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &part = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>());
+    virtual void bomSubstituteList(const ::InvenTree::OptionalParam<qint32> &bom_item = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &part = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void bomSubstituteMetadataPartialUpdate(const qint32 &id);
+    virtual void bomSubstituteMetadataPartialUpdate(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void bomSubstituteMetadataRetrieve(const qint32 &id);
+    virtual void bomSubstituteMetadataRetrieve(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void bomSubstituteMetadataUpdate(const qint32 &id);
+    virtual void bomSubstituteMetadataUpdate(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  patched_bom_item_substitute PatchedBomItemSubstitute [optional]
     */
-    void bomSubstitutePartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedBomItemSubstitute> &patched_bom_item_substitute = ::InvenTree::OptionalParam<PatchedBomItemSubstitute>());
+    virtual void bomSubstitutePartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedBomItemSubstitute> &patched_bom_item_substitute = ::InvenTree::OptionalParam<PatchedBomItemSubstitute>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void bomSubstituteRetrieve(const qint32 &id);
+    virtual void bomSubstituteRetrieve(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  bom_item_substitute BomItemSubstitute [required]
     */
-    void bomSubstituteUpdate(const qint32 &id, const BomItemSubstitute &bom_item_substitute);
+    virtual void bomSubstituteUpdate(const qint32 &id, const BomItemSubstitute &bom_item_substitute);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  bom_item BomItem [required]
     */
-    void bomUpdate(const qint32 &id, const BomItem &bom_item);
+    virtual void bomUpdate(const qint32 &id, const BomItem &bom_item);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  patched_bom_item_validation PatchedBomItemValidation [optional]
     */
-    void bomValidatePartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedBomItemValidation> &patched_bom_item_validation = ::InvenTree::OptionalParam<PatchedBomItemValidation>());
+    virtual void bomValidatePartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedBomItemValidation> &patched_bom_item_validation = ::InvenTree::OptionalParam<PatchedBomItemValidation>());
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  bom_item_validation BomItemValidation [optional]
     */
-    void bomValidateUpdate(const qint32 &id, const ::InvenTree::OptionalParam<BomItemValidation> &bom_item_validation = ::InvenTree::OptionalParam<BomItemValidation>());
+    virtual void bomValidateUpdate(const qint32 &id, const ::InvenTree::OptionalParam<BomItemValidation> &bom_item_validation = ::InvenTree::OptionalParam<BomItemValidation>());
 
 
 private:
@@ -286,6 +286,7 @@ Q_SIGNALS:
     void bomUpdateSignal(BomItem summary);
     void bomValidatePartialUpdateSignal(BomItemValidation summary);
     void bomValidateUpdateSignal(BomItemValidation summary);
+
 
     void bomCreateSignalFull(HttpRequestWorker *worker, BomItem summary);
     void bomDestroySignalFull(HttpRequestWorker *worker);

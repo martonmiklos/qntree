@@ -59,12 +59,12 @@ public:
     QString getParamStyleDelimiter(const QString &style, const QString &name, bool isExplode);
 
 
-    void errorReportDestroy();
+    virtual void errorReportDestroy();
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void errorReportDestroy2(const qint32 &id);
+    virtual void errorReportDestroy2(const qint32 &id);
 
     /**
     * @param[in]  limit qint32 [optional]
@@ -72,24 +72,24 @@ public:
     * @param[in]  ordering QString [optional]
     * @param[in]  search QString [optional]
     */
-    void errorReportList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>());
+    virtual void errorReportList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>());
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  patched_error_message PatchedErrorMessage [optional]
     */
-    void errorReportPartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedErrorMessage> &patched_error_message = ::InvenTree::OptionalParam<PatchedErrorMessage>());
+    virtual void errorReportPartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedErrorMessage> &patched_error_message = ::InvenTree::OptionalParam<PatchedErrorMessage>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void errorReportRetrieve(const qint32 &id);
+    virtual void errorReportRetrieve(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  error_message ErrorMessage [optional]
     */
-    void errorReportUpdate(const qint32 &id, const ::InvenTree::OptionalParam<ErrorMessage> &error_message = ::InvenTree::OptionalParam<ErrorMessage>());
+    virtual void errorReportUpdate(const qint32 &id, const ::InvenTree::OptionalParam<ErrorMessage> &error_message = ::InvenTree::OptionalParam<ErrorMessage>());
 
 
 private:
@@ -129,6 +129,7 @@ Q_SIGNALS:
     void errorReportPartialUpdateSignal(ErrorMessage summary);
     void errorReportRetrieveSignal(ErrorMessage summary);
     void errorReportUpdateSignal(ErrorMessage summary);
+
 
     void errorReportDestroySignalFull(HttpRequestWorker *worker);
     void errorReportDestroy2SignalFull(HttpRequestWorker *worker);

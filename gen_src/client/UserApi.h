@@ -68,22 +68,22 @@ public:
     /**
     * @param[in]  user_create UserCreate [required]
     */
-    void userCreate(const UserCreate &user_create);
+    virtual void userCreate(const UserCreate &user_create);
 
     /**
     * @param[in]  id QString [required]
     */
-    void userDestroy(const QString &id);
+    virtual void userDestroy(const QString &id);
 
     /**
     * @param[in]  group Group [required]
     */
-    void userGroupCreate(const Group &group);
+    virtual void userGroupCreate(const Group &group);
 
     /**
     * @param[in]  id QString [required]
     */
-    void userGroupDestroy(const QString &id);
+    virtual void userGroupDestroy(const QString &id);
 
     /**
     * @param[in]  limit qint32 [optional]
@@ -91,24 +91,24 @@ public:
     * @param[in]  ordering QString [optional]
     * @param[in]  search QString [optional]
     */
-    void userGroupList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>());
+    virtual void userGroupList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>());
 
     /**
     * @param[in]  id QString [required]
     * @param[in]  patched_group PatchedGroup [optional]
     */
-    void userGroupPartialUpdate(const QString &id, const ::InvenTree::OptionalParam<PatchedGroup> &patched_group = ::InvenTree::OptionalParam<PatchedGroup>());
+    virtual void userGroupPartialUpdate(const QString &id, const ::InvenTree::OptionalParam<PatchedGroup> &patched_group = ::InvenTree::OptionalParam<PatchedGroup>());
 
     /**
     * @param[in]  id QString [required]
     */
-    void userGroupRetrieve(const QString &id);
+    virtual void userGroupRetrieve(const QString &id);
 
     /**
     * @param[in]  id QString [required]
     * @param[in]  group Group [required]
     */
-    void userGroupUpdate(const QString &id, const Group &group);
+    virtual void userGroupUpdate(const QString &id, const Group &group);
 
     /**
     * @param[in]  is_active bool [optional]
@@ -119,57 +119,57 @@ public:
     * @param[in]  ordering QString [optional]
     * @param[in]  search QString [optional]
     */
-    void userList(const ::InvenTree::OptionalParam<bool> &is_active = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &is_staff = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &is_superuser = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>());
+    virtual void userList(const ::InvenTree::OptionalParam<bool> &is_active = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &is_staff = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &is_superuser = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>());
 
 
-    void userMeDestroy();
+    virtual void userMeDestroy();
 
     /**
     * @param[in]  patched_exended_user PatchedExendedUser [optional]
     */
-    void userMePartialUpdate(const ::InvenTree::OptionalParam<PatchedExendedUser> &patched_exended_user = ::InvenTree::OptionalParam<PatchedExendedUser>());
+    virtual void userMePartialUpdate(const ::InvenTree::OptionalParam<PatchedExendedUser> &patched_exended_user = ::InvenTree::OptionalParam<PatchedExendedUser>());
 
 
-    void userMeRetrieve();
+    virtual void userMeRetrieve();
 
     /**
     * @param[in]  exended_user ExendedUser [required]
     */
-    void userMeUpdate(const ExendedUser &exended_user);
+    virtual void userMeUpdate(const ExendedUser &exended_user);
 
     /**
     * @param[in]  limit qint32 [optional]
     * @param[in]  offset qint32 [optional]
     */
-    void userOwnerList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>());
+    virtual void userOwnerList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void userOwnerRetrieve(const qint32 &id);
+    virtual void userOwnerRetrieve(const qint32 &id);
 
     /**
     * @param[in]  id QString [required]
     * @param[in]  patched_exended_user PatchedExendedUser [optional]
     */
-    void userPartialUpdate(const QString &id, const ::InvenTree::OptionalParam<PatchedExendedUser> &patched_exended_user = ::InvenTree::OptionalParam<PatchedExendedUser>());
+    virtual void userPartialUpdate(const QString &id, const ::InvenTree::OptionalParam<PatchedExendedUser> &patched_exended_user = ::InvenTree::OptionalParam<PatchedExendedUser>());
 
     /**
     * @param[in]  id QString [required]
     */
-    void userRetrieve(const QString &id);
+    virtual void userRetrieve(const QString &id);
 
 
-    void userRolesRetrieve();
+    virtual void userRolesRetrieve();
 
 
-    void userTokenRetrieve();
+    virtual void userTokenRetrieve();
 
     /**
     * @param[in]  id QString [required]
     * @param[in]  exended_user ExendedUser [required]
     */
-    void userUpdate(const QString &id, const ExendedUser &exended_user);
+    virtual void userUpdate(const QString &id, const ExendedUser &exended_user);
 
 
 private:
@@ -237,6 +237,7 @@ Q_SIGNALS:
     void userRolesRetrieveSignal(Role summary);
     void userTokenRetrieveSignal();
     void userUpdateSignal(ExendedUser summary);
+
 
     void userCreateSignalFull(HttpRequestWorker *worker, UserCreate summary);
     void userDestroySignalFull(HttpRequestWorker *worker);

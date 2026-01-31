@@ -59,12 +59,12 @@ public:
     QString getParamStyleDelimiter(const QString &style, const QString &name, bool isExplode);
 
 
-    void notificationsDestroy();
+    virtual void notificationsDestroy();
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void notificationsDestroy2(const qint32 &id);
+    virtual void notificationsDestroy2(const qint32 &id);
 
     /**
     * @param[in]  category QString [optional]
@@ -74,27 +74,27 @@ public:
     * @param[in]  read bool [optional]
     * @param[in]  search QString [optional]
     */
-    void notificationsList(const ::InvenTree::OptionalParam<QString> &category = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<bool> &read = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>());
+    virtual void notificationsList(const ::InvenTree::OptionalParam<QString> &category = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<bool> &read = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>());
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  patched_notification_message PatchedNotificationMessage [optional]
     */
-    void notificationsPartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedNotificationMessage> &patched_notification_message = ::InvenTree::OptionalParam<PatchedNotificationMessage>());
+    virtual void notificationsPartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedNotificationMessage> &patched_notification_message = ::InvenTree::OptionalParam<PatchedNotificationMessage>());
 
 
-    void notificationsReadallRetrieve();
+    virtual void notificationsReadallRetrieve();
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void notificationsRetrieve(const qint32 &id);
+    virtual void notificationsRetrieve(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  notification_message NotificationMessage [required]
     */
-    void notificationsUpdate(const qint32 &id, const NotificationMessage &notification_message);
+    virtual void notificationsUpdate(const qint32 &id, const NotificationMessage &notification_message);
 
 
 private:
@@ -136,6 +136,7 @@ Q_SIGNALS:
     void notificationsReadallRetrieveSignal(NotificationMessage summary);
     void notificationsRetrieveSignal(NotificationMessage summary);
     void notificationsUpdateSignal(NotificationMessage summary);
+
 
     void notificationsDestroySignalFull(HttpRequestWorker *worker);
     void notificationsDestroy2SignalFull(HttpRequestWorker *worker);

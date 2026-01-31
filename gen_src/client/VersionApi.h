@@ -57,7 +57,7 @@ public:
     QString getParamStyleDelimiter(const QString &style, const QString &name, bool isExplode);
 
 
-    void versionRetrieve();
+    virtual void versionRetrieve();
 
 
 private:
@@ -87,6 +87,7 @@ private:
 Q_SIGNALS:
 
     void versionRetrieveSignal(VersionView summary);
+
 
     void versionRetrieveSignalFull(HttpRequestWorker *worker, VersionView summary);
 

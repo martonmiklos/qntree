@@ -533,8 +533,6 @@ client/PatchedPurchaseOrderExtraLine.cpp
 client/PatchedPurchaseOrderExtraLine.h
 client/PatchedPurchaseOrderLineItem.cpp
 client/PatchedPurchaseOrderLineItem.h
-client/PatchedPurchaseOrder_order_currency.cpp
-client/PatchedPurchaseOrder_order_currency.h
 client/PatchedReportAsset.cpp
 client/PatchedReportAsset.h
 client/PatchedReportSnippet.cpp

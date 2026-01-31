@@ -150,15 +150,9 @@ int ImporterApi::addServerConfiguration(const QString &operation, const QUrl &ur
     * @param variables A map between a variable name and its value. The value is used for substitution in the server's URL template.
     */
 void ImporterApi::setNewServerForAllOperations(const QUrl &url, const QString &description, const QMap<QString, ServerVariable> &variables) {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
     for (auto keyIt = _serverIndices.keyBegin(); keyIt != _serverIndices.keyEnd(); keyIt++) {
         setServerIndex(*keyIt, addServerConfiguration(*keyIt, url, description, variables));
     }
-#else
-    for (auto &e : _serverIndices.keys()) {
-        setServerIndex(e, addServerConfiguration(e, url, description, variables));
-    }
-#endif
 }
 
 /**
@@ -276,7 +270,7 @@ void ImporterApi::importerColumnMappingList(const ::InvenTree::OptionalParam<qin
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(limit.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(limit.stringValue())));
     }
     if (offset.hasValue())
     {
@@ -291,7 +285,7 @@ void ImporterApi::importerColumnMappingList(const ::InvenTree::OptionalParam<qin
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(offset.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(offset.stringValue())));
     }
     if (ordering.hasValue())
     {
@@ -306,7 +300,7 @@ void ImporterApi::importerColumnMappingList(const ::InvenTree::OptionalParam<qin
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(ordering.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(ordering.stringValue())));
     }
     if (search.hasValue())
     {
@@ -321,7 +315,7 @@ void ImporterApi::importerColumnMappingList(const ::InvenTree::OptionalParam<qin
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(search.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(search.stringValue())));
     }
     if (session.hasValue())
     {
@@ -336,7 +330,7 @@ void ImporterApi::importerColumnMappingList(const ::InvenTree::OptionalParam<qin
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("session")).append(querySuffix).append(QUrl::toPercentEncoding(session.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("session")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(session.stringValue())));
     }
     HttpRequestWorker *worker = new HttpRequestWorker(this, _manager);
     worker->setTimeOut(_timeOut);
@@ -344,19 +338,14 @@ void ImporterApi::importerColumnMappingList(const ::InvenTree::OptionalParam<qin
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &ImporterApi::importerColumnMappingListCallback);
     connect(this, &ImporterApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -447,19 +436,14 @@ void ImporterApi::importerColumnMappingPartialUpdate(const qint32 &id, const ::I
         QByteArray output = patched_data_import_column_map.value().asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &ImporterApi::importerColumnMappingPartialUpdateCallback);
     connect(this, &ImporterApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -545,19 +529,14 @@ void ImporterApi::importerColumnMappingRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &ImporterApi::importerColumnMappingRetrieveCallback);
     connect(this, &ImporterApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -648,19 +627,14 @@ void ImporterApi::importerColumnMappingUpdate(const qint32 &id, const ::InvenTre
         QByteArray output = data_import_column_map.value().asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &ImporterApi::importerColumnMappingUpdateCallback);
     connect(this, &ImporterApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -732,19 +706,14 @@ void ImporterApi::importerModelsRetrieve() {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &ImporterApi::importerModelsRetrieveCallback);
     connect(this, &ImporterApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -815,19 +784,14 @@ void ImporterApi::importerRowDestroy() {
     HttpRequestInput input(fullPath, "DELETE");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &ImporterApi::importerRowDestroyCallback);
     connect(this, &ImporterApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -912,19 +876,14 @@ void ImporterApi::importerRowDestroy2(const qint32 &id) {
     HttpRequestInput input(fullPath, "DELETE");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &ImporterApi::importerRowDestroy2Callback);
     connect(this, &ImporterApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -1003,7 +962,7 @@ void ImporterApi::importerRowList(const ::InvenTree::OptionalParam<bool> &comple
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("complete")).append(querySuffix).append(QUrl::toPercentEncoding(complete.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("complete")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(complete.stringValue())));
     }
     if (limit.hasValue())
     {
@@ -1018,7 +977,7 @@ void ImporterApi::importerRowList(const ::InvenTree::OptionalParam<bool> &comple
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(limit.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(limit.stringValue())));
     }
     if (offset.hasValue())
     {
@@ -1033,7 +992,7 @@ void ImporterApi::importerRowList(const ::InvenTree::OptionalParam<bool> &comple
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(offset.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(offset.stringValue())));
     }
     if (ordering.hasValue())
     {
@@ -1048,7 +1007,7 @@ void ImporterApi::importerRowList(const ::InvenTree::OptionalParam<bool> &comple
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(ordering.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(ordering.stringValue())));
     }
     if (search.hasValue())
     {
@@ -1063,7 +1022,7 @@ void ImporterApi::importerRowList(const ::InvenTree::OptionalParam<bool> &comple
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(search.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(search.stringValue())));
     }
     if (session.hasValue())
     {
@@ -1078,7 +1037,7 @@ void ImporterApi::importerRowList(const ::InvenTree::OptionalParam<bool> &comple
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("session")).append(querySuffix).append(QUrl::toPercentEncoding(session.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("session")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(session.stringValue())));
     }
     if (r_valid.hasValue())
     {
@@ -1093,7 +1052,7 @@ void ImporterApi::importerRowList(const ::InvenTree::OptionalParam<bool> &comple
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("valid")).append(querySuffix).append(QUrl::toPercentEncoding(r_valid.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("valid")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(r_valid.stringValue())));
     }
     HttpRequestWorker *worker = new HttpRequestWorker(this, _manager);
     worker->setTimeOut(_timeOut);
@@ -1101,19 +1060,14 @@ void ImporterApi::importerRowList(const ::InvenTree::OptionalParam<bool> &comple
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &ImporterApi::importerRowListCallback);
     connect(this, &ImporterApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -1204,19 +1158,14 @@ void ImporterApi::importerRowPartialUpdate(const qint32 &id, const ::InvenTree::
         QByteArray output = patched_data_import_row.value().asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &ImporterApi::importerRowPartialUpdateCallback);
     connect(this, &ImporterApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -1302,19 +1251,14 @@ void ImporterApi::importerRowRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &ImporterApi::importerRowRetrieveCallback);
     connect(this, &ImporterApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -1405,19 +1349,14 @@ void ImporterApi::importerRowUpdate(const qint32 &id, const ::InvenTree::Optiona
         QByteArray output = data_import_row.value().asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &ImporterApi::importerRowUpdateCallback);
     connect(this, &ImporterApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -1503,19 +1442,14 @@ void ImporterApi::importerSessionAcceptFieldsCreate(const qint32 &id) {
     HttpRequestInput input(fullPath, "POST");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &ImporterApi::importerSessionAcceptFieldsCreateCallback);
     connect(this, &ImporterApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -1606,19 +1540,14 @@ void ImporterApi::importerSessionAcceptRowsCreate(const qint32 &id, const DataIm
         QByteArray output = data_import_accept_row.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &ImporterApi::importerSessionAcceptRowsCreateCallback);
     connect(this, &ImporterApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -1695,19 +1624,14 @@ void ImporterApi::importerSessionCreate(const DataImportSession &data_import_ses
         QByteArray output = data_import_session.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &ImporterApi::importerSessionCreateCallback);
     connect(this, &ImporterApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -1779,19 +1703,14 @@ void ImporterApi::importerSessionDestroy() {
     HttpRequestInput input(fullPath, "DELETE");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &ImporterApi::importerSessionDestroyCallback);
     connect(this, &ImporterApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -1876,19 +1795,14 @@ void ImporterApi::importerSessionDestroy2(const qint32 &id) {
     HttpRequestInput input(fullPath, "DELETE");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &ImporterApi::importerSessionDestroy2Callback);
     connect(this, &ImporterApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -1967,7 +1881,7 @@ void ImporterApi::importerSessionList(const ::InvenTree::OptionalParam<qint32> &
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(limit.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(limit.stringValue())));
     }
     if (model_type.hasValue())
     {
@@ -1982,7 +1896,7 @@ void ImporterApi::importerSessionList(const ::InvenTree::OptionalParam<qint32> &
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("model_type")).append(querySuffix).append(QUrl::toPercentEncoding(model_type.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("model_type")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(model_type.stringValue())));
     }
     if (offset.hasValue())
     {
@@ -1997,7 +1911,7 @@ void ImporterApi::importerSessionList(const ::InvenTree::OptionalParam<qint32> &
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(offset.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(offset.stringValue())));
     }
     if (ordering.hasValue())
     {
@@ -2012,7 +1926,7 @@ void ImporterApi::importerSessionList(const ::InvenTree::OptionalParam<qint32> &
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(ordering.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(ordering.stringValue())));
     }
     if (search.hasValue())
     {
@@ -2027,7 +1941,7 @@ void ImporterApi::importerSessionList(const ::InvenTree::OptionalParam<qint32> &
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(search.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(search.stringValue())));
     }
     if (status.hasValue())
     {
@@ -2042,7 +1956,7 @@ void ImporterApi::importerSessionList(const ::InvenTree::OptionalParam<qint32> &
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("status")).append(querySuffix).append(QUrl::toPercentEncoding(status.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("status")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(status.stringValue())));
     }
     if (user.hasValue())
     {
@@ -2057,7 +1971,7 @@ void ImporterApi::importerSessionList(const ::InvenTree::OptionalParam<qint32> &
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("user")).append(querySuffix).append(QUrl::toPercentEncoding(user.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("user")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(user.stringValue())));
     }
     HttpRequestWorker *worker = new HttpRequestWorker(this, _manager);
     worker->setTimeOut(_timeOut);
@@ -2065,19 +1979,14 @@ void ImporterApi::importerSessionList(const ::InvenTree::OptionalParam<qint32> &
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &ImporterApi::importerSessionListCallback);
     connect(this, &ImporterApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -2168,19 +2077,14 @@ void ImporterApi::importerSessionPartialUpdate(const qint32 &id, const ::InvenTr
         QByteArray output = patched_data_import_session.value().asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &ImporterApi::importerSessionPartialUpdateCallback);
     connect(this, &ImporterApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -2266,19 +2170,14 @@ void ImporterApi::importerSessionRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &ImporterApi::importerSessionRetrieveCallback);
     connect(this, &ImporterApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -2369,19 +2268,14 @@ void ImporterApi::importerSessionUpdate(const qint32 &id, const DataImportSessio
         QByteArray output = data_import_session.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &ImporterApi::importerSessionUpdateCallback);
     connect(this, &ImporterApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }

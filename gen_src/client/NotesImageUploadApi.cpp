@@ -114,15 +114,9 @@ int NotesImageUploadApi::addServerConfiguration(const QString &operation, const 
     * @param variables A map between a variable name and its value. The value is used for substitution in the server's URL template.
     */
 void NotesImageUploadApi::setNewServerForAllOperations(const QUrl &url, const QString &description, const QMap<QString, ServerVariable> &variables) {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
     for (auto keyIt = _serverIndices.keyBegin(); keyIt != _serverIndices.keyEnd(); keyIt++) {
         setServerIndex(*keyIt, addServerConfiguration(*keyIt, url, description, variables));
     }
-#else
-    for (auto &e : _serverIndices.keys()) {
-        setServerIndex(e, addServerConfiguration(e, url, description, variables));
-    }
-#endif
 }
 
 /**
@@ -237,19 +231,14 @@ void NotesImageUploadApi::notesImageUploadCreate(const NotesImage &notes_image) 
         QByteArray output = notes_image.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &NotesImageUploadApi::notesImageUploadCreateCallback);
     connect(this, &NotesImageUploadApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -329,7 +318,7 @@ void NotesImageUploadApi::notesImageUploadList(const ::InvenTree::OptionalParam<
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(limit.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(limit.stringValue())));
     }
     if (offset.hasValue())
     {
@@ -344,7 +333,7 @@ void NotesImageUploadApi::notesImageUploadList(const ::InvenTree::OptionalParam<
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(offset.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(offset.stringValue())));
     }
     if (ordering.hasValue())
     {
@@ -359,7 +348,7 @@ void NotesImageUploadApi::notesImageUploadList(const ::InvenTree::OptionalParam<
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(ordering.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(ordering.stringValue())));
     }
     if (search.hasValue())
     {
@@ -374,7 +363,7 @@ void NotesImageUploadApi::notesImageUploadList(const ::InvenTree::OptionalParam<
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(search.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(search.stringValue())));
     }
     HttpRequestWorker *worker = new HttpRequestWorker(this, _manager);
     worker->setTimeOut(_timeOut);
@@ -382,19 +371,14 @@ void NotesImageUploadApi::notesImageUploadList(const ::InvenTree::OptionalParam<
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &NotesImageUploadApi::notesImageUploadListCallback);
     connect(this, &NotesImageUploadApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }

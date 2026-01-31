@@ -338,15 +338,9 @@ int OrderApi::addServerConfiguration(const QString &operation, const QUrl &url, 
     * @param variables A map between a variable name and its value. The value is used for substitution in the server's URL template.
     */
 void OrderApi::setNewServerForAllOperations(const QUrl &url, const QString &description, const QMap<QString, ServerVariable> &variables) {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
     for (auto keyIt = _serverIndices.keyBegin(); keyIt != _serverIndices.keyEnd(); keyIt++) {
         setServerIndex(*keyIt, addServerConfiguration(*keyIt, url, description, variables));
     }
-#else
-    for (auto &e : _serverIndices.keys()) {
-        setServerIndex(e, addServerConfiguration(e, url, description, variables));
-    }
-#endif
 }
 
 /**
@@ -470,19 +464,14 @@ void OrderApi::orderPoCancelCreate(const qint32 &id) {
     HttpRequestInput input(fullPath, "POST");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderPoCancelCreateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -572,19 +561,14 @@ void OrderApi::orderPoCompleteCreate(const qint32 &id, const ::InvenTree::Option
         QByteArray output = purchase_order_complete.value().asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderPoCompleteCreateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -661,19 +645,14 @@ void OrderApi::orderPoCreate(const PurchaseOrder &purchase_order) {
         QByteArray output = purchase_order.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderPoCreateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -759,19 +738,14 @@ void OrderApi::orderPoDestroy(const qint32 &id) {
     HttpRequestInput input(fullPath, "DELETE");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderPoDestroyCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -847,19 +821,14 @@ void OrderApi::orderPoExtraLineCreate(const PurchaseOrderExtraLine &purchase_ord
         QByteArray output = purchase_order_extra_line.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderPoExtraLineCreateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -945,19 +914,14 @@ void OrderApi::orderPoExtraLineDestroy(const qint32 &id) {
     HttpRequestInput input(fullPath, "DELETE");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderPoExtraLineDestroyCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -1036,7 +1000,7 @@ void OrderApi::orderPoExtraLineList(const ::InvenTree::OptionalParam<qint32> &li
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(limit.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(limit.stringValue())));
     }
     if (offset.hasValue())
     {
@@ -1051,7 +1015,7 @@ void OrderApi::orderPoExtraLineList(const ::InvenTree::OptionalParam<qint32> &li
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(offset.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(offset.stringValue())));
     }
     if (order.hasValue())
     {
@@ -1066,7 +1030,7 @@ void OrderApi::orderPoExtraLineList(const ::InvenTree::OptionalParam<qint32> &li
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("order")).append(querySuffix).append(QUrl::toPercentEncoding(order.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("order")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(order.stringValue())));
     }
     if (ordering.hasValue())
     {
@@ -1081,7 +1045,7 @@ void OrderApi::orderPoExtraLineList(const ::InvenTree::OptionalParam<qint32> &li
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(ordering.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(ordering.stringValue())));
     }
     if (search.hasValue())
     {
@@ -1096,7 +1060,7 @@ void OrderApi::orderPoExtraLineList(const ::InvenTree::OptionalParam<qint32> &li
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(search.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(search.stringValue())));
     }
     HttpRequestWorker *worker = new HttpRequestWorker(this, _manager);
     worker->setTimeOut(_timeOut);
@@ -1104,19 +1068,14 @@ void OrderApi::orderPoExtraLineList(const ::InvenTree::OptionalParam<qint32> &li
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderPoExtraLineListCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -1202,19 +1161,14 @@ void OrderApi::orderPoExtraLineMetadataPartialUpdate(const qint32 &id) {
     HttpRequestInput input(fullPath, "PATCH");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderPoExtraLineMetadataPartialUpdateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -1299,19 +1253,14 @@ void OrderApi::orderPoExtraLineMetadataRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderPoExtraLineMetadataRetrieveCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -1396,19 +1345,14 @@ void OrderApi::orderPoExtraLineMetadataUpdate(const qint32 &id) {
     HttpRequestInput input(fullPath, "PUT");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderPoExtraLineMetadataUpdateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -1498,19 +1442,14 @@ void OrderApi::orderPoExtraLinePartialUpdate(const qint32 &id, const ::InvenTree
         QByteArray output = patched_purchase_order_extra_line.value().asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderPoExtraLinePartialUpdateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -1596,19 +1535,14 @@ void OrderApi::orderPoExtraLineRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderPoExtraLineRetrieveCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -1699,19 +1633,14 @@ void OrderApi::orderPoExtraLineUpdate(const qint32 &id, const PurchaseOrderExtra
         QByteArray output = purchase_order_extra_line.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderPoExtraLineUpdateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -1797,19 +1726,14 @@ void OrderApi::orderPoIssueCreate(const qint32 &id) {
     HttpRequestInput input(fullPath, "POST");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderPoIssueCreateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -1885,19 +1809,14 @@ void OrderApi::orderPoLineCreate(const PurchaseOrderLineItem &purchase_order_lin
         QByteArray output = purchase_order_line_item.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderPoLineCreateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -1969,19 +1888,14 @@ void OrderApi::orderPoLineDestroy() {
     HttpRequestInput input(fullPath, "DELETE");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderPoLineDestroyCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -2066,19 +1980,14 @@ void OrderApi::orderPoLineDestroy2(const qint32 &id) {
     HttpRequestInput input(fullPath, "DELETE");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderPoLineDestroy2Callback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -2157,7 +2066,7 @@ void OrderApi::orderPoLineList(const ::InvenTree::OptionalParam<qint32> &base_pa
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("base_part")).append(querySuffix).append(QUrl::toPercentEncoding(base_part.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("base_part")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(base_part.stringValue())));
     }
     if (has_pricing.hasValue())
     {
@@ -2172,7 +2081,7 @@ void OrderApi::orderPoLineList(const ::InvenTree::OptionalParam<qint32> &base_pa
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("has_pricing")).append(querySuffix).append(QUrl::toPercentEncoding(has_pricing.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("has_pricing")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(has_pricing.stringValue())));
     }
     if (limit.hasValue())
     {
@@ -2187,7 +2096,7 @@ void OrderApi::orderPoLineList(const ::InvenTree::OptionalParam<qint32> &base_pa
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(limit.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(limit.stringValue())));
     }
     if (offset.hasValue())
     {
@@ -2202,7 +2111,7 @@ void OrderApi::orderPoLineList(const ::InvenTree::OptionalParam<qint32> &base_pa
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(offset.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(offset.stringValue())));
     }
     if (order.hasValue())
     {
@@ -2217,7 +2126,7 @@ void OrderApi::orderPoLineList(const ::InvenTree::OptionalParam<qint32> &base_pa
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("order")).append(querySuffix).append(QUrl::toPercentEncoding(order.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("order")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(order.stringValue())));
     }
     if (order_complete.hasValue())
     {
@@ -2232,7 +2141,7 @@ void OrderApi::orderPoLineList(const ::InvenTree::OptionalParam<qint32> &base_pa
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("order_complete")).append(querySuffix).append(QUrl::toPercentEncoding(order_complete.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("order_complete")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(order_complete.stringValue())));
     }
     if (order_status.hasValue())
     {
@@ -2247,7 +2156,7 @@ void OrderApi::orderPoLineList(const ::InvenTree::OptionalParam<qint32> &base_pa
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("order_status")).append(querySuffix).append(QUrl::toPercentEncoding(order_status.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("order_status")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(order_status.stringValue())));
     }
     if (ordering.hasValue())
     {
@@ -2262,7 +2171,7 @@ void OrderApi::orderPoLineList(const ::InvenTree::OptionalParam<qint32> &base_pa
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(ordering.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(ordering.stringValue())));
     }
     if (part.hasValue())
     {
@@ -2277,7 +2186,7 @@ void OrderApi::orderPoLineList(const ::InvenTree::OptionalParam<qint32> &base_pa
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("part")).append(querySuffix).append(QUrl::toPercentEncoding(part.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("part")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(part.stringValue())));
     }
     if (pending.hasValue())
     {
@@ -2292,7 +2201,7 @@ void OrderApi::orderPoLineList(const ::InvenTree::OptionalParam<qint32> &base_pa
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("pending")).append(querySuffix).append(QUrl::toPercentEncoding(pending.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("pending")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(pending.stringValue())));
     }
     if (received.hasValue())
     {
@@ -2307,7 +2216,7 @@ void OrderApi::orderPoLineList(const ::InvenTree::OptionalParam<qint32> &base_pa
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("received")).append(querySuffix).append(QUrl::toPercentEncoding(received.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("received")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(received.stringValue())));
     }
     if (search.hasValue())
     {
@@ -2322,7 +2231,7 @@ void OrderApi::orderPoLineList(const ::InvenTree::OptionalParam<qint32> &base_pa
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(search.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(search.stringValue())));
     }
     HttpRequestWorker *worker = new HttpRequestWorker(this, _manager);
     worker->setTimeOut(_timeOut);
@@ -2330,19 +2239,14 @@ void OrderApi::orderPoLineList(const ::InvenTree::OptionalParam<qint32> &base_pa
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderPoLineListCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -2428,19 +2332,14 @@ void OrderApi::orderPoLineMetadataPartialUpdate(const qint32 &id) {
     HttpRequestInput input(fullPath, "PATCH");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderPoLineMetadataPartialUpdateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -2525,19 +2424,14 @@ void OrderApi::orderPoLineMetadataRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderPoLineMetadataRetrieveCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -2622,19 +2516,14 @@ void OrderApi::orderPoLineMetadataUpdate(const qint32 &id) {
     HttpRequestInput input(fullPath, "PUT");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderPoLineMetadataUpdateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -2724,19 +2613,14 @@ void OrderApi::orderPoLinePartialUpdate(const qint32 &id, const ::InvenTree::Opt
         QByteArray output = patched_purchase_order_line_item.value().asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderPoLinePartialUpdateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -2822,19 +2706,14 @@ void OrderApi::orderPoLineRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderPoLineRetrieveCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -2925,19 +2804,14 @@ void OrderApi::orderPoLineUpdate(const qint32 &id, const PurchaseOrderLineItem &
         QByteArray output = purchase_order_line_item.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderPoLineUpdateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -3017,7 +2891,7 @@ void OrderApi::orderPoList(const ::InvenTree::OptionalParam<qint32> &assigned_to
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("assigned_to")).append(querySuffix).append(QUrl::toPercentEncoding(assigned_to.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("assigned_to")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(assigned_to.stringValue())));
     }
     if (assigned_to_me.hasValue())
     {
@@ -3032,7 +2906,7 @@ void OrderApi::orderPoList(const ::InvenTree::OptionalParam<qint32> &assigned_to
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("assigned_to_me")).append(querySuffix).append(QUrl::toPercentEncoding(assigned_to_me.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("assigned_to_me")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(assigned_to_me.stringValue())));
     }
     if (has_project_code.hasValue())
     {
@@ -3047,7 +2921,7 @@ void OrderApi::orderPoList(const ::InvenTree::OptionalParam<qint32> &assigned_to
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("has_project_code")).append(querySuffix).append(QUrl::toPercentEncoding(has_project_code.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("has_project_code")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(has_project_code.stringValue())));
     }
     if (limit.hasValue())
     {
@@ -3062,7 +2936,7 @@ void OrderApi::orderPoList(const ::InvenTree::OptionalParam<qint32> &assigned_to
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(limit.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(limit.stringValue())));
     }
     if (offset.hasValue())
     {
@@ -3077,7 +2951,7 @@ void OrderApi::orderPoList(const ::InvenTree::OptionalParam<qint32> &assigned_to
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(offset.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(offset.stringValue())));
     }
     if (ordering.hasValue())
     {
@@ -3092,7 +2966,7 @@ void OrderApi::orderPoList(const ::InvenTree::OptionalParam<qint32> &assigned_to
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(ordering.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(ordering.stringValue())));
     }
     if (outstanding.hasValue())
     {
@@ -3107,7 +2981,7 @@ void OrderApi::orderPoList(const ::InvenTree::OptionalParam<qint32> &assigned_to
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("outstanding")).append(querySuffix).append(QUrl::toPercentEncoding(outstanding.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("outstanding")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(outstanding.stringValue())));
     }
     if (overdue.hasValue())
     {
@@ -3122,7 +2996,7 @@ void OrderApi::orderPoList(const ::InvenTree::OptionalParam<qint32> &assigned_to
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("overdue")).append(querySuffix).append(QUrl::toPercentEncoding(overdue.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("overdue")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(overdue.stringValue())));
     }
     if (project_code.hasValue())
     {
@@ -3137,7 +3011,7 @@ void OrderApi::orderPoList(const ::InvenTree::OptionalParam<qint32> &assigned_to
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("project_code")).append(querySuffix).append(QUrl::toPercentEncoding(project_code.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("project_code")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(project_code.stringValue())));
     }
     if (reference.hasValue())
     {
@@ -3152,7 +3026,7 @@ void OrderApi::orderPoList(const ::InvenTree::OptionalParam<qint32> &assigned_to
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("reference")).append(querySuffix).append(QUrl::toPercentEncoding(reference.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("reference")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(reference.stringValue())));
     }
     if (search.hasValue())
     {
@@ -3167,7 +3041,7 @@ void OrderApi::orderPoList(const ::InvenTree::OptionalParam<qint32> &assigned_to
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(search.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(search.stringValue())));
     }
     if (status.hasValue())
     {
@@ -3182,7 +3056,7 @@ void OrderApi::orderPoList(const ::InvenTree::OptionalParam<qint32> &assigned_to
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("status")).append(querySuffix).append(QUrl::toPercentEncoding(status.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("status")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(status.stringValue())));
     }
     if (supplier.hasValue())
     {
@@ -3197,7 +3071,7 @@ void OrderApi::orderPoList(const ::InvenTree::OptionalParam<qint32> &assigned_to
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("supplier")).append(querySuffix).append(QUrl::toPercentEncoding(supplier.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("supplier")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(supplier.stringValue())));
     }
     HttpRequestWorker *worker = new HttpRequestWorker(this, _manager);
     worker->setTimeOut(_timeOut);
@@ -3205,19 +3079,14 @@ void OrderApi::orderPoList(const ::InvenTree::OptionalParam<qint32> &assigned_to
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderPoListCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -3303,19 +3172,14 @@ void OrderApi::orderPoMetadataPartialUpdate(const qint32 &id) {
     HttpRequestInput input(fullPath, "PATCH");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderPoMetadataPartialUpdateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -3400,19 +3264,14 @@ void OrderApi::orderPoMetadataRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderPoMetadataRetrieveCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -3497,19 +3356,14 @@ void OrderApi::orderPoMetadataUpdate(const qint32 &id) {
     HttpRequestInput input(fullPath, "PUT");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderPoMetadataUpdateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -3599,19 +3453,14 @@ void OrderApi::orderPoPartialUpdate(const qint32 &id, const ::InvenTree::Optiona
         QByteArray output = patched_purchase_order.value().asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderPoPartialUpdateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -3702,19 +3551,14 @@ void OrderApi::orderPoReceiveCreate(const qint32 &id, const PurchaseOrderReceive
         QByteArray output = purchase_order_receive.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderPoReceiveCreateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -3800,19 +3644,14 @@ void OrderApi::orderPoRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderPoRetrieveCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -3884,19 +3723,14 @@ void OrderApi::orderPoStatusRetrieve() {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderPoStatusRetrieveCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -3986,19 +3820,14 @@ void OrderApi::orderPoUpdate(const qint32 &id, const PurchaseOrder &purchase_ord
         QByteArray output = purchase_order.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderPoUpdateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -4084,19 +3913,14 @@ void OrderApi::orderRoCancelCreate(const qint32 &id) {
     HttpRequestInput input(fullPath, "POST");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderRoCancelCreateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -4181,19 +4005,14 @@ void OrderApi::orderRoCompleteCreate(const qint32 &id) {
     HttpRequestInput input(fullPath, "POST");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderRoCompleteCreateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -4269,19 +4088,14 @@ void OrderApi::orderRoCreate(const ReturnOrder &return_order) {
         QByteArray output = return_order.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderRoCreateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -4367,19 +4181,14 @@ void OrderApi::orderRoDestroy(const qint32 &id) {
     HttpRequestInput input(fullPath, "DELETE");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderRoDestroyCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -4455,19 +4264,14 @@ void OrderApi::orderRoExtraLineCreate(const ReturnOrderExtraLine &return_order_e
         QByteArray output = return_order_extra_line.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderRoExtraLineCreateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -4553,19 +4357,14 @@ void OrderApi::orderRoExtraLineDestroy(const qint32 &id) {
     HttpRequestInput input(fullPath, "DELETE");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderRoExtraLineDestroyCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -4644,7 +4443,7 @@ void OrderApi::orderRoExtraLineList(const ::InvenTree::OptionalParam<qint32> &li
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(limit.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(limit.stringValue())));
     }
     if (offset.hasValue())
     {
@@ -4659,7 +4458,7 @@ void OrderApi::orderRoExtraLineList(const ::InvenTree::OptionalParam<qint32> &li
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(offset.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(offset.stringValue())));
     }
     if (order.hasValue())
     {
@@ -4674,7 +4473,7 @@ void OrderApi::orderRoExtraLineList(const ::InvenTree::OptionalParam<qint32> &li
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("order")).append(querySuffix).append(QUrl::toPercentEncoding(order.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("order")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(order.stringValue())));
     }
     if (ordering.hasValue())
     {
@@ -4689,7 +4488,7 @@ void OrderApi::orderRoExtraLineList(const ::InvenTree::OptionalParam<qint32> &li
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(ordering.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(ordering.stringValue())));
     }
     if (search.hasValue())
     {
@@ -4704,7 +4503,7 @@ void OrderApi::orderRoExtraLineList(const ::InvenTree::OptionalParam<qint32> &li
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(search.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(search.stringValue())));
     }
     HttpRequestWorker *worker = new HttpRequestWorker(this, _manager);
     worker->setTimeOut(_timeOut);
@@ -4712,19 +4511,14 @@ void OrderApi::orderRoExtraLineList(const ::InvenTree::OptionalParam<qint32> &li
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderRoExtraLineListCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -4810,19 +4604,14 @@ void OrderApi::orderRoExtraLineMetadataPartialUpdate(const qint32 &id) {
     HttpRequestInput input(fullPath, "PATCH");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderRoExtraLineMetadataPartialUpdateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -4907,19 +4696,14 @@ void OrderApi::orderRoExtraLineMetadataRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderRoExtraLineMetadataRetrieveCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -5004,19 +4788,14 @@ void OrderApi::orderRoExtraLineMetadataUpdate(const qint32 &id) {
     HttpRequestInput input(fullPath, "PUT");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderRoExtraLineMetadataUpdateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -5106,19 +4885,14 @@ void OrderApi::orderRoExtraLinePartialUpdate(const qint32 &id, const ::InvenTree
         QByteArray output = patched_return_order_extra_line.value().asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderRoExtraLinePartialUpdateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -5204,19 +4978,14 @@ void OrderApi::orderRoExtraLineRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderRoExtraLineRetrieveCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -5307,19 +5076,14 @@ void OrderApi::orderRoExtraLineUpdate(const qint32 &id, const ReturnOrderExtraLi
         QByteArray output = return_order_extra_line.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderRoExtraLineUpdateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -5405,19 +5169,14 @@ void OrderApi::orderRoIssueCreate(const qint32 &id) {
     HttpRequestInput input(fullPath, "POST");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderRoIssueCreateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -5493,19 +5252,14 @@ void OrderApi::orderRoLineCreate(const ReturnOrderLineItem &return_order_line_it
         QByteArray output = return_order_line_item.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderRoLineCreateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -5591,19 +5345,14 @@ void OrderApi::orderRoLineDestroy(const qint32 &id) {
     HttpRequestInput input(fullPath, "DELETE");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderRoLineDestroyCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -5682,7 +5431,7 @@ void OrderApi::orderRoLineList(const ::InvenTree::OptionalParam<bool> &has_prici
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("has_pricing")).append(querySuffix).append(QUrl::toPercentEncoding(has_pricing.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("has_pricing")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(has_pricing.stringValue())));
     }
     if (item.hasValue())
     {
@@ -5697,7 +5446,7 @@ void OrderApi::orderRoLineList(const ::InvenTree::OptionalParam<bool> &has_prici
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("item")).append(querySuffix).append(QUrl::toPercentEncoding(item.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("item")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(item.stringValue())));
     }
     if (limit.hasValue())
     {
@@ -5712,7 +5461,7 @@ void OrderApi::orderRoLineList(const ::InvenTree::OptionalParam<bool> &has_prici
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(limit.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(limit.stringValue())));
     }
     if (offset.hasValue())
     {
@@ -5727,7 +5476,7 @@ void OrderApi::orderRoLineList(const ::InvenTree::OptionalParam<bool> &has_prici
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(offset.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(offset.stringValue())));
     }
     if (order.hasValue())
     {
@@ -5742,7 +5491,7 @@ void OrderApi::orderRoLineList(const ::InvenTree::OptionalParam<bool> &has_prici
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("order")).append(querySuffix).append(QUrl::toPercentEncoding(order.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("order")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(order.stringValue())));
     }
     if (order_status.hasValue())
     {
@@ -5757,7 +5506,7 @@ void OrderApi::orderRoLineList(const ::InvenTree::OptionalParam<bool> &has_prici
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("order_status")).append(querySuffix).append(QUrl::toPercentEncoding(order_status.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("order_status")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(order_status.stringValue())));
     }
     if (ordering.hasValue())
     {
@@ -5772,7 +5521,7 @@ void OrderApi::orderRoLineList(const ::InvenTree::OptionalParam<bool> &has_prici
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(ordering.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(ordering.stringValue())));
     }
     if (outcome.hasValue())
     {
@@ -5787,7 +5536,7 @@ void OrderApi::orderRoLineList(const ::InvenTree::OptionalParam<bool> &has_prici
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("outcome")).append(querySuffix).append(QUrl::toPercentEncoding(outcome.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("outcome")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(outcome.stringValue())));
     }
     if (received.hasValue())
     {
@@ -5802,7 +5551,7 @@ void OrderApi::orderRoLineList(const ::InvenTree::OptionalParam<bool> &has_prici
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("received")).append(querySuffix).append(QUrl::toPercentEncoding(received.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("received")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(received.stringValue())));
     }
     if (search.hasValue())
     {
@@ -5817,7 +5566,7 @@ void OrderApi::orderRoLineList(const ::InvenTree::OptionalParam<bool> &has_prici
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(search.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(search.stringValue())));
     }
     HttpRequestWorker *worker = new HttpRequestWorker(this, _manager);
     worker->setTimeOut(_timeOut);
@@ -5825,19 +5574,14 @@ void OrderApi::orderRoLineList(const ::InvenTree::OptionalParam<bool> &has_prici
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderRoLineListCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -5923,19 +5667,14 @@ void OrderApi::orderRoLineMetadataPartialUpdate(const qint32 &id) {
     HttpRequestInput input(fullPath, "PATCH");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderRoLineMetadataPartialUpdateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -6020,19 +5759,14 @@ void OrderApi::orderRoLineMetadataRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderRoLineMetadataRetrieveCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -6117,19 +5851,14 @@ void OrderApi::orderRoLineMetadataUpdate(const qint32 &id) {
     HttpRequestInput input(fullPath, "PUT");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderRoLineMetadataUpdateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -6219,19 +5948,14 @@ void OrderApi::orderRoLinePartialUpdate(const qint32 &id, const ::InvenTree::Opt
         QByteArray output = patched_return_order_line_item.value().asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderRoLinePartialUpdateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -6317,19 +6041,14 @@ void OrderApi::orderRoLineRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderRoLineRetrieveCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -6401,19 +6120,14 @@ void OrderApi::orderRoLineStatusRetrieve() {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderRoLineStatusRetrieveCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -6503,19 +6217,14 @@ void OrderApi::orderRoLineUpdate(const qint32 &id, const ReturnOrderLineItem &re
         QByteArray output = return_order_line_item.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderRoLineUpdateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -6595,7 +6304,7 @@ void OrderApi::orderRoList(const ::InvenTree::OptionalParam<qint32> &assigned_to
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("assigned_to")).append(querySuffix).append(QUrl::toPercentEncoding(assigned_to.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("assigned_to")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(assigned_to.stringValue())));
     }
     if (assigned_to_me.hasValue())
     {
@@ -6610,7 +6319,7 @@ void OrderApi::orderRoList(const ::InvenTree::OptionalParam<qint32> &assigned_to
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("assigned_to_me")).append(querySuffix).append(QUrl::toPercentEncoding(assigned_to_me.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("assigned_to_me")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(assigned_to_me.stringValue())));
     }
     if (customer.hasValue())
     {
@@ -6625,7 +6334,7 @@ void OrderApi::orderRoList(const ::InvenTree::OptionalParam<qint32> &assigned_to
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("customer")).append(querySuffix).append(QUrl::toPercentEncoding(customer.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("customer")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(customer.stringValue())));
     }
     if (has_project_code.hasValue())
     {
@@ -6640,7 +6349,7 @@ void OrderApi::orderRoList(const ::InvenTree::OptionalParam<qint32> &assigned_to
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("has_project_code")).append(querySuffix).append(QUrl::toPercentEncoding(has_project_code.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("has_project_code")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(has_project_code.stringValue())));
     }
     if (limit.hasValue())
     {
@@ -6655,7 +6364,7 @@ void OrderApi::orderRoList(const ::InvenTree::OptionalParam<qint32> &assigned_to
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(limit.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(limit.stringValue())));
     }
     if (offset.hasValue())
     {
@@ -6670,7 +6379,7 @@ void OrderApi::orderRoList(const ::InvenTree::OptionalParam<qint32> &assigned_to
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(offset.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(offset.stringValue())));
     }
     if (ordering.hasValue())
     {
@@ -6685,7 +6394,7 @@ void OrderApi::orderRoList(const ::InvenTree::OptionalParam<qint32> &assigned_to
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(ordering.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(ordering.stringValue())));
     }
     if (outstanding.hasValue())
     {
@@ -6700,7 +6409,7 @@ void OrderApi::orderRoList(const ::InvenTree::OptionalParam<qint32> &assigned_to
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("outstanding")).append(querySuffix).append(QUrl::toPercentEncoding(outstanding.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("outstanding")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(outstanding.stringValue())));
     }
     if (overdue.hasValue())
     {
@@ -6715,7 +6424,7 @@ void OrderApi::orderRoList(const ::InvenTree::OptionalParam<qint32> &assigned_to
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("overdue")).append(querySuffix).append(QUrl::toPercentEncoding(overdue.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("overdue")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(overdue.stringValue())));
     }
     if (project_code.hasValue())
     {
@@ -6730,7 +6439,7 @@ void OrderApi::orderRoList(const ::InvenTree::OptionalParam<qint32> &assigned_to
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("project_code")).append(querySuffix).append(QUrl::toPercentEncoding(project_code.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("project_code")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(project_code.stringValue())));
     }
     if (reference.hasValue())
     {
@@ -6745,7 +6454,7 @@ void OrderApi::orderRoList(const ::InvenTree::OptionalParam<qint32> &assigned_to
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("reference")).append(querySuffix).append(QUrl::toPercentEncoding(reference.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("reference")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(reference.stringValue())));
     }
     if (search.hasValue())
     {
@@ -6760,7 +6469,7 @@ void OrderApi::orderRoList(const ::InvenTree::OptionalParam<qint32> &assigned_to
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(search.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(search.stringValue())));
     }
     if (status.hasValue())
     {
@@ -6775,7 +6484,7 @@ void OrderApi::orderRoList(const ::InvenTree::OptionalParam<qint32> &assigned_to
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("status")).append(querySuffix).append(QUrl::toPercentEncoding(status.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("status")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(status.stringValue())));
     }
     HttpRequestWorker *worker = new HttpRequestWorker(this, _manager);
     worker->setTimeOut(_timeOut);
@@ -6783,19 +6492,14 @@ void OrderApi::orderRoList(const ::InvenTree::OptionalParam<qint32> &assigned_to
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderRoListCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -6881,19 +6585,14 @@ void OrderApi::orderRoMetadataPartialUpdate(const qint32 &id) {
     HttpRequestInput input(fullPath, "PATCH");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderRoMetadataPartialUpdateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -6978,19 +6677,14 @@ void OrderApi::orderRoMetadataRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderRoMetadataRetrieveCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -7075,19 +6769,14 @@ void OrderApi::orderRoMetadataUpdate(const qint32 &id) {
     HttpRequestInput input(fullPath, "PUT");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderRoMetadataUpdateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -7177,19 +6866,14 @@ void OrderApi::orderRoPartialUpdate(const qint32 &id, const ::InvenTree::Optiona
         QByteArray output = patched_return_order.value().asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderRoPartialUpdateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -7280,19 +6964,14 @@ void OrderApi::orderRoReceiveCreate(const qint32 &id, const ReturnOrderReceive &
         QByteArray output = return_order_receive.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderRoReceiveCreateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -7378,19 +7057,14 @@ void OrderApi::orderRoRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderRoRetrieveCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -7462,19 +7136,14 @@ void OrderApi::orderRoStatusRetrieve() {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderRoStatusRetrieveCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -7564,19 +7233,14 @@ void OrderApi::orderRoUpdate(const qint32 &id, const ReturnOrder &return_order) 
         QByteArray output = return_order.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderRoUpdateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -7667,19 +7331,14 @@ void OrderApi::orderSoAllocateCreate(const qint32 &id, const SalesOrderShipmentA
         QByteArray output = sales_order_shipment_allocation.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderSoAllocateCreateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -7770,19 +7429,14 @@ void OrderApi::orderSoAllocateSerialsCreate(const qint32 &id, const SalesOrderSe
         QByteArray output = sales_order_serial_allocation.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderSoAllocateSerialsCreateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -7868,19 +7522,14 @@ void OrderApi::orderSoAllocationDestroy(const qint32 &id) {
     HttpRequestInput input(fullPath, "DELETE");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderSoAllocationDestroyCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -7959,7 +7608,7 @@ void OrderApi::orderSoAllocationList(const ::InvenTree::OptionalParam<qint32> &l
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(limit.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(limit.stringValue())));
     }
     if (offset.hasValue())
     {
@@ -7974,7 +7623,7 @@ void OrderApi::orderSoAllocationList(const ::InvenTree::OptionalParam<qint32> &l
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(offset.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(offset.stringValue())));
     }
     HttpRequestWorker *worker = new HttpRequestWorker(this, _manager);
     worker->setTimeOut(_timeOut);
@@ -7982,19 +7631,14 @@ void OrderApi::orderSoAllocationList(const ::InvenTree::OptionalParam<qint32> &l
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderSoAllocationListCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -8085,19 +7729,14 @@ void OrderApi::orderSoAllocationPartialUpdate(const qint32 &id, const ::InvenTre
         QByteArray output = patched_sales_order_allocation.value().asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderSoAllocationPartialUpdateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -8183,19 +7822,14 @@ void OrderApi::orderSoAllocationRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderSoAllocationRetrieveCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -8286,19 +7920,14 @@ void OrderApi::orderSoAllocationUpdate(const qint32 &id, const SalesOrderAllocat
         QByteArray output = sales_order_allocation.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderSoAllocationUpdateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -8384,19 +8013,14 @@ void OrderApi::orderSoCancelCreate(const qint32 &id) {
     HttpRequestInput input(fullPath, "POST");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderSoCancelCreateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -8486,19 +8110,14 @@ void OrderApi::orderSoCompleteCreate(const qint32 &id, const ::InvenTree::Option
         QByteArray output = sales_order_complete.value().asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderSoCompleteCreateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -8575,19 +8194,14 @@ void OrderApi::orderSoCreate(const SalesOrder &sales_order) {
         QByteArray output = sales_order.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderSoCreateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -8673,19 +8287,14 @@ void OrderApi::orderSoDestroy(const qint32 &id) {
     HttpRequestInput input(fullPath, "DELETE");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderSoDestroyCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -8761,19 +8370,14 @@ void OrderApi::orderSoExtraLineCreate(const SalesOrderExtraLine &sales_order_ext
         QByteArray output = sales_order_extra_line.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderSoExtraLineCreateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -8859,19 +8463,14 @@ void OrderApi::orderSoExtraLineDestroy(const qint32 &id) {
     HttpRequestInput input(fullPath, "DELETE");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderSoExtraLineDestroyCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -8950,7 +8549,7 @@ void OrderApi::orderSoExtraLineList(const ::InvenTree::OptionalParam<qint32> &li
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(limit.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(limit.stringValue())));
     }
     if (offset.hasValue())
     {
@@ -8965,7 +8564,7 @@ void OrderApi::orderSoExtraLineList(const ::InvenTree::OptionalParam<qint32> &li
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(offset.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(offset.stringValue())));
     }
     if (order.hasValue())
     {
@@ -8980,7 +8579,7 @@ void OrderApi::orderSoExtraLineList(const ::InvenTree::OptionalParam<qint32> &li
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("order")).append(querySuffix).append(QUrl::toPercentEncoding(order.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("order")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(order.stringValue())));
     }
     if (ordering.hasValue())
     {
@@ -8995,7 +8594,7 @@ void OrderApi::orderSoExtraLineList(const ::InvenTree::OptionalParam<qint32> &li
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(ordering.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(ordering.stringValue())));
     }
     if (search.hasValue())
     {
@@ -9010,7 +8609,7 @@ void OrderApi::orderSoExtraLineList(const ::InvenTree::OptionalParam<qint32> &li
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(search.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(search.stringValue())));
     }
     HttpRequestWorker *worker = new HttpRequestWorker(this, _manager);
     worker->setTimeOut(_timeOut);
@@ -9018,19 +8617,14 @@ void OrderApi::orderSoExtraLineList(const ::InvenTree::OptionalParam<qint32> &li
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderSoExtraLineListCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -9116,19 +8710,14 @@ void OrderApi::orderSoExtraLineMetadataPartialUpdate(const qint32 &id) {
     HttpRequestInput input(fullPath, "PATCH");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderSoExtraLineMetadataPartialUpdateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -9213,19 +8802,14 @@ void OrderApi::orderSoExtraLineMetadataRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderSoExtraLineMetadataRetrieveCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -9310,19 +8894,14 @@ void OrderApi::orderSoExtraLineMetadataUpdate(const qint32 &id) {
     HttpRequestInput input(fullPath, "PUT");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderSoExtraLineMetadataUpdateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -9412,19 +8991,14 @@ void OrderApi::orderSoExtraLinePartialUpdate(const qint32 &id, const ::InvenTree
         QByteArray output = patched_sales_order_extra_line.value().asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderSoExtraLinePartialUpdateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -9510,19 +9084,14 @@ void OrderApi::orderSoExtraLineRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderSoExtraLineRetrieveCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -9613,19 +9182,14 @@ void OrderApi::orderSoExtraLineUpdate(const qint32 &id, const SalesOrderExtraLin
         QByteArray output = sales_order_extra_line.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderSoExtraLineUpdateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -9711,19 +9275,14 @@ void OrderApi::orderSoIssueCreate(const qint32 &id) {
     HttpRequestInput input(fullPath, "POST");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderSoIssueCreateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -9799,19 +9358,14 @@ void OrderApi::orderSoLineCreate(const SalesOrderLineItem &sales_order_line_item
         QByteArray output = sales_order_line_item.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderSoLineCreateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -9897,19 +9451,14 @@ void OrderApi::orderSoLineDestroy(const qint32 &id) {
     HttpRequestInput input(fullPath, "DELETE");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderSoLineDestroyCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -9988,7 +9537,7 @@ void OrderApi::orderSoLineList(const ::InvenTree::OptionalParam<bool> &completed
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("completed")).append(querySuffix).append(QUrl::toPercentEncoding(completed.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("completed")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(completed.stringValue())));
     }
     if (has_pricing.hasValue())
     {
@@ -10003,7 +9552,7 @@ void OrderApi::orderSoLineList(const ::InvenTree::OptionalParam<bool> &completed
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("has_pricing")).append(querySuffix).append(QUrl::toPercentEncoding(has_pricing.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("has_pricing")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(has_pricing.stringValue())));
     }
     if (limit.hasValue())
     {
@@ -10018,7 +9567,7 @@ void OrderApi::orderSoLineList(const ::InvenTree::OptionalParam<bool> &completed
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(limit.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(limit.stringValue())));
     }
     if (offset.hasValue())
     {
@@ -10033,7 +9582,7 @@ void OrderApi::orderSoLineList(const ::InvenTree::OptionalParam<bool> &completed
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(offset.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(offset.stringValue())));
     }
     if (order.hasValue())
     {
@@ -10048,7 +9597,7 @@ void OrderApi::orderSoLineList(const ::InvenTree::OptionalParam<bool> &completed
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("order")).append(querySuffix).append(QUrl::toPercentEncoding(order.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("order")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(order.stringValue())));
     }
     if (order_complete.hasValue())
     {
@@ -10063,7 +9612,7 @@ void OrderApi::orderSoLineList(const ::InvenTree::OptionalParam<bool> &completed
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("order_complete")).append(querySuffix).append(QUrl::toPercentEncoding(order_complete.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("order_complete")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(order_complete.stringValue())));
     }
     if (order_status.hasValue())
     {
@@ -10078,7 +9627,7 @@ void OrderApi::orderSoLineList(const ::InvenTree::OptionalParam<bool> &completed
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("order_status")).append(querySuffix).append(QUrl::toPercentEncoding(order_status.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("order_status")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(order_status.stringValue())));
     }
     if (ordering.hasValue())
     {
@@ -10093,7 +9642,7 @@ void OrderApi::orderSoLineList(const ::InvenTree::OptionalParam<bool> &completed
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(ordering.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(ordering.stringValue())));
     }
     if (part.hasValue())
     {
@@ -10108,7 +9657,7 @@ void OrderApi::orderSoLineList(const ::InvenTree::OptionalParam<bool> &completed
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("part")).append(querySuffix).append(QUrl::toPercentEncoding(part.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("part")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(part.stringValue())));
     }
     if (search.hasValue())
     {
@@ -10123,7 +9672,7 @@ void OrderApi::orderSoLineList(const ::InvenTree::OptionalParam<bool> &completed
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(search.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(search.stringValue())));
     }
     HttpRequestWorker *worker = new HttpRequestWorker(this, _manager);
     worker->setTimeOut(_timeOut);
@@ -10131,19 +9680,14 @@ void OrderApi::orderSoLineList(const ::InvenTree::OptionalParam<bool> &completed
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderSoLineListCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -10229,19 +9773,14 @@ void OrderApi::orderSoLineMetadataPartialUpdate(const qint32 &id) {
     HttpRequestInput input(fullPath, "PATCH");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderSoLineMetadataPartialUpdateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -10326,19 +9865,14 @@ void OrderApi::orderSoLineMetadataRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderSoLineMetadataRetrieveCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -10423,19 +9957,14 @@ void OrderApi::orderSoLineMetadataUpdate(const qint32 &id) {
     HttpRequestInput input(fullPath, "PUT");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderSoLineMetadataUpdateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -10525,19 +10054,14 @@ void OrderApi::orderSoLinePartialUpdate(const qint32 &id, const ::InvenTree::Opt
         QByteArray output = patched_sales_order_line_item.value().asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderSoLinePartialUpdateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -10623,19 +10147,14 @@ void OrderApi::orderSoLineRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderSoLineRetrieveCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -10726,19 +10245,14 @@ void OrderApi::orderSoLineUpdate(const qint32 &id, const SalesOrderLineItem &sal
         QByteArray output = sales_order_line_item.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderSoLineUpdateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -10818,7 +10332,7 @@ void OrderApi::orderSoList(const ::InvenTree::OptionalParam<qint32> &assigned_to
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("assigned_to")).append(querySuffix).append(QUrl::toPercentEncoding(assigned_to.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("assigned_to")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(assigned_to.stringValue())));
     }
     if (assigned_to_me.hasValue())
     {
@@ -10833,7 +10347,7 @@ void OrderApi::orderSoList(const ::InvenTree::OptionalParam<qint32> &assigned_to
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("assigned_to_me")).append(querySuffix).append(QUrl::toPercentEncoding(assigned_to_me.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("assigned_to_me")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(assigned_to_me.stringValue())));
     }
     if (customer.hasValue())
     {
@@ -10848,7 +10362,7 @@ void OrderApi::orderSoList(const ::InvenTree::OptionalParam<qint32> &assigned_to
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("customer")).append(querySuffix).append(QUrl::toPercentEncoding(customer.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("customer")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(customer.stringValue())));
     }
     if (has_project_code.hasValue())
     {
@@ -10863,7 +10377,7 @@ void OrderApi::orderSoList(const ::InvenTree::OptionalParam<qint32> &assigned_to
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("has_project_code")).append(querySuffix).append(QUrl::toPercentEncoding(has_project_code.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("has_project_code")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(has_project_code.stringValue())));
     }
     if (limit.hasValue())
     {
@@ -10878,7 +10392,7 @@ void OrderApi::orderSoList(const ::InvenTree::OptionalParam<qint32> &assigned_to
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(limit.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(limit.stringValue())));
     }
     if (offset.hasValue())
     {
@@ -10893,7 +10407,7 @@ void OrderApi::orderSoList(const ::InvenTree::OptionalParam<qint32> &assigned_to
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(offset.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(offset.stringValue())));
     }
     if (ordering.hasValue())
     {
@@ -10908,7 +10422,7 @@ void OrderApi::orderSoList(const ::InvenTree::OptionalParam<qint32> &assigned_to
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(ordering.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(ordering.stringValue())));
     }
     if (outstanding.hasValue())
     {
@@ -10923,7 +10437,7 @@ void OrderApi::orderSoList(const ::InvenTree::OptionalParam<qint32> &assigned_to
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("outstanding")).append(querySuffix).append(QUrl::toPercentEncoding(outstanding.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("outstanding")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(outstanding.stringValue())));
     }
     if (overdue.hasValue())
     {
@@ -10938,7 +10452,7 @@ void OrderApi::orderSoList(const ::InvenTree::OptionalParam<qint32> &assigned_to
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("overdue")).append(querySuffix).append(QUrl::toPercentEncoding(overdue.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("overdue")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(overdue.stringValue())));
     }
     if (project_code.hasValue())
     {
@@ -10953,7 +10467,7 @@ void OrderApi::orderSoList(const ::InvenTree::OptionalParam<qint32> &assigned_to
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("project_code")).append(querySuffix).append(QUrl::toPercentEncoding(project_code.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("project_code")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(project_code.stringValue())));
     }
     if (reference.hasValue())
     {
@@ -10968,7 +10482,7 @@ void OrderApi::orderSoList(const ::InvenTree::OptionalParam<qint32> &assigned_to
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("reference")).append(querySuffix).append(QUrl::toPercentEncoding(reference.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("reference")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(reference.stringValue())));
     }
     if (search.hasValue())
     {
@@ -10983,7 +10497,7 @@ void OrderApi::orderSoList(const ::InvenTree::OptionalParam<qint32> &assigned_to
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(search.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(search.stringValue())));
     }
     if (status.hasValue())
     {
@@ -10998,7 +10512,7 @@ void OrderApi::orderSoList(const ::InvenTree::OptionalParam<qint32> &assigned_to
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("status")).append(querySuffix).append(QUrl::toPercentEncoding(status.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("status")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(status.stringValue())));
     }
     HttpRequestWorker *worker = new HttpRequestWorker(this, _manager);
     worker->setTimeOut(_timeOut);
@@ -11006,19 +10520,14 @@ void OrderApi::orderSoList(const ::InvenTree::OptionalParam<qint32> &assigned_to
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderSoListCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -11104,19 +10613,14 @@ void OrderApi::orderSoMetadataPartialUpdate(const qint32 &id) {
     HttpRequestInput input(fullPath, "PATCH");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderSoMetadataPartialUpdateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -11201,19 +10705,14 @@ void OrderApi::orderSoMetadataRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderSoMetadataRetrieveCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -11298,19 +10797,14 @@ void OrderApi::orderSoMetadataUpdate(const qint32 &id) {
     HttpRequestInput input(fullPath, "PUT");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderSoMetadataUpdateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -11400,19 +10894,14 @@ void OrderApi::orderSoPartialUpdate(const qint32 &id, const ::InvenTree::Optiona
         QByteArray output = patched_sales_order.value().asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderSoPartialUpdateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -11498,19 +10987,14 @@ void OrderApi::orderSoRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderSoRetrieveCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -11587,19 +11071,14 @@ void OrderApi::orderSoShipmentCreate(const SalesOrderShipment &sales_order_shipm
         QByteArray output = sales_order_shipment.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderSoShipmentCreateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -11685,19 +11164,14 @@ void OrderApi::orderSoShipmentDestroy(const qint32 &id) {
     HttpRequestInput input(fullPath, "DELETE");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderSoShipmentDestroyCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -11776,7 +11250,7 @@ void OrderApi::orderSoShipmentList(const ::InvenTree::OptionalParam<bool> &deliv
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("delivered")).append(querySuffix).append(QUrl::toPercentEncoding(delivered.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("delivered")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(delivered.stringValue())));
     }
     if (limit.hasValue())
     {
@@ -11791,7 +11265,7 @@ void OrderApi::orderSoShipmentList(const ::InvenTree::OptionalParam<bool> &deliv
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(limit.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(limit.stringValue())));
     }
     if (offset.hasValue())
     {
@@ -11806,7 +11280,7 @@ void OrderApi::orderSoShipmentList(const ::InvenTree::OptionalParam<bool> &deliv
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(offset.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(offset.stringValue())));
     }
     if (order.hasValue())
     {
@@ -11821,7 +11295,7 @@ void OrderApi::orderSoShipmentList(const ::InvenTree::OptionalParam<bool> &deliv
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("order")).append(querySuffix).append(QUrl::toPercentEncoding(order.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("order")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(order.stringValue())));
     }
     if (shipped.hasValue())
     {
@@ -11836,7 +11310,7 @@ void OrderApi::orderSoShipmentList(const ::InvenTree::OptionalParam<bool> &deliv
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("shipped")).append(querySuffix).append(QUrl::toPercentEncoding(shipped.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("shipped")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(shipped.stringValue())));
     }
     HttpRequestWorker *worker = new HttpRequestWorker(this, _manager);
     worker->setTimeOut(_timeOut);
@@ -11844,19 +11318,14 @@ void OrderApi::orderSoShipmentList(const ::InvenTree::OptionalParam<bool> &deliv
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderSoShipmentListCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -11942,19 +11411,14 @@ void OrderApi::orderSoShipmentMetadataPartialUpdate(const qint32 &id) {
     HttpRequestInput input(fullPath, "PATCH");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderSoShipmentMetadataPartialUpdateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -12039,19 +11503,14 @@ void OrderApi::orderSoShipmentMetadataRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderSoShipmentMetadataRetrieveCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -12136,19 +11595,14 @@ void OrderApi::orderSoShipmentMetadataUpdate(const qint32 &id) {
     HttpRequestInput input(fullPath, "PUT");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderSoShipmentMetadataUpdateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -12238,19 +11692,14 @@ void OrderApi::orderSoShipmentPartialUpdate(const qint32 &id, const ::InvenTree:
         QByteArray output = patched_sales_order_shipment.value().asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderSoShipmentPartialUpdateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -12336,19 +11785,14 @@ void OrderApi::orderSoShipmentRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderSoShipmentRetrieveCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -12439,19 +11883,14 @@ void OrderApi::orderSoShipmentShipCreate(const qint32 &id, const ::InvenTree::Op
         QByteArray output = sales_order_shipment_complete.value().asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderSoShipmentShipCreateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -12542,19 +11981,14 @@ void OrderApi::orderSoShipmentUpdate(const qint32 &id, const SalesOrderShipment 
         QByteArray output = sales_order_shipment.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderSoShipmentUpdateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -12626,19 +12060,14 @@ void OrderApi::orderSoStatusRetrieve() {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderSoStatusRetrieveCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -12728,19 +12157,14 @@ void OrderApi::orderSoUpdate(const qint32 &id, const SalesOrder &sales_order) {
         QByteArray output = sales_order.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &OrderApi::orderSoUpdateCallback);
     connect(this, &OrderApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }

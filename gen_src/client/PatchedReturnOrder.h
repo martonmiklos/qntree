@@ -23,7 +23,6 @@
 #include "AddressBrief.h"
 #include "Contact.h"
 #include "Owner.h"
-#include "PatchedPurchaseOrder_order_currency.h"
 #include "ProjectCode.h"
 #include <QDate>
 #include <QString>
@@ -168,8 +167,8 @@ public:
     bool is_customer_reference_Set() const;
     bool is_customer_reference_Valid() const;
 
-    PatchedPurchaseOrder_order_currency getOrderCurrency() const;
-    void setOrderCurrency(const PatchedPurchaseOrder_order_currency &order_currency);
+    QString getOrderCurrency() const;
+    void setOrderCurrency(const QString &order_currency);
     bool is_order_currency_Set() const;
     bool is_order_currency_Valid() const;
 
@@ -280,7 +279,7 @@ private:
     bool m_customer_reference_isSet;
     bool m_customer_reference_isValid;
 
-    PatchedPurchaseOrder_order_currency m_order_currency;
+    QString m_order_currency;
     bool m_order_currency_isSet;
     bool m_order_currency_isValid;
 

@@ -59,7 +59,7 @@ public:
     QString getParamStyleDelimiter(const QString &style, const QString &name, bool isExplode);
 
 
-    void backgroundTaskFailedDestroy();
+    virtual void backgroundTaskFailedDestroy();
 
     /**
     * @param[in]  limit qint32 [optional]
@@ -67,19 +67,19 @@ public:
     * @param[in]  ordering QString [optional]
     * @param[in]  search QString [optional]
     */
-    void backgroundTaskFailedList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>());
+    virtual void backgroundTaskFailedList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>());
 
 
-    void backgroundTaskPendingDestroy();
+    virtual void backgroundTaskPendingDestroy();
 
     /**
     * @param[in]  limit qint32 [optional]
     * @param[in]  offset qint32 [optional]
     */
-    void backgroundTaskPendingList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>());
+    virtual void backgroundTaskPendingList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>());
 
 
-    void backgroundTaskRetrieve();
+    virtual void backgroundTaskRetrieve();
 
     /**
     * @param[in]  limit qint32 [optional]
@@ -87,7 +87,7 @@ public:
     * @param[in]  ordering QString [optional]
     * @param[in]  search QString [optional]
     */
-    void backgroundTaskScheduledList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>());
+    virtual void backgroundTaskScheduledList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>());
 
 
 private:
@@ -127,6 +127,7 @@ Q_SIGNALS:
     void backgroundTaskPendingListSignal(PaginatedPendingTaskList summary);
     void backgroundTaskRetrieveSignal();
     void backgroundTaskScheduledListSignal(PaginatedScheduledTaskList summary);
+
 
     void backgroundTaskFailedDestroySignalFull(HttpRequestWorker *worker);
     void backgroundTaskFailedListSignalFull(HttpRequestWorker *worker, PaginatedFailedTaskList summary);

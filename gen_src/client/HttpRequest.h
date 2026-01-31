@@ -24,9 +24,7 @@
 #include <QObject>
 #include <QString>
 #include <QTimer>
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
-    #include <QRandomGenerator>
-#endif
+#include <QRandomGenerator>
 
 #include "HttpFileElement.h"
 
@@ -82,6 +80,7 @@ public:
 
 Q_SIGNALS:
     void on_execution_finished(HttpRequestWorker *worker);
+    void downloadProgress(qint64 bytesReceived, qint64 bytesTotal);
 
 private:
     enum CompressionType{
@@ -97,9 +96,7 @@ private:
     bool isResponseCompressionEnabled;
     bool isRequestCompressionEnabled;
     int  httpResponseCode;
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     QRandomGenerator randomGenerator;
-#endif
 
     void on_reply_timeout(QNetworkReply *reply);
     void on_reply_finished(QNetworkReply *reply);

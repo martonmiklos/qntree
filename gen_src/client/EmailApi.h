@@ -59,7 +59,7 @@ public:
     /**
     * @param[in]  get_simple_login GetSimpleLogin [required]
     */
-    void emailGenerateCreate(const GetSimpleLogin &get_simple_login);
+    virtual void emailGenerateCreate(const GetSimpleLogin &get_simple_login);
 
 
 private:
@@ -89,6 +89,7 @@ private:
 Q_SIGNALS:
 
     void emailGenerateCreateSignal(GetSimpleLogin summary);
+
 
     void emailGenerateCreateSignalFull(HttpRequestWorker *worker, GetSimpleLogin summary);
 

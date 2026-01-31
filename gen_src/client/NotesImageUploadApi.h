@@ -60,7 +60,7 @@ public:
     /**
     * @param[in]  notes_image NotesImage [required]
     */
-    void notesImageUploadCreate(const NotesImage &notes_image);
+    virtual void notesImageUploadCreate(const NotesImage &notes_image);
 
     /**
     * @param[in]  limit qint32 [optional]
@@ -68,7 +68,7 @@ public:
     * @param[in]  ordering QString [optional]
     * @param[in]  search QString [optional]
     */
-    void notesImageUploadList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>());
+    virtual void notesImageUploadList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>());
 
 
 private:
@@ -100,6 +100,7 @@ Q_SIGNALS:
 
     void notesImageUploadCreateSignal(NotesImage summary);
     void notesImageUploadListSignal(PaginatedNotesImageList summary);
+
 
     void notesImageUploadCreateSignalFull(HttpRequestWorker *worker, NotesImage summary);
     void notesImageUploadListSignalFull(HttpRequestWorker *worker, PaginatedNotesImageList summary);

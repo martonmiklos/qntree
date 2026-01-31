@@ -158,15 +158,9 @@ int BomApi::addServerConfiguration(const QString &operation, const QUrl &url, co
     * @param variables A map between a variable name and its value. The value is used for substitution in the server's URL template.
     */
 void BomApi::setNewServerForAllOperations(const QUrl &url, const QString &description, const QMap<QString, ServerVariable> &variables) {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
     for (auto keyIt = _serverIndices.keyBegin(); keyIt != _serverIndices.keyEnd(); keyIt++) {
         setServerIndex(*keyIt, addServerConfiguration(*keyIt, url, description, variables));
     }
-#else
-    for (auto &e : _serverIndices.keys()) {
-        setServerIndex(e, addServerConfiguration(e, url, description, variables));
-    }
-#endif
 }
 
 /**
@@ -281,19 +275,14 @@ void BomApi::bomCreate(const BomItem &bom_item) {
         QByteArray output = bom_item.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &BomApi::bomCreateCallback);
     connect(this, &BomApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -365,19 +354,14 @@ void BomApi::bomDestroy() {
     HttpRequestInput input(fullPath, "DELETE");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &BomApi::bomDestroyCallback);
     connect(this, &BomApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -462,19 +446,14 @@ void BomApi::bomDestroy2(const qint32 &id) {
     HttpRequestInput input(fullPath, "DELETE");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &BomApi::bomDestroy2Callback);
     connect(this, &BomApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -550,19 +529,14 @@ void BomApi::bomImportExtractCreate(const BomImportExtract &bom_import_extract) 
         QByteArray output = bom_import_extract.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &BomApi::bomImportExtractCreateCallback);
     connect(this, &BomApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -639,19 +613,14 @@ void BomApi::bomImportSubmitCreate(const BomImportSubmit &bom_import_submit) {
         QByteArray output = bom_import_submit.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &BomApi::bomImportSubmitCreateCallback);
     connect(this, &BomApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -728,19 +697,14 @@ void BomApi::bomImportUploadCreate(const BomImportUpload &bom_import_upload) {
         QByteArray output = bom_import_upload.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &BomApi::bomImportUploadCreateCallback);
     connect(this, &BomApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -820,7 +784,7 @@ void BomApi::bomList(const ::InvenTree::OptionalParam<bool> &allow_variants, con
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("allow_variants")).append(querySuffix).append(QUrl::toPercentEncoding(allow_variants.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("allow_variants")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(allow_variants.stringValue())));
     }
     if (available_stock.hasValue())
     {
@@ -835,7 +799,7 @@ void BomApi::bomList(const ::InvenTree::OptionalParam<bool> &allow_variants, con
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("available_stock")).append(querySuffix).append(QUrl::toPercentEncoding(available_stock.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("available_stock")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(available_stock.stringValue())));
     }
     if (consumable.hasValue())
     {
@@ -850,7 +814,7 @@ void BomApi::bomList(const ::InvenTree::OptionalParam<bool> &allow_variants, con
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("consumable")).append(querySuffix).append(QUrl::toPercentEncoding(consumable.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("consumable")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(consumable.stringValue())));
     }
     if (has_pricing.hasValue())
     {
@@ -865,7 +829,7 @@ void BomApi::bomList(const ::InvenTree::OptionalParam<bool> &allow_variants, con
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("has_pricing")).append(querySuffix).append(QUrl::toPercentEncoding(has_pricing.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("has_pricing")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(has_pricing.stringValue())));
     }
     if (inherited.hasValue())
     {
@@ -880,7 +844,7 @@ void BomApi::bomList(const ::InvenTree::OptionalParam<bool> &allow_variants, con
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("inherited")).append(querySuffix).append(QUrl::toPercentEncoding(inherited.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("inherited")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(inherited.stringValue())));
     }
     if (limit.hasValue())
     {
@@ -895,7 +859,7 @@ void BomApi::bomList(const ::InvenTree::OptionalParam<bool> &allow_variants, con
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(limit.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(limit.stringValue())));
     }
     if (offset.hasValue())
     {
@@ -910,7 +874,7 @@ void BomApi::bomList(const ::InvenTree::OptionalParam<bool> &allow_variants, con
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(offset.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(offset.stringValue())));
     }
     if (on_order.hasValue())
     {
@@ -925,7 +889,7 @@ void BomApi::bomList(const ::InvenTree::OptionalParam<bool> &allow_variants, con
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("on_order")).append(querySuffix).append(QUrl::toPercentEncoding(on_order.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("on_order")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(on_order.stringValue())));
     }
     if (optional.hasValue())
     {
@@ -940,7 +904,7 @@ void BomApi::bomList(const ::InvenTree::OptionalParam<bool> &allow_variants, con
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("optional")).append(querySuffix).append(QUrl::toPercentEncoding(optional.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("optional")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(optional.stringValue())));
     }
     if (ordering.hasValue())
     {
@@ -955,7 +919,7 @@ void BomApi::bomList(const ::InvenTree::OptionalParam<bool> &allow_variants, con
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(ordering.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(ordering.stringValue())));
     }
     if (part.hasValue())
     {
@@ -970,7 +934,7 @@ void BomApi::bomList(const ::InvenTree::OptionalParam<bool> &allow_variants, con
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("part")).append(querySuffix).append(QUrl::toPercentEncoding(part.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("part")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(part.stringValue())));
     }
     if (part_active.hasValue())
     {
@@ -985,7 +949,7 @@ void BomApi::bomList(const ::InvenTree::OptionalParam<bool> &allow_variants, con
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("part_active")).append(querySuffix).append(QUrl::toPercentEncoding(part_active.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("part_active")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(part_active.stringValue())));
     }
     if (part_trackable.hasValue())
     {
@@ -1000,7 +964,7 @@ void BomApi::bomList(const ::InvenTree::OptionalParam<bool> &allow_variants, con
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("part_trackable")).append(querySuffix).append(QUrl::toPercentEncoding(part_trackable.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("part_trackable")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(part_trackable.stringValue())));
     }
     if (search.hasValue())
     {
@@ -1015,7 +979,7 @@ void BomApi::bomList(const ::InvenTree::OptionalParam<bool> &allow_variants, con
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(search.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(search.stringValue())));
     }
     if (sub_part_assembly.hasValue())
     {
@@ -1030,7 +994,7 @@ void BomApi::bomList(const ::InvenTree::OptionalParam<bool> &allow_variants, con
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("sub_part_assembly")).append(querySuffix).append(QUrl::toPercentEncoding(sub_part_assembly.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("sub_part_assembly")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(sub_part_assembly.stringValue())));
     }
     if (sub_part_trackable.hasValue())
     {
@@ -1045,7 +1009,7 @@ void BomApi::bomList(const ::InvenTree::OptionalParam<bool> &allow_variants, con
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("sub_part_trackable")).append(querySuffix).append(QUrl::toPercentEncoding(sub_part_trackable.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("sub_part_trackable")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(sub_part_trackable.stringValue())));
     }
     if (uses.hasValue())
     {
@@ -1060,7 +1024,7 @@ void BomApi::bomList(const ::InvenTree::OptionalParam<bool> &allow_variants, con
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("uses")).append(querySuffix).append(QUrl::toPercentEncoding(uses.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("uses")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(uses.stringValue())));
     }
     if (validated.hasValue())
     {
@@ -1075,7 +1039,7 @@ void BomApi::bomList(const ::InvenTree::OptionalParam<bool> &allow_variants, con
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("validated")).append(querySuffix).append(QUrl::toPercentEncoding(validated.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("validated")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(validated.stringValue())));
     }
     HttpRequestWorker *worker = new HttpRequestWorker(this, _manager);
     worker->setTimeOut(_timeOut);
@@ -1083,19 +1047,14 @@ void BomApi::bomList(const ::InvenTree::OptionalParam<bool> &allow_variants, con
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &BomApi::bomListCallback);
     connect(this, &BomApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -1181,19 +1140,14 @@ void BomApi::bomMetadataPartialUpdate(const qint32 &id) {
     HttpRequestInput input(fullPath, "PATCH");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &BomApi::bomMetadataPartialUpdateCallback);
     connect(this, &BomApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -1278,19 +1232,14 @@ void BomApi::bomMetadataRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &BomApi::bomMetadataRetrieveCallback);
     connect(this, &BomApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -1375,19 +1324,14 @@ void BomApi::bomMetadataUpdate(const qint32 &id) {
     HttpRequestInput input(fullPath, "PUT");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &BomApi::bomMetadataUpdateCallback);
     connect(this, &BomApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -1477,19 +1421,14 @@ void BomApi::bomPartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam
         QByteArray output = patched_bom_item.value().asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &BomApi::bomPartialUpdateCallback);
     connect(this, &BomApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -1575,19 +1514,14 @@ void BomApi::bomRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &BomApi::bomRetrieveCallback);
     connect(this, &BomApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -1664,19 +1598,14 @@ void BomApi::bomSubstituteCreate(const BomItemSubstitute &bom_item_substitute) {
         QByteArray output = bom_item_substitute.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &BomApi::bomSubstituteCreateCallback);
     connect(this, &BomApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -1762,19 +1691,14 @@ void BomApi::bomSubstituteDestroy(const qint32 &id) {
     HttpRequestInput input(fullPath, "DELETE");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &BomApi::bomSubstituteDestroyCallback);
     connect(this, &BomApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -1853,7 +1777,7 @@ void BomApi::bomSubstituteList(const ::InvenTree::OptionalParam<qint32> &bom_ite
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("bom_item")).append(querySuffix).append(QUrl::toPercentEncoding(bom_item.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("bom_item")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(bom_item.stringValue())));
     }
     if (limit.hasValue())
     {
@@ -1868,7 +1792,7 @@ void BomApi::bomSubstituteList(const ::InvenTree::OptionalParam<qint32> &bom_ite
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(limit.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(limit.stringValue())));
     }
     if (offset.hasValue())
     {
@@ -1883,7 +1807,7 @@ void BomApi::bomSubstituteList(const ::InvenTree::OptionalParam<qint32> &bom_ite
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(offset.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(offset.stringValue())));
     }
     if (ordering.hasValue())
     {
@@ -1898,7 +1822,7 @@ void BomApi::bomSubstituteList(const ::InvenTree::OptionalParam<qint32> &bom_ite
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(ordering.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(ordering.stringValue())));
     }
     if (part.hasValue())
     {
@@ -1913,7 +1837,7 @@ void BomApi::bomSubstituteList(const ::InvenTree::OptionalParam<qint32> &bom_ite
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("part")).append(querySuffix).append(QUrl::toPercentEncoding(part.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("part")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(part.stringValue())));
     }
     if (search.hasValue())
     {
@@ -1928,7 +1852,7 @@ void BomApi::bomSubstituteList(const ::InvenTree::OptionalParam<qint32> &bom_ite
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(search.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(search.stringValue())));
     }
     HttpRequestWorker *worker = new HttpRequestWorker(this, _manager);
     worker->setTimeOut(_timeOut);
@@ -1936,19 +1860,14 @@ void BomApi::bomSubstituteList(const ::InvenTree::OptionalParam<qint32> &bom_ite
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &BomApi::bomSubstituteListCallback);
     connect(this, &BomApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -2034,19 +1953,14 @@ void BomApi::bomSubstituteMetadataPartialUpdate(const qint32 &id) {
     HttpRequestInput input(fullPath, "PATCH");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &BomApi::bomSubstituteMetadataPartialUpdateCallback);
     connect(this, &BomApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -2131,19 +2045,14 @@ void BomApi::bomSubstituteMetadataRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &BomApi::bomSubstituteMetadataRetrieveCallback);
     connect(this, &BomApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -2228,19 +2137,14 @@ void BomApi::bomSubstituteMetadataUpdate(const qint32 &id) {
     HttpRequestInput input(fullPath, "PUT");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &BomApi::bomSubstituteMetadataUpdateCallback);
     connect(this, &BomApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -2330,19 +2234,14 @@ void BomApi::bomSubstitutePartialUpdate(const qint32 &id, const ::InvenTree::Opt
         QByteArray output = patched_bom_item_substitute.value().asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &BomApi::bomSubstitutePartialUpdateCallback);
     connect(this, &BomApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -2428,19 +2327,14 @@ void BomApi::bomSubstituteRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &BomApi::bomSubstituteRetrieveCallback);
     connect(this, &BomApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -2531,19 +2425,14 @@ void BomApi::bomSubstituteUpdate(const qint32 &id, const BomItemSubstitute &bom_
         QByteArray output = bom_item_substitute.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &BomApi::bomSubstituteUpdateCallback);
     connect(this, &BomApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -2634,19 +2523,14 @@ void BomApi::bomUpdate(const qint32 &id, const BomItem &bom_item) {
         QByteArray output = bom_item.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &BomApi::bomUpdateCallback);
     connect(this, &BomApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -2737,19 +2621,14 @@ void BomApi::bomValidatePartialUpdate(const qint32 &id, const ::InvenTree::Optio
         QByteArray output = patched_bom_item_validation.value().asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &BomApi::bomValidatePartialUpdateCallback);
     connect(this, &BomApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -2840,19 +2719,14 @@ void BomApi::bomValidateUpdate(const qint32 &id, const ::InvenTree::OptionalPara
         QByteArray output = bom_item_validation.value().asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &BomApi::bomValidateUpdateCallback);
     connect(this, &BomApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }

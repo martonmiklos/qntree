@@ -60,7 +60,7 @@ public:
     * @param[in]  limit qint32 [optional]
     * @param[in]  offset qint32 [optional]
     */
-    void versionTextList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>());
+    virtual void versionTextList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>());
 
 
 private:
@@ -90,6 +90,7 @@ private:
 Q_SIGNALS:
 
     void versionTextListSignal(PaginatedVersionInformationList summary);
+
 
     void versionTextListSignalFull(HttpRequestWorker *worker, PaginatedVersionInformationList summary);
 

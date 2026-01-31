@@ -64,32 +64,32 @@ public:
     /**
     * @param[in]  barcode Barcode [required]
     */
-    void barcodeCreate(const Barcode &barcode);
+    virtual void barcodeCreate(const Barcode &barcode);
 
     /**
     * @param[in]  barcode_assign BarcodeAssign [required]
     */
-    void barcodeLinkCreate(const BarcodeAssign &barcode_assign);
+    virtual void barcodeLinkCreate(const BarcodeAssign &barcode_assign);
 
     /**
     * @param[in]  barcode_po_allocate BarcodePOAllocate [required]
     */
-    void barcodePoAllocateCreate(const BarcodePOAllocate &barcode_po_allocate);
+    virtual void barcodePoAllocateCreate(const BarcodePOAllocate &barcode_po_allocate);
 
     /**
     * @param[in]  barcode_po_receive BarcodePOReceive [required]
     */
-    void barcodePoReceiveCreate(const BarcodePOReceive &barcode_po_receive);
+    virtual void barcodePoReceiveCreate(const BarcodePOReceive &barcode_po_receive);
 
     /**
     * @param[in]  barcode_so_allocate BarcodeSOAllocate [required]
     */
-    void barcodeSoAllocateCreate(const BarcodeSOAllocate &barcode_so_allocate);
+    virtual void barcodeSoAllocateCreate(const BarcodeSOAllocate &barcode_so_allocate);
 
     /**
     * @param[in]  barcode_unassign BarcodeUnassign [optional]
     */
-    void barcodeUnlinkCreate(const ::InvenTree::OptionalParam<BarcodeUnassign> &barcode_unassign = ::InvenTree::OptionalParam<BarcodeUnassign>());
+    virtual void barcodeUnlinkCreate(const ::InvenTree::OptionalParam<BarcodeUnassign> &barcode_unassign = ::InvenTree::OptionalParam<BarcodeUnassign>());
 
 
 private:
@@ -129,6 +129,7 @@ Q_SIGNALS:
     void barcodePoReceiveCreateSignal(BarcodePOReceive summary);
     void barcodeSoAllocateCreateSignal(BarcodeSOAllocate summary);
     void barcodeUnlinkCreateSignal(BarcodeUnassign summary);
+
 
     void barcodeCreateSignalFull(HttpRequestWorker *worker, Barcode summary);
     void barcodeLinkCreateSignalFull(HttpRequestWorker *worker, BarcodeAssign summary);

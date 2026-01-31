@@ -59,7 +59,7 @@ public:
     /**
     * @param[in]  locate_plugin LocatePlugin [required]
     */
-    void locateCreate(const LocatePlugin &locate_plugin);
+    virtual void locateCreate(const LocatePlugin &locate_plugin);
 
 
 private:
@@ -89,6 +89,7 @@ private:
 Q_SIGNALS:
 
     void locateCreateSignal(LocatePlugin summary);
+
 
     void locateCreateSignalFull(HttpRequestWorker *worker, LocatePlugin summary);
 

@@ -79,15 +79,15 @@ public:
     /**
     * @param[in]  address Address [required]
     */
-    void companyAddressCreate(const Address &address);
+    virtual void companyAddressCreate(const Address &address);
 
 
-    void companyAddressDestroy();
+    virtual void companyAddressDestroy();
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void companyAddressDestroy2(const qint32 &id);
+    virtual void companyAddressDestroy2(const qint32 &id);
 
     /**
     * @param[in]  company qint32 [optional]
@@ -96,37 +96,37 @@ public:
     * @param[in]  ordering QString [optional]
     * @param[in]  search QString [optional]
     */
-    void companyAddressList(const ::InvenTree::OptionalParam<qint32> &company = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>());
+    virtual void companyAddressList(const ::InvenTree::OptionalParam<qint32> &company = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>());
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  patched_address PatchedAddress [optional]
     */
-    void companyAddressPartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedAddress> &patched_address = ::InvenTree::OptionalParam<PatchedAddress>());
+    virtual void companyAddressPartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedAddress> &patched_address = ::InvenTree::OptionalParam<PatchedAddress>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void companyAddressRetrieve(const qint32 &id);
+    virtual void companyAddressRetrieve(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  address Address [required]
     */
-    void companyAddressUpdate(const qint32 &id, const Address &address);
+    virtual void companyAddressUpdate(const qint32 &id, const Address &address);
 
     /**
     * @param[in]  contact Contact [required]
     */
-    void companyContactCreate(const Contact &contact);
+    virtual void companyContactCreate(const Contact &contact);
 
 
-    void companyContactDestroy();
+    virtual void companyContactDestroy();
 
     /**
     * @param[in]  id QString [required]
     */
-    void companyContactDestroy2(const QString &id);
+    virtual void companyContactDestroy2(const QString &id);
 
     /**
     * @param[in]  company qint32 [optional]
@@ -135,49 +135,49 @@ public:
     * @param[in]  ordering QString [optional]
     * @param[in]  search QString [optional]
     */
-    void companyContactList(const ::InvenTree::OptionalParam<qint32> &company = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>());
+    virtual void companyContactList(const ::InvenTree::OptionalParam<qint32> &company = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>());
 
     /**
     * @param[in]  id QString [required]
     */
-    void companyContactMetadataPartialUpdate(const QString &id);
+    virtual void companyContactMetadataPartialUpdate(const QString &id);
 
     /**
     * @param[in]  id QString [required]
     */
-    void companyContactMetadataRetrieve(const QString &id);
+    virtual void companyContactMetadataRetrieve(const QString &id);
 
     /**
     * @param[in]  id QString [required]
     */
-    void companyContactMetadataUpdate(const QString &id);
+    virtual void companyContactMetadataUpdate(const QString &id);
 
     /**
     * @param[in]  id QString [required]
     * @param[in]  patched_contact PatchedContact [optional]
     */
-    void companyContactPartialUpdate(const QString &id, const ::InvenTree::OptionalParam<PatchedContact> &patched_contact = ::InvenTree::OptionalParam<PatchedContact>());
+    virtual void companyContactPartialUpdate(const QString &id, const ::InvenTree::OptionalParam<PatchedContact> &patched_contact = ::InvenTree::OptionalParam<PatchedContact>());
 
     /**
     * @param[in]  id QString [required]
     */
-    void companyContactRetrieve(const QString &id);
+    virtual void companyContactRetrieve(const QString &id);
 
     /**
     * @param[in]  id QString [required]
     * @param[in]  contact Contact [required]
     */
-    void companyContactUpdate(const QString &id, const Contact &contact);
+    virtual void companyContactUpdate(const QString &id, const Contact &contact);
 
     /**
     * @param[in]  company Company [required]
     */
-    void companyCreate(const Company &company);
+    virtual void companyCreate(const Company &company);
 
     /**
     * @param[in]  id QString [required]
     */
-    void companyDestroy(const QString &id);
+    virtual void companyDestroy(const QString &id);
 
     /**
     * @param[in]  active bool [optional]
@@ -190,35 +190,35 @@ public:
     * @param[in]  ordering QString [optional]
     * @param[in]  search QString [optional]
     */
-    void companyList(const ::InvenTree::OptionalParam<bool> &active = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &is_customer = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &is_manufacturer = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &is_supplier = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &name = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>());
+    virtual void companyList(const ::InvenTree::OptionalParam<bool> &active = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &is_customer = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &is_manufacturer = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &is_supplier = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &name = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>());
 
     /**
     * @param[in]  id QString [required]
     */
-    void companyMetadataPartialUpdate(const QString &id);
+    virtual void companyMetadataPartialUpdate(const QString &id);
 
     /**
     * @param[in]  id QString [required]
     */
-    void companyMetadataRetrieve(const QString &id);
+    virtual void companyMetadataRetrieve(const QString &id);
 
     /**
     * @param[in]  id QString [required]
     */
-    void companyMetadataUpdate(const QString &id);
+    virtual void companyMetadataUpdate(const QString &id);
 
     /**
     * @param[in]  supplier_part SupplierPart [required]
     */
-    void companyPartCreate(const SupplierPart &supplier_part);
+    virtual void companyPartCreate(const SupplierPart &supplier_part);
 
 
-    void companyPartDestroy();
+    virtual void companyPartDestroy();
 
     /**
     * @param[in]  id QString [required]
     */
-    void companyPartDestroy2(const QString &id);
+    virtual void companyPartDestroy2(const QString &id);
 
     /**
     * @param[in]  mpn QString [optional]
@@ -236,20 +236,20 @@ public:
     * @param[in]  tags__name QString [optional]
     * @param[in]  tags__slug QString [optional]
     */
-    void companyPartList(const ::InvenTree::OptionalParam<QString> &mpn = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &sku = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<bool> &active = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &manufacturer_part = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &part = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &part_active = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &supplier = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &supplier_active = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<QString> &tags__name = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &tags__slug = ::InvenTree::OptionalParam<QString>());
+    virtual void companyPartList(const ::InvenTree::OptionalParam<QString> &mpn = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &sku = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<bool> &active = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &manufacturer_part = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &part = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &part_active = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &supplier = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &supplier_active = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<QString> &tags__name = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &tags__slug = ::InvenTree::OptionalParam<QString>());
 
     /**
     * @param[in]  manufacturer_part ManufacturerPart [required]
     */
-    void companyPartManufacturerCreate(const ManufacturerPart &manufacturer_part);
+    virtual void companyPartManufacturerCreate(const ManufacturerPart &manufacturer_part);
 
 
-    void companyPartManufacturerDestroy();
+    virtual void companyPartManufacturerDestroy();
 
     /**
     * @param[in]  id QString [required]
     */
-    void companyPartManufacturerDestroy2(const QString &id);
+    virtual void companyPartManufacturerDestroy2(const QString &id);
 
     /**
     * @param[in]  mpn QString [optional]
@@ -264,35 +264,35 @@ public:
     * @param[in]  tags__name QString [optional]
     * @param[in]  tags__slug QString [optional]
     */
-    void companyPartManufacturerList(const ::InvenTree::OptionalParam<QString> &mpn = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &manufacturer = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &manufacturer_active = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &part = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &part_active = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &tags__name = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &tags__slug = ::InvenTree::OptionalParam<QString>());
+    virtual void companyPartManufacturerList(const ::InvenTree::OptionalParam<QString> &mpn = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &manufacturer = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &manufacturer_active = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &part = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &part_active = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &tags__name = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &tags__slug = ::InvenTree::OptionalParam<QString>());
 
     /**
     * @param[in]  id QString [required]
     */
-    void companyPartManufacturerMetadataPartialUpdate(const QString &id);
+    virtual void companyPartManufacturerMetadataPartialUpdate(const QString &id);
 
     /**
     * @param[in]  id QString [required]
     */
-    void companyPartManufacturerMetadataRetrieve(const QString &id);
+    virtual void companyPartManufacturerMetadataRetrieve(const QString &id);
 
     /**
     * @param[in]  id QString [required]
     */
-    void companyPartManufacturerMetadataUpdate(const QString &id);
+    virtual void companyPartManufacturerMetadataUpdate(const QString &id);
 
     /**
     * @param[in]  manufacturer_part_parameter ManufacturerPartParameter [required]
     */
-    void companyPartManufacturerParameterCreate(const ManufacturerPartParameter &manufacturer_part_parameter);
+    virtual void companyPartManufacturerParameterCreate(const ManufacturerPartParameter &manufacturer_part_parameter);
 
 
-    void companyPartManufacturerParameterDestroy();
+    virtual void companyPartManufacturerParameterDestroy();
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void companyPartManufacturerParameterDestroy2(const qint32 &id);
+    virtual void companyPartManufacturerParameterDestroy2(const qint32 &id);
 
     /**
     * @param[in]  limit qint32 [optional]
@@ -306,89 +306,89 @@ public:
     * @param[in]  units QString [optional]
     * @param[in]  value QString [optional]
     */
-    void companyPartManufacturerParameterList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &manufacturer = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &manufacturer_part = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &name = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &part = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &units = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &value = ::InvenTree::OptionalParam<QString>());
+    virtual void companyPartManufacturerParameterList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &manufacturer = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &manufacturer_part = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &name = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &part = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &units = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &value = ::InvenTree::OptionalParam<QString>());
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  patched_manufacturer_part_parameter PatchedManufacturerPartParameter [optional]
     */
-    void companyPartManufacturerParameterPartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedManufacturerPartParameter> &patched_manufacturer_part_parameter = ::InvenTree::OptionalParam<PatchedManufacturerPartParameter>());
+    virtual void companyPartManufacturerParameterPartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedManufacturerPartParameter> &patched_manufacturer_part_parameter = ::InvenTree::OptionalParam<PatchedManufacturerPartParameter>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void companyPartManufacturerParameterRetrieve(const qint32 &id);
+    virtual void companyPartManufacturerParameterRetrieve(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  manufacturer_part_parameter ManufacturerPartParameter [required]
     */
-    void companyPartManufacturerParameterUpdate(const qint32 &id, const ManufacturerPartParameter &manufacturer_part_parameter);
+    virtual void companyPartManufacturerParameterUpdate(const qint32 &id, const ManufacturerPartParameter &manufacturer_part_parameter);
 
     /**
     * @param[in]  id QString [required]
     * @param[in]  patched_manufacturer_part PatchedManufacturerPart [optional]
     */
-    void companyPartManufacturerPartialUpdate(const QString &id, const ::InvenTree::OptionalParam<PatchedManufacturerPart> &patched_manufacturer_part = ::InvenTree::OptionalParam<PatchedManufacturerPart>());
+    virtual void companyPartManufacturerPartialUpdate(const QString &id, const ::InvenTree::OptionalParam<PatchedManufacturerPart> &patched_manufacturer_part = ::InvenTree::OptionalParam<PatchedManufacturerPart>());
 
     /**
     * @param[in]  id QString [required]
     */
-    void companyPartManufacturerRetrieve(const QString &id);
+    virtual void companyPartManufacturerRetrieve(const QString &id);
 
     /**
     * @param[in]  id QString [required]
     * @param[in]  manufacturer_part ManufacturerPart [required]
     */
-    void companyPartManufacturerUpdate(const QString &id, const ManufacturerPart &manufacturer_part);
+    virtual void companyPartManufacturerUpdate(const QString &id, const ManufacturerPart &manufacturer_part);
 
     /**
     * @param[in]  id QString [required]
     */
-    void companyPartMetadataPartialUpdate(const QString &id);
+    virtual void companyPartMetadataPartialUpdate(const QString &id);
 
     /**
     * @param[in]  id QString [required]
     */
-    void companyPartMetadataRetrieve(const QString &id);
+    virtual void companyPartMetadataRetrieve(const QString &id);
 
     /**
     * @param[in]  id QString [required]
     */
-    void companyPartMetadataUpdate(const QString &id);
+    virtual void companyPartMetadataUpdate(const QString &id);
 
     /**
     * @param[in]  id QString [required]
     * @param[in]  patched_supplier_part PatchedSupplierPart [optional]
     */
-    void companyPartPartialUpdate(const QString &id, const ::InvenTree::OptionalParam<PatchedSupplierPart> &patched_supplier_part = ::InvenTree::OptionalParam<PatchedSupplierPart>());
+    virtual void companyPartPartialUpdate(const QString &id, const ::InvenTree::OptionalParam<PatchedSupplierPart> &patched_supplier_part = ::InvenTree::OptionalParam<PatchedSupplierPart>());
 
     /**
     * @param[in]  id QString [required]
     */
-    void companyPartRetrieve(const QString &id);
+    virtual void companyPartRetrieve(const QString &id);
 
     /**
     * @param[in]  id QString [required]
     * @param[in]  supplier_part SupplierPart [required]
     */
-    void companyPartUpdate(const QString &id, const SupplierPart &supplier_part);
+    virtual void companyPartUpdate(const QString &id, const SupplierPart &supplier_part);
 
     /**
     * @param[in]  id QString [required]
     * @param[in]  patched_company PatchedCompany [optional]
     */
-    void companyPartialUpdate(const QString &id, const ::InvenTree::OptionalParam<PatchedCompany> &patched_company = ::InvenTree::OptionalParam<PatchedCompany>());
+    virtual void companyPartialUpdate(const QString &id, const ::InvenTree::OptionalParam<PatchedCompany> &patched_company = ::InvenTree::OptionalParam<PatchedCompany>());
 
     /**
     * @param[in]  supplier_price_break SupplierPriceBreak [required]
     */
-    void companyPriceBreakCreate(const SupplierPriceBreak &supplier_price_break);
+    virtual void companyPriceBreakCreate(const SupplierPriceBreak &supplier_price_break);
 
     /**
     * @param[in]  id QString [required]
     */
-    void companyPriceBreakDestroy(const QString &id);
+    virtual void companyPriceBreakDestroy(const QString &id);
 
     /**
     * @param[in]  base_part qint32 [optional]
@@ -400,35 +400,35 @@ public:
     * @param[in]  search QString [optional]
     * @param[in]  supplier qint32 [optional]
     */
-    void companyPriceBreakList(const ::InvenTree::OptionalParam<qint32> &base_part = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &part = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<double> &quantity = ::InvenTree::OptionalParam<double>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &supplier = ::InvenTree::OptionalParam<qint32>());
+    virtual void companyPriceBreakList(const ::InvenTree::OptionalParam<qint32> &base_part = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &part = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<double> &quantity = ::InvenTree::OptionalParam<double>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &supplier = ::InvenTree::OptionalParam<qint32>());
 
     /**
     * @param[in]  id QString [required]
     * @param[in]  patched_supplier_price_break PatchedSupplierPriceBreak [optional]
     */
-    void companyPriceBreakPartialUpdate(const QString &id, const ::InvenTree::OptionalParam<PatchedSupplierPriceBreak> &patched_supplier_price_break = ::InvenTree::OptionalParam<PatchedSupplierPriceBreak>());
+    virtual void companyPriceBreakPartialUpdate(const QString &id, const ::InvenTree::OptionalParam<PatchedSupplierPriceBreak> &patched_supplier_price_break = ::InvenTree::OptionalParam<PatchedSupplierPriceBreak>());
 
     /**
     * @param[in]  id QString [required]
     */
-    void companyPriceBreakRetrieve(const QString &id);
+    virtual void companyPriceBreakRetrieve(const QString &id);
 
     /**
     * @param[in]  id QString [required]
     * @param[in]  supplier_price_break SupplierPriceBreak [required]
     */
-    void companyPriceBreakUpdate(const QString &id, const SupplierPriceBreak &supplier_price_break);
+    virtual void companyPriceBreakUpdate(const QString &id, const SupplierPriceBreak &supplier_price_break);
 
     /**
     * @param[in]  id QString [required]
     */
-    void companyRetrieve(const QString &id);
+    virtual void companyRetrieve(const QString &id);
 
     /**
     * @param[in]  id QString [required]
     * @param[in]  company Company [required]
     */
-    void companyUpdate(const QString &id, const Company &company);
+    virtual void companyUpdate(const QString &id, const Company &company);
 
 
 private:
@@ -574,6 +574,7 @@ Q_SIGNALS:
     void companyPriceBreakUpdateSignal(SupplierPriceBreak summary);
     void companyRetrieveSignal(Company summary);
     void companyUpdateSignal(Company summary);
+
 
     void companyAddressCreateSignalFull(HttpRequestWorker *worker, Address summary);
     void companyAddressDestroySignalFull(HttpRequestWorker *worker);

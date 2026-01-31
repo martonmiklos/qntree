@@ -284,7 +284,7 @@ QJsonObject SalesOrder::asJsonObject() const {
     if (m_total_price_isSet) {
         obj.insert(QString("total_price"), ::InvenTree::toJsonValue(m_total_price));
     }
-    if (m_order_currency.isSet()) {
+    if (m_order_currency_isSet) {
         obj.insert(QString("order_currency"), ::InvenTree::toJsonValue(m_order_currency));
     }
     return obj;
@@ -690,10 +690,10 @@ bool SalesOrder::is_total_price_Valid() const{
     return m_total_price_isValid;
 }
 
-PatchedPurchaseOrder_order_currency SalesOrder::getOrderCurrency() const {
+QString SalesOrder::getOrderCurrency() const {
     return m_order_currency;
 }
-void SalesOrder::setOrderCurrency(const PatchedPurchaseOrder_order_currency &order_currency) {
+void SalesOrder::setOrderCurrency(const QString &order_currency) {
     m_order_currency = order_currency;
     m_order_currency_isSet = true;
 }
@@ -834,7 +834,7 @@ bool SalesOrder::isSet() const {
             break;
         }
 
-        if (m_order_currency.isSet()) {
+        if (m_order_currency_isSet) {
             isObjectUpdated = true;
             break;
         }

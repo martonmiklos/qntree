@@ -61,28 +61,28 @@ public:
     QString getParamStyleDelimiter(const QString &style, const QString &name, bool isExplode);
 
 
-    void labelOutputDestroy();
+    virtual void labelOutputDestroy();
 
     /**
     * @param[in]  limit qint32 [optional]
     * @param[in]  offset qint32 [optional]
     */
-    void labelOutputList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>());
+    virtual void labelOutputList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>());
 
     /**
     * @param[in]  label_print LabelPrint [required]
     */
-    void labelPrintCreate(const LabelPrint &label_print);
+    virtual void labelPrintCreate(const LabelPrint &label_print);
 
     /**
     * @param[in]  label_template LabelTemplate [required]
     */
-    void labelTemplateCreate(const LabelTemplate &label_template);
+    virtual void labelTemplateCreate(const LabelTemplate &label_template);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void labelTemplateDestroy(const qint32 &id);
+    virtual void labelTemplateDestroy(const qint32 &id);
 
     /**
     * @param[in]  enabled bool [optional]
@@ -92,39 +92,39 @@ public:
     * @param[in]  offset qint32 [optional]
     * @param[in]  search QString [optional]
     */
-    void labelTemplateList(const ::InvenTree::OptionalParam<bool> &enabled = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<QString> &items = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &model_type = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>());
+    virtual void labelTemplateList(const ::InvenTree::OptionalParam<bool> &enabled = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<QString> &items = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &model_type = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void labelTemplateMetadataPartialUpdate(const qint32 &id);
+    virtual void labelTemplateMetadataPartialUpdate(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void labelTemplateMetadataRetrieve(const qint32 &id);
+    virtual void labelTemplateMetadataRetrieve(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void labelTemplateMetadataUpdate(const qint32 &id);
+    virtual void labelTemplateMetadataUpdate(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  patched_label_template PatchedLabelTemplate [optional]
     */
-    void labelTemplatePartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedLabelTemplate> &patched_label_template = ::InvenTree::OptionalParam<PatchedLabelTemplate>());
+    virtual void labelTemplatePartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedLabelTemplate> &patched_label_template = ::InvenTree::OptionalParam<PatchedLabelTemplate>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void labelTemplateRetrieve(const qint32 &id);
+    virtual void labelTemplateRetrieve(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  label_template LabelTemplate [required]
     */
-    void labelTemplateUpdate(const qint32 &id, const LabelTemplate &label_template);
+    virtual void labelTemplateUpdate(const qint32 &id, const LabelTemplate &label_template);
 
 
 private:
@@ -176,6 +176,7 @@ Q_SIGNALS:
     void labelTemplatePartialUpdateSignal(LabelTemplate summary);
     void labelTemplateRetrieveSignal(LabelTemplate summary);
     void labelTemplateUpdateSignal(LabelTemplate summary);
+
 
     void labelOutputDestroySignalFull(HttpRequestWorker *worker);
     void labelOutputListSignalFull(HttpRequestWorker *worker, PaginatedLabelOutputList summary);

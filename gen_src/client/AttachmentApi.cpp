@@ -128,15 +128,9 @@ int AttachmentApi::addServerConfiguration(const QString &operation, const QUrl &
     * @param variables A map between a variable name and its value. The value is used for substitution in the server's URL template.
     */
 void AttachmentApi::setNewServerForAllOperations(const QUrl &url, const QString &description, const QMap<QString, ServerVariable> &variables) {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
     for (auto keyIt = _serverIndices.keyBegin(); keyIt != _serverIndices.keyEnd(); keyIt++) {
         setServerIndex(*keyIt, addServerConfiguration(*keyIt, url, description, variables));
     }
-#else
-    for (auto &e : _serverIndices.keys()) {
-        setServerIndex(e, addServerConfiguration(e, url, description, variables));
-    }
-#endif
 }
 
 /**
@@ -251,19 +245,14 @@ void AttachmentApi::attachmentCreate(const Attachment &attachment) {
         QByteArray output = attachment.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &AttachmentApi::attachmentCreateCallback);
     connect(this, &AttachmentApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -349,19 +338,14 @@ void AttachmentApi::attachmentDestroy(const qint32 &id) {
     HttpRequestInput input(fullPath, "DELETE");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &AttachmentApi::attachmentDestroyCallback);
     connect(this, &AttachmentApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -440,7 +424,7 @@ void AttachmentApi::attachmentList(const ::InvenTree::OptionalParam<bool> &is_fi
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("is_file")).append(querySuffix).append(QUrl::toPercentEncoding(is_file.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("is_file")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(is_file.stringValue())));
     }
     if (is_link.hasValue())
     {
@@ -455,7 +439,7 @@ void AttachmentApi::attachmentList(const ::InvenTree::OptionalParam<bool> &is_fi
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("is_link")).append(querySuffix).append(QUrl::toPercentEncoding(is_link.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("is_link")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(is_link.stringValue())));
     }
     if (limit.hasValue())
     {
@@ -470,7 +454,7 @@ void AttachmentApi::attachmentList(const ::InvenTree::OptionalParam<bool> &is_fi
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(limit.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(limit.stringValue())));
     }
     if (model_id.hasValue())
     {
@@ -485,7 +469,7 @@ void AttachmentApi::attachmentList(const ::InvenTree::OptionalParam<bool> &is_fi
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("model_id")).append(querySuffix).append(QUrl::toPercentEncoding(model_id.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("model_id")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(model_id.stringValue())));
     }
     if (model_type.hasValue())
     {
@@ -500,7 +484,7 @@ void AttachmentApi::attachmentList(const ::InvenTree::OptionalParam<bool> &is_fi
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("model_type")).append(querySuffix).append(QUrl::toPercentEncoding(model_type.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("model_type")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(model_type.stringValue())));
     }
     if (offset.hasValue())
     {
@@ -515,7 +499,7 @@ void AttachmentApi::attachmentList(const ::InvenTree::OptionalParam<bool> &is_fi
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(offset.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(offset.stringValue())));
     }
     if (ordering.hasValue())
     {
@@ -530,7 +514,7 @@ void AttachmentApi::attachmentList(const ::InvenTree::OptionalParam<bool> &is_fi
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(ordering.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(ordering.stringValue())));
     }
     if (search.hasValue())
     {
@@ -545,7 +529,7 @@ void AttachmentApi::attachmentList(const ::InvenTree::OptionalParam<bool> &is_fi
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(search.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(search.stringValue())));
     }
     if (upload_user.hasValue())
     {
@@ -560,7 +544,7 @@ void AttachmentApi::attachmentList(const ::InvenTree::OptionalParam<bool> &is_fi
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("upload_user")).append(querySuffix).append(QUrl::toPercentEncoding(upload_user.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("upload_user")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(upload_user.stringValue())));
     }
     HttpRequestWorker *worker = new HttpRequestWorker(this, _manager);
     worker->setTimeOut(_timeOut);
@@ -568,19 +552,14 @@ void AttachmentApi::attachmentList(const ::InvenTree::OptionalParam<bool> &is_fi
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &AttachmentApi::attachmentListCallback);
     connect(this, &AttachmentApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -666,19 +645,14 @@ void AttachmentApi::attachmentMetadataPartialUpdate(const qint32 &id) {
     HttpRequestInput input(fullPath, "PATCH");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &AttachmentApi::attachmentMetadataPartialUpdateCallback);
     connect(this, &AttachmentApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -763,19 +737,14 @@ void AttachmentApi::attachmentMetadataRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &AttachmentApi::attachmentMetadataRetrieveCallback);
     connect(this, &AttachmentApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -860,19 +829,14 @@ void AttachmentApi::attachmentMetadataUpdate(const qint32 &id) {
     HttpRequestInput input(fullPath, "PUT");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &AttachmentApi::attachmentMetadataUpdateCallback);
     connect(this, &AttachmentApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -962,19 +926,14 @@ void AttachmentApi::attachmentPartialUpdate(const qint32 &id, const ::InvenTree:
         QByteArray output = patched_attachment.value().asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &AttachmentApi::attachmentPartialUpdateCallback);
     connect(this, &AttachmentApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -1060,19 +1019,14 @@ void AttachmentApi::attachmentRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &AttachmentApi::attachmentRetrieveCallback);
     connect(this, &AttachmentApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -1163,19 +1117,14 @@ void AttachmentApi::attachmentUpdate(const qint32 &id, const Attachment &attachm
         QByteArray output = attachment.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &AttachmentApi::attachmentUpdateCallback);
     connect(this, &AttachmentApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }

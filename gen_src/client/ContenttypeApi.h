@@ -61,17 +61,17 @@ public:
     * @param[in]  limit qint32 [optional]
     * @param[in]  offset qint32 [optional]
     */
-    void contenttypeList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>());
+    virtual void contenttypeList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void contenttypeRetrieve(const qint32 &id);
+    virtual void contenttypeRetrieve(const qint32 &id);
 
     /**
     * @param[in]  model QString [required]
     */
-    void contenttypeRetrieveModel(const QString &model);
+    virtual void contenttypeRetrieveModel(const QString &model);
 
 
 private:
@@ -105,6 +105,7 @@ Q_SIGNALS:
     void contenttypeListSignal(PaginatedContentTypeList summary);
     void contenttypeRetrieveSignal(ContentType summary);
     void contenttypeRetrieveModelSignal(ContentType summary);
+
 
     void contenttypeListSignalFull(HttpRequestWorker *worker, PaginatedContentTypeList summary);
     void contenttypeRetrieveSignalFull(HttpRequestWorker *worker, ContentType summary);

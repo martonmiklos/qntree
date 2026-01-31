@@ -40,32 +40,23 @@ void NullEnum::initializeModel() {
 
 void NullEnum::fromJson(QString jsonString) {
     
-    if ( jsonString.compare("null", Qt::CaseInsensitive) == 0) {
-        m_value = eNullEnum::r_NULL;
-        m_value_isSet = m_value_isValid = true;
-    }
 }
 
 void NullEnum::fromJsonValue(QJsonValue json) {
-fromJson(json.toString());
+
 }
 
 QString NullEnum::asJson() const {
     
     QString val;
     switch (m_value){
-        case eNullEnum::r_NULL:
-            val = "null";
-            break;
-        default:
-            break;
     }
     return val;
 }
 
 QJsonValue NullEnum::asJsonValue() const {
     
-    return QJsonValue(asJson());
+    
 }
 
 

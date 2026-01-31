@@ -69,92 +69,92 @@ public:
     /**
     * @param[in]  report_asset ReportAsset [required]
     */
-    void reportAssetCreate(const ReportAsset &report_asset);
+    virtual void reportAssetCreate(const ReportAsset &report_asset);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void reportAssetDestroy(const qint32 &id);
+    virtual void reportAssetDestroy(const qint32 &id);
 
     /**
     * @param[in]  limit qint32 [optional]
     * @param[in]  offset qint32 [optional]
     */
-    void reportAssetList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>());
+    virtual void reportAssetList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>());
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  patched_report_asset PatchedReportAsset [optional]
     */
-    void reportAssetPartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedReportAsset> &patched_report_asset = ::InvenTree::OptionalParam<PatchedReportAsset>());
+    virtual void reportAssetPartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedReportAsset> &patched_report_asset = ::InvenTree::OptionalParam<PatchedReportAsset>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void reportAssetRetrieve(const qint32 &id);
+    virtual void reportAssetRetrieve(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  report_asset ReportAsset [required]
     */
-    void reportAssetUpdate(const qint32 &id, const ReportAsset &report_asset);
+    virtual void reportAssetUpdate(const qint32 &id, const ReportAsset &report_asset);
 
 
-    void reportOutputDestroy();
+    virtual void reportOutputDestroy();
 
     /**
     * @param[in]  limit qint32 [optional]
     * @param[in]  offset qint32 [optional]
     */
-    void reportOutputList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>());
+    virtual void reportOutputList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>());
 
     /**
     * @param[in]  report_print ReportPrint [required]
     */
-    void reportPrintCreate(const ReportPrint &report_print);
+    virtual void reportPrintCreate(const ReportPrint &report_print);
 
     /**
     * @param[in]  report_snippet ReportSnippet [required]
     */
-    void reportSnippetCreate(const ReportSnippet &report_snippet);
+    virtual void reportSnippetCreate(const ReportSnippet &report_snippet);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void reportSnippetDestroy(const qint32 &id);
+    virtual void reportSnippetDestroy(const qint32 &id);
 
     /**
     * @param[in]  limit qint32 [optional]
     * @param[in]  offset qint32 [optional]
     */
-    void reportSnippetList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>());
+    virtual void reportSnippetList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>());
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  patched_report_snippet PatchedReportSnippet [optional]
     */
-    void reportSnippetPartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedReportSnippet> &patched_report_snippet = ::InvenTree::OptionalParam<PatchedReportSnippet>());
+    virtual void reportSnippetPartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedReportSnippet> &patched_report_snippet = ::InvenTree::OptionalParam<PatchedReportSnippet>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void reportSnippetRetrieve(const qint32 &id);
+    virtual void reportSnippetRetrieve(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  report_snippet ReportSnippet [required]
     */
-    void reportSnippetUpdate(const qint32 &id, const ReportSnippet &report_snippet);
+    virtual void reportSnippetUpdate(const qint32 &id, const ReportSnippet &report_snippet);
 
     /**
     * @param[in]  report_template ReportTemplate [required]
     */
-    void reportTemplateCreate(const ReportTemplate &report_template);
+    virtual void reportTemplateCreate(const ReportTemplate &report_template);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void reportTemplateDestroy(const qint32 &id);
+    virtual void reportTemplateDestroy(const qint32 &id);
 
     /**
     * @param[in]  enabled bool [optional]
@@ -165,39 +165,39 @@ public:
     * @param[in]  offset qint32 [optional]
     * @param[in]  search QString [optional]
     */
-    void reportTemplateList(const ::InvenTree::OptionalParam<bool> &enabled = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<QString> &items = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<bool> &landscape = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &model_type = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>());
+    virtual void reportTemplateList(const ::InvenTree::OptionalParam<bool> &enabled = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<QString> &items = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<bool> &landscape = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &model_type = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void reportTemplateMetadataPartialUpdate(const qint32 &id);
+    virtual void reportTemplateMetadataPartialUpdate(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void reportTemplateMetadataRetrieve(const qint32 &id);
+    virtual void reportTemplateMetadataRetrieve(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void reportTemplateMetadataUpdate(const qint32 &id);
+    virtual void reportTemplateMetadataUpdate(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  patched_report_template PatchedReportTemplate [optional]
     */
-    void reportTemplatePartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedReportTemplate> &patched_report_template = ::InvenTree::OptionalParam<PatchedReportTemplate>());
+    virtual void reportTemplatePartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedReportTemplate> &patched_report_template = ::InvenTree::OptionalParam<PatchedReportTemplate>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void reportTemplateRetrieve(const qint32 &id);
+    virtual void reportTemplateRetrieve(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  report_template ReportTemplate [required]
     */
-    void reportTemplateUpdate(const qint32 &id, const ReportTemplate &report_template);
+    virtual void reportTemplateUpdate(const qint32 &id, const ReportTemplate &report_template);
 
 
 private:
@@ -273,6 +273,7 @@ Q_SIGNALS:
     void reportTemplatePartialUpdateSignal(ReportTemplate summary);
     void reportTemplateRetrieveSignal(ReportTemplate summary);
     void reportTemplateUpdateSignal(ReportTemplate summary);
+
 
     void reportAssetCreateSignalFull(HttpRequestWorker *worker, ReportAsset summary);
     void reportAssetDestroySignalFull(HttpRequestWorker *worker);

@@ -57,12 +57,12 @@ public:
     QString getParamStyleDelimiter(const QString &style, const QString &name, bool isExplode);
 
 
-    void webUiPreferenceRetrieve();
+    virtual void webUiPreferenceRetrieve();
 
     /**
     * @param[in]  preferred Preferred [required]
     */
-    void webUiPreferenceUpdate(const Preferred &preferred);
+    virtual void webUiPreferenceUpdate(const Preferred &preferred);
 
 
 private:
@@ -94,6 +94,7 @@ Q_SIGNALS:
 
     void webUiPreferenceRetrieveSignal(Preferred summary);
     void webUiPreferenceUpdateSignal(Preferred summary);
+
 
     void webUiPreferenceRetrieveSignalFull(HttpRequestWorker *worker, Preferred summary);
     void webUiPreferenceUpdateSignalFull(HttpRequestWorker *worker, Preferred summary);

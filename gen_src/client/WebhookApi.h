@@ -58,7 +58,7 @@ public:
     /**
     * @param[in]  endpoint QString [required]
     */
-    void webhookCreate(const QString &endpoint);
+    virtual void webhookCreate(const QString &endpoint);
 
 
 private:
@@ -88,6 +88,7 @@ private:
 Q_SIGNALS:
 
     void webhookCreateSignal();
+
 
     void webhookCreateSignalFull(HttpRequestWorker *worker);
 

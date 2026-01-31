@@ -281,7 +281,7 @@ QJsonObject PatchedReturnOrder::asJsonObject() const {
     if (m_customer_reference_isSet) {
         obj.insert(QString("customer_reference"), ::InvenTree::toJsonValue(m_customer_reference));
     }
-    if (m_order_currency.isSet()) {
+    if (m_order_currency_isSet) {
         obj.insert(QString("order_currency"), ::InvenTree::toJsonValue(m_order_currency));
     }
     if (m_total_price_isSet) {
@@ -674,10 +674,10 @@ bool PatchedReturnOrder::is_customer_reference_Valid() const{
     return m_customer_reference_isValid;
 }
 
-PatchedPurchaseOrder_order_currency PatchedReturnOrder::getOrderCurrency() const {
+QString PatchedReturnOrder::getOrderCurrency() const {
     return m_order_currency;
 }
-void PatchedReturnOrder::setOrderCurrency(const PatchedPurchaseOrder_order_currency &order_currency) {
+void PatchedReturnOrder::setOrderCurrency(const QString &order_currency) {
     m_order_currency = order_currency;
     m_order_currency_isSet = true;
 }
@@ -829,7 +829,7 @@ bool PatchedReturnOrder::isSet() const {
             break;
         }
 
-        if (m_order_currency.isSet()) {
+        if (m_order_currency_isSet) {
             isObjectUpdated = true;
             break;
         }

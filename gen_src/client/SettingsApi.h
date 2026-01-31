@@ -70,24 +70,24 @@ public:
     * @param[in]  ordering QString [optional]
     * @param[in]  search QString [optional]
     */
-    void settingsGlobalList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>());
+    virtual void settingsGlobalList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>());
 
     /**
     * @param[in]  key QString [required]
     * @param[in]  patched_global_settings PatchedGlobalSettings [optional]
     */
-    void settingsGlobalPartialUpdate(const QString &key, const ::InvenTree::OptionalParam<PatchedGlobalSettings> &patched_global_settings = ::InvenTree::OptionalParam<PatchedGlobalSettings>());
+    virtual void settingsGlobalPartialUpdate(const QString &key, const ::InvenTree::OptionalParam<PatchedGlobalSettings> &patched_global_settings = ::InvenTree::OptionalParam<PatchedGlobalSettings>());
 
     /**
     * @param[in]  key QString [required]
     */
-    void settingsGlobalRetrieve(const QString &key);
+    virtual void settingsGlobalRetrieve(const QString &key);
 
     /**
     * @param[in]  key QString [required]
     * @param[in]  global_settings GlobalSettings [required]
     */
-    void settingsGlobalUpdate(const QString &key, const GlobalSettings &global_settings);
+    virtual void settingsGlobalUpdate(const QString &key, const GlobalSettings &global_settings);
 
     /**
     * @param[in]  limit qint32 [optional]
@@ -95,24 +95,24 @@ public:
     * @param[in]  ordering QString [optional]
     * @param[in]  search QString [optional]
     */
-    void settingsNotificationList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>());
+    virtual void settingsNotificationList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>());
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  patched_notification_user_setting PatchedNotificationUserSetting [optional]
     */
-    void settingsNotificationPartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedNotificationUserSetting> &patched_notification_user_setting = ::InvenTree::OptionalParam<PatchedNotificationUserSetting>());
+    virtual void settingsNotificationPartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedNotificationUserSetting> &patched_notification_user_setting = ::InvenTree::OptionalParam<PatchedNotificationUserSetting>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void settingsNotificationRetrieve(const qint32 &id);
+    virtual void settingsNotificationRetrieve(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  notification_user_setting NotificationUserSetting [required]
     */
-    void settingsNotificationUpdate(const qint32 &id, const NotificationUserSetting &notification_user_setting);
+    virtual void settingsNotificationUpdate(const qint32 &id, const NotificationUserSetting &notification_user_setting);
 
     /**
     * @param[in]  limit qint32 [optional]
@@ -120,24 +120,24 @@ public:
     * @param[in]  ordering QString [optional]
     * @param[in]  search QString [optional]
     */
-    void settingsUserList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>());
+    virtual void settingsUserList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>());
 
     /**
     * @param[in]  key QString [required]
     * @param[in]  patched_user_settings PatchedUserSettings [optional]
     */
-    void settingsUserPartialUpdate(const QString &key, const ::InvenTree::OptionalParam<PatchedUserSettings> &patched_user_settings = ::InvenTree::OptionalParam<PatchedUserSettings>());
+    virtual void settingsUserPartialUpdate(const QString &key, const ::InvenTree::OptionalParam<PatchedUserSettings> &patched_user_settings = ::InvenTree::OptionalParam<PatchedUserSettings>());
 
     /**
     * @param[in]  key QString [required]
     */
-    void settingsUserRetrieve(const QString &key);
+    virtual void settingsUserRetrieve(const QString &key);
 
     /**
     * @param[in]  key QString [required]
     * @param[in]  user_settings UserSettings [required]
     */
-    void settingsUserUpdate(const QString &key, const UserSettings &user_settings);
+    virtual void settingsUserUpdate(const QString &key, const UserSettings &user_settings);
 
 
 private:
@@ -189,6 +189,7 @@ Q_SIGNALS:
     void settingsUserPartialUpdateSignal(UserSettings summary);
     void settingsUserRetrieveSignal(UserSettings summary);
     void settingsUserUpdateSignal(UserSettings summary);
+
 
     void settingsGlobalListSignalFull(HttpRequestWorker *worker, PaginatedGlobalSettingsList summary);
     void settingsGlobalPartialUpdateSignalFull(HttpRequestWorker *worker, GlobalSettings summary);

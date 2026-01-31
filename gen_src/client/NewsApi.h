@@ -59,12 +59,12 @@ public:
     QString getParamStyleDelimiter(const QString &style, const QString &name, bool isExplode);
 
 
-    void newsDestroy();
+    virtual void newsDestroy();
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void newsDestroy2(const qint32 &id);
+    virtual void newsDestroy2(const qint32 &id);
 
     /**
     * @param[in]  limit qint32 [optional]
@@ -72,24 +72,24 @@ public:
     * @param[in]  ordering QString [optional]
     * @param[in]  read bool [optional]
     */
-    void newsList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<bool> &read = ::InvenTree::OptionalParam<bool>());
+    virtual void newsList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<bool> &read = ::InvenTree::OptionalParam<bool>());
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  patched_news_feed_entry PatchedNewsFeedEntry [optional]
     */
-    void newsPartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedNewsFeedEntry> &patched_news_feed_entry = ::InvenTree::OptionalParam<PatchedNewsFeedEntry>());
+    virtual void newsPartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedNewsFeedEntry> &patched_news_feed_entry = ::InvenTree::OptionalParam<PatchedNewsFeedEntry>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void newsRetrieve(const qint32 &id);
+    virtual void newsRetrieve(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  news_feed_entry NewsFeedEntry [required]
     */
-    void newsUpdate(const qint32 &id, const NewsFeedEntry &news_feed_entry);
+    virtual void newsUpdate(const qint32 &id, const NewsFeedEntry &news_feed_entry);
 
 
 private:
@@ -129,6 +129,7 @@ Q_SIGNALS:
     void newsPartialUpdateSignal(NewsFeedEntry summary);
     void newsRetrieveSignal(NewsFeedEntry summary);
     void newsUpdateSignal(NewsFeedEntry summary);
+
 
     void newsDestroySignalFull(HttpRequestWorker *worker);
     void newsDestroy2SignalFull(HttpRequestWorker *worker);

@@ -308,15 +308,9 @@ int PartApi::addServerConfiguration(const QString &operation, const QUrl &url, c
     * @param variables A map between a variable name and its value. The value is used for substitution in the server's URL template.
     */
 void PartApi::setNewServerForAllOperations(const QUrl &url, const QString &description, const QMap<QString, ServerVariable> &variables) {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
     for (auto keyIt = _serverIndices.keyBegin(); keyIt != _serverIndices.keyEnd(); keyIt++) {
         setServerIndex(*keyIt, addServerConfiguration(*keyIt, url, description, variables));
     }
-#else
-    for (auto &e : _serverIndices.keys()) {
-        setServerIndex(e, addServerConfiguration(e, url, description, variables));
-    }
-#endif
 }
 
 /**
@@ -445,19 +439,14 @@ void PartApi::partBomCopyCreate(const qint32 &id, const PartCopyBOM &part_copy_b
         QByteArray output = part_copy_bom.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partBomCopyCreateCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -548,19 +537,14 @@ void PartApi::partBomValidatePartialUpdate(const qint32 &id, const ::InvenTree::
         QByteArray output = patched_bom_validate.value().asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partBomValidatePartialUpdateCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -646,19 +630,14 @@ void PartApi::partBomValidateRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partBomValidateRetrieveCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -749,19 +728,14 @@ void PartApi::partBomValidateUpdate(const qint32 &id, const ::InvenTree::Optiona
         QByteArray output = bom_validate.value().asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partBomValidateUpdateCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -838,19 +812,14 @@ void PartApi::partCategoryCreate(const Category &category) {
         QByteArray output = category.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partCategoryCreateCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -936,19 +905,14 @@ void PartApi::partCategoryDestroy(const qint32 &id) {
     HttpRequestInput input(fullPath, "DELETE");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partCategoryDestroyCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -1027,7 +991,7 @@ void PartApi::partCategoryList(const ::InvenTree::OptionalParam<bool> &cascade, 
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("cascade")).append(querySuffix).append(QUrl::toPercentEncoding(cascade.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("cascade")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(cascade.stringValue())));
     }
     if (depth.hasValue())
     {
@@ -1042,7 +1006,7 @@ void PartApi::partCategoryList(const ::InvenTree::OptionalParam<bool> &cascade, 
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("depth")).append(querySuffix).append(QUrl::toPercentEncoding(depth.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("depth")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(depth.stringValue())));
     }
     if (exclude_tree.hasValue())
     {
@@ -1057,7 +1021,7 @@ void PartApi::partCategoryList(const ::InvenTree::OptionalParam<bool> &cascade, 
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("exclude_tree")).append(querySuffix).append(QUrl::toPercentEncoding(exclude_tree.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("exclude_tree")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(exclude_tree.stringValue())));
     }
     if (limit.hasValue())
     {
@@ -1072,7 +1036,7 @@ void PartApi::partCategoryList(const ::InvenTree::OptionalParam<bool> &cascade, 
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(limit.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(limit.stringValue())));
     }
     if (name.hasValue())
     {
@@ -1087,7 +1051,7 @@ void PartApi::partCategoryList(const ::InvenTree::OptionalParam<bool> &cascade, 
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("name")).append(querySuffix).append(QUrl::toPercentEncoding(name.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("name")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(name.stringValue())));
     }
     if (offset.hasValue())
     {
@@ -1102,7 +1066,7 @@ void PartApi::partCategoryList(const ::InvenTree::OptionalParam<bool> &cascade, 
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(offset.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(offset.stringValue())));
     }
     if (ordering.hasValue())
     {
@@ -1117,7 +1081,7 @@ void PartApi::partCategoryList(const ::InvenTree::OptionalParam<bool> &cascade, 
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(ordering.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(ordering.stringValue())));
     }
     if (parent.hasValue())
     {
@@ -1132,7 +1096,7 @@ void PartApi::partCategoryList(const ::InvenTree::OptionalParam<bool> &cascade, 
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("parent")).append(querySuffix).append(QUrl::toPercentEncoding(parent.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("parent")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(parent.stringValue())));
     }
     if (search.hasValue())
     {
@@ -1147,7 +1111,7 @@ void PartApi::partCategoryList(const ::InvenTree::OptionalParam<bool> &cascade, 
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(search.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(search.stringValue())));
     }
     if (starred.hasValue())
     {
@@ -1162,7 +1126,7 @@ void PartApi::partCategoryList(const ::InvenTree::OptionalParam<bool> &cascade, 
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("starred")).append(querySuffix).append(QUrl::toPercentEncoding(starred.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("starred")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(starred.stringValue())));
     }
     if (structural.hasValue())
     {
@@ -1177,7 +1141,7 @@ void PartApi::partCategoryList(const ::InvenTree::OptionalParam<bool> &cascade, 
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("structural")).append(querySuffix).append(QUrl::toPercentEncoding(structural.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("structural")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(structural.stringValue())));
     }
     if (top_level.hasValue())
     {
@@ -1192,7 +1156,7 @@ void PartApi::partCategoryList(const ::InvenTree::OptionalParam<bool> &cascade, 
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("top_level")).append(querySuffix).append(QUrl::toPercentEncoding(top_level.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("top_level")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(top_level.stringValue())));
     }
     HttpRequestWorker *worker = new HttpRequestWorker(this, _manager);
     worker->setTimeOut(_timeOut);
@@ -1200,19 +1164,14 @@ void PartApi::partCategoryList(const ::InvenTree::OptionalParam<bool> &cascade, 
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partCategoryListCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -1298,19 +1257,14 @@ void PartApi::partCategoryMetadataPartialUpdate(const qint32 &id) {
     HttpRequestInput input(fullPath, "PATCH");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partCategoryMetadataPartialUpdateCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -1395,19 +1349,14 @@ void PartApi::partCategoryMetadataRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partCategoryMetadataRetrieveCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -1492,19 +1441,14 @@ void PartApi::partCategoryMetadataUpdate(const qint32 &id) {
     HttpRequestInput input(fullPath, "PUT");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partCategoryMetadataUpdateCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -1580,19 +1524,14 @@ void PartApi::partCategoryParametersCreate(const CategoryParameterTemplate &cate
         QByteArray output = category_parameter_template.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partCategoryParametersCreateCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -1678,19 +1617,14 @@ void PartApi::partCategoryParametersDestroy(const qint32 &id) {
     HttpRequestInput input(fullPath, "DELETE");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partCategoryParametersDestroyCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -1769,7 +1703,7 @@ void PartApi::partCategoryParametersList(const ::InvenTree::OptionalParam<qint32
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(limit.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(limit.stringValue())));
     }
     if (offset.hasValue())
     {
@@ -1784,7 +1718,7 @@ void PartApi::partCategoryParametersList(const ::InvenTree::OptionalParam<qint32
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(offset.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(offset.stringValue())));
     }
     HttpRequestWorker *worker = new HttpRequestWorker(this, _manager);
     worker->setTimeOut(_timeOut);
@@ -1792,19 +1726,14 @@ void PartApi::partCategoryParametersList(const ::InvenTree::OptionalParam<qint32
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partCategoryParametersListCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -1890,19 +1819,14 @@ void PartApi::partCategoryParametersMetadataPartialUpdate(const qint32 &id) {
     HttpRequestInput input(fullPath, "PATCH");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partCategoryParametersMetadataPartialUpdateCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -1987,19 +1911,14 @@ void PartApi::partCategoryParametersMetadataRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partCategoryParametersMetadataRetrieveCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -2084,19 +2003,14 @@ void PartApi::partCategoryParametersMetadataUpdate(const qint32 &id) {
     HttpRequestInput input(fullPath, "PUT");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partCategoryParametersMetadataUpdateCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -2186,19 +2100,14 @@ void PartApi::partCategoryParametersPartialUpdate(const qint32 &id, const ::Inve
         QByteArray output = patched_category_parameter_template.value().asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partCategoryParametersPartialUpdateCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -2284,19 +2193,14 @@ void PartApi::partCategoryParametersRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partCategoryParametersRetrieveCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -2387,19 +2291,14 @@ void PartApi::partCategoryParametersUpdate(const qint32 &id, const CategoryParam
         QByteArray output = category_parameter_template.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partCategoryParametersUpdateCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -2490,19 +2389,14 @@ void PartApi::partCategoryPartialUpdate(const qint32 &id, const ::InvenTree::Opt
         QByteArray output = patched_category.value().asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partCategoryPartialUpdateCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -2588,19 +2482,14 @@ void PartApi::partCategoryRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partCategoryRetrieveCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -2680,7 +2569,7 @@ void PartApi::partCategoryTreeList(const ::InvenTree::OptionalParam<qint32> &lim
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(limit.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(limit.stringValue())));
     }
     if (offset.hasValue())
     {
@@ -2695,7 +2584,7 @@ void PartApi::partCategoryTreeList(const ::InvenTree::OptionalParam<qint32> &lim
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(offset.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(offset.stringValue())));
     }
     if (ordering.hasValue())
     {
@@ -2710,7 +2599,7 @@ void PartApi::partCategoryTreeList(const ::InvenTree::OptionalParam<qint32> &lim
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(ordering.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(ordering.stringValue())));
     }
     HttpRequestWorker *worker = new HttpRequestWorker(this, _manager);
     worker->setTimeOut(_timeOut);
@@ -2718,19 +2607,14 @@ void PartApi::partCategoryTreeList(const ::InvenTree::OptionalParam<qint32> &lim
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partCategoryTreeListCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -2821,19 +2705,14 @@ void PartApi::partCategoryUpdate(const qint32 &id, const Category &category) {
         QByteArray output = category.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partCategoryUpdateCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -2910,19 +2789,14 @@ void PartApi::partChangeCategoryCreate(const PartSetCategory &part_set_category)
         QByteArray output = part_set_category.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partChangeCategoryCreateCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -2999,19 +2873,14 @@ void PartApi::partCreate(const Part &part) {
         QByteArray output = part.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partCreateCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -3097,19 +2966,14 @@ void PartApi::partDestroy(const qint32 &id) {
     HttpRequestInput input(fullPath, "DELETE");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partDestroyCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -3185,19 +3049,14 @@ void PartApi::partInternalPriceCreate(const PartInternalPrice &part_internal_pri
         QByteArray output = part_internal_price.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partInternalPriceCreateCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -3283,19 +3142,14 @@ void PartApi::partInternalPriceDestroy(const qint32 &id) {
     HttpRequestInput input(fullPath, "DELETE");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partInternalPriceDestroyCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -3374,7 +3228,7 @@ void PartApi::partInternalPriceList(const ::InvenTree::OptionalParam<qint32> &li
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(limit.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(limit.stringValue())));
     }
     if (offset.hasValue())
     {
@@ -3389,7 +3243,7 @@ void PartApi::partInternalPriceList(const ::InvenTree::OptionalParam<qint32> &li
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(offset.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(offset.stringValue())));
     }
     if (ordering.hasValue())
     {
@@ -3404,7 +3258,7 @@ void PartApi::partInternalPriceList(const ::InvenTree::OptionalParam<qint32> &li
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(ordering.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(ordering.stringValue())));
     }
     if (part.hasValue())
     {
@@ -3419,7 +3273,7 @@ void PartApi::partInternalPriceList(const ::InvenTree::OptionalParam<qint32> &li
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("part")).append(querySuffix).append(QUrl::toPercentEncoding(part.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("part")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(part.stringValue())));
     }
     if (search.hasValue())
     {
@@ -3434,7 +3288,7 @@ void PartApi::partInternalPriceList(const ::InvenTree::OptionalParam<qint32> &li
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(search.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(search.stringValue())));
     }
     HttpRequestWorker *worker = new HttpRequestWorker(this, _manager);
     worker->setTimeOut(_timeOut);
@@ -3442,19 +3296,14 @@ void PartApi::partInternalPriceList(const ::InvenTree::OptionalParam<qint32> &li
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partInternalPriceListCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -3545,19 +3394,14 @@ void PartApi::partInternalPricePartialUpdate(const qint32 &id, const ::InvenTree
         QByteArray output = patched_part_internal_price.value().asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partInternalPricePartialUpdateCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -3643,19 +3487,14 @@ void PartApi::partInternalPriceRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partInternalPriceRetrieveCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -3746,19 +3585,14 @@ void PartApi::partInternalPriceUpdate(const qint32 &id, const PartInternalPrice 
         QByteArray output = part_internal_price.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partInternalPriceUpdateCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -3838,7 +3672,7 @@ void PartApi::partList(const ::InvenTree::OptionalParam<QString> &ipn, const ::I
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("IPN")).append(querySuffix).append(QUrl::toPercentEncoding(ipn.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("IPN")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(ipn.stringValue())));
     }
     if (ipn_regex.hasValue())
     {
@@ -3853,7 +3687,7 @@ void PartApi::partList(const ::InvenTree::OptionalParam<QString> &ipn, const ::I
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("IPN_regex")).append(querySuffix).append(QUrl::toPercentEncoding(ipn_regex.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("IPN_regex")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(ipn_regex.stringValue())));
     }
     if (active.hasValue())
     {
@@ -3868,7 +3702,7 @@ void PartApi::partList(const ::InvenTree::OptionalParam<QString> &ipn, const ::I
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("active")).append(querySuffix).append(QUrl::toPercentEncoding(active.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("active")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(active.stringValue())));
     }
     if (ancestor.hasValue())
     {
@@ -3883,7 +3717,7 @@ void PartApi::partList(const ::InvenTree::OptionalParam<QString> &ipn, const ::I
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("ancestor")).append(querySuffix).append(QUrl::toPercentEncoding(ancestor.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("ancestor")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(ancestor.stringValue())));
     }
     if (assembly.hasValue())
     {
@@ -3898,7 +3732,7 @@ void PartApi::partList(const ::InvenTree::OptionalParam<QString> &ipn, const ::I
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("assembly")).append(querySuffix).append(QUrl::toPercentEncoding(assembly.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("assembly")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(assembly.stringValue())));
     }
     if (bom_valid.hasValue())
     {
@@ -3913,7 +3747,7 @@ void PartApi::partList(const ::InvenTree::OptionalParam<QString> &ipn, const ::I
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("bom_valid")).append(querySuffix).append(QUrl::toPercentEncoding(bom_valid.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("bom_valid")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(bom_valid.stringValue())));
     }
     if (component.hasValue())
     {
@@ -3928,7 +3762,7 @@ void PartApi::partList(const ::InvenTree::OptionalParam<QString> &ipn, const ::I
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("component")).append(querySuffix).append(QUrl::toPercentEncoding(component.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("component")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(component.stringValue())));
     }
     if (convert_from.hasValue())
     {
@@ -3943,7 +3777,7 @@ void PartApi::partList(const ::InvenTree::OptionalParam<QString> &ipn, const ::I
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("convert_from")).append(querySuffix).append(QUrl::toPercentEncoding(convert_from.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("convert_from")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(convert_from.stringValue())));
     }
     if (created_after.hasValue())
     {
@@ -3958,7 +3792,7 @@ void PartApi::partList(const ::InvenTree::OptionalParam<QString> &ipn, const ::I
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("created_after")).append(querySuffix).append(QUrl::toPercentEncoding(created_after.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("created_after")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(created_after.stringValue())));
     }
     if (created_before.hasValue())
     {
@@ -3973,7 +3807,7 @@ void PartApi::partList(const ::InvenTree::OptionalParam<QString> &ipn, const ::I
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("created_before")).append(querySuffix).append(QUrl::toPercentEncoding(created_before.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("created_before")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(created_before.stringValue())));
     }
     if (default_location.hasValue())
     {
@@ -3988,7 +3822,7 @@ void PartApi::partList(const ::InvenTree::OptionalParam<QString> &ipn, const ::I
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("default_location")).append(querySuffix).append(QUrl::toPercentEncoding(default_location.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("default_location")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(default_location.stringValue())));
     }
     if (depleted_stock.hasValue())
     {
@@ -4003,7 +3837,7 @@ void PartApi::partList(const ::InvenTree::OptionalParam<QString> &ipn, const ::I
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("depleted_stock")).append(querySuffix).append(QUrl::toPercentEncoding(depleted_stock.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("depleted_stock")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(depleted_stock.stringValue())));
     }
     if (exclude_tree.hasValue())
     {
@@ -4018,7 +3852,7 @@ void PartApi::partList(const ::InvenTree::OptionalParam<QString> &ipn, const ::I
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("exclude_tree")).append(querySuffix).append(QUrl::toPercentEncoding(exclude_tree.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("exclude_tree")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(exclude_tree.stringValue())));
     }
     if (has_ipn.hasValue())
     {
@@ -4033,7 +3867,7 @@ void PartApi::partList(const ::InvenTree::OptionalParam<QString> &ipn, const ::I
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("has_ipn")).append(querySuffix).append(QUrl::toPercentEncoding(has_ipn.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("has_ipn")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(has_ipn.stringValue())));
     }
     if (has_pricing.hasValue())
     {
@@ -4048,7 +3882,7 @@ void PartApi::partList(const ::InvenTree::OptionalParam<QString> &ipn, const ::I
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("has_pricing")).append(querySuffix).append(QUrl::toPercentEncoding(has_pricing.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("has_pricing")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(has_pricing.stringValue())));
     }
     if (has_revisions.hasValue())
     {
@@ -4063,7 +3897,7 @@ void PartApi::partList(const ::InvenTree::OptionalParam<QString> &ipn, const ::I
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("has_revisions")).append(querySuffix).append(QUrl::toPercentEncoding(has_revisions.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("has_revisions")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(has_revisions.stringValue())));
     }
     if (has_stock.hasValue())
     {
@@ -4078,7 +3912,7 @@ void PartApi::partList(const ::InvenTree::OptionalParam<QString> &ipn, const ::I
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("has_stock")).append(querySuffix).append(QUrl::toPercentEncoding(has_stock.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("has_stock")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(has_stock.stringValue())));
     }
     if (has_units.hasValue())
     {
@@ -4093,7 +3927,7 @@ void PartApi::partList(const ::InvenTree::OptionalParam<QString> &ipn, const ::I
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("has_units")).append(querySuffix).append(QUrl::toPercentEncoding(has_units.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("has_units")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(has_units.stringValue())));
     }
     if (in_bom_for.hasValue())
     {
@@ -4108,7 +3942,7 @@ void PartApi::partList(const ::InvenTree::OptionalParam<QString> &ipn, const ::I
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("in_bom_for")).append(querySuffix).append(QUrl::toPercentEncoding(in_bom_for.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("in_bom_for")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(in_bom_for.stringValue())));
     }
     if (is_revision.hasValue())
     {
@@ -4123,7 +3957,7 @@ void PartApi::partList(const ::InvenTree::OptionalParam<QString> &ipn, const ::I
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("is_revision")).append(querySuffix).append(QUrl::toPercentEncoding(is_revision.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("is_revision")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(is_revision.stringValue())));
     }
     if (is_template.hasValue())
     {
@@ -4138,7 +3972,7 @@ void PartApi::partList(const ::InvenTree::OptionalParam<QString> &ipn, const ::I
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("is_template")).append(querySuffix).append(QUrl::toPercentEncoding(is_template.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("is_template")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(is_template.stringValue())));
     }
     if (limit.hasValue())
     {
@@ -4153,7 +3987,7 @@ void PartApi::partList(const ::InvenTree::OptionalParam<QString> &ipn, const ::I
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(limit.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(limit.stringValue())));
     }
     if (locked.hasValue())
     {
@@ -4168,7 +4002,7 @@ void PartApi::partList(const ::InvenTree::OptionalParam<QString> &ipn, const ::I
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("locked")).append(querySuffix).append(QUrl::toPercentEncoding(locked.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("locked")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(locked.stringValue())));
     }
     if (low_stock.hasValue())
     {
@@ -4183,7 +4017,7 @@ void PartApi::partList(const ::InvenTree::OptionalParam<QString> &ipn, const ::I
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("low_stock")).append(querySuffix).append(QUrl::toPercentEncoding(low_stock.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("low_stock")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(low_stock.stringValue())));
     }
     if (name_regex.hasValue())
     {
@@ -4198,7 +4032,7 @@ void PartApi::partList(const ::InvenTree::OptionalParam<QString> &ipn, const ::I
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("name_regex")).append(querySuffix).append(QUrl::toPercentEncoding(name_regex.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("name_regex")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(name_regex.stringValue())));
     }
     if (offset.hasValue())
     {
@@ -4213,7 +4047,7 @@ void PartApi::partList(const ::InvenTree::OptionalParam<QString> &ipn, const ::I
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(offset.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(offset.stringValue())));
     }
     if (ordering.hasValue())
     {
@@ -4228,7 +4062,7 @@ void PartApi::partList(const ::InvenTree::OptionalParam<QString> &ipn, const ::I
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(ordering.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(ordering.stringValue())));
     }
     if (purchaseable.hasValue())
     {
@@ -4243,7 +4077,7 @@ void PartApi::partList(const ::InvenTree::OptionalParam<QString> &ipn, const ::I
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("purchaseable")).append(querySuffix).append(QUrl::toPercentEncoding(purchaseable.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("purchaseable")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(purchaseable.stringValue())));
     }
     if (revision_of.hasValue())
     {
@@ -4258,7 +4092,7 @@ void PartApi::partList(const ::InvenTree::OptionalParam<QString> &ipn, const ::I
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("revision_of")).append(querySuffix).append(QUrl::toPercentEncoding(revision_of.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("revision_of")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(revision_of.stringValue())));
     }
     if (salable.hasValue())
     {
@@ -4273,7 +4107,7 @@ void PartApi::partList(const ::InvenTree::OptionalParam<QString> &ipn, const ::I
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("salable")).append(querySuffix).append(QUrl::toPercentEncoding(salable.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("salable")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(salable.stringValue())));
     }
     if (search.hasValue())
     {
@@ -4288,7 +4122,7 @@ void PartApi::partList(const ::InvenTree::OptionalParam<QString> &ipn, const ::I
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(search.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(search.stringValue())));
     }
     if (starred.hasValue())
     {
@@ -4303,7 +4137,7 @@ void PartApi::partList(const ::InvenTree::OptionalParam<QString> &ipn, const ::I
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("starred")).append(querySuffix).append(QUrl::toPercentEncoding(starred.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("starred")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(starred.stringValue())));
     }
     if (stock_to_build.hasValue())
     {
@@ -4318,7 +4152,7 @@ void PartApi::partList(const ::InvenTree::OptionalParam<QString> &ipn, const ::I
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("stock_to_build")).append(querySuffix).append(QUrl::toPercentEncoding(stock_to_build.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("stock_to_build")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(stock_to_build.stringValue())));
     }
     if (stocktake.hasValue())
     {
@@ -4333,7 +4167,7 @@ void PartApi::partList(const ::InvenTree::OptionalParam<QString> &ipn, const ::I
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("stocktake")).append(querySuffix).append(QUrl::toPercentEncoding(stocktake.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("stocktake")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(stocktake.stringValue())));
     }
     if (tags_name.hasValue())
     {
@@ -4348,7 +4182,7 @@ void PartApi::partList(const ::InvenTree::OptionalParam<QString> &ipn, const ::I
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("tags_name")).append(querySuffix).append(QUrl::toPercentEncoding(tags_name.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("tags_name")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(tags_name.stringValue())));
     }
     if (tags_slug.hasValue())
     {
@@ -4363,7 +4197,7 @@ void PartApi::partList(const ::InvenTree::OptionalParam<QString> &ipn, const ::I
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("tags_slug")).append(querySuffix).append(QUrl::toPercentEncoding(tags_slug.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("tags_slug")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(tags_slug.stringValue())));
     }
     if (trackable.hasValue())
     {
@@ -4378,7 +4212,7 @@ void PartApi::partList(const ::InvenTree::OptionalParam<QString> &ipn, const ::I
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("trackable")).append(querySuffix).append(QUrl::toPercentEncoding(trackable.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("trackable")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(trackable.stringValue())));
     }
     if (unallocated_stock.hasValue())
     {
@@ -4393,7 +4227,7 @@ void PartApi::partList(const ::InvenTree::OptionalParam<QString> &ipn, const ::I
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("unallocated_stock")).append(querySuffix).append(QUrl::toPercentEncoding(unallocated_stock.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("unallocated_stock")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(unallocated_stock.stringValue())));
     }
     if (variant_of.hasValue())
     {
@@ -4408,7 +4242,7 @@ void PartApi::partList(const ::InvenTree::OptionalParam<QString> &ipn, const ::I
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("variant_of")).append(querySuffix).append(QUrl::toPercentEncoding(variant_of.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("variant_of")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(variant_of.stringValue())));
     }
     if (r_virtual.hasValue())
     {
@@ -4423,7 +4257,7 @@ void PartApi::partList(const ::InvenTree::OptionalParam<QString> &ipn, const ::I
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("virtual")).append(querySuffix).append(QUrl::toPercentEncoding(r_virtual.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("virtual")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(r_virtual.stringValue())));
     }
     HttpRequestWorker *worker = new HttpRequestWorker(this, _manager);
     worker->setTimeOut(_timeOut);
@@ -4431,19 +4265,14 @@ void PartApi::partList(const ::InvenTree::OptionalParam<QString> &ipn, const ::I
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partListCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -4529,19 +4358,14 @@ void PartApi::partMetadataPartialUpdate(const qint32 &id) {
     HttpRequestInput input(fullPath, "PATCH");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partMetadataPartialUpdateCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -4626,19 +4450,14 @@ void PartApi::partMetadataRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partMetadataRetrieveCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -4723,19 +4542,14 @@ void PartApi::partMetadataUpdate(const qint32 &id) {
     HttpRequestInput input(fullPath, "PUT");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partMetadataUpdateCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -4811,19 +4625,14 @@ void PartApi::partParameterCreate(const PartParameter &part_parameter) {
         QByteArray output = part_parameter.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partParameterCreateCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -4909,19 +4718,14 @@ void PartApi::partParameterDestroy(const qint32 &id) {
     HttpRequestInput input(fullPath, "DELETE");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partParameterDestroyCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -5000,7 +4804,7 @@ void PartApi::partParameterList(const ::InvenTree::OptionalParam<qint32> &limit,
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(limit.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(limit.stringValue())));
     }
     if (offset.hasValue())
     {
@@ -5015,7 +4819,7 @@ void PartApi::partParameterList(const ::InvenTree::OptionalParam<qint32> &limit,
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(offset.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(offset.stringValue())));
     }
     if (ordering.hasValue())
     {
@@ -5030,7 +4834,7 @@ void PartApi::partParameterList(const ::InvenTree::OptionalParam<qint32> &limit,
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(ordering.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(ordering.stringValue())));
     }
     if (part.hasValue())
     {
@@ -5045,7 +4849,7 @@ void PartApi::partParameterList(const ::InvenTree::OptionalParam<qint32> &limit,
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("part")).append(querySuffix).append(QUrl::toPercentEncoding(part.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("part")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(part.stringValue())));
     }
     if (search.hasValue())
     {
@@ -5060,7 +4864,7 @@ void PartApi::partParameterList(const ::InvenTree::OptionalParam<qint32> &limit,
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(search.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(search.stringValue())));
     }
     if (r_template.hasValue())
     {
@@ -5075,7 +4879,7 @@ void PartApi::partParameterList(const ::InvenTree::OptionalParam<qint32> &limit,
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("template")).append(querySuffix).append(QUrl::toPercentEncoding(r_template.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("template")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(r_template.stringValue())));
     }
     HttpRequestWorker *worker = new HttpRequestWorker(this, _manager);
     worker->setTimeOut(_timeOut);
@@ -5083,19 +4887,14 @@ void PartApi::partParameterList(const ::InvenTree::OptionalParam<qint32> &limit,
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partParameterListCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -5181,19 +4980,14 @@ void PartApi::partParameterMetadataPartialUpdate(const qint32 &id) {
     HttpRequestInput input(fullPath, "PATCH");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partParameterMetadataPartialUpdateCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -5278,19 +5072,14 @@ void PartApi::partParameterMetadataRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partParameterMetadataRetrieveCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -5375,19 +5164,14 @@ void PartApi::partParameterMetadataUpdate(const qint32 &id) {
     HttpRequestInput input(fullPath, "PUT");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partParameterMetadataUpdateCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -5477,19 +5261,14 @@ void PartApi::partParameterPartialUpdate(const qint32 &id, const ::InvenTree::Op
         QByteArray output = patched_part_parameter.value().asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partParameterPartialUpdateCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -5575,19 +5354,14 @@ void PartApi::partParameterRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partParameterRetrieveCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -5664,19 +5438,14 @@ void PartApi::partParameterTemplateCreate(const PartParameterTemplate &part_para
         QByteArray output = part_parameter_template.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partParameterTemplateCreateCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -5762,19 +5531,14 @@ void PartApi::partParameterTemplateDestroy(const qint32 &id) {
     HttpRequestInput input(fullPath, "DELETE");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partParameterTemplateDestroyCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -5853,7 +5617,7 @@ void PartApi::partParameterTemplateList(const ::InvenTree::OptionalParam<qint32>
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("category")).append(querySuffix).append(QUrl::toPercentEncoding(category.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("category")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(category.stringValue())));
     }
     if (checkbox.hasValue())
     {
@@ -5868,7 +5632,7 @@ void PartApi::partParameterTemplateList(const ::InvenTree::OptionalParam<qint32>
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("checkbox")).append(querySuffix).append(QUrl::toPercentEncoding(checkbox.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("checkbox")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(checkbox.stringValue())));
     }
     if (has_choices.hasValue())
     {
@@ -5883,7 +5647,7 @@ void PartApi::partParameterTemplateList(const ::InvenTree::OptionalParam<qint32>
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("has_choices")).append(querySuffix).append(QUrl::toPercentEncoding(has_choices.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("has_choices")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(has_choices.stringValue())));
     }
     if (has_units.hasValue())
     {
@@ -5898,7 +5662,7 @@ void PartApi::partParameterTemplateList(const ::InvenTree::OptionalParam<qint32>
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("has_units")).append(querySuffix).append(QUrl::toPercentEncoding(has_units.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("has_units")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(has_units.stringValue())));
     }
     if (limit.hasValue())
     {
@@ -5913,7 +5677,7 @@ void PartApi::partParameterTemplateList(const ::InvenTree::OptionalParam<qint32>
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(limit.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(limit.stringValue())));
     }
     if (name.hasValue())
     {
@@ -5928,7 +5692,7 @@ void PartApi::partParameterTemplateList(const ::InvenTree::OptionalParam<qint32>
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("name")).append(querySuffix).append(QUrl::toPercentEncoding(name.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("name")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(name.stringValue())));
     }
     if (offset.hasValue())
     {
@@ -5943,7 +5707,7 @@ void PartApi::partParameterTemplateList(const ::InvenTree::OptionalParam<qint32>
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(offset.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(offset.stringValue())));
     }
     if (ordering.hasValue())
     {
@@ -5958,7 +5722,7 @@ void PartApi::partParameterTemplateList(const ::InvenTree::OptionalParam<qint32>
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(ordering.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(ordering.stringValue())));
     }
     if (part.hasValue())
     {
@@ -5973,7 +5737,7 @@ void PartApi::partParameterTemplateList(const ::InvenTree::OptionalParam<qint32>
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("part")).append(querySuffix).append(QUrl::toPercentEncoding(part.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("part")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(part.stringValue())));
     }
     if (search.hasValue())
     {
@@ -5988,7 +5752,7 @@ void PartApi::partParameterTemplateList(const ::InvenTree::OptionalParam<qint32>
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(search.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(search.stringValue())));
     }
     if (units.hasValue())
     {
@@ -6003,7 +5767,7 @@ void PartApi::partParameterTemplateList(const ::InvenTree::OptionalParam<qint32>
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("units")).append(querySuffix).append(QUrl::toPercentEncoding(units.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("units")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(units.stringValue())));
     }
     HttpRequestWorker *worker = new HttpRequestWorker(this, _manager);
     worker->setTimeOut(_timeOut);
@@ -6011,19 +5775,14 @@ void PartApi::partParameterTemplateList(const ::InvenTree::OptionalParam<qint32>
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partParameterTemplateListCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -6109,19 +5868,14 @@ void PartApi::partParameterTemplateMetadataPartialUpdate(const qint32 &id) {
     HttpRequestInput input(fullPath, "PATCH");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partParameterTemplateMetadataPartialUpdateCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -6206,19 +5960,14 @@ void PartApi::partParameterTemplateMetadataRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partParameterTemplateMetadataRetrieveCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -6303,19 +6052,14 @@ void PartApi::partParameterTemplateMetadataUpdate(const qint32 &id) {
     HttpRequestInput input(fullPath, "PUT");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partParameterTemplateMetadataUpdateCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -6405,19 +6149,14 @@ void PartApi::partParameterTemplatePartialUpdate(const qint32 &id, const ::Inven
         QByteArray output = patched_part_parameter_template.value().asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partParameterTemplatePartialUpdateCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -6503,19 +6242,14 @@ void PartApi::partParameterTemplateRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partParameterTemplateRetrieveCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -6606,19 +6340,14 @@ void PartApi::partParameterTemplateUpdate(const qint32 &id, const PartParameterT
         QByteArray output = part_parameter_template.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partParameterTemplateUpdateCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -6709,19 +6438,14 @@ void PartApi::partParameterUpdate(const qint32 &id, const PartParameter &part_pa
         QByteArray output = part_parameter.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partParameterUpdateCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -6812,19 +6536,14 @@ void PartApi::partPartialUpdate(const qint32 &id, const ::InvenTree::OptionalPar
         QByteArray output = patched_part.value().asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partPartialUpdateCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -6915,19 +6634,14 @@ void PartApi::partPricingPartialUpdate(const qint32 &id, const ::InvenTree::Opti
         QByteArray output = patched_part_pricing.value().asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partPricingPartialUpdateCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -7013,19 +6727,14 @@ void PartApi::partPricingRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partPricingRetrieveCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -7116,19 +6825,14 @@ void PartApi::partPricingUpdate(const qint32 &id, const ::InvenTree::OptionalPar
         QByteArray output = part_pricing.value().asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partPricingUpdateCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -7205,19 +6909,14 @@ void PartApi::partRelatedCreate(const PartRelation &part_relation) {
         QByteArray output = part_relation.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partRelatedCreateCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -7303,19 +7002,14 @@ void PartApi::partRelatedDestroy(const qint32 &id) {
     HttpRequestInput input(fullPath, "DELETE");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partRelatedDestroyCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -7394,7 +7088,7 @@ void PartApi::partRelatedList(const ::InvenTree::OptionalParam<qint32> &limit, c
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(limit.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(limit.stringValue())));
     }
     if (offset.hasValue())
     {
@@ -7409,7 +7103,7 @@ void PartApi::partRelatedList(const ::InvenTree::OptionalParam<qint32> &limit, c
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(offset.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(offset.stringValue())));
     }
     HttpRequestWorker *worker = new HttpRequestWorker(this, _manager);
     worker->setTimeOut(_timeOut);
@@ -7417,19 +7111,14 @@ void PartApi::partRelatedList(const ::InvenTree::OptionalParam<qint32> &limit, c
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partRelatedListCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -7515,19 +7204,14 @@ void PartApi::partRelatedMetadataPartialUpdate(const qint32 &id) {
     HttpRequestInput input(fullPath, "PATCH");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partRelatedMetadataPartialUpdateCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -7612,19 +7296,14 @@ void PartApi::partRelatedMetadataRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partRelatedMetadataRetrieveCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -7709,19 +7388,14 @@ void PartApi::partRelatedMetadataUpdate(const qint32 &id) {
     HttpRequestInput input(fullPath, "PUT");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partRelatedMetadataUpdateCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -7811,19 +7485,14 @@ void PartApi::partRelatedPartialUpdate(const qint32 &id, const ::InvenTree::Opti
         QByteArray output = patched_part_relation.value().asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partRelatedPartialUpdateCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -7909,19 +7578,14 @@ void PartApi::partRelatedRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partRelatedRetrieveCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -8012,19 +7676,14 @@ void PartApi::partRelatedUpdate(const qint32 &id, const PartRelation &part_relat
         QByteArray output = part_relation.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partRelatedUpdateCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -8110,19 +7769,14 @@ void PartApi::partRequirementsRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partRequirementsRetrieveCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -8207,19 +7861,14 @@ void PartApi::partRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partRetrieveCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -8296,19 +7945,14 @@ void PartApi::partSalePriceCreate(const PartSalePrice &part_sale_price) {
         QByteArray output = part_sale_price.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partSalePriceCreateCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -8394,19 +8038,14 @@ void PartApi::partSalePriceDestroy(const qint32 &id) {
     HttpRequestInput input(fullPath, "DELETE");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partSalePriceDestroyCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -8485,7 +8124,7 @@ void PartApi::partSalePriceList(const ::InvenTree::OptionalParam<qint32> &limit,
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(limit.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(limit.stringValue())));
     }
     if (offset.hasValue())
     {
@@ -8500,7 +8139,7 @@ void PartApi::partSalePriceList(const ::InvenTree::OptionalParam<qint32> &limit,
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(offset.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(offset.stringValue())));
     }
     if (ordering.hasValue())
     {
@@ -8515,7 +8154,7 @@ void PartApi::partSalePriceList(const ::InvenTree::OptionalParam<qint32> &limit,
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(ordering.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(ordering.stringValue())));
     }
     if (part.hasValue())
     {
@@ -8530,7 +8169,7 @@ void PartApi::partSalePriceList(const ::InvenTree::OptionalParam<qint32> &limit,
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("part")).append(querySuffix).append(QUrl::toPercentEncoding(part.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("part")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(part.stringValue())));
     }
     if (search.hasValue())
     {
@@ -8545,7 +8184,7 @@ void PartApi::partSalePriceList(const ::InvenTree::OptionalParam<qint32> &limit,
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(search.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(search.stringValue())));
     }
     HttpRequestWorker *worker = new HttpRequestWorker(this, _manager);
     worker->setTimeOut(_timeOut);
@@ -8553,19 +8192,14 @@ void PartApi::partSalePriceList(const ::InvenTree::OptionalParam<qint32> &limit,
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partSalePriceListCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -8656,19 +8290,14 @@ void PartApi::partSalePricePartialUpdate(const qint32 &id, const ::InvenTree::Op
         QByteArray output = patched_part_sale_price.value().asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partSalePricePartialUpdateCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -8754,19 +8383,14 @@ void PartApi::partSalePriceRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partSalePriceRetrieveCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -8857,19 +8481,14 @@ void PartApi::partSalePriceUpdate(const qint32 &id, const PartSalePrice &part_sa
         QByteArray output = part_sale_price.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partSalePriceUpdateCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -8955,19 +8574,14 @@ void PartApi::partSchedulingRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partSchedulingRetrieveCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -9052,19 +8666,14 @@ void PartApi::partSerialNumbersRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partSerialNumbersRetrieveCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -9140,19 +8749,14 @@ void PartApi::partStocktakeCreate(const PartStocktake &part_stocktake) {
         QByteArray output = part_stocktake.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partStocktakeCreateCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -9238,19 +8842,14 @@ void PartApi::partStocktakeDestroy(const qint32 &id) {
     HttpRequestInput input(fullPath, "DELETE");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partStocktakeDestroyCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -9329,7 +8928,7 @@ void PartApi::partStocktakeList(const ::InvenTree::OptionalParam<qint32> &limit,
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(limit.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(limit.stringValue())));
     }
     if (offset.hasValue())
     {
@@ -9344,7 +8943,7 @@ void PartApi::partStocktakeList(const ::InvenTree::OptionalParam<qint32> &limit,
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(offset.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(offset.stringValue())));
     }
     if (ordering.hasValue())
     {
@@ -9359,7 +8958,7 @@ void PartApi::partStocktakeList(const ::InvenTree::OptionalParam<qint32> &limit,
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(ordering.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(ordering.stringValue())));
     }
     if (part.hasValue())
     {
@@ -9374,7 +8973,7 @@ void PartApi::partStocktakeList(const ::InvenTree::OptionalParam<qint32> &limit,
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("part")).append(querySuffix).append(QUrl::toPercentEncoding(part.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("part")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(part.stringValue())));
     }
     if (user.hasValue())
     {
@@ -9389,7 +8988,7 @@ void PartApi::partStocktakeList(const ::InvenTree::OptionalParam<qint32> &limit,
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("user")).append(querySuffix).append(QUrl::toPercentEncoding(user.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("user")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(user.stringValue())));
     }
     HttpRequestWorker *worker = new HttpRequestWorker(this, _manager);
     worker->setTimeOut(_timeOut);
@@ -9397,19 +8996,14 @@ void PartApi::partStocktakeList(const ::InvenTree::OptionalParam<qint32> &limit,
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partStocktakeListCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -9500,19 +9094,14 @@ void PartApi::partStocktakePartialUpdate(const qint32 &id, const ::InvenTree::Op
         QByteArray output = patched_part_stocktake.value().asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partStocktakePartialUpdateCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -9589,19 +9178,14 @@ void PartApi::partStocktakeReportGenerateCreate(const ::InvenTree::OptionalParam
         QByteArray output = part_stocktake_report_generate.value().asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partStocktakeReportGenerateCreateCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -9681,7 +9265,7 @@ void PartApi::partStocktakeReportList(const ::InvenTree::OptionalParam<qint32> &
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(limit.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(limit.stringValue())));
     }
     if (offset.hasValue())
     {
@@ -9696,7 +9280,7 @@ void PartApi::partStocktakeReportList(const ::InvenTree::OptionalParam<qint32> &
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(offset.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(offset.stringValue())));
     }
     if (ordering.hasValue())
     {
@@ -9711,7 +9295,7 @@ void PartApi::partStocktakeReportList(const ::InvenTree::OptionalParam<qint32> &
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(ordering.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(ordering.stringValue())));
     }
     HttpRequestWorker *worker = new HttpRequestWorker(this, _manager);
     worker->setTimeOut(_timeOut);
@@ -9719,19 +9303,14 @@ void PartApi::partStocktakeReportList(const ::InvenTree::OptionalParam<qint32> &
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partStocktakeReportListCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -9817,19 +9396,14 @@ void PartApi::partStocktakeRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partStocktakeRetrieveCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -9920,19 +9494,14 @@ void PartApi::partStocktakeUpdate(const qint32 &id, const PartStocktake &part_st
         QByteArray output = part_stocktake.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partStocktakeUpdateCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -10009,19 +9578,14 @@ void PartApi::partTestTemplateCreate(const PartTestTemplate &part_test_template)
         QByteArray output = part_test_template.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partTestTemplateCreateCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -10107,19 +9671,14 @@ void PartApi::partTestTemplateDestroy(const qint32 &id) {
     HttpRequestInput input(fullPath, "DELETE");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partTestTemplateDestroyCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -10198,7 +9757,7 @@ void PartApi::partTestTemplateList(const ::InvenTree::OptionalParam<bool> &enabl
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("enabled")).append(querySuffix).append(QUrl::toPercentEncoding(enabled.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("enabled")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(enabled.stringValue())));
     }
     if (has_results.hasValue())
     {
@@ -10213,7 +9772,7 @@ void PartApi::partTestTemplateList(const ::InvenTree::OptionalParam<bool> &enabl
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("has_results")).append(querySuffix).append(QUrl::toPercentEncoding(has_results.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("has_results")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(has_results.stringValue())));
     }
     if (key.hasValue())
     {
@@ -10228,7 +9787,7 @@ void PartApi::partTestTemplateList(const ::InvenTree::OptionalParam<bool> &enabl
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("key")).append(querySuffix).append(QUrl::toPercentEncoding(key.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("key")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(key.stringValue())));
     }
     if (limit.hasValue())
     {
@@ -10243,7 +9802,7 @@ void PartApi::partTestTemplateList(const ::InvenTree::OptionalParam<bool> &enabl
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(limit.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(limit.stringValue())));
     }
     if (offset.hasValue())
     {
@@ -10258,7 +9817,7 @@ void PartApi::partTestTemplateList(const ::InvenTree::OptionalParam<bool> &enabl
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(offset.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(offset.stringValue())));
     }
     if (ordering.hasValue())
     {
@@ -10273,7 +9832,7 @@ void PartApi::partTestTemplateList(const ::InvenTree::OptionalParam<bool> &enabl
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(ordering.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(ordering.stringValue())));
     }
     if (part.hasValue())
     {
@@ -10288,7 +9847,7 @@ void PartApi::partTestTemplateList(const ::InvenTree::OptionalParam<bool> &enabl
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("part")).append(querySuffix).append(QUrl::toPercentEncoding(part.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("part")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(part.stringValue())));
     }
     if (required.hasValue())
     {
@@ -10303,7 +9862,7 @@ void PartApi::partTestTemplateList(const ::InvenTree::OptionalParam<bool> &enabl
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("required")).append(querySuffix).append(QUrl::toPercentEncoding(required.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("required")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(required.stringValue())));
     }
     if (requires_attachment.hasValue())
     {
@@ -10318,7 +9877,7 @@ void PartApi::partTestTemplateList(const ::InvenTree::OptionalParam<bool> &enabl
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("requires_attachment")).append(querySuffix).append(QUrl::toPercentEncoding(requires_attachment.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("requires_attachment")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(requires_attachment.stringValue())));
     }
     if (requires_value.hasValue())
     {
@@ -10333,7 +9892,7 @@ void PartApi::partTestTemplateList(const ::InvenTree::OptionalParam<bool> &enabl
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("requires_value")).append(querySuffix).append(QUrl::toPercentEncoding(requires_value.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("requires_value")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(requires_value.stringValue())));
     }
     if (search.hasValue())
     {
@@ -10348,7 +9907,7 @@ void PartApi::partTestTemplateList(const ::InvenTree::OptionalParam<bool> &enabl
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(search.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(search.stringValue())));
     }
     HttpRequestWorker *worker = new HttpRequestWorker(this, _manager);
     worker->setTimeOut(_timeOut);
@@ -10356,19 +9915,14 @@ void PartApi::partTestTemplateList(const ::InvenTree::OptionalParam<bool> &enabl
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partTestTemplateListCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -10454,19 +10008,14 @@ void PartApi::partTestTemplateMetadataPartialUpdate(const qint32 &id) {
     HttpRequestInput input(fullPath, "PATCH");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partTestTemplateMetadataPartialUpdateCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -10551,19 +10100,14 @@ void PartApi::partTestTemplateMetadataRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partTestTemplateMetadataRetrieveCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -10648,19 +10192,14 @@ void PartApi::partTestTemplateMetadataUpdate(const qint32 &id) {
     HttpRequestInput input(fullPath, "PUT");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partTestTemplateMetadataUpdateCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -10750,19 +10289,14 @@ void PartApi::partTestTemplatePartialUpdate(const qint32 &id, const ::InvenTree:
         QByteArray output = patched_part_test_template.value().asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partTestTemplatePartialUpdateCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -10848,19 +10382,14 @@ void PartApi::partTestTemplateRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partTestTemplateRetrieveCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -10951,19 +10480,14 @@ void PartApi::partTestTemplateUpdate(const qint32 &id, const PartTestTemplate &p
         QByteArray output = part_test_template.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partTestTemplateUpdateCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -11043,7 +10567,7 @@ void PartApi::partThumbsList(const ::InvenTree::OptionalParam<qint32> &limit, co
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(limit.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(limit.stringValue())));
     }
     if (offset.hasValue())
     {
@@ -11058,7 +10582,7 @@ void PartApi::partThumbsList(const ::InvenTree::OptionalParam<qint32> &limit, co
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(offset.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(offset.stringValue())));
     }
     if (search.hasValue())
     {
@@ -11073,7 +10597,7 @@ void PartApi::partThumbsList(const ::InvenTree::OptionalParam<qint32> &limit, co
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(search.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(search.stringValue())));
     }
     HttpRequestWorker *worker = new HttpRequestWorker(this, _manager);
     worker->setTimeOut(_timeOut);
@@ -11081,19 +10605,14 @@ void PartApi::partThumbsList(const ::InvenTree::OptionalParam<qint32> &limit, co
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partThumbsListCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -11184,19 +10703,14 @@ void PartApi::partThumbsPartialUpdate(const QString &id, const ::InvenTree::Opti
         QByteArray output = patched_part_thumb_serializer_update.value().asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partThumbsPartialUpdateCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -11282,19 +10796,14 @@ void PartApi::partThumbsRetrieve(const QString &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partThumbsRetrieveCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -11385,19 +10894,14 @@ void PartApi::partThumbsUpdate(const QString &id, const PartThumbSerializerUpdat
         QByteArray output = part_thumb_serializer_update.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partThumbsUpdateCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -11488,19 +10992,14 @@ void PartApi::partUpdate(const qint32 &id, const Part &part) {
         QByteArray output = part.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &PartApi::partUpdateCallback);
     connect(this, &PartApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }

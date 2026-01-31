@@ -61,12 +61,12 @@ public:
     /**
     * @param[in]  project_code ProjectCode [required]
     */
-    void projectCodeCreate(const ProjectCode &project_code);
+    virtual void projectCodeCreate(const ProjectCode &project_code);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void projectCodeDestroy(const qint32 &id);
+    virtual void projectCodeDestroy(const qint32 &id);
 
     /**
     * @param[in]  limit qint32 [optional]
@@ -74,39 +74,39 @@ public:
     * @param[in]  ordering QString [optional]
     * @param[in]  search QString [optional]
     */
-    void projectCodeList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>());
+    virtual void projectCodeList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void projectCodeMetadataPartialUpdate(const qint32 &id);
+    virtual void projectCodeMetadataPartialUpdate(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void projectCodeMetadataRetrieve(const qint32 &id);
+    virtual void projectCodeMetadataRetrieve(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void projectCodeMetadataUpdate(const qint32 &id);
+    virtual void projectCodeMetadataUpdate(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  patched_project_code PatchedProjectCode [optional]
     */
-    void projectCodePartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedProjectCode> &patched_project_code = ::InvenTree::OptionalParam<PatchedProjectCode>());
+    virtual void projectCodePartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedProjectCode> &patched_project_code = ::InvenTree::OptionalParam<PatchedProjectCode>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void projectCodeRetrieve(const qint32 &id);
+    virtual void projectCodeRetrieve(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  project_code ProjectCode [required]
     */
-    void projectCodeUpdate(const qint32 &id, const ProjectCode &project_code);
+    virtual void projectCodeUpdate(const qint32 &id, const ProjectCode &project_code);
 
 
 private:
@@ -152,6 +152,7 @@ Q_SIGNALS:
     void projectCodePartialUpdateSignal(ProjectCode summary);
     void projectCodeRetrieveSignal(ProjectCode summary);
     void projectCodeUpdateSignal(ProjectCode summary);
+
 
     void projectCodeCreateSignalFull(HttpRequestWorker *worker, ProjectCode summary);
     void projectCodeDestroySignalFull(HttpRequestWorker *worker);

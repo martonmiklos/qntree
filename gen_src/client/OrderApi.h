@@ -98,33 +98,33 @@ public:
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderPoCancelCreate(const qint32 &id);
+    virtual void orderPoCancelCreate(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  purchase_order_complete PurchaseOrderComplete [optional]
     */
-    void orderPoCompleteCreate(const qint32 &id, const ::InvenTree::OptionalParam<PurchaseOrderComplete> &purchase_order_complete = ::InvenTree::OptionalParam<PurchaseOrderComplete>());
+    virtual void orderPoCompleteCreate(const qint32 &id, const ::InvenTree::OptionalParam<PurchaseOrderComplete> &purchase_order_complete = ::InvenTree::OptionalParam<PurchaseOrderComplete>());
 
     /**
     * @param[in]  purchase_order PurchaseOrder [required]
     */
-    void orderPoCreate(const PurchaseOrder &purchase_order);
+    virtual void orderPoCreate(const PurchaseOrder &purchase_order);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderPoDestroy(const qint32 &id);
+    virtual void orderPoDestroy(const qint32 &id);
 
     /**
     * @param[in]  purchase_order_extra_line PurchaseOrderExtraLine [required]
     */
-    void orderPoExtraLineCreate(const PurchaseOrderExtraLine &purchase_order_extra_line);
+    virtual void orderPoExtraLineCreate(const PurchaseOrderExtraLine &purchase_order_extra_line);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderPoExtraLineDestroy(const qint32 &id);
+    virtual void orderPoExtraLineDestroy(const qint32 &id);
 
     /**
     * @param[in]  limit qint32 [optional]
@@ -133,57 +133,57 @@ public:
     * @param[in]  ordering QString [optional]
     * @param[in]  search QString [optional]
     */
-    void orderPoExtraLineList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &order = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>());
+    virtual void orderPoExtraLineList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &order = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderPoExtraLineMetadataPartialUpdate(const qint32 &id);
+    virtual void orderPoExtraLineMetadataPartialUpdate(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderPoExtraLineMetadataRetrieve(const qint32 &id);
+    virtual void orderPoExtraLineMetadataRetrieve(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderPoExtraLineMetadataUpdate(const qint32 &id);
+    virtual void orderPoExtraLineMetadataUpdate(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  patched_purchase_order_extra_line PatchedPurchaseOrderExtraLine [optional]
     */
-    void orderPoExtraLinePartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedPurchaseOrderExtraLine> &patched_purchase_order_extra_line = ::InvenTree::OptionalParam<PatchedPurchaseOrderExtraLine>());
+    virtual void orderPoExtraLinePartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedPurchaseOrderExtraLine> &patched_purchase_order_extra_line = ::InvenTree::OptionalParam<PatchedPurchaseOrderExtraLine>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderPoExtraLineRetrieve(const qint32 &id);
+    virtual void orderPoExtraLineRetrieve(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  purchase_order_extra_line PurchaseOrderExtraLine [required]
     */
-    void orderPoExtraLineUpdate(const qint32 &id, const PurchaseOrderExtraLine &purchase_order_extra_line);
+    virtual void orderPoExtraLineUpdate(const qint32 &id, const PurchaseOrderExtraLine &purchase_order_extra_line);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderPoIssueCreate(const qint32 &id);
+    virtual void orderPoIssueCreate(const qint32 &id);
 
     /**
     * @param[in]  purchase_order_line_item PurchaseOrderLineItem [required]
     */
-    void orderPoLineCreate(const PurchaseOrderLineItem &purchase_order_line_item);
+    virtual void orderPoLineCreate(const PurchaseOrderLineItem &purchase_order_line_item);
 
 
-    void orderPoLineDestroy();
+    virtual void orderPoLineDestroy();
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderPoLineDestroy2(const qint32 &id);
+    virtual void orderPoLineDestroy2(const qint32 &id);
 
     /**
     * @param[in]  base_part qint32 [optional]
@@ -199,39 +199,39 @@ public:
     * @param[in]  received bool [optional]
     * @param[in]  search QString [optional]
     */
-    void orderPoLineList(const ::InvenTree::OptionalParam<qint32> &base_part = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &has_pricing = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &order = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &order_complete = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &order_status = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &part = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &pending = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &received = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>());
+    virtual void orderPoLineList(const ::InvenTree::OptionalParam<qint32> &base_part = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &has_pricing = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &order = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &order_complete = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &order_status = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &part = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &pending = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &received = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderPoLineMetadataPartialUpdate(const qint32 &id);
+    virtual void orderPoLineMetadataPartialUpdate(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderPoLineMetadataRetrieve(const qint32 &id);
+    virtual void orderPoLineMetadataRetrieve(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderPoLineMetadataUpdate(const qint32 &id);
+    virtual void orderPoLineMetadataUpdate(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  patched_purchase_order_line_item PatchedPurchaseOrderLineItem [optional]
     */
-    void orderPoLinePartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedPurchaseOrderLineItem> &patched_purchase_order_line_item = ::InvenTree::OptionalParam<PatchedPurchaseOrderLineItem>());
+    virtual void orderPoLinePartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedPurchaseOrderLineItem> &patched_purchase_order_line_item = ::InvenTree::OptionalParam<PatchedPurchaseOrderLineItem>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderPoLineRetrieve(const qint32 &id);
+    virtual void orderPoLineRetrieve(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  purchase_order_line_item PurchaseOrderLineItem [required]
     */
-    void orderPoLineUpdate(const qint32 &id, const PurchaseOrderLineItem &purchase_order_line_item);
+    virtual void orderPoLineUpdate(const qint32 &id, const PurchaseOrderLineItem &purchase_order_line_item);
 
     /**
     * @param[in]  assigned_to qint32 [optional]
@@ -248,78 +248,78 @@ public:
     * @param[in]  status qint32 [optional]
     * @param[in]  supplier qint32 [optional]
     */
-    void orderPoList(const ::InvenTree::OptionalParam<qint32> &assigned_to = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &assigned_to_me = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &has_project_code = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<bool> &outstanding = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &overdue = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &project_code = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &reference = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &status = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &supplier = ::InvenTree::OptionalParam<qint32>());
+    virtual void orderPoList(const ::InvenTree::OptionalParam<qint32> &assigned_to = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &assigned_to_me = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &has_project_code = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<bool> &outstanding = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &overdue = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &project_code = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &reference = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &status = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &supplier = ::InvenTree::OptionalParam<qint32>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderPoMetadataPartialUpdate(const qint32 &id);
+    virtual void orderPoMetadataPartialUpdate(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderPoMetadataRetrieve(const qint32 &id);
+    virtual void orderPoMetadataRetrieve(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderPoMetadataUpdate(const qint32 &id);
+    virtual void orderPoMetadataUpdate(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  patched_purchase_order PatchedPurchaseOrder [optional]
     */
-    void orderPoPartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedPurchaseOrder> &patched_purchase_order = ::InvenTree::OptionalParam<PatchedPurchaseOrder>());
+    virtual void orderPoPartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedPurchaseOrder> &patched_purchase_order = ::InvenTree::OptionalParam<PatchedPurchaseOrder>());
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  purchase_order_receive PurchaseOrderReceive [required]
     */
-    void orderPoReceiveCreate(const qint32 &id, const PurchaseOrderReceive &purchase_order_receive);
+    virtual void orderPoReceiveCreate(const qint32 &id, const PurchaseOrderReceive &purchase_order_receive);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderPoRetrieve(const qint32 &id);
+    virtual void orderPoRetrieve(const qint32 &id);
 
 
-    void orderPoStatusRetrieve();
+    virtual void orderPoStatusRetrieve();
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  purchase_order PurchaseOrder [required]
     */
-    void orderPoUpdate(const qint32 &id, const PurchaseOrder &purchase_order);
+    virtual void orderPoUpdate(const qint32 &id, const PurchaseOrder &purchase_order);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderRoCancelCreate(const qint32 &id);
+    virtual void orderRoCancelCreate(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderRoCompleteCreate(const qint32 &id);
+    virtual void orderRoCompleteCreate(const qint32 &id);
 
     /**
     * @param[in]  return_order ReturnOrder [required]
     */
-    void orderRoCreate(const ReturnOrder &return_order);
+    virtual void orderRoCreate(const ReturnOrder &return_order);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderRoDestroy(const qint32 &id);
+    virtual void orderRoDestroy(const qint32 &id);
 
     /**
     * @param[in]  return_order_extra_line ReturnOrderExtraLine [required]
     */
-    void orderRoExtraLineCreate(const ReturnOrderExtraLine &return_order_extra_line);
+    virtual void orderRoExtraLineCreate(const ReturnOrderExtraLine &return_order_extra_line);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderRoExtraLineDestroy(const qint32 &id);
+    virtual void orderRoExtraLineDestroy(const qint32 &id);
 
     /**
     * @param[in]  limit qint32 [optional]
@@ -328,54 +328,54 @@ public:
     * @param[in]  ordering QString [optional]
     * @param[in]  search QString [optional]
     */
-    void orderRoExtraLineList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &order = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>());
+    virtual void orderRoExtraLineList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &order = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderRoExtraLineMetadataPartialUpdate(const qint32 &id);
+    virtual void orderRoExtraLineMetadataPartialUpdate(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderRoExtraLineMetadataRetrieve(const qint32 &id);
+    virtual void orderRoExtraLineMetadataRetrieve(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderRoExtraLineMetadataUpdate(const qint32 &id);
+    virtual void orderRoExtraLineMetadataUpdate(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  patched_return_order_extra_line PatchedReturnOrderExtraLine [optional]
     */
-    void orderRoExtraLinePartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedReturnOrderExtraLine> &patched_return_order_extra_line = ::InvenTree::OptionalParam<PatchedReturnOrderExtraLine>());
+    virtual void orderRoExtraLinePartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedReturnOrderExtraLine> &patched_return_order_extra_line = ::InvenTree::OptionalParam<PatchedReturnOrderExtraLine>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderRoExtraLineRetrieve(const qint32 &id);
+    virtual void orderRoExtraLineRetrieve(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  return_order_extra_line ReturnOrderExtraLine [required]
     */
-    void orderRoExtraLineUpdate(const qint32 &id, const ReturnOrderExtraLine &return_order_extra_line);
+    virtual void orderRoExtraLineUpdate(const qint32 &id, const ReturnOrderExtraLine &return_order_extra_line);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderRoIssueCreate(const qint32 &id);
+    virtual void orderRoIssueCreate(const qint32 &id);
 
     /**
     * @param[in]  return_order_line_item ReturnOrderLineItem [required]
     */
-    void orderRoLineCreate(const ReturnOrderLineItem &return_order_line_item);
+    virtual void orderRoLineCreate(const ReturnOrderLineItem &return_order_line_item);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderRoLineDestroy(const qint32 &id);
+    virtual void orderRoLineDestroy(const qint32 &id);
 
     /**
     * @param[in]  has_pricing bool [optional]
@@ -389,42 +389,42 @@ public:
     * @param[in]  received bool [optional]
     * @param[in]  search QString [optional]
     */
-    void orderRoLineList(const ::InvenTree::OptionalParam<bool> &has_pricing = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &item = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &order = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &order_status = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &outcome = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &received = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>());
+    virtual void orderRoLineList(const ::InvenTree::OptionalParam<bool> &has_pricing = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &item = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &order = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &order_status = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &outcome = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &received = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderRoLineMetadataPartialUpdate(const qint32 &id);
+    virtual void orderRoLineMetadataPartialUpdate(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderRoLineMetadataRetrieve(const qint32 &id);
+    virtual void orderRoLineMetadataRetrieve(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderRoLineMetadataUpdate(const qint32 &id);
+    virtual void orderRoLineMetadataUpdate(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  patched_return_order_line_item PatchedReturnOrderLineItem [optional]
     */
-    void orderRoLinePartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedReturnOrderLineItem> &patched_return_order_line_item = ::InvenTree::OptionalParam<PatchedReturnOrderLineItem>());
+    virtual void orderRoLinePartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedReturnOrderLineItem> &patched_return_order_line_item = ::InvenTree::OptionalParam<PatchedReturnOrderLineItem>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderRoLineRetrieve(const qint32 &id);
+    virtual void orderRoLineRetrieve(const qint32 &id);
 
 
-    void orderRoLineStatusRetrieve();
+    virtual void orderRoLineStatusRetrieve();
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  return_order_line_item ReturnOrderLineItem [required]
     */
-    void orderRoLineUpdate(const qint32 &id, const ReturnOrderLineItem &return_order_line_item);
+    virtual void orderRoLineUpdate(const qint32 &id, const ReturnOrderLineItem &return_order_line_item);
 
     /**
     * @param[in]  assigned_to qint32 [optional]
@@ -441,119 +441,119 @@ public:
     * @param[in]  search QString [optional]
     * @param[in]  status qint32 [optional]
     */
-    void orderRoList(const ::InvenTree::OptionalParam<qint32> &assigned_to = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &assigned_to_me = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &customer = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &has_project_code = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<bool> &outstanding = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &overdue = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &project_code = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &reference = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &status = ::InvenTree::OptionalParam<qint32>());
+    virtual void orderRoList(const ::InvenTree::OptionalParam<qint32> &assigned_to = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &assigned_to_me = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &customer = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &has_project_code = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<bool> &outstanding = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &overdue = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &project_code = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &reference = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &status = ::InvenTree::OptionalParam<qint32>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderRoMetadataPartialUpdate(const qint32 &id);
+    virtual void orderRoMetadataPartialUpdate(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderRoMetadataRetrieve(const qint32 &id);
+    virtual void orderRoMetadataRetrieve(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderRoMetadataUpdate(const qint32 &id);
+    virtual void orderRoMetadataUpdate(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  patched_return_order PatchedReturnOrder [optional]
     */
-    void orderRoPartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedReturnOrder> &patched_return_order = ::InvenTree::OptionalParam<PatchedReturnOrder>());
+    virtual void orderRoPartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedReturnOrder> &patched_return_order = ::InvenTree::OptionalParam<PatchedReturnOrder>());
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  return_order_receive ReturnOrderReceive [required]
     */
-    void orderRoReceiveCreate(const qint32 &id, const ReturnOrderReceive &return_order_receive);
+    virtual void orderRoReceiveCreate(const qint32 &id, const ReturnOrderReceive &return_order_receive);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderRoRetrieve(const qint32 &id);
+    virtual void orderRoRetrieve(const qint32 &id);
 
 
-    void orderRoStatusRetrieve();
+    virtual void orderRoStatusRetrieve();
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  return_order ReturnOrder [required]
     */
-    void orderRoUpdate(const qint32 &id, const ReturnOrder &return_order);
+    virtual void orderRoUpdate(const qint32 &id, const ReturnOrder &return_order);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  sales_order_shipment_allocation SalesOrderShipmentAllocation [required]
     */
-    void orderSoAllocateCreate(const qint32 &id, const SalesOrderShipmentAllocation &sales_order_shipment_allocation);
+    virtual void orderSoAllocateCreate(const qint32 &id, const SalesOrderShipmentAllocation &sales_order_shipment_allocation);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  sales_order_serial_allocation SalesOrderSerialAllocation [required]
     */
-    void orderSoAllocateSerialsCreate(const qint32 &id, const SalesOrderSerialAllocation &sales_order_serial_allocation);
+    virtual void orderSoAllocateSerialsCreate(const qint32 &id, const SalesOrderSerialAllocation &sales_order_serial_allocation);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderSoAllocationDestroy(const qint32 &id);
+    virtual void orderSoAllocationDestroy(const qint32 &id);
 
     /**
     * @param[in]  limit qint32 [optional]
     * @param[in]  offset qint32 [optional]
     */
-    void orderSoAllocationList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>());
+    virtual void orderSoAllocationList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>());
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  patched_sales_order_allocation PatchedSalesOrderAllocation [optional]
     */
-    void orderSoAllocationPartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedSalesOrderAllocation> &patched_sales_order_allocation = ::InvenTree::OptionalParam<PatchedSalesOrderAllocation>());
+    virtual void orderSoAllocationPartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedSalesOrderAllocation> &patched_sales_order_allocation = ::InvenTree::OptionalParam<PatchedSalesOrderAllocation>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderSoAllocationRetrieve(const qint32 &id);
+    virtual void orderSoAllocationRetrieve(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  sales_order_allocation SalesOrderAllocation [required]
     */
-    void orderSoAllocationUpdate(const qint32 &id, const SalesOrderAllocation &sales_order_allocation);
+    virtual void orderSoAllocationUpdate(const qint32 &id, const SalesOrderAllocation &sales_order_allocation);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderSoCancelCreate(const qint32 &id);
+    virtual void orderSoCancelCreate(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  sales_order_complete SalesOrderComplete [optional]
     */
-    void orderSoCompleteCreate(const qint32 &id, const ::InvenTree::OptionalParam<SalesOrderComplete> &sales_order_complete = ::InvenTree::OptionalParam<SalesOrderComplete>());
+    virtual void orderSoCompleteCreate(const qint32 &id, const ::InvenTree::OptionalParam<SalesOrderComplete> &sales_order_complete = ::InvenTree::OptionalParam<SalesOrderComplete>());
 
     /**
     * @param[in]  sales_order SalesOrder [required]
     */
-    void orderSoCreate(const SalesOrder &sales_order);
+    virtual void orderSoCreate(const SalesOrder &sales_order);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderSoDestroy(const qint32 &id);
+    virtual void orderSoDestroy(const qint32 &id);
 
     /**
     * @param[in]  sales_order_extra_line SalesOrderExtraLine [required]
     */
-    void orderSoExtraLineCreate(const SalesOrderExtraLine &sales_order_extra_line);
+    virtual void orderSoExtraLineCreate(const SalesOrderExtraLine &sales_order_extra_line);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderSoExtraLineDestroy(const qint32 &id);
+    virtual void orderSoExtraLineDestroy(const qint32 &id);
 
     /**
     * @param[in]  limit qint32 [optional]
@@ -562,54 +562,54 @@ public:
     * @param[in]  ordering QString [optional]
     * @param[in]  search QString [optional]
     */
-    void orderSoExtraLineList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &order = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>());
+    virtual void orderSoExtraLineList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &order = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderSoExtraLineMetadataPartialUpdate(const qint32 &id);
+    virtual void orderSoExtraLineMetadataPartialUpdate(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderSoExtraLineMetadataRetrieve(const qint32 &id);
+    virtual void orderSoExtraLineMetadataRetrieve(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderSoExtraLineMetadataUpdate(const qint32 &id);
+    virtual void orderSoExtraLineMetadataUpdate(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  patched_sales_order_extra_line PatchedSalesOrderExtraLine [optional]
     */
-    void orderSoExtraLinePartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedSalesOrderExtraLine> &patched_sales_order_extra_line = ::InvenTree::OptionalParam<PatchedSalesOrderExtraLine>());
+    virtual void orderSoExtraLinePartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedSalesOrderExtraLine> &patched_sales_order_extra_line = ::InvenTree::OptionalParam<PatchedSalesOrderExtraLine>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderSoExtraLineRetrieve(const qint32 &id);
+    virtual void orderSoExtraLineRetrieve(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  sales_order_extra_line SalesOrderExtraLine [required]
     */
-    void orderSoExtraLineUpdate(const qint32 &id, const SalesOrderExtraLine &sales_order_extra_line);
+    virtual void orderSoExtraLineUpdate(const qint32 &id, const SalesOrderExtraLine &sales_order_extra_line);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderSoIssueCreate(const qint32 &id);
+    virtual void orderSoIssueCreate(const qint32 &id);
 
     /**
     * @param[in]  sales_order_line_item SalesOrderLineItem [required]
     */
-    void orderSoLineCreate(const SalesOrderLineItem &sales_order_line_item);
+    virtual void orderSoLineCreate(const SalesOrderLineItem &sales_order_line_item);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderSoLineDestroy(const qint32 &id);
+    virtual void orderSoLineDestroy(const qint32 &id);
 
     /**
     * @param[in]  completed bool [optional]
@@ -623,39 +623,39 @@ public:
     * @param[in]  part qint32 [optional]
     * @param[in]  search QString [optional]
     */
-    void orderSoLineList(const ::InvenTree::OptionalParam<bool> &completed = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &has_pricing = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &order = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &order_complete = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &order_status = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &part = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>());
+    virtual void orderSoLineList(const ::InvenTree::OptionalParam<bool> &completed = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &has_pricing = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &order = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &order_complete = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &order_status = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &part = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderSoLineMetadataPartialUpdate(const qint32 &id);
+    virtual void orderSoLineMetadataPartialUpdate(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderSoLineMetadataRetrieve(const qint32 &id);
+    virtual void orderSoLineMetadataRetrieve(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderSoLineMetadataUpdate(const qint32 &id);
+    virtual void orderSoLineMetadataUpdate(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  patched_sales_order_line_item PatchedSalesOrderLineItem [optional]
     */
-    void orderSoLinePartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedSalesOrderLineItem> &patched_sales_order_line_item = ::InvenTree::OptionalParam<PatchedSalesOrderLineItem>());
+    virtual void orderSoLinePartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedSalesOrderLineItem> &patched_sales_order_line_item = ::InvenTree::OptionalParam<PatchedSalesOrderLineItem>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderSoLineRetrieve(const qint32 &id);
+    virtual void orderSoLineRetrieve(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  sales_order_line_item SalesOrderLineItem [required]
     */
-    void orderSoLineUpdate(const qint32 &id, const SalesOrderLineItem &sales_order_line_item);
+    virtual void orderSoLineUpdate(const qint32 &id, const SalesOrderLineItem &sales_order_line_item);
 
     /**
     * @param[in]  assigned_to qint32 [optional]
@@ -672,43 +672,43 @@ public:
     * @param[in]  search QString [optional]
     * @param[in]  status qint32 [optional]
     */
-    void orderSoList(const ::InvenTree::OptionalParam<qint32> &assigned_to = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &assigned_to_me = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &customer = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &has_project_code = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<bool> &outstanding = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &overdue = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &project_code = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &reference = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &status = ::InvenTree::OptionalParam<qint32>());
+    virtual void orderSoList(const ::InvenTree::OptionalParam<qint32> &assigned_to = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &assigned_to_me = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &customer = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &has_project_code = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<bool> &outstanding = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &overdue = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &project_code = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &reference = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &status = ::InvenTree::OptionalParam<qint32>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderSoMetadataPartialUpdate(const qint32 &id);
+    virtual void orderSoMetadataPartialUpdate(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderSoMetadataRetrieve(const qint32 &id);
+    virtual void orderSoMetadataRetrieve(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderSoMetadataUpdate(const qint32 &id);
+    virtual void orderSoMetadataUpdate(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  patched_sales_order PatchedSalesOrder [optional]
     */
-    void orderSoPartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedSalesOrder> &patched_sales_order = ::InvenTree::OptionalParam<PatchedSalesOrder>());
+    virtual void orderSoPartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedSalesOrder> &patched_sales_order = ::InvenTree::OptionalParam<PatchedSalesOrder>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderSoRetrieve(const qint32 &id);
+    virtual void orderSoRetrieve(const qint32 &id);
 
     /**
     * @param[in]  sales_order_shipment SalesOrderShipment [required]
     */
-    void orderSoShipmentCreate(const SalesOrderShipment &sales_order_shipment);
+    virtual void orderSoShipmentCreate(const SalesOrderShipment &sales_order_shipment);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderSoShipmentDestroy(const qint32 &id);
+    virtual void orderSoShipmentDestroy(const qint32 &id);
 
     /**
     * @param[in]  delivered bool [optional]
@@ -717,54 +717,54 @@ public:
     * @param[in]  order qint32 [optional]
     * @param[in]  shipped bool [optional]
     */
-    void orderSoShipmentList(const ::InvenTree::OptionalParam<bool> &delivered = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &order = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &shipped = ::InvenTree::OptionalParam<bool>());
+    virtual void orderSoShipmentList(const ::InvenTree::OptionalParam<bool> &delivered = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &order = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &shipped = ::InvenTree::OptionalParam<bool>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderSoShipmentMetadataPartialUpdate(const qint32 &id);
+    virtual void orderSoShipmentMetadataPartialUpdate(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderSoShipmentMetadataRetrieve(const qint32 &id);
+    virtual void orderSoShipmentMetadataRetrieve(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderSoShipmentMetadataUpdate(const qint32 &id);
+    virtual void orderSoShipmentMetadataUpdate(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  patched_sales_order_shipment PatchedSalesOrderShipment [optional]
     */
-    void orderSoShipmentPartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedSalesOrderShipment> &patched_sales_order_shipment = ::InvenTree::OptionalParam<PatchedSalesOrderShipment>());
+    virtual void orderSoShipmentPartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedSalesOrderShipment> &patched_sales_order_shipment = ::InvenTree::OptionalParam<PatchedSalesOrderShipment>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void orderSoShipmentRetrieve(const qint32 &id);
+    virtual void orderSoShipmentRetrieve(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  sales_order_shipment_complete SalesOrderShipmentComplete [optional]
     */
-    void orderSoShipmentShipCreate(const qint32 &id, const ::InvenTree::OptionalParam<SalesOrderShipmentComplete> &sales_order_shipment_complete = ::InvenTree::OptionalParam<SalesOrderShipmentComplete>());
+    virtual void orderSoShipmentShipCreate(const qint32 &id, const ::InvenTree::OptionalParam<SalesOrderShipmentComplete> &sales_order_shipment_complete = ::InvenTree::OptionalParam<SalesOrderShipmentComplete>());
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  sales_order_shipment SalesOrderShipment [required]
     */
-    void orderSoShipmentUpdate(const qint32 &id, const SalesOrderShipment &sales_order_shipment);
+    virtual void orderSoShipmentUpdate(const qint32 &id, const SalesOrderShipment &sales_order_shipment);
 
 
-    void orderSoStatusRetrieve();
+    virtual void orderSoStatusRetrieve();
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  sales_order SalesOrder [required]
     */
-    void orderSoUpdate(const qint32 &id, const SalesOrder &sales_order);
+    virtual void orderSoUpdate(const qint32 &id, const SalesOrder &sales_order);
 
 
 private:
@@ -1020,6 +1020,7 @@ Q_SIGNALS:
     void orderSoShipmentUpdateSignal(SalesOrderShipment summary);
     void orderSoStatusRetrieveSignal();
     void orderSoUpdateSignal(SalesOrder summary);
+
 
     void orderPoCancelCreateSignalFull(HttpRequestWorker *worker);
     void orderPoCompleteCreateSignalFull(HttpRequestWorker *worker, PurchaseOrderComplete summary);

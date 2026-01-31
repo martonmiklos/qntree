@@ -228,15 +228,9 @@ int CompanyApi::addServerConfiguration(const QString &operation, const QUrl &url
     * @param variables A map between a variable name and its value. The value is used for substitution in the server's URL template.
     */
 void CompanyApi::setNewServerForAllOperations(const QUrl &url, const QString &description, const QMap<QString, ServerVariable> &variables) {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
     for (auto keyIt = _serverIndices.keyBegin(); keyIt != _serverIndices.keyEnd(); keyIt++) {
         setServerIndex(*keyIt, addServerConfiguration(*keyIt, url, description, variables));
     }
-#else
-    for (auto &e : _serverIndices.keys()) {
-        setServerIndex(e, addServerConfiguration(e, url, description, variables));
-    }
-#endif
 }
 
 /**
@@ -351,19 +345,14 @@ void CompanyApi::companyAddressCreate(const Address &address) {
         QByteArray output = address.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyAddressCreateCallback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -435,19 +424,14 @@ void CompanyApi::companyAddressDestroy() {
     HttpRequestInput input(fullPath, "DELETE");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyAddressDestroyCallback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -532,19 +516,14 @@ void CompanyApi::companyAddressDestroy2(const qint32 &id) {
     HttpRequestInput input(fullPath, "DELETE");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyAddressDestroy2Callback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -623,7 +602,7 @@ void CompanyApi::companyAddressList(const ::InvenTree::OptionalParam<qint32> &co
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("company")).append(querySuffix).append(QUrl::toPercentEncoding(company.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("company")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(company.stringValue())));
     }
     if (limit.hasValue())
     {
@@ -638,7 +617,7 @@ void CompanyApi::companyAddressList(const ::InvenTree::OptionalParam<qint32> &co
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(limit.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(limit.stringValue())));
     }
     if (offset.hasValue())
     {
@@ -653,7 +632,7 @@ void CompanyApi::companyAddressList(const ::InvenTree::OptionalParam<qint32> &co
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(offset.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(offset.stringValue())));
     }
     if (ordering.hasValue())
     {
@@ -668,7 +647,7 @@ void CompanyApi::companyAddressList(const ::InvenTree::OptionalParam<qint32> &co
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(ordering.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(ordering.stringValue())));
     }
     if (search.hasValue())
     {
@@ -683,7 +662,7 @@ void CompanyApi::companyAddressList(const ::InvenTree::OptionalParam<qint32> &co
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(search.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(search.stringValue())));
     }
     HttpRequestWorker *worker = new HttpRequestWorker(this, _manager);
     worker->setTimeOut(_timeOut);
@@ -691,19 +670,14 @@ void CompanyApi::companyAddressList(const ::InvenTree::OptionalParam<qint32> &co
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyAddressListCallback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -794,19 +768,14 @@ void CompanyApi::companyAddressPartialUpdate(const qint32 &id, const ::InvenTree
         QByteArray output = patched_address.value().asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyAddressPartialUpdateCallback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -892,19 +861,14 @@ void CompanyApi::companyAddressRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyAddressRetrieveCallback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -995,19 +959,14 @@ void CompanyApi::companyAddressUpdate(const qint32 &id, const Address &address) 
         QByteArray output = address.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyAddressUpdateCallback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -1084,19 +1043,14 @@ void CompanyApi::companyContactCreate(const Contact &contact) {
         QByteArray output = contact.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyContactCreateCallback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -1168,19 +1122,14 @@ void CompanyApi::companyContactDestroy() {
     HttpRequestInput input(fullPath, "DELETE");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyContactDestroyCallback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -1265,19 +1214,14 @@ void CompanyApi::companyContactDestroy2(const QString &id) {
     HttpRequestInput input(fullPath, "DELETE");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyContactDestroy2Callback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -1356,7 +1300,7 @@ void CompanyApi::companyContactList(const ::InvenTree::OptionalParam<qint32> &co
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("company")).append(querySuffix).append(QUrl::toPercentEncoding(company.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("company")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(company.stringValue())));
     }
     if (limit.hasValue())
     {
@@ -1371,7 +1315,7 @@ void CompanyApi::companyContactList(const ::InvenTree::OptionalParam<qint32> &co
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(limit.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(limit.stringValue())));
     }
     if (offset.hasValue())
     {
@@ -1386,7 +1330,7 @@ void CompanyApi::companyContactList(const ::InvenTree::OptionalParam<qint32> &co
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(offset.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(offset.stringValue())));
     }
     if (ordering.hasValue())
     {
@@ -1401,7 +1345,7 @@ void CompanyApi::companyContactList(const ::InvenTree::OptionalParam<qint32> &co
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(ordering.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(ordering.stringValue())));
     }
     if (search.hasValue())
     {
@@ -1416,7 +1360,7 @@ void CompanyApi::companyContactList(const ::InvenTree::OptionalParam<qint32> &co
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(search.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(search.stringValue())));
     }
     HttpRequestWorker *worker = new HttpRequestWorker(this, _manager);
     worker->setTimeOut(_timeOut);
@@ -1424,19 +1368,14 @@ void CompanyApi::companyContactList(const ::InvenTree::OptionalParam<qint32> &co
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyContactListCallback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -1522,19 +1461,14 @@ void CompanyApi::companyContactMetadataPartialUpdate(const QString &id) {
     HttpRequestInput input(fullPath, "PATCH");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyContactMetadataPartialUpdateCallback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -1619,19 +1553,14 @@ void CompanyApi::companyContactMetadataRetrieve(const QString &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyContactMetadataRetrieveCallback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -1716,19 +1645,14 @@ void CompanyApi::companyContactMetadataUpdate(const QString &id) {
     HttpRequestInput input(fullPath, "PUT");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyContactMetadataUpdateCallback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -1818,19 +1742,14 @@ void CompanyApi::companyContactPartialUpdate(const QString &id, const ::InvenTre
         QByteArray output = patched_contact.value().asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyContactPartialUpdateCallback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -1916,19 +1835,14 @@ void CompanyApi::companyContactRetrieve(const QString &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyContactRetrieveCallback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -2019,19 +1933,14 @@ void CompanyApi::companyContactUpdate(const QString &id, const Contact &contact)
         QByteArray output = contact.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyContactUpdateCallback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -2108,19 +2017,14 @@ void CompanyApi::companyCreate(const Company &company) {
         QByteArray output = company.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyCreateCallback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -2206,19 +2110,14 @@ void CompanyApi::companyDestroy(const QString &id) {
     HttpRequestInput input(fullPath, "DELETE");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyDestroyCallback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -2297,7 +2196,7 @@ void CompanyApi::companyList(const ::InvenTree::OptionalParam<bool> &active, con
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("active")).append(querySuffix).append(QUrl::toPercentEncoding(active.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("active")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(active.stringValue())));
     }
     if (is_customer.hasValue())
     {
@@ -2312,7 +2211,7 @@ void CompanyApi::companyList(const ::InvenTree::OptionalParam<bool> &active, con
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("is_customer")).append(querySuffix).append(QUrl::toPercentEncoding(is_customer.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("is_customer")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(is_customer.stringValue())));
     }
     if (is_manufacturer.hasValue())
     {
@@ -2327,7 +2226,7 @@ void CompanyApi::companyList(const ::InvenTree::OptionalParam<bool> &active, con
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("is_manufacturer")).append(querySuffix).append(QUrl::toPercentEncoding(is_manufacturer.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("is_manufacturer")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(is_manufacturer.stringValue())));
     }
     if (is_supplier.hasValue())
     {
@@ -2342,7 +2241,7 @@ void CompanyApi::companyList(const ::InvenTree::OptionalParam<bool> &active, con
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("is_supplier")).append(querySuffix).append(QUrl::toPercentEncoding(is_supplier.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("is_supplier")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(is_supplier.stringValue())));
     }
     if (limit.hasValue())
     {
@@ -2357,7 +2256,7 @@ void CompanyApi::companyList(const ::InvenTree::OptionalParam<bool> &active, con
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(limit.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(limit.stringValue())));
     }
     if (name.hasValue())
     {
@@ -2372,7 +2271,7 @@ void CompanyApi::companyList(const ::InvenTree::OptionalParam<bool> &active, con
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("name")).append(querySuffix).append(QUrl::toPercentEncoding(name.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("name")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(name.stringValue())));
     }
     if (offset.hasValue())
     {
@@ -2387,7 +2286,7 @@ void CompanyApi::companyList(const ::InvenTree::OptionalParam<bool> &active, con
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(offset.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(offset.stringValue())));
     }
     if (ordering.hasValue())
     {
@@ -2402,7 +2301,7 @@ void CompanyApi::companyList(const ::InvenTree::OptionalParam<bool> &active, con
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(ordering.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(ordering.stringValue())));
     }
     if (search.hasValue())
     {
@@ -2417,7 +2316,7 @@ void CompanyApi::companyList(const ::InvenTree::OptionalParam<bool> &active, con
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(search.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(search.stringValue())));
     }
     HttpRequestWorker *worker = new HttpRequestWorker(this, _manager);
     worker->setTimeOut(_timeOut);
@@ -2425,19 +2324,14 @@ void CompanyApi::companyList(const ::InvenTree::OptionalParam<bool> &active, con
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyListCallback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -2523,19 +2417,14 @@ void CompanyApi::companyMetadataPartialUpdate(const QString &id) {
     HttpRequestInput input(fullPath, "PATCH");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyMetadataPartialUpdateCallback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -2620,19 +2509,14 @@ void CompanyApi::companyMetadataRetrieve(const QString &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyMetadataRetrieveCallback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -2717,19 +2601,14 @@ void CompanyApi::companyMetadataUpdate(const QString &id) {
     HttpRequestInput input(fullPath, "PUT");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyMetadataUpdateCallback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -2805,19 +2684,14 @@ void CompanyApi::companyPartCreate(const SupplierPart &supplier_part) {
         QByteArray output = supplier_part.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyPartCreateCallback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -2889,19 +2763,14 @@ void CompanyApi::companyPartDestroy() {
     HttpRequestInput input(fullPath, "DELETE");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyPartDestroyCallback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -2986,19 +2855,14 @@ void CompanyApi::companyPartDestroy2(const QString &id) {
     HttpRequestInput input(fullPath, "DELETE");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyPartDestroy2Callback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -3077,7 +2941,7 @@ void CompanyApi::companyPartList(const ::InvenTree::OptionalParam<QString> &mpn,
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("MPN")).append(querySuffix).append(QUrl::toPercentEncoding(mpn.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("MPN")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(mpn.stringValue())));
     }
     if (sku.hasValue())
     {
@@ -3092,7 +2956,7 @@ void CompanyApi::companyPartList(const ::InvenTree::OptionalParam<QString> &mpn,
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("SKU")).append(querySuffix).append(QUrl::toPercentEncoding(sku.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("SKU")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(sku.stringValue())));
     }
     if (active.hasValue())
     {
@@ -3107,7 +2971,7 @@ void CompanyApi::companyPartList(const ::InvenTree::OptionalParam<QString> &mpn,
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("active")).append(querySuffix).append(QUrl::toPercentEncoding(active.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("active")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(active.stringValue())));
     }
     if (limit.hasValue())
     {
@@ -3122,7 +2986,7 @@ void CompanyApi::companyPartList(const ::InvenTree::OptionalParam<QString> &mpn,
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(limit.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(limit.stringValue())));
     }
     if (manufacturer_part.hasValue())
     {
@@ -3137,7 +3001,7 @@ void CompanyApi::companyPartList(const ::InvenTree::OptionalParam<QString> &mpn,
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("manufacturer_part")).append(querySuffix).append(QUrl::toPercentEncoding(manufacturer_part.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("manufacturer_part")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(manufacturer_part.stringValue())));
     }
     if (offset.hasValue())
     {
@@ -3152,7 +3016,7 @@ void CompanyApi::companyPartList(const ::InvenTree::OptionalParam<QString> &mpn,
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(offset.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(offset.stringValue())));
     }
     if (ordering.hasValue())
     {
@@ -3167,7 +3031,7 @@ void CompanyApi::companyPartList(const ::InvenTree::OptionalParam<QString> &mpn,
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(ordering.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(ordering.stringValue())));
     }
     if (part.hasValue())
     {
@@ -3182,7 +3046,7 @@ void CompanyApi::companyPartList(const ::InvenTree::OptionalParam<QString> &mpn,
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("part")).append(querySuffix).append(QUrl::toPercentEncoding(part.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("part")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(part.stringValue())));
     }
     if (part_active.hasValue())
     {
@@ -3197,7 +3061,7 @@ void CompanyApi::companyPartList(const ::InvenTree::OptionalParam<QString> &mpn,
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("part_active")).append(querySuffix).append(QUrl::toPercentEncoding(part_active.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("part_active")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(part_active.stringValue())));
     }
     if (search.hasValue())
     {
@@ -3212,7 +3076,7 @@ void CompanyApi::companyPartList(const ::InvenTree::OptionalParam<QString> &mpn,
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(search.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(search.stringValue())));
     }
     if (supplier.hasValue())
     {
@@ -3227,7 +3091,7 @@ void CompanyApi::companyPartList(const ::InvenTree::OptionalParam<QString> &mpn,
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("supplier")).append(querySuffix).append(QUrl::toPercentEncoding(supplier.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("supplier")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(supplier.stringValue())));
     }
     if (supplier_active.hasValue())
     {
@@ -3242,7 +3106,7 @@ void CompanyApi::companyPartList(const ::InvenTree::OptionalParam<QString> &mpn,
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("supplier_active")).append(querySuffix).append(QUrl::toPercentEncoding(supplier_active.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("supplier_active")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(supplier_active.stringValue())));
     }
     if (tags__name.hasValue())
     {
@@ -3257,7 +3121,7 @@ void CompanyApi::companyPartList(const ::InvenTree::OptionalParam<QString> &mpn,
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("tags__name")).append(querySuffix).append(QUrl::toPercentEncoding(tags__name.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("tags__name")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(tags__name.stringValue())));
     }
     if (tags__slug.hasValue())
     {
@@ -3272,7 +3136,7 @@ void CompanyApi::companyPartList(const ::InvenTree::OptionalParam<QString> &mpn,
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("tags__slug")).append(querySuffix).append(QUrl::toPercentEncoding(tags__slug.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("tags__slug")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(tags__slug.stringValue())));
     }
     HttpRequestWorker *worker = new HttpRequestWorker(this, _manager);
     worker->setTimeOut(_timeOut);
@@ -3280,19 +3144,14 @@ void CompanyApi::companyPartList(const ::InvenTree::OptionalParam<QString> &mpn,
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyPartListCallback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -3369,19 +3228,14 @@ void CompanyApi::companyPartManufacturerCreate(const ManufacturerPart &manufactu
         QByteArray output = manufacturer_part.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyPartManufacturerCreateCallback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -3453,19 +3307,14 @@ void CompanyApi::companyPartManufacturerDestroy() {
     HttpRequestInput input(fullPath, "DELETE");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyPartManufacturerDestroyCallback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -3550,19 +3399,14 @@ void CompanyApi::companyPartManufacturerDestroy2(const QString &id) {
     HttpRequestInput input(fullPath, "DELETE");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyPartManufacturerDestroy2Callback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -3641,7 +3485,7 @@ void CompanyApi::companyPartManufacturerList(const ::InvenTree::OptionalParam<QS
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("MPN")).append(querySuffix).append(QUrl::toPercentEncoding(mpn.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("MPN")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(mpn.stringValue())));
     }
     if (limit.hasValue())
     {
@@ -3656,7 +3500,7 @@ void CompanyApi::companyPartManufacturerList(const ::InvenTree::OptionalParam<QS
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(limit.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(limit.stringValue())));
     }
     if (manufacturer.hasValue())
     {
@@ -3671,7 +3515,7 @@ void CompanyApi::companyPartManufacturerList(const ::InvenTree::OptionalParam<QS
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("manufacturer")).append(querySuffix).append(QUrl::toPercentEncoding(manufacturer.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("manufacturer")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(manufacturer.stringValue())));
     }
     if (manufacturer_active.hasValue())
     {
@@ -3686,7 +3530,7 @@ void CompanyApi::companyPartManufacturerList(const ::InvenTree::OptionalParam<QS
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("manufacturer_active")).append(querySuffix).append(QUrl::toPercentEncoding(manufacturer_active.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("manufacturer_active")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(manufacturer_active.stringValue())));
     }
     if (offset.hasValue())
     {
@@ -3701,7 +3545,7 @@ void CompanyApi::companyPartManufacturerList(const ::InvenTree::OptionalParam<QS
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(offset.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(offset.stringValue())));
     }
     if (ordering.hasValue())
     {
@@ -3716,7 +3560,7 @@ void CompanyApi::companyPartManufacturerList(const ::InvenTree::OptionalParam<QS
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(ordering.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(ordering.stringValue())));
     }
     if (part.hasValue())
     {
@@ -3731,7 +3575,7 @@ void CompanyApi::companyPartManufacturerList(const ::InvenTree::OptionalParam<QS
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("part")).append(querySuffix).append(QUrl::toPercentEncoding(part.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("part")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(part.stringValue())));
     }
     if (part_active.hasValue())
     {
@@ -3746,7 +3590,7 @@ void CompanyApi::companyPartManufacturerList(const ::InvenTree::OptionalParam<QS
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("part_active")).append(querySuffix).append(QUrl::toPercentEncoding(part_active.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("part_active")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(part_active.stringValue())));
     }
     if (search.hasValue())
     {
@@ -3761,7 +3605,7 @@ void CompanyApi::companyPartManufacturerList(const ::InvenTree::OptionalParam<QS
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(search.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(search.stringValue())));
     }
     if (tags__name.hasValue())
     {
@@ -3776,7 +3620,7 @@ void CompanyApi::companyPartManufacturerList(const ::InvenTree::OptionalParam<QS
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("tags__name")).append(querySuffix).append(QUrl::toPercentEncoding(tags__name.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("tags__name")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(tags__name.stringValue())));
     }
     if (tags__slug.hasValue())
     {
@@ -3791,7 +3635,7 @@ void CompanyApi::companyPartManufacturerList(const ::InvenTree::OptionalParam<QS
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("tags__slug")).append(querySuffix).append(QUrl::toPercentEncoding(tags__slug.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("tags__slug")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(tags__slug.stringValue())));
     }
     HttpRequestWorker *worker = new HttpRequestWorker(this, _manager);
     worker->setTimeOut(_timeOut);
@@ -3799,19 +3643,14 @@ void CompanyApi::companyPartManufacturerList(const ::InvenTree::OptionalParam<QS
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyPartManufacturerListCallback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -3897,19 +3736,14 @@ void CompanyApi::companyPartManufacturerMetadataPartialUpdate(const QString &id)
     HttpRequestInput input(fullPath, "PATCH");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyPartManufacturerMetadataPartialUpdateCallback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -3994,19 +3828,14 @@ void CompanyApi::companyPartManufacturerMetadataRetrieve(const QString &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyPartManufacturerMetadataRetrieveCallback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -4091,19 +3920,14 @@ void CompanyApi::companyPartManufacturerMetadataUpdate(const QString &id) {
     HttpRequestInput input(fullPath, "PUT");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyPartManufacturerMetadataUpdateCallback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -4179,19 +4003,14 @@ void CompanyApi::companyPartManufacturerParameterCreate(const ManufacturerPartPa
         QByteArray output = manufacturer_part_parameter.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyPartManufacturerParameterCreateCallback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -4263,19 +4082,14 @@ void CompanyApi::companyPartManufacturerParameterDestroy() {
     HttpRequestInput input(fullPath, "DELETE");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyPartManufacturerParameterDestroyCallback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -4360,19 +4174,14 @@ void CompanyApi::companyPartManufacturerParameterDestroy2(const qint32 &id) {
     HttpRequestInput input(fullPath, "DELETE");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyPartManufacturerParameterDestroy2Callback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -4451,7 +4260,7 @@ void CompanyApi::companyPartManufacturerParameterList(const ::InvenTree::Optiona
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(limit.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(limit.stringValue())));
     }
     if (manufacturer.hasValue())
     {
@@ -4466,7 +4275,7 @@ void CompanyApi::companyPartManufacturerParameterList(const ::InvenTree::Optiona
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("manufacturer")).append(querySuffix).append(QUrl::toPercentEncoding(manufacturer.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("manufacturer")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(manufacturer.stringValue())));
     }
     if (manufacturer_part.hasValue())
     {
@@ -4481,7 +4290,7 @@ void CompanyApi::companyPartManufacturerParameterList(const ::InvenTree::Optiona
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("manufacturer_part")).append(querySuffix).append(QUrl::toPercentEncoding(manufacturer_part.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("manufacturer_part")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(manufacturer_part.stringValue())));
     }
     if (name.hasValue())
     {
@@ -4496,7 +4305,7 @@ void CompanyApi::companyPartManufacturerParameterList(const ::InvenTree::Optiona
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("name")).append(querySuffix).append(QUrl::toPercentEncoding(name.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("name")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(name.stringValue())));
     }
     if (offset.hasValue())
     {
@@ -4511,7 +4320,7 @@ void CompanyApi::companyPartManufacturerParameterList(const ::InvenTree::Optiona
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(offset.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(offset.stringValue())));
     }
     if (ordering.hasValue())
     {
@@ -4526,7 +4335,7 @@ void CompanyApi::companyPartManufacturerParameterList(const ::InvenTree::Optiona
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(ordering.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(ordering.stringValue())));
     }
     if (part.hasValue())
     {
@@ -4541,7 +4350,7 @@ void CompanyApi::companyPartManufacturerParameterList(const ::InvenTree::Optiona
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("part")).append(querySuffix).append(QUrl::toPercentEncoding(part.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("part")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(part.stringValue())));
     }
     if (search.hasValue())
     {
@@ -4556,7 +4365,7 @@ void CompanyApi::companyPartManufacturerParameterList(const ::InvenTree::Optiona
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(search.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(search.stringValue())));
     }
     if (units.hasValue())
     {
@@ -4571,7 +4380,7 @@ void CompanyApi::companyPartManufacturerParameterList(const ::InvenTree::Optiona
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("units")).append(querySuffix).append(QUrl::toPercentEncoding(units.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("units")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(units.stringValue())));
     }
     if (value.hasValue())
     {
@@ -4586,7 +4395,7 @@ void CompanyApi::companyPartManufacturerParameterList(const ::InvenTree::Optiona
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("value")).append(querySuffix).append(QUrl::toPercentEncoding(value.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("value")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(value.stringValue())));
     }
     HttpRequestWorker *worker = new HttpRequestWorker(this, _manager);
     worker->setTimeOut(_timeOut);
@@ -4594,19 +4403,14 @@ void CompanyApi::companyPartManufacturerParameterList(const ::InvenTree::Optiona
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyPartManufacturerParameterListCallback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -4697,19 +4501,14 @@ void CompanyApi::companyPartManufacturerParameterPartialUpdate(const qint32 &id,
         QByteArray output = patched_manufacturer_part_parameter.value().asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyPartManufacturerParameterPartialUpdateCallback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -4795,19 +4594,14 @@ void CompanyApi::companyPartManufacturerParameterRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyPartManufacturerParameterRetrieveCallback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -4898,19 +4692,14 @@ void CompanyApi::companyPartManufacturerParameterUpdate(const qint32 &id, const 
         QByteArray output = manufacturer_part_parameter.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyPartManufacturerParameterUpdateCallback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -5001,19 +4790,14 @@ void CompanyApi::companyPartManufacturerPartialUpdate(const QString &id, const :
         QByteArray output = patched_manufacturer_part.value().asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyPartManufacturerPartialUpdateCallback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -5099,19 +4883,14 @@ void CompanyApi::companyPartManufacturerRetrieve(const QString &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyPartManufacturerRetrieveCallback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -5202,19 +4981,14 @@ void CompanyApi::companyPartManufacturerUpdate(const QString &id, const Manufact
         QByteArray output = manufacturer_part.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyPartManufacturerUpdateCallback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -5300,19 +5074,14 @@ void CompanyApi::companyPartMetadataPartialUpdate(const QString &id) {
     HttpRequestInput input(fullPath, "PATCH");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyPartMetadataPartialUpdateCallback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -5397,19 +5166,14 @@ void CompanyApi::companyPartMetadataRetrieve(const QString &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyPartMetadataRetrieveCallback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -5494,19 +5258,14 @@ void CompanyApi::companyPartMetadataUpdate(const QString &id) {
     HttpRequestInput input(fullPath, "PUT");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyPartMetadataUpdateCallback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -5596,19 +5355,14 @@ void CompanyApi::companyPartPartialUpdate(const QString &id, const ::InvenTree::
         QByteArray output = patched_supplier_part.value().asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyPartPartialUpdateCallback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -5694,19 +5448,14 @@ void CompanyApi::companyPartRetrieve(const QString &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyPartRetrieveCallback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -5797,19 +5546,14 @@ void CompanyApi::companyPartUpdate(const QString &id, const SupplierPart &suppli
         QByteArray output = supplier_part.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyPartUpdateCallback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -5900,19 +5644,14 @@ void CompanyApi::companyPartialUpdate(const QString &id, const ::InvenTree::Opti
         QByteArray output = patched_company.value().asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyPartialUpdateCallback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -5989,19 +5728,14 @@ void CompanyApi::companyPriceBreakCreate(const SupplierPriceBreak &supplier_pric
         QByteArray output = supplier_price_break.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyPriceBreakCreateCallback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -6087,19 +5821,14 @@ void CompanyApi::companyPriceBreakDestroy(const QString &id) {
     HttpRequestInput input(fullPath, "DELETE");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyPriceBreakDestroyCallback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -6178,7 +5907,7 @@ void CompanyApi::companyPriceBreakList(const ::InvenTree::OptionalParam<qint32> 
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("base_part")).append(querySuffix).append(QUrl::toPercentEncoding(base_part.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("base_part")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(base_part.stringValue())));
     }
     if (limit.hasValue())
     {
@@ -6193,7 +5922,7 @@ void CompanyApi::companyPriceBreakList(const ::InvenTree::OptionalParam<qint32> 
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(limit.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(limit.stringValue())));
     }
     if (offset.hasValue())
     {
@@ -6208,7 +5937,7 @@ void CompanyApi::companyPriceBreakList(const ::InvenTree::OptionalParam<qint32> 
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(offset.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(offset.stringValue())));
     }
     if (ordering.hasValue())
     {
@@ -6223,7 +5952,7 @@ void CompanyApi::companyPriceBreakList(const ::InvenTree::OptionalParam<qint32> 
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(ordering.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(ordering.stringValue())));
     }
     if (part.hasValue())
     {
@@ -6238,7 +5967,7 @@ void CompanyApi::companyPriceBreakList(const ::InvenTree::OptionalParam<qint32> 
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("part")).append(querySuffix).append(QUrl::toPercentEncoding(part.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("part")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(part.stringValue())));
     }
     if (quantity.hasValue())
     {
@@ -6253,7 +5982,7 @@ void CompanyApi::companyPriceBreakList(const ::InvenTree::OptionalParam<qint32> 
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("quantity")).append(querySuffix).append(QUrl::toPercentEncoding(quantity.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("quantity")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(quantity.stringValue())));
     }
     if (search.hasValue())
     {
@@ -6268,7 +5997,7 @@ void CompanyApi::companyPriceBreakList(const ::InvenTree::OptionalParam<qint32> 
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(search.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(search.stringValue())));
     }
     if (supplier.hasValue())
     {
@@ -6283,7 +6012,7 @@ void CompanyApi::companyPriceBreakList(const ::InvenTree::OptionalParam<qint32> 
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("supplier")).append(querySuffix).append(QUrl::toPercentEncoding(supplier.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("supplier")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(supplier.stringValue())));
     }
     HttpRequestWorker *worker = new HttpRequestWorker(this, _manager);
     worker->setTimeOut(_timeOut);
@@ -6291,19 +6020,14 @@ void CompanyApi::companyPriceBreakList(const ::InvenTree::OptionalParam<qint32> 
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyPriceBreakListCallback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -6394,19 +6118,14 @@ void CompanyApi::companyPriceBreakPartialUpdate(const QString &id, const ::Inven
         QByteArray output = patched_supplier_price_break.value().asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyPriceBreakPartialUpdateCallback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -6492,19 +6211,14 @@ void CompanyApi::companyPriceBreakRetrieve(const QString &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyPriceBreakRetrieveCallback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -6595,19 +6309,14 @@ void CompanyApi::companyPriceBreakUpdate(const QString &id, const SupplierPriceB
         QByteArray output = supplier_price_break.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyPriceBreakUpdateCallback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -6693,19 +6402,14 @@ void CompanyApi::companyRetrieve(const QString &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyRetrieveCallback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -6796,19 +6500,14 @@ void CompanyApi::companyUpdate(const QString &id, const Company &company) {
         QByteArray output = company.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &CompanyApi::companyUpdateCallback);
     connect(this, &CompanyApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }

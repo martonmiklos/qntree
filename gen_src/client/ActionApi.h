@@ -59,7 +59,7 @@ public:
     /**
     * @param[in]  action_plugin ActionPlugin [required]
     */
-    void actionCreate(const ActionPlugin &action_plugin);
+    virtual void actionCreate(const ActionPlugin &action_plugin);
 
 
 private:
@@ -89,6 +89,7 @@ private:
 Q_SIGNALS:
 
     void actionCreateSignal(ActionPlugin summary);
+
 
     void actionCreateSignalFull(HttpRequestWorker *worker, ActionPlugin summary);
 

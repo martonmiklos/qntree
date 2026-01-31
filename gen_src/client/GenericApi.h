@@ -56,12 +56,12 @@ public:
     QString getParamStyleDelimiter(const QString &style, const QString &name, bool isExplode);
 
 
-    void genericStatusRetrieve();
+    virtual void genericStatusRetrieve();
 
     /**
     * @param[in]  statusmodel QString [required]
     */
-    void genericStatusRetrieve2(const QString &statusmodel);
+    virtual void genericStatusRetrieve2(const QString &statusmodel);
 
 
 private:
@@ -93,6 +93,7 @@ Q_SIGNALS:
 
     void genericStatusRetrieveSignal();
     void genericStatusRetrieve2Signal();
+
 
     void genericStatusRetrieveSignalFull(HttpRequestWorker *worker);
     void genericStatusRetrieve2SignalFull(HttpRequestWorker *worker);

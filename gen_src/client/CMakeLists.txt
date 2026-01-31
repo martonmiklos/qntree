@@ -246,7 +246,6 @@ add_library(${PROJECT_NAME}
   PatchedPurchaseOrder.h
   PatchedPurchaseOrderExtraLine.h
   PatchedPurchaseOrderLineItem.h
-  PatchedPurchaseOrder_order_currency.h
   PatchedReportAsset.h
   PatchedReportSnippet.h
   PatchedReportTemplate.h
@@ -626,7 +625,6 @@ add_library(${PROJECT_NAME}
   PatchedPurchaseOrder.cpp
   PatchedPurchaseOrderExtraLine.cpp
   PatchedPurchaseOrderLineItem.cpp
-  PatchedPurchaseOrder_order_currency.cpp
   PatchedReportAsset.cpp
   PatchedReportSnippet.cpp
   PatchedReportTemplate.cpp

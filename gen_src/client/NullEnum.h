@@ -39,7 +39,6 @@ public:
 
     enum class eNullEnum {
         INVALID_VALUE_OPENAPI_GENERATED = 0,
-        r_NULL
     };
     NullEnum::eNullEnum getValue() const;
     void setValue(const NullEnum::eNullEnum& value);

@@ -74,100 +74,100 @@ public:
     /**
     * @param[in]  email_address EmailAddress [required]
     */
-    void authEmailsCreate(const EmailAddress &email_address);
+    virtual void authEmailsCreate(const EmailAddress &email_address);
 
     /**
     * @param[in]  limit qint32 [optional]
     * @param[in]  offset qint32 [optional]
     */
-    void authEmailsList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>());
+    virtual void authEmailsList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void authEmailsPrimaryCreate(const qint32 &id);
+    virtual void authEmailsPrimaryCreate(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void authEmailsRemoveCreate(const qint32 &id);
+    virtual void authEmailsRemoveCreate(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void authEmailsVerifyCreate(const qint32 &id);
+    virtual void authEmailsVerifyCreate(const qint32 &id);
 
     /**
     * @param[in]  login Login [required]
     */
-    void authLoginCreate(const Login &login);
+    virtual void authLoginCreate(const Login &login);
 
 
-    void authLogoutCreate();
+    virtual void authLogoutCreate();
 
 
-    void authLogoutRetrieve();
+    virtual void authLogoutRetrieve();
 
     /**
     * @param[in]  password_change PasswordChange [required]
     */
-    void authPasswordChangeCreate(const PasswordChange &password_change);
+    virtual void authPasswordChangeCreate(const PasswordChange &password_change);
 
     /**
     * @param[in]  password_reset_confirm PasswordResetConfirm [required]
     */
-    void authPasswordResetConfirmCreate(const PasswordResetConfirm &password_reset_confirm);
+    virtual void authPasswordResetConfirmCreate(const PasswordResetConfirm &password_reset_confirm);
 
     /**
     * @param[in]  password_reset PasswordReset [required]
     */
-    void authPasswordResetCreate(const PasswordReset &password_reset);
+    virtual void authPasswordResetCreate(const PasswordReset &password_reset);
 
     /**
     * @param[in]  limit qint32 [optional]
     * @param[in]  offset qint32 [optional]
     */
-    void authProvidersList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>());
+    virtual void authProvidersList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>());
 
     /**
     * @param[in]  r_register Register [required]
     */
-    void authRegistrationCreate(const Register &r_register);
+    virtual void authRegistrationCreate(const Register &r_register);
 
     /**
     * @param[in]  resend_email_verification ResendEmailVerification [optional]
     */
-    void authRegistrationResendEmailCreate(const ::InvenTree::OptionalParam<ResendEmailVerification> &resend_email_verification = ::InvenTree::OptionalParam<ResendEmailVerification>());
+    virtual void authRegistrationResendEmailCreate(const ::InvenTree::OptionalParam<ResendEmailVerification> &resend_email_verification = ::InvenTree::OptionalParam<ResendEmailVerification>());
 
     /**
     * @param[in]  verify_email VerifyEmail [required]
     */
-    void authRegistrationVerifyEmailCreate(const VerifyEmail &verify_email);
+    virtual void authRegistrationVerifyEmailCreate(const VerifyEmail &verify_email);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  social_connect SocialConnect [optional]
     */
-    void authSocialDisconnectCreate(const qint32 &id, const ::InvenTree::OptionalParam<SocialConnect> &social_connect = ::InvenTree::OptionalParam<SocialConnect>());
+    virtual void authSocialDisconnectCreate(const qint32 &id, const ::InvenTree::OptionalParam<SocialConnect> &social_connect = ::InvenTree::OptionalParam<SocialConnect>());
 
     /**
     * @param[in]  limit qint32 [optional]
     * @param[in]  offset qint32 [optional]
     */
-    void authSocialList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>());
+    virtual void authSocialList(const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>());
 
     /**
     * @param[in]  patched_user_details PatchedUserDetails [optional]
     */
-    void authUserPartialUpdate(const ::InvenTree::OptionalParam<PatchedUserDetails> &patched_user_details = ::InvenTree::OptionalParam<PatchedUserDetails>());
+    virtual void authUserPartialUpdate(const ::InvenTree::OptionalParam<PatchedUserDetails> &patched_user_details = ::InvenTree::OptionalParam<PatchedUserDetails>());
 
 
-    void authUserRetrieve();
+    virtual void authUserRetrieve();
 
     /**
     * @param[in]  user_details UserDetails [required]
     */
-    void authUserUpdate(const UserDetails &user_details);
+    virtual void authUserUpdate(const UserDetails &user_details);
 
 
 private:
@@ -235,6 +235,7 @@ Q_SIGNALS:
     void authUserPartialUpdateSignal(UserDetails summary);
     void authUserRetrieveSignal(UserDetails summary);
     void authUserUpdateSignal(UserDetails summary);
+
 
     void authEmailsCreateSignalFull(HttpRequestWorker *worker, EmailAddress summary);
     void authEmailsListSignalFull(HttpRequestWorker *worker, PaginatedEmailAddressList summary);

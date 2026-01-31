@@ -61,12 +61,12 @@ public:
     /**
     * @param[in]  attachment Attachment [required]
     */
-    void attachmentCreate(const Attachment &attachment);
+    virtual void attachmentCreate(const Attachment &attachment);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void attachmentDestroy(const qint32 &id);
+    virtual void attachmentDestroy(const qint32 &id);
 
     /**
     * @param[in]  is_file bool [optional]
@@ -79,39 +79,39 @@ public:
     * @param[in]  search QString [optional]
     * @param[in]  upload_user qint32 [optional]
     */
-    void attachmentList(const ::InvenTree::OptionalParam<bool> &is_file = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &is_link = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &model_id = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &model_type = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &upload_user = ::InvenTree::OptionalParam<qint32>());
+    virtual void attachmentList(const ::InvenTree::OptionalParam<bool> &is_file = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &is_link = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &model_id = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &model_type = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &upload_user = ::InvenTree::OptionalParam<qint32>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void attachmentMetadataPartialUpdate(const qint32 &id);
+    virtual void attachmentMetadataPartialUpdate(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void attachmentMetadataRetrieve(const qint32 &id);
+    virtual void attachmentMetadataRetrieve(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void attachmentMetadataUpdate(const qint32 &id);
+    virtual void attachmentMetadataUpdate(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  patched_attachment PatchedAttachment [optional]
     */
-    void attachmentPartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedAttachment> &patched_attachment = ::InvenTree::OptionalParam<PatchedAttachment>());
+    virtual void attachmentPartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedAttachment> &patched_attachment = ::InvenTree::OptionalParam<PatchedAttachment>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void attachmentRetrieve(const qint32 &id);
+    virtual void attachmentRetrieve(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  attachment Attachment [required]
     */
-    void attachmentUpdate(const qint32 &id, const Attachment &attachment);
+    virtual void attachmentUpdate(const qint32 &id, const Attachment &attachment);
 
 
 private:
@@ -157,6 +157,7 @@ Q_SIGNALS:
     void attachmentPartialUpdateSignal(Attachment summary);
     void attachmentRetrieveSignal(Attachment summary);
     void attachmentUpdateSignal(Attachment summary);
+
 
     void attachmentCreateSignalFull(HttpRequestWorker *worker, Attachment summary);
     void attachmentDestroySignalFull(HttpRequestWorker *worker);

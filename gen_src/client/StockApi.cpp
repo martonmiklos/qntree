@@ -220,15 +220,9 @@ int StockApi::addServerConfiguration(const QString &operation, const QUrl &url, 
     * @param variables A map between a variable name and its value. The value is used for substitution in the server's URL template.
     */
 void StockApi::setNewServerForAllOperations(const QUrl &url, const QString &description, const QMap<QString, ServerVariable> &variables) {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
     for (auto keyIt = _serverIndices.keyBegin(); keyIt != _serverIndices.keyEnd(); keyIt++) {
         setServerIndex(*keyIt, addServerConfiguration(*keyIt, url, description, variables));
     }
-#else
-    for (auto &e : _serverIndices.keys()) {
-        setServerIndex(e, addServerConfiguration(e, url, description, variables));
-    }
-#endif
 }
 
 /**
@@ -343,19 +337,14 @@ void StockApi::stockAddCreate(const StockAdd &stock_add) {
         QByteArray output = stock_add.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &StockApi::stockAddCreateCallback);
     connect(this, &StockApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -432,19 +421,14 @@ void StockApi::stockAssignCreate(const StockAssignment &stock_assignment) {
         QByteArray output = stock_assignment.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &StockApi::stockAssignCreateCallback);
     connect(this, &StockApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -521,19 +505,14 @@ void StockApi::stockChangeStatusCreate(const StockChangeStatus &stock_change_sta
         QByteArray output = stock_change_status.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &StockApi::stockChangeStatusCreateCallback);
     connect(this, &StockApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -624,19 +603,14 @@ void StockApi::stockConvertCreate(const qint32 &id, const ConvertStockItem &conv
         QByteArray output = convert_stock_item.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &StockApi::stockConvertCreateCallback);
     connect(this, &StockApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -713,19 +687,14 @@ void StockApi::stockCountCreate(const StockCount &stock_count) {
         QByteArray output = stock_count.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &StockApi::stockCountCreateCallback);
     connect(this, &StockApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -802,19 +771,14 @@ void StockApi::stockCreate(const StockItem &stock_item) {
         QByteArray output = stock_item.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &StockApi::stockCreateCallback);
     connect(this, &StockApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -886,19 +850,14 @@ void StockApi::stockDestroy() {
     HttpRequestInput input(fullPath, "DELETE");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &StockApi::stockDestroyCallback);
     connect(this, &StockApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -983,19 +942,14 @@ void StockApi::stockDestroy2(const qint32 &id) {
     HttpRequestInput input(fullPath, "DELETE");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &StockApi::stockDestroy2Callback);
     connect(this, &StockApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -1085,19 +1039,14 @@ void StockApi::stockInstallCreate(const qint32 &id, const InstallStockItem &inst
         QByteArray output = install_stock_item.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &StockApi::stockInstallCreateCallback);
     connect(this, &StockApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -1177,7 +1126,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("IPN")).append(querySuffix).append(QUrl::toPercentEncoding(ipn.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("IPN")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(ipn.stringValue())));
     }
     if (ipn_contains.hasValue())
     {
@@ -1192,7 +1141,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("IPN_contains")).append(querySuffix).append(QUrl::toPercentEncoding(ipn_contains.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("IPN_contains")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(ipn_contains.stringValue())));
     }
     if (ipn_regex.hasValue())
     {
@@ -1207,7 +1156,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("IPN_regex")).append(querySuffix).append(QUrl::toPercentEncoding(ipn_regex.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("IPN_regex")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(ipn_regex.stringValue())));
     }
     if (active.hasValue())
     {
@@ -1222,7 +1171,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("active")).append(querySuffix).append(QUrl::toPercentEncoding(active.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("active")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(active.stringValue())));
     }
     if (allocated.hasValue())
     {
@@ -1237,7 +1186,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("allocated")).append(querySuffix).append(QUrl::toPercentEncoding(allocated.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("allocated")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(allocated.stringValue())));
     }
     if (ancestor.hasValue())
     {
@@ -1252,7 +1201,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("ancestor")).append(querySuffix).append(QUrl::toPercentEncoding(ancestor.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("ancestor")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(ancestor.stringValue())));
     }
     if (assembly.hasValue())
     {
@@ -1267,7 +1216,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("assembly")).append(querySuffix).append(QUrl::toPercentEncoding(assembly.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("assembly")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(assembly.stringValue())));
     }
     if (available.hasValue())
     {
@@ -1282,7 +1231,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("available")).append(querySuffix).append(QUrl::toPercentEncoding(available.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("available")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(available.stringValue())));
     }
     if (batch.hasValue())
     {
@@ -1297,7 +1246,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("batch")).append(querySuffix).append(QUrl::toPercentEncoding(batch.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("batch")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(batch.stringValue())));
     }
     if (batch_regex.hasValue())
     {
@@ -1312,7 +1261,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("batch_regex")).append(querySuffix).append(QUrl::toPercentEncoding(batch_regex.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("batch_regex")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(batch_regex.stringValue())));
     }
     if (belongs_to.hasValue())
     {
@@ -1327,7 +1276,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("belongs_to")).append(querySuffix).append(QUrl::toPercentEncoding(belongs_to.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("belongs_to")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(belongs_to.stringValue())));
     }
     if (bom_item.hasValue())
     {
@@ -1342,7 +1291,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("bom_item")).append(querySuffix).append(QUrl::toPercentEncoding(bom_item.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("bom_item")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(bom_item.stringValue())));
     }
     if (build.hasValue())
     {
@@ -1357,7 +1306,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("build")).append(querySuffix).append(QUrl::toPercentEncoding(build.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("build")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(build.stringValue())));
     }
     if (category.hasValue())
     {
@@ -1372,7 +1321,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("category")).append(querySuffix).append(QUrl::toPercentEncoding(category.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("category")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(category.stringValue())));
     }
     if (company.hasValue())
     {
@@ -1387,7 +1336,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("company")).append(querySuffix).append(QUrl::toPercentEncoding(company.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("company")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(company.stringValue())));
     }
     if (consumed_by.hasValue())
     {
@@ -1402,7 +1351,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("consumed_by")).append(querySuffix).append(QUrl::toPercentEncoding(consumed_by.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("consumed_by")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(consumed_by.stringValue())));
     }
     if (customer.hasValue())
     {
@@ -1417,7 +1366,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("customer")).append(querySuffix).append(QUrl::toPercentEncoding(customer.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("customer")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(customer.stringValue())));
     }
     if (depleted.hasValue())
     {
@@ -1432,7 +1381,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("depleted")).append(querySuffix).append(QUrl::toPercentEncoding(depleted.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("depleted")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(depleted.stringValue())));
     }
     if (expired.hasValue())
     {
@@ -1447,7 +1396,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("expired")).append(querySuffix).append(QUrl::toPercentEncoding(expired.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("expired")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(expired.stringValue())));
     }
     if (expiry_date_gte.hasValue())
     {
@@ -1462,7 +1411,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("expiry_date_gte")).append(querySuffix).append(QUrl::toPercentEncoding(expiry_date_gte.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("expiry_date_gte")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(expiry_date_gte.stringValue())));
     }
     if (expiry_date_lte.hasValue())
     {
@@ -1477,7 +1426,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("expiry_date_lte")).append(querySuffix).append(QUrl::toPercentEncoding(expiry_date_lte.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("expiry_date_lte")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(expiry_date_lte.stringValue())));
     }
     if (external.hasValue())
     {
@@ -1492,7 +1441,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("external")).append(querySuffix).append(QUrl::toPercentEncoding(external.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("external")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(external.stringValue())));
     }
     if (has_batch.hasValue())
     {
@@ -1507,7 +1456,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("has_batch")).append(querySuffix).append(QUrl::toPercentEncoding(has_batch.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("has_batch")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(has_batch.stringValue())));
     }
     if (has_child_items.hasValue())
     {
@@ -1522,7 +1471,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("has_child_items")).append(querySuffix).append(QUrl::toPercentEncoding(has_child_items.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("has_child_items")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(has_child_items.stringValue())));
     }
     if (has_installed_items.hasValue())
     {
@@ -1537,7 +1486,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("has_installed_items")).append(querySuffix).append(QUrl::toPercentEncoding(has_installed_items.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("has_installed_items")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(has_installed_items.stringValue())));
     }
     if (has_purchase_price.hasValue())
     {
@@ -1552,7 +1501,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("has_purchase_price")).append(querySuffix).append(QUrl::toPercentEncoding(has_purchase_price.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("has_purchase_price")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(has_purchase_price.stringValue())));
     }
     if (in_stock.hasValue())
     {
@@ -1567,7 +1516,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("in_stock")).append(querySuffix).append(QUrl::toPercentEncoding(in_stock.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("in_stock")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(in_stock.stringValue())));
     }
     if (installed.hasValue())
     {
@@ -1582,7 +1531,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("installed")).append(querySuffix).append(QUrl::toPercentEncoding(installed.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("installed")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(installed.stringValue())));
     }
     if (is_building.hasValue())
     {
@@ -1597,7 +1546,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("is_building")).append(querySuffix).append(QUrl::toPercentEncoding(is_building.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("is_building")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(is_building.stringValue())));
     }
     if (limit.hasValue())
     {
@@ -1612,7 +1561,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(limit.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(limit.stringValue())));
     }
     if (manufacturer.hasValue())
     {
@@ -1627,7 +1576,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("manufacturer")).append(querySuffix).append(QUrl::toPercentEncoding(manufacturer.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("manufacturer")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(manufacturer.stringValue())));
     }
     if (max_stock.hasValue())
     {
@@ -1642,7 +1591,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("max_stock")).append(querySuffix).append(QUrl::toPercentEncoding(max_stock.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("max_stock")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(max_stock.stringValue())));
     }
     if (min_stock.hasValue())
     {
@@ -1657,7 +1606,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("min_stock")).append(querySuffix).append(QUrl::toPercentEncoding(min_stock.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("min_stock")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(min_stock.stringValue())));
     }
     if (name.hasValue())
     {
@@ -1672,7 +1621,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("name")).append(querySuffix).append(QUrl::toPercentEncoding(name.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("name")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(name.stringValue())));
     }
     if (name_contains.hasValue())
     {
@@ -1687,7 +1636,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("name_contains")).append(querySuffix).append(QUrl::toPercentEncoding(name_contains.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("name_contains")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(name_contains.stringValue())));
     }
     if (name_regex.hasValue())
     {
@@ -1702,7 +1651,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("name_regex")).append(querySuffix).append(QUrl::toPercentEncoding(name_regex.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("name_regex")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(name_regex.stringValue())));
     }
     if (offset.hasValue())
     {
@@ -1717,7 +1666,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(offset.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(offset.stringValue())));
     }
     if (ordering.hasValue())
     {
@@ -1732,7 +1681,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(ordering.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(ordering.stringValue())));
     }
     if (part_tree.hasValue())
     {
@@ -1747,7 +1696,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("part_tree")).append(querySuffix).append(QUrl::toPercentEncoding(part_tree.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("part_tree")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(part_tree.stringValue())));
     }
     if (purchase_order.hasValue())
     {
@@ -1762,7 +1711,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("purchase_order")).append(querySuffix).append(QUrl::toPercentEncoding(purchase_order.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("purchase_order")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(purchase_order.stringValue())));
     }
     if (salable.hasValue())
     {
@@ -1777,7 +1726,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("salable")).append(querySuffix).append(QUrl::toPercentEncoding(salable.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("salable")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(salable.stringValue())));
     }
     if (sales_order.hasValue())
     {
@@ -1792,7 +1741,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("sales_order")).append(querySuffix).append(QUrl::toPercentEncoding(sales_order.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("sales_order")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(sales_order.stringValue())));
     }
     if (search.hasValue())
     {
@@ -1807,7 +1756,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(search.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(search.stringValue())));
     }
     if (sent_to_customer.hasValue())
     {
@@ -1822,7 +1771,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("sent_to_customer")).append(querySuffix).append(QUrl::toPercentEncoding(sent_to_customer.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("sent_to_customer")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(sent_to_customer.stringValue())));
     }
     if (serial.hasValue())
     {
@@ -1837,7 +1786,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("serial")).append(querySuffix).append(QUrl::toPercentEncoding(serial.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("serial")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(serial.stringValue())));
     }
     if (serial_gte.hasValue())
     {
@@ -1852,7 +1801,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("serial_gte")).append(querySuffix).append(QUrl::toPercentEncoding(serial_gte.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("serial_gte")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(serial_gte.stringValue())));
     }
     if (serial_lte.hasValue())
     {
@@ -1867,7 +1816,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("serial_lte")).append(querySuffix).append(QUrl::toPercentEncoding(serial_lte.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("serial_lte")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(serial_lte.stringValue())));
     }
     if (serialized.hasValue())
     {
@@ -1882,7 +1831,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("serialized")).append(querySuffix).append(QUrl::toPercentEncoding(serialized.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("serialized")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(serialized.stringValue())));
     }
     if (stale.hasValue())
     {
@@ -1897,7 +1846,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("stale")).append(querySuffix).append(QUrl::toPercentEncoding(stale.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("stale")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(stale.stringValue())));
     }
     if (status.hasValue())
     {
@@ -1912,7 +1861,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("status")).append(querySuffix).append(QUrl::toPercentEncoding(status.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("status")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(status.stringValue())));
     }
     if (supplier.hasValue())
     {
@@ -1927,7 +1876,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("supplier")).append(querySuffix).append(QUrl::toPercentEncoding(supplier.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("supplier")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(supplier.stringValue())));
     }
     if (supplier_part.hasValue())
     {
@@ -1942,7 +1891,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("supplier_part")).append(querySuffix).append(QUrl::toPercentEncoding(supplier_part.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("supplier_part")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(supplier_part.stringValue())));
     }
     if (tags__name.hasValue())
     {
@@ -1957,7 +1906,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("tags__name")).append(querySuffix).append(QUrl::toPercentEncoding(tags__name.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("tags__name")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(tags__name.stringValue())));
     }
     if (tags__slug.hasValue())
     {
@@ -1972,7 +1921,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("tags__slug")).append(querySuffix).append(QUrl::toPercentEncoding(tags__slug.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("tags__slug")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(tags__slug.stringValue())));
     }
     if (tracked.hasValue())
     {
@@ -1987,7 +1936,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("tracked")).append(querySuffix).append(QUrl::toPercentEncoding(tracked.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("tracked")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(tracked.stringValue())));
     }
     if (updated_after.hasValue())
     {
@@ -2002,7 +1951,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("updated_after")).append(querySuffix).append(QUrl::toPercentEncoding(updated_after.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("updated_after")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(updated_after.stringValue())));
     }
     if (updated_before.hasValue())
     {
@@ -2017,7 +1966,7 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("updated_before")).append(querySuffix).append(QUrl::toPercentEncoding(updated_before.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("updated_before")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(updated_before.stringValue())));
     }
     HttpRequestWorker *worker = new HttpRequestWorker(this, _manager);
     worker->setTimeOut(_timeOut);
@@ -2025,19 +1974,14 @@ void StockApi::stockList(const ::InvenTree::OptionalParam<QString> &ipn, const :
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &StockApi::stockListCallback);
     connect(this, &StockApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -2114,19 +2058,14 @@ void StockApi::stockLocationCreate(const Location &location) {
         QByteArray output = location.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &StockApi::stockLocationCreateCallback);
     connect(this, &StockApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -2212,19 +2151,14 @@ void StockApi::stockLocationDestroy(const qint32 &id) {
     HttpRequestInput input(fullPath, "DELETE");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &StockApi::stockLocationDestroyCallback);
     connect(this, &StockApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -2303,7 +2237,7 @@ void StockApi::stockLocationList(const ::InvenTree::OptionalParam<bool> &cascade
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("cascade")).append(querySuffix).append(QUrl::toPercentEncoding(cascade.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("cascade")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(cascade.stringValue())));
     }
     if (depth.hasValue())
     {
@@ -2318,7 +2252,7 @@ void StockApi::stockLocationList(const ::InvenTree::OptionalParam<bool> &cascade
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("depth")).append(querySuffix).append(QUrl::toPercentEncoding(depth.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("depth")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(depth.stringValue())));
     }
     if (external.hasValue())
     {
@@ -2333,7 +2267,7 @@ void StockApi::stockLocationList(const ::InvenTree::OptionalParam<bool> &cascade
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("external")).append(querySuffix).append(QUrl::toPercentEncoding(external.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("external")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(external.stringValue())));
     }
     if (has_location_type.hasValue())
     {
@@ -2348,7 +2282,7 @@ void StockApi::stockLocationList(const ::InvenTree::OptionalParam<bool> &cascade
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("has_location_type")).append(querySuffix).append(QUrl::toPercentEncoding(has_location_type.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("has_location_type")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(has_location_type.stringValue())));
     }
     if (limit.hasValue())
     {
@@ -2363,7 +2297,7 @@ void StockApi::stockLocationList(const ::InvenTree::OptionalParam<bool> &cascade
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(limit.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(limit.stringValue())));
     }
     if (location_type.hasValue())
     {
@@ -2378,7 +2312,7 @@ void StockApi::stockLocationList(const ::InvenTree::OptionalParam<bool> &cascade
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("location_type")).append(querySuffix).append(QUrl::toPercentEncoding(location_type.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("location_type")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(location_type.stringValue())));
     }
     if (name.hasValue())
     {
@@ -2393,7 +2327,7 @@ void StockApi::stockLocationList(const ::InvenTree::OptionalParam<bool> &cascade
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("name")).append(querySuffix).append(QUrl::toPercentEncoding(name.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("name")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(name.stringValue())));
     }
     if (offset.hasValue())
     {
@@ -2408,7 +2342,7 @@ void StockApi::stockLocationList(const ::InvenTree::OptionalParam<bool> &cascade
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(offset.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(offset.stringValue())));
     }
     if (ordering.hasValue())
     {
@@ -2423,7 +2357,7 @@ void StockApi::stockLocationList(const ::InvenTree::OptionalParam<bool> &cascade
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(ordering.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(ordering.stringValue())));
     }
     if (parent.hasValue())
     {
@@ -2438,7 +2372,7 @@ void StockApi::stockLocationList(const ::InvenTree::OptionalParam<bool> &cascade
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("parent")).append(querySuffix).append(QUrl::toPercentEncoding(parent.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("parent")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(parent.stringValue())));
     }
     if (search.hasValue())
     {
@@ -2453,7 +2387,7 @@ void StockApi::stockLocationList(const ::InvenTree::OptionalParam<bool> &cascade
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(search.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(search.stringValue())));
     }
     if (structural.hasValue())
     {
@@ -2468,7 +2402,7 @@ void StockApi::stockLocationList(const ::InvenTree::OptionalParam<bool> &cascade
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("structural")).append(querySuffix).append(QUrl::toPercentEncoding(structural.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("structural")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(structural.stringValue())));
     }
     if (top_level.hasValue())
     {
@@ -2483,7 +2417,7 @@ void StockApi::stockLocationList(const ::InvenTree::OptionalParam<bool> &cascade
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("top_level")).append(querySuffix).append(QUrl::toPercentEncoding(top_level.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("top_level")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(top_level.stringValue())));
     }
     HttpRequestWorker *worker = new HttpRequestWorker(this, _manager);
     worker->setTimeOut(_timeOut);
@@ -2491,19 +2425,14 @@ void StockApi::stockLocationList(const ::InvenTree::OptionalParam<bool> &cascade
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &StockApi::stockLocationListCallback);
     connect(this, &StockApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -2589,19 +2518,14 @@ void StockApi::stockLocationMetadataPartialUpdate(const qint32 &id) {
     HttpRequestInput input(fullPath, "PATCH");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &StockApi::stockLocationMetadataPartialUpdateCallback);
     connect(this, &StockApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -2686,19 +2610,14 @@ void StockApi::stockLocationMetadataRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &StockApi::stockLocationMetadataRetrieveCallback);
     connect(this, &StockApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -2783,19 +2702,14 @@ void StockApi::stockLocationMetadataUpdate(const qint32 &id) {
     HttpRequestInput input(fullPath, "PUT");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &StockApi::stockLocationMetadataUpdateCallback);
     connect(this, &StockApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -2885,19 +2799,14 @@ void StockApi::stockLocationPartialUpdate(const qint32 &id, const ::InvenTree::O
         QByteArray output = patched_location.value().asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &StockApi::stockLocationPartialUpdateCallback);
     connect(this, &StockApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -2983,19 +2892,14 @@ void StockApi::stockLocationRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &StockApi::stockLocationRetrieveCallback);
     connect(this, &StockApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -3075,7 +2979,7 @@ void StockApi::stockLocationTreeList(const ::InvenTree::OptionalParam<qint32> &l
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(limit.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(limit.stringValue())));
     }
     if (offset.hasValue())
     {
@@ -3090,7 +2994,7 @@ void StockApi::stockLocationTreeList(const ::InvenTree::OptionalParam<qint32> &l
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(offset.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(offset.stringValue())));
     }
     if (ordering.hasValue())
     {
@@ -3105,7 +3009,7 @@ void StockApi::stockLocationTreeList(const ::InvenTree::OptionalParam<qint32> &l
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(ordering.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(ordering.stringValue())));
     }
     HttpRequestWorker *worker = new HttpRequestWorker(this, _manager);
     worker->setTimeOut(_timeOut);
@@ -3113,19 +3017,14 @@ void StockApi::stockLocationTreeList(const ::InvenTree::OptionalParam<qint32> &l
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &StockApi::stockLocationTreeListCallback);
     connect(this, &StockApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -3202,19 +3101,14 @@ void StockApi::stockLocationTypeCreate(const StockLocationType &stock_location_t
         QByteArray output = stock_location_type.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &StockApi::stockLocationTypeCreateCallback);
     connect(this, &StockApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -3300,19 +3194,14 @@ void StockApi::stockLocationTypeDestroy(const qint32 &id) {
     HttpRequestInput input(fullPath, "DELETE");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &StockApi::stockLocationTypeDestroyCallback);
     connect(this, &StockApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -3391,7 +3280,7 @@ void StockApi::stockLocationTypeList(const ::InvenTree::OptionalParam<qint32> &l
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(limit.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(limit.stringValue())));
     }
     if (offset.hasValue())
     {
@@ -3406,7 +3295,7 @@ void StockApi::stockLocationTypeList(const ::InvenTree::OptionalParam<qint32> &l
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(offset.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(offset.stringValue())));
     }
     if (ordering.hasValue())
     {
@@ -3421,7 +3310,7 @@ void StockApi::stockLocationTypeList(const ::InvenTree::OptionalParam<qint32> &l
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(ordering.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(ordering.stringValue())));
     }
     if (search.hasValue())
     {
@@ -3436,7 +3325,7 @@ void StockApi::stockLocationTypeList(const ::InvenTree::OptionalParam<qint32> &l
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(search.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(search.stringValue())));
     }
     HttpRequestWorker *worker = new HttpRequestWorker(this, _manager);
     worker->setTimeOut(_timeOut);
@@ -3444,19 +3333,14 @@ void StockApi::stockLocationTypeList(const ::InvenTree::OptionalParam<qint32> &l
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &StockApi::stockLocationTypeListCallback);
     connect(this, &StockApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -3542,19 +3426,14 @@ void StockApi::stockLocationTypeMetadataPartialUpdate(const qint32 &id) {
     HttpRequestInput input(fullPath, "PATCH");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &StockApi::stockLocationTypeMetadataPartialUpdateCallback);
     connect(this, &StockApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -3639,19 +3518,14 @@ void StockApi::stockLocationTypeMetadataRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &StockApi::stockLocationTypeMetadataRetrieveCallback);
     connect(this, &StockApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -3736,19 +3610,14 @@ void StockApi::stockLocationTypeMetadataUpdate(const qint32 &id) {
     HttpRequestInput input(fullPath, "PUT");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &StockApi::stockLocationTypeMetadataUpdateCallback);
     connect(this, &StockApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -3838,19 +3707,14 @@ void StockApi::stockLocationTypePartialUpdate(const qint32 &id, const ::InvenTre
         QByteArray output = patched_stock_location_type.value().asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &StockApi::stockLocationTypePartialUpdateCallback);
     connect(this, &StockApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -3936,19 +3800,14 @@ void StockApi::stockLocationTypeRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &StockApi::stockLocationTypeRetrieveCallback);
     connect(this, &StockApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -4039,19 +3898,14 @@ void StockApi::stockLocationTypeUpdate(const qint32 &id, const StockLocationType
         QByteArray output = stock_location_type.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &StockApi::stockLocationTypeUpdateCallback);
     connect(this, &StockApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -4142,19 +3996,14 @@ void StockApi::stockLocationUpdate(const qint32 &id, const Location &location) {
         QByteArray output = location.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &StockApi::stockLocationUpdateCallback);
     connect(this, &StockApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -4231,19 +4080,14 @@ void StockApi::stockMergeCreate(const StockMerge &stock_merge) {
         QByteArray output = stock_merge.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &StockApi::stockMergeCreateCallback);
     connect(this, &StockApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -4329,19 +4173,14 @@ void StockApi::stockMetadataPartialUpdate(const qint32 &id) {
     HttpRequestInput input(fullPath, "PATCH");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &StockApi::stockMetadataPartialUpdateCallback);
     connect(this, &StockApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -4426,19 +4265,14 @@ void StockApi::stockMetadataRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &StockApi::stockMetadataRetrieveCallback);
     connect(this, &StockApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -4523,19 +4357,14 @@ void StockApi::stockMetadataUpdate(const qint32 &id) {
     HttpRequestInput input(fullPath, "PUT");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &StockApi::stockMetadataUpdateCallback);
     connect(this, &StockApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -4625,19 +4454,14 @@ void StockApi::stockPartialUpdate(const qint32 &id, const ::InvenTree::OptionalP
         QByteArray output = patched_stock_item.value().asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &StockApi::stockPartialUpdateCallback);
     connect(this, &StockApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -4714,19 +4538,14 @@ void StockApi::stockRemoveCreate(const StockRemove &stock_remove) {
         QByteArray output = stock_remove.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &StockApi::stockRemoveCreateCallback);
     connect(this, &StockApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -4812,19 +4631,14 @@ void StockApi::stockRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &StockApi::stockRetrieveCallback);
     connect(this, &StockApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -4915,19 +4729,14 @@ void StockApi::stockReturnCreate(const qint32 &id, const ReturnStockItem &return
         QByteArray output = return_stock_item.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &StockApi::stockReturnCreateCallback);
     connect(this, &StockApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -5018,19 +4827,14 @@ void StockApi::stockSerializeCreate(const qint32 &id, const SerializeStockItem &
         QByteArray output = serialize_stock_item.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &StockApi::stockSerializeCreateCallback);
     connect(this, &StockApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -5102,19 +4906,14 @@ void StockApi::stockStatusRetrieve() {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &StockApi::stockStatusRetrieveCallback);
     connect(this, &StockApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -5190,19 +4989,14 @@ void StockApi::stockTestCreate(const StockItemTestResult &stock_item_test_result
         QByteArray output = stock_item_test_result.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &StockApi::stockTestCreateCallback);
     connect(this, &StockApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -5274,19 +5068,14 @@ void StockApi::stockTestDestroy() {
     HttpRequestInput input(fullPath, "DELETE");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &StockApi::stockTestDestroyCallback);
     connect(this, &StockApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -5371,19 +5160,14 @@ void StockApi::stockTestDestroy2(const qint32 &id) {
     HttpRequestInput input(fullPath, "DELETE");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &StockApi::stockTestDestroy2Callback);
     connect(this, &StockApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -5462,7 +5246,7 @@ void StockApi::stockTestList(const ::InvenTree::OptionalParam<qint32> &build, co
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("build")).append(querySuffix).append(QUrl::toPercentEncoding(build.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("build")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(build.stringValue())));
     }
     if (enabled.hasValue())
     {
@@ -5477,7 +5261,7 @@ void StockApi::stockTestList(const ::InvenTree::OptionalParam<qint32> &build, co
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("enabled")).append(querySuffix).append(QUrl::toPercentEncoding(enabled.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("enabled")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(enabled.stringValue())));
     }
     if (limit.hasValue())
     {
@@ -5492,7 +5276,7 @@ void StockApi::stockTestList(const ::InvenTree::OptionalParam<qint32> &build, co
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(limit.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(limit.stringValue())));
     }
     if (offset.hasValue())
     {
@@ -5507,7 +5291,7 @@ void StockApi::stockTestList(const ::InvenTree::OptionalParam<qint32> &build, co
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(offset.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(offset.stringValue())));
     }
     if (ordering.hasValue())
     {
@@ -5522,7 +5306,7 @@ void StockApi::stockTestList(const ::InvenTree::OptionalParam<qint32> &build, co
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(ordering.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(ordering.stringValue())));
     }
     if (part.hasValue())
     {
@@ -5537,7 +5321,7 @@ void StockApi::stockTestList(const ::InvenTree::OptionalParam<qint32> &build, co
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("part")).append(querySuffix).append(QUrl::toPercentEncoding(part.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("part")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(part.stringValue())));
     }
     if (required.hasValue())
     {
@@ -5552,7 +5336,7 @@ void StockApi::stockTestList(const ::InvenTree::OptionalParam<qint32> &build, co
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("required")).append(querySuffix).append(QUrl::toPercentEncoding(required.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("required")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(required.stringValue())));
     }
     if (result.hasValue())
     {
@@ -5567,7 +5351,7 @@ void StockApi::stockTestList(const ::InvenTree::OptionalParam<qint32> &build, co
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("result")).append(querySuffix).append(QUrl::toPercentEncoding(result.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("result")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(result.stringValue())));
     }
     if (search.hasValue())
     {
@@ -5582,7 +5366,7 @@ void StockApi::stockTestList(const ::InvenTree::OptionalParam<qint32> &build, co
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(search.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(search.stringValue())));
     }
     if (r_template.hasValue())
     {
@@ -5597,7 +5381,7 @@ void StockApi::stockTestList(const ::InvenTree::OptionalParam<qint32> &build, co
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("template")).append(querySuffix).append(QUrl::toPercentEncoding(r_template.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("template")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(r_template.stringValue())));
     }
     if (test.hasValue())
     {
@@ -5612,7 +5396,7 @@ void StockApi::stockTestList(const ::InvenTree::OptionalParam<qint32> &build, co
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("test")).append(querySuffix).append(QUrl::toPercentEncoding(test.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("test")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(test.stringValue())));
     }
     if (user.hasValue())
     {
@@ -5627,7 +5411,7 @@ void StockApi::stockTestList(const ::InvenTree::OptionalParam<qint32> &build, co
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("user")).append(querySuffix).append(QUrl::toPercentEncoding(user.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("user")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(user.stringValue())));
     }
     if (value.hasValue())
     {
@@ -5642,7 +5426,7 @@ void StockApi::stockTestList(const ::InvenTree::OptionalParam<qint32> &build, co
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("value")).append(querySuffix).append(QUrl::toPercentEncoding(value.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("value")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(value.stringValue())));
     }
     HttpRequestWorker *worker = new HttpRequestWorker(this, _manager);
     worker->setTimeOut(_timeOut);
@@ -5650,19 +5434,14 @@ void StockApi::stockTestList(const ::InvenTree::OptionalParam<qint32> &build, co
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &StockApi::stockTestListCallback);
     connect(this, &StockApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -5748,19 +5527,14 @@ void StockApi::stockTestMetadataPartialUpdate(const qint32 &id) {
     HttpRequestInput input(fullPath, "PATCH");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &StockApi::stockTestMetadataPartialUpdateCallback);
     connect(this, &StockApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -5845,19 +5619,14 @@ void StockApi::stockTestMetadataRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &StockApi::stockTestMetadataRetrieveCallback);
     connect(this, &StockApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -5942,19 +5711,14 @@ void StockApi::stockTestMetadataUpdate(const qint32 &id) {
     HttpRequestInput input(fullPath, "PUT");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &StockApi::stockTestMetadataUpdateCallback);
     connect(this, &StockApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -6044,19 +5808,14 @@ void StockApi::stockTestPartialUpdate(const qint32 &id, const ::InvenTree::Optio
         QByteArray output = patched_stock_item_test_result.value().asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &StockApi::stockTestPartialUpdateCallback);
     connect(this, &StockApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -6142,19 +5901,14 @@ void StockApi::stockTestRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &StockApi::stockTestRetrieveCallback);
     connect(this, &StockApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -6245,19 +5999,14 @@ void StockApi::stockTestUpdate(const qint32 &id, const StockItemTestResult &stoc
         QByteArray output = stock_item_test_result.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &StockApi::stockTestUpdateCallback);
     connect(this, &StockApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -6337,7 +6086,7 @@ void StockApi::stockTrackList(const ::InvenTree::OptionalParam<qint32> &item, co
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("item")).append(querySuffix).append(QUrl::toPercentEncoding(item.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("item")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(item.stringValue())));
     }
     if (limit.hasValue())
     {
@@ -6352,7 +6101,7 @@ void StockApi::stockTrackList(const ::InvenTree::OptionalParam<qint32> &item, co
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(limit.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("limit")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(limit.stringValue())));
     }
     if (offset.hasValue())
     {
@@ -6367,7 +6116,7 @@ void StockApi::stockTrackList(const ::InvenTree::OptionalParam<qint32> &item, co
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(offset.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("offset")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(offset.stringValue())));
     }
     if (ordering.hasValue())
     {
@@ -6382,7 +6131,7 @@ void StockApi::stockTrackList(const ::InvenTree::OptionalParam<qint32> &item, co
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(ordering.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("ordering")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(ordering.stringValue())));
     }
     if (search.hasValue())
     {
@@ -6397,7 +6146,7 @@ void StockApi::stockTrackList(const ::InvenTree::OptionalParam<qint32> &item, co
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(search.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("search")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(search.stringValue())));
     }
     if (user.hasValue())
     {
@@ -6412,7 +6161,7 @@ void StockApi::stockTrackList(const ::InvenTree::OptionalParam<qint32> &item, co
         else
             fullPath.append("?");
 
-        fullPath.append(QUrl::toPercentEncoding("user")).append(querySuffix).append(QUrl::toPercentEncoding(user.stringValue()));
+        fullPath.append(QUrl::toPercentEncoding("user")).append(querySuffix).append(QUrl::toPercentEncoding(::InvenTree::toStringValue(user.stringValue())));
     }
     HttpRequestWorker *worker = new HttpRequestWorker(this, _manager);
     worker->setTimeOut(_timeOut);
@@ -6420,19 +6169,14 @@ void StockApi::stockTrackList(const ::InvenTree::OptionalParam<qint32> &item, co
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &StockApi::stockTrackListCallback);
     connect(this, &StockApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -6518,19 +6262,14 @@ void StockApi::stockTrackRetrieve(const qint32 &id) {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &StockApi::stockTrackRetrieveCallback);
     connect(this, &StockApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -6602,19 +6341,14 @@ void StockApi::stockTrackStatusRetrieve() {
     HttpRequestInput input(fullPath, "GET");
 
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &StockApi::stockTrackStatusRetrieveCallback);
     connect(this, &StockApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -6690,19 +6424,14 @@ void StockApi::stockTransferCreate(const StockTransfer &stock_transfer) {
         QByteArray output = stock_transfer.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &StockApi::stockTransferCreateCallback);
     connect(this, &StockApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -6793,19 +6522,14 @@ void StockApi::stockUninstallCreate(const qint32 &id, const UninstallStockItem &
         QByteArray output = uninstall_stock_item.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &StockApi::stockUninstallCreateCallback);
     connect(this, &StockApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }
@@ -6896,19 +6620,14 @@ void StockApi::stockUpdate(const qint32 &id, const StockItem &stock_item) {
         QByteArray output = stock_item.asJson().toUtf8();
         input.request_body.append(output);
     }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
-#else
-    for (auto key : _defaultHeaders.keys()) {
-        input.headers.insert(key, _defaultHeaders[key]);
-    }
-#endif
+
 
     connect(worker, &HttpRequestWorker::on_execution_finished, this, &StockApi::stockUpdateCallback);
     connect(this, &StockApi::abortRequestsSignal, worker, &QObject::deleteLater);
-    connect(worker, &QObject::destroyed, this, [this]() {
+    connect(worker, &QObject::destroyed, this, [this] {
         if (findChildren<HttpRequestWorker*>().count() == 0) {
             Q_EMIT allPendingRequestsCompleted();
         }

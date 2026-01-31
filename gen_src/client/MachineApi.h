@@ -68,15 +68,15 @@ public:
     /**
     * @param[in]  machine_config_create MachineConfigCreate [required]
     */
-    void machineCreate(const MachineConfigCreate &machine_config_create);
+    virtual void machineCreate(const MachineConfigCreate &machine_config_create);
 
     /**
     * @param[in]  id QString [required]
     */
-    void machineDestroy(const QString &id);
+    virtual void machineDestroy(const QString &id);
 
 
-    void machineDriversList();
+    virtual void machineDriversList();
 
     /**
     * @param[in]  active bool [optional]
@@ -87,28 +87,28 @@ public:
     * @param[in]  ordering QString [optional]
     * @param[in]  search QString [optional]
     */
-    void machineList(const ::InvenTree::OptionalParam<bool> &active = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<QString> &driver = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &machine_type = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>());
+    virtual void machineList(const ::InvenTree::OptionalParam<bool> &active = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<QString> &driver = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &machine_type = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>());
 
     /**
     * @param[in]  id QString [required]
     * @param[in]  patched_machine_config PatchedMachineConfig [optional]
     */
-    void machinePartialUpdate(const QString &id, const ::InvenTree::OptionalParam<PatchedMachineConfig> &patched_machine_config = ::InvenTree::OptionalParam<PatchedMachineConfig>());
+    virtual void machinePartialUpdate(const QString &id, const ::InvenTree::OptionalParam<PatchedMachineConfig> &patched_machine_config = ::InvenTree::OptionalParam<PatchedMachineConfig>());
 
     /**
     * @param[in]  id QString [required]
     */
-    void machineRestartCreate(const QString &id);
+    virtual void machineRestartCreate(const QString &id);
 
     /**
     * @param[in]  id QString [required]
     */
-    void machineRetrieve(const QString &id);
+    virtual void machineRetrieve(const QString &id);
 
     /**
     * @param[in]  id QString [required]
     */
-    void machineSettingsList(const QString &id);
+    virtual void machineSettingsList(const QString &id);
 
     /**
     * @param[in]  config_type QString [required]
@@ -116,14 +116,14 @@ public:
     * @param[in]  key QString [required]
     * @param[in]  patched_machine_setting PatchedMachineSetting [optional]
     */
-    void machineSettingsPartialUpdate(const QString &config_type, const QString &id, const QString &key, const ::InvenTree::OptionalParam<PatchedMachineSetting> &patched_machine_setting = ::InvenTree::OptionalParam<PatchedMachineSetting>());
+    virtual void machineSettingsPartialUpdate(const QString &config_type, const QString &id, const QString &key, const ::InvenTree::OptionalParam<PatchedMachineSetting> &patched_machine_setting = ::InvenTree::OptionalParam<PatchedMachineSetting>());
 
     /**
     * @param[in]  config_type QString [required]
     * @param[in]  id QString [required]
     * @param[in]  key QString [required]
     */
-    void machineSettingsRetrieve(const QString &config_type, const QString &id, const QString &key);
+    virtual void machineSettingsRetrieve(const QString &config_type, const QString &id, const QString &key);
 
     /**
     * @param[in]  config_type QString [required]
@@ -131,19 +131,19 @@ public:
     * @param[in]  key QString [required]
     * @param[in]  machine_setting MachineSetting [required]
     */
-    void machineSettingsUpdate(const QString &config_type, const QString &id, const QString &key, const MachineSetting &machine_setting);
+    virtual void machineSettingsUpdate(const QString &config_type, const QString &id, const QString &key, const MachineSetting &machine_setting);
 
 
-    void machineStatusRetrieve();
+    virtual void machineStatusRetrieve();
 
 
-    void machineTypesList();
+    virtual void machineTypesList();
 
     /**
     * @param[in]  id QString [required]
     * @param[in]  machine_config MachineConfig [required]
     */
-    void machineUpdate(const QString &id, const MachineConfig &machine_config);
+    virtual void machineUpdate(const QString &id, const MachineConfig &machine_config);
 
 
 private:
@@ -199,6 +199,7 @@ Q_SIGNALS:
     void machineStatusRetrieveSignal(MachineRegistryStatus summary);
     void machineTypesListSignal(QList<MachineType> summary);
     void machineUpdateSignal(MachineConfig summary);
+
 
     void machineCreateSignalFull(HttpRequestWorker *worker, MachineConfigCreate summary);
     void machineDestroySignalFull(HttpRequestWorker *worker);

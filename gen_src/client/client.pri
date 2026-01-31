@@ -237,7 +237,6 @@ HEADERS += \
     $${PWD}/PatchedPurchaseOrder.h \
     $${PWD}/PatchedPurchaseOrderExtraLine.h \
     $${PWD}/PatchedPurchaseOrderLineItem.h \
-    $${PWD}/PatchedPurchaseOrder_order_currency.h \
     $${PWD}/PatchedReportAsset.h \
     $${PWD}/PatchedReportSnippet.h \
     $${PWD}/PatchedReportTemplate.h \
@@ -622,7 +621,6 @@ SOURCES += \
     $${PWD}/PatchedPurchaseOrder.cpp \
     $${PWD}/PatchedPurchaseOrderExtraLine.cpp \
     $${PWD}/PatchedPurchaseOrderLineItem.cpp \
-    $${PWD}/PatchedPurchaseOrder_order_currency.cpp \
     $${PWD}/PatchedReportAsset.cpp \
     $${PWD}/PatchedReportSnippet.cpp \
     $${PWD}/PatchedReportTemplate.cpp \

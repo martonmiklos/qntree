@@ -77,66 +77,66 @@ public:
     * @param[in]  id qint32 [required]
     * @param[in]  build_allocation BuildAllocation [required]
     */
-    void buildAllocateCreate(const qint32 &id, const BuildAllocation &build_allocation);
+    virtual void buildAllocateCreate(const qint32 &id, const BuildAllocation &build_allocation);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  build_auto_allocation BuildAutoAllocation [optional]
     */
-    void buildAutoAllocateCreate(const qint32 &id, const ::InvenTree::OptionalParam<BuildAutoAllocation> &build_auto_allocation = ::InvenTree::OptionalParam<BuildAutoAllocation>());
+    virtual void buildAutoAllocateCreate(const qint32 &id, const ::InvenTree::OptionalParam<BuildAutoAllocation> &build_auto_allocation = ::InvenTree::OptionalParam<BuildAutoAllocation>());
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  build_cancel BuildCancel [optional]
     */
-    void buildCancelCreate(const qint32 &id, const ::InvenTree::OptionalParam<BuildCancel> &build_cancel = ::InvenTree::OptionalParam<BuildCancel>());
+    virtual void buildCancelCreate(const qint32 &id, const ::InvenTree::OptionalParam<BuildCancel> &build_cancel = ::InvenTree::OptionalParam<BuildCancel>());
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  build_output_complete BuildOutputComplete [required]
     */
-    void buildCompleteCreate(const qint32 &id, const BuildOutputComplete &build_output_complete);
+    virtual void buildCompleteCreate(const qint32 &id, const BuildOutputComplete &build_output_complete);
 
     /**
     * @param[in]  build Build [required]
     */
-    void buildCreate(const Build &build);
+    virtual void buildCreate(const Build &build);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  build_output_create BuildOutputCreate [required]
     */
-    void buildCreateOutputCreate(const qint32 &id, const BuildOutputCreate &build_output_create);
+    virtual void buildCreateOutputCreate(const qint32 &id, const BuildOutputCreate &build_output_create);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  build_output_delete BuildOutputDelete [required]
     */
-    void buildDeleteOutputsCreate(const qint32 &id, const BuildOutputDelete &build_output_delete);
+    virtual void buildDeleteOutputsCreate(const qint32 &id, const BuildOutputDelete &build_output_delete);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void buildDestroy(const qint32 &id);
+    virtual void buildDestroy(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  build_complete BuildComplete [optional]
     */
-    void buildFinishCreate(const qint32 &id, const ::InvenTree::OptionalParam<BuildComplete> &build_complete = ::InvenTree::OptionalParam<BuildComplete>());
+    virtual void buildFinishCreate(const qint32 &id, const ::InvenTree::OptionalParam<BuildComplete> &build_complete = ::InvenTree::OptionalParam<BuildComplete>());
 
     /**
     * @param[in]  build_item BuildItem [required]
     */
-    void buildItemCreate(const BuildItem &build_item);
+    virtual void buildItemCreate(const BuildItem &build_item);
 
 
-    void buildItemDestroy();
+    virtual void buildItemDestroy();
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void buildItemDestroy2(const qint32 &id);
+    virtual void buildItemDestroy2(const qint32 &id);
 
     /**
     * @param[in]  build qint32 [optional]
@@ -150,49 +150,49 @@ public:
     * @param[in]  stock_item qint32 [optional]
     * @param[in]  tracked bool [optional]
     */
-    void buildItemList(const ::InvenTree::OptionalParam<qint32> &build = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &build_line = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &install_into = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &part = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &stock_item = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &tracked = ::InvenTree::OptionalParam<bool>());
+    virtual void buildItemList(const ::InvenTree::OptionalParam<qint32> &build = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &build_line = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &install_into = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &part = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &stock_item = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &tracked = ::InvenTree::OptionalParam<bool>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void buildItemMetadataPartialUpdate(const qint32 &id);
+    virtual void buildItemMetadataPartialUpdate(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void buildItemMetadataRetrieve(const qint32 &id);
+    virtual void buildItemMetadataRetrieve(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void buildItemMetadataUpdate(const qint32 &id);
+    virtual void buildItemMetadataUpdate(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  patched_build_item PatchedBuildItem [optional]
     */
-    void buildItemPartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedBuildItem> &patched_build_item = ::InvenTree::OptionalParam<PatchedBuildItem>());
+    virtual void buildItemPartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedBuildItem> &patched_build_item = ::InvenTree::OptionalParam<PatchedBuildItem>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void buildItemRetrieve(const qint32 &id);
+    virtual void buildItemRetrieve(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  build_item BuildItem [required]
     */
-    void buildItemUpdate(const qint32 &id, const BuildItem &build_item);
+    virtual void buildItemUpdate(const qint32 &id, const BuildItem &build_item);
 
     /**
     * @param[in]  build_line BuildLine [required]
     */
-    void buildLineCreate(const BuildLine &build_line);
+    virtual void buildLineCreate(const BuildLine &build_line);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void buildLineDestroy(const qint32 &id);
+    virtual void buildLineDestroy(const qint32 &id);
 
     /**
     * @param[in]  allocated bool [optional]
@@ -207,24 +207,24 @@ public:
     * @param[in]  search QString [optional]
     * @param[in]  tracked bool [optional]
     */
-    void buildLineList(const ::InvenTree::OptionalParam<bool> &allocated = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &available = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &bom_item = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &build = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &consumable = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &optional = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<bool> &tracked = ::InvenTree::OptionalParam<bool>());
+    virtual void buildLineList(const ::InvenTree::OptionalParam<bool> &allocated = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &available = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &bom_item = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &build = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &consumable = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<bool> &optional = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<bool> &tracked = ::InvenTree::OptionalParam<bool>());
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  patched_build_line PatchedBuildLine [optional]
     */
-    void buildLinePartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedBuildLine> &patched_build_line = ::InvenTree::OptionalParam<PatchedBuildLine>());
+    virtual void buildLinePartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedBuildLine> &patched_build_line = ::InvenTree::OptionalParam<PatchedBuildLine>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void buildLineRetrieve(const qint32 &id);
+    virtual void buildLineRetrieve(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  build_line BuildLine [required]
     */
-    void buildLineUpdate(const qint32 &id, const BuildLine &build_line);
+    virtual void buildLineUpdate(const qint32 &id, const BuildLine &build_line);
 
     /**
     * @param[in]  active bool [optional]
@@ -244,54 +244,54 @@ public:
     * @param[in]  search QString [optional]
     * @param[in]  status qint32 [optional]
     */
-    void buildList(const ::InvenTree::OptionalParam<bool> &active = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<double> &assigned_to = ::InvenTree::OptionalParam<double>(), const ::InvenTree::OptionalParam<bool> &assigned_to_me = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &has_project_code = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &issued_by = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<bool> &overdue = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &parent = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &part = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &project_code = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &reference = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &sales_order = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &status = ::InvenTree::OptionalParam<qint32>());
+    virtual void buildList(const ::InvenTree::OptionalParam<bool> &active = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<double> &assigned_to = ::InvenTree::OptionalParam<double>(), const ::InvenTree::OptionalParam<bool> &assigned_to_me = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<bool> &has_project_code = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &issued_by = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<bool> &overdue = ::InvenTree::OptionalParam<bool>(), const ::InvenTree::OptionalParam<qint32> &parent = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &part = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<qint32> &project_code = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &reference = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &sales_order = ::InvenTree::OptionalParam<qint32>(), const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>(), const ::InvenTree::OptionalParam<qint32> &status = ::InvenTree::OptionalParam<qint32>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void buildMetadataPartialUpdate(const qint32 &id);
+    virtual void buildMetadataPartialUpdate(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void buildMetadataRetrieve(const qint32 &id);
+    virtual void buildMetadataRetrieve(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void buildMetadataUpdate(const qint32 &id);
+    virtual void buildMetadataUpdate(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  patched_build PatchedBuild [optional]
     */
-    void buildPartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedBuild> &patched_build = ::InvenTree::OptionalParam<PatchedBuild>());
+    virtual void buildPartialUpdate(const qint32 &id, const ::InvenTree::OptionalParam<PatchedBuild> &patched_build = ::InvenTree::OptionalParam<PatchedBuild>());
 
     /**
     * @param[in]  id qint32 [required]
     */
-    void buildRetrieve(const qint32 &id);
+    virtual void buildRetrieve(const qint32 &id);
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  build_output_scrap BuildOutputScrap [required]
     */
-    void buildScrapOutputsCreate(const qint32 &id, const BuildOutputScrap &build_output_scrap);
+    virtual void buildScrapOutputsCreate(const qint32 &id, const BuildOutputScrap &build_output_scrap);
 
 
-    void buildStatusRetrieve();
+    virtual void buildStatusRetrieve();
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  build_unallocation BuildUnallocation [optional]
     */
-    void buildUnallocateCreate(const qint32 &id, const ::InvenTree::OptionalParam<BuildUnallocation> &build_unallocation = ::InvenTree::OptionalParam<BuildUnallocation>());
+    virtual void buildUnallocateCreate(const qint32 &id, const ::InvenTree::OptionalParam<BuildUnallocation> &build_unallocation = ::InvenTree::OptionalParam<BuildUnallocation>());
 
     /**
     * @param[in]  id qint32 [required]
     * @param[in]  build Build [required]
     */
-    void buildUpdate(const qint32 &id, const Build &build);
+    virtual void buildUpdate(const qint32 &id, const Build &build);
 
 
 private:
@@ -389,6 +389,7 @@ Q_SIGNALS:
     void buildStatusRetrieveSignal();
     void buildUnallocateCreateSignal(BuildUnallocation summary);
     void buildUpdateSignal(Build summary);
+
 
     void buildAllocateCreateSignalFull(HttpRequestWorker *worker, BuildAllocation summary);
     void buildAutoAllocateCreateSignalFull(HttpRequestWorker *worker, BuildAutoAllocation summary);

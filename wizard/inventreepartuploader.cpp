@@ -93,6 +93,7 @@ void InvenTreePartUploader::partUpdated(InvenTree::Part summary)
     disconnect(m_wizard->partApi(), nullptr, this, nullptr);
     emit stateChanged(SetDefaultSupplierPart, UploadImage);
 
+    //m_wizard->partApi()->pa
 }
 
 
