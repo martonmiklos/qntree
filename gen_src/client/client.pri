@@ -5,30 +5,35 @@ HEADERS += \
     $${PWD}/APISearchView.h \
     $${PWD}/AcceptOverallocatedEnum.h \
     $${PWD}/ActionPlugin.h \
+    $${PWD}/ActionPluginError.h \
     $${PWD}/Address.h \
     $${PWD}/AddressBrief.h \
+    $${PWD}/AllUnitListResponse.h \
+    $${PWD}/ApiToken.h \
     $${PWD}/Attachment.h \
     $${PWD}/AttachmentModelTypeEnum.h \
-    $${PWD}/BOMValidate.h \
     $${PWD}/Barcode.h \
     $${PWD}/BarcodeAssign.h \
+    $${PWD}/BarcodeGenerate.h \
     $${PWD}/BarcodePOAllocate.h \
     $${PWD}/BarcodePOReceive.h \
     $${PWD}/BarcodeSOAllocate.h \
+    $${PWD}/BarcodeScanResult.h \
     $${PWD}/BarcodeUnassign.h \
     $${PWD}/BlankEnum.h \
-    $${PWD}/BomImportExtract.h \
-    $${PWD}/BomImportSubmit.h \
-    $${PWD}/BomImportUpload.h \
     $${PWD}/BomItem.h \
     $${PWD}/BomItemSubstitute.h \
     $${PWD}/BomItemValidation.h \
+    $${PWD}/BriefUserProfile.h \
     $${PWD}/Build.h \
     $${PWD}/BuildAllocation.h \
     $${PWD}/BuildAllocationItem.h \
     $${PWD}/BuildAutoAllocation.h \
     $${PWD}/BuildCancel.h \
     $${PWD}/BuildComplete.h \
+    $${PWD}/BuildConsume.h \
+    $${PWD}/BuildConsumeAllocation.h \
+    $${PWD}/BuildConsumeLineItem.h \
     $${PWD}/BuildItem.h \
     $${PWD}/BuildLine.h \
     $${PWD}/BuildOutput.h \
@@ -39,34 +44,59 @@ HEADERS += \
     $${PWD}/BuildOutputScrap.h \
     $${PWD}/BuildStatusEnum.h \
     $${PWD}/BuildUnallocation.h \
+    $${PWD}/BulkRequest.h \
     $${PWD}/Category.h \
     $${PWD}/CategoryParameterTemplate.h \
     $${PWD}/CategoryTree.h \
+    $${PWD}/ColorEnum.h \
     $${PWD}/Company.h \
     $${PWD}/CompanyBrief.h \
+    $${PWD}/Config.h \
     $${PWD}/ConfigTypeEnum.h \
     $${PWD}/Contact.h \
     $${PWD}/ContentType.h \
     $${PWD}/ConvertStockItem.h \
     $${PWD}/CurrencyExchange.h \
+    $${PWD}/CustomState.h \
     $${PWD}/CustomUnit.h \
+    $${PWD}/Customize.h \
     $${PWD}/DataImportAcceptRow.h \
     $${PWD}/DataImportColumnMap.h \
     $${PWD}/DataImportRow.h \
     $${PWD}/DataImportSession.h \
     $${PWD}/DataImportSessionModelTypeEnum.h \
     $${PWD}/DataImportSessionStatusEnum.h \
-    $${PWD}/EmailAddress.h \
+    $${PWD}/DataImporterModel.h \
+    $${PWD}/DataOutput.h \
+    $${PWD}/DefaultLocation.h \
+    $${PWD}/DirectionEnum.h \
+    $${PWD}/DuplicateOrder.h \
+    $${PWD}/DuplicatePart.h \
+    $${PWD}/EmailMessage.h \
+    $${PWD}/EmailMessageStatusEnum.h \
     $${PWD}/ErrorMessage.h \
-    $${PWD}/ExendedUser.h \
+    $${PWD}/ExtendedUser.h \
     $${PWD}/FailedTask.h \
+    $${PWD}/Flag.h \
     $${PWD}/GenerateBatchCode.h \
     $${PWD}/GenerateSerialNumber.h \
+    $${PWD}/GenericStateClass.h \
+    $${PWD}/GenericStateValue.h \
+    $${PWD}/GetAuthToken.h \
     $${PWD}/GetSimpleLogin.h \
     $${PWD}/GlobalSettings.h \
     $${PWD}/Group.h \
+    $${PWD}/HealthCheckStatus.h \
+    $${PWD}/HealthCheckStatusStatusEnum.h \
+    $${PWD}/Icon.h \
+    $${PWD}/IconPackage.h \
+    $${PWD}/ImportParameter.h \
+    $${PWD}/ImportRequest.h \
+    $${PWD}/ImportResult.h \
+    $${PWD}/InfoApi.h \
+    $${PWD}/InitialStock.h \
+    $${PWD}/InitialSupplier.h \
     $${PWD}/InstallStockItem.h \
-    $${PWD}/LabelOutput.h \
     $${PWD}/LabelPrint.h \
     $${PWD}/LabelTemplate.h \
     $${PWD}/LicenseView.h \
@@ -75,28 +105,31 @@ HEADERS += \
     $${PWD}/Location.h \
     $${PWD}/LocationBrief.h \
     $${PWD}/LocationTree.h \
-    $${PWD}/Login.h \
     $${PWD}/MachineConfig.h \
     $${PWD}/MachineConfigCreate.h \
     $${PWD}/MachineDriver.h \
+    $${PWD}/MachineProperty.h \
+    $${PWD}/MachinePropertyTypeEnum.h \
     $${PWD}/MachineRegistryError.h \
     $${PWD}/MachineRegistryStatus.h \
     $${PWD}/MachineRestart.h \
     $${PWD}/MachineSetting.h \
     $${PWD}/MachineType.h \
     $${PWD}/ManufacturerPart.h \
-    $${PWD}/ManufacturerPartParameter.h \
-    $${PWD}/ModelType972Enum.h \
+    $${PWD}/MeUser.h \
+    $${PWD}/ModelType4f8Enum.h \
+    $${PWD}/NameEnum.h \
     $${PWD}/NewsFeedEntry.h \
     $${PWD}/NotesImage.h \
     $${PWD}/NotificationMessage.h \
-    $${PWD}/NotificationUserSetting.h \
     $${PWD}/NullEnum.h \
     $${PWD}/OutcomeEnum.h \
     $${PWD}/Owner.h \
     $${PWD}/PageSizeEnum.h \
     $${PWD}/PaginatedAddressList.h \
+    $${PWD}/PaginatedApiTokenList.h \
     $${PWD}/PaginatedAttachmentList.h \
+    $${PWD}/PaginatedBarcodeScanResultList.h \
     $${PWD}/PaginatedBomItemList.h \
     $${PWD}/PaginatedBomItemSubstituteList.h \
     $${PWD}/PaginatedBuildItemList.h \
@@ -108,35 +141,34 @@ HEADERS += \
     $${PWD}/PaginatedCompanyList.h \
     $${PWD}/PaginatedContactList.h \
     $${PWD}/PaginatedContentTypeList.h \
+    $${PWD}/PaginatedCustomStateList.h \
     $${PWD}/PaginatedCustomUnitList.h \
     $${PWD}/PaginatedDataImportColumnMapList.h \
     $${PWD}/PaginatedDataImportRowList.h \
     $${PWD}/PaginatedDataImportSessionList.h \
-    $${PWD}/PaginatedEmailAddressList.h \
+    $${PWD}/PaginatedDataOutputList.h \
+    $${PWD}/PaginatedEmailMessageList.h \
     $${PWD}/PaginatedErrorMessageList.h \
     $${PWD}/PaginatedFailedTaskList.h \
     $${PWD}/PaginatedGlobalSettingsList.h \
     $${PWD}/PaginatedGroupList.h \
-    $${PWD}/PaginatedLabelOutputList.h \
+    $${PWD}/PaginatedIconPackageList.h \
     $${PWD}/PaginatedLabelTemplateList.h \
     $${PWD}/PaginatedLocationList.h \
     $${PWD}/PaginatedLocationTreeList.h \
     $${PWD}/PaginatedMachineConfigList.h \
     $${PWD}/PaginatedManufacturerPartList.h \
-    $${PWD}/PaginatedManufacturerPartParameterList.h \
     $${PWD}/PaginatedNewsFeedEntryList.h \
     $${PWD}/PaginatedNotesImageList.h \
     $${PWD}/PaginatedNotificationMessageList.h \
-    $${PWD}/PaginatedNotificationUserSettingList.h \
     $${PWD}/PaginatedOwnerList.h \
+    $${PWD}/PaginatedParameterList.h \
+    $${PWD}/PaginatedParameterTemplateList.h \
     $${PWD}/PaginatedPartInternalPriceList.h \
     $${PWD}/PaginatedPartList.h \
-    $${PWD}/PaginatedPartParameterList.h \
-    $${PWD}/PaginatedPartParameterTemplateList.h \
     $${PWD}/PaginatedPartRelationList.h \
     $${PWD}/PaginatedPartSalePriceList.h \
     $${PWD}/PaginatedPartStocktakeList.h \
-    $${PWD}/PaginatedPartStocktakeReportList.h \
     $${PWD}/PaginatedPartTestTemplateList.h \
     $${PWD}/PaginatedPartThumbList.h \
     $${PWD}/PaginatedPendingTaskList.h \
@@ -147,20 +179,20 @@ HEADERS += \
     $${PWD}/PaginatedPurchaseOrderLineItemList.h \
     $${PWD}/PaginatedPurchaseOrderList.h \
     $${PWD}/PaginatedReportAssetList.h \
-    $${PWD}/PaginatedReportOutputList.h \
     $${PWD}/PaginatedReportSnippetList.h \
     $${PWD}/PaginatedReportTemplateList.h \
     $${PWD}/PaginatedReturnOrderExtraLineList.h \
     $${PWD}/PaginatedReturnOrderLineItemList.h \
     $${PWD}/PaginatedReturnOrderList.h \
+    $${PWD}/PaginatedRuleSetList.h \
     $${PWD}/PaginatedSalesOrderAllocationList.h \
     $${PWD}/PaginatedSalesOrderExtraLineList.h \
     $${PWD}/PaginatedSalesOrderLineItemList.h \
     $${PWD}/PaginatedSalesOrderList.h \
     $${PWD}/PaginatedSalesOrderShipmentList.h \
     $${PWD}/PaginatedScheduledTaskList.h \
-    $${PWD}/PaginatedSocialAccountList.h \
-    $${PWD}/PaginatedSocialProviderListResponseList.h \
+    $${PWD}/PaginatedSelectionEntryList.h \
+    $${PWD}/PaginatedSelectionListList.h \
     $${PWD}/PaginatedStockItemList.h \
     $${PWD}/PaginatedStockItemTestResultList.h \
     $${PWD}/PaginatedStockLocationTypeList.h \
@@ -169,29 +201,24 @@ HEADERS += \
     $${PWD}/PaginatedSupplierPriceBreakList.h \
     $${PWD}/PaginatedUserCreateList.h \
     $${PWD}/PaginatedUserSettingsList.h \
-    $${PWD}/PaginatedVersionInformationList.h \
+    $${PWD}/Parameter.h \
+    $${PWD}/ParameterTemplate.h \
     $${PWD}/Part.h \
+    $${PWD}/PartBomValidate.h \
     $${PWD}/PartBrief.h \
     $${PWD}/PartCopyBOM.h \
     $${PWD}/PartInternalPrice.h \
-    $${PWD}/PartParameter.h \
-    $${PWD}/PartParameterTemplate.h \
     $${PWD}/PartPricing.h \
     $${PWD}/PartRelation.h \
+    $${PWD}/PartRequirements.h \
     $${PWD}/PartSalePrice.h \
-    $${PWD}/PartSetCategory.h \
+    $${PWD}/PartSerialNumber.h \
     $${PWD}/PartStocktake.h \
-    $${PWD}/PartStocktakeReport.h \
-    $${PWD}/PartStocktakeReportGenerate.h \
     $${PWD}/PartTestTemplate.h \
     $${PWD}/PartThumb.h \
     $${PWD}/PartThumbSerializerUpdate.h \
-    $${PWD}/PasswordChange.h \
-    $${PWD}/PasswordReset.h \
-    $${PWD}/PasswordResetConfirm.h \
     $${PWD}/PatchedAddress.h \
     $${PWD}/PatchedAttachment.h \
-    $${PWD}/PatchedBOMValidate.h \
     $${PWD}/PatchedBomItem.h \
     $${PWD}/PatchedBomItemSubstitute.h \
     $${PWD}/PatchedBomItemValidation.h \
@@ -202,12 +229,13 @@ HEADERS += \
     $${PWD}/PatchedCategoryParameterTemplate.h \
     $${PWD}/PatchedCompany.h \
     $${PWD}/PatchedContact.h \
+    $${PWD}/PatchedCustomState.h \
     $${PWD}/PatchedCustomUnit.h \
     $${PWD}/PatchedDataImportColumnMap.h \
     $${PWD}/PatchedDataImportRow.h \
     $${PWD}/PatchedDataImportSession.h \
     $${PWD}/PatchedErrorMessage.h \
-    $${PWD}/PatchedExendedUser.h \
+    $${PWD}/PatchedExtendedUser.h \
     $${PWD}/PatchedGlobalSettings.h \
     $${PWD}/PatchedGroup.h \
     $${PWD}/PatchedLabelTemplate.h \
@@ -215,14 +243,14 @@ HEADERS += \
     $${PWD}/PatchedMachineConfig.h \
     $${PWD}/PatchedMachineSetting.h \
     $${PWD}/PatchedManufacturerPart.h \
-    $${PWD}/PatchedManufacturerPartParameter.h \
+    $${PWD}/PatchedMeUser.h \
     $${PWD}/PatchedNewsFeedEntry.h \
     $${PWD}/PatchedNotificationMessage.h \
-    $${PWD}/PatchedNotificationUserSetting.h \
+    $${PWD}/PatchedParameter.h \
+    $${PWD}/PatchedParameterTemplate.h \
     $${PWD}/PatchedPart.h \
+    $${PWD}/PatchedPartBomValidate.h \
     $${PWD}/PatchedPartInternalPrice.h \
-    $${PWD}/PatchedPartParameter.h \
-    $${PWD}/PatchedPartParameterTemplate.h \
     $${PWD}/PatchedPartPricing.h \
     $${PWD}/PatchedPartRelation.h \
     $${PWD}/PatchedPartSalePrice.h \
@@ -230,9 +258,9 @@ HEADERS += \
     $${PWD}/PatchedPartTestTemplate.h \
     $${PWD}/PatchedPartThumbSerializerUpdate.h \
     $${PWD}/PatchedPluginActivate.h \
-    $${PWD}/PatchedPluginConfig.h \
     $${PWD}/PatchedPluginSetting.h \
     $${PWD}/PatchedPluginUninstall.h \
+    $${PWD}/PatchedPluginUserSetting.h \
     $${PWD}/PatchedProjectCode.h \
     $${PWD}/PatchedPurchaseOrder.h \
     $${PWD}/PatchedPurchaseOrderExtraLine.h \
@@ -243,29 +271,35 @@ HEADERS += \
     $${PWD}/PatchedReturnOrder.h \
     $${PWD}/PatchedReturnOrderExtraLine.h \
     $${PWD}/PatchedReturnOrderLineItem.h \
+    $${PWD}/PatchedRuleSet.h \
     $${PWD}/PatchedSalesOrder.h \
     $${PWD}/PatchedSalesOrderAllocation.h \
     $${PWD}/PatchedSalesOrderExtraLine.h \
     $${PWD}/PatchedSalesOrderLineItem.h \
     $${PWD}/PatchedSalesOrderShipment.h \
+    $${PWD}/PatchedSelectionEntry.h \
+    $${PWD}/PatchedSelectionList.h \
     $${PWD}/PatchedStockItem.h \
     $${PWD}/PatchedStockItemTestResult.h \
     $${PWD}/PatchedStockLocationType.h \
     $${PWD}/PatchedSupplierPart.h \
     $${PWD}/PatchedSupplierPriceBreak.h \
-    $${PWD}/PatchedUserDetails.h \
+    $${PWD}/PatchedUserProfile.h \
+    $${PWD}/PatchedUserSetPassword.h \
     $${PWD}/PatchedUserSettings.h \
     $${PWD}/PendingTask.h \
     $${PWD}/PluginActivate.h \
+    $${PWD}/PluginAdminDetail.h \
     $${PWD}/PluginConfig.h \
     $${PWD}/PluginConfigInstall.h \
     $${PWD}/PluginRegistryError.h \
     $${PWD}/PluginRegistryStatus.h \
     $${PWD}/PluginReload.h \
     $${PWD}/PluginSetting.h \
+    $${PWD}/PluginUIFeature.h \
     $${PWD}/PluginUninstall.h \
-    $${PWD}/Preferred.h \
-    $${PWD}/PreferredMethodEnum.h \
+    $${PWD}/PluginUserSetting.h \
+    $${PWD}/PriorityEnum.h \
     $${PWD}/ProjectCode.h \
     $${PWD}/PurchaseOrder.h \
     $${PWD}/PurchaseOrderComplete.h \
@@ -273,22 +307,18 @@ HEADERS += \
     $${PWD}/PurchaseOrderLineItem.h \
     $${PWD}/PurchaseOrderLineItemReceive.h \
     $${PWD}/PurchaseOrderReceive.h \
-    $${PWD}/Register.h \
+    $${PWD}/ReferenceStatusEnum.h \
     $${PWD}/ReportAsset.h \
-    $${PWD}/ReportOutput.h \
     $${PWD}/ReportPrint.h \
     $${PWD}/ReportSnippet.h \
     $${PWD}/ReportTemplate.h \
-    $${PWD}/ResendEmailVerification.h \
-    $${PWD}/RestAuthDetail.h \
     $${PWD}/ReturnOrder.h \
     $${PWD}/ReturnOrderExtraLine.h \
     $${PWD}/ReturnOrderLineItem.h \
     $${PWD}/ReturnOrderLineItemReceive.h \
     $${PWD}/ReturnOrderReceive.h \
-    $${PWD}/ReturnStockItem.h \
     $${PWD}/Role.h \
-    $${PWD}/SalePriceCurrencyEnum.h \
+    $${PWD}/RuleSet.h \
     $${PWD}/SalesOrder.h \
     $${PWD}/SalesOrderAllocation.h \
     $${PWD}/SalesOrderComplete.h \
@@ -301,37 +331,43 @@ HEADERS += \
     $${PWD}/SalesOrderShipmentComplete.h \
     $${PWD}/ScheduleTypeEnum.h \
     $${PWD}/ScheduledTask.h \
+    $${PWD}/SearchResult.h \
+    $${PWD}/SelectionEntry.h \
+    $${PWD}/SelectionList.h \
     $${PWD}/SerializeStockItem.h \
-    $${PWD}/SocialAccount.h \
-    $${PWD}/SocialConnect.h \
-    $${PWD}/SocialProvider.h \
-    $${PWD}/SocialProviderListResponse.h \
-    $${PWD}/Status2a7Enum.h \
+    $${PWD}/Settings.h \
     $${PWD}/StockAdd.h \
     $${PWD}/StockAdjustmentItem.h \
-    $${PWD}/StockAdjustmentItem_status.h \
     $${PWD}/StockAssignment.h \
     $${PWD}/StockAssignmentItem.h \
     $${PWD}/StockChangeStatus.h \
     $${PWD}/StockCount.h \
     $${PWD}/StockItem.h \
-    $${PWD}/StockItemSerializerBrief.h \
+    $${PWD}/StockItemSerialNumbers.h \
+    $${PWD}/StockItemStatusEnum.h \
     $${PWD}/StockItemTestResult.h \
     $${PWD}/StockLocationType.h \
     $${PWD}/StockMerge.h \
     $${PWD}/StockMergeItem.h \
     $${PWD}/StockRemove.h \
+    $${PWD}/StockReturn.h \
     $${PWD}/StockTracking.h \
     $${PWD}/StockTransfer.h \
+    $${PWD}/SupplierList.h \
     $${PWD}/SupplierPart.h \
     $${PWD}/SupplierPriceBreak.h \
-    $${PWD}/Token.h \
+    $${PWD}/SupplierPriceBreakBrief.h \
+    $${PWD}/TaskOverview.h \
+    $${PWD}/TemplateModelTypeEnum.h \
+    $${PWD}/TestEmail.h \
     $${PWD}/UninstallStockItem.h \
+    $${PWD}/Unit.h \
     $${PWD}/User.h \
     $${PWD}/UserCreate.h \
-    $${PWD}/UserDetails.h \
+    $${PWD}/UserProfile.h \
+    $${PWD}/UserSetPassword.h \
     $${PWD}/UserSettings.h \
-    $${PWD}/VerifyEmail.h \
+    $${PWD}/UserTypeEnum.h \
     $${PWD}/Version.h \
     $${PWD}/VersionInformation.h \
     $${PWD}/VersionView.h \
@@ -339,7 +375,6 @@ HEADERS += \
     $${PWD}/ActionApi.h \
     $${PWD}/AdminApi.h \
     $${PWD}/AttachmentApi.h \
-    $${PWD}/AuthApi.h \
     $${PWD}/BackgroundTaskApi.h \
     $${PWD}/BarcodeApi.h \
     $${PWD}/BomApi.h \
@@ -347,32 +382,39 @@ HEADERS += \
     $${PWD}/CompanyApi.h \
     $${PWD}/ContenttypeApi.h \
     $${PWD}/CurrencyApi.h \
+    $${PWD}/DataOutputApi.h \
+    $${PWD}/DefaultApi.h \
     $${PWD}/EmailApi.h \
     $${PWD}/ErrorReportApi.h \
     $${PWD}/FlagsApi.h \
     $${PWD}/GenerateApi.h \
     $${PWD}/GenericApi.h \
+    $${PWD}/IconsApi.h \
     $${PWD}/ImporterApi.h \
     $${PWD}/LabelApi.h \
     $${PWD}/LicenseApi.h \
     $${PWD}/LocateApi.h \
     $${PWD}/MachineApi.h \
+    $${PWD}/MetadataApi.h \
     $${PWD}/NewsApi.h \
     $${PWD}/NotesImageUploadApi.h \
     $${PWD}/NotificationsApi.h \
     $${PWD}/OrderApi.h \
+    $${PWD}/ParameterApi.h \
     $${PWD}/PartApi.h \
     $${PWD}/PluginsApi.h \
     $${PWD}/ProjectCodeApi.h \
     $${PWD}/ReportApi.h \
     $${PWD}/SearchApi.h \
+    $${PWD}/SelectionApi.h \
     $${PWD}/SettingsApi.h \
     $${PWD}/StockApi.h \
+    $${PWD}/SupplierApi.h \
+    $${PWD}/SystemApi.h \
     $${PWD}/UnitsApi.h \
     $${PWD}/UserApi.h \
     $${PWD}/VersionApi.h \
     $${PWD}/VersionTextApi.h \
-    $${PWD}/WebApi.h \
     $${PWD}/WebhookApi.h \
 # Others
     $${PWD}/Helpers.h \
@@ -389,30 +431,35 @@ SOURCES += \
     $${PWD}/APISearchView.cpp \
     $${PWD}/AcceptOverallocatedEnum.cpp \
     $${PWD}/ActionPlugin.cpp \
+    $${PWD}/ActionPluginError.cpp \
     $${PWD}/Address.cpp \
     $${PWD}/AddressBrief.cpp \
+    $${PWD}/AllUnitListResponse.cpp \
+    $${PWD}/ApiToken.cpp \
     $${PWD}/Attachment.cpp \
     $${PWD}/AttachmentModelTypeEnum.cpp \
-    $${PWD}/BOMValidate.cpp \
     $${PWD}/Barcode.cpp \
     $${PWD}/BarcodeAssign.cpp \
+    $${PWD}/BarcodeGenerate.cpp \
     $${PWD}/BarcodePOAllocate.cpp \
     $${PWD}/BarcodePOReceive.cpp \
     $${PWD}/BarcodeSOAllocate.cpp \
+    $${PWD}/BarcodeScanResult.cpp \
     $${PWD}/BarcodeUnassign.cpp \
     $${PWD}/BlankEnum.cpp \
-    $${PWD}/BomImportExtract.cpp \
-    $${PWD}/BomImportSubmit.cpp \
-    $${PWD}/BomImportUpload.cpp \
     $${PWD}/BomItem.cpp \
     $${PWD}/BomItemSubstitute.cpp \
     $${PWD}/BomItemValidation.cpp \
+    $${PWD}/BriefUserProfile.cpp \
     $${PWD}/Build.cpp \
     $${PWD}/BuildAllocation.cpp \
     $${PWD}/BuildAllocationItem.cpp \
     $${PWD}/BuildAutoAllocation.cpp \
     $${PWD}/BuildCancel.cpp \
     $${PWD}/BuildComplete.cpp \
+    $${PWD}/BuildConsume.cpp \
+    $${PWD}/BuildConsumeAllocation.cpp \
+    $${PWD}/BuildConsumeLineItem.cpp \
     $${PWD}/BuildItem.cpp \
     $${PWD}/BuildLine.cpp \
     $${PWD}/BuildOutput.cpp \
@@ -423,34 +470,59 @@ SOURCES += \
     $${PWD}/BuildOutputScrap.cpp \
     $${PWD}/BuildStatusEnum.cpp \
     $${PWD}/BuildUnallocation.cpp \
+    $${PWD}/BulkRequest.cpp \
     $${PWD}/Category.cpp \
     $${PWD}/CategoryParameterTemplate.cpp \
     $${PWD}/CategoryTree.cpp \
+    $${PWD}/ColorEnum.cpp \
     $${PWD}/Company.cpp \
     $${PWD}/CompanyBrief.cpp \
+    $${PWD}/Config.cpp \
     $${PWD}/ConfigTypeEnum.cpp \
     $${PWD}/Contact.cpp \
     $${PWD}/ContentType.cpp \
     $${PWD}/ConvertStockItem.cpp \
     $${PWD}/CurrencyExchange.cpp \
+    $${PWD}/CustomState.cpp \
     $${PWD}/CustomUnit.cpp \
+    $${PWD}/Customize.cpp \
     $${PWD}/DataImportAcceptRow.cpp \
     $${PWD}/DataImportColumnMap.cpp \
     $${PWD}/DataImportRow.cpp \
     $${PWD}/DataImportSession.cpp \
     $${PWD}/DataImportSessionModelTypeEnum.cpp \
     $${PWD}/DataImportSessionStatusEnum.cpp \
-    $${PWD}/EmailAddress.cpp \
+    $${PWD}/DataImporterModel.cpp \
+    $${PWD}/DataOutput.cpp \
+    $${PWD}/DefaultLocation.cpp \
+    $${PWD}/DirectionEnum.cpp \
+    $${PWD}/DuplicateOrder.cpp \
+    $${PWD}/DuplicatePart.cpp \
+    $${PWD}/EmailMessage.cpp \
+    $${PWD}/EmailMessageStatusEnum.cpp \
     $${PWD}/ErrorMessage.cpp \
-    $${PWD}/ExendedUser.cpp \
+    $${PWD}/ExtendedUser.cpp \
     $${PWD}/FailedTask.cpp \
+    $${PWD}/Flag.cpp \
     $${PWD}/GenerateBatchCode.cpp \
     $${PWD}/GenerateSerialNumber.cpp \
+    $${PWD}/GenericStateClass.cpp \
+    $${PWD}/GenericStateValue.cpp \
+    $${PWD}/GetAuthToken.cpp \
     $${PWD}/GetSimpleLogin.cpp \
     $${PWD}/GlobalSettings.cpp \
     $${PWD}/Group.cpp \
+    $${PWD}/HealthCheckStatus.cpp \
+    $${PWD}/HealthCheckStatusStatusEnum.cpp \
+    $${PWD}/Icon.cpp \
+    $${PWD}/IconPackage.cpp \
+    $${PWD}/ImportParameter.cpp \
+    $${PWD}/ImportRequest.cpp \
+    $${PWD}/ImportResult.cpp \
+    $${PWD}/InfoApi.cpp \
+    $${PWD}/InitialStock.cpp \
+    $${PWD}/InitialSupplier.cpp \
     $${PWD}/InstallStockItem.cpp \
-    $${PWD}/LabelOutput.cpp \
     $${PWD}/LabelPrint.cpp \
     $${PWD}/LabelTemplate.cpp \
     $${PWD}/LicenseView.cpp \
@@ -459,28 +531,31 @@ SOURCES += \
     $${PWD}/Location.cpp \
     $${PWD}/LocationBrief.cpp \
     $${PWD}/LocationTree.cpp \
-    $${PWD}/Login.cpp \
     $${PWD}/MachineConfig.cpp \
     $${PWD}/MachineConfigCreate.cpp \
     $${PWD}/MachineDriver.cpp \
+    $${PWD}/MachineProperty.cpp \
+    $${PWD}/MachinePropertyTypeEnum.cpp \
     $${PWD}/MachineRegistryError.cpp \
     $${PWD}/MachineRegistryStatus.cpp \
     $${PWD}/MachineRestart.cpp \
     $${PWD}/MachineSetting.cpp \
     $${PWD}/MachineType.cpp \
     $${PWD}/ManufacturerPart.cpp \
-    $${PWD}/ManufacturerPartParameter.cpp \
-    $${PWD}/ModelType972Enum.cpp \
+    $${PWD}/MeUser.cpp \
+    $${PWD}/ModelType4f8Enum.cpp \
+    $${PWD}/NameEnum.cpp \
     $${PWD}/NewsFeedEntry.cpp \
     $${PWD}/NotesImage.cpp \
     $${PWD}/NotificationMessage.cpp \
-    $${PWD}/NotificationUserSetting.cpp \
     $${PWD}/NullEnum.cpp \
     $${PWD}/OutcomeEnum.cpp \
     $${PWD}/Owner.cpp \
     $${PWD}/PageSizeEnum.cpp \
     $${PWD}/PaginatedAddressList.cpp \
+    $${PWD}/PaginatedApiTokenList.cpp \
     $${PWD}/PaginatedAttachmentList.cpp \
+    $${PWD}/PaginatedBarcodeScanResultList.cpp \
     $${PWD}/PaginatedBomItemList.cpp \
     $${PWD}/PaginatedBomItemSubstituteList.cpp \
     $${PWD}/PaginatedBuildItemList.cpp \
@@ -492,35 +567,34 @@ SOURCES += \
     $${PWD}/PaginatedCompanyList.cpp \
     $${PWD}/PaginatedContactList.cpp \
     $${PWD}/PaginatedContentTypeList.cpp \
+    $${PWD}/PaginatedCustomStateList.cpp \
     $${PWD}/PaginatedCustomUnitList.cpp \
     $${PWD}/PaginatedDataImportColumnMapList.cpp \
     $${PWD}/PaginatedDataImportRowList.cpp \
     $${PWD}/PaginatedDataImportSessionList.cpp \
-    $${PWD}/PaginatedEmailAddressList.cpp \
+    $${PWD}/PaginatedDataOutputList.cpp \
+    $${PWD}/PaginatedEmailMessageList.cpp \
     $${PWD}/PaginatedErrorMessageList.cpp \
     $${PWD}/PaginatedFailedTaskList.cpp \
     $${PWD}/PaginatedGlobalSettingsList.cpp \
     $${PWD}/PaginatedGroupList.cpp \
-    $${PWD}/PaginatedLabelOutputList.cpp \
+    $${PWD}/PaginatedIconPackageList.cpp \
     $${PWD}/PaginatedLabelTemplateList.cpp \
     $${PWD}/PaginatedLocationList.cpp \
     $${PWD}/PaginatedLocationTreeList.cpp \
     $${PWD}/PaginatedMachineConfigList.cpp \
     $${PWD}/PaginatedManufacturerPartList.cpp \
-    $${PWD}/PaginatedManufacturerPartParameterList.cpp \
     $${PWD}/PaginatedNewsFeedEntryList.cpp \
     $${PWD}/PaginatedNotesImageList.cpp \
     $${PWD}/PaginatedNotificationMessageList.cpp \
-    $${PWD}/PaginatedNotificationUserSettingList.cpp \
     $${PWD}/PaginatedOwnerList.cpp \
+    $${PWD}/PaginatedParameterList.cpp \
+    $${PWD}/PaginatedParameterTemplateList.cpp \
     $${PWD}/PaginatedPartInternalPriceList.cpp \
     $${PWD}/PaginatedPartList.cpp \
-    $${PWD}/PaginatedPartParameterList.cpp \
-    $${PWD}/PaginatedPartParameterTemplateList.cpp \
     $${PWD}/PaginatedPartRelationList.cpp \
     $${PWD}/PaginatedPartSalePriceList.cpp \
     $${PWD}/PaginatedPartStocktakeList.cpp \
-    $${PWD}/PaginatedPartStocktakeReportList.cpp \
     $${PWD}/PaginatedPartTestTemplateList.cpp \
     $${PWD}/PaginatedPartThumbList.cpp \
     $${PWD}/PaginatedPendingTaskList.cpp \
@@ -531,20 +605,20 @@ SOURCES += \
     $${PWD}/PaginatedPurchaseOrderLineItemList.cpp \
     $${PWD}/PaginatedPurchaseOrderList.cpp \
     $${PWD}/PaginatedReportAssetList.cpp \
-    $${PWD}/PaginatedReportOutputList.cpp \
     $${PWD}/PaginatedReportSnippetList.cpp \
     $${PWD}/PaginatedReportTemplateList.cpp \
     $${PWD}/PaginatedReturnOrderExtraLineList.cpp \
     $${PWD}/PaginatedReturnOrderLineItemList.cpp \
     $${PWD}/PaginatedReturnOrderList.cpp \
+    $${PWD}/PaginatedRuleSetList.cpp \
     $${PWD}/PaginatedSalesOrderAllocationList.cpp \
     $${PWD}/PaginatedSalesOrderExtraLineList.cpp \
     $${PWD}/PaginatedSalesOrderLineItemList.cpp \
     $${PWD}/PaginatedSalesOrderList.cpp \
     $${PWD}/PaginatedSalesOrderShipmentList.cpp \
     $${PWD}/PaginatedScheduledTaskList.cpp \
-    $${PWD}/PaginatedSocialAccountList.cpp \
-    $${PWD}/PaginatedSocialProviderListResponseList.cpp \
+    $${PWD}/PaginatedSelectionEntryList.cpp \
+    $${PWD}/PaginatedSelectionListList.cpp \
     $${PWD}/PaginatedStockItemList.cpp \
     $${PWD}/PaginatedStockItemTestResultList.cpp \
     $${PWD}/PaginatedStockLocationTypeList.cpp \
@@ -553,29 +627,24 @@ SOURCES += \
     $${PWD}/PaginatedSupplierPriceBreakList.cpp \
     $${PWD}/PaginatedUserCreateList.cpp \
     $${PWD}/PaginatedUserSettingsList.cpp \
-    $${PWD}/PaginatedVersionInformationList.cpp \
+    $${PWD}/Parameter.cpp \
+    $${PWD}/ParameterTemplate.cpp \
     $${PWD}/Part.cpp \
+    $${PWD}/PartBomValidate.cpp \
     $${PWD}/PartBrief.cpp \
     $${PWD}/PartCopyBOM.cpp \
     $${PWD}/PartInternalPrice.cpp \
-    $${PWD}/PartParameter.cpp \
-    $${PWD}/PartParameterTemplate.cpp \
     $${PWD}/PartPricing.cpp \
     $${PWD}/PartRelation.cpp \
+    $${PWD}/PartRequirements.cpp \
     $${PWD}/PartSalePrice.cpp \
-    $${PWD}/PartSetCategory.cpp \
+    $${PWD}/PartSerialNumber.cpp \
     $${PWD}/PartStocktake.cpp \
-    $${PWD}/PartStocktakeReport.cpp \
-    $${PWD}/PartStocktakeReportGenerate.cpp \
     $${PWD}/PartTestTemplate.cpp \
     $${PWD}/PartThumb.cpp \
     $${PWD}/PartThumbSerializerUpdate.cpp \
-    $${PWD}/PasswordChange.cpp \
-    $${PWD}/PasswordReset.cpp \
-    $${PWD}/PasswordResetConfirm.cpp \
     $${PWD}/PatchedAddress.cpp \
     $${PWD}/PatchedAttachment.cpp \
-    $${PWD}/PatchedBOMValidate.cpp \
     $${PWD}/PatchedBomItem.cpp \
     $${PWD}/PatchedBomItemSubstitute.cpp \
     $${PWD}/PatchedBomItemValidation.cpp \
@@ -586,12 +655,13 @@ SOURCES += \
     $${PWD}/PatchedCategoryParameterTemplate.cpp \
     $${PWD}/PatchedCompany.cpp \
     $${PWD}/PatchedContact.cpp \
+    $${PWD}/PatchedCustomState.cpp \
     $${PWD}/PatchedCustomUnit.cpp \
     $${PWD}/PatchedDataImportColumnMap.cpp \
     $${PWD}/PatchedDataImportRow.cpp \
     $${PWD}/PatchedDataImportSession.cpp \
     $${PWD}/PatchedErrorMessage.cpp \
-    $${PWD}/PatchedExendedUser.cpp \
+    $${PWD}/PatchedExtendedUser.cpp \
     $${PWD}/PatchedGlobalSettings.cpp \
     $${PWD}/PatchedGroup.cpp \
     $${PWD}/PatchedLabelTemplate.cpp \
@@ -599,14 +669,14 @@ SOURCES += \
     $${PWD}/PatchedMachineConfig.cpp \
     $${PWD}/PatchedMachineSetting.cpp \
     $${PWD}/PatchedManufacturerPart.cpp \
-    $${PWD}/PatchedManufacturerPartParameter.cpp \
+    $${PWD}/PatchedMeUser.cpp \
     $${PWD}/PatchedNewsFeedEntry.cpp \
     $${PWD}/PatchedNotificationMessage.cpp \
-    $${PWD}/PatchedNotificationUserSetting.cpp \
+    $${PWD}/PatchedParameter.cpp \
+    $${PWD}/PatchedParameterTemplate.cpp \
     $${PWD}/PatchedPart.cpp \
+    $${PWD}/PatchedPartBomValidate.cpp \
     $${PWD}/PatchedPartInternalPrice.cpp \
-    $${PWD}/PatchedPartParameter.cpp \
-    $${PWD}/PatchedPartParameterTemplate.cpp \
     $${PWD}/PatchedPartPricing.cpp \
     $${PWD}/PatchedPartRelation.cpp \
     $${PWD}/PatchedPartSalePrice.cpp \
@@ -614,9 +684,9 @@ SOURCES += \
     $${PWD}/PatchedPartTestTemplate.cpp \
     $${PWD}/PatchedPartThumbSerializerUpdate.cpp \
     $${PWD}/PatchedPluginActivate.cpp \
-    $${PWD}/PatchedPluginConfig.cpp \
     $${PWD}/PatchedPluginSetting.cpp \
     $${PWD}/PatchedPluginUninstall.cpp \
+    $${PWD}/PatchedPluginUserSetting.cpp \
     $${PWD}/PatchedProjectCode.cpp \
     $${PWD}/PatchedPurchaseOrder.cpp \
     $${PWD}/PatchedPurchaseOrderExtraLine.cpp \
@@ -627,29 +697,35 @@ SOURCES += \
     $${PWD}/PatchedReturnOrder.cpp \
     $${PWD}/PatchedReturnOrderExtraLine.cpp \
     $${PWD}/PatchedReturnOrderLineItem.cpp \
+    $${PWD}/PatchedRuleSet.cpp \
     $${PWD}/PatchedSalesOrder.cpp \
     $${PWD}/PatchedSalesOrderAllocation.cpp \
     $${PWD}/PatchedSalesOrderExtraLine.cpp \
     $${PWD}/PatchedSalesOrderLineItem.cpp \
     $${PWD}/PatchedSalesOrderShipment.cpp \
+    $${PWD}/PatchedSelectionEntry.cpp \
+    $${PWD}/PatchedSelectionList.cpp \
     $${PWD}/PatchedStockItem.cpp \
     $${PWD}/PatchedStockItemTestResult.cpp \
     $${PWD}/PatchedStockLocationType.cpp \
     $${PWD}/PatchedSupplierPart.cpp \
     $${PWD}/PatchedSupplierPriceBreak.cpp \
-    $${PWD}/PatchedUserDetails.cpp \
+    $${PWD}/PatchedUserProfile.cpp \
+    $${PWD}/PatchedUserSetPassword.cpp \
     $${PWD}/PatchedUserSettings.cpp \
     $${PWD}/PendingTask.cpp \
     $${PWD}/PluginActivate.cpp \
+    $${PWD}/PluginAdminDetail.cpp \
     $${PWD}/PluginConfig.cpp \
     $${PWD}/PluginConfigInstall.cpp \
     $${PWD}/PluginRegistryError.cpp \
     $${PWD}/PluginRegistryStatus.cpp \
     $${PWD}/PluginReload.cpp \
     $${PWD}/PluginSetting.cpp \
+    $${PWD}/PluginUIFeature.cpp \
     $${PWD}/PluginUninstall.cpp \
-    $${PWD}/Preferred.cpp \
-    $${PWD}/PreferredMethodEnum.cpp \
+    $${PWD}/PluginUserSetting.cpp \
+    $${PWD}/PriorityEnum.cpp \
     $${PWD}/ProjectCode.cpp \
     $${PWD}/PurchaseOrder.cpp \
     $${PWD}/PurchaseOrderComplete.cpp \
@@ -657,22 +733,18 @@ SOURCES += \
     $${PWD}/PurchaseOrderLineItem.cpp \
     $${PWD}/PurchaseOrderLineItemReceive.cpp \
     $${PWD}/PurchaseOrderReceive.cpp \
-    $${PWD}/Register.cpp \
+    $${PWD}/ReferenceStatusEnum.cpp \
     $${PWD}/ReportAsset.cpp \
-    $${PWD}/ReportOutput.cpp \
     $${PWD}/ReportPrint.cpp \
     $${PWD}/ReportSnippet.cpp \
     $${PWD}/ReportTemplate.cpp \
-    $${PWD}/ResendEmailVerification.cpp \
-    $${PWD}/RestAuthDetail.cpp \
     $${PWD}/ReturnOrder.cpp \
     $${PWD}/ReturnOrderExtraLine.cpp \
     $${PWD}/ReturnOrderLineItem.cpp \
     $${PWD}/ReturnOrderLineItemReceive.cpp \
     $${PWD}/ReturnOrderReceive.cpp \
-    $${PWD}/ReturnStockItem.cpp \
     $${PWD}/Role.cpp \
-    $${PWD}/SalePriceCurrencyEnum.cpp \
+    $${PWD}/RuleSet.cpp \
     $${PWD}/SalesOrder.cpp \
     $${PWD}/SalesOrderAllocation.cpp \
     $${PWD}/SalesOrderComplete.cpp \
@@ -685,37 +757,43 @@ SOURCES += \
     $${PWD}/SalesOrderShipmentComplete.cpp \
     $${PWD}/ScheduleTypeEnum.cpp \
     $${PWD}/ScheduledTask.cpp \
+    $${PWD}/SearchResult.cpp \
+    $${PWD}/SelectionEntry.cpp \
+    $${PWD}/SelectionList.cpp \
     $${PWD}/SerializeStockItem.cpp \
-    $${PWD}/SocialAccount.cpp \
-    $${PWD}/SocialConnect.cpp \
-    $${PWD}/SocialProvider.cpp \
-    $${PWD}/SocialProviderListResponse.cpp \
-    $${PWD}/Status2a7Enum.cpp \
+    $${PWD}/Settings.cpp \
     $${PWD}/StockAdd.cpp \
     $${PWD}/StockAdjustmentItem.cpp \
-    $${PWD}/StockAdjustmentItem_status.cpp \
     $${PWD}/StockAssignment.cpp \
     $${PWD}/StockAssignmentItem.cpp \
     $${PWD}/StockChangeStatus.cpp \
     $${PWD}/StockCount.cpp \
     $${PWD}/StockItem.cpp \
-    $${PWD}/StockItemSerializerBrief.cpp \
+    $${PWD}/StockItemSerialNumbers.cpp \
+    $${PWD}/StockItemStatusEnum.cpp \
     $${PWD}/StockItemTestResult.cpp \
     $${PWD}/StockLocationType.cpp \
     $${PWD}/StockMerge.cpp \
     $${PWD}/StockMergeItem.cpp \
     $${PWD}/StockRemove.cpp \
+    $${PWD}/StockReturn.cpp \
     $${PWD}/StockTracking.cpp \
     $${PWD}/StockTransfer.cpp \
+    $${PWD}/SupplierList.cpp \
     $${PWD}/SupplierPart.cpp \
     $${PWD}/SupplierPriceBreak.cpp \
-    $${PWD}/Token.cpp \
+    $${PWD}/SupplierPriceBreakBrief.cpp \
+    $${PWD}/TaskOverview.cpp \
+    $${PWD}/TemplateModelTypeEnum.cpp \
+    $${PWD}/TestEmail.cpp \
     $${PWD}/UninstallStockItem.cpp \
+    $${PWD}/Unit.cpp \
     $${PWD}/User.cpp \
     $${PWD}/UserCreate.cpp \
-    $${PWD}/UserDetails.cpp \
+    $${PWD}/UserProfile.cpp \
+    $${PWD}/UserSetPassword.cpp \
     $${PWD}/UserSettings.cpp \
-    $${PWD}/VerifyEmail.cpp \
+    $${PWD}/UserTypeEnum.cpp \
     $${PWD}/Version.cpp \
     $${PWD}/VersionInformation.cpp \
     $${PWD}/VersionView.cpp \
@@ -723,7 +801,6 @@ SOURCES += \
     $${PWD}/ActionApi.cpp \
     $${PWD}/AdminApi.cpp \
     $${PWD}/AttachmentApi.cpp \
-    $${PWD}/AuthApi.cpp \
     $${PWD}/BackgroundTaskApi.cpp \
     $${PWD}/BarcodeApi.cpp \
     $${PWD}/BomApi.cpp \
@@ -731,32 +808,39 @@ SOURCES += \
     $${PWD}/CompanyApi.cpp \
     $${PWD}/ContenttypeApi.cpp \
     $${PWD}/CurrencyApi.cpp \
+    $${PWD}/DataOutputApi.cpp \
+    $${PWD}/DefaultApi.cpp \
     $${PWD}/EmailApi.cpp \
     $${PWD}/ErrorReportApi.cpp \
     $${PWD}/FlagsApi.cpp \
     $${PWD}/GenerateApi.cpp \
     $${PWD}/GenericApi.cpp \
+    $${PWD}/IconsApi.cpp \
     $${PWD}/ImporterApi.cpp \
     $${PWD}/LabelApi.cpp \
     $${PWD}/LicenseApi.cpp \
     $${PWD}/LocateApi.cpp \
     $${PWD}/MachineApi.cpp \
+    $${PWD}/MetadataApi.cpp \
     $${PWD}/NewsApi.cpp \
     $${PWD}/NotesImageUploadApi.cpp \
     $${PWD}/NotificationsApi.cpp \
     $${PWD}/OrderApi.cpp \
+    $${PWD}/ParameterApi.cpp \
     $${PWD}/PartApi.cpp \
     $${PWD}/PluginsApi.cpp \
     $${PWD}/ProjectCodeApi.cpp \
     $${PWD}/ReportApi.cpp \
     $${PWD}/SearchApi.cpp \
+    $${PWD}/SelectionApi.cpp \
     $${PWD}/SettingsApi.cpp \
     $${PWD}/StockApi.cpp \
+    $${PWD}/SupplierApi.cpp \
+    $${PWD}/SystemApi.cpp \
     $${PWD}/UnitsApi.cpp \
     $${PWD}/UserApi.cpp \
     $${PWD}/VersionApi.cpp \
     $${PWD}/VersionTextApi.cpp \
-    $${PWD}/WebApi.cpp \
     $${PWD}/WebhookApi.cpp \
 # Others
     $${PWD}/Helpers.cpp \

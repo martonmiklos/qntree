@@ -14,30 +14,35 @@ add_library(${PROJECT_NAME}
   APISearchView.h
   AcceptOverallocatedEnum.h
   ActionPlugin.h
+  ActionPluginError.h
   Address.h
   AddressBrief.h
+  AllUnitListResponse.h
+  ApiToken.h
   Attachment.h
   AttachmentModelTypeEnum.h
-  BOMValidate.h
   Barcode.h
   BarcodeAssign.h
+  BarcodeGenerate.h
   BarcodePOAllocate.h
   BarcodePOReceive.h
   BarcodeSOAllocate.h
+  BarcodeScanResult.h
   BarcodeUnassign.h
   BlankEnum.h
-  BomImportExtract.h
-  BomImportSubmit.h
-  BomImportUpload.h
   BomItem.h
   BomItemSubstitute.h
   BomItemValidation.h
+  BriefUserProfile.h
   Build.h
   BuildAllocation.h
   BuildAllocationItem.h
   BuildAutoAllocation.h
   BuildCancel.h
   BuildComplete.h
+  BuildConsume.h
+  BuildConsumeAllocation.h
+  BuildConsumeLineItem.h
   BuildItem.h
   BuildLine.h
   BuildOutput.h
@@ -48,34 +53,59 @@ add_library(${PROJECT_NAME}
   BuildOutputScrap.h
   BuildStatusEnum.h
   BuildUnallocation.h
+  BulkRequest.h
   Category.h
   CategoryParameterTemplate.h
   CategoryTree.h
+  ColorEnum.h
   Company.h
   CompanyBrief.h
+  Config.h
   ConfigTypeEnum.h
   Contact.h
   ContentType.h
   ConvertStockItem.h
   CurrencyExchange.h
+  CustomState.h
   CustomUnit.h
+  Customize.h
   DataImportAcceptRow.h
   DataImportColumnMap.h
   DataImportRow.h
   DataImportSession.h
   DataImportSessionModelTypeEnum.h
   DataImportSessionStatusEnum.h
-  EmailAddress.h
+  DataImporterModel.h
+  DataOutput.h
+  DefaultLocation.h
+  DirectionEnum.h
+  DuplicateOrder.h
+  DuplicatePart.h
+  EmailMessage.h
+  EmailMessageStatusEnum.h
   ErrorMessage.h
-  ExendedUser.h
+  ExtendedUser.h
   FailedTask.h
+  Flag.h
   GenerateBatchCode.h
   GenerateSerialNumber.h
+  GenericStateClass.h
+  GenericStateValue.h
+  GetAuthToken.h
   GetSimpleLogin.h
   GlobalSettings.h
   Group.h
+  HealthCheckStatus.h
+  HealthCheckStatusStatusEnum.h
+  Icon.h
+  IconPackage.h
+  ImportParameter.h
+  ImportRequest.h
+  ImportResult.h
+  InfoApi.h
+  InitialStock.h
+  InitialSupplier.h
   InstallStockItem.h
-  LabelOutput.h
   LabelPrint.h
   LabelTemplate.h
   LicenseView.h
@@ -84,28 +114,31 @@ add_library(${PROJECT_NAME}
   Location.h
   LocationBrief.h
   LocationTree.h
-  Login.h
   MachineConfig.h
   MachineConfigCreate.h
   MachineDriver.h
+  MachineProperty.h
+  MachinePropertyTypeEnum.h
   MachineRegistryError.h
   MachineRegistryStatus.h
   MachineRestart.h
   MachineSetting.h
   MachineType.h
   ManufacturerPart.h
-  ManufacturerPartParameter.h
-  ModelType972Enum.h
+  MeUser.h
+  ModelType4f8Enum.h
+  NameEnum.h
   NewsFeedEntry.h
   NotesImage.h
   NotificationMessage.h
-  NotificationUserSetting.h
   NullEnum.h
   OutcomeEnum.h
   Owner.h
   PageSizeEnum.h
   PaginatedAddressList.h
+  PaginatedApiTokenList.h
   PaginatedAttachmentList.h
+  PaginatedBarcodeScanResultList.h
   PaginatedBomItemList.h
   PaginatedBomItemSubstituteList.h
   PaginatedBuildItemList.h
@@ -117,35 +150,34 @@ add_library(${PROJECT_NAME}
   PaginatedCompanyList.h
   PaginatedContactList.h
   PaginatedContentTypeList.h
+  PaginatedCustomStateList.h
   PaginatedCustomUnitList.h
   PaginatedDataImportColumnMapList.h
   PaginatedDataImportRowList.h
   PaginatedDataImportSessionList.h
-  PaginatedEmailAddressList.h
+  PaginatedDataOutputList.h
+  PaginatedEmailMessageList.h
   PaginatedErrorMessageList.h
   PaginatedFailedTaskList.h
   PaginatedGlobalSettingsList.h
   PaginatedGroupList.h
-  PaginatedLabelOutputList.h
+  PaginatedIconPackageList.h
   PaginatedLabelTemplateList.h
   PaginatedLocationList.h
   PaginatedLocationTreeList.h
   PaginatedMachineConfigList.h
   PaginatedManufacturerPartList.h
-  PaginatedManufacturerPartParameterList.h
   PaginatedNewsFeedEntryList.h
   PaginatedNotesImageList.h
   PaginatedNotificationMessageList.h
-  PaginatedNotificationUserSettingList.h
   PaginatedOwnerList.h
+  PaginatedParameterList.h
+  PaginatedParameterTemplateList.h
   PaginatedPartInternalPriceList.h
   PaginatedPartList.h
-  PaginatedPartParameterList.h
-  PaginatedPartParameterTemplateList.h
   PaginatedPartRelationList.h
   PaginatedPartSalePriceList.h
   PaginatedPartStocktakeList.h
-  PaginatedPartStocktakeReportList.h
   PaginatedPartTestTemplateList.h
   PaginatedPartThumbList.h
   PaginatedPendingTaskList.h
@@ -156,20 +188,20 @@ add_library(${PROJECT_NAME}
   PaginatedPurchaseOrderLineItemList.h
   PaginatedPurchaseOrderList.h
   PaginatedReportAssetList.h
-  PaginatedReportOutputList.h
   PaginatedReportSnippetList.h
   PaginatedReportTemplateList.h
   PaginatedReturnOrderExtraLineList.h
   PaginatedReturnOrderLineItemList.h
   PaginatedReturnOrderList.h
+  PaginatedRuleSetList.h
   PaginatedSalesOrderAllocationList.h
   PaginatedSalesOrderExtraLineList.h
   PaginatedSalesOrderLineItemList.h
   PaginatedSalesOrderList.h
   PaginatedSalesOrderShipmentList.h
   PaginatedScheduledTaskList.h
-  PaginatedSocialAccountList.h
-  PaginatedSocialProviderListResponseList.h
+  PaginatedSelectionEntryList.h
+  PaginatedSelectionListList.h
   PaginatedStockItemList.h
   PaginatedStockItemTestResultList.h
   PaginatedStockLocationTypeList.h
@@ -178,29 +210,24 @@ add_library(${PROJECT_NAME}
   PaginatedSupplierPriceBreakList.h
   PaginatedUserCreateList.h
   PaginatedUserSettingsList.h
-  PaginatedVersionInformationList.h
+  Parameter.h
+  ParameterTemplate.h
   Part.h
+  PartBomValidate.h
   PartBrief.h
   PartCopyBOM.h
   PartInternalPrice.h
-  PartParameter.h
-  PartParameterTemplate.h
   PartPricing.h
   PartRelation.h
+  PartRequirements.h
   PartSalePrice.h
-  PartSetCategory.h
+  PartSerialNumber.h
   PartStocktake.h
-  PartStocktakeReport.h
-  PartStocktakeReportGenerate.h
   PartTestTemplate.h
   PartThumb.h
   PartThumbSerializerUpdate.h
-  PasswordChange.h
-  PasswordReset.h
-  PasswordResetConfirm.h
   PatchedAddress.h
   PatchedAttachment.h
-  PatchedBOMValidate.h
   PatchedBomItem.h
   PatchedBomItemSubstitute.h
   PatchedBomItemValidation.h
@@ -211,12 +238,13 @@ add_library(${PROJECT_NAME}
   PatchedCategoryParameterTemplate.h
   PatchedCompany.h
   PatchedContact.h
+  PatchedCustomState.h
   PatchedCustomUnit.h
   PatchedDataImportColumnMap.h
   PatchedDataImportRow.h
   PatchedDataImportSession.h
   PatchedErrorMessage.h
-  PatchedExendedUser.h
+  PatchedExtendedUser.h
   PatchedGlobalSettings.h
   PatchedGroup.h
   PatchedLabelTemplate.h
@@ -224,14 +252,14 @@ add_library(${PROJECT_NAME}
   PatchedMachineConfig.h
   PatchedMachineSetting.h
   PatchedManufacturerPart.h
-  PatchedManufacturerPartParameter.h
+  PatchedMeUser.h
   PatchedNewsFeedEntry.h
   PatchedNotificationMessage.h
-  PatchedNotificationUserSetting.h
+  PatchedParameter.h
+  PatchedParameterTemplate.h
   PatchedPart.h
+  PatchedPartBomValidate.h
   PatchedPartInternalPrice.h
-  PatchedPartParameter.h
-  PatchedPartParameterTemplate.h
   PatchedPartPricing.h
   PatchedPartRelation.h
   PatchedPartSalePrice.h
@@ -239,9 +267,9 @@ add_library(${PROJECT_NAME}
   PatchedPartTestTemplate.h
   PatchedPartThumbSerializerUpdate.h
   PatchedPluginActivate.h
-  PatchedPluginConfig.h
   PatchedPluginSetting.h
   PatchedPluginUninstall.h
+  PatchedPluginUserSetting.h
   PatchedProjectCode.h
   PatchedPurchaseOrder.h
   PatchedPurchaseOrderExtraLine.h
@@ -252,29 +280,35 @@ add_library(${PROJECT_NAME}
   PatchedReturnOrder.h
   PatchedReturnOrderExtraLine.h
   PatchedReturnOrderLineItem.h
+  PatchedRuleSet.h
   PatchedSalesOrder.h
   PatchedSalesOrderAllocation.h
   PatchedSalesOrderExtraLine.h
   PatchedSalesOrderLineItem.h
   PatchedSalesOrderShipment.h
+  PatchedSelectionEntry.h
+  PatchedSelectionList.h
   PatchedStockItem.h
   PatchedStockItemTestResult.h
   PatchedStockLocationType.h
   PatchedSupplierPart.h
   PatchedSupplierPriceBreak.h
-  PatchedUserDetails.h
+  PatchedUserProfile.h
+  PatchedUserSetPassword.h
   PatchedUserSettings.h
   PendingTask.h
   PluginActivate.h
+  PluginAdminDetail.h
   PluginConfig.h
   PluginConfigInstall.h
   PluginRegistryError.h
   PluginRegistryStatus.h
   PluginReload.h
   PluginSetting.h
+  PluginUIFeature.h
   PluginUninstall.h
-  Preferred.h
-  PreferredMethodEnum.h
+  PluginUserSetting.h
+  PriorityEnum.h
   ProjectCode.h
   PurchaseOrder.h
   PurchaseOrderComplete.h
@@ -282,22 +316,18 @@ add_library(${PROJECT_NAME}
   PurchaseOrderLineItem.h
   PurchaseOrderLineItemReceive.h
   PurchaseOrderReceive.h
-  Register.h
+  ReferenceStatusEnum.h
   ReportAsset.h
-  ReportOutput.h
   ReportPrint.h
   ReportSnippet.h
   ReportTemplate.h
-  ResendEmailVerification.h
-  RestAuthDetail.h
   ReturnOrder.h
   ReturnOrderExtraLine.h
   ReturnOrderLineItem.h
   ReturnOrderLineItemReceive.h
   ReturnOrderReceive.h
-  ReturnStockItem.h
   Role.h
-  SalePriceCurrencyEnum.h
+  RuleSet.h
   SalesOrder.h
   SalesOrderAllocation.h
   SalesOrderComplete.h
@@ -310,44 +340,49 @@ add_library(${PROJECT_NAME}
   SalesOrderShipmentComplete.h
   ScheduleTypeEnum.h
   ScheduledTask.h
+  SearchResult.h
+  SelectionEntry.h
+  SelectionList.h
   SerializeStockItem.h
-  SocialAccount.h
-  SocialConnect.h
-  SocialProvider.h
-  SocialProviderListResponse.h
-  Status2a7Enum.h
+  Settings.h
   StockAdd.h
   StockAdjustmentItem.h
-  StockAdjustmentItem_status.h
   StockAssignment.h
   StockAssignmentItem.h
   StockChangeStatus.h
   StockCount.h
   StockItem.h
-  StockItemSerializerBrief.h
+  StockItemSerialNumbers.h
+  StockItemStatusEnum.h
   StockItemTestResult.h
   StockLocationType.h
   StockMerge.h
   StockMergeItem.h
   StockRemove.h
+  StockReturn.h
   StockTracking.h
   StockTransfer.h
+  SupplierList.h
   SupplierPart.h
   SupplierPriceBreak.h
-  Token.h
+  SupplierPriceBreakBrief.h
+  TaskOverview.h
+  TemplateModelTypeEnum.h
+  TestEmail.h
   UninstallStockItem.h
+  Unit.h
   User.h
   UserCreate.h
-  UserDetails.h
+  UserProfile.h
+  UserSetPassword.h
   UserSettings.h
-  VerifyEmail.h
+  UserTypeEnum.h
   Version.h
   VersionInformation.h
   VersionView.h
   ActionApi.h
   AdminApi.h
   AttachmentApi.h
-  AuthApi.h
   BackgroundTaskApi.h
   BarcodeApi.h
   BomApi.h
@@ -355,32 +390,39 @@ add_library(${PROJECT_NAME}
   CompanyApi.h
   ContenttypeApi.h
   CurrencyApi.h
+  DataOutputApi.h
+  DefaultApi.h
   EmailApi.h
   ErrorReportApi.h
   FlagsApi.h
   GenerateApi.h
   GenericApi.h
+  IconsApi.h
   ImporterApi.h
   LabelApi.h
   LicenseApi.h
   LocateApi.h
   MachineApi.h
+  MetadataApi.h
   NewsApi.h
   NotesImageUploadApi.h
   NotificationsApi.h
   OrderApi.h
+  ParameterApi.h
   PartApi.h
   PluginsApi.h
   ProjectCodeApi.h
   ReportApi.h
   SearchApi.h
+  SelectionApi.h
   SettingsApi.h
   StockApi.h
+  SupplierApi.h
+  SystemApi.h
   UnitsApi.h
   UserApi.h
   VersionApi.h
   VersionTextApi.h
-  WebApi.h
   WebhookApi.h
   Helpers.h
   HttpRequest.h
@@ -393,30 +435,35 @@ add_library(${PROJECT_NAME}
   APISearchView.cpp
   AcceptOverallocatedEnum.cpp
   ActionPlugin.cpp
+  ActionPluginError.cpp
   Address.cpp
   AddressBrief.cpp
+  AllUnitListResponse.cpp
+  ApiToken.cpp
   Attachment.cpp
   AttachmentModelTypeEnum.cpp
-  BOMValidate.cpp
   Barcode.cpp
   BarcodeAssign.cpp
+  BarcodeGenerate.cpp
   BarcodePOAllocate.cpp
   BarcodePOReceive.cpp
   BarcodeSOAllocate.cpp
+  BarcodeScanResult.cpp
   BarcodeUnassign.cpp
   BlankEnum.cpp
-  BomImportExtract.cpp
-  BomImportSubmit.cpp
-  BomImportUpload.cpp
   BomItem.cpp
   BomItemSubstitute.cpp
   BomItemValidation.cpp
+  BriefUserProfile.cpp
   Build.cpp
   BuildAllocation.cpp
   BuildAllocationItem.cpp
   BuildAutoAllocation.cpp
   BuildCancel.cpp
   BuildComplete.cpp
+  BuildConsume.cpp
+  BuildConsumeAllocation.cpp
+  BuildConsumeLineItem.cpp
   BuildItem.cpp
   BuildLine.cpp
   BuildOutput.cpp
@@ -427,34 +474,59 @@ add_library(${PROJECT_NAME}
   BuildOutputScrap.cpp
   BuildStatusEnum.cpp
   BuildUnallocation.cpp
+  BulkRequest.cpp
   Category.cpp
   CategoryParameterTemplate.cpp
   CategoryTree.cpp
+  ColorEnum.cpp
   Company.cpp
   CompanyBrief.cpp
+  Config.cpp
   ConfigTypeEnum.cpp
   Contact.cpp
   ContentType.cpp
   ConvertStockItem.cpp
   CurrencyExchange.cpp
+  CustomState.cpp
   CustomUnit.cpp
+  Customize.cpp
   DataImportAcceptRow.cpp
   DataImportColumnMap.cpp
   DataImportRow.cpp
   DataImportSession.cpp
   DataImportSessionModelTypeEnum.cpp
   DataImportSessionStatusEnum.cpp
-  EmailAddress.cpp
+  DataImporterModel.cpp
+  DataOutput.cpp
+  DefaultLocation.cpp
+  DirectionEnum.cpp
+  DuplicateOrder.cpp
+  DuplicatePart.cpp
+  EmailMessage.cpp
+  EmailMessageStatusEnum.cpp
   ErrorMessage.cpp
-  ExendedUser.cpp
+  ExtendedUser.cpp
   FailedTask.cpp
+  Flag.cpp
   GenerateBatchCode.cpp
   GenerateSerialNumber.cpp
+  GenericStateClass.cpp
+  GenericStateValue.cpp
+  GetAuthToken.cpp
   GetSimpleLogin.cpp
   GlobalSettings.cpp
   Group.cpp
+  HealthCheckStatus.cpp
+  HealthCheckStatusStatusEnum.cpp
+  Icon.cpp
+  IconPackage.cpp
+  ImportParameter.cpp
+  ImportRequest.cpp
+  ImportResult.cpp
+  InfoApi.cpp
+  InitialStock.cpp
+  InitialSupplier.cpp
   InstallStockItem.cpp
-  LabelOutput.cpp
   LabelPrint.cpp
   LabelTemplate.cpp
   LicenseView.cpp
@@ -463,28 +535,31 @@ add_library(${PROJECT_NAME}
   Location.cpp
   LocationBrief.cpp
   LocationTree.cpp
-  Login.cpp
   MachineConfig.cpp
   MachineConfigCreate.cpp
   MachineDriver.cpp
+  MachineProperty.cpp
+  MachinePropertyTypeEnum.cpp
   MachineRegistryError.cpp
   MachineRegistryStatus.cpp
   MachineRestart.cpp
   MachineSetting.cpp
   MachineType.cpp
   ManufacturerPart.cpp
-  ManufacturerPartParameter.cpp
-  ModelType972Enum.cpp
+  MeUser.cpp
+  ModelType4f8Enum.cpp
+  NameEnum.cpp
   NewsFeedEntry.cpp
   NotesImage.cpp
   NotificationMessage.cpp
-  NotificationUserSetting.cpp
   NullEnum.cpp
   OutcomeEnum.cpp
   Owner.cpp
   PageSizeEnum.cpp
   PaginatedAddressList.cpp
+  PaginatedApiTokenList.cpp
   PaginatedAttachmentList.cpp
+  PaginatedBarcodeScanResultList.cpp
   PaginatedBomItemList.cpp
   PaginatedBomItemSubstituteList.cpp
   PaginatedBuildItemList.cpp
@@ -496,35 +571,34 @@ add_library(${PROJECT_NAME}
   PaginatedCompanyList.cpp
   PaginatedContactList.cpp
   PaginatedContentTypeList.cpp
+  PaginatedCustomStateList.cpp
   PaginatedCustomUnitList.cpp
   PaginatedDataImportColumnMapList.cpp
   PaginatedDataImportRowList.cpp
   PaginatedDataImportSessionList.cpp
-  PaginatedEmailAddressList.cpp
+  PaginatedDataOutputList.cpp
+  PaginatedEmailMessageList.cpp
   PaginatedErrorMessageList.cpp
   PaginatedFailedTaskList.cpp
   PaginatedGlobalSettingsList.cpp
   PaginatedGroupList.cpp
-  PaginatedLabelOutputList.cpp
+  PaginatedIconPackageList.cpp
   PaginatedLabelTemplateList.cpp
   PaginatedLocationList.cpp
   PaginatedLocationTreeList.cpp
   PaginatedMachineConfigList.cpp
   PaginatedManufacturerPartList.cpp
-  PaginatedManufacturerPartParameterList.cpp
   PaginatedNewsFeedEntryList.cpp
   PaginatedNotesImageList.cpp
   PaginatedNotificationMessageList.cpp
-  PaginatedNotificationUserSettingList.cpp
   PaginatedOwnerList.cpp
+  PaginatedParameterList.cpp
+  PaginatedParameterTemplateList.cpp
   PaginatedPartInternalPriceList.cpp
   PaginatedPartList.cpp
-  PaginatedPartParameterList.cpp
-  PaginatedPartParameterTemplateList.cpp
   PaginatedPartRelationList.cpp
   PaginatedPartSalePriceList.cpp
   PaginatedPartStocktakeList.cpp
-  PaginatedPartStocktakeReportList.cpp
   PaginatedPartTestTemplateList.cpp
   PaginatedPartThumbList.cpp
   PaginatedPendingTaskList.cpp
@@ -535,20 +609,20 @@ add_library(${PROJECT_NAME}
   PaginatedPurchaseOrderLineItemList.cpp
   PaginatedPurchaseOrderList.cpp
   PaginatedReportAssetList.cpp
-  PaginatedReportOutputList.cpp
   PaginatedReportSnippetList.cpp
   PaginatedReportTemplateList.cpp
   PaginatedReturnOrderExtraLineList.cpp
   PaginatedReturnOrderLineItemList.cpp
   PaginatedReturnOrderList.cpp
+  PaginatedRuleSetList.cpp
   PaginatedSalesOrderAllocationList.cpp
   PaginatedSalesOrderExtraLineList.cpp
   PaginatedSalesOrderLineItemList.cpp
   PaginatedSalesOrderList.cpp
   PaginatedSalesOrderShipmentList.cpp
   PaginatedScheduledTaskList.cpp
-  PaginatedSocialAccountList.cpp
-  PaginatedSocialProviderListResponseList.cpp
+  PaginatedSelectionEntryList.cpp
+  PaginatedSelectionListList.cpp
   PaginatedStockItemList.cpp
   PaginatedStockItemTestResultList.cpp
   PaginatedStockLocationTypeList.cpp
@@ -557,29 +631,24 @@ add_library(${PROJECT_NAME}
   PaginatedSupplierPriceBreakList.cpp
   PaginatedUserCreateList.cpp
   PaginatedUserSettingsList.cpp
-  PaginatedVersionInformationList.cpp
+  Parameter.cpp
+  ParameterTemplate.cpp
   Part.cpp
+  PartBomValidate.cpp
   PartBrief.cpp
   PartCopyBOM.cpp
   PartInternalPrice.cpp
-  PartParameter.cpp
-  PartParameterTemplate.cpp
   PartPricing.cpp
   PartRelation.cpp
+  PartRequirements.cpp
   PartSalePrice.cpp
-  PartSetCategory.cpp
+  PartSerialNumber.cpp
   PartStocktake.cpp
-  PartStocktakeReport.cpp
-  PartStocktakeReportGenerate.cpp
   PartTestTemplate.cpp
   PartThumb.cpp
   PartThumbSerializerUpdate.cpp
-  PasswordChange.cpp
-  PasswordReset.cpp
-  PasswordResetConfirm.cpp
   PatchedAddress.cpp
   PatchedAttachment.cpp
-  PatchedBOMValidate.cpp
   PatchedBomItem.cpp
   PatchedBomItemSubstitute.cpp
   PatchedBomItemValidation.cpp
@@ -590,12 +659,13 @@ add_library(${PROJECT_NAME}
   PatchedCategoryParameterTemplate.cpp
   PatchedCompany.cpp
   PatchedContact.cpp
+  PatchedCustomState.cpp
   PatchedCustomUnit.cpp
   PatchedDataImportColumnMap.cpp
   PatchedDataImportRow.cpp
   PatchedDataImportSession.cpp
   PatchedErrorMessage.cpp
-  PatchedExendedUser.cpp
+  PatchedExtendedUser.cpp
   PatchedGlobalSettings.cpp
   PatchedGroup.cpp
   PatchedLabelTemplate.cpp
@@ -603,14 +673,14 @@ add_library(${PROJECT_NAME}
   PatchedMachineConfig.cpp
   PatchedMachineSetting.cpp
   PatchedManufacturerPart.cpp
-  PatchedManufacturerPartParameter.cpp
+  PatchedMeUser.cpp
   PatchedNewsFeedEntry.cpp
   PatchedNotificationMessage.cpp
-  PatchedNotificationUserSetting.cpp
+  PatchedParameter.cpp
+  PatchedParameterTemplate.cpp
   PatchedPart.cpp
+  PatchedPartBomValidate.cpp
   PatchedPartInternalPrice.cpp
-  PatchedPartParameter.cpp
-  PatchedPartParameterTemplate.cpp
   PatchedPartPricing.cpp
   PatchedPartRelation.cpp
   PatchedPartSalePrice.cpp
@@ -618,9 +688,9 @@ add_library(${PROJECT_NAME}
   PatchedPartTestTemplate.cpp
   PatchedPartThumbSerializerUpdate.cpp
   PatchedPluginActivate.cpp
-  PatchedPluginConfig.cpp
   PatchedPluginSetting.cpp
   PatchedPluginUninstall.cpp
+  PatchedPluginUserSetting.cpp
   PatchedProjectCode.cpp
   PatchedPurchaseOrder.cpp
   PatchedPurchaseOrderExtraLine.cpp
@@ -631,29 +701,35 @@ add_library(${PROJECT_NAME}
   PatchedReturnOrder.cpp
   PatchedReturnOrderExtraLine.cpp
   PatchedReturnOrderLineItem.cpp
+  PatchedRuleSet.cpp
   PatchedSalesOrder.cpp
   PatchedSalesOrderAllocation.cpp
   PatchedSalesOrderExtraLine.cpp
   PatchedSalesOrderLineItem.cpp
   PatchedSalesOrderShipment.cpp
+  PatchedSelectionEntry.cpp
+  PatchedSelectionList.cpp
   PatchedStockItem.cpp
   PatchedStockItemTestResult.cpp
   PatchedStockLocationType.cpp
   PatchedSupplierPart.cpp
   PatchedSupplierPriceBreak.cpp
-  PatchedUserDetails.cpp
+  PatchedUserProfile.cpp
+  PatchedUserSetPassword.cpp
   PatchedUserSettings.cpp
   PendingTask.cpp
   PluginActivate.cpp
+  PluginAdminDetail.cpp
   PluginConfig.cpp
   PluginConfigInstall.cpp
   PluginRegistryError.cpp
   PluginRegistryStatus.cpp
   PluginReload.cpp
   PluginSetting.cpp
+  PluginUIFeature.cpp
   PluginUninstall.cpp
-  Preferred.cpp
-  PreferredMethodEnum.cpp
+  PluginUserSetting.cpp
+  PriorityEnum.cpp
   ProjectCode.cpp
   PurchaseOrder.cpp
   PurchaseOrderComplete.cpp
@@ -661,22 +737,18 @@ add_library(${PROJECT_NAME}
   PurchaseOrderLineItem.cpp
   PurchaseOrderLineItemReceive.cpp
   PurchaseOrderReceive.cpp
-  Register.cpp
+  ReferenceStatusEnum.cpp
   ReportAsset.cpp
-  ReportOutput.cpp
   ReportPrint.cpp
   ReportSnippet.cpp
   ReportTemplate.cpp
-  ResendEmailVerification.cpp
-  RestAuthDetail.cpp
   ReturnOrder.cpp
   ReturnOrderExtraLine.cpp
   ReturnOrderLineItem.cpp
   ReturnOrderLineItemReceive.cpp
   ReturnOrderReceive.cpp
-  ReturnStockItem.cpp
   Role.cpp
-  SalePriceCurrencyEnum.cpp
+  RuleSet.cpp
   SalesOrder.cpp
   SalesOrderAllocation.cpp
   SalesOrderComplete.cpp
@@ -689,44 +761,49 @@ add_library(${PROJECT_NAME}
   SalesOrderShipmentComplete.cpp
   ScheduleTypeEnum.cpp
   ScheduledTask.cpp
+  SearchResult.cpp
+  SelectionEntry.cpp
+  SelectionList.cpp
   SerializeStockItem.cpp
-  SocialAccount.cpp
-  SocialConnect.cpp
-  SocialProvider.cpp
-  SocialProviderListResponse.cpp
-  Status2a7Enum.cpp
+  Settings.cpp
   StockAdd.cpp
   StockAdjustmentItem.cpp
-  StockAdjustmentItem_status.cpp
   StockAssignment.cpp
   StockAssignmentItem.cpp
   StockChangeStatus.cpp
   StockCount.cpp
   StockItem.cpp
-  StockItemSerializerBrief.cpp
+  StockItemSerialNumbers.cpp
+  StockItemStatusEnum.cpp
   StockItemTestResult.cpp
   StockLocationType.cpp
   StockMerge.cpp
   StockMergeItem.cpp
   StockRemove.cpp
+  StockReturn.cpp
   StockTracking.cpp
   StockTransfer.cpp
+  SupplierList.cpp
   SupplierPart.cpp
   SupplierPriceBreak.cpp
-  Token.cpp
+  SupplierPriceBreakBrief.cpp
+  TaskOverview.cpp
+  TemplateModelTypeEnum.cpp
+  TestEmail.cpp
   UninstallStockItem.cpp
+  Unit.cpp
   User.cpp
   UserCreate.cpp
-  UserDetails.cpp
+  UserProfile.cpp
+  UserSetPassword.cpp
   UserSettings.cpp
-  VerifyEmail.cpp
+  UserTypeEnum.cpp
   Version.cpp
   VersionInformation.cpp
   VersionView.cpp
   ActionApi.cpp
   AdminApi.cpp
   AttachmentApi.cpp
-  AuthApi.cpp
   BackgroundTaskApi.cpp
   BarcodeApi.cpp
   BomApi.cpp
@@ -734,32 +811,39 @@ add_library(${PROJECT_NAME}
   CompanyApi.cpp
   ContenttypeApi.cpp
   CurrencyApi.cpp
+  DataOutputApi.cpp
+  DefaultApi.cpp
   EmailApi.cpp
   ErrorReportApi.cpp
   FlagsApi.cpp
   GenerateApi.cpp
   GenericApi.cpp
+  IconsApi.cpp
   ImporterApi.cpp
   LabelApi.cpp
   LicenseApi.cpp
   LocateApi.cpp
   MachineApi.cpp
+  MetadataApi.cpp
   NewsApi.cpp
   NotesImageUploadApi.cpp
   NotificationsApi.cpp
   OrderApi.cpp
+  ParameterApi.cpp
   PartApi.cpp
   PluginsApi.cpp
   ProjectCodeApi.cpp
   ReportApi.cpp
   SearchApi.cpp
+  SelectionApi.cpp
   SettingsApi.cpp
   StockApi.cpp
+  SupplierApi.cpp
+  SystemApi.cpp
   UnitsApi.cpp
   UserApi.cpp
   VersionApi.cpp
   VersionTextApi.cpp
-  WebApi.cpp
   WebhookApi.cpp
   Helpers.cpp
   HttpRequest.cpp
