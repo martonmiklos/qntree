@@ -72,46 +72,58 @@ void PartListModel::setFilter(const QString &filterValue)
     beginResetModel();
     connect(m_api, &InvenTree::PartApi::partListSignal, this, &PartListModel::partListReceived);
 
-    m_api->partList(InvenTree::OptionalParam<QString>(), // ipn
-                    InvenTree::OptionalParam<QString>(), // ipn regex
-                    InvenTree::OptionalParam<bool>(), // active
-                    InvenTree::OptionalParam<qint32>(), // ancestor
-                    InvenTree::OptionalParam<bool>(), // assembly
-                    InvenTree::OptionalParam<bool>(), // bom_valid
-                    InvenTree::OptionalParam<bool>(), // component
-                    InvenTree::OptionalParam<qint32>(), // convert_from
-                    InvenTree::OptionalParam<QDate>(), // created_after
-                    InvenTree::OptionalParam<QDate>(), // created_before
-                    InvenTree::OptionalParam<qint32>(), // default_location
-                    InvenTree::OptionalParam<bool>(), // depleted_stock
-                    InvenTree::OptionalParam<qint32>(), // exclude_tree
-                    InvenTree::OptionalParam<bool>(), // has_ipn
-                    InvenTree::OptionalParam<bool>(), // has_pricing
-                    InvenTree::OptionalParam<bool>(), // has_revisions
-                    InvenTree::OptionalParam<bool>(), // has_stock
-                    InvenTree::OptionalParam<bool>(), // has_units
-                    InvenTree::OptionalParam<qint32>(), // in_bom_for
-                    InvenTree::OptionalParam<bool>(), // is_revision
-                    InvenTree::OptionalParam<bool>(), // is_template
-                    InvenTree::OptionalParam<qint32>(25), // limit
-                    InvenTree::OptionalParam<bool>(), // locked
-                    InvenTree::OptionalParam<bool>(), // low_stock
+    m_api->partList(25, // limit
+                    InvenTree::OptionalParam<QString>(), //  ipn
+                    InvenTree::OptionalParam<QString>(), //  ipn_regex
+                    InvenTree::OptionalParam<bool>(), //  active
+                    InvenTree::OptionalParam<qint32>(), //  ancestor
+                    InvenTree::OptionalParam<bool>(), //  assembly
+                    InvenTree::OptionalParam<bool>(), //  bom_valid
+                    InvenTree::OptionalParam<bool>(), //  cascade
+                    InvenTree::OptionalParam<qint32>(), //  category
+                    InvenTree::OptionalParam<bool>(), //  category_detail
+                    InvenTree::OptionalParam<bool>(), //  component
+                    InvenTree::OptionalParam<qint32>(), //  convert_from
+                    InvenTree::OptionalParam<QDate>(), //  created_after
+                    InvenTree::OptionalParam<QDate>(), //  created_before
+                    InvenTree::OptionalParam<qint32>(), //  default_location
+                    InvenTree::OptionalParam<bool>(), //  depleted_stock
+                    InvenTree::OptionalParam<QList<qint32>>(), //  exclude_id
+                    InvenTree::OptionalParam<double>(), //  exclude_related
+                    InvenTree::OptionalParam<qint32>(), //  exclude_tree
+                    InvenTree::OptionalParam<bool>(), //  has_ipn
+                    InvenTree::OptionalParam<bool>(), //  has_pricing
+                    InvenTree::OptionalParam<bool>(), //  has_revisions
+                    InvenTree::OptionalParam<bool>(), //  has_stock
+                    InvenTree::OptionalParam<bool>(), //  has_units
+                    InvenTree::OptionalParam<qint32>(), //  in_bom_for
+                    InvenTree::OptionalParam<bool>(), //  is_revision
+                    InvenTree::OptionalParam<bool>(), //  is_template
+                    InvenTree::OptionalParam<bool>(), //  is_variant
+                    InvenTree::OptionalParam<bool>(), //  location_detail
+                    InvenTree::OptionalParam<bool>(), //  locked
+                    InvenTree::OptionalParam<bool>(), //  low_stock
                     InvenTree::OptionalParam<QString>(".*" + filterValue + ".*"), // name_regex
                     InvenTree::OptionalParam<qint32>(m_offset), // offset
-                    InvenTree::OptionalParam<QString>(), // ordering
-                    InvenTree::OptionalParam<bool>(), // purchaseable
-                    InvenTree::OptionalParam<qint32>(), // revision_of
-                    InvenTree::OptionalParam<bool>(), // salable
-                    InvenTree::OptionalParam<QString>(filterValue), // search
-                    InvenTree::OptionalParam<bool>(), // starred
-                    InvenTree::OptionalParam<bool>(), // stock_to_build
-                    InvenTree::OptionalParam<bool>(), // stocktake
-                    InvenTree::OptionalParam<QString>(), // tags_name
-                    InvenTree::OptionalParam<QString>(), // tags_slug
-                    InvenTree::OptionalParam<bool>(), // trackable
-                    InvenTree::OptionalParam<bool>(), // unallocated_stock
-                    InvenTree::OptionalParam<qint32>(), // variant_of
-                    InvenTree::OptionalParam<bool>() // r_virtual
+                    InvenTree::OptionalParam<QString>(), //  ordering
+                    InvenTree::OptionalParam<bool>(), //  parameters
+                    InvenTree::OptionalParam<bool>(), //  path_detail
+                    InvenTree::OptionalParam<bool>(), //  price_breaks
+                    InvenTree::OptionalParam<bool>(), //  purchaseable
+                    InvenTree::OptionalParam<double>(), //  related
+                    InvenTree::OptionalParam<qint32>(), //  revision_of
+                    InvenTree::OptionalParam<bool>(), //  salable
+                    InvenTree::OptionalParam<QString>(), //  search
+                    InvenTree::OptionalParam<bool>(), //  starred
+                    InvenTree::OptionalParam<bool>(), //  stock_to_build
+                    InvenTree::OptionalParam<bool>(), //  tags
+                    InvenTree::OptionalParam<QString>(), //  tags_name
+                    InvenTree::OptionalParam<QString>(), //  tags_slug
+                    InvenTree::OptionalParam<bool>(), //  testable
+                    InvenTree::OptionalParam<bool>(), //  trackable
+                    InvenTree::OptionalParam<bool>(), //  unallocated_stock
+                    InvenTree::OptionalParam<qint32>(), //  variant_of
+                    InvenTree::OptionalParam<bool>() //  r_virtual
                     );
 }
 

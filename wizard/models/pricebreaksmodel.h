@@ -1,5 +1,6 @@
 #pragma once
 
+#include "gen_src/client/SupplierPriceBreak.h"
 #include "supplier/supplierpart.h"
 #include <QAbstractTableModel>
 
@@ -29,7 +30,6 @@ public:
     void setPart(SupplierPart *newPart);
 
     qreal getPriceForQuantity(qreal quantity, QString *currency = nullptr);
-
 private:
     SupplierPart *m_part = nullptr;
 };

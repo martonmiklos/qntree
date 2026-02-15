@@ -122,5 +122,6 @@ void StockLineWidget::on_checkBoxCreateStock_clicked(bool checked)
     for (auto widget : m_stockWidgets) {
         widget->setEnabled(checked);
     }
+    emit quantityChanged();
 }
 

@@ -29,6 +29,10 @@ public:
     QList<SupplierPartProperty> properties() const;
     QList<SupplierPartPricingRange> priceRanges() const;
 
+    void reset();
+
+    void setAttachmentComment(int index, const QString &comment);
+
     QImage image() const;
 
     qint32 existingPk() const;
@@ -38,6 +42,7 @@ public:
     QString sku() const;
 
     QString supplierLink() const;
+    SupplierAttachment* attachmentAt(int index);
 
 protected:
     QString m_sku;

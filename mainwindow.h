@@ -1,5 +1,6 @@
 #pragma once
 
+#include "gen_src/client/AttachmentApi.h"
 #include "gen_src/client/CompanyApi.h"
 #include <QMainWindow>
 #include <QSettings>
@@ -30,5 +31,6 @@ private:
     InvenTree::StockApi *m_stockApi = nullptr;
     InvenTree::CurrencyApi *m_currencyApi = nullptr;
     InvenTree::CompanyApi *m_companyApi = nullptr;
+    InvenTree::AttachmentApi *m_attachmentApi = nullptr;
     QSettings m_settings;
 };

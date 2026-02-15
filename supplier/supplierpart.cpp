@@ -50,6 +50,17 @@ QList<SupplierPartPricingRange> SupplierPart::priceRanges() const
     return m_priceRanges;
 }
 
+void SupplierPart::reset()
+{
+    m_attachments.clear();
+}
+
+void SupplierPart::setAttachmentComment(int index, const QString &comment)
+{
+    Q_ASSERT(index < m_attachments.count());
+    m_attachments[index].comment = comment;
+}
+
 QImage SupplierPart::image() const
 {
     return m_image;
@@ -78,5 +89,10 @@ QString SupplierPart::sku() const
 QString SupplierPart::supplierLink() const
 {
     return m_supplierLink;
+}
+
+SupplierAttachment *SupplierPart::attachmentAt(int index)
+{
+    return &m_attachments[index];
 }
 

@@ -2,6 +2,7 @@
 #include "ui_inventreepartimportwizard.h"
 
 #include "ui_wizardpagepartdetails.h"
+#include "ui_wizardpagestockandpricing.h"
 #include "ui_wizardpagesupplierdataenter.h"
 #include "wizard/wizardpagesummary.h"
 #include "wizard/wizardpagesupplierdataenter.h"
@@ -14,19 +15,23 @@
 #include "wizard/inventreepartuploader.h"
 #include "supplier/supplierregistry.h"
 #include "wizard/stocklinewidget.h"
+#include "wizard/models/propertymappingmodel.h"
+#include "wizard/wizardpagestockandpricing.h"
 #include <QMessageBox>
 
 InvenTreePartImportWizard::InvenTreePartImportWizard(InvenTree::PartApi *api,
                                                      InvenTree::StockApi *stockApi,
                                                      InvenTree::CurrencyApi *currencyApi,
                                                      InvenTree::CompanyApi *companyApi,
+                                                     InvenTree::AttachmentApi *attachmentApi,
                                                      QWidget *parent)
     : QWizard(parent),
     ui(new Ui::InvenTreePartImportWizard),
     m_partApi(api),
     m_stockApi(stockApi),
     m_currencyApi(currencyApi),
-    m_companyApi(companyApi)
+    m_companyApi(companyApi),
+    m_attachmentApi(attachmentApi)
 {
     ui->setupUi(this);
     setAttribute(Qt::WA_DeleteOnClose);
@@ -107,6 +112,11 @@ InvenTree::CurrencyApi *InvenTreePartImportWizard::currencyApi() const
     return m_currencyApi;
 }
 
+InvenTree::AttachmentApi *InvenTreePartImportWizard::attachmentApi() const
+{
+    return m_attachmentApi;
+}
+
 void InvenTreePartImportWizard::initNewInvenTreePart(InvenTree::Part *part)
 {
     /*        part = Part.create(inventree_api, {
@@ -121,6 +131,7 @@ void InvenTreePartImportWizard::initNewInvenTreePart(InvenTree::Part *part)
             'component': True,
             'purchaseable': True,
         })*/
+    part->fromJson(QString()); // reset all fields
     part->setName(m_selectedPart.name());
     part->setDescription(m_selectedPart.description());
     part->setCategory(m_partDetailsPage->invenTreeTargetCategoryPk());
@@ -159,7 +170,7 @@ void InvenTreePartImportWizard::initNewSupplierPart(int partPk, int mfrPart, Inv
 
 void InvenTreePartImportWizard::initStockItems(int partPk, QList<InvenTree::StockItem> *items, int *defaultLocationId)
 {
-    for (auto sl : m_stockAndPricingPage->m_stockLines) {
+    for (auto &sl : m_stockAndPricingPage->m_stockLines) {
         if (sl->create()) {
             InvenTree::StockItem siOut;
             siOut.setPart(partPk);
@@ -174,9 +185,39 @@ void InvenTreePartImportWizard::initStockItems(int partPk, QList<InvenTree::Stoc
     }
 }
 
-void InvenTreePartImportWizard::initParameterList(int partPk, QList<InvenTree::PartParameter> *params)
+/*void InvenTreePartImportWizard::initParameterList(int partPk, QList<InvenTree::PartParameter> *params)
 {
+    m_partParametersPage->m_propertyModel->initParameterList(partPk, params);
+} FIXME */
 
+void InvenTreePartImportWizard::initPriceBreaks(int partPk, QList<InvenTree::SupplierPriceBreak> *breaks)
+{
+    if (m_stockAndPricingPage->ui->checkBoxSavePriceBreaks->isChecked()) {
+        for (const auto &pr : m_selectedPart.priceRanges()) {
+            InvenTree::SupplierPriceBreak pbr;
+            pbr.setPart(partPk);
+            pbr.setSupplier(SupplierRegistry::instance()->getSupplierByUId(m_startPage->ui->comboBoxSupplier->currentData().toString())->invenTreeId());
+            pbr.setPrice(QString::number(pr.price));
+            pbr.setQuantity(pr.qtyMin);
+            breaks->append(pbr);
+        }
+    }
+}
+
+void InvenTreePartImportWizard::initAttachments(int partPk, QList<InvenTree::Attachment> *as)
+{
+    for (const auto &a : m_selectedPart.attachments()) {
+        InvenTree::Attachment ao;
+        InvenTree::AttachmentModelTypeEnum t;
+        t.setValue(InvenTree::AttachmentModelTypeEnum::eAttachmentModelTypeEnum::PART);
+        ao.setModelType(t);
+        ao.setComment(a.comment);
+        ao.setFileSize(a.sizeInBytes);
+        ao.setFilename(a.url.fileName());
+        ao.setLink(a.url.toString());
+        ao.setModelId(partPk);
+        as->append(ao);
+    }
 }
 
 int InvenTreePartImportWizard::currentSupplierDbId() const

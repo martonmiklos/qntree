@@ -1,5 +1,4 @@
 #include "mainwindow.h"
-#include "InvenTree_dialogs/dialogselectinventreecategory.h"
 #include "gen_src/client/StockApi.h"
 #include "ui_mainwindow.h"
 #include "supplier/supplierregistry.h"
@@ -31,6 +30,12 @@ MainWindow::MainWindow(QWidget *parent)
     m_companyApi = new InvenTree::CompanyApi();
     m_companyApi->addHeaders("Authorization", "Token inv-cfdeb7eb1b8a30c013ecf21db9870816955dc557-20250325");
 
+    m_companyApi = new InvenTree::CompanyApi();
+    m_companyApi->addHeaders("Authorization", "Token inv-cfdeb7eb1b8a30c013ecf21db9870816955dc557-20250325");
+
+    m_attachmentApi = new InvenTree::AttachmentApi();
+    m_attachmentApi->addHeaders("Authorization", "Token inv-cfdeb7eb1b8a30c013ecf21db9870816955dc557-20250325");
+
     SupplierRegistry::instance(this);
 
     on_pushButtonImportParts_clicked();
@@ -57,7 +62,7 @@ void MainWindow::on_pushButtonConnect_clicked()
 
 void MainWindow::on_pushButtonImportParts_clicked()
 {
-    InvenTreePartImportWizard *wizard = new InvenTreePartImportWizard(m_partApi, m_stockApi, m_currencyApi, m_companyApi, this);
+    InvenTreePartImportWizard *wizard = new InvenTreePartImportWizard(m_partApi, m_stockApi, m_currencyApi, m_companyApi, m_attachmentApi, this);
     wizard->show();
 }
 

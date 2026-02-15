@@ -19,23 +19,23 @@ void InvenTreeCompanyModel::update()
         isManufacturer.m_hasValue = true;
     }
     connect(m_api, &InvenTree::CompanyApi::companyListSignal, this, &InvenTreeCompanyModel::companyListReceived);
-    m_api->companyList(isActive,
+    m_api->companyList(std::numeric_limits<qint32>().max(),
+                       isActive,
                        isCustomer,
                        isManufacturer,
                        isSupplier,
-                       InvenTree::OptionalParam<qint32>(std::numeric_limits<qint32>().max()),
                        InvenTree::OptionalParam<QString>(),
                        InvenTree::OptionalParam<qint32>(0));
 
-    /*  const ::InvenTree::OptionalParam<bool> &active = ::InvenTree::OptionalParam<bool>(),
-        const ::InvenTree::OptionalParam<bool> &is_customer = ::InvenTree::OptionalParam<bool>(),
-        const ::InvenTree::OptionalParam<bool> &is_manufacturer = ::InvenTree::OptionalParam<bool>(),
-        const ::InvenTree::OptionalParam<bool> &is_supplier = ::InvenTree::OptionalParam<bool>(),
-        const ::InvenTree::OptionalParam<qint32> &limit = ::InvenTree::OptionalParam<qint32>(),
-        const ::InvenTree::OptionalParam<QString> &name = ::InvenTree::OptionalParam<QString>(),
-        const ::InvenTree::OptionalParam<qint32> &offset = ::InvenTree::OptionalParam<qint32>(),
-        const ::InvenTree::OptionalParam<QString> &ordering = ::InvenTree::OptionalParam<QString>(),
-        const ::InvenTree::OptionalParam<QString> &search = ::InvenTree::OptionalParam<QString>()*/
+    /*  const qint32 &limit,
+     *  const ::InvenTree::OptionalParam<bool> &active,
+     *  const ::InvenTree::OptionalParam<bool> &is_customer,
+     *  const ::InvenTree::OptionalParam<bool> &is_manufacturer,
+     *  const ::InvenTree::OptionalParam<bool> &is_supplier,
+     *  const ::InvenTree::OptionalParam<QString> &name,
+     *  const ::InvenTree::OptionalParam<qint32> &offset,
+     *  const ::InvenTree::OptionalParam<QString> &ordering,
+     *  const ::InvenTree::OptionalParam<QString> &search*/
 }
 
 QVariant InvenTreeCompanyModel::headerData(int section, Qt::Orientation orientation, int role) const

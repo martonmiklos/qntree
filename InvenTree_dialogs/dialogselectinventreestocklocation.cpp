@@ -30,7 +30,8 @@ void DialogSelectInvenTreeStockLocation::on_treeViewStockLocations_doubleClicked
 {
     if (m_filterForNonStructural && m_model->data(index, InvenTreeStockLocationModel::IsStructuralRole).toBool()) {
         QMessageBox::warning(this, tr("Unable to select"), tr("The %1 location is structural and cannot be selected.\n"
-                                                              "Please select an another non-structural location"));
+                                                              "Please select an another non-structural location")
+                                                               .arg(m_model->data(index, Qt::DisplayRole).toString()));
         return;
     }
     emit stockLocationSelected(m_model->data(index, InvenTreeStockLocationModel::PkRole).toInt(),

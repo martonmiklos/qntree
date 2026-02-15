@@ -12,6 +12,21 @@ WizardPageStockAndPricing::WizardPageStockAndPricing(InvenTreePartImportWizard *
     ui->tableViewPriceBreaks->setModel(m_priceBreakModel);
     ui->tableViewPriceBreaks->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Stretch);
     addNewLineWidget();
+
+    /*connect(m_wizard->currencyApi(), &InvenTree::CurrencyApi::currencyExchangeRetrieveSignal, this, [=] (InvenTree::CurrencyExchange summary) {
+        disconnect(m_wizard->currencyApi(), nullptr, this, nullptr);
+
+        for (auto c : summary.)
+        for (int i = 0; i<std::numeric_limits<int>().max(); i++) {
+            e.setValue(static_cast<InvenTree::SalePriceCurrencyEnum::eSalePriceCurrencyEnum>(i));
+            auto s = e.asJson();
+            if (s.isEmpty())
+                return;
+            ui->comboBoxUnitPriceCurrency->addItem(s);
+        }
+    });
+    m_wizard->currencyApi()->currencyExchangeRetrieve();*/
+
 }
 
 WizardPageStockAndPricing::~WizardPageStockAndPricing()
@@ -64,7 +79,7 @@ QString WizardPageStockAndPricing::summary() const
         ret.append(tr("<b>Create stocks</b><br><ul>"));
         for (auto line : m_stockLines) {
             if (line->create()) {
-                ret.append(tr("<li>%1%2</li>").arg(line->locationName(), line->isDefaultLocation() ? tr(" (make it default)") : QString()));
+                ret.append(tr("<li>%1%2 %3 %4</li>").arg(line->locationName(), line->isDefaultLocation() ? tr(" (make it default)") : QString()).arg(line->quantity()).arg(m_selectedPart->unit()));
             }
         }
         ret.append("</ul><br>");
@@ -74,7 +89,17 @@ QString WizardPageStockAndPricing::summary() const
         ret.append(tr("<b>Create price breaks</b><br><ul>"));
         int min = 1;
         for (auto &pb : m_selectedPart->priceRanges()) {
-            ret.append(QString("%1 - %2: %3 %4").arg(min).arg(pb.qtyMin).arg(pb.price).arg(pb.currency));
+            QString minMax;
+            if (min == pb.qtyMin)
+                minMax = tr("%1 pc").arg(min);
+            else
+                minMax = tr("%1 - %2 pcs").arg(min).arg(pb.qtyMin);
+
+            // highlight the price break where we are
+            bool current = false;
+            if (min <= ui->doubleSpinBoxUnitPrice->value() && ui->doubleSpinBoxUnitPrice->value() < pb.qtyMin)
+                current = true;
+            ret.append(QString("<li>%1: %2 %3%4</li>").arg(minMax).arg(pb.price).arg(pb.currency, current ? " <-" : QString()));
             min = pb.qtyMin + 1;
         }
         ret.append("</ul><br>");

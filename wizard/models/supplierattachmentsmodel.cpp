@@ -56,49 +56,57 @@ QVariant SupplierAttachmentsModel::data(const QModelIndex &index, int role) cons
     if (!m_part)
         return QVariant();
 
+    auto a = m_part->attachmentAt(index.row());
     if (role == Qt::DisplayRole) {
         switch (static_cast<Columns>(index.column())) {
         case Col_FileName:
-            return m_part->attachments().at(index.row()).url.fileName();
+            return a->filename();
         case Col_Size: {
             QLocale locale;
-            return  locale.formattedDataSize(m_part->attachments().at(index.row()).sizeInBytes);
+            return  locale.formattedDataSize(a->sizeInBytes);
         }
         case Col_Action:
-            return m_attachmentsToSave.indexOf(&(m_part->attachments().at(index.row()))) != -1 ? tr("Save") : tr("Skip");
+            return m_attachmentsToSave.indexOf(a) != -1 ? tr("Save") : tr("Skip");
         case Col_Invalid:
             break;
         case Col_Comment:
-            return m_part->attachments().at(index.row()).comment;
+            return a->comment;
         }
     } else if (role == Qt::EditRole) {
         if (index.column() == Col_Action) {
-            return m_attachmentsToSave.indexOf(&(m_part->attachments().at(index.row()))) != -1 ? "save" : "skip";
+            return m_attachmentsToSave.indexOf(a) != -1 ? "save" : "skip";
         } else if (index.row() == Col_Comment) {
-            return m_part->attachments().at(index.row()).comment;
+            return a->comment;
         }
     } else if (role == Role_Url) {
-        return m_part->attachments().at(index.row()).url;
+        return a->url;
     } else if (role == Role_Size) {
-        return m_part->attachments().at(index.row()).sizeInBytes;
+        return a->sizeInBytes;
     } else if (role == Role_Save) {
-        return m_attachmentsToSave.contains(&(m_part->attachments().at(index.row())));
+        return m_attachmentsToSave.contains(a);
     }
     return QVariant();
 }
 
 bool SupplierAttachmentsModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
-    if (role == Qt::EditRole && index.column() == Col_Action) {
-        if (value.toString() == "save") {
-            if (m_attachmentsToSave.indexOf(&m_part->attachments().at(index.row())) == -1) {
-                m_attachmentsToSave.append(&m_part->attachments().at(index.row()));
+    if (role == Qt::EditRole) {
+        if (index.column() == Col_Action) {
+            auto a = m_part->attachmentAt(index.row());
+            if (value.toString() == "save") {
+                if (!m_attachmentsToSave.contains(a)) {
+                    m_attachmentsToSave.append(a);
+                }
+            } else {
+                m_attachmentsToSave.removeAll(a);
             }
-        } else {
-            m_attachmentsToSave.removeAll(&m_part->attachments().at(index.row()));
+            emit dataChanged(index, index, QList<int>({Qt::DisplayRole, Qt::EditRole}));
+            return true;
+        } else if (index.column() == Col_Comment) {
+            m_part->setAttachmentComment(index.row(), value.toString());
+            emit dataChanged(index, index, QList<int>({Qt::DisplayRole, Qt::EditRole}));
+            return true;
         }
-        emit dataChanged(index, index, QList<int>({Qt::DisplayRole, Qt::EditRole}));
-        return true;
     }
     return false;
 }

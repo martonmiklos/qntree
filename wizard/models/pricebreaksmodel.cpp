@@ -75,3 +75,4 @@ qreal PricebreaksModel::getPriceForQuantity(qreal quantity, QString *currency)
     }
     return 0.0;
 }
+

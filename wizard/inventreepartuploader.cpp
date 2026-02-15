@@ -1,9 +1,57 @@
 #include "inventreepartuploader.h"
 
+#include "gen_src/client/Attachment.h"
+
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+#include <QNetworkRequest>
+#include <QTemporaryFile>
+#include <QUrl>
+#include <QObject>
+#include <QDebug>
+#include <QCoreApplication>
+
 InvenTreePartUploader::InvenTreePartUploader(InvenTreePartImportWizard *parent)
     : QObject{parent},
     m_wizard(parent)
 {
+}
+
+void InvenTreePartUploader::downloadToTempFile(const QString &sourceUrl, QObject *context, std::function<void (const QString &, const QString &)> onSuccess, std::function<void (const QString &)> onError)
+{
+    auto *manager = new QNetworkAccessManager(context);
+
+    QNetworkRequest request(sourceUrl);
+    auto *reply = manager->get(request);
+
+    // Temporary file (auto-deleted on destruction)
+    auto *tempFile = new QTemporaryFile(context);
+    tempFile->setAutoRemove(true);
+
+    if (!tempFile->open()) {
+        onError(QStringLiteral("Failed to open temporary file"));
+        reply->deleteLater();
+        manager->deleteLater();
+        return;
+    }
+
+    QObject::connect(reply, &QNetworkReply::readyRead, context, [reply, tempFile]() {
+        tempFile->write(reply->readAll());
+    });
+
+    QObject::connect(reply, &QNetworkReply::finished, context, [=]() {
+        reply->deleteLater();
+        manager->deleteLater();
+
+        if (reply->error() != QNetworkReply::NoError) {
+            tempFile->deleteLater();
+            onError(reply->errorString());
+            return;
+        }
+
+        tempFile->flush();
+        onSuccess(tempFile->fileName(), reply->header(QNetworkRequest::ContentTypeHeader).toString());
+    });
 }
 
 void InvenTreePartUploader::start()
@@ -108,7 +156,7 @@ void InvenTreePartUploader::partUpdated(InvenTree::Part summary)
 
     connect(m_wizard->partApi(), &InvenTree::PartApi::partPartialUpdateSignal, this, &InvenTreePartUploader::imageUploaded);
     connect(m_wizard->partApi(), &InvenTree::PartApi::partPartialUpdateSignalError, this, &InvenTreePartUploader::imageUploadError);
-    m_wizard->partApi()->partPartialUpdate(m_part.getPk(), InvenTree::OptionalParam<InvenTree::PatchedPart>(), files);
+    // FIXME m_wizard->partApi()->partPartialUpdate(m_part.getPk(), InvenTree::OptionalParam<InvenTree::PatchedPart>(), files);
 }
 
 void InvenTreePartUploader::imageUploadError(InvenTree::Part summary, QNetworkReply::NetworkError error_type, const QString &error_str)
@@ -141,7 +189,7 @@ void InvenTreePartUploader::imageUploaded(InvenTree::Part summary)
     }
 }
 
-void InvenTreePartUploader::stockItemCreateError(InvenTree::StockItem summary, QNetworkReply::NetworkError error_type, const QString &error_str)
+void InvenTreePartUploader::stockItemCreateError(QList<InvenTree::StockItem> summary, QNetworkReply::NetworkError error_type, const QString &error_str)
 {
     Q_UNUSED(summary)
     Q_UNUSED(error_type)
@@ -149,11 +197,10 @@ void InvenTreePartUploader::stockItemCreateError(InvenTree::StockItem summary, Q
     emit stateFailed(AddStockItems, error_str);
 }
 
-void InvenTreePartUploader::stockItemCreated(InvenTree::StockItem summary)
+void InvenTreePartUploader::stockItemCreated(QList<InvenTree::StockItem> summary)
 {
     m_stockItemCreationLeft--;
     if (m_stockItemCreationLeft == 0) {
-        Q_UNUSED(summary)
         disconnect(m_wizard->stockApi(), nullptr, this, nullptr);
 
         if (m_defaultLocationId != -1) {
@@ -185,20 +232,19 @@ void InvenTreePartUploader::defaultStockLocationSet(InvenTree::Part summary)
 
 void InvenTreePartUploader::createParameters()
 {
-    QList<InvenTree::PartParameter> params;
+    /*QList<InvenTree::PartParameter> params;
     m_wizard->initParameterList(m_part.getPk(), &params);
-    if (params.count()) {
+    if (params.count() && false) {
         emit stateChanged(m_state, CreateParameters);
         m_paramsCreationLeft = params.count();
         for (const auto &p : params) {
-            m_wizard->partApi()->partParameterCreate(p);
+            // FIXME m_wizard->partApi()->parameter(p);
         }
-    } else {
+    } else {*/
         setupPricing();
-        emit stateChanged(CreateParameters, SetupSuppliersAndPricing);
-    }
+   //}
 }
-
+/*
 void InvenTreePartUploader::partParameterCreateError(InvenTree::PartParameter summary, QNetworkReply::NetworkError error_type, const QString &error_str)
 {
     Q_UNUSED(summary)
@@ -215,9 +261,86 @@ void InvenTreePartUploader::partParameterCreated(InvenTree::PartParameter summar
         disconnect(m_wizard->partApi(), nullptr, this, nullptr);
         setupPricing();
     }
-}
+}*/
 
 void InvenTreePartUploader::setupPricing()
 {
-    emit stateChanged(CreateParameters, SetupSuppliersAndPricing);
+    emit stateChanged(m_state, SetupSuppliersAndPricing);
+    QList<InvenTree::SupplierPriceBreak> priceBreaks;
+    m_wizard->initPriceBreaks(m_part.getDefaultSupplier(), &priceBreaks);
+    if (priceBreaks.count() > 0) {
+        connect(m_wizard->companyApi(), &InvenTree::CompanyApi::companyPriceBreakCreateSignal, this, &InvenTreePartUploader::priceBreakCreated);
+        connect(m_wizard->companyApi(), &InvenTree::CompanyApi::companyPriceBreakCreateSignalError, this, &InvenTreePartUploader::priceBreakCreateError);
+
+        m_priceBreakLeft = priceBreaks.count();
+        for (const auto &pb : priceBreaks) {
+            m_wizard->companyApi()->companyPriceBreakCreate(pb);
+        }
+    } else {
+        uploadAttachments();
+    }
 }
+
+void InvenTreePartUploader::priceBreakCreateError(InvenTree::SupplierPriceBreak summary, QNetworkReply::NetworkError error_type, const QString &error_str)
+{
+    Q_UNUSED(summary)
+    Q_UNUSED(error_type)
+    disconnect(m_wizard->companyApi(), nullptr, this, nullptr);
+    emit stateFailed(SetupSuppliersAndPricing, error_str);
+}
+
+void InvenTreePartUploader::priceBreakCreated(InvenTree::SupplierPriceBreak summary)
+{
+    m_priceBreakLeft--;
+    if (m_priceBreakLeft == 0) {
+        Q_UNUSED(summary)
+        disconnect(m_wizard->companyApi(), nullptr, this, nullptr);
+        uploadAttachments();
+    }
+}
+
+void InvenTreePartUploader::uploadAttachments()
+{
+    m_attachments.clear();
+    m_wizard->initAttachments(m_part.getPk(), &m_attachments);
+    if (m_attachments.size() == 0) {
+        emit stateChanged(m_state, Finished);
+    } else {
+        connect(m_wizard->attachmentApi(), &InvenTree::AttachmentApi::attachmentCreateSignal, this, &InvenTreePartUploader::attachmentCreated);
+        connect(m_wizard->attachmentApi(), &InvenTree::AttachmentApi::attachmentCreateSignalError, this, &InvenTreePartUploader::attachmentCreateError);
+        m_attachmentsLeft = m_attachments.size();
+        emit stateChanged(m_state, UploadFiles);
+        for (auto &a : m_attachments) {
+            downloadToTempFile(a.getLink(), this,
+                               [=] (const QString &localPath, const QString &mime) {
+                                   QList<InvenTree::HttpFileElement> files;
+                                   InvenTree::HttpFileElement file;
+                                   file.loadFromFile("attachment", localPath, a.getFilename(), mime);
+                                   files.append(file);
+                                   // FIXME m_wizard->attachmentApi()->attachmentCreate(a, files);
+                               },
+                               [=] (const QString & errorString) {
+                                   emit stateFailed(UploadFiles, errorString);
+                               });
+        }
+    }
+}
+
+void InvenTreePartUploader::attachmentCreateError(InvenTree::Attachment summary, QNetworkReply::NetworkError error_type, const QString &error_str)
+{
+    Q_UNUSED(summary)
+    Q_UNUSED(error_type)
+    disconnect(m_wizard->attachmentApi(), nullptr, this, nullptr);
+    emit stateFailed(UploadFiles, error_str);
+}
+
+void InvenTreePartUploader::attachmentCreated(InvenTree::Attachment summary)
+{
+    m_attachmentsLeft--;
+    if (m_attachmentsLeft == 0) {
+        Q_UNUSED(summary)
+        disconnect(m_wizard->attachmentApi(), nullptr, this, nullptr);
+        emit stateChanged(UploadFiles, Finished);
+    }
+}
+

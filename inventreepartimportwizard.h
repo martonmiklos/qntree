@@ -3,11 +3,16 @@
 #include "gen_src/client/CompanyApi.h"
 #include "gen_src/client/PartApi.h"
 #include "gen_src/client/StockApi.h"
+#include "gen_src/client/AttachmentApi.h"
 #include "gen_src/client/CurrencyApi.h"
+#include "gen_src/client/Attachment.h"
+
 #include "supplier/supplierpart.h"
+
 #include "wizard/inventreepartimportwizardpage.h"
 #include "wizard/models/supplierattachmentsmodel.h"
 #include "wizard/wizardpageselectpartcreationmode.h"
+
 #include <QWizard>
 #include <QSettings>
 
@@ -52,7 +57,7 @@ public:
     explicit InvenTreePartImportWizard(InvenTree::PartApi *api,
                                        InvenTree::StockApi *stockApi,
                                        InvenTree::CurrencyApi *currencyApi,
-                                       InvenTree::CompanyApi *companyApi,
+                                       InvenTree::CompanyApi *companyApi, InvenTree::AttachmentApi *attachmentApi,
                                        QWidget *parent = nullptr);
     ~InvenTreePartImportWizard();
     void setSelectedPart(::SupplierPart & part);
@@ -60,13 +65,15 @@ public:
     InvenTree::PartApi *partApi() const;
     InvenTree::StockApi *stockApi() const;
     InvenTree::CurrencyApi *currencyApi() const;
+    InvenTree::AttachmentApi *attachmentApi() const;
 
     void initNewInvenTreePart(InvenTree::Part *part);
     void initNewManufacturerPart(int partPk, InvenTree::ManufacturerPart *mfrPart);
     void initNewSupplierPart(int partPk, int mfrPart, InvenTree::SupplierPart *part);
     void initStockItems(int partPk, QList<InvenTree::StockItem> *items, int *defaultLocationId = nullptr);
-    void initParameterList(int partPk, QList<InvenTree::PartParameter> *params);
-
+    //void initParameterList(int partPk, QList<InvenTree::PartParameter> *params);
+    void initPriceBreaks(int partPk, QList<InvenTree::SupplierPriceBreak> *breaks);
+    void initAttachments(int partPk, QList<InvenTree::Attachment> *as);
     int currentSupplierDbId() const;
 
     InvenTree::CompanyApi *companyApi() const;
@@ -90,6 +97,7 @@ protected:
     InvenTree::StockApi *m_stockApi = nullptr;
     InvenTree::CurrencyApi *m_currencyApi = nullptr;
     InvenTree::CompanyApi *m_companyApi = nullptr;
+    InvenTree::AttachmentApi *m_attachmentApi = nullptr;
 
     QSettings m_settings;
     QNetworkAccessManager *m_networkAccessManager = nullptr;
@@ -98,3 +106,4 @@ protected:
 private slots:
     void on_InvenTreePartImportWizard_currentIdChanged(int newPageId);
 };
+

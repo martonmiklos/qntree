@@ -55,6 +55,8 @@ public:
 
     void setTemplateTargetCategory(int row, bool save, int pk = -1, const QString &name = QString());
 
+    //void initParameterList(int partPk, QList<InvenTree::PartParameter> *params);
+
 private:
     QList<PropertyMappingLine> m_lines;    
 };

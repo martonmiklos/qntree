@@ -23,7 +23,6 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     supplier/abstractsupplier.cpp \
-    supplier/supplierattachment.cpp \
     supplier/supplierpart.cpp \
     supplier/supplierpartproperty.cpp \
     supplier/supplierregistry.cpp \
@@ -60,7 +59,6 @@ HEADERS += \
     mainwindow.h \
     qt_goodies/qobjectsingleton.h \
     supplier/abstractsupplier.h \
-    supplier/supplierattachment.h \
     supplier/supplierpart.h \
     supplier/supplierpartproperty.h \
     supplier/supplierregistry.h \

@@ -39,12 +39,15 @@ void WizardPageInvenTreeSyncStatus::reset()
     ui->labelError->clear();
     auto keys = m_resultLabelMap.keys();
     for (auto key : keys) {
-        m_resultLabelMap[key]->setText("-");
+        if (m_resultLabelMap.contains(key))
+            m_resultLabelMap[key]->setText("-");
     }
 }
 
 void WizardPageInvenTreeSyncStatus::stateChanged(InvenTreePartUploader::State old, InvenTreePartUploader::State newState)
 {
+    if (!m_resultLabelMap.contains(old))
+        return;
     auto label = m_resultLabelMap[old];
     if (label)
         label->setText(tr("Done"));
@@ -60,6 +63,9 @@ void WizardPageInvenTreeSyncStatus::stateChanged(InvenTreePartUploader::State ol
 
 void WizardPageInvenTreeSyncStatus::stateError(InvenTreePartUploader::State old, const QString &error)
 {
+    if (!m_resultLabelMap.contains(old))
+        return;
+
     auto label = m_resultLabelMap[old];
     if (label)
         label->setText(tr("Error"));

@@ -241,16 +241,19 @@ void InvenTreeCategoryItem::fetchChilds()
     connect(m_api, &InvenTree::PartApi::partCategoryListSignal, this, &InvenTreeCategoryItem::subCategoriesReceieved);
     bool cascade = parent.stringValue() != "";
     m_api->partCategoryList(
-        InvenTree::OptionalParam<bool>(cascade), // cascade
-        InvenTree::OptionalParam<double>(1), // depth
-        InvenTree::OptionalParam<qint32>(), // exclude_tree
-        InvenTree::OptionalParam<qint32>(65535), //limit,
-        InvenTree::OptionalParam<QString>(), //name,
-        InvenTree::OptionalParam<qint32>(0), //offset,
-        InvenTree::OptionalParam<QString>(), //ordering,
-        parent,
-        InvenTree::OptionalParam<QString>(), // search,
-        InvenTree::OptionalParam<bool>() //structural
+        65535, // limit
+        InvenTree::OptionalParam<bool>(), //cascade
+        1, //depth
+        InvenTree::OptionalParam<qint32>(), //exclude_tree
+        InvenTree::OptionalParam<QString>(), //name
+        0, //offset
+        InvenTree::OptionalParam<QString>(), //ordering
+        parent, //parent
+        InvenTree::OptionalParam<bool>(), //path_detail
+        InvenTree::OptionalParam<QString>(), //search
+        InvenTree::OptionalParam<bool>(), //starred
+        InvenTree::OptionalParam<bool>(), //structural
+        InvenTree::OptionalParam<bool>() //top_level
         );
 }
 

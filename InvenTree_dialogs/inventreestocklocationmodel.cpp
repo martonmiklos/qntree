@@ -195,18 +195,20 @@ void InvenTreeStockLocationItem::fetchChilds()
      *    const ::InvenTree::OptionalParam<bool> &structural = ::InvenTree::OptionalParam<bool>()); */
 
     m_api->stockLocationList(
-        InvenTree::OptionalParam<bool>(false), // cascade
-        InvenTree::OptionalParam<double>(1), // depth
-        InvenTree::OptionalParam<bool>(), // external
+        65535, // limit
+        InvenTree::OptionalParam<bool>(), //cascade
+        InvenTree::OptionalParam<double>(), //depth
+        InvenTree::OptionalParam<bool>(), //external
         InvenTree::OptionalParam<bool>(), //has_location_type
-        InvenTree::OptionalParam<qint32>(65535), //limit,
-        InvenTree::OptionalParam<qint32>(), // location_type,
-        InvenTree::OptionalParam<QString>(), // name
-        InvenTree::OptionalParam<qint32>(0), //offset,
-        InvenTree::OptionalParam<QString>(), //ordering,
-        parent,
-        InvenTree::OptionalParam<QString>(), // search,
-        InvenTree::OptionalParam<bool>() // structural
+        InvenTree::OptionalParam<qint32>(), //location_type
+        InvenTree::OptionalParam<QString>(), //name
+        InvenTree::OptionalParam<qint32>(), //offset
+        InvenTree::OptionalParam<QString>(), //ordering
+        parent, //parent
+        InvenTree::OptionalParam<bool>(), //path_detail
+        InvenTree::OptionalParam<QString>(), //search
+        InvenTree::OptionalParam<bool>(), //structural
+        InvenTree::OptionalParam<bool>() //top_level
         );
 }
 

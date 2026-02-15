@@ -48,6 +48,17 @@ void PropertyMappingModel::setTemplateTargetCategory(int row, bool save, int pk,
     emit dataChanged(index(row, Action), index(row, Action));
 }
 
+/*void PropertyMappingModel::initParameterList(int partPk, QList<InvenTree::PartParameter> *params)
+{
+    for (const auto &l : std::as_const(m_lines)) {
+        if (l.valueAction() == PropertyMappingModel::SaveValue) {
+            InvenTree::PartParameter pp;
+            pp.setPart(partPk);
+            params->append(pp);
+        }
+    }
+}*/
+
 int PropertyMappingModel::rowCount(const QModelIndex &parent) const
 {
     if (parent.isValid())

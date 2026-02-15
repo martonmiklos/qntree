@@ -77,7 +77,7 @@ void WizardPagePartDetails::setSelectedPart(SupplierPart *part)
                     m_invenTreeManufacturerPk = -1;
                     disconnect(m_wizard->companyApi(), nullptr, this, nullptr);
                 });
-        m_wizard->companyApi()->companyRetrieve(QString::number(existingManufacturerLink->inventree_company_pk()));
+        m_wizard->companyApi()->companyRetrieve(existingManufacturerLink->inventree_company_pk());
     } else {
         // no mapping is saved yet let's look for equal names
         ui->labelInvenTreeManufacturerName->setText(tr("%1 (creating)").arg(m_selectedPart->manufacturer()));
@@ -94,13 +94,15 @@ void WizardPagePartDetails::setSelectedPart(SupplierPart *part)
         });
 
         m_wizard->companyApi()->companyList(
-            true, // active
-            InvenTree::OptionalParam<bool>(),// isCustomer
-            true, // isManufacturer
-            InvenTree::OptionalParam<bool>(),
-            InvenTree::OptionalParam<qint32>(std::numeric_limits<qint32>().max()), // limit
-            m_selectedPart->manufacturer(), // name
-            InvenTree::OptionalParam<qint32>(0) // offset
+            std::numeric_limits<qint32>().max(), // limit
+            true, //active
+            InvenTree::OptionalParam<bool>(), //is_customer
+            true, //is_manufacturer
+            InvenTree::OptionalParam<bool>(), //is_supplier
+            m_selectedPart->manufacturer(), //name
+            InvenTree::OptionalParam<qint32>(0), //offset
+            InvenTree::OptionalParam<QString>(), //ordering
+            InvenTree::OptionalParam<QString>() //search
             );
     }
 

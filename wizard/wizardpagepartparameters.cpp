@@ -59,6 +59,12 @@ void WizardPagePartParameters::setSelectedPart(SupplierPart *newSelectedPart)
     m_wizard->m_settings.endGroup();
 }
 
+/*void WizardPagePartParameters::initParameterList(int partPk, QList<InvenTree::PartParameter> *params)
+{
+
+}
+*/
+
 void WizardPagePartParameters::on_tableViewPropertyMapping_customContextMenuRequested(const QPoint &pos)
 {
     QMenu contextMenu = QMenu();

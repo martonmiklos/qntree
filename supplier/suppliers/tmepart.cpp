@@ -35,6 +35,14 @@ void TMEPart::parseAttachmentsResponse(const QJsonArray &documentListJson)
         SupplierAttachment attachment;
         attachment.url = QUrl("http:" + obj["DocumentUrl"].toString());
         attachment.sizeInBytes = obj["Filesize"].toInt();
+        attachment.language = obj["Language"].toString();
+
+        for (auto &a : m_attachments) {
+            if (a.url.fileName() == attachment.url.fileName()) {
+                a.hasOtherLang = true;
+                attachment.hasOtherLang = true;
+            }
+        }
         m_attachments.append(attachment);
     }
 }

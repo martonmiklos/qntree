@@ -33,12 +33,21 @@ private:
     InvenTree::SupplierPart m_supplierPart;
     InvenTree::ManufacturerPart m_mfrPart;
     State m_state = Idle;
+    QList<InvenTree::Attachment> m_attachments;
     int m_stockItemCreationLeft = 0;
     int m_defaultLocationId = -1;
     int m_paramsCreationLeft = 0;
+    int m_priceBreakLeft = 0;
+    int m_attachmentsLeft = 0;
 
     void createParameters();
     void setupPricing();
+    void uploadAttachments();
+
+    void downloadToTempFile(const QString &sourceUrl,
+                            QObject *context,
+                            std::function<void(const QString &localFileUrl, const QString &mime)> onSuccess,
+                            std::function<void(const QString &error)> onError);
 
 private slots:
     void partCreated(InvenTree::Part summary);
@@ -56,12 +65,18 @@ private slots:
     void imageUploaded(InvenTree::Part summary);
     void imageUploadError(InvenTree::Part summary, QNetworkReply::NetworkError error_type, const QString &error_str);
 
-    void stockItemCreated(InvenTree::StockItem summary);
-    void stockItemCreateError(InvenTree::StockItem summary, QNetworkReply::NetworkError error_type, const QString &error_str);
+    void stockItemCreated(QList<InvenTree::StockItem> summary);
+    void stockItemCreateError(QList<InvenTree::StockItem> summary, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     void defaultStockLocationSet(InvenTree::Part summary);
     void defaultStockLocationSetError(InvenTree::Part summary, QNetworkReply::NetworkError error_type, const QString &error_str);
 
-    void partParameterCreated(InvenTree::PartParameter summary);
-    void partParameterCreateError(InvenTree::PartParameter summary, QNetworkReply::NetworkError error_type, const QString &error_str);
+    /*void partParameterCreated(InvenTree::PartParameter summary);
+    void partParameterCreateError(InvenTree::PartParameter summary, QNetworkReply::NetworkError error_type, const QString &error_str);*/
+
+    void priceBreakCreated(InvenTree::SupplierPriceBreak summary);
+    void priceBreakCreateError(InvenTree::SupplierPriceBreak summary, QNetworkReply::NetworkError error_type, const QString &error_str);
+
+    void attachmentCreated(InvenTree::Attachment summary);
+    void attachmentCreateError(InvenTree::Attachment summary, QNetworkReply::NetworkError error_type, const QString &error_str);
 };

@@ -4,8 +4,8 @@
 
 InvenTree API
 
-- API version: 225
-- Generator version: 7.19.0
+- API version: 442
+- Generator version: 7.20.0-SNAPSHOT
 
 API for InvenTree - the intuitive open source inventory management system
 
@@ -66,6 +66,10 @@ void Example::exampleFunction1(){
       // Configure API key authorization: cookieAuth
       apiInstance.setApiKey("YOUR API KEY NAME","YOUR API KEY");
 
+      //OAuth Authentication supported right now
+
+      //OAuth Authentication supported right now
+
       QEventLoop loop;
       connect(&apiInstance, &ActionApi::actionCreateSignal, [&]() {
           loop.quit();
@@ -119,6 +123,13 @@ If your endpoint has multiple server objects in the servers array, you can set t
 void setServerIndex(const QString &operation, int serverIndex);
 ```
 Parameter "operation" should be your operationid. "serverIndex" is the index you want to set as your default server. The function will check if there is a server with your index.
+
+Alternatively, to set the server index globally for all operations:
+```c++
+void setServerIndex(int serverIndex);
+```
+This will apply the specified server index to all operations in the API.
+
 Here is an example of multiple servers in the servers array. The first server will have index 0 and the second will have index 1.
 ```yaml
 servers:
@@ -148,6 +159,102 @@ Authentication schemes defined for the API:
 - **Type**: API key
 - **API key parameter name**: sessionid
 - **Location**: 
+
+### oauth2
+
+
+- **Type**: OAuth
+- **Flow**: application
+- **Authorization URL**: 
+- **Scopes**: 
+  - g:read: General Read scope
+  - openid: OpenID Connect scope
+  - a:staff: User Role Staff
+  - a:superuser: User Role Superuser
+  - r:view:admin: GET for Role Admin
+  - r:view:part_category: GET for Role Part Categories
+  - r:view:part: GET for Role Parts
+  - r:view:stock_location: GET for Role Stock Locations
+  - r:view:stock: GET for Role Stock Items
+  - r:view:build: GET for Role Build Orders
+  - r:view:purchase_order: GET for Role Purchase Orders
+  - r:view:sales_order: GET for Role Sales Orders
+  - r:view:return_order: GET for Role Return Orders
+  - r:add:admin: POST for Role Admin
+  - r:add:part_category: POST for Role Part Categories
+  - r:add:part: POST for Role Parts
+  - r:add:stock_location: POST for Role Stock Locations
+  - r:add:stock: POST for Role Stock Items
+  - r:add:build: POST for Role Build Orders
+  - r:add:purchase_order: POST for Role Purchase Orders
+  - r:add:sales_order: POST for Role Sales Orders
+  - r:add:return_order: POST for Role Return Orders
+  - r:change:admin: PUT / PATCH for Role Admin
+  - r:change:part_category: PUT / PATCH for Role Part Categories
+  - r:change:part: PUT / PATCH for Role Parts
+  - r:change:stock_location: PUT / PATCH for Role Stock Locations
+  - r:change:stock: PUT / PATCH for Role Stock Items
+  - r:change:build: PUT / PATCH for Role Build Orders
+  - r:change:purchase_order: PUT / PATCH for Role Purchase Orders
+  - r:change:sales_order: PUT / PATCH for Role Sales Orders
+  - r:change:return_order: PUT / PATCH for Role Return Orders
+  - r:delete:admin: DELETE for Role Admin
+  - r:delete:part_category: DELETE for Role Part Categories
+  - r:delete:part: DELETE for Role Parts
+  - r:delete:stock_location: DELETE for Role Stock Locations
+  - r:delete:stock: DELETE for Role Stock Items
+  - r:delete:build: DELETE for Role Build Orders
+  - r:delete:purchase_order: DELETE for Role Purchase Orders
+  - r:delete:sales_order: DELETE for Role Sales Orders
+  - r:delete:return_order: DELETE for Role Return Orders
+
+### oauth2
+
+
+- **Type**: OAuth
+- **Flow**: accessCode
+- **Authorization URL**: /o/authorize/
+- **Scopes**: 
+  - g:read: General Read scope
+  - openid: OpenID Connect scope
+  - a:staff: User Role Staff
+  - a:superuser: User Role Superuser
+  - r:view:admin: GET for Role Admin
+  - r:view:part_category: GET for Role Part Categories
+  - r:view:part: GET for Role Parts
+  - r:view:stock_location: GET for Role Stock Locations
+  - r:view:stock: GET for Role Stock Items
+  - r:view:build: GET for Role Build Orders
+  - r:view:purchase_order: GET for Role Purchase Orders
+  - r:view:sales_order: GET for Role Sales Orders
+  - r:view:return_order: GET for Role Return Orders
+  - r:add:admin: POST for Role Admin
+  - r:add:part_category: POST for Role Part Categories
+  - r:add:part: POST for Role Parts
+  - r:add:stock_location: POST for Role Stock Locations
+  - r:add:stock: POST for Role Stock Items
+  - r:add:build: POST for Role Build Orders
+  - r:add:purchase_order: POST for Role Purchase Orders
+  - r:add:sales_order: POST for Role Sales Orders
+  - r:add:return_order: POST for Role Return Orders
+  - r:change:admin: PUT / PATCH for Role Admin
+  - r:change:part_category: PUT / PATCH for Role Part Categories
+  - r:change:part: PUT / PATCH for Role Parts
+  - r:change:stock_location: PUT / PATCH for Role Stock Locations
+  - r:change:stock: PUT / PATCH for Role Stock Items
+  - r:change:build: PUT / PATCH for Role Build Orders
+  - r:change:purchase_order: PUT / PATCH for Role Purchase Orders
+  - r:change:sales_order: PUT / PATCH for Role Sales Orders
+  - r:change:return_order: PUT / PATCH for Role Return Orders
+  - r:delete:admin: DELETE for Role Admin
+  - r:delete:part_category: DELETE for Role Part Categories
+  - r:delete:part: DELETE for Role Parts
+  - r:delete:stock_location: DELETE for Role Stock Locations
+  - r:delete:stock: DELETE for Role Stock Items
+  - r:delete:build: DELETE for Role Build Orders
+  - r:delete:purchase_order: DELETE for Role Purchase Orders
+  - r:delete:sales_order: DELETE for Role Sales Orders
+  - r:delete:return_order: DELETE for Role Return Orders
 
 ### tokenAuth
 

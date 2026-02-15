@@ -4,9 +4,19 @@
 class SupplierAttachment
 {
 public:
-    SupplierAttachment();
+    SupplierAttachment() = default;
 
     QUrl url;
     quint64 sizeInBytes;
     QString comment;
+    QString language;
+    bool hasOtherLang = false;
+
+    QString filename() const
+    {
+        QString ret = url.fileName();
+        if (hasOtherLang)
+            ret.append(" (" + language + ")");
+        return ret;
+    }
 };
