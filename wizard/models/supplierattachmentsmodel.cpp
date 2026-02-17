@@ -66,7 +66,7 @@ QVariant SupplierAttachmentsModel::data(const QModelIndex &index, int role) cons
             return  locale.formattedDataSize(a->sizeInBytes);
         }
         case Col_Action:
-            return m_attachmentsToSave.indexOf(a) != -1 ? tr("Save") : tr("Skip");
+            return a->upload ? tr("Save") : tr("Skip");
         case Col_Invalid:
             break;
         case Col_Comment:
@@ -74,7 +74,7 @@ QVariant SupplierAttachmentsModel::data(const QModelIndex &index, int role) cons
         }
     } else if (role == Qt::EditRole) {
         if (index.column() == Col_Action) {
-            return m_attachmentsToSave.indexOf(a) != -1 ? "save" : "skip";
+            return a->upload ? "save" : "skip";
         } else if (index.row() == Col_Comment) {
             return a->comment;
         }
@@ -83,7 +83,7 @@ QVariant SupplierAttachmentsModel::data(const QModelIndex &index, int role) cons
     } else if (role == Role_Size) {
         return a->sizeInBytes;
     } else if (role == Role_Save) {
-        return m_attachmentsToSave.contains(a);
+        return a->upload;
     }
     return QVariant();
 }
@@ -93,13 +93,7 @@ bool SupplierAttachmentsModel::setData(const QModelIndex &index, const QVariant 
     if (role == Qt::EditRole) {
         if (index.column() == Col_Action) {
             auto a = m_part->attachmentAt(index.row());
-            if (value.toString() == "save") {
-                if (!m_attachmentsToSave.contains(a)) {
-                    m_attachmentsToSave.append(a);
-                }
-            } else {
-                m_attachmentsToSave.removeAll(a);
-            }
+            a->upload = value.toBool();
             emit dataChanged(index, index, QList<int>({Qt::DisplayRole, Qt::EditRole}));
             return true;
         } else if (index.column() == Col_Comment) {
@@ -122,13 +116,15 @@ Qt::ItemFlags SupplierAttachmentsModel::flags(const QModelIndex &index) const
 void SupplierAttachmentsModel::setPart(SupplierPart *part)
 {
     beginResetModel();
-    m_attachmentsToSave.clear();
     m_part = part;
     endResetModel();
 }
 
 bool SupplierAttachmentsModel::hasSaveable() const
 {
-    return m_attachmentsToSave.count() > 0;
+    for (const auto &a : m_part->attachments())
+        if (a.upload)
+            return true;
+    return false;
 }
 

@@ -207,12 +207,15 @@ void InvenTreePartImportWizard::initPriceBreaks(int partPk, QList<InvenTree::Sup
 void InvenTreePartImportWizard::initAttachments(int partPk, QList<InvenTree::Attachment> *as)
 {
     for (const auto &a : m_selectedPart.attachments()) {
+        if (!a.upload)
+            continue;
         InvenTree::Attachment ao;
         InvenTree::AttachmentModelTypeEnum t;
         t.setValue(InvenTree::AttachmentModelTypeEnum::eAttachmentModelTypeEnum::PART);
         ao.setModelType(t);
         ao.setComment(a.comment);
         ao.setLink(a.url.toString());
+        ao.setFilename(a.filename());
         ao.setModelId(partPk);
         as->append(ao);
     }

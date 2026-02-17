@@ -45,6 +45,7 @@ private:
     void uploadAttachments();
 
     void downloadToTempFile(const QString &sourceUrl,
+                            const QString &fileName,
                             QObject *context,
                             std::function<void(const QString &localFileUrl, const QString &mime)> onSuccess,
                             std::function<void(const QString &error)> onError);

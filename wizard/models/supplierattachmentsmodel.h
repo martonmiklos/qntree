@@ -43,7 +43,6 @@ public:
     bool hasSaveable() const;
 
 private:
-    QList<const SupplierAttachment*> m_attachmentsToSave;
     ::SupplierPart *m_part = nullptr;
 
 

@@ -8,6 +8,7 @@
 #include <QTemporaryFile>
 #include <QUrl>
 #include <QObject>
+#include <QDir>
 #include <QDebug>
 #include <QCoreApplication>
 
@@ -17,7 +18,7 @@ InvenTreePartUploader::InvenTreePartUploader(InvenTreePartImportWizard *parent)
 {
 }
 
-void InvenTreePartUploader::downloadToTempFile(const QString &sourceUrl, QObject *context, std::function<void (const QString &, const QString &)> onSuccess, std::function<void (const QString &)> onError)
+void InvenTreePartUploader::downloadToTempFile(const QString &sourceUrl, const QString &fileName, QObject *context, std::function<void (const QString &, const QString &)> onSuccess, std::function<void (const QString &)> onError)
 {
     auto *manager = new QNetworkAccessManager(context);
 
@@ -25,10 +26,12 @@ void InvenTreePartUploader::downloadToTempFile(const QString &sourceUrl, QObject
     auto *reply = manager->get(request);
 
     // Temporary file (auto-deleted on destruction)
-    auto *tempFile = new QTemporaryFile(context);
-    tempFile->setAutoRemove(true);
 
-    if (!tempFile->open()) {
+    QTemporaryDir tmpDir;
+    auto tempFilePath = tmpDir.path() + QDir::separator() + fileName;
+    auto *tempFile = new QFile();
+
+    if (!tempFile->open(QFile::ReadOnly)) {
         onError(QStringLiteral("Failed to open temporary file"));
         reply->deleteLater();
         manager->deleteLater();
@@ -50,7 +53,7 @@ void InvenTreePartUploader::downloadToTempFile(const QString &sourceUrl, QObject
         }
 
         tempFile->flush();
-        onSuccess(tempFile->fileName(), reply->header(QNetworkRequest::ContentTypeHeader).toString());
+        onSuccess(tempFilePath, reply->header(QNetworkRequest::ContentTypeHeader).toString());
     });
 }
 
@@ -311,13 +314,13 @@ void InvenTreePartUploader::uploadAttachments()
         m_attachmentsLeft = m_attachments.size();
         emit stateChanged(m_state, UploadFiles);
         for (auto &a : m_attachments) {
-            downloadToTempFile(a.getLink(), this,
+            downloadToTempFile(a.getLink(), a.getFilename(), this,
                                [=] (const QString &localPath, const QString &mime) {
                                    QList<InvenTree::HttpFileElement> files;
                                    InvenTree::HttpFileElement file;
                                    file.loadFromFile("attachment", localPath, a.getFilename(), mime);
                                    files.append(file);
-                                   InvenTree::Attachment ac = a;
+                                   InvenTree::Attachment ac;
                                    ac.setAttachment(file);
                                    m_wizard->attachmentApi()->attachmentCreate(ac);
                                },

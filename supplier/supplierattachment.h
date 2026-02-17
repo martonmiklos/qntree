@@ -11,6 +11,7 @@ public:
     QString comment;
     QString language;
     bool hasOtherLang = false;
+    bool upload = false;
 
     QString filename() const
     {
