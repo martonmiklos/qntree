@@ -21,6 +21,7 @@
 #include <QJsonObject>
 
 #include "AttachmentModelTypeEnum.h"
+#include "HttpFileElement.h"
 #include "User.h"
 #include <QDate>
 #include <QString>
@@ -47,8 +48,8 @@ public:
     bool is_pk_Set() const;
     bool is_pk_Valid() const;
 
-    QString getAttachment() const;
-    void setAttachment(const QString &attachment);
+    HttpFileElement getAttachment() const;
+    void setAttachment(const HttpFileElement &attachment);
     bool is_attachment_Set() const;
     bool is_attachment_Valid() const;
 
@@ -107,7 +108,7 @@ private:
     bool m_pk_isSet;
     bool m_pk_isValid;
 
-    QString m_attachment;
+    HttpFileElement m_attachment;
     bool m_attachment_isSet;
     bool m_attachment_isValid;
 

@@ -23,6 +23,7 @@
 #include "Category.h"
 #include "DefaultLocation.h"
 #include "DuplicatePart.h"
+#include "HttpFileElement.h"
 #include "InitialStock.h"
 #include "InitialSupplier.h"
 #include "Parameter.h"
@@ -137,8 +138,8 @@ public:
     bool is_full_name_Set() const;
     bool is_full_name_Valid() const;
 
-    QString getImage() const;
-    void setImage(const QString &image);
+    HttpFileElement getImage() const;
+    void setImage(const HttpFileElement &image);
     bool is_image_Set() const;
     bool is_image_Valid() const;
 
@@ -447,7 +448,7 @@ private:
     bool m_full_name_isSet;
     bool m_full_name_isValid;
 
-    QString m_image;
+    HttpFileElement m_image;
     bool m_image_isSet;
     bool m_image_isValid;
 

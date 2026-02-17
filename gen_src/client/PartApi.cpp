@@ -6725,10 +6725,12 @@ void PartApi::partPartialUpdate(const qint32 &id, const ::InvenTree::OptionalPar
     HttpRequestInput input(fullPath, "PATCH");
 
     if (patched_part.hasValue()){
-
-        
-        QByteArray output = patched_part.value().asJson().toUtf8();
-        input.request_body.append(output);
+        if (patched_part.value().is_image_Set()) {
+            input.add_file(patched_part.value().getImage());
+        } else {
+            QByteArray output = patched_part.value().asJson().toUtf8();
+            input.request_body.append(output);
+        }
     }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);

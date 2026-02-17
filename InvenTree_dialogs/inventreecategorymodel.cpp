@@ -242,7 +242,7 @@ void InvenTreeCategoryItem::fetchChilds()
     bool cascade = parent.stringValue() != "";
     m_api->partCategoryList(
         65535, // limit
-        InvenTree::OptionalParam<bool>(), //cascade
+        cascade, //cascade
         1, //depth
         InvenTree::OptionalParam<qint32>(), //exclude_tree
         InvenTree::OptionalParam<QString>(), //name

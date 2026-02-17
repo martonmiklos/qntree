@@ -212,8 +212,6 @@ void InvenTreePartImportWizard::initAttachments(int partPk, QList<InvenTree::Att
         t.setValue(InvenTree::AttachmentModelTypeEnum::eAttachmentModelTypeEnum::PART);
         ao.setModelType(t);
         ao.setComment(a.comment);
-        ao.setFileSize(a.sizeInBytes);
-        ao.setFilename(a.url.fileName());
         ao.setLink(a.url.toString());
         ao.setModelId(partPk);
         as->append(ao);

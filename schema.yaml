@@ -21207,7 +21207,7 @@ components:
           title: ID
         attachment:
           type: string
-          format: uri
+          format: binary
           nullable: true
         filename:
           type: string
@@ -29526,7 +29526,7 @@ components:
           readOnly: true
         image:
           type: string
-          format: uri
+          format: binary
           nullable: true
         remote_image:
           type: string

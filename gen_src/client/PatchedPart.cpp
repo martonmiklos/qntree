@@ -496,7 +496,7 @@ QJsonObject PatchedPart::asJsonObject() const {
     if (m_full_name_isSet) {
         obj.insert(QString("full_name"), ::InvenTree::toJsonValue(m_full_name));
     }
-    if (m_image_isSet) {
+    if (m_image.isSet()) {
         obj.insert(QString("image"), ::InvenTree::toJsonValue(m_image));
     }
     if (m_remote_image_isSet) {
@@ -899,10 +899,10 @@ bool PatchedPart::is_full_name_Valid() const{
     return m_full_name_isValid;
 }
 
-QString PatchedPart::getImage() const {
+HttpFileElement PatchedPart::getImage() const {
     return m_image;
 }
-void PatchedPart::setImage(const QString &image) {
+void PatchedPart::setImage(const HttpFileElement &image) {
     m_image = image;
     m_image_isSet = true;
 }
@@ -1750,7 +1750,7 @@ bool PatchedPart::isSet() const {
             break;
         }
 
-        if (m_image_isSet) {
+        if (m_image.isSet()) {
             isObjectUpdated = true;
             break;
         }

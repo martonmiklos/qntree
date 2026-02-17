@@ -145,18 +145,18 @@ void InvenTreePartUploader::partUpdated(InvenTree::Part summary)
     InvenTree::Part part;
     part.setPk(m_part.getPk());
 
-    QList<InvenTree::HttpFileElement> files;
     InvenTree::HttpFileElement image;
     QTemporaryFile localFile("XXXXXX.png");
     if (localFile.open()) {
         m_wizard->m_selectedPart.image().save(&localFile, "PNG");
     }
     image.loadFromFile("image", localFile.fileName(), m_wizard->m_selectedPart.name() + ".png", "image/png");
-    files.append(image);
 
     connect(m_wizard->partApi(), &InvenTree::PartApi::partPartialUpdateSignal, this, &InvenTreePartUploader::imageUploaded);
     connect(m_wizard->partApi(), &InvenTree::PartApi::partPartialUpdateSignalError, this, &InvenTreePartUploader::imageUploadError);
-    // FIXME m_wizard->partApi()->partPartialUpdate(m_part.getPk(), InvenTree::OptionalParam<InvenTree::PatchedPart>(), files);
+    InvenTree::PatchedPart patchedPart;
+    patchedPart.setImage(image);
+    m_wizard->partApi()->partPartialUpdate(m_part.getPk(), patchedPart);
 }
 
 void InvenTreePartUploader::imageUploadError(InvenTree::Part summary, QNetworkReply::NetworkError error_type, const QString &error_str)
@@ -317,7 +317,9 @@ void InvenTreePartUploader::uploadAttachments()
                                    InvenTree::HttpFileElement file;
                                    file.loadFromFile("attachment", localPath, a.getFilename(), mime);
                                    files.append(file);
-                                   // FIXME m_wizard->attachmentApi()->attachmentCreate(a, files);
+                                   InvenTree::Attachment ac = a;
+                                   ac.setAttachment(file);
+                                   m_wizard->attachmentApi()->attachmentCreate(ac);
                                },
                                [=] (const QString & errorString) {
                                    emit stateFailed(UploadFiles, errorString);

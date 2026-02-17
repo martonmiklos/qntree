@@ -409,11 +409,20 @@ void AttachmentApi::attachmentCreate(const Attachment &attachment) {
     worker->setWorkingDirectory(_workingDirectory);
     HttpRequestInput input(fullPath, "POST");
 
+    if (attachment.is_attachment_Set())
+    {
+        input.add_file(attachment.getAttachment());
+    }
+
     {
 
-        
-        QByteArray output = attachment.asJson().toUtf8();
-        input.request_body.append(output);
+        if (input.files.count() > 0) {
+            // multipart
+            input.add_json_object(attachment.asJsonObject());
+        } else {
+            QByteArray output = attachment.asJson().toUtf8();
+            input.request_body.append(output);
+        }
     }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);

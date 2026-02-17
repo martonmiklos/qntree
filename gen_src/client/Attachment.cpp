@@ -122,7 +122,7 @@ QJsonObject Attachment::asJsonObject() const {
     if (m_pk_isSet) {
         obj.insert(QString("pk"), ::InvenTree::toJsonValue(m_pk));
     }
-    if (m_attachment_isSet) {
+    if (m_attachment.isSet()) {
         obj.insert(QString("attachment"), ::InvenTree::toJsonValue(m_attachment));
     }
     if (m_filename_isSet) {
@@ -171,10 +171,10 @@ bool Attachment::is_pk_Valid() const{
     return m_pk_isValid;
 }
 
-QString Attachment::getAttachment() const {
+HttpFileElement Attachment::getAttachment() const {
     return m_attachment;
 }
-void Attachment::setAttachment(const QString &attachment) {
+void Attachment::setAttachment(const HttpFileElement &attachment) {
     m_attachment = attachment;
     m_attachment_isSet = true;
 }
@@ -339,7 +339,7 @@ bool Attachment::isSet() const {
             break;
         }
 
-        if (m_attachment_isSet) {
+        if (m_attachment.isSet()) {
             isObjectUpdated = true;
             break;
         }
