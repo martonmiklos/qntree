@@ -38,13 +38,13 @@ TME::TME(QObject *parent)
 void TME::retrivePart(const QString &partNumber)
 {
     QList<QPair<QString, QString>> params;
-    params.append(QPair<QString,QString>("SymbolList%5B0%5D", partNumber));
+    params.append(QPair<QString,QString>("SymbolList%5B0%5D", QUrl::toPercentEncoding(partNumber)));
     m_partDetailQueryReply = apiCall("Products/GetProducts", params);
 }
 
 int TME::pnLengthLimit() const
 {
-    return 16;
+    return 32;
 }
 
 QNetworkReply *TME::apiCall(const QString &action, QList<QPair<QString, QString>> params)
@@ -81,6 +81,7 @@ QNetworkReply *TME::apiCall(const QString &action, QList<QPair<QString, QString>
             paramString.append("&");
         paramString.append(param.first + "=" + param.second);
     }
+    qWarning() << paramString;
     req.setHeader(QNetworkRequest::ContentTypeHeader, "application/x-www-form-urlencoded");
     return m_manager->post(req, paramString.toLocal8Bit());
 }
@@ -119,7 +120,7 @@ void TME::networkReplyFinished(QNetworkReply *reply)
         m_part.parseImageResponse(reply->readAll());
 
         QList<QPair<QString, QString>> params;
-        params.append(QPair<QString,QString>("SymbolList%5B0%5D", m_part.name()));
+        params.append(QPair<QString,QString>("SymbolList%5B0%5D", QUrl::toPercentEncoding(m_part.name())));
         m_partPropertiesQueryReply = apiCall("Products/GetParameters", params);
         return;
     }
@@ -150,7 +151,7 @@ void TME::networkReplyFinished(QNetworkReply *reply)
             m_part.parseParametersResponse(ob["ParameterList"].toArray());
 
             QList<QPair<QString, QString>> params;
-            params.append(QPair<QString,QString>("SymbolList%5B0%5D", m_part.name()));
+            params.append(QPair<QString,QString>("SymbolList%5B0%5D", QUrl::toPercentEncoding(m_part.name())));
             m_partAttachementsQueryReply = apiCall("Products/GetProductsFiles", params);
         } else {
             emit error(jsonObject["ErrorMessage"].toString());
@@ -162,7 +163,7 @@ void TME::networkReplyFinished(QNetworkReply *reply)
             m_part.parseAttachmentsResponse(ob["DocumentList"].toArray());
 
             QList<QPair<QString, QString>> params;
-            params.append(QPair<QString,QString>("SymbolList%5B0%5D", m_part.name()));
+            params.append(QPair<QString,QString>("SymbolList%5B0%5D", QUrl::toPercentEncoding(m_part.name())));
             params.append(QPair<QString,QString>("Currency", m_currency));
             //params.append(QPair<QString,QString>("GrossPrices", m_grossPrices ? "true" : "false"));
             m_partPricingQueryReply = apiCall("Products/GetPrices", params);
