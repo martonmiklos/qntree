@@ -107,6 +107,18 @@ QString WizardPageStockAndPricing::summary() const
     return ret;
 }
 
+void WizardPageStockAndPricing::resetStockLines(qreal initialQty)
+{
+    while (m_stockLines.count() > 1) {
+        auto l = m_stockLines.takeFirst();
+        ui->verticalLayoutStock->removeWidget(l);
+    }
+
+    if (initialQty > 0) {
+        m_stockLines.first()->setQuantity(initialQty);
+    }
+}
+
 qreal WizardPageStockAndPricing::totalQuantity() const
 {
     qreal ret = 0;

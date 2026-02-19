@@ -74,11 +74,20 @@ public:
     bool canFetchMore(const QModelIndex &parent) const override;
     void fetchMore(const QModelIndex &parent) override;
 
-    void addPk(int pk);
+    void fetchParentLocation(int pk);
+
+    void setVisiblePk(int pk);
 
 private slots:
     void itemsChildsFetched(int childCount);
 
 private:
+    void expandTreeToSelected();
+
     InvenTreeStockLocationItem *m_rootItem = nullptr;
+    bool m_topLevelLocationsFetched = false;
+    bool m_populatetreeToSelectedLocation = false;
+    int m_preSelectedPk = -1;
+    void populateParentsRecursivelyToTop(int pk);
+    QList<int> m_locationListToPopulate;
 };

@@ -75,6 +75,14 @@ void InvenTreePartUploader::partCreateError(InvenTree::Part , QNetworkReply::Net
     emit stateFailed(CreatePart, error_str);
 }
 
+void InvenTreePartUploader::createManufacturerPart()
+{
+    connect(m_wizard->companyApi(), &InvenTree::CompanyApi::companyPartManufacturerCreateSignal, this, &InvenTreePartUploader::mfrPartCreated);
+    connect(m_wizard->companyApi(), &InvenTree::CompanyApi::companyPartManufacturerCreateSignalError, this, &InvenTreePartUploader::mfrPartCreateError);
+
+    m_wizard->companyApi()->companyPartManufacturerCreate(m_mfrPart);
+}
+
 void InvenTreePartUploader::partCreated(InvenTree::Part summary)
 {
     disconnect(m_wizard->partApi(), &InvenTree::PartApi::partCreateSignal, this, &InvenTreePartUploader::partCreated);
@@ -83,10 +91,33 @@ void InvenTreePartUploader::partCreated(InvenTree::Part summary)
     m_part = summary;
     m_wizard->initNewManufacturerPart(summary.getPk(), &m_mfrPart);
 
-    connect(m_wizard->companyApi(), &InvenTree::CompanyApi::companyPartManufacturerCreateSignal, this, &InvenTreePartUploader::mfrPartCreated);
-    connect(m_wizard->companyApi(), &InvenTree::CompanyApi::companyPartManufacturerCreateSignalError, this, &InvenTreePartUploader::mfrPartCreateError);
+    if (m_mfrPart.getManufacturer() == -1) {
+        // Manufacturer needs to be created first
+        connect(m_wizard->companyApi(), &InvenTree::CompanyApi::companyCreateSignal, this, &InvenTreePartUploader::mfrCompanyCreated);
+        connect(m_wizard->companyApi(), &InvenTree::CompanyApi::companyCreateSignalError, this, &InvenTreePartUploader::mfrCompanyCreateError);
 
-    m_wizard->companyApi()->companyPartManufacturerCreate(m_mfrPart);
+        InvenTree::Company manufacturer;
+        m_wizard->initNewManufacturerCompany(&manufacturer);
+        m_wizard->companyApi()->companyCreate(manufacturer);
+    } else {
+        createManufacturerPart();
+    }
+}
+
+
+void InvenTreePartUploader::mfrCompanyCreateError(InvenTree::Company summary, QNetworkReply::NetworkError error_type, const QString &error_str)
+{
+    Q_UNUSED(summary)
+    Q_UNUSED(error_type)
+    disconnect(m_wizard->companyApi(), &InvenTree::CompanyApi::companyPartManufacturerCreateSignalError, this, &InvenTreePartUploader::mfrPartCreateError);
+    emit stateFailed(CreateManufacturerPart, error_str);
+}
+
+void InvenTreePartUploader::mfrCompanyCreated(InvenTree::Company summary)
+{
+    disconnect(m_wizard->companyApi(), nullptr, this, nullptr);
+    m_mfrPart.setManufacturer(summary.getPk());
+    createManufacturerPart();
 }
 
 void InvenTreePartUploader::mfrPartCreateError(InvenTree::ManufacturerPart summary, QNetworkReply::NetworkError error_type, const QString &error_str)

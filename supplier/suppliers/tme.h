@@ -34,6 +34,10 @@ private:
     QString m_currency = QStringLiteral("EUR");
     bool m_grossPrices = true;
 
+    bool m_isQrDataBeingScanned = false;
+    qreal m_qtyFromQr = 0;
+    QString m_poFromQr;
+
 private slots:
     void networkReplyFinished(QNetworkReply *reply);
 

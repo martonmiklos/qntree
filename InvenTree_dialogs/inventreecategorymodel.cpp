@@ -104,6 +104,9 @@ QVariant InvenTreeCategoryModel::data(const QModelIndex &index, int role) const
     } else if (role == CategoryPathRole) {
         InvenTreeCategoryItem *item = static_cast<InvenTreeCategoryItem*>(index.internalPointer());
         return item->categoryData.getPathstring();
+    } else if (role == CategoryDefaultLocation) {
+        InvenTreeCategoryItem *item = static_cast<InvenTreeCategoryItem*>(index.internalPointer());
+        return item->categoryData.getDefaultLocation();
     }
     return QVariant();
 }
@@ -173,6 +176,12 @@ void InvenTreeCategoryModel::setVisiblePk(int pk)
             m_populatetreeToSelectedCategory = true;
         }
     }
+}
+
+InvenTree::Category InvenTreeCategoryModel::getCategoryByIndex(const QModelIndex &index)
+{
+    InvenTreeCategoryItem *item = static_cast<InvenTreeCategoryItem*>(index.internalPointer());
+    return item->categoryData;
 }
 
 void InvenTreeCategoryModel::populateParentsRecursivelyToTop(int pk)
@@ -320,3 +329,4 @@ void InvenTreeCategoryItem::setParentItem(InvenTreeCategoryItem *newParentItem)
     setParent(newParentItem);
     m_parentItem = newParentItem;
 }
+

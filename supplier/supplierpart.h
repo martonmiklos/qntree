@@ -44,6 +44,8 @@ public:
     QString supplierLink() const;
     SupplierAttachment* attachmentAt(int index);
 
+    qreal quantity() const;
+
 protected:
     QString m_sku;
     QString m_name;
@@ -55,4 +57,5 @@ protected:
     QList<SupplierPartProperty> m_properties;
     QList<SupplierPartPricingRange> m_priceRanges;
     qint32 m_existingPk = 0;
+    qreal m_quantity = 0.0;
 };

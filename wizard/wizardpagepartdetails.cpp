@@ -4,6 +4,8 @@
 #include "gen_src/client/PartApi.h"
 #include "supplier/supplierpart.h"
 #include "ui_wizardpagepartdetails.h"
+#include "wizardpagestockandpricing.h"
+#include "stocklinewidget.h"
 #include "db/config_db.h"
 
 #include <QMessageBox>
@@ -105,20 +107,27 @@ void WizardPagePartDetails::setSelectedPart(SupplierPart *part)
             InvenTree::OptionalParam<QString>() //search
             );
     }
+}
 
-    auto categoryMap = ConfigDb::instance()->supplier_category_map()
-                           ->query()
-                           ->where(SupplierCategoryMap::supplier_category_idField() == m_selectedPart->categoryId() &&
-                                   SupplierCategoryMap::supplier_idField() == m_wizard->currentSupplierDbId())
-                           ->first();
-    if (categoryMap) {
-        connect(m_wizard->partApi(), &InvenTree::PartApi::partCategoryRetrieveSignal, this, [=](InvenTree::Category summary) {
-            ui->labelInvenTreeSelectedCategory->setText(summary.getName());
-            m_invenTreeTargetCategoryPk = summary.getPk();
-            disconnect(m_wizard->partApi(), nullptr, this, nullptr);
-            emit completeChanged();
-        });
-        m_wizard->partApi()->partCategoryRetrieve(categoryMap->inventree_category_id());
+void WizardPagePartDetails::checkCategorySelection(InvenTree::Category &category)
+{
+    if (category.getDefaultLocation() != 0) {
+        if (m_selectedPart->quantity() > 0) {
+            connect(m_wizard->stockApi(),
+                    &InvenTree::StockApi::stockLocationRetrieveSignal, this,
+                    [=](InvenTree::Location location) {
+                        disconnect(m_wizard->stockApi(), nullptr, this, nullptr);
+                        m_wizard->m_stockAndPricingPage->m_stockLines.first()
+                            ->selectLocation(location);
+                    });
+
+            connect(
+                m_wizard->stockApi(),
+                &InvenTree::StockApi::stockLocationRetrieveSignalError, this,
+                [=]() { disconnect(m_wizard->stockApi(), nullptr, this, nullptr); });
+            m_wizard->stockApi()->stockLocationRetrieve(
+                category.getDefaultLocation());
+        }
     }
 }
 
@@ -127,7 +136,10 @@ void WizardPagePartDetails::categoryDetailsRetrived(InvenTree::Category category
     ui->labelInvenTreeSelectedCategory->setText(category.getName());
     ui->labelInvenTreeSelectedCategory->setToolTip(category.getPathstring());
     m_invenTreeTargetCategoryPk = category.getPk();
-    disconnect(m_wizard->partApi(), &InvenTree::PartApi::partCategoryRetrieveSignal, this, &WizardPagePartDetails::categoryDetailsRetrived);
+    disconnect(m_wizard->partApi(),
+               &InvenTree::PartApi::partCategoryRetrieveSignal, this,
+               &WizardPagePartDetails::categoryDetailsRetrived);
+    checkCategorySelection(category);
     emit completeChanged();
 }
 
@@ -193,10 +205,11 @@ QString WizardPagePartDetails::summary() const
 void WizardPagePartDetails::on_toolButtonEditInventTreeCategory_clicked()
 {
     auto dlg = new DialogSelectInvenTreeCategory(m_wizard->partApi(), m_invenTreeTargetCategoryPk, this);
-    connect(dlg, &DialogSelectInvenTreeCategory::categorySelected, this, [=](int pk, const QString &categoryName, const QString &categoryPath) {
-        ui->labelInvenTreeSelectedCategory->setText(categoryName);
-        ui->labelInvenTreeSelectedCategory->setToolTip(categoryPath);
-        m_invenTreeTargetCategoryPk = pk;
+    connect(dlg, &DialogSelectInvenTreeCategory::categorySelected, this, [=](InvenTree::Category category) {
+        ui->labelInvenTreeSelectedCategory->setText(category.getName());
+        ui->labelInvenTreeSelectedCategory->setToolTip(category.getPathstring());
+        m_invenTreeTargetCategoryPk = category.getPk();
+        checkCategorySelection(category);
         emit completeChanged();
         dlg->close();
     });

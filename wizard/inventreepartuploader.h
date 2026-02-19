@@ -49,10 +49,15 @@ private:
                             QObject *context,
                             std::function<void(const QString &localFileUrl, const QString &mime)> onSuccess,
                             std::function<void(const QString &error)> onError);
-
+    
+    void createManufacturerPart();
+    
 private slots:
     void partCreated(InvenTree::Part summary);
     void partCreateError(InvenTree::Part summary, QNetworkReply::NetworkError error_type, const QString &error_str);
+
+    void mfrCompanyCreated(InvenTree::Company summary);
+    void mfrCompanyCreateError(InvenTree::Company summary, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     void mfrPartCreated(InvenTree::ManufacturerPart summary);
     void mfrPartCreateError(InvenTree::ManufacturerPart summary, QNetworkReply::NetworkError error_type, const QString &error_str);

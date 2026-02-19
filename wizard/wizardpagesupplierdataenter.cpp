@@ -6,6 +6,8 @@
 #include <QMimeData>
 #include <QThread>
 
+#include "wizardpagestockandpricing.h"
+
 #include "../supplier/supplierregistry.h"
 #include "../supplier/supplierpart.h"
 
@@ -107,8 +109,10 @@ bool WizardPageSupplierDataEnter::validatePage()
         }
     }
 
-    if (m_partDataRetrived)
+    if (m_partDataRetrived) {
         ui->labelMessage->clear();
+        m_wizard->m_stockAndPricingPage->resetStockLines(m_selectedPart->quantity());
+    }
 
     return !m_partDataError;
 }

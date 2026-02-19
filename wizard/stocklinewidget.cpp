@@ -68,6 +68,13 @@ QString StockLineWidget::locationName() const
     return ui->labelStockLocation->text();
 }
 
+void StockLineWidget::selectLocation(const InvenTree::Location &location)
+{
+    m_selectedLocationPk = location.getPk();
+    ui->labelStockLocation->setText(location.getName());
+    ui->labelStockLocation->setToolTip(location.getPathstring());
+}
+
 int StockLineWidget::selectedLocationPk() const
 {
     return m_selectedLocationPk;
@@ -79,6 +86,15 @@ qreal StockLineWidget::quantity() const
         return 0.0;
 
     return ui->doubleSpinBoxStockQuantity->value();
+}
+
+void StockLineWidget::setQuantity(qreal qty)
+{
+    ui->doubleSpinBoxStockQuantity->setValue(qty);
+    if (!ui->checkBoxCreateStock->isChecked()) {
+        ui->checkBoxCreateStock->setChecked(true);
+        on_checkBoxCreateStock_clicked(true);
+    }
 }
 
 void StockLineWidget::on_toolButtonRemoveStock_clicked()

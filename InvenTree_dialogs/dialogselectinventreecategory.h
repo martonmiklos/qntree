@@ -29,5 +29,5 @@ private:
     QSettings m_settings;
 
 signals:
-    void categorySelected(int pk, const QString &categoryName, const QString &categoryPath);
+    void categorySelected(const InvenTree::Category &category);
 };

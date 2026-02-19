@@ -51,9 +51,7 @@ void DialogSelectInvenTreeCategory::on_treeViewCategory_doubleClicked(const QMod
                                                               "Please select an another non-structural category").arg(m_model->data(index, Qt::DisplayRole).toString()));
         return;
     }
-    emit categorySelected(m_model->data(index, InvenTreeCategoryModel::PkRole).toInt(),
-                          m_model->data(index, Qt::DisplayRole).toString(),
-                          m_model->data(index, InvenTreeCategoryModel::CategoryPathRole).toString());
+    emit categorySelected(m_model->getCategoryByIndex(index));
 }
 
 void DialogSelectInvenTreeCategory::setFilterForNonStructural(bool newFilterForNonStructural)

@@ -41,6 +41,7 @@ class InvenTreePartImportWizard : public QWizard
     friend class WizardPagePartDetails;
     friend class WizardPageSummary;
     friend class WizardPageInvenTreeSyncStatus;
+    friend class WizardPageSupplierDataEnter;
 public:
     enum PageIndexes {
         SupplierDataEnter,
@@ -69,6 +70,7 @@ public:
 
     void initNewInvenTreePart(InvenTree::Part *part);
     void initNewManufacturerPart(int partPk, InvenTree::ManufacturerPart *mfrPart);
+    void initNewManufacturerCompany(InvenTree::Company *mfr);
     void initNewSupplierPart(int partPk, int mfrPart, InvenTree::SupplierPart *part);
     void initStockItems(int partPk, QList<InvenTree::StockItem> *items, int *defaultLocationId = nullptr);
     //void initParameterList(int partPk, QList<InvenTree::PartParameter> *params);

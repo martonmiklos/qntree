@@ -17,6 +17,7 @@ SOURCES += \
     InvenTree_dialogs/dialogselectinventreestocklocation.cpp \
     InvenTree_dialogs/inventreecategorymodel.cpp \
     InvenTree_dialogs/inventreestocklocationmodel.cpp \
+    InvenTree_dialogs/inventreetreemodel.cpp \
     db/config_db.cpp \
     dialog.cpp \
     inventreepartimportwizard.cpp \
@@ -53,6 +54,7 @@ HEADERS += \
     InvenTree_dialogs/dialogselectinventreestocklocation.h \
     InvenTree_dialogs/inventreecategorymodel.h \
     InvenTree_dialogs/inventreestocklocationmodel.h \
+    InvenTree_dialogs/inventreetreemodel.h \
     db/config_db.h \
     dialog.h \
     inventreepartimportwizard.h \

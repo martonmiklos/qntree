@@ -41,6 +41,7 @@ private:
 
 
 private slots:
+    void checkCategorySelection(InvenTree::Category &category);
     void categoryDetailsRetrived(InvenTree::Category category);
     void on_toolButtonEditInventTreeCategory_clicked();
     void on_labelPartImage_customContextMenuRequested(const QPoint &pos);

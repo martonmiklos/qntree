@@ -8,6 +8,7 @@
 #include "qjsonobject.h"
 #include "db/config_db.h"
 
+#include <QRegularExpression>
 #include <QMessageAuthenticationCode>
 
 TME::TME(QObject *parent)
@@ -35,8 +36,18 @@ TME::TME(QObject *parent)
     connect(m_manager, &QNetworkAccessManager::finished, this, &TME::networkReplyFinished);
 }
 
-void TME::retrivePart(const QString &partNumber)
+void TME::retrivePart(const QString &userData)
 {
+    QString partNumber = userData;
+    static QRegularExpression bigQrRe("QTY:([0-9]*)\\sPN:([^\\s]*)\\sPO:([^\\s]*).*");
+    auto matches = bigQrRe.match(userData);
+    if (matches.hasMatch()) {
+        m_isQrDataBeingScanned = true;
+        m_qtyFromQr = matches.captured(1).toDouble();
+        partNumber = matches.captured(2);
+        m_poFromQr = matches.captured(3);        
+    }
+
     QList<QPair<QString, QString>> params;
     params.append(QPair<QString,QString>("SymbolList%5B0%5D", QUrl::toPercentEncoding(partNumber)));
     m_partDetailQueryReply = apiCall("Products/GetProducts", params);
@@ -134,6 +145,11 @@ void TME::networkReplyFinished(QNetworkReply *reply)
         if (!reply->error()) {
             ob = ob["ProductList"].toArray().first().toObject();
             m_part = TMEPart(ob);
+
+            if (m_isQrDataBeingScanned) {
+                m_part.m_quantity = m_qtyFromQr;
+                // TODO save the PO for further processing
+            }
 
             QNetworkRequest req =  QNetworkRequest(QUrl("http:" + ob["Photo"].toString()));
             m_imageReply = m_manager->get(req);

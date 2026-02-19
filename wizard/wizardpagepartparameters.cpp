@@ -144,10 +144,9 @@ void WizardPagePartParameters::on_tableViewPropertyMapping_customContextMenuRequ
         } else {
             auto dlg = new DialogSelectInvenTreeCategory(m_wizard->partApi(), m_wizard->m_partDetailsPage->invenTreeTargetCategoryPk(), this);
             dlg->setWindowTitle(tr("Select category for the parameter template"));
-            connect(dlg, &DialogSelectInvenTreeCategory::categorySelected, this, [=](int pk, const QString &name, const QString &path) {
-                Q_UNUSED(path)
+            connect(dlg, &DialogSelectInvenTreeCategory::categorySelected, this, [=](const InvenTree::Category &category) {
                 for (auto row : ui->tableViewPropertyMapping->selectionModel()->selectedRows())
-                    m_propertyModel->setTemplateTargetCategory(row.row(), true, pk, name);
+                    m_propertyModel->setTemplateTargetCategory(row.row(), true, category.getPk(), category.getName());
                 dlg->close();
             });
             dlg->show();

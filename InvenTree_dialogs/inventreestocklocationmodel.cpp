@@ -144,11 +144,6 @@ void InvenTreeStockLocationModel::fetchMore(const QModelIndex &parent)
     }
 }
 
-void InvenTreeStockLocationModel::addPk(int pk)
-{
-    // recursively add the category upwards in the category tree
-}
-
 void InvenTreeStockLocationModel::itemsChildsFetched(int childCount)
 {
     auto parentItem = static_cast<InvenTreeStockLocationItem*>(this->sender());
@@ -196,8 +191,8 @@ void InvenTreeStockLocationItem::fetchChilds()
 
     m_api->stockLocationList(
         65535, // limit
-        InvenTree::OptionalParam<bool>(), //cascade
-        InvenTree::OptionalParam<double>(), //depth
+        false, //cascade
+        1, //depth
         InvenTree::OptionalParam<bool>(), //external
         InvenTree::OptionalParam<bool>(), //has_location_type
         InvenTree::OptionalParam<qint32>(), //location_type

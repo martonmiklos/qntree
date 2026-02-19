@@ -15,7 +15,6 @@
 #include "wizard/inventreepartuploader.h"
 #include "supplier/supplierregistry.h"
 #include "wizard/stocklinewidget.h"
-#include "wizard/models/propertymappingmodel.h"
 #include "wizard/wizardpagestockandpricing.h"
 #include <QMessageBox>
 
@@ -157,6 +156,15 @@ void InvenTreePartImportWizard::initNewManufacturerPart(int partPk, InvenTree::M
     mfrPart->setDescription(m_selectedPart.description());
 }
 
+void InvenTreePartImportWizard::initNewManufacturerCompany(InvenTree::Company *mfr)
+{
+    mfr->setActive(true);
+    mfr->setIsManufacturer(true);
+    mfr->setIsSupplier(false);
+    mfr->setIsCustomer(false);
+    mfr->setName(m_partDetailsPage->ui->labelSupplierManufacturerName->text());
+}
+
 void InvenTreePartImportWizard::initNewSupplierPart(int partPk, int mfrPart, InvenTree::SupplierPart *supplierPart)
 {
     supplierPart->setManufacturerPart(mfrPart);
@@ -233,7 +241,10 @@ InvenTree::CompanyApi *InvenTreePartImportWizard::companyApi() const
 
 void InvenTreePartImportWizard::on_InvenTreePartImportWizard_currentIdChanged(int newId)
 {
-    if (newId == NewPartSupplierDataReview) {
+    if (newId == SupplierDataEnter) {
+        m_startPage->ui->lineEditPartNumber->selectAll();
+        m_startPage->ui->lineEditPartNumber->setFocus();
+    } else if (newId == NewPartSupplierDataReview) {
         m_partDetailsPage->setSupplierUuid(m_startPage->selectedSupplier()->uid());
     } else if (newId == ParameterMapping) {
         m_partDetailsPage->saveMapping();

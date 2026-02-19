@@ -96,3 +96,8 @@ SupplierAttachment *SupplierPart::attachmentAt(int index)
     return &m_attachments[index];
 }
 
+qreal SupplierPart::quantity() const
+{
+    return m_quantity;
+}
+

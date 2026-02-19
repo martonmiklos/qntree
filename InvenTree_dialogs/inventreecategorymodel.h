@@ -62,16 +62,15 @@ public:
         IsStructuralRole = Qt::UserRole + 1,
         PkRole,
         CategoryPathRole,
+        CategoryDefaultLocation,
     };
     explicit InvenTreeCategoryModel(InvenTree::PartApi *api, QObject *parent = nullptr);
     ~InvenTreeCategoryModel();
 
-    // Header:
     QVariant headerData(int section,
                         Qt::Orientation orientation,
                         int role = Qt::DisplayRole) const override;
 
-    // Basic functionality:
     QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const override;
     QModelIndex parent(const QModelIndex &index) const override;
 
@@ -88,14 +87,13 @@ public:
 
     void setVisiblePk(int pk);
 
+    InvenTree::Category getCategoryByIndex(const QModelIndex &index);
+
 private slots:
     void childItemsFetched(int childCount);
     void parentCategoryFetchedForSelection(InvenTree::Category categoryData);
 
 private:
-
-    void expandTreeToSelected();
-
     InvenTreeCategoryItem *m_rootItem = nullptr;
     InvenTree::PartApi *m_api = nullptr;
     bool m_topLevelCategoriesFetched = false;

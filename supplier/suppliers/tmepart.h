@@ -4,9 +4,11 @@
 
 class QJsonArray;
 class QJsonObject;
+class TME;
 
 class TMEPart : public SupplierPart
 {
+    friend class TME;
 public:
     TMEPart() = default;
     TMEPart(const QJsonObject &productJson);

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "gen_src/client/Location.h"
 #include <QWidget>
 
 class InvenTreePartImportWizard;
@@ -13,17 +14,20 @@ class StockLineWidget : public QWidget
     Q_OBJECT
 public:
     friend class InvenTreePartImportWizard;
+    friend class WizardPageStockAndPricing;
     explicit StockLineWidget(InvenTreePartImportWizard *wizard, QWidget *parent = nullptr);
     ~StockLineWidget();
     void setRemovable(bool removable);
     int selectedLocationPk() const;
     qreal quantity() const;
+    void setQuantity(qreal qty);
     bool ready() const;
     void setQtySuffix(const QString &suffix);
     void setAsDefaultLocation(bool defaultLocation);
     bool isDefaultLocation() const;
     bool create() const;
     QString locationName() const;
+    void selectLocation(const InvenTree::Location &location);
 
 private slots:
     void on_toolButtonRemoveStock_clicked();
