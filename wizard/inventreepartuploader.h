@@ -22,12 +22,15 @@ public:
     };
     explicit InvenTreePartUploader(InvenTreePartImportWizard *parent = nullptr);
     void start();
+    quint32 partPk() const;
 
 signals:
     void stateChanged(InvenTreePartUploader::State oldState, InvenTreePartUploader::State newState);
     void stateFailed(InvenTreePartUploader::State state, const QString &error);
 
 private:
+    QTemporaryDir m_tmpDir;
+    QFile *m_tempFile = nullptr;
     InvenTreePartImportWizard *m_wizard = nullptr;
     InvenTree::Part m_part;
     InvenTree::SupplierPart m_supplierPart;

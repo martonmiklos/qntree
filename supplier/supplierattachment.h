@@ -15,9 +15,6 @@ public:
 
     QString filename() const
     {
-        QString ret = url.fileName();
-        if (hasOtherLang)
-            ret.append(" (" + language + ")");
-        return ret;
+        return url.fileName();
     }
 };

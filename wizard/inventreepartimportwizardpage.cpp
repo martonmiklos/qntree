@@ -10,8 +10,3 @@ InvenTreePartImportWizardPage::InvenTreePartImportWizardPage(InvenTreePartImport
 {
     m_wizard = parent;
 }
-
-void InvenTreePartImportWizardPage::setSelectedPart(::SupplierPart *newSelectedPart)
-{
-    m_selectedPart = newSelectedPart;
-}

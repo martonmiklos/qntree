@@ -55,7 +55,7 @@ void TME::retrivePart(const QString &userData)
 
 int TME::pnLengthLimit() const
 {
-    return 32;
+    return 65535;
 }
 
 QNetworkReply *TME::apiCall(const QString &action, QList<QPair<QString, QString>> params)

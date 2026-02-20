@@ -42,6 +42,8 @@ class InvenTreePartImportWizard : public QWizard
     friend class WizardPageSummary;
     friend class WizardPageInvenTreeSyncStatus;
     friend class WizardPageSupplierDataEnter;
+    friend class WizardPageAttachments;
+    friend class WizardPageStockAndPricing;
 public:
     enum PageIndexes {
         SupplierDataEnter,

@@ -3,7 +3,6 @@
 #include "gen_src/client/PartApi.h"
 #include "inventreepartimportwizard.h"
 #include "inventreepartimportwizardpage.h"
-#include "supplier/supplierpart.h"
 #include <QWizardPage>
 
 namespace Ui {
@@ -19,7 +18,7 @@ public:
     explicit WizardPagePartDetails(InvenTree::PartApi *api, InvenTreePartImportWizard *parent = nullptr);
     ~WizardPagePartDetails();
 
-    void setSelectedPart(SupplierPart *part) override;
+    void update() override;
     void saveMapping();
 
     void setSupplierUuid(const QString &newSupplierUuid);

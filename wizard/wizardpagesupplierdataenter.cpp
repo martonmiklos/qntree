@@ -111,7 +111,7 @@ bool WizardPageSupplierDataEnter::validatePage()
 
     if (m_partDataRetrived) {
         ui->labelMessage->clear();
-        m_wizard->m_stockAndPricingPage->resetStockLines(m_selectedPart->quantity());
+        m_wizard->m_stockAndPricingPage->resetStockLines(m_wizard->m_selectedPart.quantity());
     }
 
     return !m_partDataError;

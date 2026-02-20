@@ -16,9 +16,8 @@ class WizardPageAttachments : public InvenTreePartImportWizardPage
 
 public:
     explicit WizardPageAttachments(InvenTreePartImportWizard *parent = nullptr);
-    virtual void setSelectedPart(::SupplierPart *newSelectedPart) override;
     ~WizardPageAttachments();
-
+    void update() override;
     QString summary() const override;
 
 private slots:

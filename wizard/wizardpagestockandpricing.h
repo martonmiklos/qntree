@@ -22,7 +22,6 @@ public:
     ~WizardPageStockAndPricing();
     bool isComplete() const override;
     void update() override;
-    void setSelectedPart(SupplierPart *newSelectedPart) override;
     QString summary() const override;
 
     void resetStockLines(qreal initialQty = 0);

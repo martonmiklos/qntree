@@ -15,7 +15,7 @@ class WizardPageSummary : public InvenTreePartImportWizardPage
 public:
     friend class WizardPageInvenTreeSyncStatus;
     explicit WizardPageSummary(InvenTreePartImportWizard *parent = nullptr);
-    void updateSummary();
+    void update() override;
     ~WizardPageSummary();
 
 private:

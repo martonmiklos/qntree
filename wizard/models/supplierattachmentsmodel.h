@@ -44,6 +44,4 @@ public:
 
 private:
     ::SupplierPart *m_part = nullptr;
-
-
 };

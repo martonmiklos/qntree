@@ -60,6 +60,8 @@ QVariant SupplierAttachmentsModel::data(const QModelIndex &index, int role) cons
     if (role == Qt::DisplayRole) {
         switch (static_cast<Columns>(index.column())) {
         case Col_FileName:
+            if (a->hasOtherLang)
+                return a->filename() + " (" + a->language + ")";
             return a->filename();
         case Col_Size: {
             QLocale locale;

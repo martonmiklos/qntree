@@ -40,15 +40,14 @@ void WizardPagePartParameters::saveSettings()
     m_wizard->m_settings.endGroup();
 }
 
-void WizardPagePartParameters::setSelectedPart(SupplierPart *newSelectedPart)
+void WizardPagePartParameters::update()
 {
-    InvenTreePartImportWizardPage::setSelectedPart(newSelectedPart);
-
+    m_propertyModel->setPart(&m_wizard->m_selectedPart);
     m_wizard->m_settings.beginGroup("InvenTreePartImportWizard");
     m_wizard->m_settings.beginGroup("NonSaveableProperties");
 
-    m_propertyModel->setPart(newSelectedPart);
-    for (int i = 0; i<newSelectedPart->properties().count(); i++) {
+    ui->tableViewPropertyMapping->reset();
+    for (int i = 0; i<m_wizard->m_selectedPart.properties().count(); i++) {
         if (ui->checkBoxAutoSplitUnits->isChecked())
             m_propertyModel->splitRowUnit(i);
         const auto propertyName = m_propertyModel->propertyName(i);

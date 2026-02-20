@@ -9,6 +9,7 @@ WizardPageStockAndPricing::WizardPageStockAndPricing(InvenTreePartImportWizard *
 {
     ui->setupUi(this);
     m_priceBreakModel = new PricebreaksModel(this);
+    m_priceBreakModel->setPart(&m_wizard->m_selectedPart);
     ui->tableViewPriceBreaks->setModel(m_priceBreakModel);
     ui->tableViewPriceBreaks->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Stretch);
     addNewLineWidget();
@@ -45,8 +46,10 @@ bool WizardPageStockAndPricing::isComplete() const
 
 void WizardPageStockAndPricing::update()
 {
+    m_priceWasEdited = false;
+    updatePriceFromPriceBreaks();
     for (auto line : m_stockLines) {
-        line->setQtySuffix(" " + m_selectedPart->unit());
+        line->setQtySuffix(" " + m_wizard->m_selectedPart.unit());
     }
 }
 
@@ -54,14 +57,6 @@ void WizardPageStockAndPricing::on_doubleSpinBoxUnitPrice_valueChanged(double ar
 {
     Q_UNUSED(arg1);
     emit completeChanged();
-}
-
-void WizardPageStockAndPricing::setSelectedPart(SupplierPart *part)
-{
-    InvenTreePartImportWizardPage::setSelectedPart(part);
-    m_priceBreakModel->setPart(part);
-    m_priceWasEdited = false;
-    updatePriceFromPriceBreaks();
 }
 
 QString WizardPageStockAndPricing::summary() const
@@ -79,7 +74,7 @@ QString WizardPageStockAndPricing::summary() const
         ret.append(tr("<b>Create stocks</b><br><ul>"));
         for (auto line : m_stockLines) {
             if (line->create()) {
-                ret.append(tr("<li>%1%2 %3 %4</li>").arg(line->locationName(), line->isDefaultLocation() ? tr(" (make it default)") : QString()).arg(line->quantity()).arg(m_selectedPart->unit()));
+                ret.append(tr("<li>%1%2 %3 %4</li>").arg(line->locationName(), line->isDefaultLocation() ? tr(" (make it default)") : QString()).arg(line->quantity()).arg(m_wizard->m_selectedPart.unit()));
             }
         }
         ret.append("</ul><br>");
@@ -88,7 +83,7 @@ QString WizardPageStockAndPricing::summary() const
     if (ui->checkBoxSavePriceBreaks->isChecked()) {
         ret.append(tr("<b>Create price breaks</b><br><ul>"));
         int min = 1;
-        for (auto &pb : m_selectedPart->priceRanges()) {
+        for (auto &pb : m_wizard->m_selectedPart.priceRanges()) {
             QString minMax;
             if (min == pb.qtyMin)
                 minMax = tr("%1 pc").arg(min);
@@ -155,8 +150,7 @@ void WizardPageStockAndPricing::addNewLineWidget()
         });
     }
     m_stockLines.append(lineWidget);
-    if (m_selectedPart)
-        lineWidget->setQtySuffix(" " + m_selectedPart->unit());
+    lineWidget->setQtySuffix(" " + m_wizard->m_selectedPart.unit());
     ui->verticalLayoutStock->addWidget(lineWidget);
     connect(lineWidget, &StockLineWidget::addNewLine, this, [=]() {
         addNewLineWidget();

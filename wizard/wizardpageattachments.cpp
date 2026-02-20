@@ -10,15 +10,11 @@ WizardPageAttachments::WizardPageAttachments(InvenTreePartImportWizard *parent)
     ui->setupUi(this);
 
     m_attachmentsModel = new SupplierAttachmentsModel(this);
+    m_attachmentsModel->setPart(&m_wizard->m_selectedPart);
     ui->tableViewAttachmentMapping->setModel(m_attachmentsModel);
 
     ui->tableViewAttachmentMapping->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Stretch);
     ui->tableViewAttachmentMapping->setItemDelegateForColumn(SupplierAttachmentsModel::Col_Action, new SupplierAttachmentActionDelegate(ui->tableViewAttachmentMapping));
-}
-
-void WizardPageAttachments::setSelectedPart(SupplierPart *newSelectedPart)
-{
-    m_attachmentsModel->setPart(newSelectedPart);
 }
 
 WizardPageAttachments::~WizardPageAttachments()
@@ -26,19 +22,24 @@ WizardPageAttachments::~WizardPageAttachments()
     delete ui;
 }
 
+void WizardPageAttachments::update()
+{
+    m_attachmentsModel->setPart(&m_wizard->m_selectedPart);
+}
+
 QString WizardPageAttachments::summary() const
 {
     if (!m_attachmentsModel->hasSaveable())
         return QString();
-    QString ret = tr("<b>Save attachments</b><br>");
-    for (int i = 0; i<m_attachmentsModel->rowCount(); i++) {
-        if (m_attachmentsModel->data(m_attachmentsModel->index(i, SupplierAttachmentsModel::Col_Action), SupplierAttachmentsModel::Role_Save).toBool()) {
-            QString comment = m_attachmentsModel->data(m_attachmentsModel->index(i, SupplierAttachmentsModel::Col_Comment)).toString();
+    QString ret = tr("<b>Save attachments</b><br><ul>");
+    for (auto &a : m_wizard->m_selectedPart.attachments()) {
+        if (a.upload) {
+            QString comment = a.comment;
             if (!comment.isEmpty()) {
                 comment = tr(" (%1)").arg(comment);
             }
             ret.append(tr("<li>%1%2</li>").arg(
-                m_attachmentsModel->data(m_attachmentsModel->index(i, SupplierAttachmentsModel::Col_FileName)).toString(),
+                a.url.fileName(),
                 comment));
         }
     }

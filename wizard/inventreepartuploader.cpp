@@ -16,6 +16,7 @@ InvenTreePartUploader::InvenTreePartUploader(InvenTreePartImportWizard *parent)
     : QObject{parent},
     m_wizard(parent)
 {
+    m_tempFile = new QFile();
 }
 
 void InvenTreePartUploader::downloadToTempFile(const QString &sourceUrl, const QString &fileName, QObject *context, std::function<void (const QString &, const QString &)> onSuccess, std::function<void (const QString &)> onError)
@@ -25,21 +26,21 @@ void InvenTreePartUploader::downloadToTempFile(const QString &sourceUrl, const Q
     QNetworkRequest request(sourceUrl);
     auto *reply = manager->get(request);
 
-    // Temporary file (auto-deleted on destruction)
+    auto tempFilePath = m_tmpDir.path() + QDir::separator() + fileName;
 
-    QTemporaryDir tmpDir;
-    auto tempFilePath = tmpDir.path() + QDir::separator() + fileName;
-    auto *tempFile = new QFile();
+    if (m_tempFile->isOpen())
+        m_tempFile->close();
 
-    if (!tempFile->open(QFile::ReadOnly)) {
+    m_tempFile->setFileName(tempFilePath);
+    if (!m_tempFile->open(QFile::WriteOnly | QFile::Truncate)) {
         onError(QStringLiteral("Failed to open temporary file"));
         reply->deleteLater();
         manager->deleteLater();
         return;
     }
 
-    QObject::connect(reply, &QNetworkReply::readyRead, context, [reply, tempFile]() {
-        tempFile->write(reply->readAll());
+    QObject::connect(reply, &QNetworkReply::readyRead, context, [reply, this]() {
+        m_tempFile->write(reply->readAll());
     });
 
     QObject::connect(reply, &QNetworkReply::finished, context, [=]() {
@@ -47,12 +48,12 @@ void InvenTreePartUploader::downloadToTempFile(const QString &sourceUrl, const Q
         manager->deleteLater();
 
         if (reply->error() != QNetworkReply::NoError) {
-            tempFile->deleteLater();
+            m_tempFile->deleteLater();
             onError(reply->errorString());
             return;
         }
 
-        tempFile->flush();
+        m_tempFile->flush();
         onSuccess(tempFilePath, reply->header(QNetworkRequest::ContentTypeHeader).toString());
     });
 }
@@ -67,6 +68,11 @@ void InvenTreePartUploader::start()
     connect(m_wizard->partApi(), &InvenTree::PartApi::partCreateSignalError, this, &InvenTreePartUploader::partCreateError);
 
     m_wizard->partApi()->partCreate(m_part);
+}
+
+quint32 InvenTreePartUploader::partPk() const
+{
+    return m_part.getPk();
 }
 
 void InvenTreePartUploader::partCreateError(InvenTree::Part , QNetworkReply::NetworkError, const QString &error_str)
@@ -351,7 +357,12 @@ void InvenTreePartUploader::uploadAttachments()
                                    InvenTree::HttpFileElement file;
                                    file.loadFromFile("attachment", localPath, a.getFilename(), mime);
                                    files.append(file);
+                                   // we need to copy over the attachment as the filename must not be filled
                                    InvenTree::Attachment ac;
+                                   ac.setModelId(a.getModelId());
+                                   InvenTree::AttachmentModelTypeEnum t;
+                                   t.setValue(InvenTree::AttachmentModelTypeEnum::eAttachmentModelTypeEnum::PART);
+                                   ac.setModelType(t);
                                    ac.setAttachment(file);
                                    m_wizard->attachmentApi()->attachmentCreate(ac);
                                },

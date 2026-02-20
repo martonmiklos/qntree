@@ -12,7 +12,7 @@ WizardPageSummary::WizardPageSummary(InvenTreePartImportWizard *parent)
     ui->setupUi(this);
 }
 
-void WizardPageSummary::updateSummary()
+void WizardPageSummary::update()
 {
     QString summary;
     summary.append(m_wizard->m_partDetailsPage->summary());

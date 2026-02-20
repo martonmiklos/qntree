@@ -92,8 +92,6 @@ InvenTreePartImportWizard::~InvenTreePartImportWizard()
 void InvenTreePartImportWizard::setSelectedPart(SupplierPart &part)
 {
     m_selectedPart = part;
-    for (auto page : std::as_const(m_wizardPages))
-        page->setSelectedPart(&part);
 }
 
 InvenTree::PartApi *InvenTreePartImportWizard::partApi() const
@@ -218,9 +216,6 @@ void InvenTreePartImportWizard::initAttachments(int partPk, QList<InvenTree::Att
         if (!a.upload)
             continue;
         InvenTree::Attachment ao;
-        InvenTree::AttachmentModelTypeEnum t;
-        t.setValue(InvenTree::AttachmentModelTypeEnum::eAttachmentModelTypeEnum::PART);
-        ao.setModelType(t);
         ao.setComment(a.comment);
         ao.setLink(a.url.toString());
         ao.setFilename(a.filename());
@@ -246,12 +241,14 @@ void InvenTreePartImportWizard::on_InvenTreePartImportWizard_currentIdChanged(in
         m_startPage->ui->lineEditPartNumber->setFocus();
     } else if (newId == NewPartSupplierDataReview) {
         m_partDetailsPage->setSupplierUuid(m_startPage->selectedSupplier()->uid());
+        m_partDetailsPage->update();
     } else if (newId == ParameterMapping) {
         m_partDetailsPage->saveMapping();
-        // update the unit suffix
-        m_stockAndPricingPage->update();
+        m_partParametersPage->update();
+    } else if (newId == Attachments) {
+        m_attachmentsPage->update();
     } else if (newId == Summary) {
-        m_summaryPage->updateSummary();
+        m_summaryPage->update();
     } else if (newId == UploadPage) {
         m_uploadPage->reset();
         m_uploader->start();
