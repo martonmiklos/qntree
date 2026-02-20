@@ -13,6 +13,8 @@ QT_END_NAMESPACE
 #include "gen_src/client/StockApi.h"
 #include "gen_src/client/CurrencyApi.h"
 
+class InventreeSettingsDialog;
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -24,6 +26,9 @@ public:
 private slots:
     void on_pushButtonConnect_clicked();
     void on_pushButtonImportParts_clicked();
+    void on_actionInvenTree_access_triggered();
+
+    void updateInvenTreeToken();
 
 private:
     Ui::MainWindow *ui;
@@ -33,4 +38,5 @@ private:
     InvenTree::CompanyApi *m_companyApi = nullptr;
     InvenTree::AttachmentApi *m_attachmentApi = nullptr;
     QSettings m_settings;
+    InventreeSettingsDialog *m_inventreeSettingsDlg = nullptr;
 };

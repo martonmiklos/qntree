@@ -21,6 +21,7 @@ SOURCES += \
     db/config_db.cpp \
     dialog.cpp \
     inventreepartimportwizard.cpp \
+    inventreesettingsdialog.cpp \
     main.cpp \
     mainwindow.cpp \
     supplier/abstractsupplier.cpp \
@@ -58,6 +59,7 @@ HEADERS += \
     db/config_db.h \
     dialog.h \
     inventreepartimportwizard.h \
+    inventreesettingsdialog.h \
     mainwindow.h \
     qt_goodies/qobjectsingleton.h \
     supplier/abstractsupplier.h \
@@ -91,6 +93,7 @@ FORMS += \
     InvenTree_dialogs/dialogselectinventreestocklocation.ui \
     dialog.ui \
     inventreepartimportwizard.ui \
+    inventreesettingsdialog.ui \
     mainwindow.ui \
     wizard/stocklinewidget.ui \
     wizard/wizardpageattachments.ui \

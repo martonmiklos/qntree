@@ -54,7 +54,7 @@ void WizardPageInvenTreeSyncStatus::stateChanged(InvenTreePartUploader::State ol
 
     if (newState == InvenTreePartUploader::Finished) {
         if (m_wizard->m_summaryPage->ui->checkBoxOpenInInvenTree->isChecked()) {
-            QDesktopServices::openUrl(QUrl("http://localhost:8000/web/part/" + QString::number(m_wizard->m_uploader->partPk()) + "/details"));
+            QDesktopServices::openUrl(QUrl("http://localhost:8000/web/part/" + QString::number(m_wizard->m_uploader->partPk()) + "/details")); // FIXME
         }
         m_completed = true;
         emit completeChanged();

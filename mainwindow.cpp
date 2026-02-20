@@ -9,6 +9,8 @@ using namespace InvenTree;
 
 #include "db/config_db.h"
 
+#include "inventreesettingsdialog.h"
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -19,22 +21,13 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     m_partApi = new InvenTree::PartApi();
-    m_partApi->addHeaders("Authorization", "Token inv-cfdeb7eb1b8a30c013ecf21db9870816955dc557-20250325");
 
     m_stockApi = new InvenTree::StockApi();
-    m_stockApi->addHeaders("Authorization", "Token inv-cfdeb7eb1b8a30c013ecf21db9870816955dc557-20250325");
-
     m_currencyApi = new InvenTree::CurrencyApi();
-    m_currencyApi->addHeaders("Authorization", "Token inv-cfdeb7eb1b8a30c013ecf21db9870816955dc557-20250325");
-
     m_companyApi = new InvenTree::CompanyApi();
-    m_companyApi->addHeaders("Authorization", "Token inv-cfdeb7eb1b8a30c013ecf21db9870816955dc557-20250325");
-
     m_companyApi = new InvenTree::CompanyApi();
-    m_companyApi->addHeaders("Authorization", "Token inv-cfdeb7eb1b8a30c013ecf21db9870816955dc557-20250325");
-
     m_attachmentApi = new InvenTree::AttachmentApi();
-    m_attachmentApi->addHeaders("Authorization", "Token inv-cfdeb7eb1b8a30c013ecf21db9870816955dc557-20250325");
+    updateInvenTreeToken();
 
     SupplierRegistry::instance(this);
 
@@ -64,5 +57,28 @@ void MainWindow::on_pushButtonImportParts_clicked()
 {
     InvenTreePartImportWizard *wizard = new InvenTreePartImportWizard(m_partApi, m_stockApi, m_currencyApi, m_companyApi, m_attachmentApi, this);
     wizard->show();
+}
+
+void MainWindow::on_actionInvenTree_access_triggered()
+{
+    if (!m_inventreeSettingsDlg) {
+        m_inventreeSettingsDlg = new InventreeSettingsDialog(this);
+        connect(m_inventreeSettingsDlg, &InventreeSettingsDialog::accepted, this, &MainWindow::updateInvenTreeToken);
+    }
+    m_inventreeSettingsDlg->show();
+}
+
+void MainWindow::updateInvenTreeToken()
+{
+    m_settings.beginGroup("InventTree");
+    auto token = m_settings.value(InventreeSettingsDialog::KEY_SERVER).toString();
+    m_settings.endGroup();
+
+    m_partApi->addHeaders("Authorization", "Token " + token);
+    m_stockApi->addHeaders("Authorization", "Token " + token);
+    m_currencyApi->addHeaders("Authorization", "Token " + token);
+    m_companyApi->addHeaders("Authorization", "Token " + token);
+    m_companyApi->addHeaders("Authorization", "Token " + token);
+    m_attachmentApi->addHeaders("Authorization", "Token " + token);
 }
 

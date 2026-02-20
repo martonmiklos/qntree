@@ -51,7 +51,7 @@
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionInvenTree_access">
    <property name="text">
-    <string>InvenTree access</string>
+    <string>InvenTree</string>
    </property>
   </action>
   <action name="actionSupplier_settings">
