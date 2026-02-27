@@ -363,14 +363,14 @@ void ImporterApi::importerColumnMappingList(const qint32 &limit, const ::InvenTr
         }
     });
 
-    _OauthMethod = 3;
+    _OauthMethod = OauthMethod::ClientCredentialsFlow;
     _authFlow.unlink();
     _implicitFlow.unlink();
     _passwordFlow.unlink();
     _credentialFlow.link();
-    QStringList scope3;
-    scope3.append("g:read");
-    auto token3 = _credentialFlow.getToken(scope3.join(" "));
+    QStringList scopeClientCredentialsFlow;
+    scopeClientCredentialsFlow.append("g:read");
+    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
     if(token3.isValid())
         input.headers.insert("Authorization", "Bearer " + token3.getToken());
 
@@ -387,16 +387,16 @@ void ImporterApi::importerColumnMappingList(const qint32 &limit, const ::InvenTr
     });
 
     _latestInput = input;
-    _latestScope = scope3;
+    _latestScope = scopeClientCredentialsFlow;
 
-    _OauthMethod = 2;
+    _OauthMethod = OauthMethod::AuthorizationFlow;
     _implicitFlow.unlink();
     _credentialFlow.unlink();
     _passwordFlow.unlink();
     _authFlow.link();
-    QStringList scope2;
-    scope2.append("g:read");
-    auto token2 = _authFlow.getToken(scope2.join(" "));
+    QStringList scopeAuthorizationFlow;
+    scopeAuthorizationFlow.append("g:read");
+    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
     if(token2.isValid())
         input.headers.insert("Authorization", "Bearer " + token2.getToken());
 
@@ -413,7 +413,7 @@ void ImporterApi::importerColumnMappingList(const qint32 &limit, const ::InvenTr
     });
 
     _latestInput = input;
-    _latestScope = scope2;
+    _latestScope = scopeAuthorizationFlow;
 
 
 
@@ -540,14 +540,14 @@ void ImporterApi::importerColumnMappingPartialUpdate(const qint32 &id, const ::I
         }
     });
 
-    _OauthMethod = 3;
+    _OauthMethod = OauthMethod::ClientCredentialsFlow;
     _authFlow.unlink();
     _implicitFlow.unlink();
     _passwordFlow.unlink();
     _credentialFlow.link();
-    QStringList scope3;
-    scope3.append("g:read");
-    auto token3 = _credentialFlow.getToken(scope3.join(" "));
+    QStringList scopeClientCredentialsFlow;
+    scopeClientCredentialsFlow.append("g:read");
+    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
     if(token3.isValid())
         input.headers.insert("Authorization", "Bearer " + token3.getToken());
 
@@ -564,16 +564,16 @@ void ImporterApi::importerColumnMappingPartialUpdate(const qint32 &id, const ::I
     });
 
     _latestInput = input;
-    _latestScope = scope3;
+    _latestScope = scopeClientCredentialsFlow;
 
-    _OauthMethod = 2;
+    _OauthMethod = OauthMethod::AuthorizationFlow;
     _implicitFlow.unlink();
     _credentialFlow.unlink();
     _passwordFlow.unlink();
     _authFlow.link();
-    QStringList scope2;
-    scope2.append("g:read");
-    auto token2 = _authFlow.getToken(scope2.join(" "));
+    QStringList scopeAuthorizationFlow;
+    scopeAuthorizationFlow.append("g:read");
+    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
     if(token2.isValid())
         input.headers.insert("Authorization", "Bearer " + token2.getToken());
 
@@ -590,7 +590,7 @@ void ImporterApi::importerColumnMappingPartialUpdate(const qint32 &id, const ::I
     });
 
     _latestInput = input;
-    _latestScope = scope2;
+    _latestScope = scopeAuthorizationFlow;
 
 
 
@@ -712,14 +712,14 @@ void ImporterApi::importerColumnMappingRetrieve(const qint32 &id) {
         }
     });
 
-    _OauthMethod = 3;
+    _OauthMethod = OauthMethod::ClientCredentialsFlow;
     _authFlow.unlink();
     _implicitFlow.unlink();
     _passwordFlow.unlink();
     _credentialFlow.link();
-    QStringList scope3;
-    scope3.append("g:read");
-    auto token3 = _credentialFlow.getToken(scope3.join(" "));
+    QStringList scopeClientCredentialsFlow;
+    scopeClientCredentialsFlow.append("g:read");
+    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
     if(token3.isValid())
         input.headers.insert("Authorization", "Bearer " + token3.getToken());
 
@@ -736,16 +736,16 @@ void ImporterApi::importerColumnMappingRetrieve(const qint32 &id) {
     });
 
     _latestInput = input;
-    _latestScope = scope3;
+    _latestScope = scopeClientCredentialsFlow;
 
-    _OauthMethod = 2;
+    _OauthMethod = OauthMethod::AuthorizationFlow;
     _implicitFlow.unlink();
     _credentialFlow.unlink();
     _passwordFlow.unlink();
     _authFlow.link();
-    QStringList scope2;
-    scope2.append("g:read");
-    auto token2 = _authFlow.getToken(scope2.join(" "));
+    QStringList scopeAuthorizationFlow;
+    scopeAuthorizationFlow.append("g:read");
+    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
     if(token2.isValid())
         input.headers.insert("Authorization", "Bearer " + token2.getToken());
 
@@ -762,7 +762,7 @@ void ImporterApi::importerColumnMappingRetrieve(const qint32 &id) {
     });
 
     _latestInput = input;
-    _latestScope = scope2;
+    _latestScope = scopeAuthorizationFlow;
 
 
 
@@ -889,14 +889,14 @@ void ImporterApi::importerColumnMappingUpdate(const qint32 &id, const ::InvenTre
         }
     });
 
-    _OauthMethod = 3;
+    _OauthMethod = OauthMethod::ClientCredentialsFlow;
     _authFlow.unlink();
     _implicitFlow.unlink();
     _passwordFlow.unlink();
     _credentialFlow.link();
-    QStringList scope3;
-    scope3.append("g:read");
-    auto token3 = _credentialFlow.getToken(scope3.join(" "));
+    QStringList scopeClientCredentialsFlow;
+    scopeClientCredentialsFlow.append("g:read");
+    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
     if(token3.isValid())
         input.headers.insert("Authorization", "Bearer " + token3.getToken());
 
@@ -913,16 +913,16 @@ void ImporterApi::importerColumnMappingUpdate(const qint32 &id, const ::InvenTre
     });
 
     _latestInput = input;
-    _latestScope = scope3;
+    _latestScope = scopeClientCredentialsFlow;
 
-    _OauthMethod = 2;
+    _OauthMethod = OauthMethod::AuthorizationFlow;
     _implicitFlow.unlink();
     _credentialFlow.unlink();
     _passwordFlow.unlink();
     _authFlow.link();
-    QStringList scope2;
-    scope2.append("g:read");
-    auto token2 = _authFlow.getToken(scope2.join(" "));
+    QStringList scopeAuthorizationFlow;
+    scopeAuthorizationFlow.append("g:read");
+    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
     if(token2.isValid())
         input.headers.insert("Authorization", "Bearer " + token2.getToken());
 
@@ -939,7 +939,7 @@ void ImporterApi::importerColumnMappingUpdate(const qint32 &id, const ::InvenTre
     });
 
     _latestInput = input;
-    _latestScope = scope2;
+    _latestScope = scopeAuthorizationFlow;
 
 
 
@@ -1047,14 +1047,14 @@ void ImporterApi::importerModelsList() {
         }
     });
 
-    _OauthMethod = 3;
+    _OauthMethod = OauthMethod::ClientCredentialsFlow;
     _authFlow.unlink();
     _implicitFlow.unlink();
     _passwordFlow.unlink();
     _credentialFlow.link();
-    QStringList scope3;
-    scope3.append("g:read");
-    auto token3 = _credentialFlow.getToken(scope3.join(" "));
+    QStringList scopeClientCredentialsFlow;
+    scopeClientCredentialsFlow.append("g:read");
+    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
     if(token3.isValid())
         input.headers.insert("Authorization", "Bearer " + token3.getToken());
 
@@ -1071,16 +1071,16 @@ void ImporterApi::importerModelsList() {
     });
 
     _latestInput = input;
-    _latestScope = scope3;
+    _latestScope = scopeClientCredentialsFlow;
 
-    _OauthMethod = 2;
+    _OauthMethod = OauthMethod::AuthorizationFlow;
     _implicitFlow.unlink();
     _credentialFlow.unlink();
     _passwordFlow.unlink();
     _authFlow.link();
-    QStringList scope2;
-    scope2.append("g:read");
-    auto token2 = _authFlow.getToken(scope2.join(" "));
+    QStringList scopeAuthorizationFlow;
+    scopeAuthorizationFlow.append("g:read");
+    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
     if(token2.isValid())
         input.headers.insert("Authorization", "Bearer " + token2.getToken());
 
@@ -1097,7 +1097,7 @@ void ImporterApi::importerModelsList() {
     });
 
     _latestInput = input;
-    _latestScope = scope2;
+    _latestScope = scopeAuthorizationFlow;
 
 
 
@@ -1219,14 +1219,14 @@ void ImporterApi::importerRowBulkDestroy(const BulkRequest &bulk_request) {
         }
     });
 
-    _OauthMethod = 3;
+    _OauthMethod = OauthMethod::ClientCredentialsFlow;
     _authFlow.unlink();
     _implicitFlow.unlink();
     _passwordFlow.unlink();
     _credentialFlow.link();
-    QStringList scope3;
-    scope3.append("g:read");
-    auto token3 = _credentialFlow.getToken(scope3.join(" "));
+    QStringList scopeClientCredentialsFlow;
+    scopeClientCredentialsFlow.append("g:read");
+    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
     if(token3.isValid())
         input.headers.insert("Authorization", "Bearer " + token3.getToken());
 
@@ -1243,16 +1243,16 @@ void ImporterApi::importerRowBulkDestroy(const BulkRequest &bulk_request) {
     });
 
     _latestInput = input;
-    _latestScope = scope3;
+    _latestScope = scopeClientCredentialsFlow;
 
-    _OauthMethod = 2;
+    _OauthMethod = OauthMethod::AuthorizationFlow;
     _implicitFlow.unlink();
     _credentialFlow.unlink();
     _passwordFlow.unlink();
     _authFlow.link();
-    QStringList scope2;
-    scope2.append("g:read");
-    auto token2 = _authFlow.getToken(scope2.join(" "));
+    QStringList scopeAuthorizationFlow;
+    scopeAuthorizationFlow.append("g:read");
+    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
     if(token2.isValid())
         input.headers.insert("Authorization", "Bearer " + token2.getToken());
 
@@ -1269,7 +1269,7 @@ void ImporterApi::importerRowBulkDestroy(const BulkRequest &bulk_request) {
     });
 
     _latestInput = input;
-    _latestScope = scope2;
+    _latestScope = scopeAuthorizationFlow;
 
 
 
@@ -1390,14 +1390,14 @@ void ImporterApi::importerRowDestroy(const qint32 &id) {
         }
     });
 
-    _OauthMethod = 3;
+    _OauthMethod = OauthMethod::ClientCredentialsFlow;
     _authFlow.unlink();
     _implicitFlow.unlink();
     _passwordFlow.unlink();
     _credentialFlow.link();
-    QStringList scope3;
-    scope3.append("g:read");
-    auto token3 = _credentialFlow.getToken(scope3.join(" "));
+    QStringList scopeClientCredentialsFlow;
+    scopeClientCredentialsFlow.append("g:read");
+    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
     if(token3.isValid())
         input.headers.insert("Authorization", "Bearer " + token3.getToken());
 
@@ -1414,16 +1414,16 @@ void ImporterApi::importerRowDestroy(const qint32 &id) {
     });
 
     _latestInput = input;
-    _latestScope = scope3;
+    _latestScope = scopeClientCredentialsFlow;
 
-    _OauthMethod = 2;
+    _OauthMethod = OauthMethod::AuthorizationFlow;
     _implicitFlow.unlink();
     _credentialFlow.unlink();
     _passwordFlow.unlink();
     _authFlow.link();
-    QStringList scope2;
-    scope2.append("g:read");
-    auto token2 = _authFlow.getToken(scope2.join(" "));
+    QStringList scopeAuthorizationFlow;
+    scopeAuthorizationFlow.append("g:read");
+    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
     if(token2.isValid())
         input.headers.insert("Authorization", "Bearer " + token2.getToken());
 
@@ -1440,7 +1440,7 @@ void ImporterApi::importerRowDestroy(const qint32 &id) {
     });
 
     _latestInput = input;
-    _latestScope = scope2;
+    _latestScope = scopeAuthorizationFlow;
 
 
 
@@ -1653,14 +1653,14 @@ void ImporterApi::importerRowList(const qint32 &limit, const ::InvenTree::Option
         }
     });
 
-    _OauthMethod = 3;
+    _OauthMethod = OauthMethod::ClientCredentialsFlow;
     _authFlow.unlink();
     _implicitFlow.unlink();
     _passwordFlow.unlink();
     _credentialFlow.link();
-    QStringList scope3;
-    scope3.append("g:read");
-    auto token3 = _credentialFlow.getToken(scope3.join(" "));
+    QStringList scopeClientCredentialsFlow;
+    scopeClientCredentialsFlow.append("g:read");
+    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
     if(token3.isValid())
         input.headers.insert("Authorization", "Bearer " + token3.getToken());
 
@@ -1677,16 +1677,16 @@ void ImporterApi::importerRowList(const qint32 &limit, const ::InvenTree::Option
     });
 
     _latestInput = input;
-    _latestScope = scope3;
+    _latestScope = scopeClientCredentialsFlow;
 
-    _OauthMethod = 2;
+    _OauthMethod = OauthMethod::AuthorizationFlow;
     _implicitFlow.unlink();
     _credentialFlow.unlink();
     _passwordFlow.unlink();
     _authFlow.link();
-    QStringList scope2;
-    scope2.append("g:read");
-    auto token2 = _authFlow.getToken(scope2.join(" "));
+    QStringList scopeAuthorizationFlow;
+    scopeAuthorizationFlow.append("g:read");
+    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
     if(token2.isValid())
         input.headers.insert("Authorization", "Bearer " + token2.getToken());
 
@@ -1703,7 +1703,7 @@ void ImporterApi::importerRowList(const qint32 &limit, const ::InvenTree::Option
     });
 
     _latestInput = input;
-    _latestScope = scope2;
+    _latestScope = scopeAuthorizationFlow;
 
 
 
@@ -1830,14 +1830,14 @@ void ImporterApi::importerRowPartialUpdate(const qint32 &id, const ::InvenTree::
         }
     });
 
-    _OauthMethod = 3;
+    _OauthMethod = OauthMethod::ClientCredentialsFlow;
     _authFlow.unlink();
     _implicitFlow.unlink();
     _passwordFlow.unlink();
     _credentialFlow.link();
-    QStringList scope3;
-    scope3.append("g:read");
-    auto token3 = _credentialFlow.getToken(scope3.join(" "));
+    QStringList scopeClientCredentialsFlow;
+    scopeClientCredentialsFlow.append("g:read");
+    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
     if(token3.isValid())
         input.headers.insert("Authorization", "Bearer " + token3.getToken());
 
@@ -1854,16 +1854,16 @@ void ImporterApi::importerRowPartialUpdate(const qint32 &id, const ::InvenTree::
     });
 
     _latestInput = input;
-    _latestScope = scope3;
+    _latestScope = scopeClientCredentialsFlow;
 
-    _OauthMethod = 2;
+    _OauthMethod = OauthMethod::AuthorizationFlow;
     _implicitFlow.unlink();
     _credentialFlow.unlink();
     _passwordFlow.unlink();
     _authFlow.link();
-    QStringList scope2;
-    scope2.append("g:read");
-    auto token2 = _authFlow.getToken(scope2.join(" "));
+    QStringList scopeAuthorizationFlow;
+    scopeAuthorizationFlow.append("g:read");
+    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
     if(token2.isValid())
         input.headers.insert("Authorization", "Bearer " + token2.getToken());
 
@@ -1880,7 +1880,7 @@ void ImporterApi::importerRowPartialUpdate(const qint32 &id, const ::InvenTree::
     });
 
     _latestInput = input;
-    _latestScope = scope2;
+    _latestScope = scopeAuthorizationFlow;
 
 
 
@@ -2002,14 +2002,14 @@ void ImporterApi::importerRowRetrieve(const qint32 &id) {
         }
     });
 
-    _OauthMethod = 3;
+    _OauthMethod = OauthMethod::ClientCredentialsFlow;
     _authFlow.unlink();
     _implicitFlow.unlink();
     _passwordFlow.unlink();
     _credentialFlow.link();
-    QStringList scope3;
-    scope3.append("g:read");
-    auto token3 = _credentialFlow.getToken(scope3.join(" "));
+    QStringList scopeClientCredentialsFlow;
+    scopeClientCredentialsFlow.append("g:read");
+    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
     if(token3.isValid())
         input.headers.insert("Authorization", "Bearer " + token3.getToken());
 
@@ -2026,16 +2026,16 @@ void ImporterApi::importerRowRetrieve(const qint32 &id) {
     });
 
     _latestInput = input;
-    _latestScope = scope3;
+    _latestScope = scopeClientCredentialsFlow;
 
-    _OauthMethod = 2;
+    _OauthMethod = OauthMethod::AuthorizationFlow;
     _implicitFlow.unlink();
     _credentialFlow.unlink();
     _passwordFlow.unlink();
     _authFlow.link();
-    QStringList scope2;
-    scope2.append("g:read");
-    auto token2 = _authFlow.getToken(scope2.join(" "));
+    QStringList scopeAuthorizationFlow;
+    scopeAuthorizationFlow.append("g:read");
+    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
     if(token2.isValid())
         input.headers.insert("Authorization", "Bearer " + token2.getToken());
 
@@ -2052,7 +2052,7 @@ void ImporterApi::importerRowRetrieve(const qint32 &id) {
     });
 
     _latestInput = input;
-    _latestScope = scope2;
+    _latestScope = scopeAuthorizationFlow;
 
 
 
@@ -2179,14 +2179,14 @@ void ImporterApi::importerRowUpdate(const qint32 &id, const ::InvenTree::Optiona
         }
     });
 
-    _OauthMethod = 3;
+    _OauthMethod = OauthMethod::ClientCredentialsFlow;
     _authFlow.unlink();
     _implicitFlow.unlink();
     _passwordFlow.unlink();
     _credentialFlow.link();
-    QStringList scope3;
-    scope3.append("g:read");
-    auto token3 = _credentialFlow.getToken(scope3.join(" "));
+    QStringList scopeClientCredentialsFlow;
+    scopeClientCredentialsFlow.append("g:read");
+    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
     if(token3.isValid())
         input.headers.insert("Authorization", "Bearer " + token3.getToken());
 
@@ -2203,16 +2203,16 @@ void ImporterApi::importerRowUpdate(const qint32 &id, const ::InvenTree::Optiona
     });
 
     _latestInput = input;
-    _latestScope = scope3;
+    _latestScope = scopeClientCredentialsFlow;
 
-    _OauthMethod = 2;
+    _OauthMethod = OauthMethod::AuthorizationFlow;
     _implicitFlow.unlink();
     _credentialFlow.unlink();
     _passwordFlow.unlink();
     _authFlow.link();
-    QStringList scope2;
-    scope2.append("g:read");
-    auto token2 = _authFlow.getToken(scope2.join(" "));
+    QStringList scopeAuthorizationFlow;
+    scopeAuthorizationFlow.append("g:read");
+    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
     if(token2.isValid())
         input.headers.insert("Authorization", "Bearer " + token2.getToken());
 
@@ -2229,7 +2229,7 @@ void ImporterApi::importerRowUpdate(const qint32 &id, const ::InvenTree::Optiona
     });
 
     _latestInput = input;
-    _latestScope = scope2;
+    _latestScope = scopeAuthorizationFlow;
 
 
 
@@ -2351,14 +2351,14 @@ void ImporterApi::importerSessionAcceptFieldsCreate(const qint32 &id) {
         }
     });
 
-    _OauthMethod = 3;
+    _OauthMethod = OauthMethod::ClientCredentialsFlow;
     _authFlow.unlink();
     _implicitFlow.unlink();
     _passwordFlow.unlink();
     _credentialFlow.link();
-    QStringList scope3;
-    scope3.append("g:read");
-    auto token3 = _credentialFlow.getToken(scope3.join(" "));
+    QStringList scopeClientCredentialsFlow;
+    scopeClientCredentialsFlow.append("g:read");
+    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
     if(token3.isValid())
         input.headers.insert("Authorization", "Bearer " + token3.getToken());
 
@@ -2375,16 +2375,16 @@ void ImporterApi::importerSessionAcceptFieldsCreate(const qint32 &id) {
     });
 
     _latestInput = input;
-    _latestScope = scope3;
+    _latestScope = scopeClientCredentialsFlow;
 
-    _OauthMethod = 2;
+    _OauthMethod = OauthMethod::AuthorizationFlow;
     _implicitFlow.unlink();
     _credentialFlow.unlink();
     _passwordFlow.unlink();
     _authFlow.link();
-    QStringList scope2;
-    scope2.append("g:read");
-    auto token2 = _authFlow.getToken(scope2.join(" "));
+    QStringList scopeAuthorizationFlow;
+    scopeAuthorizationFlow.append("g:read");
+    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
     if(token2.isValid())
         input.headers.insert("Authorization", "Bearer " + token2.getToken());
 
@@ -2401,7 +2401,7 @@ void ImporterApi::importerSessionAcceptFieldsCreate(const qint32 &id) {
     });
 
     _latestInput = input;
-    _latestScope = scope2;
+    _latestScope = scopeAuthorizationFlow;
 
 
 
@@ -2528,14 +2528,14 @@ void ImporterApi::importerSessionAcceptRowsCreate(const qint32 &id, const DataIm
         }
     });
 
-    _OauthMethod = 3;
+    _OauthMethod = OauthMethod::ClientCredentialsFlow;
     _authFlow.unlink();
     _implicitFlow.unlink();
     _passwordFlow.unlink();
     _credentialFlow.link();
-    QStringList scope3;
-    scope3.append("g:read");
-    auto token3 = _credentialFlow.getToken(scope3.join(" "));
+    QStringList scopeClientCredentialsFlow;
+    scopeClientCredentialsFlow.append("g:read");
+    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
     if(token3.isValid())
         input.headers.insert("Authorization", "Bearer " + token3.getToken());
 
@@ -2552,16 +2552,16 @@ void ImporterApi::importerSessionAcceptRowsCreate(const qint32 &id, const DataIm
     });
 
     _latestInput = input;
-    _latestScope = scope3;
+    _latestScope = scopeClientCredentialsFlow;
 
-    _OauthMethod = 2;
+    _OauthMethod = OauthMethod::AuthorizationFlow;
     _implicitFlow.unlink();
     _credentialFlow.unlink();
     _passwordFlow.unlink();
     _authFlow.link();
-    QStringList scope2;
-    scope2.append("g:read");
-    auto token2 = _authFlow.getToken(scope2.join(" "));
+    QStringList scopeAuthorizationFlow;
+    scopeAuthorizationFlow.append("g:read");
+    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
     if(token2.isValid())
         input.headers.insert("Authorization", "Bearer " + token2.getToken());
 
@@ -2578,7 +2578,7 @@ void ImporterApi::importerSessionAcceptRowsCreate(const qint32 &id, const DataIm
     });
 
     _latestInput = input;
-    _latestScope = scope2;
+    _latestScope = scopeAuthorizationFlow;
 
 
 
@@ -2691,22 +2691,22 @@ void ImporterApi::importerSessionBulkDestroy(const BulkRequest &bulk_request) {
         }
     });
 
-    _OauthMethod = 3;
+    _OauthMethod = OauthMethod::ClientCredentialsFlow;
     _authFlow.unlink();
     _implicitFlow.unlink();
     _passwordFlow.unlink();
     _credentialFlow.link();
-    QStringList scope3;
-    scope3.append("r:change:admin");
-    scope3.append("r:change:part_category");
-    scope3.append("r:change:part");
-    scope3.append("r:change:stock_location");
-    scope3.append("r:change:stock");
-    scope3.append("r:change:build");
-    scope3.append("r:change:purchase_order");
-    scope3.append("r:change:sales_order");
-    scope3.append("r:change:return_order");
-    auto token3 = _credentialFlow.getToken(scope3.join(" "));
+    QStringList scopeClientCredentialsFlow;
+    scopeClientCredentialsFlow.append("r:change:admin");
+    scopeClientCredentialsFlow.append("r:change:part_category");
+    scopeClientCredentialsFlow.append("r:change:part");
+    scopeClientCredentialsFlow.append("r:change:stock_location");
+    scopeClientCredentialsFlow.append("r:change:stock");
+    scopeClientCredentialsFlow.append("r:change:build");
+    scopeClientCredentialsFlow.append("r:change:purchase_order");
+    scopeClientCredentialsFlow.append("r:change:sales_order");
+    scopeClientCredentialsFlow.append("r:change:return_order");
+    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
     if(token3.isValid())
         input.headers.insert("Authorization", "Bearer " + token3.getToken());
 
@@ -2723,24 +2723,24 @@ void ImporterApi::importerSessionBulkDestroy(const BulkRequest &bulk_request) {
     });
 
     _latestInput = input;
-    _latestScope = scope3;
+    _latestScope = scopeClientCredentialsFlow;
 
-    _OauthMethod = 2;
+    _OauthMethod = OauthMethod::AuthorizationFlow;
     _implicitFlow.unlink();
     _credentialFlow.unlink();
     _passwordFlow.unlink();
     _authFlow.link();
-    QStringList scope2;
-    scope2.append("r:change:admin");
-    scope2.append("r:change:part_category");
-    scope2.append("r:change:part");
-    scope2.append("r:change:stock_location");
-    scope2.append("r:change:stock");
-    scope2.append("r:change:build");
-    scope2.append("r:change:purchase_order");
-    scope2.append("r:change:sales_order");
-    scope2.append("r:change:return_order");
-    auto token2 = _authFlow.getToken(scope2.join(" "));
+    QStringList scopeAuthorizationFlow;
+    scopeAuthorizationFlow.append("r:change:admin");
+    scopeAuthorizationFlow.append("r:change:part_category");
+    scopeAuthorizationFlow.append("r:change:part");
+    scopeAuthorizationFlow.append("r:change:stock_location");
+    scopeAuthorizationFlow.append("r:change:stock");
+    scopeAuthorizationFlow.append("r:change:build");
+    scopeAuthorizationFlow.append("r:change:purchase_order");
+    scopeAuthorizationFlow.append("r:change:sales_order");
+    scopeAuthorizationFlow.append("r:change:return_order");
+    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
     if(token2.isValid())
         input.headers.insert("Authorization", "Bearer " + token2.getToken());
 
@@ -2757,7 +2757,7 @@ void ImporterApi::importerSessionBulkDestroy(const BulkRequest &bulk_request) {
     });
 
     _latestInput = input;
-    _latestScope = scope2;
+    _latestScope = scopeAuthorizationFlow;
 
 
 
@@ -2885,22 +2885,22 @@ void ImporterApi::importerSessionCreate(const DataImportSession &data_import_ses
         }
     });
 
-    _OauthMethod = 3;
+    _OauthMethod = OauthMethod::ClientCredentialsFlow;
     _authFlow.unlink();
     _implicitFlow.unlink();
     _passwordFlow.unlink();
     _credentialFlow.link();
-    QStringList scope3;
-    scope3.append("r:change:admin");
-    scope3.append("r:change:part_category");
-    scope3.append("r:change:part");
-    scope3.append("r:change:stock_location");
-    scope3.append("r:change:stock");
-    scope3.append("r:change:build");
-    scope3.append("r:change:purchase_order");
-    scope3.append("r:change:sales_order");
-    scope3.append("r:change:return_order");
-    auto token3 = _credentialFlow.getToken(scope3.join(" "));
+    QStringList scopeClientCredentialsFlow;
+    scopeClientCredentialsFlow.append("r:change:admin");
+    scopeClientCredentialsFlow.append("r:change:part_category");
+    scopeClientCredentialsFlow.append("r:change:part");
+    scopeClientCredentialsFlow.append("r:change:stock_location");
+    scopeClientCredentialsFlow.append("r:change:stock");
+    scopeClientCredentialsFlow.append("r:change:build");
+    scopeClientCredentialsFlow.append("r:change:purchase_order");
+    scopeClientCredentialsFlow.append("r:change:sales_order");
+    scopeClientCredentialsFlow.append("r:change:return_order");
+    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
     if(token3.isValid())
         input.headers.insert("Authorization", "Bearer " + token3.getToken());
 
@@ -2917,24 +2917,24 @@ void ImporterApi::importerSessionCreate(const DataImportSession &data_import_ses
     });
 
     _latestInput = input;
-    _latestScope = scope3;
+    _latestScope = scopeClientCredentialsFlow;
 
-    _OauthMethod = 2;
+    _OauthMethod = OauthMethod::AuthorizationFlow;
     _implicitFlow.unlink();
     _credentialFlow.unlink();
     _passwordFlow.unlink();
     _authFlow.link();
-    QStringList scope2;
-    scope2.append("r:change:admin");
-    scope2.append("r:change:part_category");
-    scope2.append("r:change:part");
-    scope2.append("r:change:stock_location");
-    scope2.append("r:change:stock");
-    scope2.append("r:change:build");
-    scope2.append("r:change:purchase_order");
-    scope2.append("r:change:sales_order");
-    scope2.append("r:change:return_order");
-    auto token2 = _authFlow.getToken(scope2.join(" "));
+    QStringList scopeAuthorizationFlow;
+    scopeAuthorizationFlow.append("r:change:admin");
+    scopeAuthorizationFlow.append("r:change:part_category");
+    scopeAuthorizationFlow.append("r:change:part");
+    scopeAuthorizationFlow.append("r:change:stock_location");
+    scopeAuthorizationFlow.append("r:change:stock");
+    scopeAuthorizationFlow.append("r:change:build");
+    scopeAuthorizationFlow.append("r:change:purchase_order");
+    scopeAuthorizationFlow.append("r:change:sales_order");
+    scopeAuthorizationFlow.append("r:change:return_order");
+    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
     if(token2.isValid())
         input.headers.insert("Authorization", "Bearer " + token2.getToken());
 
@@ -2951,7 +2951,7 @@ void ImporterApi::importerSessionCreate(const DataImportSession &data_import_ses
     });
 
     _latestInput = input;
-    _latestScope = scope2;
+    _latestScope = scopeAuthorizationFlow;
 
 
 
@@ -3089,22 +3089,22 @@ void ImporterApi::importerSessionDestroy(const qint32 &id) {
         }
     });
 
-    _OauthMethod = 3;
+    _OauthMethod = OauthMethod::ClientCredentialsFlow;
     _authFlow.unlink();
     _implicitFlow.unlink();
     _passwordFlow.unlink();
     _credentialFlow.link();
-    QStringList scope3;
-    scope3.append("r:change:admin");
-    scope3.append("r:change:part_category");
-    scope3.append("r:change:part");
-    scope3.append("r:change:stock_location");
-    scope3.append("r:change:stock");
-    scope3.append("r:change:build");
-    scope3.append("r:change:purchase_order");
-    scope3.append("r:change:sales_order");
-    scope3.append("r:change:return_order");
-    auto token3 = _credentialFlow.getToken(scope3.join(" "));
+    QStringList scopeClientCredentialsFlow;
+    scopeClientCredentialsFlow.append("r:change:admin");
+    scopeClientCredentialsFlow.append("r:change:part_category");
+    scopeClientCredentialsFlow.append("r:change:part");
+    scopeClientCredentialsFlow.append("r:change:stock_location");
+    scopeClientCredentialsFlow.append("r:change:stock");
+    scopeClientCredentialsFlow.append("r:change:build");
+    scopeClientCredentialsFlow.append("r:change:purchase_order");
+    scopeClientCredentialsFlow.append("r:change:sales_order");
+    scopeClientCredentialsFlow.append("r:change:return_order");
+    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
     if(token3.isValid())
         input.headers.insert("Authorization", "Bearer " + token3.getToken());
 
@@ -3121,24 +3121,24 @@ void ImporterApi::importerSessionDestroy(const qint32 &id) {
     });
 
     _latestInput = input;
-    _latestScope = scope3;
+    _latestScope = scopeClientCredentialsFlow;
 
-    _OauthMethod = 2;
+    _OauthMethod = OauthMethod::AuthorizationFlow;
     _implicitFlow.unlink();
     _credentialFlow.unlink();
     _passwordFlow.unlink();
     _authFlow.link();
-    QStringList scope2;
-    scope2.append("r:change:admin");
-    scope2.append("r:change:part_category");
-    scope2.append("r:change:part");
-    scope2.append("r:change:stock_location");
-    scope2.append("r:change:stock");
-    scope2.append("r:change:build");
-    scope2.append("r:change:purchase_order");
-    scope2.append("r:change:sales_order");
-    scope2.append("r:change:return_order");
-    auto token2 = _authFlow.getToken(scope2.join(" "));
+    QStringList scopeAuthorizationFlow;
+    scopeAuthorizationFlow.append("r:change:admin");
+    scopeAuthorizationFlow.append("r:change:part_category");
+    scopeAuthorizationFlow.append("r:change:part");
+    scopeAuthorizationFlow.append("r:change:stock_location");
+    scopeAuthorizationFlow.append("r:change:stock");
+    scopeAuthorizationFlow.append("r:change:build");
+    scopeAuthorizationFlow.append("r:change:purchase_order");
+    scopeAuthorizationFlow.append("r:change:sales_order");
+    scopeAuthorizationFlow.append("r:change:return_order");
+    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
     if(token2.isValid())
         input.headers.insert("Authorization", "Bearer " + token2.getToken());
 
@@ -3155,7 +3155,7 @@ void ImporterApi::importerSessionDestroy(const qint32 &id) {
     });
 
     _latestInput = input;
-    _latestScope = scope2;
+    _latestScope = scopeAuthorizationFlow;
 
 
 
@@ -3384,14 +3384,14 @@ void ImporterApi::importerSessionList(const qint32 &limit, const ::InvenTree::Op
         }
     });
 
-    _OauthMethod = 3;
+    _OauthMethod = OauthMethod::ClientCredentialsFlow;
     _authFlow.unlink();
     _implicitFlow.unlink();
     _passwordFlow.unlink();
     _credentialFlow.link();
-    QStringList scope3;
-    scope3.append("g:read");
-    auto token3 = _credentialFlow.getToken(scope3.join(" "));
+    QStringList scopeClientCredentialsFlow;
+    scopeClientCredentialsFlow.append("g:read");
+    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
     if(token3.isValid())
         input.headers.insert("Authorization", "Bearer " + token3.getToken());
 
@@ -3408,16 +3408,16 @@ void ImporterApi::importerSessionList(const qint32 &limit, const ::InvenTree::Op
     });
 
     _latestInput = input;
-    _latestScope = scope3;
+    _latestScope = scopeClientCredentialsFlow;
 
-    _OauthMethod = 2;
+    _OauthMethod = OauthMethod::AuthorizationFlow;
     _implicitFlow.unlink();
     _credentialFlow.unlink();
     _passwordFlow.unlink();
     _authFlow.link();
-    QStringList scope2;
-    scope2.append("g:read");
-    auto token2 = _authFlow.getToken(scope2.join(" "));
+    QStringList scopeAuthorizationFlow;
+    scopeAuthorizationFlow.append("g:read");
+    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
     if(token2.isValid())
         input.headers.insert("Authorization", "Bearer " + token2.getToken());
 
@@ -3434,7 +3434,7 @@ void ImporterApi::importerSessionList(const qint32 &limit, const ::InvenTree::Op
     });
 
     _latestInput = input;
-    _latestScope = scope2;
+    _latestScope = scopeAuthorizationFlow;
 
 
 
@@ -3561,22 +3561,22 @@ void ImporterApi::importerSessionPartialUpdate(const qint32 &id, const ::InvenTr
         }
     });
 
-    _OauthMethod = 3;
+    _OauthMethod = OauthMethod::ClientCredentialsFlow;
     _authFlow.unlink();
     _implicitFlow.unlink();
     _passwordFlow.unlink();
     _credentialFlow.link();
-    QStringList scope3;
-    scope3.append("r:change:admin");
-    scope3.append("r:change:part_category");
-    scope3.append("r:change:part");
-    scope3.append("r:change:stock_location");
-    scope3.append("r:change:stock");
-    scope3.append("r:change:build");
-    scope3.append("r:change:purchase_order");
-    scope3.append("r:change:sales_order");
-    scope3.append("r:change:return_order");
-    auto token3 = _credentialFlow.getToken(scope3.join(" "));
+    QStringList scopeClientCredentialsFlow;
+    scopeClientCredentialsFlow.append("r:change:admin");
+    scopeClientCredentialsFlow.append("r:change:part_category");
+    scopeClientCredentialsFlow.append("r:change:part");
+    scopeClientCredentialsFlow.append("r:change:stock_location");
+    scopeClientCredentialsFlow.append("r:change:stock");
+    scopeClientCredentialsFlow.append("r:change:build");
+    scopeClientCredentialsFlow.append("r:change:purchase_order");
+    scopeClientCredentialsFlow.append("r:change:sales_order");
+    scopeClientCredentialsFlow.append("r:change:return_order");
+    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
     if(token3.isValid())
         input.headers.insert("Authorization", "Bearer " + token3.getToken());
 
@@ -3593,24 +3593,24 @@ void ImporterApi::importerSessionPartialUpdate(const qint32 &id, const ::InvenTr
     });
 
     _latestInput = input;
-    _latestScope = scope3;
+    _latestScope = scopeClientCredentialsFlow;
 
-    _OauthMethod = 2;
+    _OauthMethod = OauthMethod::AuthorizationFlow;
     _implicitFlow.unlink();
     _credentialFlow.unlink();
     _passwordFlow.unlink();
     _authFlow.link();
-    QStringList scope2;
-    scope2.append("r:change:admin");
-    scope2.append("r:change:part_category");
-    scope2.append("r:change:part");
-    scope2.append("r:change:stock_location");
-    scope2.append("r:change:stock");
-    scope2.append("r:change:build");
-    scope2.append("r:change:purchase_order");
-    scope2.append("r:change:sales_order");
-    scope2.append("r:change:return_order");
-    auto token2 = _authFlow.getToken(scope2.join(" "));
+    QStringList scopeAuthorizationFlow;
+    scopeAuthorizationFlow.append("r:change:admin");
+    scopeAuthorizationFlow.append("r:change:part_category");
+    scopeAuthorizationFlow.append("r:change:part");
+    scopeAuthorizationFlow.append("r:change:stock_location");
+    scopeAuthorizationFlow.append("r:change:stock");
+    scopeAuthorizationFlow.append("r:change:build");
+    scopeAuthorizationFlow.append("r:change:purchase_order");
+    scopeAuthorizationFlow.append("r:change:sales_order");
+    scopeAuthorizationFlow.append("r:change:return_order");
+    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
     if(token2.isValid())
         input.headers.insert("Authorization", "Bearer " + token2.getToken());
 
@@ -3627,7 +3627,7 @@ void ImporterApi::importerSessionPartialUpdate(const qint32 &id, const ::InvenTr
     });
 
     _latestInput = input;
-    _latestScope = scope2;
+    _latestScope = scopeAuthorizationFlow;
 
 
 
@@ -3765,14 +3765,14 @@ void ImporterApi::importerSessionRetrieve(const qint32 &id) {
         }
     });
 
-    _OauthMethod = 3;
+    _OauthMethod = OauthMethod::ClientCredentialsFlow;
     _authFlow.unlink();
     _implicitFlow.unlink();
     _passwordFlow.unlink();
     _credentialFlow.link();
-    QStringList scope3;
-    scope3.append("g:read");
-    auto token3 = _credentialFlow.getToken(scope3.join(" "));
+    QStringList scopeClientCredentialsFlow;
+    scopeClientCredentialsFlow.append("g:read");
+    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
     if(token3.isValid())
         input.headers.insert("Authorization", "Bearer " + token3.getToken());
 
@@ -3789,16 +3789,16 @@ void ImporterApi::importerSessionRetrieve(const qint32 &id) {
     });
 
     _latestInput = input;
-    _latestScope = scope3;
+    _latestScope = scopeClientCredentialsFlow;
 
-    _OauthMethod = 2;
+    _OauthMethod = OauthMethod::AuthorizationFlow;
     _implicitFlow.unlink();
     _credentialFlow.unlink();
     _passwordFlow.unlink();
     _authFlow.link();
-    QStringList scope2;
-    scope2.append("g:read");
-    auto token2 = _authFlow.getToken(scope2.join(" "));
+    QStringList scopeAuthorizationFlow;
+    scopeAuthorizationFlow.append("g:read");
+    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
     if(token2.isValid())
         input.headers.insert("Authorization", "Bearer " + token2.getToken());
 
@@ -3815,7 +3815,7 @@ void ImporterApi::importerSessionRetrieve(const qint32 &id) {
     });
 
     _latestInput = input;
-    _latestScope = scope2;
+    _latestScope = scopeAuthorizationFlow;
 
 
 
@@ -3942,22 +3942,22 @@ void ImporterApi::importerSessionUpdate(const qint32 &id, const DataImportSessio
         }
     });
 
-    _OauthMethod = 3;
+    _OauthMethod = OauthMethod::ClientCredentialsFlow;
     _authFlow.unlink();
     _implicitFlow.unlink();
     _passwordFlow.unlink();
     _credentialFlow.link();
-    QStringList scope3;
-    scope3.append("r:change:admin");
-    scope3.append("r:change:part_category");
-    scope3.append("r:change:part");
-    scope3.append("r:change:stock_location");
-    scope3.append("r:change:stock");
-    scope3.append("r:change:build");
-    scope3.append("r:change:purchase_order");
-    scope3.append("r:change:sales_order");
-    scope3.append("r:change:return_order");
-    auto token3 = _credentialFlow.getToken(scope3.join(" "));
+    QStringList scopeClientCredentialsFlow;
+    scopeClientCredentialsFlow.append("r:change:admin");
+    scopeClientCredentialsFlow.append("r:change:part_category");
+    scopeClientCredentialsFlow.append("r:change:part");
+    scopeClientCredentialsFlow.append("r:change:stock_location");
+    scopeClientCredentialsFlow.append("r:change:stock");
+    scopeClientCredentialsFlow.append("r:change:build");
+    scopeClientCredentialsFlow.append("r:change:purchase_order");
+    scopeClientCredentialsFlow.append("r:change:sales_order");
+    scopeClientCredentialsFlow.append("r:change:return_order");
+    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
     if(token3.isValid())
         input.headers.insert("Authorization", "Bearer " + token3.getToken());
 
@@ -3974,24 +3974,24 @@ void ImporterApi::importerSessionUpdate(const qint32 &id, const DataImportSessio
     });
 
     _latestInput = input;
-    _latestScope = scope3;
+    _latestScope = scopeClientCredentialsFlow;
 
-    _OauthMethod = 2;
+    _OauthMethod = OauthMethod::AuthorizationFlow;
     _implicitFlow.unlink();
     _credentialFlow.unlink();
     _passwordFlow.unlink();
     _authFlow.link();
-    QStringList scope2;
-    scope2.append("r:change:admin");
-    scope2.append("r:change:part_category");
-    scope2.append("r:change:part");
-    scope2.append("r:change:stock_location");
-    scope2.append("r:change:stock");
-    scope2.append("r:change:build");
-    scope2.append("r:change:purchase_order");
-    scope2.append("r:change:sales_order");
-    scope2.append("r:change:return_order");
-    auto token2 = _authFlow.getToken(scope2.join(" "));
+    QStringList scopeAuthorizationFlow;
+    scopeAuthorizationFlow.append("r:change:admin");
+    scopeAuthorizationFlow.append("r:change:part_category");
+    scopeAuthorizationFlow.append("r:change:part");
+    scopeAuthorizationFlow.append("r:change:stock_location");
+    scopeAuthorizationFlow.append("r:change:stock");
+    scopeAuthorizationFlow.append("r:change:build");
+    scopeAuthorizationFlow.append("r:change:purchase_order");
+    scopeAuthorizationFlow.append("r:change:sales_order");
+    scopeAuthorizationFlow.append("r:change:return_order");
+    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
     if(token2.isValid())
         input.headers.insert("Authorization", "Bearer " + token2.getToken());
 
@@ -4008,7 +4008,7 @@ void ImporterApi::importerSessionUpdate(const qint32 &id, const DataImportSessio
     });
 
     _latestInput = input;
-    _latestScope = scope2;
+    _latestScope = scopeAuthorizationFlow;
 
 
 
@@ -4101,11 +4101,11 @@ void ImporterApi::importerSessionUpdateCallback(HttpRequestWorker *worker) {
     }
 }
 
-void ImporterApi::tokenAvailable(){
+void ImporterApi::tokenAvailable() {
 
     oauthToken token;
     switch (_OauthMethod) {
-    case 1: //implicit flow
+    case OauthMethod::ImplicitFlow:
         token = _implicitFlow.getToken(_latestScope.join(" "));
         if(token.isValid()){
             _latestInput.headers.insert("Authorization", "Bearer " + token.getToken());
@@ -4115,7 +4115,7 @@ void ImporterApi::tokenAvailable(){
             qDebug() << "Could not retrieve a valid token";
         }
         break;
-    case 2: //authorization flow
+    case OauthMethod::AuthorizationFlow:
         token = _authFlow.getToken(_latestScope.join(" "));
         if(token.isValid()){
             _latestInput.headers.insert("Authorization", "Bearer " + token.getToken());
@@ -4125,7 +4125,7 @@ void ImporterApi::tokenAvailable(){
             qDebug() << "Could not retrieve a valid token";
         }
         break;
-    case 3: //client credentials flow
+    case OauthMethod::ClientCredentialsFlow:
         token = _credentialFlow.getToken(_latestScope.join(" "));
         if(token.isValid()){
             _latestInput.headers.insert("Authorization", "Bearer " + token.getToken());
@@ -4135,7 +4135,7 @@ void ImporterApi::tokenAvailable(){
             qDebug() << "Could not retrieve a valid token";
         }
         break;
-    case 4: //resource owner password flow
+    case OauthMethod::ResourceOwnerPasswordFlow:
         token = _passwordFlow.getToken(_latestScope.join(" "));
         if(token.isValid()){
             _latestInput.headers.insert("Authorization", "Bearer " + token.getToken());

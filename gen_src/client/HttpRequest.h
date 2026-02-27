@@ -51,9 +51,7 @@ public:
     HttpRequestInput();
     HttpRequestInput(QString v_url_str, QString v_http_method);
     void initialize();
-    void add_json_object(const QJsonObject& obj, const QString& prefix = "");
     void add_var(QString key, QString value);
-    void add_file(HttpFileElement file);
     void add_file(QString variable_name, QString local_filename, QString request_filename, QString mime_type);
 };
 

@@ -261,14 +261,14 @@ void UnitsApi::unitsAllRetrieve() {
         }
     });
 
-    _OauthMethod = 3;
+    _OauthMethod = OauthMethod::ClientCredentialsFlow;
     _authFlow.unlink();
     _implicitFlow.unlink();
     _passwordFlow.unlink();
     _credentialFlow.link();
-    QStringList scope3;
-    scope3.append("g:read");
-    auto token3 = _credentialFlow.getToken(scope3.join(" "));
+    QStringList scopeClientCredentialsFlow;
+    scopeClientCredentialsFlow.append("g:read");
+    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
     if(token3.isValid())
         input.headers.insert("Authorization", "Bearer " + token3.getToken());
 
@@ -285,16 +285,16 @@ void UnitsApi::unitsAllRetrieve() {
     });
 
     _latestInput = input;
-    _latestScope = scope3;
+    _latestScope = scopeClientCredentialsFlow;
 
-    _OauthMethod = 2;
+    _OauthMethod = OauthMethod::AuthorizationFlow;
     _implicitFlow.unlink();
     _credentialFlow.unlink();
     _passwordFlow.unlink();
     _authFlow.link();
-    QStringList scope2;
-    scope2.append("g:read");
-    auto token2 = _authFlow.getToken(scope2.join(" "));
+    QStringList scopeAuthorizationFlow;
+    scopeAuthorizationFlow.append("g:read");
+    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
     if(token2.isValid())
         input.headers.insert("Authorization", "Bearer " + token2.getToken());
 
@@ -311,7 +311,7 @@ void UnitsApi::unitsAllRetrieve() {
     });
 
     _latestInput = input;
-    _latestScope = scope2;
+    _latestScope = scopeAuthorizationFlow;
 
 
 
@@ -424,14 +424,14 @@ void UnitsApi::unitsCreate(const CustomUnit &custom_unit) {
         }
     });
 
-    _OauthMethod = 3;
+    _OauthMethod = OauthMethod::ClientCredentialsFlow;
     _authFlow.unlink();
     _implicitFlow.unlink();
     _passwordFlow.unlink();
     _credentialFlow.link();
-    QStringList scope3;
-    scope3.append("a:staff");
-    auto token3 = _credentialFlow.getToken(scope3.join(" "));
+    QStringList scopeClientCredentialsFlow;
+    scopeClientCredentialsFlow.append("a:staff");
+    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
     if(token3.isValid())
         input.headers.insert("Authorization", "Bearer " + token3.getToken());
 
@@ -448,16 +448,16 @@ void UnitsApi::unitsCreate(const CustomUnit &custom_unit) {
     });
 
     _latestInput = input;
-    _latestScope = scope3;
+    _latestScope = scopeClientCredentialsFlow;
 
-    _OauthMethod = 2;
+    _OauthMethod = OauthMethod::AuthorizationFlow;
     _implicitFlow.unlink();
     _credentialFlow.unlink();
     _passwordFlow.unlink();
     _authFlow.link();
-    QStringList scope2;
-    scope2.append("a:staff");
-    auto token2 = _authFlow.getToken(scope2.join(" "));
+    QStringList scopeAuthorizationFlow;
+    scopeAuthorizationFlow.append("a:staff");
+    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
     if(token2.isValid())
         input.headers.insert("Authorization", "Bearer " + token2.getToken());
 
@@ -474,7 +474,7 @@ void UnitsApi::unitsCreate(const CustomUnit &custom_unit) {
     });
 
     _latestInput = input;
-    _latestScope = scope2;
+    _latestScope = scopeAuthorizationFlow;
 
 
 
@@ -596,14 +596,14 @@ void UnitsApi::unitsDestroy(const qint32 &id) {
         }
     });
 
-    _OauthMethod = 3;
+    _OauthMethod = OauthMethod::ClientCredentialsFlow;
     _authFlow.unlink();
     _implicitFlow.unlink();
     _passwordFlow.unlink();
     _credentialFlow.link();
-    QStringList scope3;
-    scope3.append("a:staff");
-    auto token3 = _credentialFlow.getToken(scope3.join(" "));
+    QStringList scopeClientCredentialsFlow;
+    scopeClientCredentialsFlow.append("a:staff");
+    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
     if(token3.isValid())
         input.headers.insert("Authorization", "Bearer " + token3.getToken());
 
@@ -620,16 +620,16 @@ void UnitsApi::unitsDestroy(const qint32 &id) {
     });
 
     _latestInput = input;
-    _latestScope = scope3;
+    _latestScope = scopeClientCredentialsFlow;
 
-    _OauthMethod = 2;
+    _OauthMethod = OauthMethod::AuthorizationFlow;
     _implicitFlow.unlink();
     _credentialFlow.unlink();
     _passwordFlow.unlink();
     _authFlow.link();
-    QStringList scope2;
-    scope2.append("a:staff");
-    auto token2 = _authFlow.getToken(scope2.join(" "));
+    QStringList scopeAuthorizationFlow;
+    scopeAuthorizationFlow.append("a:staff");
+    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
     if(token2.isValid())
         input.headers.insert("Authorization", "Bearer " + token2.getToken());
 
@@ -646,7 +646,7 @@ void UnitsApi::unitsDestroy(const qint32 &id) {
     });
 
     _latestInput = input;
-    _latestScope = scope2;
+    _latestScope = scopeAuthorizationFlow;
 
 
 
@@ -814,14 +814,14 @@ void UnitsApi::unitsList(const qint32 &limit, const ::InvenTree::OptionalParam<q
         }
     });
 
-    _OauthMethod = 3;
+    _OauthMethod = OauthMethod::ClientCredentialsFlow;
     _authFlow.unlink();
     _implicitFlow.unlink();
     _passwordFlow.unlink();
     _credentialFlow.link();
-    QStringList scope3;
-    scope3.append("g:read");
-    auto token3 = _credentialFlow.getToken(scope3.join(" "));
+    QStringList scopeClientCredentialsFlow;
+    scopeClientCredentialsFlow.append("g:read");
+    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
     if(token3.isValid())
         input.headers.insert("Authorization", "Bearer " + token3.getToken());
 
@@ -838,16 +838,16 @@ void UnitsApi::unitsList(const qint32 &limit, const ::InvenTree::OptionalParam<q
     });
 
     _latestInput = input;
-    _latestScope = scope3;
+    _latestScope = scopeClientCredentialsFlow;
 
-    _OauthMethod = 2;
+    _OauthMethod = OauthMethod::AuthorizationFlow;
     _implicitFlow.unlink();
     _credentialFlow.unlink();
     _passwordFlow.unlink();
     _authFlow.link();
-    QStringList scope2;
-    scope2.append("g:read");
-    auto token2 = _authFlow.getToken(scope2.join(" "));
+    QStringList scopeAuthorizationFlow;
+    scopeAuthorizationFlow.append("g:read");
+    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
     if(token2.isValid())
         input.headers.insert("Authorization", "Bearer " + token2.getToken());
 
@@ -864,7 +864,7 @@ void UnitsApi::unitsList(const qint32 &limit, const ::InvenTree::OptionalParam<q
     });
 
     _latestInput = input;
-    _latestScope = scope2;
+    _latestScope = scopeAuthorizationFlow;
 
 
 
@@ -991,14 +991,14 @@ void UnitsApi::unitsPartialUpdate(const qint32 &id, const ::InvenTree::OptionalP
         }
     });
 
-    _OauthMethod = 3;
+    _OauthMethod = OauthMethod::ClientCredentialsFlow;
     _authFlow.unlink();
     _implicitFlow.unlink();
     _passwordFlow.unlink();
     _credentialFlow.link();
-    QStringList scope3;
-    scope3.append("a:staff");
-    auto token3 = _credentialFlow.getToken(scope3.join(" "));
+    QStringList scopeClientCredentialsFlow;
+    scopeClientCredentialsFlow.append("a:staff");
+    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
     if(token3.isValid())
         input.headers.insert("Authorization", "Bearer " + token3.getToken());
 
@@ -1015,16 +1015,16 @@ void UnitsApi::unitsPartialUpdate(const qint32 &id, const ::InvenTree::OptionalP
     });
 
     _latestInput = input;
-    _latestScope = scope3;
+    _latestScope = scopeClientCredentialsFlow;
 
-    _OauthMethod = 2;
+    _OauthMethod = OauthMethod::AuthorizationFlow;
     _implicitFlow.unlink();
     _credentialFlow.unlink();
     _passwordFlow.unlink();
     _authFlow.link();
-    QStringList scope2;
-    scope2.append("a:staff");
-    auto token2 = _authFlow.getToken(scope2.join(" "));
+    QStringList scopeAuthorizationFlow;
+    scopeAuthorizationFlow.append("a:staff");
+    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
     if(token2.isValid())
         input.headers.insert("Authorization", "Bearer " + token2.getToken());
 
@@ -1041,7 +1041,7 @@ void UnitsApi::unitsPartialUpdate(const qint32 &id, const ::InvenTree::OptionalP
     });
 
     _latestInput = input;
-    _latestScope = scope2;
+    _latestScope = scopeAuthorizationFlow;
 
 
 
@@ -1163,14 +1163,14 @@ void UnitsApi::unitsRetrieve(const qint32 &id) {
         }
     });
 
-    _OauthMethod = 3;
+    _OauthMethod = OauthMethod::ClientCredentialsFlow;
     _authFlow.unlink();
     _implicitFlow.unlink();
     _passwordFlow.unlink();
     _credentialFlow.link();
-    QStringList scope3;
-    scope3.append("g:read");
-    auto token3 = _credentialFlow.getToken(scope3.join(" "));
+    QStringList scopeClientCredentialsFlow;
+    scopeClientCredentialsFlow.append("g:read");
+    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
     if(token3.isValid())
         input.headers.insert("Authorization", "Bearer " + token3.getToken());
 
@@ -1187,16 +1187,16 @@ void UnitsApi::unitsRetrieve(const qint32 &id) {
     });
 
     _latestInput = input;
-    _latestScope = scope3;
+    _latestScope = scopeClientCredentialsFlow;
 
-    _OauthMethod = 2;
+    _OauthMethod = OauthMethod::AuthorizationFlow;
     _implicitFlow.unlink();
     _credentialFlow.unlink();
     _passwordFlow.unlink();
     _authFlow.link();
-    QStringList scope2;
-    scope2.append("g:read");
-    auto token2 = _authFlow.getToken(scope2.join(" "));
+    QStringList scopeAuthorizationFlow;
+    scopeAuthorizationFlow.append("g:read");
+    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
     if(token2.isValid())
         input.headers.insert("Authorization", "Bearer " + token2.getToken());
 
@@ -1213,7 +1213,7 @@ void UnitsApi::unitsRetrieve(const qint32 &id) {
     });
 
     _latestInput = input;
-    _latestScope = scope2;
+    _latestScope = scopeAuthorizationFlow;
 
 
 
@@ -1340,14 +1340,14 @@ void UnitsApi::unitsUpdate(const qint32 &id, const CustomUnit &custom_unit) {
         }
     });
 
-    _OauthMethod = 3;
+    _OauthMethod = OauthMethod::ClientCredentialsFlow;
     _authFlow.unlink();
     _implicitFlow.unlink();
     _passwordFlow.unlink();
     _credentialFlow.link();
-    QStringList scope3;
-    scope3.append("a:staff");
-    auto token3 = _credentialFlow.getToken(scope3.join(" "));
+    QStringList scopeClientCredentialsFlow;
+    scopeClientCredentialsFlow.append("a:staff");
+    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
     if(token3.isValid())
         input.headers.insert("Authorization", "Bearer " + token3.getToken());
 
@@ -1364,16 +1364,16 @@ void UnitsApi::unitsUpdate(const qint32 &id, const CustomUnit &custom_unit) {
     });
 
     _latestInput = input;
-    _latestScope = scope3;
+    _latestScope = scopeClientCredentialsFlow;
 
-    _OauthMethod = 2;
+    _OauthMethod = OauthMethod::AuthorizationFlow;
     _implicitFlow.unlink();
     _credentialFlow.unlink();
     _passwordFlow.unlink();
     _authFlow.link();
-    QStringList scope2;
-    scope2.append("a:staff");
-    auto token2 = _authFlow.getToken(scope2.join(" "));
+    QStringList scopeAuthorizationFlow;
+    scopeAuthorizationFlow.append("a:staff");
+    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
     if(token2.isValid())
         input.headers.insert("Authorization", "Bearer " + token2.getToken());
 
@@ -1390,7 +1390,7 @@ void UnitsApi::unitsUpdate(const qint32 &id, const CustomUnit &custom_unit) {
     });
 
     _latestInput = input;
-    _latestScope = scope2;
+    _latestScope = scopeAuthorizationFlow;
 
 
 
@@ -1467,11 +1467,11 @@ void UnitsApi::unitsUpdateCallback(HttpRequestWorker *worker) {
     }
 }
 
-void UnitsApi::tokenAvailable(){
+void UnitsApi::tokenAvailable() {
 
     oauthToken token;
     switch (_OauthMethod) {
-    case 1: //implicit flow
+    case OauthMethod::ImplicitFlow:
         token = _implicitFlow.getToken(_latestScope.join(" "));
         if(token.isValid()){
             _latestInput.headers.insert("Authorization", "Bearer " + token.getToken());
@@ -1481,7 +1481,7 @@ void UnitsApi::tokenAvailable(){
             qDebug() << "Could not retrieve a valid token";
         }
         break;
-    case 2: //authorization flow
+    case OauthMethod::AuthorizationFlow:
         token = _authFlow.getToken(_latestScope.join(" "));
         if(token.isValid()){
             _latestInput.headers.insert("Authorization", "Bearer " + token.getToken());
@@ -1491,7 +1491,7 @@ void UnitsApi::tokenAvailable(){
             qDebug() << "Could not retrieve a valid token";
         }
         break;
-    case 3: //client credentials flow
+    case OauthMethod::ClientCredentialsFlow:
         token = _credentialFlow.getToken(_latestScope.join(" "));
         if(token.isValid()){
             _latestInput.headers.insert("Authorization", "Bearer " + token.getToken());
@@ -1501,7 +1501,7 @@ void UnitsApi::tokenAvailable(){
             qDebug() << "Could not retrieve a valid token";
         }
         break;
-    case 4: //resource owner password flow
+    case OauthMethod::ResourceOwnerPasswordFlow:
         token = _passwordFlow.getToken(_latestScope.join(" "));
         if(token.isValid()){
             _latestInput.headers.insert("Authorization", "Bearer " + token.getToken());

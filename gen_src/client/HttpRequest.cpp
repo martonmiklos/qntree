@@ -20,8 +20,6 @@
 
 
 #include "HttpRequest.h"
-#include "qjsonobject.h"
-#include <QJsonArray>
 
 namespace InvenTree {
 
@@ -41,73 +39,6 @@ void HttpRequestInput::initialize() {
     http_method = "GET";
 }
 
-QString json_value_to_string(const QJsonValue& v)
-{
-    switch (v.type()) {
-    case QJsonValue::Null:   return "";
-    case QJsonValue::Bool:   return v.toBool() ? "true" : "false";
-    case QJsonValue::Double: return QString::number(v.toDouble(), 'g', 15);
-    case QJsonValue::String: return v.toString();
-    default:                 return QString();
-    }
-}
-
-void HttpRequestInput::add_json_object(const QJsonObject& obj, const QString& prefix)
-{
-    for (auto it = obj.begin(); it != obj.end(); ++it) {
-
-        QString key = prefix.isEmpty() ? it.key() : prefix + "." + it.key();
-        const QJsonValue& val = it.value();
-
-        switch (val.type()) {
-
-        case QJsonValue::Null:
-            add_var(key, "");
-            break;
-
-        case QJsonValue::Bool:
-            add_var(key, val.toBool() ? "true" : "false");
-            break;
-
-        case QJsonValue::Double:
-            add_var(key, QString::number(val.toDouble(), 'g', 15));
-            break;
-
-        case QJsonValue::String:
-            add_var(key, val.toString());
-            break;
-
-        case QJsonValue::Array: {
-            QJsonArray arr = val.toArray();
-            for (int i = 0; i < arr.size(); ++i) {
-                QString arrKey = QString("%1[%2]").arg(key).arg(i);
-                const QJsonValue& av = arr[i];
-
-                if (av.isObject()) {
-                    add_json_object(av.toObject(), arrKey);
-                } else if (av.isArray()) {
-                    // nested array → recursion
-                    QJsonObject tmp;
-                    tmp["value"] = av;
-                    add_json_object(tmp, arrKey);
-                } else {
-                    add_var(arrKey, json_value_to_string(av));
-                }
-            }
-            break;
-        }
-
-        case QJsonValue::Object:
-            add_json_object(val.toObject(), key);
-            break;
-
-        default:
-            break;
-        }
-    }
-}
-
-
 void HttpRequestInput::add_var(QString key, QString value) {
     vars[key] = value;
 }
@@ -118,10 +49,6 @@ void HttpRequestInput::add_file(QString variable_name, QString local_filename, Q
     file.local_filename = local_filename;
     file.request_filename = request_filename;
     file.mime_type = mime_type;
-    files.append(file);
-}
-
-void HttpRequestInput::add_file(HttpFileElement file) {
     files.append(file);
 }
 
@@ -293,8 +220,6 @@ void HttpRequestWorker::execute(HttpRequestInput *input) {
 
         // add variables
         for (QString key : input->vars.keys()) {
-            if (input->vars.value(key).isEmpty())
-                continue;
             // add boundary
             request_content.append(boundary_delimiter.toUtf8());
             request_content.append(boundary.toUtf8());
@@ -304,8 +229,8 @@ void HttpRequestWorker::execute(HttpRequestInput *input) {
             request_content.append("Content-Disposition: form-data; ");
             request_content.append(http_attribute_encode("name", key).toUtf8());
             request_content.append(new_line.toUtf8());
-            ///request_content.append("Content-Type: text/plain");
-            //request_content.append(new_line.toUtf8());
+            request_content.append("Content-Type: text/plain");
+            request_content.append(new_line.toUtf8());
 
             // add header to body splitter
             request_content.append(new_line.toUtf8());

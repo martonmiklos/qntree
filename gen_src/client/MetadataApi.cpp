@@ -301,22 +301,22 @@ void MetadataApi::metadataPartialUpdate(const QString &lookup_field, const QStri
         }
     });
 
-    _OauthMethod = 3;
+    _OauthMethod = OauthMethod::ClientCredentialsFlow;
     _authFlow.unlink();
     _implicitFlow.unlink();
     _passwordFlow.unlink();
     _credentialFlow.link();
-    QStringList scope3;
-    scope3.append("r:change:admin");
-    scope3.append("r:change:part_category");
-    scope3.append("r:change:part");
-    scope3.append("r:change:stock_location");
-    scope3.append("r:change:stock");
-    scope3.append("r:change:build");
-    scope3.append("r:change:purchase_order");
-    scope3.append("r:change:sales_order");
-    scope3.append("r:change:return_order");
-    auto token3 = _credentialFlow.getToken(scope3.join(" "));
+    QStringList scopeClientCredentialsFlow;
+    scopeClientCredentialsFlow.append("r:change:admin");
+    scopeClientCredentialsFlow.append("r:change:part_category");
+    scopeClientCredentialsFlow.append("r:change:part");
+    scopeClientCredentialsFlow.append("r:change:stock_location");
+    scopeClientCredentialsFlow.append("r:change:stock");
+    scopeClientCredentialsFlow.append("r:change:build");
+    scopeClientCredentialsFlow.append("r:change:purchase_order");
+    scopeClientCredentialsFlow.append("r:change:sales_order");
+    scopeClientCredentialsFlow.append("r:change:return_order");
+    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
     if(token3.isValid())
         input.headers.insert("Authorization", "Bearer " + token3.getToken());
 
@@ -333,24 +333,24 @@ void MetadataApi::metadataPartialUpdate(const QString &lookup_field, const QStri
     });
 
     _latestInput = input;
-    _latestScope = scope3;
+    _latestScope = scopeClientCredentialsFlow;
 
-    _OauthMethod = 2;
+    _OauthMethod = OauthMethod::AuthorizationFlow;
     _implicitFlow.unlink();
     _credentialFlow.unlink();
     _passwordFlow.unlink();
     _authFlow.link();
-    QStringList scope2;
-    scope2.append("r:change:admin");
-    scope2.append("r:change:part_category");
-    scope2.append("r:change:part");
-    scope2.append("r:change:stock_location");
-    scope2.append("r:change:stock");
-    scope2.append("r:change:build");
-    scope2.append("r:change:purchase_order");
-    scope2.append("r:change:sales_order");
-    scope2.append("r:change:return_order");
-    auto token2 = _authFlow.getToken(scope2.join(" "));
+    QStringList scopeAuthorizationFlow;
+    scopeAuthorizationFlow.append("r:change:admin");
+    scopeAuthorizationFlow.append("r:change:part_category");
+    scopeAuthorizationFlow.append("r:change:part");
+    scopeAuthorizationFlow.append("r:change:stock_location");
+    scopeAuthorizationFlow.append("r:change:stock");
+    scopeAuthorizationFlow.append("r:change:build");
+    scopeAuthorizationFlow.append("r:change:purchase_order");
+    scopeAuthorizationFlow.append("r:change:sales_order");
+    scopeAuthorizationFlow.append("r:change:return_order");
+    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
     if(token2.isValid())
         input.headers.insert("Authorization", "Bearer " + token2.getToken());
 
@@ -367,7 +367,7 @@ void MetadataApi::metadataPartialUpdate(const QString &lookup_field, const QStri
     });
 
     _latestInput = input;
-    _latestScope = scope2;
+    _latestScope = scopeAuthorizationFlow;
 
 
 
@@ -518,22 +518,22 @@ void MetadataApi::metadataPkPartialUpdate(const qint32 &id, const QString &model
         }
     });
 
-    _OauthMethod = 3;
+    _OauthMethod = OauthMethod::ClientCredentialsFlow;
     _authFlow.unlink();
     _implicitFlow.unlink();
     _passwordFlow.unlink();
     _credentialFlow.link();
-    QStringList scope3;
-    scope3.append("r:change:admin");
-    scope3.append("r:change:part_category");
-    scope3.append("r:change:part");
-    scope3.append("r:change:stock_location");
-    scope3.append("r:change:stock");
-    scope3.append("r:change:build");
-    scope3.append("r:change:purchase_order");
-    scope3.append("r:change:sales_order");
-    scope3.append("r:change:return_order");
-    auto token3 = _credentialFlow.getToken(scope3.join(" "));
+    QStringList scopeClientCredentialsFlow;
+    scopeClientCredentialsFlow.append("r:change:admin");
+    scopeClientCredentialsFlow.append("r:change:part_category");
+    scopeClientCredentialsFlow.append("r:change:part");
+    scopeClientCredentialsFlow.append("r:change:stock_location");
+    scopeClientCredentialsFlow.append("r:change:stock");
+    scopeClientCredentialsFlow.append("r:change:build");
+    scopeClientCredentialsFlow.append("r:change:purchase_order");
+    scopeClientCredentialsFlow.append("r:change:sales_order");
+    scopeClientCredentialsFlow.append("r:change:return_order");
+    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
     if(token3.isValid())
         input.headers.insert("Authorization", "Bearer " + token3.getToken());
 
@@ -550,24 +550,24 @@ void MetadataApi::metadataPkPartialUpdate(const qint32 &id, const QString &model
     });
 
     _latestInput = input;
-    _latestScope = scope3;
+    _latestScope = scopeClientCredentialsFlow;
 
-    _OauthMethod = 2;
+    _OauthMethod = OauthMethod::AuthorizationFlow;
     _implicitFlow.unlink();
     _credentialFlow.unlink();
     _passwordFlow.unlink();
     _authFlow.link();
-    QStringList scope2;
-    scope2.append("r:change:admin");
-    scope2.append("r:change:part_category");
-    scope2.append("r:change:part");
-    scope2.append("r:change:stock_location");
-    scope2.append("r:change:stock");
-    scope2.append("r:change:build");
-    scope2.append("r:change:purchase_order");
-    scope2.append("r:change:sales_order");
-    scope2.append("r:change:return_order");
-    auto token2 = _authFlow.getToken(scope2.join(" "));
+    QStringList scopeAuthorizationFlow;
+    scopeAuthorizationFlow.append("r:change:admin");
+    scopeAuthorizationFlow.append("r:change:part_category");
+    scopeAuthorizationFlow.append("r:change:part");
+    scopeAuthorizationFlow.append("r:change:stock_location");
+    scopeAuthorizationFlow.append("r:change:stock");
+    scopeAuthorizationFlow.append("r:change:build");
+    scopeAuthorizationFlow.append("r:change:purchase_order");
+    scopeAuthorizationFlow.append("r:change:sales_order");
+    scopeAuthorizationFlow.append("r:change:return_order");
+    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
     if(token2.isValid())
         input.headers.insert("Authorization", "Bearer " + token2.getToken());
 
@@ -584,7 +584,7 @@ void MetadataApi::metadataPkPartialUpdate(const qint32 &id, const QString &model
     });
 
     _latestInput = input;
-    _latestScope = scope2;
+    _latestScope = scopeAuthorizationFlow;
 
 
 
@@ -735,22 +735,22 @@ void MetadataApi::metadataPkRetrieve(const qint32 &id, const QString &model) {
         }
     });
 
-    _OauthMethod = 3;
+    _OauthMethod = OauthMethod::ClientCredentialsFlow;
     _authFlow.unlink();
     _implicitFlow.unlink();
     _passwordFlow.unlink();
     _credentialFlow.link();
-    QStringList scope3;
-    scope3.append("r:view:admin");
-    scope3.append("r:view:part_category");
-    scope3.append("r:view:part");
-    scope3.append("r:view:stock_location");
-    scope3.append("r:view:stock");
-    scope3.append("r:view:build");
-    scope3.append("r:view:purchase_order");
-    scope3.append("r:view:sales_order");
-    scope3.append("r:view:return_order");
-    auto token3 = _credentialFlow.getToken(scope3.join(" "));
+    QStringList scopeClientCredentialsFlow;
+    scopeClientCredentialsFlow.append("r:view:admin");
+    scopeClientCredentialsFlow.append("r:view:part_category");
+    scopeClientCredentialsFlow.append("r:view:part");
+    scopeClientCredentialsFlow.append("r:view:stock_location");
+    scopeClientCredentialsFlow.append("r:view:stock");
+    scopeClientCredentialsFlow.append("r:view:build");
+    scopeClientCredentialsFlow.append("r:view:purchase_order");
+    scopeClientCredentialsFlow.append("r:view:sales_order");
+    scopeClientCredentialsFlow.append("r:view:return_order");
+    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
     if(token3.isValid())
         input.headers.insert("Authorization", "Bearer " + token3.getToken());
 
@@ -767,24 +767,24 @@ void MetadataApi::metadataPkRetrieve(const qint32 &id, const QString &model) {
     });
 
     _latestInput = input;
-    _latestScope = scope3;
+    _latestScope = scopeClientCredentialsFlow;
 
-    _OauthMethod = 2;
+    _OauthMethod = OauthMethod::AuthorizationFlow;
     _implicitFlow.unlink();
     _credentialFlow.unlink();
     _passwordFlow.unlink();
     _authFlow.link();
-    QStringList scope2;
-    scope2.append("r:view:admin");
-    scope2.append("r:view:part_category");
-    scope2.append("r:view:part");
-    scope2.append("r:view:stock_location");
-    scope2.append("r:view:stock");
-    scope2.append("r:view:build");
-    scope2.append("r:view:purchase_order");
-    scope2.append("r:view:sales_order");
-    scope2.append("r:view:return_order");
-    auto token2 = _authFlow.getToken(scope2.join(" "));
+    QStringList scopeAuthorizationFlow;
+    scopeAuthorizationFlow.append("r:view:admin");
+    scopeAuthorizationFlow.append("r:view:part_category");
+    scopeAuthorizationFlow.append("r:view:part");
+    scopeAuthorizationFlow.append("r:view:stock_location");
+    scopeAuthorizationFlow.append("r:view:stock");
+    scopeAuthorizationFlow.append("r:view:build");
+    scopeAuthorizationFlow.append("r:view:purchase_order");
+    scopeAuthorizationFlow.append("r:view:sales_order");
+    scopeAuthorizationFlow.append("r:view:return_order");
+    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
     if(token2.isValid())
         input.headers.insert("Authorization", "Bearer " + token2.getToken());
 
@@ -801,7 +801,7 @@ void MetadataApi::metadataPkRetrieve(const qint32 &id, const QString &model) {
     });
 
     _latestInput = input;
-    _latestScope = scope2;
+    _latestScope = scopeAuthorizationFlow;
 
 
 
@@ -952,22 +952,22 @@ void MetadataApi::metadataPkUpdate(const qint32 &id, const QString &model) {
         }
     });
 
-    _OauthMethod = 3;
+    _OauthMethod = OauthMethod::ClientCredentialsFlow;
     _authFlow.unlink();
     _implicitFlow.unlink();
     _passwordFlow.unlink();
     _credentialFlow.link();
-    QStringList scope3;
-    scope3.append("r:change:admin");
-    scope3.append("r:change:part_category");
-    scope3.append("r:change:part");
-    scope3.append("r:change:stock_location");
-    scope3.append("r:change:stock");
-    scope3.append("r:change:build");
-    scope3.append("r:change:purchase_order");
-    scope3.append("r:change:sales_order");
-    scope3.append("r:change:return_order");
-    auto token3 = _credentialFlow.getToken(scope3.join(" "));
+    QStringList scopeClientCredentialsFlow;
+    scopeClientCredentialsFlow.append("r:change:admin");
+    scopeClientCredentialsFlow.append("r:change:part_category");
+    scopeClientCredentialsFlow.append("r:change:part");
+    scopeClientCredentialsFlow.append("r:change:stock_location");
+    scopeClientCredentialsFlow.append("r:change:stock");
+    scopeClientCredentialsFlow.append("r:change:build");
+    scopeClientCredentialsFlow.append("r:change:purchase_order");
+    scopeClientCredentialsFlow.append("r:change:sales_order");
+    scopeClientCredentialsFlow.append("r:change:return_order");
+    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
     if(token3.isValid())
         input.headers.insert("Authorization", "Bearer " + token3.getToken());
 
@@ -984,24 +984,24 @@ void MetadataApi::metadataPkUpdate(const qint32 &id, const QString &model) {
     });
 
     _latestInput = input;
-    _latestScope = scope3;
+    _latestScope = scopeClientCredentialsFlow;
 
-    _OauthMethod = 2;
+    _OauthMethod = OauthMethod::AuthorizationFlow;
     _implicitFlow.unlink();
     _credentialFlow.unlink();
     _passwordFlow.unlink();
     _authFlow.link();
-    QStringList scope2;
-    scope2.append("r:change:admin");
-    scope2.append("r:change:part_category");
-    scope2.append("r:change:part");
-    scope2.append("r:change:stock_location");
-    scope2.append("r:change:stock");
-    scope2.append("r:change:build");
-    scope2.append("r:change:purchase_order");
-    scope2.append("r:change:sales_order");
-    scope2.append("r:change:return_order");
-    auto token2 = _authFlow.getToken(scope2.join(" "));
+    QStringList scopeAuthorizationFlow;
+    scopeAuthorizationFlow.append("r:change:admin");
+    scopeAuthorizationFlow.append("r:change:part_category");
+    scopeAuthorizationFlow.append("r:change:part");
+    scopeAuthorizationFlow.append("r:change:stock_location");
+    scopeAuthorizationFlow.append("r:change:stock");
+    scopeAuthorizationFlow.append("r:change:build");
+    scopeAuthorizationFlow.append("r:change:purchase_order");
+    scopeAuthorizationFlow.append("r:change:sales_order");
+    scopeAuthorizationFlow.append("r:change:return_order");
+    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
     if(token2.isValid())
         input.headers.insert("Authorization", "Bearer " + token2.getToken());
 
@@ -1018,7 +1018,7 @@ void MetadataApi::metadataPkUpdate(const qint32 &id, const QString &model) {
     });
 
     _latestInput = input;
-    _latestScope = scope2;
+    _latestScope = scopeAuthorizationFlow;
 
 
 
@@ -1183,22 +1183,22 @@ void MetadataApi::metadataRetrieve(const QString &lookup_field, const QString &l
         }
     });
 
-    _OauthMethod = 3;
+    _OauthMethod = OauthMethod::ClientCredentialsFlow;
     _authFlow.unlink();
     _implicitFlow.unlink();
     _passwordFlow.unlink();
     _credentialFlow.link();
-    QStringList scope3;
-    scope3.append("r:view:admin");
-    scope3.append("r:view:part_category");
-    scope3.append("r:view:part");
-    scope3.append("r:view:stock_location");
-    scope3.append("r:view:stock");
-    scope3.append("r:view:build");
-    scope3.append("r:view:purchase_order");
-    scope3.append("r:view:sales_order");
-    scope3.append("r:view:return_order");
-    auto token3 = _credentialFlow.getToken(scope3.join(" "));
+    QStringList scopeClientCredentialsFlow;
+    scopeClientCredentialsFlow.append("r:view:admin");
+    scopeClientCredentialsFlow.append("r:view:part_category");
+    scopeClientCredentialsFlow.append("r:view:part");
+    scopeClientCredentialsFlow.append("r:view:stock_location");
+    scopeClientCredentialsFlow.append("r:view:stock");
+    scopeClientCredentialsFlow.append("r:view:build");
+    scopeClientCredentialsFlow.append("r:view:purchase_order");
+    scopeClientCredentialsFlow.append("r:view:sales_order");
+    scopeClientCredentialsFlow.append("r:view:return_order");
+    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
     if(token3.isValid())
         input.headers.insert("Authorization", "Bearer " + token3.getToken());
 
@@ -1215,24 +1215,24 @@ void MetadataApi::metadataRetrieve(const QString &lookup_field, const QString &l
     });
 
     _latestInput = input;
-    _latestScope = scope3;
+    _latestScope = scopeClientCredentialsFlow;
 
-    _OauthMethod = 2;
+    _OauthMethod = OauthMethod::AuthorizationFlow;
     _implicitFlow.unlink();
     _credentialFlow.unlink();
     _passwordFlow.unlink();
     _authFlow.link();
-    QStringList scope2;
-    scope2.append("r:view:admin");
-    scope2.append("r:view:part_category");
-    scope2.append("r:view:part");
-    scope2.append("r:view:stock_location");
-    scope2.append("r:view:stock");
-    scope2.append("r:view:build");
-    scope2.append("r:view:purchase_order");
-    scope2.append("r:view:sales_order");
-    scope2.append("r:view:return_order");
-    auto token2 = _authFlow.getToken(scope2.join(" "));
+    QStringList scopeAuthorizationFlow;
+    scopeAuthorizationFlow.append("r:view:admin");
+    scopeAuthorizationFlow.append("r:view:part_category");
+    scopeAuthorizationFlow.append("r:view:part");
+    scopeAuthorizationFlow.append("r:view:stock_location");
+    scopeAuthorizationFlow.append("r:view:stock");
+    scopeAuthorizationFlow.append("r:view:build");
+    scopeAuthorizationFlow.append("r:view:purchase_order");
+    scopeAuthorizationFlow.append("r:view:sales_order");
+    scopeAuthorizationFlow.append("r:view:return_order");
+    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
     if(token2.isValid())
         input.headers.insert("Authorization", "Bearer " + token2.getToken());
 
@@ -1249,7 +1249,7 @@ void MetadataApi::metadataRetrieve(const QString &lookup_field, const QString &l
     });
 
     _latestInput = input;
-    _latestScope = scope2;
+    _latestScope = scopeAuthorizationFlow;
 
 
 
@@ -1414,22 +1414,22 @@ void MetadataApi::metadataUpdate(const QString &lookup_field, const QString &loo
         }
     });
 
-    _OauthMethod = 3;
+    _OauthMethod = OauthMethod::ClientCredentialsFlow;
     _authFlow.unlink();
     _implicitFlow.unlink();
     _passwordFlow.unlink();
     _credentialFlow.link();
-    QStringList scope3;
-    scope3.append("r:change:admin");
-    scope3.append("r:change:part_category");
-    scope3.append("r:change:part");
-    scope3.append("r:change:stock_location");
-    scope3.append("r:change:stock");
-    scope3.append("r:change:build");
-    scope3.append("r:change:purchase_order");
-    scope3.append("r:change:sales_order");
-    scope3.append("r:change:return_order");
-    auto token3 = _credentialFlow.getToken(scope3.join(" "));
+    QStringList scopeClientCredentialsFlow;
+    scopeClientCredentialsFlow.append("r:change:admin");
+    scopeClientCredentialsFlow.append("r:change:part_category");
+    scopeClientCredentialsFlow.append("r:change:part");
+    scopeClientCredentialsFlow.append("r:change:stock_location");
+    scopeClientCredentialsFlow.append("r:change:stock");
+    scopeClientCredentialsFlow.append("r:change:build");
+    scopeClientCredentialsFlow.append("r:change:purchase_order");
+    scopeClientCredentialsFlow.append("r:change:sales_order");
+    scopeClientCredentialsFlow.append("r:change:return_order");
+    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
     if(token3.isValid())
         input.headers.insert("Authorization", "Bearer " + token3.getToken());
 
@@ -1446,24 +1446,24 @@ void MetadataApi::metadataUpdate(const QString &lookup_field, const QString &loo
     });
 
     _latestInput = input;
-    _latestScope = scope3;
+    _latestScope = scopeClientCredentialsFlow;
 
-    _OauthMethod = 2;
+    _OauthMethod = OauthMethod::AuthorizationFlow;
     _implicitFlow.unlink();
     _credentialFlow.unlink();
     _passwordFlow.unlink();
     _authFlow.link();
-    QStringList scope2;
-    scope2.append("r:change:admin");
-    scope2.append("r:change:part_category");
-    scope2.append("r:change:part");
-    scope2.append("r:change:stock_location");
-    scope2.append("r:change:stock");
-    scope2.append("r:change:build");
-    scope2.append("r:change:purchase_order");
-    scope2.append("r:change:sales_order");
-    scope2.append("r:change:return_order");
-    auto token2 = _authFlow.getToken(scope2.join(" "));
+    QStringList scopeAuthorizationFlow;
+    scopeAuthorizationFlow.append("r:change:admin");
+    scopeAuthorizationFlow.append("r:change:part_category");
+    scopeAuthorizationFlow.append("r:change:part");
+    scopeAuthorizationFlow.append("r:change:stock_location");
+    scopeAuthorizationFlow.append("r:change:stock");
+    scopeAuthorizationFlow.append("r:change:build");
+    scopeAuthorizationFlow.append("r:change:purchase_order");
+    scopeAuthorizationFlow.append("r:change:sales_order");
+    scopeAuthorizationFlow.append("r:change:return_order");
+    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
     if(token2.isValid())
         input.headers.insert("Authorization", "Bearer " + token2.getToken());
 
@@ -1480,7 +1480,7 @@ void MetadataApi::metadataUpdate(const QString &lookup_field, const QString &loo
     });
 
     _latestInput = input;
-    _latestScope = scope2;
+    _latestScope = scopeAuthorizationFlow;
 
 
 
@@ -1572,11 +1572,11 @@ void MetadataApi::metadataUpdateCallback(HttpRequestWorker *worker) {
     }
 }
 
-void MetadataApi::tokenAvailable(){
+void MetadataApi::tokenAvailable() {
 
     oauthToken token;
     switch (_OauthMethod) {
-    case 1: //implicit flow
+    case OauthMethod::ImplicitFlow:
         token = _implicitFlow.getToken(_latestScope.join(" "));
         if(token.isValid()){
             _latestInput.headers.insert("Authorization", "Bearer " + token.getToken());
@@ -1586,7 +1586,7 @@ void MetadataApi::tokenAvailable(){
             qDebug() << "Could not retrieve a valid token";
         }
         break;
-    case 2: //authorization flow
+    case OauthMethod::AuthorizationFlow:
         token = _authFlow.getToken(_latestScope.join(" "));
         if(token.isValid()){
             _latestInput.headers.insert("Authorization", "Bearer " + token.getToken());
@@ -1596,7 +1596,7 @@ void MetadataApi::tokenAvailable(){
             qDebug() << "Could not retrieve a valid token";
         }
         break;
-    case 3: //client credentials flow
+    case OauthMethod::ClientCredentialsFlow:
         token = _credentialFlow.getToken(_latestScope.join(" "));
         if(token.isValid()){
             _latestInput.headers.insert("Authorization", "Bearer " + token.getToken());
@@ -1606,7 +1606,7 @@ void MetadataApi::tokenAvailable(){
             qDebug() << "Could not retrieve a valid token";
         }
         break;
-    case 4: //resource owner password flow
+    case OauthMethod::ResourceOwnerPasswordFlow:
         token = _passwordFlow.getToken(_latestScope.join(" "));
         if(token.isValid()){
             _latestInput.headers.insert("Authorization", "Bearer " + token.getToken());
