@@ -52,6 +52,10 @@ void HttpRequestInput::add_file(QString variable_name, QString local_filename, Q
     files.append(file);
 }
 
+void HttpRequestInput::add_file_element(HttpFileElement file) {
+    files.append(file);
+}
+
 HttpRequestWorker::HttpRequestWorker(QObject *parent, QNetworkAccessManager *_manager)
     : QObject(parent), manager(_manager), timeOutTimer(this), isResponseCompressionEnabled(false), isRequestCompressionEnabled(false), httpResponseCode(-1) {
     randomGenerator = QRandomGenerator(QDateTime::currentSecsSinceEpoch());
