@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-DuplicatePart::DuplicatePart(QString json) {
+DuplicatePart::DuplicatePart(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -52,7 +52,7 @@ void DuplicatePart::initializeModel() {
     m_copy_tests_isValid = false;
 }
 
-void DuplicatePart::fromJson(QString jsonString) {
+void DuplicatePart::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

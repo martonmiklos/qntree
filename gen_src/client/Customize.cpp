@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-Customize::Customize(QString json) {
+Customize::Customize(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -46,7 +46,7 @@ void Customize::initializeModel() {
     m_navbar_message_isValid = false;
 }
 
-void Customize::fromJson(QString jsonString) {
+void Customize::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

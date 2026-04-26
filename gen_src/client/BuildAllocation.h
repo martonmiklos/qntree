@@ -32,13 +32,13 @@ class BuildAllocationItem;
 class BuildAllocation : public Object {
 public:
     BuildAllocation();
-    BuildAllocation(QString json);
+    BuildAllocation(const QString &json);
     ~BuildAllocation() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QList<BuildAllocationItem> getItems() const;
     void setItems(const QList<BuildAllocationItem> &items);

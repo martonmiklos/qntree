@@ -34,13 +34,13 @@ class SelectionEntry;
 class PatchedSelectionList : public Object {
 public:
     PatchedSelectionList();
-    PatchedSelectionList(QString json);
+    PatchedSelectionList(const QString &json);
     ~PatchedSelectionList() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     qint32 getPk() const;
     void setPk(const qint32 &pk);

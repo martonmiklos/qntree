@@ -30,13 +30,13 @@ namespace InvenTree {
 class HealthCheckStatus : public Object {
 public:
     HealthCheckStatus();
-    HealthCheckStatus(QString json);
+    HealthCheckStatus(const QString &json);
     ~HealthCheckStatus() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     HealthCheckStatusStatusEnum getStatus() const;
     void setStatus(const HealthCheckStatusStatusEnum &status);

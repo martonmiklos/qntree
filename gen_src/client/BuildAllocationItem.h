@@ -30,13 +30,13 @@ namespace InvenTree {
 class BuildAllocationItem : public Object {
 public:
     BuildAllocationItem();
-    BuildAllocationItem(QString json);
+    BuildAllocationItem(const QString &json);
     ~BuildAllocationItem() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     qint32 getBuildLine() const;
     void setBuildLine(const qint32 &build_line);

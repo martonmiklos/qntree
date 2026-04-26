@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-ContentType::ContentType(QString json) {
+ContentType::ContentType(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -49,7 +49,7 @@ void ContentType::initializeModel() {
     m_is_plugin_isValid = false;
 }
 
-void ContentType::fromJson(QString jsonString) {
+void ContentType::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

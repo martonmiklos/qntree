@@ -33,13 +33,13 @@ namespace InvenTree {
 class MachineDriver : public Object {
 public:
     MachineDriver();
-    MachineDriver(QString json);
+    MachineDriver(const QString &json);
     ~MachineDriver() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QString getSlug() const;
     void setSlug(const QString &slug);

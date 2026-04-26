@@ -135,7 +135,7 @@ void InvenTreePartImportWizard::initNewInvenTreePart(InvenTree::Part *part)
     part->setKeywords(m_partDetailsPage->ui->lineEditKeyWords->text());
     part->setRevision(m_partDetailsPage->ui->lineEditRevision->text());
     // TODO IPN???
-    part->setActive(false); // FIXME!!
+    part->setActive(true);
     part->setComponent(true);
     part->setPurchaseable(true);
 }

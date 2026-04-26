@@ -30,13 +30,13 @@ namespace InvenTree {
 class DataImportAcceptRow : public Object {
 public:
     DataImportAcceptRow();
-    DataImportAcceptRow(QString json);
+    DataImportAcceptRow(const QString &json);
     ~DataImportAcceptRow() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QList<qint32> getRows() const;
     void setRows(const QList<qint32> &rows);

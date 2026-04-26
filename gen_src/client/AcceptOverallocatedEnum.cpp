@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-AcceptOverallocatedEnum::AcceptOverallocatedEnum(QString json) {
+AcceptOverallocatedEnum::AcceptOverallocatedEnum(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -38,7 +38,7 @@ void AcceptOverallocatedEnum::initializeModel() {
     m_value = eAcceptOverallocatedEnum::INVALID_VALUE_OPENAPI_GENERATED;
 }
 
-void AcceptOverallocatedEnum::fromJson(QString jsonString) {
+void AcceptOverallocatedEnum::fromJson(const QString &jsonString) {
     
     if ( jsonString.compare("reject", Qt::CaseInsensitive) == 0) {
         m_value = eAcceptOverallocatedEnum::REJECT;

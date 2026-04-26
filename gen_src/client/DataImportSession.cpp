@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-DataImportSession::DataImportSession(QString json) {
+DataImportSession::DataImportSession(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -82,7 +82,7 @@ void DataImportSession::initializeModel() {
     m_completed_row_count_isValid = false;
 }
 
-void DataImportSession::fromJson(QString jsonString) {
+void DataImportSession::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

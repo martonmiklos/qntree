@@ -30,13 +30,13 @@ namespace InvenTree {
 class SerializeStockItem : public Object {
 public:
     SerializeStockItem();
-    SerializeStockItem(QString json);
+    SerializeStockItem(const QString &json);
     ~SerializeStockItem() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     qint32 getQuantity() const;
     void setQuantity(const qint32 &quantity);

@@ -30,13 +30,13 @@ namespace InvenTree {
 class APISearchView : public Object {
 public:
     APISearchView();
-    APISearchView(QString json);
+    APISearchView(const QString &json);
     ~APISearchView() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QString getSearch() const;
     void setSearch(const QString &search);

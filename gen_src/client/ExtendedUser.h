@@ -35,13 +35,13 @@ class BriefUserProfile;
 class ExtendedUser : public Object {
 public:
     ExtendedUser();
-    ExtendedUser(QString json);
+    ExtendedUser(const QString &json);
     ~ExtendedUser() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     qint32 getPk() const;
     void setPk(const qint32 &pk);

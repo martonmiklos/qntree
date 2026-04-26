@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-DataImportSessionModelTypeEnum::DataImportSessionModelTypeEnum(QString json) {
+DataImportSessionModelTypeEnum::DataImportSessionModelTypeEnum(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -38,7 +38,7 @@ void DataImportSessionModelTypeEnum::initializeModel() {
     m_value = eDataImportSessionModelTypeEnum::INVALID_VALUE_OPENAPI_GENERATED;
 }
 
-void DataImportSessionModelTypeEnum::fromJson(QString jsonString) {
+void DataImportSessionModelTypeEnum::fromJson(const QString &jsonString) {
     
     if ( jsonString.compare("projectcode", Qt::CaseInsensitive) == 0) {
         m_value = eDataImportSessionModelTypeEnum::PROJECTCODE;

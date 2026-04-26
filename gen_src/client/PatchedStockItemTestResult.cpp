@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-PatchedStockItemTestResult::PatchedStockItemTestResult(QString json) {
+PatchedStockItemTestResult::PatchedStockItemTestResult(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -76,7 +76,7 @@ void PatchedStockItemTestResult::initializeModel() {
     m_template_detail_isValid = false;
 }
 
-void PatchedStockItemTestResult::fromJson(QString jsonString) {
+void PatchedStockItemTestResult::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

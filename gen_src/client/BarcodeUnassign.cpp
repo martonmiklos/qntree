@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-BarcodeUnassign::BarcodeUnassign(QString json) {
+BarcodeUnassign::BarcodeUnassign(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -64,7 +64,7 @@ void BarcodeUnassign::initializeModel() {
     m_stocklocation_isValid = false;
 }
 
-void BarcodeUnassign::fromJson(QString jsonString) {
+void BarcodeUnassign::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

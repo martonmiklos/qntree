@@ -29,13 +29,13 @@ namespace InvenTree {
 class PriorityEnum : public Enum {
 public:
     PriorityEnum();
-    PriorityEnum(QString json);
+    PriorityEnum(const QString &json);
     ~PriorityEnum() override;
 
     QString asJson() const override;
     QJsonValue asJsonValue() const override;
     void fromJsonValue(QJsonValue json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     enum class ePriorityEnum : int {
         INVALID_VALUE_OPENAPI_GENERATED = 0,

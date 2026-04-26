@@ -33,13 +33,13 @@ namespace InvenTree {
 class EmailMessage : public Object {
 public:
     EmailMessage();
-    EmailMessage(QString json);
+    EmailMessage(const QString &json);
     ~EmailMessage() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QString getPk() const;
     void setPk(const QString &pk);

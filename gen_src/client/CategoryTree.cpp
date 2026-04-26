@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-CategoryTree::CategoryTree(QString json) {
+CategoryTree::CategoryTree(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -52,7 +52,7 @@ void CategoryTree::initializeModel() {
     m_subcategories_isValid = false;
 }
 
-void CategoryTree::fromJson(QString jsonString) {
+void CategoryTree::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

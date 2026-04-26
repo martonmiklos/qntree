@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-FailedTask::FailedTask(QString json) {
+FailedTask::FailedTask(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -61,7 +61,7 @@ void FailedTask::initializeModel() {
     m_result_isValid = false;
 }
 
-void FailedTask::fromJson(QString jsonString) {
+void FailedTask::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

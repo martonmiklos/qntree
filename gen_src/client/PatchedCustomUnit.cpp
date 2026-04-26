@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-PatchedCustomUnit::PatchedCustomUnit(QString json) {
+PatchedCustomUnit::PatchedCustomUnit(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -46,7 +46,7 @@ void PatchedCustomUnit::initializeModel() {
     m_definition_isValid = false;
 }
 
-void PatchedCustomUnit::fromJson(QString jsonString) {
+void PatchedCustomUnit::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

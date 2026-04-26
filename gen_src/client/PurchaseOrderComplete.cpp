@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-PurchaseOrderComplete::PurchaseOrderComplete(QString json) {
+PurchaseOrderComplete::PurchaseOrderComplete(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -37,7 +37,7 @@ void PurchaseOrderComplete::initializeModel() {
     m_accept_incomplete_isValid = false;
 }
 
-void PurchaseOrderComplete::fromJson(QString jsonString) {
+void PurchaseOrderComplete::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

@@ -32,13 +32,13 @@ class Part;
 class PatchedPartRelation : public Object {
 public:
     PatchedPartRelation();
-    PatchedPartRelation(QString json);
+    PatchedPartRelation(const QString &json);
     ~PatchedPartRelation() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     qint32 getPk() const;
     void setPk(const qint32 &pk);

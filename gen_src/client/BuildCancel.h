@@ -29,13 +29,13 @@ namespace InvenTree {
 class BuildCancel : public Object {
 public:
     BuildCancel();
-    BuildCancel(QString json);
+    BuildCancel(const QString &json);
     ~BuildCancel() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     bool isRemoveAllocatedStock() const;
     void setRemoveAllocatedStock(const bool &remove_allocated_stock);

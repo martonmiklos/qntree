@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-Settings::Settings(QString json) {
+Settings::Settings(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -43,7 +43,7 @@ void Settings::initializeModel() {
     m_password_forgotten_enabled_isValid = false;
 }
 
-void Settings::fromJson(QString jsonString) {
+void Settings::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

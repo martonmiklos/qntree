@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-BarcodePOAllocate::BarcodePOAllocate(QString json) {
+BarcodePOAllocate::BarcodePOAllocate(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -40,7 +40,7 @@ void BarcodePOAllocate::initializeModel() {
     m_purchase_order_isValid = false;
 }
 
-void BarcodePOAllocate::fromJson(QString jsonString) {
+void BarcodePOAllocate::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

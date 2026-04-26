@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-PatchedNewsFeedEntry::PatchedNewsFeedEntry(QString json) {
+PatchedNewsFeedEntry::PatchedNewsFeedEntry(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -58,7 +58,7 @@ void PatchedNewsFeedEntry::initializeModel() {
     m_read_isValid = false;
 }
 
-void PatchedNewsFeedEntry::fromJson(QString jsonString) {
+void PatchedNewsFeedEntry::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

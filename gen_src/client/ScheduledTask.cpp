@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-ScheduledTask::ScheduledTask(QString json) {
+ScheduledTask::ScheduledTask(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -67,7 +67,7 @@ void ScheduledTask::initializeModel() {
     m_task_isValid = false;
 }
 
-void ScheduledTask::fromJson(QString jsonString) {
+void ScheduledTask::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

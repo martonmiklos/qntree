@@ -33,13 +33,13 @@ class BuildLine;
 class PaginatedBuildLineList : public Object {
 public:
     PaginatedBuildLineList();
-    PaginatedBuildLineList(QString json);
+    PaginatedBuildLineList(const QString &json);
     ~PaginatedBuildLineList() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     qint32 getCount() const;
     void setCount(const qint32 &count);

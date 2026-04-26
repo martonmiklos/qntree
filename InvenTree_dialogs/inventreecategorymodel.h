@@ -85,7 +85,7 @@ public:
 
     void fetchParentCategory(int pk);
 
-    void setVisiblePk(int pk);
+    void setSelectedPk(int pk);
 
     InvenTree::Category getCategoryByIndex(const QModelIndex &index);
 

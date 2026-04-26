@@ -30,13 +30,13 @@ namespace InvenTree {
 class InitialStock : public Object {
 public:
     InitialStock();
-    InitialStock(QString json);
+    InitialStock(const QString &json);
     ~InitialStock() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QString getQuantity() const;
     void setQuantity(const QString &quantity);

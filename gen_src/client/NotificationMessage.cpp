@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-NotificationMessage::NotificationMessage(QString json) {
+NotificationMessage::NotificationMessage(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -67,7 +67,7 @@ void NotificationMessage::initializeModel() {
     m_read_isValid = false;
 }
 
-void NotificationMessage::fromJson(QString jsonString) {
+void NotificationMessage::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

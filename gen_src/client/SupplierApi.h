@@ -121,23 +121,23 @@ Q_SIGNALS:
     void supplierSearchListSignalFull(HttpRequestWorker *worker, QList<SearchResult> summary);
 
     Q_DECL_DEPRECATED_X("Use supplierImportCreateSignalError() instead")
-    void supplierImportCreateSignalE(ImportResult summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void supplierImportCreateSignalE(ImportResult summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void supplierImportCreateSignalError(ImportResult summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use supplierListListSignalError() instead")
-    void supplierListListSignalE(QList<SupplierList> summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void supplierListListSignalE(QList<SupplierList> summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void supplierListListSignalError(QList<SupplierList> summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use supplierSearchListSignalError() instead")
-    void supplierSearchListSignalE(QList<SearchResult> summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void supplierSearchListSignalE(QList<SearchResult> summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void supplierSearchListSignalError(QList<SearchResult> summary, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     Q_DECL_DEPRECATED_X("Use supplierImportCreateSignalErrorFull() instead")
-    void supplierImportCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void supplierImportCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void supplierImportCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use supplierListListSignalErrorFull() instead")
-    void supplierListListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void supplierListListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void supplierListListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use supplierSearchListSignalErrorFull() instead")
-    void supplierSearchListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void supplierSearchListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void supplierSearchListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     void abortRequestsSignal();

@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-CategoryParameterTemplate::CategoryParameterTemplate(QString json) {
+CategoryParameterTemplate::CategoryParameterTemplate(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -52,7 +52,7 @@ void CategoryParameterTemplate::initializeModel() {
     m_default_value_isValid = false;
 }
 
-void CategoryParameterTemplate::fromJson(QString jsonString) {
+void CategoryParameterTemplate::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

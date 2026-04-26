@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-EmailMessageStatusEnum::EmailMessageStatusEnum(QString json) {
+EmailMessageStatusEnum::EmailMessageStatusEnum(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -38,7 +38,7 @@ void EmailMessageStatusEnum::initializeModel() {
     m_value = eEmailMessageStatusEnum::INVALID_VALUE_OPENAPI_GENERATED;
 }
 
-void EmailMessageStatusEnum::fromJson(QString jsonString) {
+void EmailMessageStatusEnum::fromJson(const QString &jsonString) {
     
     if ( jsonString.compare("A", Qt::CaseInsensitive) == 0) {
         m_value = eEmailMessageStatusEnum::A;

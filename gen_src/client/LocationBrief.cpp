@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-LocationBrief::LocationBrief(QString json) {
+LocationBrief::LocationBrief(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -43,7 +43,7 @@ void LocationBrief::initializeModel() {
     m_pathstring_isValid = false;
 }
 
-void LocationBrief::fromJson(QString jsonString) {
+void LocationBrief::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

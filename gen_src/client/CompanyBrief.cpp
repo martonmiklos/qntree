@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-CompanyBrief::CompanyBrief(QString json) {
+CompanyBrief::CompanyBrief(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -58,7 +58,7 @@ void CompanyBrief::initializeModel() {
     m_tax_id_isValid = false;
 }
 
-void CompanyBrief::fromJson(QString jsonString) {
+void CompanyBrief::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

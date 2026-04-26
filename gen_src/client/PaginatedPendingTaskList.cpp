@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-PaginatedPendingTaskList::PaginatedPendingTaskList(QString json) {
+PaginatedPendingTaskList::PaginatedPendingTaskList(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -46,7 +46,7 @@ void PaginatedPendingTaskList::initializeModel() {
     m_results_isValid = false;
 }
 
-void PaginatedPendingTaskList::fromJson(QString jsonString) {
+void PaginatedPendingTaskList::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

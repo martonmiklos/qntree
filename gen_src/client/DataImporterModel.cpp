@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-DataImporterModel::DataImporterModel(QString json) {
+DataImporterModel::DataImporterModel(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -43,7 +43,7 @@ void DataImporterModel::initializeModel() {
     m_api_url_isValid = false;
 }
 
-void DataImporterModel::fromJson(QString jsonString) {
+void DataImporterModel::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

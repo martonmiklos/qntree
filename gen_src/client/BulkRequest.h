@@ -32,13 +32,13 @@ namespace InvenTree {
 class BulkRequest : public Object {
 public:
     BulkRequest();
-    BulkRequest(QString json);
+    BulkRequest(const QString &json);
     ~BulkRequest() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QList<qint32> getItems() const;
     void setItems(const QList<qint32> &items);

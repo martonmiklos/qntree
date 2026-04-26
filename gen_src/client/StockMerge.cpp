@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-StockMerge::StockMerge(QString json) {
+StockMerge::StockMerge(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -49,7 +49,7 @@ void StockMerge::initializeModel() {
     m_allow_mismatched_status_isValid = false;
 }
 
-void StockMerge::fromJson(QString jsonString) {
+void StockMerge::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

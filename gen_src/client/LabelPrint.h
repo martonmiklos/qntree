@@ -31,13 +31,13 @@ namespace InvenTree {
 class LabelPrint : public Object {
 public:
     LabelPrint();
-    LabelPrint(QString json);
+    LabelPrint(const QString &json);
     ~LabelPrint() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     qint32 getRTemplate() const;
     void setRTemplate(const qint32 &r_template);

@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-PartSerialNumber::PartSerialNumber(QString json) {
+PartSerialNumber::PartSerialNumber(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -40,7 +40,7 @@ void PartSerialNumber::initializeModel() {
     m_next_isValid = false;
 }
 
-void PartSerialNumber::fromJson(QString jsonString) {
+void PartSerialNumber::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

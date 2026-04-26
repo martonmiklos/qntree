@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-PatchedCustomState::PatchedCustomState(QString json) {
+PatchedCustomState::PatchedCustomState(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -61,7 +61,7 @@ void PatchedCustomState::initializeModel() {
     m_reference_status_isValid = false;
 }
 
-void PatchedCustomState::fromJson(QString jsonString) {
+void PatchedCustomState::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

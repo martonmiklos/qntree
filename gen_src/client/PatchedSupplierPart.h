@@ -42,13 +42,13 @@ class Parameter;
 class PatchedSupplierPart : public Object {
 public:
     PatchedSupplierPart();
-    PatchedSupplierPart(QString json);
+    PatchedSupplierPart(const QString &json);
     ~PatchedSupplierPart() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     double getAvailable() const;
     void setAvailable(const double &available);

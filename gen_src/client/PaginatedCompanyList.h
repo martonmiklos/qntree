@@ -33,13 +33,13 @@ class Company;
 class PaginatedCompanyList : public Object {
 public:
     PaginatedCompanyList();
-    PaginatedCompanyList(QString json);
+    PaginatedCompanyList(const QString &json);
     ~PaginatedCompanyList() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     qint32 getCount() const;
     void setCount(const qint32 &count);

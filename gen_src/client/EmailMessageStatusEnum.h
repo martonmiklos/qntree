@@ -29,13 +29,13 @@ namespace InvenTree {
 class EmailMessageStatusEnum : public Enum {
 public:
     EmailMessageStatusEnum();
-    EmailMessageStatusEnum(QString json);
+    EmailMessageStatusEnum(const QString &json);
     ~EmailMessageStatusEnum() override;
 
     QString asJson() const override;
     QJsonValue asJsonValue() const override;
     void fromJsonValue(QJsonValue json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     enum class eEmailMessageStatusEnum {
         INVALID_VALUE_OPENAPI_GENERATED = 0,

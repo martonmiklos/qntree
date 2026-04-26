@@ -29,13 +29,13 @@ namespace InvenTree {
 class TemplateModelTypeEnum : public Enum {
 public:
     TemplateModelTypeEnum();
-    TemplateModelTypeEnum(QString json);
+    TemplateModelTypeEnum(const QString &json);
     ~TemplateModelTypeEnum() override;
 
     QString asJson() const override;
     QJsonValue asJsonValue() const override;
     void fromJsonValue(QJsonValue json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     enum class eTemplateModelTypeEnum {
         INVALID_VALUE_OPENAPI_GENERATED = 0,

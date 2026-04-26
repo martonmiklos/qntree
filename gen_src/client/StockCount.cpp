@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-StockCount::StockCount(QString json) {
+StockCount::StockCount(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -40,7 +40,7 @@ void StockCount::initializeModel() {
     m_notes_isValid = false;
 }
 
-void StockCount::fromJson(QString jsonString) {
+void StockCount::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

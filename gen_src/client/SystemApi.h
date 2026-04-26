@@ -100,11 +100,11 @@ Q_SIGNALS:
     void systemHealthRetrieveSignalFull(HttpRequestWorker *worker, HealthCheckStatus summary);
 
     Q_DECL_DEPRECATED_X("Use systemHealthRetrieveSignalError() instead")
-    void systemHealthRetrieveSignalE(HealthCheckStatus summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void systemHealthRetrieveSignalE(HealthCheckStatus summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void systemHealthRetrieveSignalError(HealthCheckStatus summary, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     Q_DECL_DEPRECATED_X("Use systemHealthRetrieveSignalErrorFull() instead")
-    void systemHealthRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void systemHealthRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void systemHealthRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     void abortRequestsSignal();

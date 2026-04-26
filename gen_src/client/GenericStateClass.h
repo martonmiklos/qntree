@@ -33,13 +33,13 @@ class GenericStateValue;
 class GenericStateClass : public Object {
 public:
     GenericStateClass();
-    GenericStateClass(QString json);
+    GenericStateClass(const QString &json);
     ~GenericStateClass() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QString getStatusClass() const;
     void setStatusClass(const QString &status_class);

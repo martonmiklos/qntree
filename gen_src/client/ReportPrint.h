@@ -30,13 +30,13 @@ namespace InvenTree {
 class ReportPrint : public Object {
 public:
     ReportPrint();
-    ReportPrint(QString json);
+    ReportPrint(const QString &json);
     ~ReportPrint() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     qint32 getRTemplate() const;
     void setRTemplate(const qint32 &r_template);

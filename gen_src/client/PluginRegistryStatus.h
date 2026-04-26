@@ -32,13 +32,13 @@ class PluginRegistryError;
 class PluginRegistryStatus : public Object {
 public:
     PluginRegistryStatus();
-    PluginRegistryStatus(QString json);
+    PluginRegistryStatus(const QString &json);
     ~PluginRegistryStatus() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     qint32 getActivePlugins() const;
     void setActivePlugins(const qint32 &active_plugins);

@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-PatchedErrorMessage::PatchedErrorMessage(QString json) {
+PatchedErrorMessage::PatchedErrorMessage(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -49,7 +49,7 @@ void PatchedErrorMessage::initializeModel() {
     m_pk_isValid = false;
 }
 
-void PatchedErrorMessage::fromJson(QString jsonString) {
+void PatchedErrorMessage::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

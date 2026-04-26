@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-PatchedPurchaseOrderLineItem::PatchedPurchaseOrderLineItem(QString json) {
+PatchedPurchaseOrderLineItem::PatchedPurchaseOrderLineItem(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -124,7 +124,7 @@ void PatchedPurchaseOrderLineItem::initializeModel() {
     m_supplier_part_detail_isValid = false;
 }
 
-void PatchedPurchaseOrderLineItem::fromJson(QString jsonString) {
+void PatchedPurchaseOrderLineItem::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

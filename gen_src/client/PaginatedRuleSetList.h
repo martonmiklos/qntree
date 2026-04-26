@@ -33,13 +33,13 @@ class RuleSet;
 class PaginatedRuleSetList : public Object {
 public:
     PaginatedRuleSetList();
-    PaginatedRuleSetList(QString json);
+    PaginatedRuleSetList(const QString &json);
     ~PaginatedRuleSetList() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     qint32 getCount() const;
     void setCount(const qint32 &count);

@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-GenerateSerialNumber::GenerateSerialNumber(QString json) {
+GenerateSerialNumber::GenerateSerialNumber(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -43,7 +43,7 @@ void GenerateSerialNumber::initializeModel() {
     m_quantity_isValid = false;
 }
 
-void GenerateSerialNumber::fromJson(QString jsonString) {
+void GenerateSerialNumber::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

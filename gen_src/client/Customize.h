@@ -30,13 +30,13 @@ namespace InvenTree {
 class Customize : public Object {
 public:
     Customize();
-    Customize(QString json);
+    Customize(const QString &json);
     ~Customize() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QString getLogo() const;
     void setLogo(const QString &logo);

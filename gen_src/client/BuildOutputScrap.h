@@ -33,13 +33,13 @@ class BuildOutputQuantity;
 class BuildOutputScrap : public Object {
 public:
     BuildOutputScrap();
-    BuildOutputScrap(QString json);
+    BuildOutputScrap(const QString &json);
     ~BuildOutputScrap() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QList<BuildOutputQuantity> getOutputs() const;
     void setOutputs(const QList<BuildOutputQuantity> &outputs);

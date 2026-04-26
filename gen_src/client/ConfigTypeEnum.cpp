@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-ConfigTypeEnum::ConfigTypeEnum(QString json) {
+ConfigTypeEnum::ConfigTypeEnum(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -38,7 +38,7 @@ void ConfigTypeEnum::initializeModel() {
     m_value = eConfigTypeEnum::INVALID_VALUE_OPENAPI_GENERATED;
 }
 
-void ConfigTypeEnum::fromJson(QString jsonString) {
+void ConfigTypeEnum::fromJson(const QString &jsonString) {
     
     if ( jsonString.compare("M", Qt::CaseInsensitive) == 0) {
         m_value = eConfigTypeEnum::M;

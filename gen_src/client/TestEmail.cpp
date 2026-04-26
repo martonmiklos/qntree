@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-TestEmail::TestEmail(QString json) {
+TestEmail::TestEmail(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -37,7 +37,7 @@ void TestEmail::initializeModel() {
     m_email_isValid = false;
 }
 
-void TestEmail::fromJson(QString jsonString) {
+void TestEmail::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

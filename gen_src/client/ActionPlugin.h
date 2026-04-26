@@ -32,13 +32,13 @@ namespace InvenTree {
 class ActionPlugin : public Object {
 public:
     ActionPlugin();
-    ActionPlugin(QString json);
+    ActionPlugin(const QString &json);
     ~ActionPlugin() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QString getAction() const;
     void setAction(const QString &action);

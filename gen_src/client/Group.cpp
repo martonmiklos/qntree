@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-Group::Group(QString json) {
+Group::Group(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -40,7 +40,7 @@ void Group::initializeModel() {
     m_name_isValid = false;
 }
 
-void Group::fromJson(QString jsonString) {
+void Group::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

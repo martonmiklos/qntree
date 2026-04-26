@@ -156,47 +156,47 @@ Q_SIGNALS:
     void unitsUpdateSignalFull(HttpRequestWorker *worker, CustomUnit summary);
 
     Q_DECL_DEPRECATED_X("Use unitsAllRetrieveSignalError() instead")
-    void unitsAllRetrieveSignalE(AllUnitListResponse summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void unitsAllRetrieveSignalE(AllUnitListResponse summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void unitsAllRetrieveSignalError(AllUnitListResponse summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use unitsCreateSignalError() instead")
-    void unitsCreateSignalE(CustomUnit summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void unitsCreateSignalE(CustomUnit summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void unitsCreateSignalError(CustomUnit summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use unitsDestroySignalError() instead")
-    void unitsDestroySignalE(QNetworkReply::NetworkError error_type, QString error_str);
+    void unitsDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void unitsDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use unitsListSignalError() instead")
-    void unitsListSignalE(PaginatedCustomUnitList summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void unitsListSignalE(PaginatedCustomUnitList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void unitsListSignalError(PaginatedCustomUnitList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use unitsPartialUpdateSignalError() instead")
-    void unitsPartialUpdateSignalE(CustomUnit summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void unitsPartialUpdateSignalE(CustomUnit summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void unitsPartialUpdateSignalError(CustomUnit summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use unitsRetrieveSignalError() instead")
-    void unitsRetrieveSignalE(CustomUnit summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void unitsRetrieveSignalE(CustomUnit summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void unitsRetrieveSignalError(CustomUnit summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use unitsUpdateSignalError() instead")
-    void unitsUpdateSignalE(CustomUnit summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void unitsUpdateSignalE(CustomUnit summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void unitsUpdateSignalError(CustomUnit summary, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     Q_DECL_DEPRECATED_X("Use unitsAllRetrieveSignalErrorFull() instead")
-    void unitsAllRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void unitsAllRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void unitsAllRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use unitsCreateSignalErrorFull() instead")
-    void unitsCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void unitsCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void unitsCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use unitsDestroySignalErrorFull() instead")
-    void unitsDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void unitsDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void unitsDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use unitsListSignalErrorFull() instead")
-    void unitsListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void unitsListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void unitsListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use unitsPartialUpdateSignalErrorFull() instead")
-    void unitsPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void unitsPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void unitsPartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use unitsRetrieveSignalErrorFull() instead")
-    void unitsRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void unitsRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void unitsRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use unitsUpdateSignalErrorFull() instead")
-    void unitsUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void unitsUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void unitsUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     void abortRequestsSignal();

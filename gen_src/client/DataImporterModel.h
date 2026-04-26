@@ -30,13 +30,13 @@ namespace InvenTree {
 class DataImporterModel : public Object {
 public:
     DataImporterModel();
-    DataImporterModel(QString json);
+    DataImporterModel(const QString &json);
     ~DataImporterModel() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QString getSerializer() const;
     void setSerializer(const QString &serializer);

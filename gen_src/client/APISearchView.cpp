@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-APISearchView::APISearchView(QString json) {
+APISearchView::APISearchView(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -52,7 +52,7 @@ void APISearchView::initializeModel() {
     m_offset_isValid = false;
 }
 
-void APISearchView::fromJson(QString jsonString) {
+void APISearchView::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

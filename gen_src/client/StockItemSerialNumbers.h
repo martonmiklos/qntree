@@ -31,13 +31,13 @@ class StockItem;
 class StockItemSerialNumbers : public Object {
 public:
     StockItemSerialNumbers();
-    StockItemSerialNumbers(QString json);
+    StockItemSerialNumbers(const QString &json);
     ~StockItemSerialNumbers() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     StockItem getNext() const;
     void setNext(const StockItem &next);

@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-MachineDriver::MachineDriver(QString json) {
+MachineDriver::MachineDriver(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -58,7 +58,7 @@ void MachineDriver::initializeModel() {
     m_driver_errors_isValid = false;
 }
 
-void MachineDriver::fromJson(QString jsonString) {
+void MachineDriver::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

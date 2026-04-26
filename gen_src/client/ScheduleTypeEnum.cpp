@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-ScheduleTypeEnum::ScheduleTypeEnum(QString json) {
+ScheduleTypeEnum::ScheduleTypeEnum(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -38,7 +38,7 @@ void ScheduleTypeEnum::initializeModel() {
     m_value = eScheduleTypeEnum::INVALID_VALUE_OPENAPI_GENERATED;
 }
 
-void ScheduleTypeEnum::fromJson(QString jsonString) {
+void ScheduleTypeEnum::fromJson(const QString &jsonString) {
     
     if ( jsonString.compare("O", Qt::CaseInsensitive) == 0) {
         m_value = eScheduleTypeEnum::O;

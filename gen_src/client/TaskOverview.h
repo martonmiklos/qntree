@@ -29,13 +29,13 @@ namespace InvenTree {
 class TaskOverview : public Object {
 public:
     TaskOverview();
-    TaskOverview(QString json);
+    TaskOverview(const QString &json);
     ~TaskOverview() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     bool isIsRunning() const;
     void setIsRunning(const bool &is_running);

@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-PatchedParameter::PatchedParameter(QString json) {
+PatchedParameter::PatchedParameter(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -67,7 +67,7 @@ void PatchedParameter::initializeModel() {
     m_updated_by_detail_isValid = false;
 }
 
-void PatchedParameter::fromJson(QString jsonString) {
+void PatchedParameter::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

@@ -122,23 +122,23 @@ Q_SIGNALS:
     void contenttypeRetrieveModelSignalFull(HttpRequestWorker *worker, ContentType summary);
 
     Q_DECL_DEPRECATED_X("Use contenttypeListSignalError() instead")
-    void contenttypeListSignalE(PaginatedContentTypeList summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void contenttypeListSignalE(PaginatedContentTypeList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void contenttypeListSignalError(PaginatedContentTypeList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use contenttypeRetrieveSignalError() instead")
-    void contenttypeRetrieveSignalE(ContentType summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void contenttypeRetrieveSignalE(ContentType summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void contenttypeRetrieveSignalError(ContentType summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use contenttypeRetrieveModelSignalError() instead")
-    void contenttypeRetrieveModelSignalE(ContentType summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void contenttypeRetrieveModelSignalE(ContentType summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void contenttypeRetrieveModelSignalError(ContentType summary, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     Q_DECL_DEPRECATED_X("Use contenttypeListSignalErrorFull() instead")
-    void contenttypeListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void contenttypeListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void contenttypeListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use contenttypeRetrieveSignalErrorFull() instead")
-    void contenttypeRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void contenttypeRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void contenttypeRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use contenttypeRetrieveModelSignalErrorFull() instead")
-    void contenttypeRetrieveModelSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void contenttypeRetrieveModelSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void contenttypeRetrieveModelSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     void abortRequestsSignal();

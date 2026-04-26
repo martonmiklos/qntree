@@ -31,13 +31,13 @@ namespace InvenTree {
 class MachineProperty : public Object {
 public:
     MachineProperty();
-    MachineProperty(QString json);
+    MachineProperty(const QString &json);
     ~MachineProperty() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QString getKey() const;
     void setKey(const QString &key);

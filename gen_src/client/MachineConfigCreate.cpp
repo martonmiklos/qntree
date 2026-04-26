@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-MachineConfigCreate::MachineConfigCreate(QString json) {
+MachineConfigCreate::MachineConfigCreate(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -73,7 +73,7 @@ void MachineConfigCreate::initializeModel() {
     m_properties_isValid = false;
 }
 
-void MachineConfigCreate::fromJson(QString jsonString) {
+void MachineConfigCreate::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

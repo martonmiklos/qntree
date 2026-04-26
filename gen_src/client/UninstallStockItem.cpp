@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-UninstallStockItem::UninstallStockItem(QString json) {
+UninstallStockItem::UninstallStockItem(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -40,7 +40,7 @@ void UninstallStockItem::initializeModel() {
     m_note_isValid = false;
 }
 
-void UninstallStockItem::fromJson(QString jsonString) {
+void UninstallStockItem::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

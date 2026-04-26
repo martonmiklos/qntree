@@ -29,13 +29,13 @@ namespace InvenTree {
 class PluginReload : public Object {
 public:
     PluginReload();
-    PluginReload(QString json);
+    PluginReload(const QString &json);
     ~PluginReload() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     bool isFullReload() const;
     void setFullReload(const bool &full_reload);

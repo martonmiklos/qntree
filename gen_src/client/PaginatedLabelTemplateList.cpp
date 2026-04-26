@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-PaginatedLabelTemplateList::PaginatedLabelTemplateList(QString json) {
+PaginatedLabelTemplateList::PaginatedLabelTemplateList(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -46,7 +46,7 @@ void PaginatedLabelTemplateList::initializeModel() {
     m_results_isValid = false;
 }
 
-void PaginatedLabelTemplateList::fromJson(QString jsonString) {
+void PaginatedLabelTemplateList::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

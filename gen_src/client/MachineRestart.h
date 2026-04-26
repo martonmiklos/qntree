@@ -29,13 +29,13 @@ namespace InvenTree {
 class MachineRestart : public Object {
 public:
     MachineRestart();
-    MachineRestart(QString json);
+    MachineRestart(const QString &json);
     ~MachineRestart() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     bool isOk() const;
     void setOk(const bool &ok);

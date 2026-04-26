@@ -31,13 +31,13 @@ namespace InvenTree {
 class ErrorMessage : public Object {
 public:
     ErrorMessage();
-    ErrorMessage(QString json);
+    ErrorMessage(const QString &json);
     ~ErrorMessage() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QDateTime getWhen() const;
     void setWhen(const QDateTime &when);

@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-PaginatedOwnerList::PaginatedOwnerList(QString json) {
+PaginatedOwnerList::PaginatedOwnerList(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -46,7 +46,7 @@ void PaginatedOwnerList::initializeModel() {
     m_results_isValid = false;
 }
 
-void PaginatedOwnerList::fromJson(QString jsonString) {
+void PaginatedOwnerList::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

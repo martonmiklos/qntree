@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-StockItemSerialNumbers::StockItemSerialNumbers(QString json) {
+StockItemSerialNumbers::StockItemSerialNumbers(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -40,7 +40,7 @@ void StockItemSerialNumbers::initializeModel() {
     m_previous_isValid = false;
 }
 
-void StockItemSerialNumbers::fromJson(QString jsonString) {
+void StockItemSerialNumbers::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

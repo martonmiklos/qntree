@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-BuildUnallocation::BuildUnallocation(QString json) {
+BuildUnallocation::BuildUnallocation(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -40,7 +40,7 @@ void BuildUnallocation::initializeModel() {
     m_output_isValid = false;
 }
 
-void BuildUnallocation::fromJson(QString jsonString) {
+void BuildUnallocation::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

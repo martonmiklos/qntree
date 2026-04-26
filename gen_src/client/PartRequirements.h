@@ -29,13 +29,13 @@ namespace InvenTree {
 class PartRequirements : public Object {
 public:
     PartRequirements();
-    PartRequirements(QString json);
+    PartRequirements(const QString &json);
     ~PartRequirements() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     double getTotalStock() const;
     void setTotalStock(const double &total_stock);

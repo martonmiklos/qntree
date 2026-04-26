@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-ProjectCode::ProjectCode(QString json) {
+ProjectCode::ProjectCode(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -49,7 +49,7 @@ void ProjectCode::initializeModel() {
     m_responsible_detail_isValid = false;
 }
 
-void ProjectCode::fromJson(QString jsonString) {
+void ProjectCode::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

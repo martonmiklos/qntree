@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-ReturnOrderLineItem::ReturnOrderLineItem(QString json) {
+ReturnOrderLineItem::ReturnOrderLineItem(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -82,7 +82,7 @@ void ReturnOrderLineItem::initializeModel() {
     m_item_detail_isValid = false;
 }
 
-void ReturnOrderLineItem::fromJson(QString jsonString) {
+void ReturnOrderLineItem::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

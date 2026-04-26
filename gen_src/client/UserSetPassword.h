@@ -30,13 +30,13 @@ namespace InvenTree {
 class UserSetPassword : public Object {
 public:
     UserSetPassword();
-    UserSetPassword(QString json);
+    UserSetPassword(const QString &json);
     ~UserSetPassword() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QString getPassword() const;
     void setPassword(const QString &password);

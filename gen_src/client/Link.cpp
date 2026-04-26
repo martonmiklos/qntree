@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-Link::Link(QString json) {
+Link::Link(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -46,7 +46,7 @@ void Link::initializeModel() {
     m_bug_isValid = false;
 }
 
-void Link::fromJson(QString jsonString) {
+void Link::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

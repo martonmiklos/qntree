@@ -30,13 +30,13 @@ namespace InvenTree {
 class LocatePlugin : public Object {
 public:
     LocatePlugin();
-    LocatePlugin(QString json);
+    LocatePlugin(const QString &json);
     ~LocatePlugin() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QString getPlugin() const;
     void setPlugin(const QString &plugin);

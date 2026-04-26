@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-BuildCancel::BuildCancel(QString json) {
+BuildCancel::BuildCancel(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -40,7 +40,7 @@ void BuildCancel::initializeModel() {
     m_remove_incomplete_outputs_isValid = false;
 }
 
-void BuildCancel::fromJson(QString jsonString) {
+void BuildCancel::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

@@ -30,13 +30,13 @@ namespace InvenTree {
 class UninstallStockItem : public Object {
 public:
     UninstallStockItem();
-    UninstallStockItem(QString json);
+    UninstallStockItem(const QString &json);
     ~UninstallStockItem() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     qint32 getLocation() const;
     void setLocation(const qint32 &location);

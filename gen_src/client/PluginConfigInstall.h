@@ -30,13 +30,13 @@ namespace InvenTree {
 class PluginConfigInstall : public Object {
 public:
     PluginConfigInstall();
-    PluginConfigInstall(QString json);
+    PluginConfigInstall(const QString &json);
     ~PluginConfigInstall() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QString getUrl() const;
     void setUrl(const QString &url);

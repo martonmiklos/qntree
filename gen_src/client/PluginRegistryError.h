@@ -30,13 +30,13 @@ namespace InvenTree {
 class PluginRegistryError : public Object {
 public:
     PluginRegistryError();
-    PluginRegistryError(QString json);
+    PluginRegistryError(const QString &json);
     ~PluginRegistryError() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QString getStage() const;
     void setStage(const QString &stage);

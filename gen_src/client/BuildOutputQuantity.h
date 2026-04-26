@@ -30,13 +30,13 @@ namespace InvenTree {
 class BuildOutputQuantity : public Object {
 public:
     BuildOutputQuantity();
-    BuildOutputQuantity(QString json);
+    BuildOutputQuantity(const QString &json);
     ~BuildOutputQuantity() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     qint32 getOutput() const;
     void setOutput(const qint32 &output);

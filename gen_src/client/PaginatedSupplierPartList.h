@@ -33,13 +33,13 @@ class SupplierPart;
 class PaginatedSupplierPartList : public Object {
 public:
     PaginatedSupplierPartList();
-    PaginatedSupplierPartList(QString json);
+    PaginatedSupplierPartList(const QString &json);
     ~PaginatedSupplierPartList() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     qint32 getCount() const;
     void setCount(const qint32 &count);

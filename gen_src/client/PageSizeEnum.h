@@ -29,13 +29,13 @@ namespace InvenTree {
 class PageSizeEnum : public Enum {
 public:
     PageSizeEnum();
-    PageSizeEnum(QString json);
+    PageSizeEnum(const QString &json);
     ~PageSizeEnum() override;
 
     QString asJson() const override;
     QJsonValue asJsonValue() const override;
     void fromJsonValue(QJsonValue json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     enum class ePageSizeEnum {
         INVALID_VALUE_OPENAPI_GENERATED = 0,

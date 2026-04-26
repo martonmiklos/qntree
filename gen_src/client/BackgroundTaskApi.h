@@ -151,41 +151,41 @@ Q_SIGNALS:
     void backgroundTaskScheduledListSignalFull(HttpRequestWorker *worker, PaginatedScheduledTaskList summary);
 
     Q_DECL_DEPRECATED_X("Use backgroundTaskFailedBulkDestroySignalError() instead")
-    void backgroundTaskFailedBulkDestroySignalE(QNetworkReply::NetworkError error_type, QString error_str);
+    void backgroundTaskFailedBulkDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void backgroundTaskFailedBulkDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use backgroundTaskFailedListSignalError() instead")
-    void backgroundTaskFailedListSignalE(PaginatedFailedTaskList summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void backgroundTaskFailedListSignalE(PaginatedFailedTaskList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void backgroundTaskFailedListSignalError(PaginatedFailedTaskList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use backgroundTaskPendingBulkDestroySignalError() instead")
-    void backgroundTaskPendingBulkDestroySignalE(QNetworkReply::NetworkError error_type, QString error_str);
+    void backgroundTaskPendingBulkDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void backgroundTaskPendingBulkDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use backgroundTaskPendingListSignalError() instead")
-    void backgroundTaskPendingListSignalE(PaginatedPendingTaskList summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void backgroundTaskPendingListSignalE(PaginatedPendingTaskList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void backgroundTaskPendingListSignalError(PaginatedPendingTaskList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use backgroundTaskRetrieveSignalError() instead")
-    void backgroundTaskRetrieveSignalE(TaskOverview summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void backgroundTaskRetrieveSignalE(TaskOverview summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void backgroundTaskRetrieveSignalError(TaskOverview summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use backgroundTaskScheduledListSignalError() instead")
-    void backgroundTaskScheduledListSignalE(PaginatedScheduledTaskList summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void backgroundTaskScheduledListSignalE(PaginatedScheduledTaskList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void backgroundTaskScheduledListSignalError(PaginatedScheduledTaskList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     Q_DECL_DEPRECATED_X("Use backgroundTaskFailedBulkDestroySignalErrorFull() instead")
-    void backgroundTaskFailedBulkDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void backgroundTaskFailedBulkDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void backgroundTaskFailedBulkDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use backgroundTaskFailedListSignalErrorFull() instead")
-    void backgroundTaskFailedListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void backgroundTaskFailedListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void backgroundTaskFailedListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use backgroundTaskPendingBulkDestroySignalErrorFull() instead")
-    void backgroundTaskPendingBulkDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void backgroundTaskPendingBulkDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void backgroundTaskPendingBulkDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use backgroundTaskPendingListSignalErrorFull() instead")
-    void backgroundTaskPendingListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void backgroundTaskPendingListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void backgroundTaskPendingListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use backgroundTaskRetrieveSignalErrorFull() instead")
-    void backgroundTaskRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void backgroundTaskRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void backgroundTaskRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use backgroundTaskScheduledListSignalErrorFull() instead")
-    void backgroundTaskScheduledListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void backgroundTaskScheduledListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void backgroundTaskScheduledListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     void abortRequestsSignal();

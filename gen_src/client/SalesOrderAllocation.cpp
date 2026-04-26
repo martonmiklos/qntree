@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-SalesOrderAllocation::SalesOrderAllocation(QString json) {
+SalesOrderAllocation::SalesOrderAllocation(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -64,7 +64,7 @@ void SalesOrderAllocation::initializeModel() {
     m_shipment_detail_isValid = false;
 }
 
-void SalesOrderAllocation::fromJson(QString jsonString) {
+void SalesOrderAllocation::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

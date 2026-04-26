@@ -30,13 +30,13 @@ namespace InvenTree {
 class ImportParameter : public Object {
 public:
     ImportParameter();
-    ImportParameter(QString json);
+    ImportParameter(const QString &json);
     ~ImportParameter() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QString getName() const;
     void setName(const QString &name);

@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-PriorityEnum::PriorityEnum(QString json) {
+PriorityEnum::PriorityEnum(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -38,7 +38,7 @@ void PriorityEnum::initializeModel() {
     m_value = ePriorityEnum::INVALID_VALUE_OPENAPI_GENERATED;
 }
 
-void PriorityEnum::fromJson(QString jsonString) {
+void PriorityEnum::fromJson(const QString &jsonString) {
     
     if ( jsonString.compare(QString::number(0), Qt::CaseInsensitive) == 0) {
         m_value = ePriorityEnum::_0;

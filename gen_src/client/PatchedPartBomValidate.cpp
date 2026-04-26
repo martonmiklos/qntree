@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-PatchedPartBomValidate::PatchedPartBomValidate(QString json) {
+PatchedPartBomValidate::PatchedPartBomValidate(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -55,7 +55,7 @@ void PatchedPartBomValidate::initializeModel() {
     m_r_valid_isValid = false;
 }
 
-void PatchedPartBomValidate::fromJson(QString jsonString) {
+void PatchedPartBomValidate::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

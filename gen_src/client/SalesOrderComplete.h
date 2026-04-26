@@ -29,13 +29,13 @@ namespace InvenTree {
 class SalesOrderComplete : public Object {
 public:
     SalesOrderComplete();
-    SalesOrderComplete(QString json);
+    SalesOrderComplete(const QString &json);
     ~SalesOrderComplete() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     bool isAcceptIncomplete() const;
     void setAcceptIncomplete(const bool &accept_incomplete);

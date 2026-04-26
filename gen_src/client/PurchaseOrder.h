@@ -43,13 +43,13 @@ class Owner;
 class PurchaseOrder : public Object {
 public:
     PurchaseOrder();
-    PurchaseOrder(QString json);
+    PurchaseOrder(const QString &json);
     ~PurchaseOrder() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     qint32 getPk() const;
     void setPk(const qint32 &pk);

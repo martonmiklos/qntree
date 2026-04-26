@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-NameEnum::NameEnum(QString json) {
+NameEnum::NameEnum(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -38,7 +38,7 @@ void NameEnum::initializeModel() {
     m_value = eNameEnum::INVALID_VALUE_OPENAPI_GENERATED;
 }
 
-void NameEnum::fromJson(QString jsonString) {
+void NameEnum::fromJson(const QString &jsonString) {
     
     if ( jsonString.compare("admin", Qt::CaseInsensitive) == 0) {
         m_value = eNameEnum::ADMIN;

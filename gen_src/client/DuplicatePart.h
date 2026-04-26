@@ -29,13 +29,13 @@ namespace InvenTree {
 class DuplicatePart : public Object {
 public:
     DuplicatePart();
-    DuplicatePart(QString json);
+    DuplicatePart(const QString &json);
     ~DuplicatePart() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     qint32 getPart() const;
     void setPart(const qint32 &part);

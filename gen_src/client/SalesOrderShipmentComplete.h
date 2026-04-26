@@ -31,13 +31,13 @@ namespace InvenTree {
 class SalesOrderShipmentComplete : public Object {
 public:
     SalesOrderShipmentComplete();
-    SalesOrderShipmentComplete(QString json);
+    SalesOrderShipmentComplete(const QString &json);
     ~SalesOrderShipmentComplete() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QDate getShipmentDate() const;
     void setShipmentDate(const QDate &shipment_date);

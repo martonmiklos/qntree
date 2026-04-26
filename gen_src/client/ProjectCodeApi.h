@@ -149,41 +149,41 @@ Q_SIGNALS:
     void projectCodeUpdateSignalFull(HttpRequestWorker *worker, ProjectCode summary);
 
     Q_DECL_DEPRECATED_X("Use projectCodeCreateSignalError() instead")
-    void projectCodeCreateSignalE(ProjectCode summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void projectCodeCreateSignalE(ProjectCode summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void projectCodeCreateSignalError(ProjectCode summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use projectCodeDestroySignalError() instead")
-    void projectCodeDestroySignalE(QNetworkReply::NetworkError error_type, QString error_str);
+    void projectCodeDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void projectCodeDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use projectCodeListSignalError() instead")
-    void projectCodeListSignalE(PaginatedProjectCodeList summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void projectCodeListSignalE(PaginatedProjectCodeList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void projectCodeListSignalError(PaginatedProjectCodeList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use projectCodePartialUpdateSignalError() instead")
-    void projectCodePartialUpdateSignalE(ProjectCode summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void projectCodePartialUpdateSignalE(ProjectCode summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void projectCodePartialUpdateSignalError(ProjectCode summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use projectCodeRetrieveSignalError() instead")
-    void projectCodeRetrieveSignalE(ProjectCode summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void projectCodeRetrieveSignalE(ProjectCode summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void projectCodeRetrieveSignalError(ProjectCode summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use projectCodeUpdateSignalError() instead")
-    void projectCodeUpdateSignalE(ProjectCode summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void projectCodeUpdateSignalE(ProjectCode summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void projectCodeUpdateSignalError(ProjectCode summary, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     Q_DECL_DEPRECATED_X("Use projectCodeCreateSignalErrorFull() instead")
-    void projectCodeCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void projectCodeCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void projectCodeCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use projectCodeDestroySignalErrorFull() instead")
-    void projectCodeDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void projectCodeDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void projectCodeDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use projectCodeListSignalErrorFull() instead")
-    void projectCodeListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void projectCodeListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void projectCodeListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use projectCodePartialUpdateSignalErrorFull() instead")
-    void projectCodePartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void projectCodePartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void projectCodePartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use projectCodeRetrieveSignalErrorFull() instead")
-    void projectCodeRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void projectCodeRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void projectCodeRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use projectCodeUpdateSignalErrorFull() instead")
-    void projectCodeUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void projectCodeUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void projectCodeUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     void abortRequestsSignal();

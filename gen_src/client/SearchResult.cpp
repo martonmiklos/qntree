@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-SearchResult::SearchResult(QString json) {
+SearchResult::SearchResult(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -61,7 +61,7 @@ void SearchResult::initializeModel() {
     m_existing_part_id_isValid = false;
 }
 
-void SearchResult::fromJson(QString jsonString) {
+void SearchResult::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

@@ -30,13 +30,13 @@ namespace InvenTree {
 class GenerateBatchCode : public Object {
 public:
     GenerateBatchCode();
-    GenerateBatchCode(QString json);
+    GenerateBatchCode(const QString &json);
     ~GenerateBatchCode() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QString getBatchCode() const;
     void setBatchCode(const QString &batch_code);

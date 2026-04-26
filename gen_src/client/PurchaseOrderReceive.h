@@ -32,13 +32,13 @@ class PurchaseOrderLineItemReceive;
 class PurchaseOrderReceive : public Object {
 public:
     PurchaseOrderReceive();
-    PurchaseOrderReceive(QString json);
+    PurchaseOrderReceive(const QString &json);
     ~PurchaseOrderReceive() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QList<PurchaseOrderLineItemReceive> getItems() const;
     void setItems(const QList<PurchaseOrderLineItemReceive> &items);

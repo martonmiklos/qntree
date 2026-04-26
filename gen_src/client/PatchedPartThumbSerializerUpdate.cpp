@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-PatchedPartThumbSerializerUpdate::PatchedPartThumbSerializerUpdate(QString json) {
+PatchedPartThumbSerializerUpdate::PatchedPartThumbSerializerUpdate(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -37,7 +37,7 @@ void PatchedPartThumbSerializerUpdate::initializeModel() {
     m_image_isValid = false;
 }
 
-void PatchedPartThumbSerializerUpdate::fromJson(QString jsonString) {
+void PatchedPartThumbSerializerUpdate::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

@@ -30,13 +30,13 @@ namespace InvenTree {
 class LocationBrief : public Object {
 public:
     LocationBrief();
-    LocationBrief(QString json);
+    LocationBrief(const QString &json);
     ~LocationBrief() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     qint32 getPk() const;
     void setPk(const qint32 &pk);

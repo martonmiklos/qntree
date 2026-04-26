@@ -50,13 +50,13 @@ class InitialSupplier;
 class PatchedPart : public Object {
 public:
     PatchedPart();
-    PatchedPart(QString json);
+    PatchedPart(const QString &json);
     ~PatchedPart() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     bool isActive() const;
     void setActive(const bool &active);

@@ -32,13 +32,13 @@ namespace InvenTree {
 class Role : public Object {
 public:
     Role();
-    Role(QString json);
+    Role(const QString &json);
     ~Role() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     qint32 getUser() const;
     void setUser(const qint32 &user);

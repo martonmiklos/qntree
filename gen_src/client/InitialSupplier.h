@@ -30,13 +30,13 @@ namespace InvenTree {
 class InitialSupplier : public Object {
 public:
     InitialSupplier();
-    InitialSupplier(QString json);
+    InitialSupplier(const QString &json);
     ~InitialSupplier() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     qint32 getSupplier() const;
     void setSupplier(const qint32 &supplier);

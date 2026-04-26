@@ -31,13 +31,13 @@ namespace InvenTree {
 class SupplierPriceBreakBrief : public Object {
 public:
     SupplierPriceBreakBrief();
-    SupplierPriceBreakBrief(QString json);
+    SupplierPriceBreakBrief(const QString &json);
     ~SupplierPriceBreakBrief() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     qint32 getPk() const;
     void setPk(const qint32 &pk);

@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-MachineRegistryError::MachineRegistryError(QString json) {
+MachineRegistryError::MachineRegistryError(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -37,7 +37,7 @@ void MachineRegistryError::initializeModel() {
     m_message_isValid = false;
 }
 
-void MachineRegistryError::fromJson(QString jsonString) {
+void MachineRegistryError::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

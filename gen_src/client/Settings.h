@@ -29,13 +29,13 @@ namespace InvenTree {
 class Settings : public Object {
 public:
     Settings();
-    Settings(QString json);
+    Settings(const QString &json);
     ~Settings() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     bool isSsoRegistration() const;
     void setSsoRegistration(const bool &sso_registration);

@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-GetAuthToken::GetAuthToken(QString json) {
+GetAuthToken::GetAuthToken(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -43,7 +43,7 @@ void GetAuthToken::initializeModel() {
     m_expiry_isValid = false;
 }
 
-void GetAuthToken::fromJson(QString jsonString) {
+void GetAuthToken::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

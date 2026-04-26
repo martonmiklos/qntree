@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-PartThumb::PartThumb(QString json) {
+PartThumb::PartThumb(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -40,7 +40,7 @@ void PartThumb::initializeModel() {
     m_count_isValid = false;
 }
 
-void PartThumb::fromJson(QString jsonString) {
+void PartThumb::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

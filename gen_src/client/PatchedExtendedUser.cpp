@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-PatchedExtendedUser::PatchedExtendedUser(QString json) {
+PatchedExtendedUser::PatchedExtendedUser(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -67,7 +67,7 @@ void PatchedExtendedUser::initializeModel() {
     m_profile_isValid = false;
 }
 
-void PatchedExtendedUser::fromJson(QString jsonString) {
+void PatchedExtendedUser::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

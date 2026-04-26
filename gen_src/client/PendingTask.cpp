@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-PendingTask::PendingTask(QString json) {
+PendingTask::PendingTask(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -58,7 +58,7 @@ void PendingTask::initializeModel() {
     m_kwargs_isValid = false;
 }
 
-void PendingTask::fromJson(QString jsonString) {
+void PendingTask::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

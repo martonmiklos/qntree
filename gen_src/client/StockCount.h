@@ -33,13 +33,13 @@ class StockAdjustmentItem;
 class StockCount : public Object {
 public:
     StockCount();
-    StockCount(QString json);
+    StockCount(const QString &json);
     ~StockCount() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QList<StockAdjustmentItem> getItems() const;
     void setItems(const QList<StockAdjustmentItem> &items);

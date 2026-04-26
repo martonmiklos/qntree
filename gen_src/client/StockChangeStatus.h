@@ -31,13 +31,13 @@ namespace InvenTree {
 class StockChangeStatus : public Object {
 public:
     StockChangeStatus();
-    StockChangeStatus(QString json);
+    StockChangeStatus(const QString &json);
     ~StockChangeStatus() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QList<qint32> getItems() const;
     void setItems(const QList<qint32> &items);

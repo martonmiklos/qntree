@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-VersionInformation::VersionInformation(QString json) {
+VersionInformation::VersionInformation(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -49,7 +49,7 @@ void VersionInformation::initializeModel() {
     m_latest_isValid = false;
 }
 
-void VersionInformation::fromJson(QString jsonString) {
+void VersionInformation::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

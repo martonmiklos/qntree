@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-AddressBrief::AddressBrief(QString json) {
+AddressBrief::AddressBrief(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -61,7 +61,7 @@ void AddressBrief::initializeModel() {
     m_internal_shipping_notes_isValid = false;
 }
 
-void AddressBrief::fromJson(QString jsonString) {
+void AddressBrief::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

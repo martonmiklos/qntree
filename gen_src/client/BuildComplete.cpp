@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-BuildComplete::BuildComplete(QString json) {
+BuildComplete::BuildComplete(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -43,7 +43,7 @@ void BuildComplete::initializeModel() {
     m_accept_incomplete_isValid = false;
 }
 
-void BuildComplete::fromJson(QString jsonString) {
+void BuildComplete::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

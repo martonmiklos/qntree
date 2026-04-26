@@ -31,13 +31,13 @@ namespace InvenTree {
 class PluginAdminDetail : public Object {
 public:
     PluginAdminDetail();
-    PluginAdminDetail(QString json);
+    PluginAdminDetail(const QString &json);
     ~PluginAdminDetail() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QString getSource() const;
     void setSource(const QString &source);

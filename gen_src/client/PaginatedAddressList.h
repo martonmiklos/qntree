@@ -33,13 +33,13 @@ class Address;
 class PaginatedAddressList : public Object {
 public:
     PaginatedAddressList();
-    PaginatedAddressList(QString json);
+    PaginatedAddressList(const QString &json);
     ~PaginatedAddressList() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     qint32 getCount() const;
     void setCount(const qint32 &count);

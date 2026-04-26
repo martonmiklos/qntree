@@ -71,7 +71,7 @@ void MainWindow::on_actionInvenTree_access_triggered()
 void MainWindow::updateInvenTreeToken()
 {
     m_settings.beginGroup("InventTree");
-    auto token = m_settings.value(InventreeSettingsDialog::KEY_SERVER).toString();
+    auto token = m_settings.value(InventreeSettingsDialog::KEY_TOKEN).toString();
     m_settings.endGroup();
 
     m_partApi->addHeaders("Authorization", "Token " + token);

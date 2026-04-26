@@ -31,13 +31,13 @@ namespace InvenTree {
 class PartPricing : public Object {
 public:
     PartPricing();
-    PartPricing(QString json);
+    PartPricing(const QString &json);
     ~PartPricing() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QString getCurrency() const;
     void setCurrency(const QString &currency);

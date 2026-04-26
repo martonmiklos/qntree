@@ -29,13 +29,13 @@ namespace InvenTree {
 class HealthCheckStatusStatusEnum : public Enum {
 public:
     HealthCheckStatusStatusEnum();
-    HealthCheckStatusStatusEnum(QString json);
+    HealthCheckStatusStatusEnum(const QString &json);
     ~HealthCheckStatusStatusEnum() override;
 
     QString asJson() const override;
     QJsonValue asJsonValue() const override;
     void fromJsonValue(QJsonValue json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     enum class eHealthCheckStatusStatusEnum {
         INVALID_VALUE_OPENAPI_GENERATED = 0,

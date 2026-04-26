@@ -32,13 +32,13 @@ class MachineRegistryError;
 class MachineRegistryStatus : public Object {
 public:
     MachineRegistryStatus();
-    MachineRegistryStatus(QString json);
+    MachineRegistryStatus(const QString &json);
     ~MachineRegistryStatus() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QList<MachineRegistryError> getRegistryErrors() const;
     void setRegistryErrors(const QList<MachineRegistryError> &registry_errors);

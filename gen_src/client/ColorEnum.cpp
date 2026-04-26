@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-ColorEnum::ColorEnum(QString json) {
+ColorEnum::ColorEnum(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -38,7 +38,7 @@ void ColorEnum::initializeModel() {
     m_value = eColorEnum::INVALID_VALUE_OPENAPI_GENERATED;
 }
 
-void ColorEnum::fromJson(QString jsonString) {
+void ColorEnum::fromJson(const QString &jsonString) {
     
     if ( jsonString.compare("primary", Qt::CaseInsensitive) == 0) {
         m_value = eColorEnum::PRIMARY;

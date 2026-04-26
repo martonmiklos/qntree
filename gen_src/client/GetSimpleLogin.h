@@ -30,13 +30,13 @@ namespace InvenTree {
 class GetSimpleLogin : public Object {
 public:
     GetSimpleLogin();
-    GetSimpleLogin(QString json);
+    GetSimpleLogin(const QString &json);
     ~GetSimpleLogin() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QString getEmail() const;
     void setEmail(const QString &email);

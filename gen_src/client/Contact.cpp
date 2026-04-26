@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-Contact::Contact(QString json) {
+Contact::Contact(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -55,7 +55,7 @@ void Contact::initializeModel() {
     m_role_isValid = false;
 }
 
-void Contact::fromJson(QString jsonString) {
+void Contact::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

@@ -162,11 +162,12 @@ void InvenTreeCategoryModel::childItemsFetched(int childCount)
     emit dataFetched();
 }
 
-void InvenTreeCategoryModel::setVisiblePk(int pk)
+void InvenTreeCategoryModel::setSelectedPk(int pk)
 {
     m_preSelectedPk = pk;
     if (m_rootItem->hasChildPk(pk)) {
-        // the selected category is a topmost category -> do nothing
+        // the selected category is a topmost category -> no population just select
+        emit requestSelection(m_rootItem->childByPk(pk)->index());
     } else {
         // the selected category is not a topmost category -> start recursively selecting the parent categories
         if (m_topLevelCategoriesFetched) {
@@ -203,7 +204,9 @@ void InvenTreeCategoryModel::parentCategoryFetchedForSelection(InvenTree::Catego
     if (m_rootItem->hasChildPk(categoryData.getPk())) {
         // we reached top level -> finished
         disconnect(m_api, &InvenTree::PartApi::partCategoryRetrieveSignal, this, &InvenTreeCategoryModel::parentCategoryFetchedForSelection);
+        // TODO check if it is already exist then select
         emit requestExpand(m_rootItem->childByPk(categoryData.getPk())->index());
+
     } else {
         if (categoryData.getPk() == 0) {
             // for some reason we reached a top level item while it was not added to the rootitem
@@ -271,7 +274,7 @@ void InvenTreeCategoryItem::subCategoriesReceieved(InvenTree::PaginatedCategoryL
     disconnect(m_api, &InvenTree::PartApi::partCategoryListSignal, this, &InvenTreeCategoryItem::subCategoriesReceieved);
     m_fetchInProgress = false;
     auto categories = summary.getResults();
-    for (const auto &category : categories) {
+    for (const auto &category : std::as_const(categories)) {
         if ((categoryData.getPk() == 0 && !category.is_parent_Set()) || category.getParent() == categoryData.getPk()) {
             auto newChild = new InvenTreeCategoryItem(m_api, category, this);
             m_childItems.append(newChild);

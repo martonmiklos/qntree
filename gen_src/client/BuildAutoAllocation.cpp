@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-BuildAutoAllocation::BuildAutoAllocation(QString json) {
+BuildAutoAllocation::BuildAutoAllocation(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -49,7 +49,7 @@ void BuildAutoAllocation::initializeModel() {
     m_optional_items_isValid = false;
 }
 
-void BuildAutoAllocation::fromJson(QString jsonString) {
+void BuildAutoAllocation::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

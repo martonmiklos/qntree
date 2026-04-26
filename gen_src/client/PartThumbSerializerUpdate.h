@@ -30,13 +30,13 @@ namespace InvenTree {
 class PartThumbSerializerUpdate : public Object {
 public:
     PartThumbSerializerUpdate();
-    PartThumbSerializerUpdate(QString json);
+    PartThumbSerializerUpdate(const QString &json);
     ~PartThumbSerializerUpdate() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QString getImage() const;
     void setImage(const QString &image);

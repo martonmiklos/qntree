@@ -39,13 +39,13 @@ class DataImportColumnMap;
 class DataImportSession : public Object {
 public:
     DataImportSession();
-    DataImportSession(QString json);
+    DataImportSession(const QString &json);
     ~DataImportSession() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     qint32 getPk() const;
     void setPk(const qint32 &pk);

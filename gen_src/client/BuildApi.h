@@ -462,197 +462,197 @@ Q_SIGNALS:
     void buildUpdateSignalFull(HttpRequestWorker *worker, Build summary);
 
     Q_DECL_DEPRECATED_X("Use buildAllocateCreateSignalError() instead")
-    void buildAllocateCreateSignalE(BuildAllocation summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildAllocateCreateSignalE(BuildAllocation summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildAllocateCreateSignalError(BuildAllocation summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildAutoAllocateCreateSignalError() instead")
-    void buildAutoAllocateCreateSignalE(BuildAutoAllocation summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildAutoAllocateCreateSignalE(BuildAutoAllocation summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildAutoAllocateCreateSignalError(BuildAutoAllocation summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildCancelCreateSignalError() instead")
-    void buildCancelCreateSignalE(BuildCancel summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildCancelCreateSignalE(BuildCancel summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildCancelCreateSignalError(BuildCancel summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildCompleteCreateSignalError() instead")
-    void buildCompleteCreateSignalE(BuildOutputComplete summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildCompleteCreateSignalE(BuildOutputComplete summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildCompleteCreateSignalError(BuildOutputComplete summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildConsumeCreateSignalError() instead")
-    void buildConsumeCreateSignalE(BuildConsume summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildConsumeCreateSignalE(BuildConsume summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildConsumeCreateSignalError(BuildConsume summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildCreateSignalError() instead")
-    void buildCreateSignalE(Build summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildCreateSignalE(Build summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildCreateSignalError(Build summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildCreateOutputCreateSignalError() instead")
-    void buildCreateOutputCreateSignalE(QList<StockItem> summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildCreateOutputCreateSignalE(QList<StockItem> summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildCreateOutputCreateSignalError(QList<StockItem> summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildDeleteOutputsCreateSignalError() instead")
-    void buildDeleteOutputsCreateSignalE(BuildOutputDelete summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildDeleteOutputsCreateSignalE(BuildOutputDelete summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildDeleteOutputsCreateSignalError(BuildOutputDelete summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildDestroySignalError() instead")
-    void buildDestroySignalE(QNetworkReply::NetworkError error_type, QString error_str);
+    void buildDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildFinishCreateSignalError() instead")
-    void buildFinishCreateSignalE(BuildComplete summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildFinishCreateSignalE(BuildComplete summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildFinishCreateSignalError(BuildComplete summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildHoldCreateSignalError() instead")
-    void buildHoldCreateSignalE(QNetworkReply::NetworkError error_type, QString error_str);
+    void buildHoldCreateSignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildHoldCreateSignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildIssueCreateSignalError() instead")
-    void buildIssueCreateSignalE(QNetworkReply::NetworkError error_type, QString error_str);
+    void buildIssueCreateSignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildIssueCreateSignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildItemBulkDestroySignalError() instead")
-    void buildItemBulkDestroySignalE(QNetworkReply::NetworkError error_type, QString error_str);
+    void buildItemBulkDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildItemBulkDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildItemCreateSignalError() instead")
-    void buildItemCreateSignalE(BuildItem summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildItemCreateSignalE(BuildItem summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildItemCreateSignalError(BuildItem summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildItemDestroySignalError() instead")
-    void buildItemDestroySignalE(QNetworkReply::NetworkError error_type, QString error_str);
+    void buildItemDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildItemDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildItemListSignalError() instead")
-    void buildItemListSignalE(PaginatedBuildItemList summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildItemListSignalE(PaginatedBuildItemList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildItemListSignalError(PaginatedBuildItemList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildItemPartialUpdateSignalError() instead")
-    void buildItemPartialUpdateSignalE(BuildItem summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildItemPartialUpdateSignalE(BuildItem summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildItemPartialUpdateSignalError(BuildItem summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildItemRetrieveSignalError() instead")
-    void buildItemRetrieveSignalE(BuildItem summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildItemRetrieveSignalE(BuildItem summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildItemRetrieveSignalError(BuildItem summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildItemUpdateSignalError() instead")
-    void buildItemUpdateSignalE(BuildItem summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildItemUpdateSignalE(BuildItem summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildItemUpdateSignalError(BuildItem summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildLineCreateSignalError() instead")
-    void buildLineCreateSignalE(BuildLine summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildLineCreateSignalE(BuildLine summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildLineCreateSignalError(BuildLine summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildLineDestroySignalError() instead")
-    void buildLineDestroySignalE(QNetworkReply::NetworkError error_type, QString error_str);
+    void buildLineDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildLineDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildLineListSignalError() instead")
-    void buildLineListSignalE(PaginatedBuildLineList summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildLineListSignalE(PaginatedBuildLineList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildLineListSignalError(PaginatedBuildLineList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildLinePartialUpdateSignalError() instead")
-    void buildLinePartialUpdateSignalE(BuildLine summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildLinePartialUpdateSignalE(BuildLine summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildLinePartialUpdateSignalError(BuildLine summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildLineRetrieveSignalError() instead")
-    void buildLineRetrieveSignalE(BuildLine summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildLineRetrieveSignalE(BuildLine summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildLineRetrieveSignalError(BuildLine summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildLineUpdateSignalError() instead")
-    void buildLineUpdateSignalE(BuildLine summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildLineUpdateSignalE(BuildLine summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildLineUpdateSignalError(BuildLine summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildListSignalError() instead")
-    void buildListSignalE(PaginatedBuildList summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildListSignalE(PaginatedBuildList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildListSignalError(PaginatedBuildList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildPartialUpdateSignalError() instead")
-    void buildPartialUpdateSignalE(Build summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildPartialUpdateSignalE(Build summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildPartialUpdateSignalError(Build summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildRetrieveSignalError() instead")
-    void buildRetrieveSignalE(Build summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildRetrieveSignalE(Build summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildRetrieveSignalError(Build summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildScrapOutputsCreateSignalError() instead")
-    void buildScrapOutputsCreateSignalE(BuildOutputScrap summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildScrapOutputsCreateSignalE(BuildOutputScrap summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildScrapOutputsCreateSignalError(BuildOutputScrap summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildStatusRetrieveSignalError() instead")
-    void buildStatusRetrieveSignalE(GenericStateClass summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildStatusRetrieveSignalE(GenericStateClass summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildStatusRetrieveSignalError(GenericStateClass summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildUnallocateCreateSignalError() instead")
-    void buildUnallocateCreateSignalE(BuildUnallocation summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildUnallocateCreateSignalE(BuildUnallocation summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildUnallocateCreateSignalError(BuildUnallocation summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildUpdateSignalError() instead")
-    void buildUpdateSignalE(Build summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildUpdateSignalE(Build summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildUpdateSignalError(Build summary, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     Q_DECL_DEPRECATED_X("Use buildAllocateCreateSignalErrorFull() instead")
-    void buildAllocateCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildAllocateCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildAllocateCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildAutoAllocateCreateSignalErrorFull() instead")
-    void buildAutoAllocateCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildAutoAllocateCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildAutoAllocateCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildCancelCreateSignalErrorFull() instead")
-    void buildCancelCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildCancelCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildCancelCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildCompleteCreateSignalErrorFull() instead")
-    void buildCompleteCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildCompleteCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildCompleteCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildConsumeCreateSignalErrorFull() instead")
-    void buildConsumeCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildConsumeCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildConsumeCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildCreateSignalErrorFull() instead")
-    void buildCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildCreateOutputCreateSignalErrorFull() instead")
-    void buildCreateOutputCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildCreateOutputCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildCreateOutputCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildDeleteOutputsCreateSignalErrorFull() instead")
-    void buildDeleteOutputsCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildDeleteOutputsCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildDeleteOutputsCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildDestroySignalErrorFull() instead")
-    void buildDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildFinishCreateSignalErrorFull() instead")
-    void buildFinishCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildFinishCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildFinishCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildHoldCreateSignalErrorFull() instead")
-    void buildHoldCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildHoldCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildHoldCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildIssueCreateSignalErrorFull() instead")
-    void buildIssueCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildIssueCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildIssueCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildItemBulkDestroySignalErrorFull() instead")
-    void buildItemBulkDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildItemBulkDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildItemBulkDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildItemCreateSignalErrorFull() instead")
-    void buildItemCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildItemCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildItemCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildItemDestroySignalErrorFull() instead")
-    void buildItemDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildItemDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildItemDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildItemListSignalErrorFull() instead")
-    void buildItemListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildItemListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildItemListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildItemPartialUpdateSignalErrorFull() instead")
-    void buildItemPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildItemPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildItemPartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildItemRetrieveSignalErrorFull() instead")
-    void buildItemRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildItemRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildItemRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildItemUpdateSignalErrorFull() instead")
-    void buildItemUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildItemUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildItemUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildLineCreateSignalErrorFull() instead")
-    void buildLineCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildLineCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildLineCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildLineDestroySignalErrorFull() instead")
-    void buildLineDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildLineDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildLineDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildLineListSignalErrorFull() instead")
-    void buildLineListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildLineListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildLineListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildLinePartialUpdateSignalErrorFull() instead")
-    void buildLinePartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildLinePartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildLinePartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildLineRetrieveSignalErrorFull() instead")
-    void buildLineRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildLineRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildLineRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildLineUpdateSignalErrorFull() instead")
-    void buildLineUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildLineUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildLineUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildListSignalErrorFull() instead")
-    void buildListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildPartialUpdateSignalErrorFull() instead")
-    void buildPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildPartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildRetrieveSignalErrorFull() instead")
-    void buildRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildScrapOutputsCreateSignalErrorFull() instead")
-    void buildScrapOutputsCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildScrapOutputsCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildScrapOutputsCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildStatusRetrieveSignalErrorFull() instead")
-    void buildStatusRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildStatusRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildStatusRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildUnallocateCreateSignalErrorFull() instead")
-    void buildUnallocateCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildUnallocateCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildUnallocateCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use buildUpdateSignalErrorFull() instead")
-    void buildUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void buildUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void buildUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     void abortRequestsSignal();

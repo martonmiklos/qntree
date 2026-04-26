@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-IconPackage::IconPackage(QString json) {
+IconPackage::IconPackage(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -46,7 +46,7 @@ void IconPackage::initializeModel() {
     m_icons_isValid = false;
 }
 
-void IconPackage::fromJson(QString jsonString) {
+void IconPackage::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

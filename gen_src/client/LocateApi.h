@@ -102,11 +102,11 @@ Q_SIGNALS:
     void locateCreateSignalFull(HttpRequestWorker *worker, LocatePlugin summary);
 
     Q_DECL_DEPRECATED_X("Use locateCreateSignalError() instead")
-    void locateCreateSignalE(LocatePlugin summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void locateCreateSignalE(LocatePlugin summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void locateCreateSignalError(LocatePlugin summary, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     Q_DECL_DEPRECATED_X("Use locateCreateSignalErrorFull() instead")
-    void locateCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void locateCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void locateCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     void abortRequestsSignal();

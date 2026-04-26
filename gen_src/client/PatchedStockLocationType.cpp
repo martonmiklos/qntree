@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-PatchedStockLocationType::PatchedStockLocationType(QString json) {
+PatchedStockLocationType::PatchedStockLocationType(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -49,7 +49,7 @@ void PatchedStockLocationType::initializeModel() {
     m_location_count_isValid = false;
 }
 
-void PatchedStockLocationType::fromJson(QString jsonString) {
+void PatchedStockLocationType::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

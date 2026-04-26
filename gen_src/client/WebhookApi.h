@@ -101,11 +101,11 @@ Q_SIGNALS:
     void webhookCreateSignalFull(HttpRequestWorker *worker);
 
     Q_DECL_DEPRECATED_X("Use webhookCreateSignalError() instead")
-    void webhookCreateSignalE(QNetworkReply::NetworkError error_type, QString error_str);
+    void webhookCreateSignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void webhookCreateSignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
 
     Q_DECL_DEPRECATED_X("Use webhookCreateSignalErrorFull() instead")
-    void webhookCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void webhookCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void webhookCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     void abortRequestsSignal();

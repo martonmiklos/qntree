@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-SelectionEntry::SelectionEntry(QString json) {
+SelectionEntry::SelectionEntry(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -52,7 +52,7 @@ void SelectionEntry::initializeModel() {
     m_list_isValid = false;
 }
 
-void SelectionEntry::fromJson(QString jsonString) {
+void SelectionEntry::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();
