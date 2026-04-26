@@ -62,3 +62,8 @@ void MouserPart::parseFromSearchResult(const QJsonObject &partJson)
         m_quantity = 0;
     }
 }
+
+void MouserPart::parseImageResponse(const QByteArray &imageData)
+{
+    m_image.loadFromData(imageData);
+}

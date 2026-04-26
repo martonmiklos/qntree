@@ -10,4 +10,5 @@ class MouserPart : public SupplierPart
 public:
     MouserPart() = default;
     void parseFromSearchResult(const QJsonObject &partJson);
+    void parseImageResponse(const QByteArray &imageData);
 };

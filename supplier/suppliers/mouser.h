@@ -21,5 +21,7 @@ private slots:
 private:
     QNetworkAccessManager *m_manager = nullptr;
     QNetworkReply *m_partReply = nullptr;
+    QNetworkReply *m_imageReply = nullptr;
     MouserPart m_part;
+    QSettings m_settings;
 };

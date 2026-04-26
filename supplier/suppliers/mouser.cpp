@@ -65,8 +65,17 @@ int Mouser::invenTreeId() const
 void Mouser::networkReplyFinished()
 {
     auto *reply = qobject_cast<QNetworkReply*>(sender());
-    if (reply != m_partReply)
+    if (reply == m_imageReply) {
+        if (reply->error() == QNetworkReply::NoError)
+            m_part.parseImageResponse(reply->readAll());
+
+        emit supplierPartRetrived(m_part);
+        reply->deleteLater();
+        m_imageReply = nullptr;
         return;
+    } else if (reply != m_partReply) {
+        return;
+    }
 
     const QByteArray payload = reply->readAll();
     const QJsonDocument json = QJsonDocument::fromJson(payload);
@@ -83,7 +92,26 @@ void Mouser::networkReplyFinished()
         } else {
             const QJsonObject part = parts.first().toObject();
             m_part.parseFromSearchResult(part);
-            emit supplierPartRetrived(m_part);
+
+            QString imagePath = part.value(QStringLiteral("ImagePath")).toString().trimmed();
+            if (!imagePath.isEmpty()) {
+                if (imagePath.startsWith("//"))
+                    imagePath = "https:" + imagePath;
+
+                QUrl imageUrl(imagePath);
+                if (!imageUrl.isValid() || imageUrl.scheme().isEmpty())
+                    imageUrl = QUrl(QStringLiteral("https://www.mouser.com") + imagePath);
+
+                if (m_imageReply) {
+                    m_imageReply->disconnect(this);
+                    m_imageReply->deleteLater();
+                    m_imageReply = nullptr;
+                }
+                m_imageReply = m_manager->get(QNetworkRequest(imageUrl));
+                connect(m_imageReply, &QNetworkReply::finished, this, &Mouser::networkReplyFinished);
+            } else {
+                emit supplierPartRetrived(m_part);
+            }
         }
     }
 
