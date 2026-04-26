@@ -14,6 +14,8 @@ QT_END_NAMESPACE
 #include "gen_src/client/CurrencyApi.h"
 
 class InventreeSettingsDialog;
+class MouserSettingsDialog;
+class TMESettingsDialog;
 
 class MainWindow : public QMainWindow
 {
@@ -27,6 +29,8 @@ private slots:
     void on_pushButtonConnect_clicked();
     void on_pushButtonImportParts_clicked();
     void on_actionInvenTree_access_triggered();
+    void on_actionMouser_triggered();
+    void on_actionTME_triggered();
 
     void updateInvenTreeToken();
 
@@ -39,4 +43,6 @@ private:
     InvenTree::AttachmentApi *m_attachmentApi = nullptr;
     QSettings m_settings;
     InventreeSettingsDialog *m_inventreeSettingsDlg = nullptr;
+    MouserSettingsDialog *m_mouserSettingsDialog = nullptr;
+    TMESettingsDialog *m_tmeSettingsDialog = nullptr;
 };

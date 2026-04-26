@@ -10,6 +10,8 @@ using namespace InvenTree;
 #include "db/config_db.h"
 
 #include "inventreesettingsdialog.h"
+#include "supplier/suppliers/mousersettingsdialog.h"
+#include "supplier/suppliers/tmesettingsdialog.h"
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -71,7 +73,7 @@ void MainWindow::on_actionInvenTree_access_triggered()
 void MainWindow::updateInvenTreeToken()
 {
     m_settings.beginGroup("InventTree");
-    auto token = m_settings.value(InventreeSettingsDialog::KEY_SERVER).toString();
+    auto token = m_settings.value(InventreeSettingsDialog::KEY_TOKEN).toString();
     m_settings.endGroup();
 
     m_partApi->addHeaders("Authorization", "Token " + token);
@@ -82,3 +84,16 @@ void MainWindow::updateInvenTreeToken()
     m_attachmentApi->addHeaders("Authorization", "Token " + token);
 }
 
+void MainWindow::on_actionMouser_triggered()
+{
+    if (!m_mouserSettingsDialog)
+        m_mouserSettingsDialog = new MouserSettingsDialog(this);
+    m_mouserSettingsDialog->show();
+}
+
+void MainWindow::on_actionTME_triggered()
+{
+    if (!m_tmeSettingsDialog)
+        m_tmeSettingsDialog = new TMESettingsDialog(this);
+    m_tmeSettingsDialog->show();
+}
