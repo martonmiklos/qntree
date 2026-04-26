@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-PatchedCategoryParameterTemplate::PatchedCategoryParameterTemplate(QString json) {
+PatchedCategoryParameterTemplate::PatchedCategoryParameterTemplate(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -52,7 +52,7 @@ void PatchedCategoryParameterTemplate::initializeModel() {
     m_default_value_isValid = false;
 }
 
-void PatchedCategoryParameterTemplate::fromJson(QString jsonString) {
+void PatchedCategoryParameterTemplate::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-UserCreate::UserCreate(QString json) {
+UserCreate::UserCreate(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -67,7 +67,7 @@ void UserCreate::initializeModel() {
     m_profile_isValid = false;
 }
 
-void UserCreate::fromJson(QString jsonString) {
+void UserCreate::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

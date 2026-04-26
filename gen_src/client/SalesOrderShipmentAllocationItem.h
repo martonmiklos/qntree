@@ -30,13 +30,13 @@ namespace InvenTree {
 class SalesOrderShipmentAllocationItem : public Object {
 public:
     SalesOrderShipmentAllocationItem();
-    SalesOrderShipmentAllocationItem(QString json);
+    SalesOrderShipmentAllocationItem(const QString &json);
     ~SalesOrderShipmentAllocationItem() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     qint32 getLineItem() const;
     void setLineItem(const qint32 &line_item);

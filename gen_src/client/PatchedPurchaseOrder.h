@@ -48,13 +48,13 @@ class CompanyBrief;
 class PatchedPurchaseOrder : public Object {
 public:
     PatchedPurchaseOrder();
-    PatchedPurchaseOrder(QString json);
+    PatchedPurchaseOrder(const QString &json);
     ~PatchedPurchaseOrder() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     qint32 getPk() const;
     void setPk(const qint32 &pk);

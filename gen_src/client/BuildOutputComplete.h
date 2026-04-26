@@ -33,13 +33,13 @@ class BuildOutputQuantity;
 class BuildOutputComplete : public Object {
 public:
     BuildOutputComplete();
-    BuildOutputComplete(QString json);
+    BuildOutputComplete(const QString &json);
     ~BuildOutputComplete() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QList<BuildOutputQuantity> getOutputs() const;
     void setOutputs(const QList<BuildOutputQuantity> &outputs);

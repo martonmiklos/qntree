@@ -29,13 +29,13 @@ namespace InvenTree {
 class PluginActivate : public Object {
 public:
     PluginActivate();
-    PluginActivate(QString json);
+    PluginActivate(const QString &json);
     ~PluginActivate() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     bool isActive() const;
     void setActive(const bool &active);

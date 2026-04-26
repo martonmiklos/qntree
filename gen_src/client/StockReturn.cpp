@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-StockReturn::StockReturn(QString json) {
+StockReturn::StockReturn(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -46,7 +46,7 @@ void StockReturn::initializeModel() {
     m_merge_isValid = false;
 }
 
-void StockReturn::fromJson(QString jsonString) {
+void StockReturn::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

@@ -29,13 +29,13 @@ namespace InvenTree {
 class NameEnum : public Enum {
 public:
     NameEnum();
-    NameEnum(QString json);
+    NameEnum(const QString &json);
     ~NameEnum() override;
 
     QString asJson() const override;
     QJsonValue asJsonValue() const override;
     void fromJsonValue(QJsonValue json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     enum class eNameEnum {
         INVALID_VALUE_OPENAPI_GENERATED = 0,

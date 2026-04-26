@@ -30,13 +30,13 @@ namespace InvenTree {
 class GenerateSerialNumber : public Object {
 public:
     GenerateSerialNumber();
-    GenerateSerialNumber(QString json);
+    GenerateSerialNumber(const QString &json);
     ~GenerateSerialNumber() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QString getSerialNumber() const;
     void setSerialNumber(const QString &serial_number);

@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-ModelType4f8Enum::ModelType4f8Enum(QString json) {
+ModelType4f8Enum::ModelType4f8Enum(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -38,7 +38,7 @@ void ModelType4f8Enum::initializeModel() {
     m_value = eModelType4f8Enum::INVALID_VALUE_OPENAPI_GENERATED;
 }
 
-void ModelType4f8Enum::fromJson(QString jsonString) {
+void ModelType4f8Enum::fromJson(const QString &jsonString) {
     
     if ( jsonString.compare("build.build", Qt::CaseInsensitive) == 0) {
         m_value = eModelType4f8Enum::BUILD_BUILD;

@@ -132,29 +132,29 @@ Q_SIGNALS:
     void dataOutputRetrieveSignalFull(HttpRequestWorker *worker, DataOutput summary);
 
     Q_DECL_DEPRECATED_X("Use dataOutputBulkDestroySignalError() instead")
-    void dataOutputBulkDestroySignalE(QNetworkReply::NetworkError error_type, QString error_str);
+    void dataOutputBulkDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void dataOutputBulkDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use dataOutputDestroySignalError() instead")
-    void dataOutputDestroySignalE(QNetworkReply::NetworkError error_type, QString error_str);
+    void dataOutputDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void dataOutputDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use dataOutputListSignalError() instead")
-    void dataOutputListSignalE(PaginatedDataOutputList summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void dataOutputListSignalE(PaginatedDataOutputList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void dataOutputListSignalError(PaginatedDataOutputList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use dataOutputRetrieveSignalError() instead")
-    void dataOutputRetrieveSignalE(DataOutput summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void dataOutputRetrieveSignalE(DataOutput summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void dataOutputRetrieveSignalError(DataOutput summary, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     Q_DECL_DEPRECATED_X("Use dataOutputBulkDestroySignalErrorFull() instead")
-    void dataOutputBulkDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void dataOutputBulkDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void dataOutputBulkDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use dataOutputDestroySignalErrorFull() instead")
-    void dataOutputDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void dataOutputDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void dataOutputDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use dataOutputListSignalErrorFull() instead")
-    void dataOutputListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void dataOutputListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void dataOutputListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use dataOutputRetrieveSignalErrorFull() instead")
-    void dataOutputRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void dataOutputRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void dataOutputRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     void abortRequestsSignal();

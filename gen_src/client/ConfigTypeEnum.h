@@ -29,13 +29,13 @@ namespace InvenTree {
 class ConfigTypeEnum : public Enum {
 public:
     ConfigTypeEnum();
-    ConfigTypeEnum(QString json);
+    ConfigTypeEnum(const QString &json);
     ~ConfigTypeEnum() override;
 
     QString asJson() const override;
     QJsonValue asJsonValue() const override;
     void fromJsonValue(QJsonValue json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     enum class eConfigTypeEnum {
         INVALID_VALUE_OPENAPI_GENERATED = 0,

@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-PatchedGlobalSettings::PatchedGlobalSettings(QString json) {
+PatchedGlobalSettings::PatchedGlobalSettings(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -76,7 +76,7 @@ void PatchedGlobalSettings::initializeModel() {
     m_confirm_text_isValid = false;
 }
 
-void PatchedGlobalSettings::fromJson(QString jsonString) {
+void PatchedGlobalSettings::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

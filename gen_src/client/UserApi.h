@@ -417,209 +417,209 @@ Q_SIGNALS:
     void userUpdateSignalFull(HttpRequestWorker *worker, ExtendedUser summary);
 
     Q_DECL_DEPRECATED_X("Use userCreateSignalError() instead")
-    void userCreateSignalE(UserCreate summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void userCreateSignalE(UserCreate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userCreateSignalError(UserCreate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userDestroySignalError() instead")
-    void userDestroySignalE(QNetworkReply::NetworkError error_type, QString error_str);
+    void userDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void userDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userGroupCreateSignalError() instead")
-    void userGroupCreateSignalE(Group summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void userGroupCreateSignalE(Group summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userGroupCreateSignalError(Group summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userGroupDestroySignalError() instead")
-    void userGroupDestroySignalE(QNetworkReply::NetworkError error_type, QString error_str);
+    void userGroupDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void userGroupDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userGroupListSignalError() instead")
-    void userGroupListSignalE(PaginatedGroupList summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void userGroupListSignalE(PaginatedGroupList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userGroupListSignalError(PaginatedGroupList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userGroupPartialUpdateSignalError() instead")
-    void userGroupPartialUpdateSignalE(Group summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void userGroupPartialUpdateSignalE(Group summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userGroupPartialUpdateSignalError(Group summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userGroupRetrieveSignalError() instead")
-    void userGroupRetrieveSignalE(Group summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void userGroupRetrieveSignalE(Group summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userGroupRetrieveSignalError(Group summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userGroupUpdateSignalError() instead")
-    void userGroupUpdateSignalE(Group summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void userGroupUpdateSignalE(Group summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userGroupUpdateSignalError(Group summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userListSignalError() instead")
-    void userListSignalE(PaginatedUserCreateList summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void userListSignalE(PaginatedUserCreateList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userListSignalError(PaginatedUserCreateList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userMeDestroySignalError() instead")
-    void userMeDestroySignalE(QNetworkReply::NetworkError error_type, QString error_str);
+    void userMeDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void userMeDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userMePartialUpdateSignalError() instead")
-    void userMePartialUpdateSignalE(MeUser summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void userMePartialUpdateSignalE(MeUser summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userMePartialUpdateSignalError(MeUser summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userMeRetrieveSignalError() instead")
-    void userMeRetrieveSignalE(MeUser summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void userMeRetrieveSignalE(MeUser summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userMeRetrieveSignalError(MeUser summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userMeUpdateSignalError() instead")
-    void userMeUpdateSignalE(MeUser summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void userMeUpdateSignalE(MeUser summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userMeUpdateSignalError(MeUser summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userOwnerListSignalError() instead")
-    void userOwnerListSignalE(PaginatedOwnerList summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void userOwnerListSignalE(PaginatedOwnerList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userOwnerListSignalError(PaginatedOwnerList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userOwnerRetrieveSignalError() instead")
-    void userOwnerRetrieveSignalE(Owner summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void userOwnerRetrieveSignalE(Owner summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userOwnerRetrieveSignalError(Owner summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userPartialUpdateSignalError() instead")
-    void userPartialUpdateSignalE(ExtendedUser summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void userPartialUpdateSignalE(ExtendedUser summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userPartialUpdateSignalError(ExtendedUser summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userProfilePartialUpdateSignalError() instead")
-    void userProfilePartialUpdateSignalE(UserProfile summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void userProfilePartialUpdateSignalE(UserProfile summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userProfilePartialUpdateSignalError(UserProfile summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userProfileRetrieveSignalError() instead")
-    void userProfileRetrieveSignalE(UserProfile summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void userProfileRetrieveSignalE(UserProfile summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userProfileRetrieveSignalError(UserProfile summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userProfileUpdateSignalError() instead")
-    void userProfileUpdateSignalE(UserProfile summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void userProfileUpdateSignalE(UserProfile summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userProfileUpdateSignalError(UserProfile summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userRetrieveSignalError() instead")
-    void userRetrieveSignalE(ExtendedUser summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void userRetrieveSignalE(ExtendedUser summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userRetrieveSignalError(ExtendedUser summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userRolesRetrieveSignalError() instead")
-    void userRolesRetrieveSignalE(Role summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void userRolesRetrieveSignalE(Role summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userRolesRetrieveSignalError(Role summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userRulesetDestroySignalError() instead")
-    void userRulesetDestroySignalE(QNetworkReply::NetworkError error_type, QString error_str);
+    void userRulesetDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void userRulesetDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userRulesetListSignalError() instead")
-    void userRulesetListSignalE(PaginatedRuleSetList summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void userRulesetListSignalE(PaginatedRuleSetList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userRulesetListSignalError(PaginatedRuleSetList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userRulesetPartialUpdateSignalError() instead")
-    void userRulesetPartialUpdateSignalE(RuleSet summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void userRulesetPartialUpdateSignalE(RuleSet summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userRulesetPartialUpdateSignalError(RuleSet summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userRulesetRetrieveSignalError() instead")
-    void userRulesetRetrieveSignalE(RuleSet summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void userRulesetRetrieveSignalE(RuleSet summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userRulesetRetrieveSignalError(RuleSet summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userRulesetUpdateSignalError() instead")
-    void userRulesetUpdateSignalE(RuleSet summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void userRulesetUpdateSignalE(RuleSet summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userRulesetUpdateSignalError(RuleSet summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userSetPasswordPartialUpdateSignalError() instead")
-    void userSetPasswordPartialUpdateSignalE(UserSetPassword summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void userSetPasswordPartialUpdateSignalE(UserSetPassword summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userSetPasswordPartialUpdateSignalError(UserSetPassword summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userSetPasswordUpdateSignalError() instead")
-    void userSetPasswordUpdateSignalE(UserSetPassword summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void userSetPasswordUpdateSignalE(UserSetPassword summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userSetPasswordUpdateSignalError(UserSetPassword summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userTokenRetrieveSignalError() instead")
-    void userTokenRetrieveSignalE(GetAuthToken summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void userTokenRetrieveSignalE(GetAuthToken summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userTokenRetrieveSignalError(GetAuthToken summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userTokensCreateSignalError() instead")
-    void userTokensCreateSignalE(ApiToken summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void userTokensCreateSignalE(ApiToken summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userTokensCreateSignalError(ApiToken summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userTokensDestroySignalError() instead")
-    void userTokensDestroySignalE(QNetworkReply::NetworkError error_type, QString error_str);
+    void userTokensDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void userTokensDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userTokensListSignalError() instead")
-    void userTokensListSignalE(PaginatedApiTokenList summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void userTokensListSignalE(PaginatedApiTokenList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userTokensListSignalError(PaginatedApiTokenList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userTokensRetrieveSignalError() instead")
-    void userTokensRetrieveSignalE(ApiToken summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void userTokensRetrieveSignalE(ApiToken summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userTokensRetrieveSignalError(ApiToken summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userUpdateSignalError() instead")
-    void userUpdateSignalE(ExtendedUser summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void userUpdateSignalE(ExtendedUser summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userUpdateSignalError(ExtendedUser summary, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     Q_DECL_DEPRECATED_X("Use userCreateSignalErrorFull() instead")
-    void userCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void userCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userDestroySignalErrorFull() instead")
-    void userDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void userDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userGroupCreateSignalErrorFull() instead")
-    void userGroupCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void userGroupCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userGroupCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userGroupDestroySignalErrorFull() instead")
-    void userGroupDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void userGroupDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userGroupDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userGroupListSignalErrorFull() instead")
-    void userGroupListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void userGroupListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userGroupListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userGroupPartialUpdateSignalErrorFull() instead")
-    void userGroupPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void userGroupPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userGroupPartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userGroupRetrieveSignalErrorFull() instead")
-    void userGroupRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void userGroupRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userGroupRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userGroupUpdateSignalErrorFull() instead")
-    void userGroupUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void userGroupUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userGroupUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userListSignalErrorFull() instead")
-    void userListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void userListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userMeDestroySignalErrorFull() instead")
-    void userMeDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void userMeDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userMeDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userMePartialUpdateSignalErrorFull() instead")
-    void userMePartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void userMePartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userMePartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userMeRetrieveSignalErrorFull() instead")
-    void userMeRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void userMeRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userMeRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userMeUpdateSignalErrorFull() instead")
-    void userMeUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void userMeUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userMeUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userOwnerListSignalErrorFull() instead")
-    void userOwnerListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void userOwnerListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userOwnerListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userOwnerRetrieveSignalErrorFull() instead")
-    void userOwnerRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void userOwnerRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userOwnerRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userPartialUpdateSignalErrorFull() instead")
-    void userPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void userPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userPartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userProfilePartialUpdateSignalErrorFull() instead")
-    void userProfilePartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void userProfilePartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userProfilePartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userProfileRetrieveSignalErrorFull() instead")
-    void userProfileRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void userProfileRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userProfileRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userProfileUpdateSignalErrorFull() instead")
-    void userProfileUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void userProfileUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userProfileUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userRetrieveSignalErrorFull() instead")
-    void userRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void userRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userRolesRetrieveSignalErrorFull() instead")
-    void userRolesRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void userRolesRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userRolesRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userRulesetDestroySignalErrorFull() instead")
-    void userRulesetDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void userRulesetDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userRulesetDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userRulesetListSignalErrorFull() instead")
-    void userRulesetListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void userRulesetListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userRulesetListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userRulesetPartialUpdateSignalErrorFull() instead")
-    void userRulesetPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void userRulesetPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userRulesetPartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userRulesetRetrieveSignalErrorFull() instead")
-    void userRulesetRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void userRulesetRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userRulesetRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userRulesetUpdateSignalErrorFull() instead")
-    void userRulesetUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void userRulesetUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userRulesetUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userSetPasswordPartialUpdateSignalErrorFull() instead")
-    void userSetPasswordPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void userSetPasswordPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userSetPasswordPartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userSetPasswordUpdateSignalErrorFull() instead")
-    void userSetPasswordUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void userSetPasswordUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userSetPasswordUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userTokenRetrieveSignalErrorFull() instead")
-    void userTokenRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void userTokenRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userTokenRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userTokensCreateSignalErrorFull() instead")
-    void userTokensCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void userTokensCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userTokensCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userTokensDestroySignalErrorFull() instead")
-    void userTokensDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void userTokensDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userTokensDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userTokensListSignalErrorFull() instead")
-    void userTokensListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void userTokensListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userTokensListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userTokensRetrieveSignalErrorFull() instead")
-    void userTokensRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void userTokensRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userTokensRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use userUpdateSignalErrorFull() instead")
-    void userUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void userUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void userUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     void abortRequestsSignal();

@@ -31,13 +31,13 @@ namespace InvenTree {
 class PendingTask : public Object {
 public:
     PendingTask();
-    PendingTask(QString json);
+    PendingTask(const QString &json);
     ~PendingTask() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     qint32 getPk() const;
     void setPk(const qint32 &pk);

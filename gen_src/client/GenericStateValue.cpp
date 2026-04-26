@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-GenericStateValue::GenericStateValue(QString json) {
+GenericStateValue::GenericStateValue(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -52,7 +52,7 @@ void GenericStateValue::initializeModel() {
     m_custom_isValid = false;
 }
 
-void GenericStateValue::fromJson(QString jsonString) {
+void GenericStateValue::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

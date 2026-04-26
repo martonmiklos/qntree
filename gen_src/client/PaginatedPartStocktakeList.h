@@ -33,13 +33,13 @@ class PartStocktake;
 class PaginatedPartStocktakeList : public Object {
 public:
     PaginatedPartStocktakeList();
-    PaginatedPartStocktakeList(QString json);
+    PaginatedPartStocktakeList(const QString &json);
     ~PaginatedPartStocktakeList() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     qint32 getCount() const;
     void setCount(const qint32 &count);

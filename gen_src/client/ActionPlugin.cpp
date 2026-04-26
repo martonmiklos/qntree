@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-ActionPlugin::ActionPlugin(QString json) {
+ActionPlugin::ActionPlugin(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -40,7 +40,7 @@ void ActionPlugin::initializeModel() {
     m_data_isValid = false;
 }
 
-void ActionPlugin::fromJson(QString jsonString) {
+void ActionPlugin::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

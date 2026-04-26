@@ -29,13 +29,13 @@ namespace InvenTree {
 class BarcodeUnassign : public Object {
 public:
     BarcodeUnassign();
-    BarcodeUnassign(QString json);
+    BarcodeUnassign(const QString &json);
     ~BarcodeUnassign() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     qint32 getBuild() const;
     void setBuild(const qint32 &build);

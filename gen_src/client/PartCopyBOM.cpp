@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-PartCopyBOM::PartCopyBOM(QString json) {
+PartCopyBOM::PartCopyBOM(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -49,7 +49,7 @@ void PartCopyBOM::initializeModel() {
     m_copy_substitutes_isValid = false;
 }
 
-void PartCopyBOM::fromJson(QString jsonString) {
+void PartCopyBOM::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

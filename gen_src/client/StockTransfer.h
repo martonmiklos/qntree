@@ -33,13 +33,13 @@ class StockAdjustmentItem;
 class StockTransfer : public Object {
 public:
     StockTransfer();
-    StockTransfer(QString json);
+    StockTransfer(const QString &json);
     ~StockTransfer() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QList<StockAdjustmentItem> getItems() const;
     void setItems(const QList<StockAdjustmentItem> &items);

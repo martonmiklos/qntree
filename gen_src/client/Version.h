@@ -30,13 +30,13 @@ namespace InvenTree {
 class Version : public Object {
 public:
     Version();
-    Version(QString json);
+    Version(const QString &json);
     ~Version() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QString getServer() const;
     void setServer(const QString &server);

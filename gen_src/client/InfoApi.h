@@ -35,13 +35,13 @@ class Settings;
 class InfoApi : public Object {
 public:
     InfoApi();
-    InfoApi(QString json);
+    InfoApi(const QString &json);
     ~InfoApi() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QString getServer() const;
     void setServer(const QString &server);

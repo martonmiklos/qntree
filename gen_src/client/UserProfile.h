@@ -32,13 +32,13 @@ namespace InvenTree {
 class UserProfile : public Object {
 public:
     UserProfile();
-    UserProfile(QString json);
+    UserProfile(const QString &json);
     ~UserProfile() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QString getLanguage() const;
     void setLanguage(const QString &language);

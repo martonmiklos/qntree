@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-PaginatedDataImportColumnMapList::PaginatedDataImportColumnMapList(QString json) {
+PaginatedDataImportColumnMapList::PaginatedDataImportColumnMapList(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -46,7 +46,7 @@ void PaginatedDataImportColumnMapList::initializeModel() {
     m_results_isValid = false;
 }
 
-void PaginatedDataImportColumnMapList::fromJson(QString jsonString) {
+void PaginatedDataImportColumnMapList::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

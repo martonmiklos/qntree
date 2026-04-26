@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-NotesImage::NotesImage(QString json) {
+NotesImage::NotesImage(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -52,7 +52,7 @@ void NotesImage::initializeModel() {
     m_model_id_isValid = false;
 }
 
-void NotesImage::fromJson(QString jsonString) {
+void NotesImage::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

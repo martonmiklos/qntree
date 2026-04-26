@@ -35,13 +35,13 @@ class BuildConsumeLineItem;
 class BuildConsume : public Object {
 public:
     BuildConsume();
-    BuildConsume(QString json);
+    BuildConsume(const QString &json);
     ~BuildConsume() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QList<BuildConsumeAllocation> getItems() const;
     void setItems(const QList<BuildConsumeAllocation> &items);

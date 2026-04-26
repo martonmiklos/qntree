@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-StockItemStatusEnum::StockItemStatusEnum(QString json) {
+StockItemStatusEnum::StockItemStatusEnum(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -38,7 +38,7 @@ void StockItemStatusEnum::initializeModel() {
     m_value = eStockItemStatusEnum::INVALID_VALUE_OPENAPI_GENERATED;
 }
 
-void StockItemStatusEnum::fromJson(QString jsonString) {
+void StockItemStatusEnum::fromJson(const QString &jsonString) {
     
     if ( jsonString.compare(QString::number(10), Qt::CaseInsensitive) == 0) {
         m_value = eStockItemStatusEnum::_10;

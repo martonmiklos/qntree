@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-LicenseView::LicenseView(QString json) {
+LicenseView::LicenseView(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -40,7 +40,7 @@ void LicenseView::initializeModel() {
     m_frontend_isValid = false;
 }
 
-void LicenseView::fromJson(QString jsonString) {
+void LicenseView::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

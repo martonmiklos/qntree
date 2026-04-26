@@ -264,95 +264,95 @@ Q_SIGNALS:
     void bomValidateUpdateSignalFull(HttpRequestWorker *worker, BomItemValidation summary);
 
     Q_DECL_DEPRECATED_X("Use bomBulkDestroySignalError() instead")
-    void bomBulkDestroySignalE(QNetworkReply::NetworkError error_type, QString error_str);
+    void bomBulkDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void bomBulkDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use bomCreateSignalError() instead")
-    void bomCreateSignalE(BomItem summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void bomCreateSignalE(BomItem summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void bomCreateSignalError(BomItem summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use bomDestroySignalError() instead")
-    void bomDestroySignalE(QNetworkReply::NetworkError error_type, QString error_str);
+    void bomDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void bomDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use bomListSignalError() instead")
-    void bomListSignalE(PaginatedBomItemList summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void bomListSignalE(PaginatedBomItemList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void bomListSignalError(PaginatedBomItemList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use bomPartialUpdateSignalError() instead")
-    void bomPartialUpdateSignalE(BomItem summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void bomPartialUpdateSignalE(BomItem summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void bomPartialUpdateSignalError(BomItem summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use bomRetrieveSignalError() instead")
-    void bomRetrieveSignalE(BomItem summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void bomRetrieveSignalE(BomItem summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void bomRetrieveSignalError(BomItem summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use bomSubstituteCreateSignalError() instead")
-    void bomSubstituteCreateSignalE(BomItemSubstitute summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void bomSubstituteCreateSignalE(BomItemSubstitute summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void bomSubstituteCreateSignalError(BomItemSubstitute summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use bomSubstituteDestroySignalError() instead")
-    void bomSubstituteDestroySignalE(QNetworkReply::NetworkError error_type, QString error_str);
+    void bomSubstituteDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void bomSubstituteDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use bomSubstituteListSignalError() instead")
-    void bomSubstituteListSignalE(PaginatedBomItemSubstituteList summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void bomSubstituteListSignalE(PaginatedBomItemSubstituteList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void bomSubstituteListSignalError(PaginatedBomItemSubstituteList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use bomSubstitutePartialUpdateSignalError() instead")
-    void bomSubstitutePartialUpdateSignalE(BomItemSubstitute summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void bomSubstitutePartialUpdateSignalE(BomItemSubstitute summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void bomSubstitutePartialUpdateSignalError(BomItemSubstitute summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use bomSubstituteRetrieveSignalError() instead")
-    void bomSubstituteRetrieveSignalE(BomItemSubstitute summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void bomSubstituteRetrieveSignalE(BomItemSubstitute summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void bomSubstituteRetrieveSignalError(BomItemSubstitute summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use bomSubstituteUpdateSignalError() instead")
-    void bomSubstituteUpdateSignalE(BomItemSubstitute summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void bomSubstituteUpdateSignalE(BomItemSubstitute summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void bomSubstituteUpdateSignalError(BomItemSubstitute summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use bomUpdateSignalError() instead")
-    void bomUpdateSignalE(BomItem summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void bomUpdateSignalE(BomItem summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void bomUpdateSignalError(BomItem summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use bomValidatePartialUpdateSignalError() instead")
-    void bomValidatePartialUpdateSignalE(BomItemValidation summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void bomValidatePartialUpdateSignalE(BomItemValidation summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void bomValidatePartialUpdateSignalError(BomItemValidation summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use bomValidateUpdateSignalError() instead")
-    void bomValidateUpdateSignalE(BomItemValidation summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void bomValidateUpdateSignalE(BomItemValidation summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void bomValidateUpdateSignalError(BomItemValidation summary, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     Q_DECL_DEPRECATED_X("Use bomBulkDestroySignalErrorFull() instead")
-    void bomBulkDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void bomBulkDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void bomBulkDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use bomCreateSignalErrorFull() instead")
-    void bomCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void bomCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void bomCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use bomDestroySignalErrorFull() instead")
-    void bomDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void bomDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void bomDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use bomListSignalErrorFull() instead")
-    void bomListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void bomListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void bomListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use bomPartialUpdateSignalErrorFull() instead")
-    void bomPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void bomPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void bomPartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use bomRetrieveSignalErrorFull() instead")
-    void bomRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void bomRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void bomRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use bomSubstituteCreateSignalErrorFull() instead")
-    void bomSubstituteCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void bomSubstituteCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void bomSubstituteCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use bomSubstituteDestroySignalErrorFull() instead")
-    void bomSubstituteDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void bomSubstituteDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void bomSubstituteDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use bomSubstituteListSignalErrorFull() instead")
-    void bomSubstituteListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void bomSubstituteListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void bomSubstituteListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use bomSubstitutePartialUpdateSignalErrorFull() instead")
-    void bomSubstitutePartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void bomSubstitutePartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void bomSubstitutePartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use bomSubstituteRetrieveSignalErrorFull() instead")
-    void bomSubstituteRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void bomSubstituteRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void bomSubstituteRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use bomSubstituteUpdateSignalErrorFull() instead")
-    void bomSubstituteUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void bomSubstituteUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void bomSubstituteUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use bomUpdateSignalErrorFull() instead")
-    void bomUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void bomUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void bomUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use bomValidatePartialUpdateSignalErrorFull() instead")
-    void bomValidatePartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void bomValidatePartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void bomValidatePartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use bomValidateUpdateSignalErrorFull() instead")
-    void bomValidateUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void bomValidateUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void bomValidateUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     void abortRequestsSignal();

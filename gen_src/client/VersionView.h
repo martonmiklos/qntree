@@ -33,13 +33,13 @@ class Link;
 class VersionView : public Object {
 public:
     VersionView();
-    VersionView(QString json);
+    VersionView(const QString &json);
     ~VersionView() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     bool isDev() const;
     void setDev(const bool &dev);

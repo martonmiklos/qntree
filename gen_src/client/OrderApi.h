@@ -1046,539 +1046,539 @@ Q_SIGNALS:
     void orderSoUpdateSignalFull(HttpRequestWorker *worker, SalesOrder summary);
 
     Q_DECL_DEPRECATED_X("Use orderPoCancelCreateSignalError() instead")
-    void orderPoCancelCreateSignalE(QNetworkReply::NetworkError error_type, QString error_str);
+    void orderPoCancelCreateSignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderPoCancelCreateSignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderPoCompleteCreateSignalError() instead")
-    void orderPoCompleteCreateSignalE(PurchaseOrderComplete summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderPoCompleteCreateSignalE(PurchaseOrderComplete summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderPoCompleteCreateSignalError(PurchaseOrderComplete summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderPoCreateSignalError() instead")
-    void orderPoCreateSignalE(PurchaseOrder summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderPoCreateSignalE(PurchaseOrder summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderPoCreateSignalError(PurchaseOrder summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderPoDestroySignalError() instead")
-    void orderPoDestroySignalE(QNetworkReply::NetworkError error_type, QString error_str);
+    void orderPoDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderPoDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderPoExtraLineCreateSignalError() instead")
-    void orderPoExtraLineCreateSignalE(PurchaseOrderExtraLine summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderPoExtraLineCreateSignalE(PurchaseOrderExtraLine summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderPoExtraLineCreateSignalError(PurchaseOrderExtraLine summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderPoExtraLineDestroySignalError() instead")
-    void orderPoExtraLineDestroySignalE(QNetworkReply::NetworkError error_type, QString error_str);
+    void orderPoExtraLineDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderPoExtraLineDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderPoExtraLineListSignalError() instead")
-    void orderPoExtraLineListSignalE(PaginatedPurchaseOrderExtraLineList summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderPoExtraLineListSignalE(PaginatedPurchaseOrderExtraLineList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderPoExtraLineListSignalError(PaginatedPurchaseOrderExtraLineList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderPoExtraLinePartialUpdateSignalError() instead")
-    void orderPoExtraLinePartialUpdateSignalE(PurchaseOrderExtraLine summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderPoExtraLinePartialUpdateSignalE(PurchaseOrderExtraLine summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderPoExtraLinePartialUpdateSignalError(PurchaseOrderExtraLine summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderPoExtraLineRetrieveSignalError() instead")
-    void orderPoExtraLineRetrieveSignalE(PurchaseOrderExtraLine summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderPoExtraLineRetrieveSignalE(PurchaseOrderExtraLine summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderPoExtraLineRetrieveSignalError(PurchaseOrderExtraLine summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderPoExtraLineUpdateSignalError() instead")
-    void orderPoExtraLineUpdateSignalE(PurchaseOrderExtraLine summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderPoExtraLineUpdateSignalE(PurchaseOrderExtraLine summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderPoExtraLineUpdateSignalError(PurchaseOrderExtraLine summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderPoHoldCreateSignalError() instead")
-    void orderPoHoldCreateSignalE(QNetworkReply::NetworkError error_type, QString error_str);
+    void orderPoHoldCreateSignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderPoHoldCreateSignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderPoIssueCreateSignalError() instead")
-    void orderPoIssueCreateSignalE(QNetworkReply::NetworkError error_type, QString error_str);
+    void orderPoIssueCreateSignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderPoIssueCreateSignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderPoLineBulkDestroySignalError() instead")
-    void orderPoLineBulkDestroySignalE(QNetworkReply::NetworkError error_type, QString error_str);
+    void orderPoLineBulkDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderPoLineBulkDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderPoLineCreateSignalError() instead")
-    void orderPoLineCreateSignalE(PurchaseOrderLineItem summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderPoLineCreateSignalE(PurchaseOrderLineItem summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderPoLineCreateSignalError(PurchaseOrderLineItem summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderPoLineDestroySignalError() instead")
-    void orderPoLineDestroySignalE(QNetworkReply::NetworkError error_type, QString error_str);
+    void orderPoLineDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderPoLineDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderPoLineListSignalError() instead")
-    void orderPoLineListSignalE(PaginatedPurchaseOrderLineItemList summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderPoLineListSignalE(PaginatedPurchaseOrderLineItemList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderPoLineListSignalError(PaginatedPurchaseOrderLineItemList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderPoLinePartialUpdateSignalError() instead")
-    void orderPoLinePartialUpdateSignalE(PurchaseOrderLineItem summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderPoLinePartialUpdateSignalE(PurchaseOrderLineItem summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderPoLinePartialUpdateSignalError(PurchaseOrderLineItem summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderPoLineRetrieveSignalError() instead")
-    void orderPoLineRetrieveSignalE(PurchaseOrderLineItem summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderPoLineRetrieveSignalE(PurchaseOrderLineItem summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderPoLineRetrieveSignalError(PurchaseOrderLineItem summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderPoLineUpdateSignalError() instead")
-    void orderPoLineUpdateSignalE(PurchaseOrderLineItem summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderPoLineUpdateSignalE(PurchaseOrderLineItem summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderPoLineUpdateSignalError(PurchaseOrderLineItem summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderPoListSignalError() instead")
-    void orderPoListSignalE(PaginatedPurchaseOrderList summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderPoListSignalE(PaginatedPurchaseOrderList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderPoListSignalError(PaginatedPurchaseOrderList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderPoPartialUpdateSignalError() instead")
-    void orderPoPartialUpdateSignalE(PurchaseOrder summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderPoPartialUpdateSignalE(PurchaseOrder summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderPoPartialUpdateSignalError(PurchaseOrder summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderPoReceiveCreateSignalError() instead")
-    void orderPoReceiveCreateSignalE(QList<StockItem> summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderPoReceiveCreateSignalE(QList<StockItem> summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderPoReceiveCreateSignalError(QList<StockItem> summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderPoRetrieveSignalError() instead")
-    void orderPoRetrieveSignalE(PurchaseOrder summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderPoRetrieveSignalE(PurchaseOrder summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderPoRetrieveSignalError(PurchaseOrder summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderPoStatusRetrieveSignalError() instead")
-    void orderPoStatusRetrieveSignalE(GenericStateClass summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderPoStatusRetrieveSignalE(GenericStateClass summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderPoStatusRetrieveSignalError(GenericStateClass summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderPoUpdateSignalError() instead")
-    void orderPoUpdateSignalE(PurchaseOrder summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderPoUpdateSignalE(PurchaseOrder summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderPoUpdateSignalError(PurchaseOrder summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderRoCancelCreateSignalError() instead")
-    void orderRoCancelCreateSignalE(QNetworkReply::NetworkError error_type, QString error_str);
+    void orderRoCancelCreateSignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderRoCancelCreateSignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderRoCompleteCreateSignalError() instead")
-    void orderRoCompleteCreateSignalE(QNetworkReply::NetworkError error_type, QString error_str);
+    void orderRoCompleteCreateSignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderRoCompleteCreateSignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderRoCreateSignalError() instead")
-    void orderRoCreateSignalE(ReturnOrder summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderRoCreateSignalE(ReturnOrder summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderRoCreateSignalError(ReturnOrder summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderRoDestroySignalError() instead")
-    void orderRoDestroySignalE(QNetworkReply::NetworkError error_type, QString error_str);
+    void orderRoDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderRoDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderRoExtraLineCreateSignalError() instead")
-    void orderRoExtraLineCreateSignalE(ReturnOrderExtraLine summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderRoExtraLineCreateSignalE(ReturnOrderExtraLine summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderRoExtraLineCreateSignalError(ReturnOrderExtraLine summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderRoExtraLineDestroySignalError() instead")
-    void orderRoExtraLineDestroySignalE(QNetworkReply::NetworkError error_type, QString error_str);
+    void orderRoExtraLineDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderRoExtraLineDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderRoExtraLineListSignalError() instead")
-    void orderRoExtraLineListSignalE(PaginatedReturnOrderExtraLineList summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderRoExtraLineListSignalE(PaginatedReturnOrderExtraLineList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderRoExtraLineListSignalError(PaginatedReturnOrderExtraLineList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderRoExtraLinePartialUpdateSignalError() instead")
-    void orderRoExtraLinePartialUpdateSignalE(ReturnOrderExtraLine summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderRoExtraLinePartialUpdateSignalE(ReturnOrderExtraLine summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderRoExtraLinePartialUpdateSignalError(ReturnOrderExtraLine summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderRoExtraLineRetrieveSignalError() instead")
-    void orderRoExtraLineRetrieveSignalE(ReturnOrderExtraLine summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderRoExtraLineRetrieveSignalE(ReturnOrderExtraLine summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderRoExtraLineRetrieveSignalError(ReturnOrderExtraLine summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderRoExtraLineUpdateSignalError() instead")
-    void orderRoExtraLineUpdateSignalE(ReturnOrderExtraLine summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderRoExtraLineUpdateSignalE(ReturnOrderExtraLine summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderRoExtraLineUpdateSignalError(ReturnOrderExtraLine summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderRoHoldCreateSignalError() instead")
-    void orderRoHoldCreateSignalE(QNetworkReply::NetworkError error_type, QString error_str);
+    void orderRoHoldCreateSignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderRoHoldCreateSignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderRoIssueCreateSignalError() instead")
-    void orderRoIssueCreateSignalE(QNetworkReply::NetworkError error_type, QString error_str);
+    void orderRoIssueCreateSignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderRoIssueCreateSignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderRoLineCreateSignalError() instead")
-    void orderRoLineCreateSignalE(ReturnOrderLineItem summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderRoLineCreateSignalE(ReturnOrderLineItem summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderRoLineCreateSignalError(ReturnOrderLineItem summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderRoLineDestroySignalError() instead")
-    void orderRoLineDestroySignalE(QNetworkReply::NetworkError error_type, QString error_str);
+    void orderRoLineDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderRoLineDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderRoLineListSignalError() instead")
-    void orderRoLineListSignalE(PaginatedReturnOrderLineItemList summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderRoLineListSignalE(PaginatedReturnOrderLineItemList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderRoLineListSignalError(PaginatedReturnOrderLineItemList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderRoLinePartialUpdateSignalError() instead")
-    void orderRoLinePartialUpdateSignalE(ReturnOrderLineItem summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderRoLinePartialUpdateSignalE(ReturnOrderLineItem summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderRoLinePartialUpdateSignalError(ReturnOrderLineItem summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderRoLineRetrieveSignalError() instead")
-    void orderRoLineRetrieveSignalE(ReturnOrderLineItem summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderRoLineRetrieveSignalE(ReturnOrderLineItem summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderRoLineRetrieveSignalError(ReturnOrderLineItem summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderRoLineStatusRetrieveSignalError() instead")
-    void orderRoLineStatusRetrieveSignalE(GenericStateClass summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderRoLineStatusRetrieveSignalE(GenericStateClass summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderRoLineStatusRetrieveSignalError(GenericStateClass summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderRoLineUpdateSignalError() instead")
-    void orderRoLineUpdateSignalE(ReturnOrderLineItem summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderRoLineUpdateSignalE(ReturnOrderLineItem summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderRoLineUpdateSignalError(ReturnOrderLineItem summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderRoListSignalError() instead")
-    void orderRoListSignalE(PaginatedReturnOrderList summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderRoListSignalE(PaginatedReturnOrderList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderRoListSignalError(PaginatedReturnOrderList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderRoPartialUpdateSignalError() instead")
-    void orderRoPartialUpdateSignalE(ReturnOrder summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderRoPartialUpdateSignalE(ReturnOrder summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderRoPartialUpdateSignalError(ReturnOrder summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderRoReceiveCreateSignalError() instead")
-    void orderRoReceiveCreateSignalE(ReturnOrderReceive summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderRoReceiveCreateSignalE(ReturnOrderReceive summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderRoReceiveCreateSignalError(ReturnOrderReceive summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderRoRetrieveSignalError() instead")
-    void orderRoRetrieveSignalE(ReturnOrder summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderRoRetrieveSignalE(ReturnOrder summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderRoRetrieveSignalError(ReturnOrder summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderRoStatusRetrieveSignalError() instead")
-    void orderRoStatusRetrieveSignalE(GenericStateClass summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderRoStatusRetrieveSignalE(GenericStateClass summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderRoStatusRetrieveSignalError(GenericStateClass summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderRoUpdateSignalError() instead")
-    void orderRoUpdateSignalE(ReturnOrder summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderRoUpdateSignalE(ReturnOrder summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderRoUpdateSignalError(ReturnOrder summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoAllocateCreateSignalError() instead")
-    void orderSoAllocateCreateSignalE(SalesOrderShipmentAllocation summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoAllocateCreateSignalE(SalesOrderShipmentAllocation summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoAllocateCreateSignalError(SalesOrderShipmentAllocation summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoAllocateSerialsCreateSignalError() instead")
-    void orderSoAllocateSerialsCreateSignalE(SalesOrderSerialAllocation summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoAllocateSerialsCreateSignalE(SalesOrderSerialAllocation summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoAllocateSerialsCreateSignalError(SalesOrderSerialAllocation summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoAllocationBulkPartialUpdateSignalError() instead")
-    void orderSoAllocationBulkPartialUpdateSignalE(SalesOrderAllocation summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoAllocationBulkPartialUpdateSignalE(SalesOrderAllocation summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoAllocationBulkPartialUpdateSignalError(SalesOrderAllocation summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoAllocationBulkUpdateSignalError() instead")
-    void orderSoAllocationBulkUpdateSignalE(SalesOrderAllocation summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoAllocationBulkUpdateSignalE(SalesOrderAllocation summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoAllocationBulkUpdateSignalError(SalesOrderAllocation summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoAllocationDestroySignalError() instead")
-    void orderSoAllocationDestroySignalE(QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoAllocationDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoAllocationDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoAllocationListSignalError() instead")
-    void orderSoAllocationListSignalE(PaginatedSalesOrderAllocationList summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoAllocationListSignalE(PaginatedSalesOrderAllocationList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoAllocationListSignalError(PaginatedSalesOrderAllocationList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoAllocationPartialUpdateSignalError() instead")
-    void orderSoAllocationPartialUpdateSignalE(SalesOrderAllocation summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoAllocationPartialUpdateSignalE(SalesOrderAllocation summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoAllocationPartialUpdateSignalError(SalesOrderAllocation summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoAllocationRetrieveSignalError() instead")
-    void orderSoAllocationRetrieveSignalE(SalesOrderAllocation summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoAllocationRetrieveSignalE(SalesOrderAllocation summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoAllocationRetrieveSignalError(SalesOrderAllocation summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoAllocationUpdateSignalError() instead")
-    void orderSoAllocationUpdateSignalE(SalesOrderAllocation summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoAllocationUpdateSignalE(SalesOrderAllocation summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoAllocationUpdateSignalError(SalesOrderAllocation summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoCancelCreateSignalError() instead")
-    void orderSoCancelCreateSignalE(QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoCancelCreateSignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoCancelCreateSignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoCompleteCreateSignalError() instead")
-    void orderSoCompleteCreateSignalE(SalesOrderComplete summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoCompleteCreateSignalE(SalesOrderComplete summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoCompleteCreateSignalError(SalesOrderComplete summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoCreateSignalError() instead")
-    void orderSoCreateSignalE(SalesOrder summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoCreateSignalE(SalesOrder summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoCreateSignalError(SalesOrder summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoDestroySignalError() instead")
-    void orderSoDestroySignalE(QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoExtraLineCreateSignalError() instead")
-    void orderSoExtraLineCreateSignalE(SalesOrderExtraLine summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoExtraLineCreateSignalE(SalesOrderExtraLine summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoExtraLineCreateSignalError(SalesOrderExtraLine summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoExtraLineDestroySignalError() instead")
-    void orderSoExtraLineDestroySignalE(QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoExtraLineDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoExtraLineDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoExtraLineListSignalError() instead")
-    void orderSoExtraLineListSignalE(PaginatedSalesOrderExtraLineList summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoExtraLineListSignalE(PaginatedSalesOrderExtraLineList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoExtraLineListSignalError(PaginatedSalesOrderExtraLineList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoExtraLinePartialUpdateSignalError() instead")
-    void orderSoExtraLinePartialUpdateSignalE(SalesOrderExtraLine summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoExtraLinePartialUpdateSignalE(SalesOrderExtraLine summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoExtraLinePartialUpdateSignalError(SalesOrderExtraLine summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoExtraLineRetrieveSignalError() instead")
-    void orderSoExtraLineRetrieveSignalE(SalesOrderExtraLine summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoExtraLineRetrieveSignalE(SalesOrderExtraLine summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoExtraLineRetrieveSignalError(SalesOrderExtraLine summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoExtraLineUpdateSignalError() instead")
-    void orderSoExtraLineUpdateSignalE(SalesOrderExtraLine summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoExtraLineUpdateSignalE(SalesOrderExtraLine summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoExtraLineUpdateSignalError(SalesOrderExtraLine summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoHoldCreateSignalError() instead")
-    void orderSoHoldCreateSignalE(QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoHoldCreateSignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoHoldCreateSignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoIssueCreateSignalError() instead")
-    void orderSoIssueCreateSignalE(QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoIssueCreateSignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoIssueCreateSignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoLineCreateSignalError() instead")
-    void orderSoLineCreateSignalE(SalesOrderLineItem summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoLineCreateSignalE(SalesOrderLineItem summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoLineCreateSignalError(SalesOrderLineItem summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoLineDestroySignalError() instead")
-    void orderSoLineDestroySignalE(QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoLineDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoLineDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoLineListSignalError() instead")
-    void orderSoLineListSignalE(PaginatedSalesOrderLineItemList summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoLineListSignalE(PaginatedSalesOrderLineItemList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoLineListSignalError(PaginatedSalesOrderLineItemList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoLinePartialUpdateSignalError() instead")
-    void orderSoLinePartialUpdateSignalE(SalesOrderLineItem summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoLinePartialUpdateSignalE(SalesOrderLineItem summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoLinePartialUpdateSignalError(SalesOrderLineItem summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoLineRetrieveSignalError() instead")
-    void orderSoLineRetrieveSignalE(SalesOrderLineItem summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoLineRetrieveSignalE(SalesOrderLineItem summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoLineRetrieveSignalError(SalesOrderLineItem summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoLineUpdateSignalError() instead")
-    void orderSoLineUpdateSignalE(SalesOrderLineItem summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoLineUpdateSignalE(SalesOrderLineItem summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoLineUpdateSignalError(SalesOrderLineItem summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoListSignalError() instead")
-    void orderSoListSignalE(PaginatedSalesOrderList summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoListSignalE(PaginatedSalesOrderList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoListSignalError(PaginatedSalesOrderList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoPartialUpdateSignalError() instead")
-    void orderSoPartialUpdateSignalE(SalesOrder summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoPartialUpdateSignalE(SalesOrder summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoPartialUpdateSignalError(SalesOrder summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoRetrieveSignalError() instead")
-    void orderSoRetrieveSignalE(SalesOrder summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoRetrieveSignalE(SalesOrder summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoRetrieveSignalError(SalesOrder summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoShipmentCreateSignalError() instead")
-    void orderSoShipmentCreateSignalE(SalesOrderShipment summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoShipmentCreateSignalE(SalesOrderShipment summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoShipmentCreateSignalError(SalesOrderShipment summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoShipmentDestroySignalError() instead")
-    void orderSoShipmentDestroySignalE(QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoShipmentDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoShipmentDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoShipmentListSignalError() instead")
-    void orderSoShipmentListSignalE(PaginatedSalesOrderShipmentList summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoShipmentListSignalE(PaginatedSalesOrderShipmentList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoShipmentListSignalError(PaginatedSalesOrderShipmentList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoShipmentPartialUpdateSignalError() instead")
-    void orderSoShipmentPartialUpdateSignalE(SalesOrderShipment summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoShipmentPartialUpdateSignalE(SalesOrderShipment summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoShipmentPartialUpdateSignalError(SalesOrderShipment summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoShipmentRetrieveSignalError() instead")
-    void orderSoShipmentRetrieveSignalE(SalesOrderShipment summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoShipmentRetrieveSignalE(SalesOrderShipment summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoShipmentRetrieveSignalError(SalesOrderShipment summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoShipmentShipCreateSignalError() instead")
-    void orderSoShipmentShipCreateSignalE(SalesOrderShipmentComplete summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoShipmentShipCreateSignalE(SalesOrderShipmentComplete summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoShipmentShipCreateSignalError(SalesOrderShipmentComplete summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoShipmentUpdateSignalError() instead")
-    void orderSoShipmentUpdateSignalE(SalesOrderShipment summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoShipmentUpdateSignalE(SalesOrderShipment summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoShipmentUpdateSignalError(SalesOrderShipment summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoStatusRetrieveSignalError() instead")
-    void orderSoStatusRetrieveSignalE(GenericStateClass summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoStatusRetrieveSignalE(GenericStateClass summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoStatusRetrieveSignalError(GenericStateClass summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoUpdateSignalError() instead")
-    void orderSoUpdateSignalE(SalesOrder summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoUpdateSignalE(SalesOrder summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoUpdateSignalError(SalesOrder summary, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     Q_DECL_DEPRECATED_X("Use orderPoCancelCreateSignalErrorFull() instead")
-    void orderPoCancelCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderPoCancelCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderPoCancelCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderPoCompleteCreateSignalErrorFull() instead")
-    void orderPoCompleteCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderPoCompleteCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderPoCompleteCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderPoCreateSignalErrorFull() instead")
-    void orderPoCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderPoCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderPoCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderPoDestroySignalErrorFull() instead")
-    void orderPoDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderPoDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderPoDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderPoExtraLineCreateSignalErrorFull() instead")
-    void orderPoExtraLineCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderPoExtraLineCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderPoExtraLineCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderPoExtraLineDestroySignalErrorFull() instead")
-    void orderPoExtraLineDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderPoExtraLineDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderPoExtraLineDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderPoExtraLineListSignalErrorFull() instead")
-    void orderPoExtraLineListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderPoExtraLineListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderPoExtraLineListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderPoExtraLinePartialUpdateSignalErrorFull() instead")
-    void orderPoExtraLinePartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderPoExtraLinePartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderPoExtraLinePartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderPoExtraLineRetrieveSignalErrorFull() instead")
-    void orderPoExtraLineRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderPoExtraLineRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderPoExtraLineRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderPoExtraLineUpdateSignalErrorFull() instead")
-    void orderPoExtraLineUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderPoExtraLineUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderPoExtraLineUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderPoHoldCreateSignalErrorFull() instead")
-    void orderPoHoldCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderPoHoldCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderPoHoldCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderPoIssueCreateSignalErrorFull() instead")
-    void orderPoIssueCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderPoIssueCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderPoIssueCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderPoLineBulkDestroySignalErrorFull() instead")
-    void orderPoLineBulkDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderPoLineBulkDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderPoLineBulkDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderPoLineCreateSignalErrorFull() instead")
-    void orderPoLineCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderPoLineCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderPoLineCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderPoLineDestroySignalErrorFull() instead")
-    void orderPoLineDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderPoLineDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderPoLineDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderPoLineListSignalErrorFull() instead")
-    void orderPoLineListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderPoLineListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderPoLineListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderPoLinePartialUpdateSignalErrorFull() instead")
-    void orderPoLinePartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderPoLinePartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderPoLinePartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderPoLineRetrieveSignalErrorFull() instead")
-    void orderPoLineRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderPoLineRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderPoLineRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderPoLineUpdateSignalErrorFull() instead")
-    void orderPoLineUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderPoLineUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderPoLineUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderPoListSignalErrorFull() instead")
-    void orderPoListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderPoListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderPoListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderPoPartialUpdateSignalErrorFull() instead")
-    void orderPoPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderPoPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderPoPartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderPoReceiveCreateSignalErrorFull() instead")
-    void orderPoReceiveCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderPoReceiveCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderPoReceiveCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderPoRetrieveSignalErrorFull() instead")
-    void orderPoRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderPoRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderPoRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderPoStatusRetrieveSignalErrorFull() instead")
-    void orderPoStatusRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderPoStatusRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderPoStatusRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderPoUpdateSignalErrorFull() instead")
-    void orderPoUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderPoUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderPoUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderRoCancelCreateSignalErrorFull() instead")
-    void orderRoCancelCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderRoCancelCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderRoCancelCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderRoCompleteCreateSignalErrorFull() instead")
-    void orderRoCompleteCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderRoCompleteCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderRoCompleteCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderRoCreateSignalErrorFull() instead")
-    void orderRoCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderRoCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderRoCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderRoDestroySignalErrorFull() instead")
-    void orderRoDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderRoDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderRoDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderRoExtraLineCreateSignalErrorFull() instead")
-    void orderRoExtraLineCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderRoExtraLineCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderRoExtraLineCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderRoExtraLineDestroySignalErrorFull() instead")
-    void orderRoExtraLineDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderRoExtraLineDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderRoExtraLineDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderRoExtraLineListSignalErrorFull() instead")
-    void orderRoExtraLineListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderRoExtraLineListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderRoExtraLineListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderRoExtraLinePartialUpdateSignalErrorFull() instead")
-    void orderRoExtraLinePartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderRoExtraLinePartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderRoExtraLinePartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderRoExtraLineRetrieveSignalErrorFull() instead")
-    void orderRoExtraLineRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderRoExtraLineRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderRoExtraLineRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderRoExtraLineUpdateSignalErrorFull() instead")
-    void orderRoExtraLineUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderRoExtraLineUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderRoExtraLineUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderRoHoldCreateSignalErrorFull() instead")
-    void orderRoHoldCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderRoHoldCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderRoHoldCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderRoIssueCreateSignalErrorFull() instead")
-    void orderRoIssueCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderRoIssueCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderRoIssueCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderRoLineCreateSignalErrorFull() instead")
-    void orderRoLineCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderRoLineCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderRoLineCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderRoLineDestroySignalErrorFull() instead")
-    void orderRoLineDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderRoLineDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderRoLineDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderRoLineListSignalErrorFull() instead")
-    void orderRoLineListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderRoLineListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderRoLineListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderRoLinePartialUpdateSignalErrorFull() instead")
-    void orderRoLinePartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderRoLinePartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderRoLinePartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderRoLineRetrieveSignalErrorFull() instead")
-    void orderRoLineRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderRoLineRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderRoLineRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderRoLineStatusRetrieveSignalErrorFull() instead")
-    void orderRoLineStatusRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderRoLineStatusRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderRoLineStatusRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderRoLineUpdateSignalErrorFull() instead")
-    void orderRoLineUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderRoLineUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderRoLineUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderRoListSignalErrorFull() instead")
-    void orderRoListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderRoListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderRoListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderRoPartialUpdateSignalErrorFull() instead")
-    void orderRoPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderRoPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderRoPartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderRoReceiveCreateSignalErrorFull() instead")
-    void orderRoReceiveCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderRoReceiveCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderRoReceiveCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderRoRetrieveSignalErrorFull() instead")
-    void orderRoRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderRoRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderRoRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderRoStatusRetrieveSignalErrorFull() instead")
-    void orderRoStatusRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderRoStatusRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderRoStatusRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderRoUpdateSignalErrorFull() instead")
-    void orderRoUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderRoUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderRoUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoAllocateCreateSignalErrorFull() instead")
-    void orderSoAllocateCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoAllocateCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoAllocateCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoAllocateSerialsCreateSignalErrorFull() instead")
-    void orderSoAllocateSerialsCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoAllocateSerialsCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoAllocateSerialsCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoAllocationBulkPartialUpdateSignalErrorFull() instead")
-    void orderSoAllocationBulkPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoAllocationBulkPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoAllocationBulkPartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoAllocationBulkUpdateSignalErrorFull() instead")
-    void orderSoAllocationBulkUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoAllocationBulkUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoAllocationBulkUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoAllocationDestroySignalErrorFull() instead")
-    void orderSoAllocationDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoAllocationDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoAllocationDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoAllocationListSignalErrorFull() instead")
-    void orderSoAllocationListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoAllocationListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoAllocationListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoAllocationPartialUpdateSignalErrorFull() instead")
-    void orderSoAllocationPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoAllocationPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoAllocationPartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoAllocationRetrieveSignalErrorFull() instead")
-    void orderSoAllocationRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoAllocationRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoAllocationRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoAllocationUpdateSignalErrorFull() instead")
-    void orderSoAllocationUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoAllocationUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoAllocationUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoCancelCreateSignalErrorFull() instead")
-    void orderSoCancelCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoCancelCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoCancelCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoCompleteCreateSignalErrorFull() instead")
-    void orderSoCompleteCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoCompleteCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoCompleteCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoCreateSignalErrorFull() instead")
-    void orderSoCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoDestroySignalErrorFull() instead")
-    void orderSoDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoExtraLineCreateSignalErrorFull() instead")
-    void orderSoExtraLineCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoExtraLineCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoExtraLineCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoExtraLineDestroySignalErrorFull() instead")
-    void orderSoExtraLineDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoExtraLineDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoExtraLineDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoExtraLineListSignalErrorFull() instead")
-    void orderSoExtraLineListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoExtraLineListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoExtraLineListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoExtraLinePartialUpdateSignalErrorFull() instead")
-    void orderSoExtraLinePartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoExtraLinePartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoExtraLinePartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoExtraLineRetrieveSignalErrorFull() instead")
-    void orderSoExtraLineRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoExtraLineRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoExtraLineRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoExtraLineUpdateSignalErrorFull() instead")
-    void orderSoExtraLineUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoExtraLineUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoExtraLineUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoHoldCreateSignalErrorFull() instead")
-    void orderSoHoldCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoHoldCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoHoldCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoIssueCreateSignalErrorFull() instead")
-    void orderSoIssueCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoIssueCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoIssueCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoLineCreateSignalErrorFull() instead")
-    void orderSoLineCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoLineCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoLineCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoLineDestroySignalErrorFull() instead")
-    void orderSoLineDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoLineDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoLineDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoLineListSignalErrorFull() instead")
-    void orderSoLineListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoLineListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoLineListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoLinePartialUpdateSignalErrorFull() instead")
-    void orderSoLinePartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoLinePartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoLinePartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoLineRetrieveSignalErrorFull() instead")
-    void orderSoLineRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoLineRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoLineRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoLineUpdateSignalErrorFull() instead")
-    void orderSoLineUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoLineUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoLineUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoListSignalErrorFull() instead")
-    void orderSoListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoPartialUpdateSignalErrorFull() instead")
-    void orderSoPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoPartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoRetrieveSignalErrorFull() instead")
-    void orderSoRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoShipmentCreateSignalErrorFull() instead")
-    void orderSoShipmentCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoShipmentCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoShipmentCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoShipmentDestroySignalErrorFull() instead")
-    void orderSoShipmentDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoShipmentDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoShipmentDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoShipmentListSignalErrorFull() instead")
-    void orderSoShipmentListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoShipmentListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoShipmentListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoShipmentPartialUpdateSignalErrorFull() instead")
-    void orderSoShipmentPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoShipmentPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoShipmentPartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoShipmentRetrieveSignalErrorFull() instead")
-    void orderSoShipmentRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoShipmentRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoShipmentRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoShipmentShipCreateSignalErrorFull() instead")
-    void orderSoShipmentShipCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoShipmentShipCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoShipmentShipCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoShipmentUpdateSignalErrorFull() instead")
-    void orderSoShipmentUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoShipmentUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoShipmentUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoStatusRetrieveSignalErrorFull() instead")
-    void orderSoStatusRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoStatusRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoStatusRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use orderSoUpdateSignalErrorFull() instead")
-    void orderSoUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void orderSoUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void orderSoUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     void abortRequestsSignal();

@@ -30,13 +30,13 @@ namespace InvenTree {
 class SupplierList : public Object {
 public:
     SupplierList();
-    SupplierList(QString json);
+    SupplierList(const QString &json);
     ~SupplierList() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QString getPluginSlug() const;
     void setPluginSlug(const QString &plugin_slug);

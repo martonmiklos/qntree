@@ -35,13 +35,13 @@ class ProjectCode;
 class PatchedPurchaseOrderExtraLine : public Object {
 public:
     PatchedPurchaseOrderExtraLine();
-    PatchedPurchaseOrderExtraLine(QString json);
+    PatchedPurchaseOrderExtraLine(const QString &json);
     ~PatchedPurchaseOrderExtraLine() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     qint32 getPk() const;
     void setPk(const qint32 &pk);

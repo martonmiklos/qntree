@@ -29,13 +29,13 @@ namespace InvenTree {
 class DataImportSessionStatusEnum : public Enum {
 public:
     DataImportSessionStatusEnum();
-    DataImportSessionStatusEnum(QString json);
+    DataImportSessionStatusEnum(const QString &json);
     ~DataImportSessionStatusEnum() override;
 
     QString asJson() const override;
     QJsonValue asJsonValue() const override;
     void fromJsonValue(QJsonValue json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     enum class eDataImportSessionStatusEnum : int {
         INVALID_VALUE_OPENAPI_GENERATED = 0,

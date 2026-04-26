@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-PaginatedRuleSetList::PaginatedRuleSetList(QString json) {
+PaginatedRuleSetList::PaginatedRuleSetList(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -46,7 +46,7 @@ void PaginatedRuleSetList::initializeModel() {
     m_results_isValid = false;
 }
 
-void PaginatedRuleSetList::fromJson(QString jsonString) {
+void PaginatedRuleSetList::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

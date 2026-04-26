@@ -29,13 +29,13 @@ namespace InvenTree {
 class BuildAutoAllocation : public Object {
 public:
     BuildAutoAllocation();
-    BuildAutoAllocation(QString json);
+    BuildAutoAllocation(const QString &json);
     ~BuildAutoAllocation() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     qint32 getLocation() const;
     void setLocation(const qint32 &location);

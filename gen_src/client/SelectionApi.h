@@ -207,77 +207,77 @@ Q_SIGNALS:
     void selectionUpdateSignalFull(HttpRequestWorker *worker, SelectionList summary);
 
     Q_DECL_DEPRECATED_X("Use selectionCreateSignalError() instead")
-    void selectionCreateSignalE(SelectionList summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void selectionCreateSignalE(SelectionList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void selectionCreateSignalError(SelectionList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use selectionDestroySignalError() instead")
-    void selectionDestroySignalE(QNetworkReply::NetworkError error_type, QString error_str);
+    void selectionDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void selectionDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use selectionEntryCreateSignalError() instead")
-    void selectionEntryCreateSignalE(SelectionEntry summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void selectionEntryCreateSignalE(SelectionEntry summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void selectionEntryCreateSignalError(SelectionEntry summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use selectionEntryDestroySignalError() instead")
-    void selectionEntryDestroySignalE(QNetworkReply::NetworkError error_type, QString error_str);
+    void selectionEntryDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void selectionEntryDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use selectionEntryListSignalError() instead")
-    void selectionEntryListSignalE(PaginatedSelectionEntryList summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void selectionEntryListSignalE(PaginatedSelectionEntryList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void selectionEntryListSignalError(PaginatedSelectionEntryList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use selectionEntryPartialUpdateSignalError() instead")
-    void selectionEntryPartialUpdateSignalE(SelectionEntry summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void selectionEntryPartialUpdateSignalE(SelectionEntry summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void selectionEntryPartialUpdateSignalError(SelectionEntry summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use selectionEntryRetrieveSignalError() instead")
-    void selectionEntryRetrieveSignalE(SelectionEntry summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void selectionEntryRetrieveSignalE(SelectionEntry summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void selectionEntryRetrieveSignalError(SelectionEntry summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use selectionEntryUpdateSignalError() instead")
-    void selectionEntryUpdateSignalE(SelectionEntry summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void selectionEntryUpdateSignalE(SelectionEntry summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void selectionEntryUpdateSignalError(SelectionEntry summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use selectionListSignalError() instead")
-    void selectionListSignalE(PaginatedSelectionListList summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void selectionListSignalE(PaginatedSelectionListList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void selectionListSignalError(PaginatedSelectionListList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use selectionPartialUpdateSignalError() instead")
-    void selectionPartialUpdateSignalE(SelectionList summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void selectionPartialUpdateSignalE(SelectionList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void selectionPartialUpdateSignalError(SelectionList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use selectionRetrieveSignalError() instead")
-    void selectionRetrieveSignalE(SelectionList summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void selectionRetrieveSignalE(SelectionList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void selectionRetrieveSignalError(SelectionList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use selectionUpdateSignalError() instead")
-    void selectionUpdateSignalE(SelectionList summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void selectionUpdateSignalE(SelectionList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void selectionUpdateSignalError(SelectionList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     Q_DECL_DEPRECATED_X("Use selectionCreateSignalErrorFull() instead")
-    void selectionCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void selectionCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void selectionCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use selectionDestroySignalErrorFull() instead")
-    void selectionDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void selectionDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void selectionDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use selectionEntryCreateSignalErrorFull() instead")
-    void selectionEntryCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void selectionEntryCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void selectionEntryCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use selectionEntryDestroySignalErrorFull() instead")
-    void selectionEntryDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void selectionEntryDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void selectionEntryDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use selectionEntryListSignalErrorFull() instead")
-    void selectionEntryListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void selectionEntryListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void selectionEntryListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use selectionEntryPartialUpdateSignalErrorFull() instead")
-    void selectionEntryPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void selectionEntryPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void selectionEntryPartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use selectionEntryRetrieveSignalErrorFull() instead")
-    void selectionEntryRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void selectionEntryRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void selectionEntryRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use selectionEntryUpdateSignalErrorFull() instead")
-    void selectionEntryUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void selectionEntryUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void selectionEntryUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use selectionListSignalErrorFull() instead")
-    void selectionListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void selectionListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void selectionListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use selectionPartialUpdateSignalErrorFull() instead")
-    void selectionPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void selectionPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void selectionPartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use selectionRetrieveSignalErrorFull() instead")
-    void selectionRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void selectionRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void selectionRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use selectionUpdateSignalErrorFull() instead")
-    void selectionUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void selectionUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void selectionUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     void abortRequestsSignal();

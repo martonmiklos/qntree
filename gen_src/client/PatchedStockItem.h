@@ -44,13 +44,13 @@ class LocationBrief;
 class PatchedStockItem : public Object {
 public:
     PatchedStockItem();
-    PatchedStockItem(QString json);
+    PatchedStockItem(const QString &json);
     ~PatchedStockItem() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     qint32 getPk() const;
     void setPk(const qint32 &pk);

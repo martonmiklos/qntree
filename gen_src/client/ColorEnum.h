@@ -29,13 +29,13 @@ namespace InvenTree {
 class ColorEnum : public Enum {
 public:
     ColorEnum();
-    ColorEnum(QString json);
+    ColorEnum(const QString &json);
     ~ColorEnum() override;
 
     QString asJson() const override;
     QJsonValue asJsonValue() const override;
     void fromJsonValue(QJsonValue json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     enum class eColorEnum {
         INVALID_VALUE_OPENAPI_GENERATED = 0,

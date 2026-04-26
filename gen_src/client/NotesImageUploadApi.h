@@ -114,17 +114,17 @@ Q_SIGNALS:
     void notesImageUploadListSignalFull(HttpRequestWorker *worker, PaginatedNotesImageList summary);
 
     Q_DECL_DEPRECATED_X("Use notesImageUploadCreateSignalError() instead")
-    void notesImageUploadCreateSignalE(NotesImage summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void notesImageUploadCreateSignalE(NotesImage summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void notesImageUploadCreateSignalError(NotesImage summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use notesImageUploadListSignalError() instead")
-    void notesImageUploadListSignalE(PaginatedNotesImageList summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void notesImageUploadListSignalE(PaginatedNotesImageList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void notesImageUploadListSignalError(PaginatedNotesImageList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     Q_DECL_DEPRECATED_X("Use notesImageUploadCreateSignalErrorFull() instead")
-    void notesImageUploadCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void notesImageUploadCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void notesImageUploadCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use notesImageUploadListSignalErrorFull() instead")
-    void notesImageUploadListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void notesImageUploadListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void notesImageUploadListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     void abortRequestsSignal();

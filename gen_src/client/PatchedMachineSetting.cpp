@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-PatchedMachineSetting::PatchedMachineSetting(QString json) {
+PatchedMachineSetting::PatchedMachineSetting(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -82,7 +82,7 @@ void PatchedMachineSetting::initializeModel() {
     m_config_type_isValid = false;
 }
 
-void PatchedMachineSetting::fromJson(QString jsonString) {
+void PatchedMachineSetting::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

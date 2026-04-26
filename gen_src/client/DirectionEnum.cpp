@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-DirectionEnum::DirectionEnum(QString json) {
+DirectionEnum::DirectionEnum(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -38,7 +38,7 @@ void DirectionEnum::initializeModel() {
     m_value = eDirectionEnum::INVALID_VALUE_OPENAPI_GENERATED;
 }
 
-void DirectionEnum::fromJson(QString jsonString) {
+void DirectionEnum::fromJson(const QString &jsonString) {
     
     if ( jsonString.compare("I", Qt::CaseInsensitive) == 0) {
         m_value = eDirectionEnum::I;

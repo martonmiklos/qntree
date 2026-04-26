@@ -31,13 +31,13 @@ namespace InvenTree {
 class Config : public Object {
 public:
     Config();
-    Config(QString json);
+    Config(const QString &json);
     ~Config() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QString getKey() const;
     void setKey(const QString &key);

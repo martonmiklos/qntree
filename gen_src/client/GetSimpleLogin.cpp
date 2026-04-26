@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-GetSimpleLogin::GetSimpleLogin(QString json) {
+GetSimpleLogin::GetSimpleLogin(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -37,7 +37,7 @@ void GetSimpleLogin::initializeModel() {
     m_email_isValid = false;
 }
 
-void GetSimpleLogin::fromJson(QString jsonString) {
+void GetSimpleLogin::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

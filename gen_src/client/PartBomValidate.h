@@ -33,13 +33,13 @@ class User;
 class PartBomValidate : public Object {
 public:
     PartBomValidate();
-    PartBomValidate(QString json);
+    PartBomValidate(const QString &json);
     ~PartBomValidate() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     qint32 getPk() const;
     void setPk(const qint32 &pk);

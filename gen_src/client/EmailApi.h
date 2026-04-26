@@ -102,11 +102,11 @@ Q_SIGNALS:
     void emailGenerateCreateSignalFull(HttpRequestWorker *worker, GetSimpleLogin summary);
 
     Q_DECL_DEPRECATED_X("Use emailGenerateCreateSignalError() instead")
-    void emailGenerateCreateSignalE(GetSimpleLogin summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void emailGenerateCreateSignalE(GetSimpleLogin summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void emailGenerateCreateSignalError(GetSimpleLogin summary, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     Q_DECL_DEPRECATED_X("Use emailGenerateCreateSignalErrorFull() instead")
-    void emailGenerateCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void emailGenerateCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void emailGenerateCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     void abortRequestsSignal();

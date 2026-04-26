@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-BarcodeGenerate::BarcodeGenerate(QString json) {
+BarcodeGenerate::BarcodeGenerate(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -40,7 +40,7 @@ void BarcodeGenerate::initializeModel() {
     m_pk_isValid = false;
 }
 
-void BarcodeGenerate::fromJson(QString jsonString) {
+void BarcodeGenerate::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

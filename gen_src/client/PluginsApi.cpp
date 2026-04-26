@@ -1873,7 +1873,7 @@ void PluginsApi::pluginsSettingsListCallback(HttpRequestWorker *worker) {
         error_str = QString("%1, %2").arg(worker->error_str, QString(worker->response));
     }
     QList<PluginSetting> output;
-    QString json(worker->response);
+    const QString &json(worker->response) ;
     QByteArray array(json.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonArray jsonArray = doc.array();
@@ -2999,7 +2999,7 @@ void PluginsApi::pluginsUiFeaturesListCallback(HttpRequestWorker *worker) {
         error_str = QString("%1, %2").arg(worker->error_str, QString(worker->response));
     }
     QList<PluginUIFeature> output;
-    QString json(worker->response);
+    const QString &json(worker->response) ;
     QByteArray array(json.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonArray jsonArray = doc.array();
@@ -3534,7 +3534,7 @@ void PluginsApi::pluginsUserSettingsListCallback(HttpRequestWorker *worker) {
         error_str = QString("%1, %2").arg(worker->error_str, QString(worker->response));
     }
     QList<PluginUserSetting> output;
-    QString json(worker->response);
+    const QString &json(worker->response) ;
     QByteArray array(json.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonArray jsonArray = doc.array();

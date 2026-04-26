@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-MachinePropertyTypeEnum::MachinePropertyTypeEnum(QString json) {
+MachinePropertyTypeEnum::MachinePropertyTypeEnum(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -38,7 +38,7 @@ void MachinePropertyTypeEnum::initializeModel() {
     m_value = eMachinePropertyTypeEnum::INVALID_VALUE_OPENAPI_GENERATED;
 }
 
-void MachinePropertyTypeEnum::fromJson(QString jsonString) {
+void MachinePropertyTypeEnum::fromJson(const QString &jsonString) {
     
     if ( jsonString.compare("str", Qt::CaseInsensitive) == 0) {
         m_value = eMachinePropertyTypeEnum::STR;

@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-BarcodePOReceive::BarcodePOReceive(QString json) {
+BarcodePOReceive::BarcodePOReceive(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -52,7 +52,7 @@ void BarcodePOReceive::initializeModel() {
     m_auto_allocate_isValid = false;
 }
 
-void BarcodePOReceive::fromJson(QString jsonString) {
+void BarcodePOReceive::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

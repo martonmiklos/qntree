@@ -33,13 +33,13 @@ class NotesImage;
 class PaginatedNotesImageList : public Object {
 public:
     PaginatedNotesImageList();
-    PaginatedNotesImageList(QString json);
+    PaginatedNotesImageList(const QString &json);
     ~PaginatedNotesImageList() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     qint32 getCount() const;
     void setCount(const qint32 &count);

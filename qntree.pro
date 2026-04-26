@@ -20,6 +20,7 @@ SOURCES += \
     InvenTree_dialogs/inventreetreemodel.cpp \
     db/config_db.cpp \
     dialog.cpp \
+    inventreecategorypathlineedit.cpp \
     inventreepartimportwizard.cpp \
     inventreesettingsdialog.cpp \
     main.cpp \
@@ -62,6 +63,7 @@ HEADERS += \
     InvenTree_dialogs/inventreetreemodel.h \
     db/config_db.h \
     dialog.h \
+    inventreecategorypathlineedit.h \
     inventreepartimportwizard.h \
     inventreesettingsdialog.h \
     mainwindow.h \

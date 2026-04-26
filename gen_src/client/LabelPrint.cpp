@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-LabelPrint::LabelPrint(QString json) {
+LabelPrint::LabelPrint(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -43,7 +43,7 @@ void LabelPrint::initializeModel() {
     m_items_isValid = false;
 }
 
-void LabelPrint::fromJson(QString jsonString) {
+void LabelPrint::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

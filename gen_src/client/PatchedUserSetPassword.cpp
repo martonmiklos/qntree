@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-PatchedUserSetPassword::PatchedUserSetPassword(QString json) {
+PatchedUserSetPassword::PatchedUserSetPassword(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -40,7 +40,7 @@ void PatchedUserSetPassword::initializeModel() {
     m_override_warning_isValid = false;
 }
 
-void PatchedUserSetPassword::fromJson(QString jsonString) {
+void PatchedUserSetPassword::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

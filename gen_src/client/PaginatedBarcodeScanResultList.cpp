@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-PaginatedBarcodeScanResultList::PaginatedBarcodeScanResultList(QString json) {
+PaginatedBarcodeScanResultList::PaginatedBarcodeScanResultList(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -46,7 +46,7 @@ void PaginatedBarcodeScanResultList::initializeModel() {
     m_results_isValid = false;
 }
 
-void PaginatedBarcodeScanResultList::fromJson(QString jsonString) {
+void PaginatedBarcodeScanResultList::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

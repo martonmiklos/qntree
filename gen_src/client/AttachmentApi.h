@@ -163,47 +163,47 @@ Q_SIGNALS:
     void attachmentUpdateSignalFull(HttpRequestWorker *worker, Attachment summary);
 
     Q_DECL_DEPRECATED_X("Use attachmentBulkDestroySignalError() instead")
-    void attachmentBulkDestroySignalE(QNetworkReply::NetworkError error_type, QString error_str);
+    void attachmentBulkDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void attachmentBulkDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use attachmentCreateSignalError() instead")
-    void attachmentCreateSignalE(Attachment summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void attachmentCreateSignalE(Attachment summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void attachmentCreateSignalError(Attachment summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use attachmentDestroySignalError() instead")
-    void attachmentDestroySignalE(QNetworkReply::NetworkError error_type, QString error_str);
+    void attachmentDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void attachmentDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use attachmentListSignalError() instead")
-    void attachmentListSignalE(PaginatedAttachmentList summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void attachmentListSignalE(PaginatedAttachmentList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void attachmentListSignalError(PaginatedAttachmentList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use attachmentPartialUpdateSignalError() instead")
-    void attachmentPartialUpdateSignalE(Attachment summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void attachmentPartialUpdateSignalE(Attachment summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void attachmentPartialUpdateSignalError(Attachment summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use attachmentRetrieveSignalError() instead")
-    void attachmentRetrieveSignalE(Attachment summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void attachmentRetrieveSignalE(Attachment summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void attachmentRetrieveSignalError(Attachment summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use attachmentUpdateSignalError() instead")
-    void attachmentUpdateSignalE(Attachment summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void attachmentUpdateSignalE(Attachment summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void attachmentUpdateSignalError(Attachment summary, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     Q_DECL_DEPRECATED_X("Use attachmentBulkDestroySignalErrorFull() instead")
-    void attachmentBulkDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void attachmentBulkDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void attachmentBulkDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use attachmentCreateSignalErrorFull() instead")
-    void attachmentCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void attachmentCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void attachmentCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use attachmentDestroySignalErrorFull() instead")
-    void attachmentDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void attachmentDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void attachmentDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use attachmentListSignalErrorFull() instead")
-    void attachmentListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void attachmentListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void attachmentListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use attachmentPartialUpdateSignalErrorFull() instead")
-    void attachmentPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void attachmentPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void attachmentPartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use attachmentRetrieveSignalErrorFull() instead")
-    void attachmentRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void attachmentRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void attachmentRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use attachmentUpdateSignalErrorFull() instead")
-    void attachmentUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void attachmentUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void attachmentUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     void abortRequestsSignal();

@@ -33,13 +33,13 @@ class CustomUnit;
 class PaginatedCustomUnitList : public Object {
 public:
     PaginatedCustomUnitList();
-    PaginatedCustomUnitList(QString json);
+    PaginatedCustomUnitList(const QString &json);
     ~PaginatedCustomUnitList() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     qint32 getCount() const;
     void setCount(const qint32 &count);

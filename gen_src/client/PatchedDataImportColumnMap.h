@@ -30,13 +30,13 @@ namespace InvenTree {
 class PatchedDataImportColumnMap : public Object {
 public:
     PatchedDataImportColumnMap();
-    PatchedDataImportColumnMap(QString json);
+    PatchedDataImportColumnMap(const QString &json);
     ~PatchedDataImportColumnMap() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     qint32 getPk() const;
     void setPk(const qint32 &pk);

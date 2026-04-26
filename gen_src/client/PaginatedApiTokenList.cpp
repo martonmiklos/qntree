@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-PaginatedApiTokenList::PaginatedApiTokenList(QString json) {
+PaginatedApiTokenList::PaginatedApiTokenList(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -46,7 +46,7 @@ void PaginatedApiTokenList::initializeModel() {
     m_results_isValid = false;
 }
 
-void PaginatedApiTokenList::fromJson(QString jsonString) {
+void PaginatedApiTokenList::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

@@ -31,13 +31,13 @@ namespace InvenTree {
 class BomItem : public Object {
 public:
     BomItem();
-    BomItem(QString json);
+    BomItem(const QString &json);
     ~BomItem() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     qint32 getPart() const;
     void setPart(const qint32 &part);

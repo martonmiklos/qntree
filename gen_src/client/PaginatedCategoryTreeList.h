@@ -33,13 +33,13 @@ class CategoryTree;
 class PaginatedCategoryTreeList : public Object {
 public:
     PaginatedCategoryTreeList();
-    PaginatedCategoryTreeList(QString json);
+    PaginatedCategoryTreeList(const QString &json);
     ~PaginatedCategoryTreeList() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     qint32 getCount() const;
     void setCount(const qint32 &count);

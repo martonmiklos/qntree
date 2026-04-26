@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-PatchedContact::PatchedContact(QString json) {
+PatchedContact::PatchedContact(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -55,7 +55,7 @@ void PatchedContact::initializeModel() {
     m_role_isValid = false;
 }
 
-void PatchedContact::fromJson(QString jsonString) {
+void PatchedContact::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-AttachmentModelTypeEnum::AttachmentModelTypeEnum(QString json) {
+AttachmentModelTypeEnum::AttachmentModelTypeEnum(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -38,7 +38,7 @@ void AttachmentModelTypeEnum::initializeModel() {
     m_value = eAttachmentModelTypeEnum::INVALID_VALUE_OPENAPI_GENERATED;
 }
 
-void AttachmentModelTypeEnum::fromJson(QString jsonString) {
+void AttachmentModelTypeEnum::fromJson(const QString &jsonString) {
     
     if ( jsonString.compare("build", Qt::CaseInsensitive) == 0) {
         m_value = eAttachmentModelTypeEnum::BUILD;

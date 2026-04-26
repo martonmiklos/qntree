@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-StockChangeStatus::StockChangeStatus(QString json) {
+StockChangeStatus::StockChangeStatus(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -43,7 +43,7 @@ void StockChangeStatus::initializeModel() {
     m_note_isValid = false;
 }
 
-void StockChangeStatus::fromJson(QString jsonString) {
+void StockChangeStatus::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

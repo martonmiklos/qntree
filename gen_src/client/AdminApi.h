@@ -155,47 +155,47 @@ Q_SIGNALS:
     void adminEmailTestCreateSignalFull(HttpRequestWorker *worker, TestEmail summary);
 
     Q_DECL_DEPRECATED_X("Use adminConfigListSignalError() instead")
-    void adminConfigListSignalE(QList<Config> summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void adminConfigListSignalE(QList<Config> summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void adminConfigListSignalError(QList<Config> summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use adminConfigRetrieveSignalError() instead")
-    void adminConfigRetrieveSignalE(Config summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void adminConfigRetrieveSignalE(Config summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void adminConfigRetrieveSignalError(Config summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use adminEmailBulkDestroySignalError() instead")
-    void adminEmailBulkDestroySignalE(QNetworkReply::NetworkError error_type, QString error_str);
+    void adminEmailBulkDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void adminEmailBulkDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use adminEmailDestroySignalError() instead")
-    void adminEmailDestroySignalE(QNetworkReply::NetworkError error_type, QString error_str);
+    void adminEmailDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void adminEmailDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use adminEmailListSignalError() instead")
-    void adminEmailListSignalE(PaginatedEmailMessageList summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void adminEmailListSignalE(PaginatedEmailMessageList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void adminEmailListSignalError(PaginatedEmailMessageList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use adminEmailRetrieveSignalError() instead")
-    void adminEmailRetrieveSignalE(EmailMessage summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void adminEmailRetrieveSignalE(EmailMessage summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void adminEmailRetrieveSignalError(EmailMessage summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use adminEmailTestCreateSignalError() instead")
-    void adminEmailTestCreateSignalE(TestEmail summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void adminEmailTestCreateSignalE(TestEmail summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void adminEmailTestCreateSignalError(TestEmail summary, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     Q_DECL_DEPRECATED_X("Use adminConfigListSignalErrorFull() instead")
-    void adminConfigListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void adminConfigListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void adminConfigListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use adminConfigRetrieveSignalErrorFull() instead")
-    void adminConfigRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void adminConfigRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void adminConfigRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use adminEmailBulkDestroySignalErrorFull() instead")
-    void adminEmailBulkDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void adminEmailBulkDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void adminEmailBulkDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use adminEmailDestroySignalErrorFull() instead")
-    void adminEmailDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void adminEmailDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void adminEmailDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use adminEmailListSignalErrorFull() instead")
-    void adminEmailListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void adminEmailListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void adminEmailListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use adminEmailRetrieveSignalErrorFull() instead")
-    void adminEmailRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void adminEmailRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void adminEmailRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use adminEmailTestCreateSignalErrorFull() instead")
-    void adminEmailTestCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void adminEmailTestCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void adminEmailTestCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     void abortRequestsSignal();

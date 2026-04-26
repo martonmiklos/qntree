@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-Flag::Flag(QString json) {
+Flag::Flag(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -43,7 +43,7 @@ void Flag::initializeModel() {
     m_conditions_isValid = false;
 }
 
-void Flag::fromJson(QString jsonString) {
+void Flag::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

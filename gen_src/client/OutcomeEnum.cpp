@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-OutcomeEnum::OutcomeEnum(QString json) {
+OutcomeEnum::OutcomeEnum(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -38,7 +38,7 @@ void OutcomeEnum::initializeModel() {
     m_value = eOutcomeEnum::INVALID_VALUE_OPENAPI_GENERATED;
 }
 
-void OutcomeEnum::fromJson(QString jsonString) {
+void OutcomeEnum::fromJson(const QString &jsonString) {
     
     if ( jsonString.compare(QString::number(10), Qt::CaseInsensitive) == 0) {
         m_value = eOutcomeEnum::_10;

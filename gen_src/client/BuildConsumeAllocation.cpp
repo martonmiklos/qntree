@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-BuildConsumeAllocation::BuildConsumeAllocation(QString json) {
+BuildConsumeAllocation::BuildConsumeAllocation(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -40,7 +40,7 @@ void BuildConsumeAllocation::initializeModel() {
     m_quantity_isValid = false;
 }
 
-void BuildConsumeAllocation::fromJson(QString jsonString) {
+void BuildConsumeAllocation::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

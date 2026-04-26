@@ -30,13 +30,13 @@ namespace InvenTree {
 class MachineRegistryError : public Object {
 public:
     MachineRegistryError();
-    MachineRegistryError(QString json);
+    MachineRegistryError(const QString &json);
     ~MachineRegistryError() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QString getMessage() const;
     void setMessage(const QString &message);

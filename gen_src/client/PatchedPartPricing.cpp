@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-PatchedPartPricing::PatchedPartPricing(QString json) {
+PatchedPartPricing::PatchedPartPricing(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -106,7 +106,7 @@ void PatchedPartPricing::initializeModel() {
     m_update_isValid = false;
 }
 
-void PatchedPartPricing::fromJson(QString jsonString) {
+void PatchedPartPricing::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

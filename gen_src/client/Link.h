@@ -30,13 +30,13 @@ namespace InvenTree {
 class Link : public Object {
 public:
     Link();
-    Link(QString json);
+    Link(const QString &json);
     ~Link() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QString getDoc() const;
     void setDoc(const QString &doc);

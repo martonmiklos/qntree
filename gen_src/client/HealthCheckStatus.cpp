@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-HealthCheckStatus::HealthCheckStatus(QString json) {
+HealthCheckStatus::HealthCheckStatus(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -37,7 +37,7 @@ void HealthCheckStatus::initializeModel() {
     m_status_isValid = false;
 }
 
-void HealthCheckStatus::fromJson(QString jsonString) {
+void HealthCheckStatus::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

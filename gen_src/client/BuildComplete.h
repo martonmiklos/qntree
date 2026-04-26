@@ -30,13 +30,13 @@ namespace InvenTree {
 class BuildComplete : public Object {
 public:
     BuildComplete();
-    BuildComplete(QString json);
+    BuildComplete(const QString &json);
     ~BuildComplete() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     AcceptOverallocatedEnum getAcceptOverallocated() const;
     void setAcceptOverallocated(const AcceptOverallocatedEnum &accept_overallocated);

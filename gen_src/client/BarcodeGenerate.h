@@ -30,13 +30,13 @@ namespace InvenTree {
 class BarcodeGenerate : public Object {
 public:
     BarcodeGenerate();
-    BarcodeGenerate(QString json);
+    BarcodeGenerate(const QString &json);
     ~BarcodeGenerate() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QString getModel() const;
     void setModel(const QString &model);

@@ -33,13 +33,13 @@ class MachineProperty;
 class MachineConfigCreate : public Object {
 public:
     MachineConfigCreate();
-    MachineConfigCreate(QString json);
+    MachineConfigCreate(const QString &json);
     ~MachineConfigCreate() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QString getPk() const;
     void setPk(const QString &pk);

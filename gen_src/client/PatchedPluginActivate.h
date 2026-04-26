@@ -29,13 +29,13 @@ namespace InvenTree {
 class PatchedPluginActivate : public Object {
 public:
     PatchedPluginActivate();
-    PatchedPluginActivate(QString json);
+    PatchedPluginActivate(const QString &json);
     ~PatchedPluginActivate() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     bool isActive() const;
     void setActive(const bool &active);

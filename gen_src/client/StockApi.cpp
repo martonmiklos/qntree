@@ -1407,7 +1407,7 @@ void StockApi::stockCreateCallback(HttpRequestWorker *worker) {
         error_str = QString("%1, %2").arg(worker->error_str, QString(worker->response));
     }
     QList<StockItem> output;
-    QString json(worker->response);
+    const QString &json(worker->response) ;
     QByteArray array(json.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonArray jsonArray = doc.array();
@@ -7163,7 +7163,7 @@ void StockApi::stockSerializeCreateCallback(HttpRequestWorker *worker) {
         error_str = QString("%1, %2").arg(worker->error_str, QString(worker->response));
     }
     QList<StockItem> output;
-    QString json(worker->response);
+    const QString &json(worker->response) ;
     QByteArray array(json.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonArray jsonArray = doc.array();

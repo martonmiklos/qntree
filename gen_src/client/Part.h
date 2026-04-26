@@ -38,13 +38,13 @@ class InitialSupplier;
 class Part : public Object {
 public:
     Part();
-    Part(QString json);
+    Part(const QString &json);
     ~Part() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     bool isActive() const;
     void setActive(const bool &active);

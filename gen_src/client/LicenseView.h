@@ -31,13 +31,13 @@ namespace InvenTree {
 class LicenseView : public Object {
 public:
     LicenseView();
-    LicenseView(QString json);
+    LicenseView(const QString &json);
     ~LicenseView() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QList<QJsonValue> getBackend() const;
     void setBackend(const QList<QJsonValue> &backend);

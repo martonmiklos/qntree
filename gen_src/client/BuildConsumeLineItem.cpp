@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-BuildConsumeLineItem::BuildConsumeLineItem(QString json) {
+BuildConsumeLineItem::BuildConsumeLineItem(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -37,7 +37,7 @@ void BuildConsumeLineItem::initializeModel() {
     m_build_line_isValid = false;
 }
 
-void BuildConsumeLineItem::fromJson(QString jsonString) {
+void BuildConsumeLineItem::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

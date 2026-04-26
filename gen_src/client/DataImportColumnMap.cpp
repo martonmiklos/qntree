@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-DataImportColumnMap::DataImportColumnMap(QString json) {
+DataImportColumnMap::DataImportColumnMap(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -52,7 +52,7 @@ void DataImportColumnMap::initializeModel() {
     m_description_isValid = false;
 }
 
-void DataImportColumnMap::fromJson(QString jsonString) {
+void DataImportColumnMap::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

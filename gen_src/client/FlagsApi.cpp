@@ -317,7 +317,7 @@ void FlagsApi::flagsListCallback(HttpRequestWorker *worker) {
         error_str = QString("%1, %2").arg(worker->error_str, QString(worker->response));
     }
     QList<Flag> output;
-    QString json(worker->response);
+    const QString &json(worker->response) ;
     QByteArray array(json.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonArray jsonArray = doc.array();

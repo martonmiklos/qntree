@@ -29,13 +29,13 @@ namespace InvenTree {
 class StockAssignmentItem : public Object {
 public:
     StockAssignmentItem();
-    StockAssignmentItem(QString json);
+    StockAssignmentItem(const QString &json);
     ~StockAssignmentItem() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     qint32 getItem() const;
     void setItem(const qint32 &item);

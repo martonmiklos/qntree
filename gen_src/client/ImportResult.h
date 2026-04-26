@@ -34,13 +34,13 @@ class ImportParameter;
 class ImportResult : public Object {
 public:
     ImportResult();
-    ImportResult(QString json);
+    ImportResult(const QString &json);
     ~ImportResult() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     qint32 getPartId() const;
     void setPartId(const qint32 &part_id);

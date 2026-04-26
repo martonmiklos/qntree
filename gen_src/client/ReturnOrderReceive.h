@@ -33,13 +33,13 @@ class ReturnOrderLineItemReceive;
 class ReturnOrderReceive : public Object {
 public:
     ReturnOrderReceive();
-    ReturnOrderReceive(QString json);
+    ReturnOrderReceive(const QString &json);
     ~ReturnOrderReceive() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QList<ReturnOrderLineItemReceive> getItems() const;
     void setItems(const QList<ReturnOrderLineItemReceive> &items);

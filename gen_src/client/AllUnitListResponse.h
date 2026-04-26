@@ -34,13 +34,13 @@ class Unit;
 class AllUnitListResponse : public Object {
 public:
     AllUnitListResponse();
-    AllUnitListResponse(QString json);
+    AllUnitListResponse(const QString &json);
     ~AllUnitListResponse() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QString getDefaultSystem() const;
     void setDefaultSystem(const QString &default_system);

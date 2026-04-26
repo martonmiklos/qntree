@@ -32,13 +32,13 @@ namespace InvenTree {
 class PluginUIFeature : public Object {
 public:
     PluginUIFeature();
-    PluginUIFeature(QString json);
+    PluginUIFeature(const QString &json);
     ~PluginUIFeature() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QString getPluginName() const;
     void setPluginName(const QString &plugin_name);

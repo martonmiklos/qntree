@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-RuleSet::RuleSet(QString json) {
+RuleSet::RuleSet(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -58,7 +58,7 @@ void RuleSet::initializeModel() {
     m_can_delete_isValid = false;
 }
 
-void RuleSet::fromJson(QString jsonString) {
+void RuleSet::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

@@ -29,13 +29,13 @@ namespace InvenTree {
 class BuildConsumeLineItem : public Object {
 public:
     BuildConsumeLineItem();
-    BuildConsumeLineItem(QString json);
+    BuildConsumeLineItem(const QString &json);
     ~BuildConsumeLineItem() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     qint32 getBuildLine() const;
     void setBuildLine(const qint32 &build_line);

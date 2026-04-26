@@ -33,13 +33,13 @@ class Parameter;
 class PaginatedParameterList : public Object {
 public:
     PaginatedParameterList();
-    PaginatedParameterList(QString json);
+    PaginatedParameterList(const QString &json);
     ~PaginatedParameterList() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     qint32 getCount() const;
     void setCount(const qint32 &count);

@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-PatchedReportTemplate::PatchedReportTemplate(QString json) {
+PatchedReportTemplate::PatchedReportTemplate(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -73,7 +73,7 @@ void PatchedReportTemplate::initializeModel() {
     m_merge_isValid = false;
 }
 
-void PatchedReportTemplate::fromJson(QString jsonString) {
+void PatchedReportTemplate::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

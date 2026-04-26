@@ -30,13 +30,13 @@ namespace InvenTree {
 class ActionPluginError : public Object {
 public:
     ActionPluginError();
-    ActionPluginError(QString json);
+    ActionPluginError(const QString &json);
     ~ActionPluginError() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QString getError() const;
     void setError(const QString &error);

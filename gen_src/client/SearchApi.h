@@ -102,11 +102,11 @@ Q_SIGNALS:
     void searchCreateSignalFull(HttpRequestWorker *worker, APISearchView summary);
 
     Q_DECL_DEPRECATED_X("Use searchCreateSignalError() instead")
-    void searchCreateSignalE(APISearchView summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void searchCreateSignalE(APISearchView summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void searchCreateSignalError(APISearchView summary, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     Q_DECL_DEPRECATED_X("Use searchCreateSignalErrorFull() instead")
-    void searchCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void searchCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void searchCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     void abortRequestsSignal();

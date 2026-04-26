@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-CurrencyExchange::CurrencyExchange(QString json) {
+CurrencyExchange::CurrencyExchange(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -43,7 +43,7 @@ void CurrencyExchange::initializeModel() {
     m_updated_isValid = false;
 }
 
-void CurrencyExchange::fromJson(QString jsonString) {
+void CurrencyExchange::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

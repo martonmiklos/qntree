@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-ReportAsset::ReportAsset(QString json) {
+ReportAsset::ReportAsset(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -43,7 +43,7 @@ void ReportAsset::initializeModel() {
     m_description_isValid = false;
 }
 
-void ReportAsset::fromJson(QString jsonString) {
+void ReportAsset::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

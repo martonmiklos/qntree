@@ -108,17 +108,17 @@ Q_SIGNALS:
     void flagsRetrieveSignalFull(HttpRequestWorker *worker, Flag summary);
 
     Q_DECL_DEPRECATED_X("Use flagsListSignalError() instead")
-    void flagsListSignalE(QList<Flag> summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void flagsListSignalE(QList<Flag> summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void flagsListSignalError(QList<Flag> summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use flagsRetrieveSignalError() instead")
-    void flagsRetrieveSignalE(Flag summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void flagsRetrieveSignalE(Flag summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void flagsRetrieveSignalError(Flag summary, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     Q_DECL_DEPRECATED_X("Use flagsListSignalErrorFull() instead")
-    void flagsListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void flagsListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void flagsListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use flagsRetrieveSignalErrorFull() instead")
-    void flagsRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void flagsRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void flagsRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     void abortRequestsSignal();

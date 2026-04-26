@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-StockTracking::StockTracking(QString json) {
+StockTracking::StockTracking(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -58,7 +58,7 @@ void StockTracking::initializeModel() {
     m_user_isValid = false;
 }
 
-void StockTracking::fromJson(QString jsonString) {
+void StockTracking::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

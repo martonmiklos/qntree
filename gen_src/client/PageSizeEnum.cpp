@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-PageSizeEnum::PageSizeEnum(QString json) {
+PageSizeEnum::PageSizeEnum(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -38,7 +38,7 @@ void PageSizeEnum::initializeModel() {
     m_value = ePageSizeEnum::INVALID_VALUE_OPENAPI_GENERATED;
 }
 
-void PageSizeEnum::fromJson(QString jsonString) {
+void PageSizeEnum::fromJson(const QString &jsonString) {
     
     if ( jsonString.compare("A4", Qt::CaseInsensitive) == 0) {
         m_value = ePageSizeEnum::A4;

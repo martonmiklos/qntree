@@ -30,13 +30,13 @@ namespace InvenTree {
 class PartThumb : public Object {
 public:
     PartThumb();
-    PartThumb(QString json);
+    PartThumb(const QString &json);
     ~PartThumb() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QString getImage() const;
     void setImage(const QString &image);

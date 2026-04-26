@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-PatchedDataImportRow::PatchedDataImportRow(QString json) {
+PatchedDataImportRow::PatchedDataImportRow(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -58,7 +58,7 @@ void PatchedDataImportRow::initializeModel() {
     m_complete_isValid = false;
 }
 
-void PatchedDataImportRow::fromJson(QString jsonString) {
+void PatchedDataImportRow::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

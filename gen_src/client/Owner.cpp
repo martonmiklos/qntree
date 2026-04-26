@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-Owner::Owner(QString json) {
+Owner::Owner(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -49,7 +49,7 @@ void Owner::initializeModel() {
     m_label_isValid = false;
 }
 
-void Owner::fromJson(QString jsonString) {
+void Owner::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

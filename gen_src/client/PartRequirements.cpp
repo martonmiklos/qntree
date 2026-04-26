@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-PartRequirements::PartRequirements(QString json) {
+PartRequirements::PartRequirements(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -64,7 +64,7 @@ void PartRequirements::initializeModel() {
     m_allocated_to_sales_orders_isValid = false;
 }
 
-void PartRequirements::fromJson(QString jsonString) {
+void PartRequirements::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

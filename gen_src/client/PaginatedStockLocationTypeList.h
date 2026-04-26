@@ -33,13 +33,13 @@ class StockLocationType;
 class PaginatedStockLocationTypeList : public Object {
 public:
     PaginatedStockLocationTypeList();
-    PaginatedStockLocationTypeList(QString json);
+    PaginatedStockLocationTypeList(const QString &json);
     ~PaginatedStockLocationTypeList() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     qint32 getCount() const;
     void setCount(const qint32 &count);

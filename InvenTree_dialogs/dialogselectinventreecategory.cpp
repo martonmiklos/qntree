@@ -25,7 +25,8 @@ DialogSelectInvenTreeCategory::DialogSelectInvenTreeCategory(InvenTree::PartApi 
         ui->labelError->clear();
     });
 
-    m_model->setVisiblePk(selectedPk);
+    if (selectedPk != 0)
+        m_model->setSelectedPk(selectedPk);
 
     m_settings.beginGroup("DialogSelectInvenTreeCategory");
     restoreGeometry(m_settings.value("geometry").toByteArray());
@@ -33,6 +34,10 @@ DialogSelectInvenTreeCategory::DialogSelectInvenTreeCategory(InvenTree::PartApi 
 
     connect(api, &InvenTree::PartApi::partCategoryListSignalError, this, [=](InvenTree::PaginatedCategoryList, QNetworkReply::NetworkError, const QString &error_str) {
         ui->labelError->setText(error_str);
+    });
+
+    connect(ui->lineEditFilterSelector, &InventreeCategoryPathLineEdit::categorySelected, this, [=](quint32 pk) {
+        m_model->setSelectedPk(pk);
     });
 }
 

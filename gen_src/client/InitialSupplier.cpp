@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-InitialSupplier::InitialSupplier(QString json) {
+InitialSupplier::InitialSupplier(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -46,7 +46,7 @@ void InitialSupplier::initializeModel() {
     m_mpn_isValid = false;
 }
 
-void InitialSupplier::fromJson(QString jsonString) {
+void InitialSupplier::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

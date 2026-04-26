@@ -30,13 +30,13 @@ namespace InvenTree {
 class BarcodeSOAllocate : public Object {
 public:
     BarcodeSOAllocate();
-    BarcodeSOAllocate(QString json);
+    BarcodeSOAllocate(const QString &json);
     ~BarcodeSOAllocate() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QString getBarcode() const;
     void setBarcode(const QString &barcode);

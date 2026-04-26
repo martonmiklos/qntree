@@ -33,13 +33,13 @@ class ReturnOrder;
 class PaginatedReturnOrderList : public Object {
 public:
     PaginatedReturnOrderList();
-    PaginatedReturnOrderList(QString json);
+    PaginatedReturnOrderList(const QString &json);
     ~PaginatedReturnOrderList() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     qint32 getCount() const;
     void setCount(const qint32 &count);

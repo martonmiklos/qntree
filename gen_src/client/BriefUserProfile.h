@@ -31,13 +31,13 @@ namespace InvenTree {
 class BriefUserProfile : public Object {
 public:
     BriefUserProfile();
-    BriefUserProfile(QString json);
+    BriefUserProfile(const QString &json);
     ~BriefUserProfile() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QString getDisplayname() const;
     void setDisplayname(const QString &displayname);

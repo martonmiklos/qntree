@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-GenerateBatchCode::GenerateBatchCode(QString json) {
+GenerateBatchCode::GenerateBatchCode(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -55,7 +55,7 @@ void GenerateBatchCode::initializeModel() {
     m_quantity_isValid = false;
 }
 
-void GenerateBatchCode::fromJson(QString jsonString) {
+void GenerateBatchCode::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

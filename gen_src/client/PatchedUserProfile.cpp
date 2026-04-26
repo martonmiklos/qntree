@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-PatchedUserProfile::PatchedUserProfile(QString json) {
+PatchedUserProfile::PatchedUserProfile(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -70,7 +70,7 @@ void PatchedUserProfile::initializeModel() {
     m_primary_group_isValid = false;
 }
 
-void PatchedUserProfile::fromJson(QString jsonString) {
+void PatchedUserProfile::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

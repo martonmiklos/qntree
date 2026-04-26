@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-ReferenceStatusEnum::ReferenceStatusEnum(QString json) {
+ReferenceStatusEnum::ReferenceStatusEnum(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -38,7 +38,7 @@ void ReferenceStatusEnum::initializeModel() {
     m_value = eReferenceStatusEnum::INVALID_VALUE_OPENAPI_GENERATED;
 }
 
-void ReferenceStatusEnum::fromJson(QString jsonString) {
+void ReferenceStatusEnum::fromJson(const QString &jsonString) {
     
     if ( jsonString.compare("BuildStatus", Qt::CaseInsensitive) == 0) {
         m_value = eReferenceStatusEnum::BUILDSTATUS;

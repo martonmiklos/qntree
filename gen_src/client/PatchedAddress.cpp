@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-PatchedAddress::PatchedAddress(QString json) {
+PatchedAddress::PatchedAddress(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -73,7 +73,7 @@ void PatchedAddress::initializeModel() {
     m_link_isValid = false;
 }
 
-void PatchedAddress::fromJson(QString jsonString) {
+void PatchedAddress::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

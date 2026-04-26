@@ -29,13 +29,13 @@ namespace InvenTree {
 class AcceptOverallocatedEnum : public Enum {
 public:
     AcceptOverallocatedEnum();
-    AcceptOverallocatedEnum(QString json);
+    AcceptOverallocatedEnum(const QString &json);
     ~AcceptOverallocatedEnum() override;
 
     QString asJson() const override;
     QJsonValue asJsonValue() const override;
     void fromJsonValue(QJsonValue json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     enum class eAcceptOverallocatedEnum {
         INVALID_VALUE_OPENAPI_GENERATED = 0,

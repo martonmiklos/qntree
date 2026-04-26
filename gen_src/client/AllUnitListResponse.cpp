@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-AllUnitListResponse::AllUnitListResponse(QString json) {
+AllUnitListResponse::AllUnitListResponse(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -43,7 +43,7 @@ void AllUnitListResponse::initializeModel() {
     m_available_units_isValid = false;
 }
 
-void AllUnitListResponse::fromJson(QString jsonString) {
+void AllUnitListResponse::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

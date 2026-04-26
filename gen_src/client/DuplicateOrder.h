@@ -29,13 +29,13 @@ namespace InvenTree {
 class DuplicateOrder : public Object {
 public:
     DuplicateOrder();
-    DuplicateOrder(QString json);
+    DuplicateOrder(const QString &json);
     ~DuplicateOrder() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     qint32 getOrderId() const;
     void setOrderId(const qint32 &order_id);

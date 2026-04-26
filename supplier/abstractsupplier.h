@@ -2,6 +2,7 @@
 
 #include "supplierpart.h"
 #include <QObject>
+#include <QSettings>
 
 class AbstractSupplier : public QObject
 {
@@ -28,4 +29,5 @@ protected:
     int m_id;
     QString m_uid;
     QString m_name;
+    mutable QSettings m_settings;
 };

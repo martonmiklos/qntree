@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-PluginUninstall::PluginUninstall(QString json) {
+PluginUninstall::PluginUninstall(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -37,7 +37,7 @@ void PluginUninstall::initializeModel() {
     m_delete_config_isValid = false;
 }
 
-void PluginUninstall::fromJson(QString jsonString) {
+void PluginUninstall::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-PaginatedStockLocationTypeList::PaginatedStockLocationTypeList(QString json) {
+PaginatedStockLocationTypeList::PaginatedStockLocationTypeList(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -46,7 +46,7 @@ void PaginatedStockLocationTypeList::initializeModel() {
     m_results_isValid = false;
 }
 
-void PaginatedStockLocationTypeList::fromJson(QString jsonString) {
+void PaginatedStockLocationTypeList::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-BomItemSubstitute::BomItemSubstitute(QString json) {
+BomItemSubstitute::BomItemSubstitute(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -46,7 +46,7 @@ void BomItemSubstitute::initializeModel() {
     m_part_detail_isValid = false;
 }
 
-void BomItemSubstitute::fromJson(QString jsonString) {
+void BomItemSubstitute::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

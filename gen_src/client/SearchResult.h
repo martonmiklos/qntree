@@ -30,13 +30,13 @@ namespace InvenTree {
 class SearchResult : public Object {
 public:
     SearchResult();
-    SearchResult(QString json);
+    SearchResult(const QString &json);
     ~SearchResult() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QString getId() const;
     void setId(const QString &id);

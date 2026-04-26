@@ -29,13 +29,13 @@ namespace InvenTree {
 class PluginUninstall : public Object {
 public:
     PluginUninstall();
-    PluginUninstall(QString json);
+    PluginUninstall(const QString &json);
     ~PluginUninstall() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     bool isDeleteConfig() const;
     void setDeleteConfig(const bool &delete_config);

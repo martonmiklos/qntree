@@ -74,7 +74,7 @@ void Example::exampleFunction1(){
       connect(&apiInstance, &ActionApi::actionCreateSignal, [&]() {
           loop.quit();
       });
-      connect(&apiInstance, &ActionApi::actionCreateSignalE, [&](QNetworkReply::NetworkError, QString error_str) {
+      connect(&apiInstance, &ActionApi::actionCreateSignalE, [&](QNetworkReply::NetworkError, const QString &error_str) {
           qDebug() << "Error happened while issuing request : " << error_str;
           loop.quit();
       });

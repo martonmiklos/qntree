@@ -33,13 +33,13 @@ namespace InvenTree {
 class Flag : public Object {
 public:
     Flag();
-    Flag(QString json);
+    Flag(const QString &json);
     ~Flag() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QString getKey() const;
     void setKey(const QString &key);

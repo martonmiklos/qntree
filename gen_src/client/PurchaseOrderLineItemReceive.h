@@ -31,13 +31,13 @@ namespace InvenTree {
 class PurchaseOrderLineItemReceive : public Object {
 public:
     PurchaseOrderLineItemReceive();
-    PurchaseOrderLineItemReceive(QString json);
+    PurchaseOrderLineItemReceive(const QString &json);
     ~PurchaseOrderLineItemReceive() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     qint32 getLineItem() const;
     void setLineItem(const qint32 &line_item);

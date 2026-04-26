@@ -33,13 +33,13 @@ class MachineConfig;
 class PaginatedMachineConfigList : public Object {
 public:
     PaginatedMachineConfigList();
-    PaginatedMachineConfigList(QString json);
+    PaginatedMachineConfigList(const QString &json);
     ~PaginatedMachineConfigList() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     qint32 getCount() const;
     void setCount(const qint32 &count);

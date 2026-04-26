@@ -32,13 +32,13 @@ class BuildOutput;
 class BuildOutputDelete : public Object {
 public:
     BuildOutputDelete();
-    BuildOutputDelete(QString json);
+    BuildOutputDelete(const QString &json);
     ~BuildOutputDelete() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QList<BuildOutput> getOutputs() const;
     void setOutputs(const QList<BuildOutput> &outputs);

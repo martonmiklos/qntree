@@ -22,7 +22,7 @@ class Object {
 public:
     Object() {}
 
-    Object(QString jsonString) {
+    Object(const QString &jsonString) {
         fromJson(jsonString);
     }
 
@@ -37,7 +37,7 @@ public:
         return doc.toJson(QJsonDocument::Compact);
     }
 
-    virtual void fromJson(QString jsonString) {
+    virtual void fromJson(const QString &jsonString) {
         QJsonDocument doc = QJsonDocument::fromJson(jsonString.toUtf8());
         jObj = doc.object();
     }

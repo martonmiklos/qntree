@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-BlankEnum::BlankEnum(QString json) {
+BlankEnum::BlankEnum(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -38,7 +38,7 @@ void BlankEnum::initializeModel() {
     m_value = eBlankEnum::INVALID_VALUE_OPENAPI_GENERATED;
 }
 
-void BlankEnum::fromJson(QString jsonString) {
+void BlankEnum::fromJson(const QString &jsonString) {
     
     if ( jsonString.compare("", Qt::CaseInsensitive) == 0) {
         m_value = eBlankEnum::EMPTY;

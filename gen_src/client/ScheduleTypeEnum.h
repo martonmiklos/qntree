@@ -29,13 +29,13 @@ namespace InvenTree {
 class ScheduleTypeEnum : public Enum {
 public:
     ScheduleTypeEnum();
-    ScheduleTypeEnum(QString json);
+    ScheduleTypeEnum(const QString &json);
     ~ScheduleTypeEnum() override;
 
     QString asJson() const override;
     QJsonValue asJsonValue() const override;
     void fromJsonValue(QJsonValue json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     enum class eScheduleTypeEnum {
         INVALID_VALUE_OPENAPI_GENERATED = 0,

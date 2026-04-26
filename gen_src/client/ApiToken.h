@@ -34,13 +34,13 @@ class User;
 class ApiToken : public Object {
 public:
     ApiToken();
-    ApiToken(QString json);
+    ApiToken(const QString &json);
     ~ApiToken() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QDateTime getCreated() const;
     void setCreated(const QDateTime &created);

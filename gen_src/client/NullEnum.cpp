@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-NullEnum::NullEnum(QString json) {
+NullEnum::NullEnum(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -38,7 +38,7 @@ void NullEnum::initializeModel() {
     m_value = eNullEnum::INVALID_VALUE_OPENAPI_GENERATED;
 }
 
-void NullEnum::fromJson(QString jsonString) {
+void NullEnum::fromJson(const QString &jsonString) {
     
 }
 

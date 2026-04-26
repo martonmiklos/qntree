@@ -31,13 +31,13 @@ namespace InvenTree {
 class FailedTask : public Object {
 public:
     FailedTask();
-    FailedTask(QString json);
+    FailedTask(const QString &json);
     ~FailedTask() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QString getPk() const;
     void setPk(const QString &pk);

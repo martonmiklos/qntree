@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-LabelTemplate::LabelTemplate(QString json) {
+LabelTemplate::LabelTemplate(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -70,7 +70,7 @@ void LabelTemplate::initializeModel() {
     m_height_isValid = false;
 }
 
-void LabelTemplate::fromJson(QString jsonString) {
+void LabelTemplate::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

@@ -33,13 +33,13 @@ class StockMergeItem;
 class StockMerge : public Object {
 public:
     StockMerge();
-    StockMerge(QString json);
+    StockMerge(const QString &json);
     ~StockMerge() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QList<StockMergeItem> getItems() const;
     void setItems(const QList<StockMergeItem> &items);

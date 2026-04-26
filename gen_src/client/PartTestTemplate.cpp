@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-PartTestTemplate::PartTestTemplate(QString json) {
+PartTestTemplate::PartTestTemplate(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -67,7 +67,7 @@ void PartTestTemplate::initializeModel() {
     m_choices_isValid = false;
 }
 
-void PartTestTemplate::fromJson(QString jsonString) {
+void PartTestTemplate::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

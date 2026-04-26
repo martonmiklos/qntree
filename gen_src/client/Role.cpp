@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-Role::Role(QString json) {
+Role::Role(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -52,7 +52,7 @@ void Role::initializeModel() {
     m_is_superuser_isValid = false;
 }
 
-void Role::fromJson(QString jsonString) {
+void Role::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

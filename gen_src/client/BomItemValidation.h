@@ -29,13 +29,13 @@ namespace InvenTree {
 class BomItemValidation : public Object {
 public:
     BomItemValidation();
-    BomItemValidation(QString json);
+    BomItemValidation(const QString &json);
     ~BomItemValidation() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     bool isRValid() const;
     void setRValid(const bool &r_valid);

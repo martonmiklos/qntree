@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-Barcode::Barcode(QString json) {
+Barcode::Barcode(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -37,7 +37,7 @@ void Barcode::initializeModel() {
     m_barcode_isValid = false;
 }
 
-void Barcode::fromJson(QString jsonString) {
+void Barcode::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-Attachment::Attachment(QString json) {
+Attachment::Attachment(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -67,7 +67,7 @@ void Attachment::initializeModel() {
     m_model_id_isValid = false;
 }
 
-void Attachment::fromJson(QString jsonString) {
+void Attachment::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

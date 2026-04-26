@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-HealthCheckStatusStatusEnum::HealthCheckStatusStatusEnum(QString json) {
+HealthCheckStatusStatusEnum::HealthCheckStatusStatusEnum(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -38,7 +38,7 @@ void HealthCheckStatusStatusEnum::initializeModel() {
     m_value = eHealthCheckStatusStatusEnum::INVALID_VALUE_OPENAPI_GENERATED;
 }
 
-void HealthCheckStatusStatusEnum::fromJson(QString jsonString) {
+void HealthCheckStatusStatusEnum::fromJson(const QString &jsonString) {
     
     if ( jsonString.compare("ok", Qt::CaseInsensitive) == 0) {
         m_value = eHealthCheckStatusStatusEnum::OK;

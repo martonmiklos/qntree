@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-PatchedPartStocktake::PatchedPartStocktake(QString json) {
+PatchedPartStocktake::PatchedPartStocktake(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -61,7 +61,7 @@ void PatchedPartStocktake::initializeModel() {
     m_cost_max_currency_isValid = false;
 }
 
-void PatchedPartStocktake::fromJson(QString jsonString) {
+void PatchedPartStocktake::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

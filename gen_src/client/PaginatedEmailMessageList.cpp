@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-PaginatedEmailMessageList::PaginatedEmailMessageList(QString json) {
+PaginatedEmailMessageList::PaginatedEmailMessageList(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -46,7 +46,7 @@ void PaginatedEmailMessageList::initializeModel() {
     m_results_isValid = false;
 }
 
-void PaginatedEmailMessageList::fromJson(QString jsonString) {
+void PaginatedEmailMessageList::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

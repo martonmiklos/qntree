@@ -35,13 +35,13 @@ class AddressBrief;
 class SalesOrderShipment : public Object {
 public:
     SalesOrderShipment();
-    SalesOrderShipment(QString json);
+    SalesOrderShipment(const QString &json);
     ~SalesOrderShipment() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     qint32 getPk() const;
     void setPk(const qint32 &pk);

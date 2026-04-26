@@ -150,41 +150,41 @@ Q_SIGNALS:
     void newsUpdateSignalFull(HttpRequestWorker *worker, NewsFeedEntry summary);
 
     Q_DECL_DEPRECATED_X("Use newsBulkDestroySignalError() instead")
-    void newsBulkDestroySignalE(QNetworkReply::NetworkError error_type, QString error_str);
+    void newsBulkDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void newsBulkDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use newsDestroySignalError() instead")
-    void newsDestroySignalE(QNetworkReply::NetworkError error_type, QString error_str);
+    void newsDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void newsDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use newsListSignalError() instead")
-    void newsListSignalE(PaginatedNewsFeedEntryList summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void newsListSignalE(PaginatedNewsFeedEntryList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void newsListSignalError(PaginatedNewsFeedEntryList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use newsPartialUpdateSignalError() instead")
-    void newsPartialUpdateSignalE(NewsFeedEntry summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void newsPartialUpdateSignalE(NewsFeedEntry summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void newsPartialUpdateSignalError(NewsFeedEntry summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use newsRetrieveSignalError() instead")
-    void newsRetrieveSignalE(NewsFeedEntry summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void newsRetrieveSignalE(NewsFeedEntry summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void newsRetrieveSignalError(NewsFeedEntry summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use newsUpdateSignalError() instead")
-    void newsUpdateSignalE(NewsFeedEntry summary, QNetworkReply::NetworkError error_type, QString error_str);
+    void newsUpdateSignalE(NewsFeedEntry summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void newsUpdateSignalError(NewsFeedEntry summary, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     Q_DECL_DEPRECATED_X("Use newsBulkDestroySignalErrorFull() instead")
-    void newsBulkDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void newsBulkDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void newsBulkDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use newsDestroySignalErrorFull() instead")
-    void newsDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void newsDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void newsDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use newsListSignalErrorFull() instead")
-    void newsListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void newsListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void newsListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use newsPartialUpdateSignalErrorFull() instead")
-    void newsPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void newsPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void newsPartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use newsRetrieveSignalErrorFull() instead")
-    void newsRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void newsRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void newsRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     Q_DECL_DEPRECATED_X("Use newsUpdateSignalErrorFull() instead")
-    void newsUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, QString error_str);
+    void newsUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void newsUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     void abortRequestsSignal();

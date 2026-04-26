@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-PluginAdminDetail::PluginAdminDetail(QString json) {
+PluginAdminDetail::PluginAdminDetail(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -40,7 +40,7 @@ void PluginAdminDetail::initializeModel() {
     m_context_isValid = false;
 }
 
-void PluginAdminDetail::fromJson(QString jsonString) {
+void PluginAdminDetail::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

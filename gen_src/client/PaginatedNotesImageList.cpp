@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-PaginatedNotesImageList::PaginatedNotesImageList(QString json) {
+PaginatedNotesImageList::PaginatedNotesImageList(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -46,7 +46,7 @@ void PaginatedNotesImageList::initializeModel() {
     m_results_isValid = false;
 }
 
-void PaginatedNotesImageList::fromJson(QString jsonString) {
+void PaginatedNotesImageList::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

@@ -23,7 +23,7 @@ class Enum {
 public:
     Enum() {}
 
-    Enum(QString jsonString) {
+    Enum(const QString &jsonString) {
         fromJson(jsonString);
     }
 
@@ -43,7 +43,7 @@ public:
         return obj;
     }
 	
-    virtual void fromJson(QString jsonString) {
+    virtual void fromJson(const QString &jsonString) {
         jstr = jsonString;
     }
 

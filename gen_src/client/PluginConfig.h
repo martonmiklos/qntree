@@ -32,13 +32,13 @@ namespace InvenTree {
 class PluginConfig : public Object {
 public:
     PluginConfig();
-    PluginConfig(QString json);
+    PluginConfig(const QString &json);
     ~PluginConfig() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     qint32 getPk() const;
     void setPk(const qint32 &pk);

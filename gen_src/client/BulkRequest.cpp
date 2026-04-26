@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-BulkRequest::BulkRequest(QString json) {
+BulkRequest::BulkRequest(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -40,7 +40,7 @@ void BulkRequest::initializeModel() {
     m_filters_isValid = false;
 }
 
-void BulkRequest::fromJson(QString jsonString) {
+void BulkRequest::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

@@ -20,7 +20,7 @@
 
 namespace InvenTree {
 
-UserSetPassword::UserSetPassword(QString json) {
+UserSetPassword::UserSetPassword(const QString &json) {
     this->initializeModel();
     this->fromJson(json);
 }
@@ -40,7 +40,7 @@ void UserSetPassword::initializeModel() {
     m_override_warning_isValid = false;
 }
 
-void UserSetPassword::fromJson(QString jsonString) {
+void UserSetPassword::fromJson(const QString &jsonString) {
     QByteArray array(jsonString.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();

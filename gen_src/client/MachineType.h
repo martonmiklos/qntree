@@ -32,13 +32,13 @@ namespace InvenTree {
 class MachineType : public Object {
 public:
     MachineType();
-    MachineType(QString json);
+    MachineType(const QString &json);
     ~MachineType() override;
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
     void fromJsonObject(QJsonObject json) override;
-    void fromJson(QString jsonString) override;
+    void fromJson(const QString &jsonString) override;
 
     QString getSlug() const;
     void setSlug(const QString &slug);
