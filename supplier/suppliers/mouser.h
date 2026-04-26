@@ -23,5 +23,4 @@ private:
     QNetworkReply *m_partReply = nullptr;
     QNetworkReply *m_imageReply = nullptr;
     MouserPart m_part;
-    QSettings m_settings;
 };

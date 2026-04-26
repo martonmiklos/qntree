@@ -11,6 +11,7 @@ It is going to be tailored to remove repeated tasks for part data import
 ### Supported data sources
 
 * TME
+* Mouser
 
 ### Planned data sources
 
