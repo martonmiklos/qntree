@@ -20,8 +20,8 @@ TMESettingsDialog::~TMESettingsDialog()
 void TMESettingsDialog::loadSettings()
 {
     m_settings.beginGroup(SETTINGS_GROUP);
-    ui->lineEditSecret->setText(m_settings.value(KEY_SECRET, "20948d40191f45adfebc").toString());
-    ui->lineEditToken->setText(m_settings.value(KEY_TOKEN, "22ecd8bff75788af5b46130c83ec68f0326b0d53979ee4c9f1").toString());
+    ui->lineEditSecret->setText(m_settings.value(KEY_SECRET).toString());
+    ui->lineEditToken->setText(m_settings.value(KEY_TOKEN).toString());
     ui->lineEditCountry->setText(m_settings.value(KEY_COUNTRY, "HU").toString());
     ui->lineEditLanguage->setText(m_settings.value(KEY_LANGUAGE, "HU").toString());
     ui->lineEditCurrency->setText(m_settings.value(KEY_CURRENCY, "EUR").toString());
