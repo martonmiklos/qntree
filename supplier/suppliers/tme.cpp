@@ -7,6 +7,7 @@
 #include "supplier/suppliers/tmepart.h"
 #include "qjsonobject.h"
 #include "db/config_db.h"
+#include "tmesettingsdialog.h"
 
 #include <QRegularExpression>
 #include <QMessageAuthenticationCode>
@@ -17,9 +18,7 @@ TME::TME(QObject *parent)
     m_name = tr("TME");
     m_uid = QStringLiteral("ac01ab15-a375-492c-94c2-f5c4fa16d6a3");
 
-    m_secret ="20948d40191f45adfebc";
-    m_token = "22ecd8bff75788af5b46130c83ec68f0326b0d53979ee4c9f1";
-    m_country = m_language = "HU";
+    loadSettings();
 
     auto dbEntry = ConfigDb::instance()->suppliers()->query()
         ->where(Suppliers::uuidField() == m_uid)
@@ -38,6 +37,8 @@ TME::TME(QObject *parent)
 
 void TME::retrivePart(const QString &userData)
 {
+    loadSettings();
+
     QString partNumber = userData;
     static QRegularExpression bigQrRe("QTY:([0-9]*)\\sPN:([^\\s]*)\\sPO:([^\\s]*).*");
     auto matches = bigQrRe.match(userData);
@@ -109,8 +110,10 @@ void TME::setGrossPrices(bool newGrossPrices)
 
 int TME::invenTreeId() const
 {
-    // FIXME use settings
-    return 4;
+    m_settings.beginGroup(TMESettingsDialog::SETTINGS_GROUP);
+    const int invenTreeSupplierId = m_settings.value(TMESettingsDialog::KEY_INVENTREE_SUPPLIER_ID, 4).toInt();
+    m_settings.endGroup();
+    return invenTreeSupplierId;
 }
 
 QString TME::currency() const
@@ -121,6 +124,18 @@ QString TME::currency() const
 void TME::setCurrency(const QString &newCurrency)
 {
     m_currency = newCurrency;
+}
+
+void TME::loadSettings()
+{
+    m_settings.beginGroup(TMESettingsDialog::SETTINGS_GROUP);
+    m_secret = m_settings.value(TMESettingsDialog::KEY_SECRET, "20948d40191f45adfebc").toString().trimmed();
+    m_token = m_settings.value(TMESettingsDialog::KEY_TOKEN, "22ecd8bff75788af5b46130c83ec68f0326b0d53979ee4c9f1").toString().trimmed();
+    m_country = m_settings.value(TMESettingsDialog::KEY_COUNTRY, "HU").toString().trimmed();
+    m_language = m_settings.value(TMESettingsDialog::KEY_LANGUAGE, "HU").toString().trimmed();
+    m_currency = m_settings.value(TMESettingsDialog::KEY_CURRENCY, "EUR").toString().trimmed();
+    m_grossPrices = m_settings.value(TMESettingsDialog::KEY_GROSS_PRICES, true).toBool();
+    m_settings.endGroup();
 }
 
 void TME::networkReplyFinished(QNetworkReply *reply)
