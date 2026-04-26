@@ -7,6 +7,7 @@
 #include <QJsonObject>
 #include <QNetworkRequest>
 #include <QUrlQuery>
+#include <QSettings>
 
 Mouser::Mouser(QObject *parent)
     : AbstractSupplier(parent)

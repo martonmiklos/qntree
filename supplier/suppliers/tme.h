@@ -3,7 +3,6 @@
 #include "../abstractsupplier.h"
 #include "qnetworkreply.h"
 #include "supplier/suppliers/tmepart.h"
-#include <QSettings>
 
 class TME : public AbstractSupplier
 {
@@ -40,7 +39,6 @@ private:
     bool m_isQrDataBeingScanned = false;
     qreal m_qtyFromQr = 0;
     QString m_poFromQr;
-    mutable QSettings m_settings;
 
 private slots:
     void networkReplyFinished(QNetworkReply *reply);
