@@ -3,6 +3,7 @@
 #include "../abstractsupplier.h"
 #include "qnetworkreply.h"
 #include "supplier/suppliers/tmepart.h"
+#include <QSettings>
 
 class TME : public AbstractSupplier
 {
@@ -21,6 +22,8 @@ public:
     int invenTreeId() const override;
 
 private:
+    void loadSettings();
+
     QString m_secret, m_token, m_country, m_language;
     QNetworkReply* apiCall(const QString &action, QList<QPair<QString, QString> > params);
     QNetworkAccessManager * m_manager = nullptr;
@@ -37,13 +40,12 @@ private:
     bool m_isQrDataBeingScanned = false;
     qreal m_qtyFromQr = 0;
     QString m_poFromQr;
+    mutable QSettings m_settings;
 
 private slots:
     void networkReplyFinished(QNetworkReply *reply);
 
 };
-
-
 
 
 
