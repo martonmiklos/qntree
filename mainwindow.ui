@@ -43,7 +43,14 @@
      <string>Settings</string>
     </property>
     <addaction name="actionInvenTree_access"/>
-    <addaction name="actionSupplier_settings"/>
+    <addaction name="menuSupplier_settings"/>
+   </widget>
+   <widget class="QMenu" name="menuSupplier_settings">
+    <property name="title">
+     <string>Supplier settings</string>
+    </property>
+    <addaction name="actionMouser"/>
+    <addaction name="actionTME"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuSettings"/>
@@ -54,9 +61,14 @@
     <string>InvenTree</string>
    </property>
   </action>
-  <action name="actionSupplier_settings">
+  <action name="actionMouser">
    <property name="text">
-    <string>Supplier settings</string>
+    <string>Mouser</string>
+   </property>
+  </action>
+  <action name="actionTME">
+   <property name="text">
+    <string>TME</string>
    </property>
   </action>
  </widget>

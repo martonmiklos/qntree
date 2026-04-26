@@ -29,7 +29,11 @@ SOURCES += \
     supplier/supplierpart.cpp \
     supplier/supplierpartproperty.cpp \
     supplier/supplierregistry.cpp \
+    supplier/suppliers/mouser.cpp \
+    supplier/suppliers/mousersettingsdialog.cpp \
+    supplier/suppliers/mouserpart.cpp \
     supplier/suppliers/tme.cpp \
+    supplier/suppliers/tmesettingsdialog.cpp \
     supplier/suppliers/tmepart.cpp \
     wizard/inventreepartimportwizardpage.cpp \
     wizard/inventreepartuploader.cpp \
@@ -68,7 +72,11 @@ HEADERS += \
     supplier/supplierpart.h \
     supplier/supplierpartproperty.h \
     supplier/supplierregistry.h \
+    supplier/suppliers/mouser.h \
+    supplier/suppliers/mousersettingsdialog.h \
+    supplier/suppliers/mouserpart.h \
     supplier/suppliers/tme.h \
+    supplier/suppliers/tmesettingsdialog.h \
     supplier/suppliers/tmepart.h \
     wizard/inventreepartimportwizardpage.h \
     wizard/inventreepartuploader.h \
@@ -97,6 +105,8 @@ FORMS += \
     inventreepartimportwizard.ui \
     inventreesettingsdialog.ui \
     mainwindow.ui \
+    supplier/suppliers/mousersettingsdialog.ui \
+    supplier/suppliers/tmesettingsdialog.ui \
     wizard/stocklinewidget.ui \
     wizard/wizardpageattachments.ui \
     wizard/wizardpageinventreesyncstatus.ui \
