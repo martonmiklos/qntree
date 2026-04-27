@@ -51,6 +51,7 @@
     </property>
     <addaction name="actionMouser"/>
     <addaction name="actionTME"/>
+    <addaction name="actionElement14"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuSettings"/>
@@ -69,6 +70,11 @@
   <action name="actionTME">
    <property name="text">
     <string>TME</string>
+   </property>
+  </action>
+  <action name="actionElement14">
+   <property name="text">
+    <string>element14</string>
    </property>
   </action>
  </widget>

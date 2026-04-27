@@ -29,6 +29,9 @@ SOURCES += \
     supplier/supplierpart.cpp \
     supplier/supplierpartproperty.cpp \
     supplier/supplierregistry.cpp \
+    supplier/suppliers/element14.cpp \
+    supplier/suppliers/element14part.cpp \
+    supplier/suppliers/element14settingsdialog.cpp \
     supplier/suppliers/mouser.cpp \
     supplier/suppliers/mousersettingsdialog.cpp \
     supplier/suppliers/mouserpart.cpp \
@@ -72,6 +75,9 @@ HEADERS += \
     supplier/supplierpart.h \
     supplier/supplierpartproperty.h \
     supplier/supplierregistry.h \
+    supplier/suppliers/element14.h \
+    supplier/suppliers/element14part.h \
+    supplier/suppliers/element14settingsdialog.h \
     supplier/suppliers/mouser.h \
     supplier/suppliers/mousersettingsdialog.h \
     supplier/suppliers/mouserpart.h \
@@ -105,6 +111,7 @@ FORMS += \
     inventreepartimportwizard.ui \
     inventreesettingsdialog.ui \
     mainwindow.ui \
+    supplier/suppliers/element14settingsdialog.ui \
     supplier/suppliers/mousersettingsdialog.ui \
     supplier/suppliers/tmesettingsdialog.ui \
     wizard/stocklinewidget.ui \

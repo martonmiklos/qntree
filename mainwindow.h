@@ -16,6 +16,7 @@ QT_END_NAMESPACE
 class InventreeSettingsDialog;
 class MouserSettingsDialog;
 class TMESettingsDialog;
+class Element14SettingsDialog;
 
 class MainWindow : public QMainWindow
 {
@@ -31,6 +32,7 @@ private slots:
     void on_actionInvenTree_access_triggered();
     void on_actionMouser_triggered();
     void on_actionTME_triggered();
+    void on_actionElement14_triggered();
 
     void updateInvenTreeToken();
 
@@ -45,4 +47,5 @@ private:
     InventreeSettingsDialog *m_inventreeSettingsDlg = nullptr;
     MouserSettingsDialog *m_mouserSettingsDialog = nullptr;
     TMESettingsDialog *m_tmeSettingsDialog = nullptr;
+    Element14SettingsDialog *m_element14SettingsDialog = nullptr;
 };
