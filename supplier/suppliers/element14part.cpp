@@ -4,7 +4,21 @@
 #include <QJsonObject>
 #include <QObject>
 #include <QRegularExpression>
+#include <QStringList>
 #include <QUrl>
+
+namespace {
+QString firstNonEmptyValue(const QJsonObject &object, const QStringList &keys)
+{
+    for (const QString &key : keys) {
+        const QString value = object.value(key).toString().trimmed();
+        if (!value.isEmpty())
+            return value;
+    }
+
+    return QString();
+}
+}
 
 void Element14Part::parseFromProductJson(const QJsonObject &productJson)
 {
@@ -22,7 +36,16 @@ void Element14Part::parseFromProductJson(const QJsonObject &productJson)
 
     m_sku = productJson.value(QStringLiteral("sku")).toString();
     m_description = productJson.value(QStringLiteral("displayName")).toString();
-    m_categoryName = productJson.value(QStringLiteral("translatedMinimumOrderQuality")).toString();
+    m_categoryName = firstNonEmptyValue(productJson, {
+        QStringLiteral("translatedDisplayCategory"),
+        QStringLiteral("displayCategory"),
+        QStringLiteral("translatedCategoryName"),
+        QStringLiteral("categoryName"),
+        QStringLiteral("taxonomyName")
+    });
+    if (m_categoryName.isEmpty())
+        m_categoryName = productJson.value(QStringLiteral("category")).toObject().value(QStringLiteral("name")).toString().trimmed();
+
     m_manufacturerName = productJson.value(QStringLiteral("brandName")).toString();
     m_supplierLink = productJson.value(QStringLiteral("datasheets")).toArray().value(0).toObject().value(QStringLiteral("url")).toString();
 
