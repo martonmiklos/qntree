@@ -6,7 +6,51 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QNetworkRequest>
+#include <QStringList>
 #include <QUrlQuery>
+
+namespace {
+QString imageUrlFromProduct(const QJsonObject &product)
+{
+    const QJsonValue imageValue = product.value(QStringLiteral("image"));
+    if (imageValue.isString()) {
+        const QString directImage = imageValue.toString().trimmed();
+        if (!directImage.isEmpty())
+            return directImage;
+    } else if (imageValue.isObject()) {
+        const QJsonObject imageObject = imageValue.toObject();
+        const QStringList imageKeys{
+            QStringLiteral("vrntPath"),
+            QStringLiteral("baseName"),
+            QStringLiteral("largeImageUrl"),
+            QStringLiteral("mediumImageUrl"),
+            QStringLiteral("smallImageUrl"),
+            QStringLiteral("url")
+        };
+
+        for (const QString &key : imageKeys) {
+            const QString imagePath = imageObject.value(key).toString().trimmed();
+            if (!imagePath.isEmpty())
+                return imagePath;
+        }
+    }
+
+    const QStringList directImageKeys{
+        QStringLiteral("imageBaseName"),
+        QStringLiteral("imageUrl"),
+        QStringLiteral("largeImageUrl"),
+        QStringLiteral("mediumImageUrl"),
+        QStringLiteral("smallImageUrl")
+    };
+    for (const QString &key : directImageKeys) {
+        const QString imagePath = product.value(key).toString().trimmed();
+        if (!imagePath.isEmpty())
+            return imagePath;
+    }
+
+    return QString();
+}
+}
 
 Element14::Element14(QObject *parent)
     : AbstractSupplier(parent)
@@ -97,18 +141,7 @@ void Element14::networkReplyFinished()
         const QJsonObject product = products.first().toObject();
         m_part.parseFromProductJson(product);
 
-        QString imageUrlString = product.value(QStringLiteral("image"))
-                                     .toObject()
-                                     .value(QStringLiteral("vrntPath"))
-                                     .toString()
-                                     .trimmed();
-        if (imageUrlString.isEmpty()) {
-            imageUrlString = product.value(QStringLiteral("image"))
-                                 .toObject()
-                                 .value(QStringLiteral("baseName"))
-                                 .toString()
-                                 .trimmed();
-        }
+        const QString imageUrlString = imageUrlFromProduct(product);
 
         if (!imageUrlString.isEmpty()) {
             QUrl imageUrl(imageUrlString);
