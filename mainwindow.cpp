@@ -10,6 +10,7 @@ using namespace InvenTree;
 #include "db/config_db.h"
 
 #include "inventreesettingsdialog.h"
+#include "supplier/suppliers/element14settingsdialog.h"
 #include "supplier/suppliers/mousersettingsdialog.h"
 #include "supplier/suppliers/tmesettingsdialog.h"
 
@@ -96,4 +97,11 @@ void MainWindow::on_actionTME_triggered()
     if (!m_tmeSettingsDialog)
         m_tmeSettingsDialog = new TMESettingsDialog(this);
     m_tmeSettingsDialog->show();
+}
+
+void MainWindow::on_actionElement14_triggered()
+{
+    if (!m_element14SettingsDialog)
+        m_element14SettingsDialog = new Element14SettingsDialog(this);
+    m_element14SettingsDialog->show();
 }
