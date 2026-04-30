@@ -129,8 +129,8 @@ void TME::setCurrency(const QString &newCurrency)
 void TME::loadSettings()
 {
     m_settings.beginGroup(TMESettingsDialog::SETTINGS_GROUP);
-    m_secret = m_settings.value(TMESettingsDialog::KEY_SECRET, "20948d40191f45adfebc").toString().trimmed();
-    m_token = m_settings.value(TMESettingsDialog::KEY_TOKEN, "22ecd8bff75788af5b46130c83ec68f0326b0d53979ee4c9f1").toString().trimmed();
+    m_secret = m_settings.value(TMESettingsDialog::KEY_SECRET).toString().trimmed();
+    m_token = m_settings.value(TMESettingsDialog::KEY_TOKEN).toString().trimmed();
     m_country = m_settings.value(TMESettingsDialog::KEY_COUNTRY, "HU").toString().trimmed();
     m_language = m_settings.value(TMESettingsDialog::KEY_LANGUAGE, "HU").toString().trimmed();
     m_currency = m_settings.value(TMESettingsDialog::KEY_CURRENCY, "EUR").toString().trimmed();

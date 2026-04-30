@@ -47,7 +47,7 @@ void Element14Part::parseFromProductJson(const QJsonObject &productJson)
         m_categoryName = productJson.value(QStringLiteral("category")).toObject().value(QStringLiteral("name")).toString().trimmed();
 
     m_manufacturerName = productJson.value(QStringLiteral("brandName")).toString();
-    m_supplierLink = productJson.value(QStringLiteral("datasheets")).toArray().value(0).toObject().value(QStringLiteral("url")).toString();
+    m_supplierLink = productJson.value(QStringLiteral("datasheets")).toArray().at(0).toObject().value(QStringLiteral("url")).toString();
 
     const QJsonArray datasheets = productJson.value(QStringLiteral("datasheets")).toArray();
     for (const auto &datasheetValue : datasheets) {
