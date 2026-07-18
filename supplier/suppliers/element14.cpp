@@ -57,7 +57,6 @@ Element14::Element14(QObject *parent)
 {
     m_name = tr("element14");
     m_uid = QStringLiteral("5888c32b-2de8-435f-a63b-2c39de5d6b1d");
-    m_id = -1;
 
     m_manager = new QNetworkAccessManager(this);
 }

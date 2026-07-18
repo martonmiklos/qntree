@@ -20,17 +20,6 @@ TME::TME(QObject *parent)
 
     loadSettings();
 
-    auto dbEntry = ConfigDb::instance()->suppliers()->query()
-        ->where(Suppliers::uuidField() == m_uid)
-        ->first();
-    if (!dbEntry) {
-        dbEntry = Nut::create<Suppliers>();
-        dbEntry->setUuid(m_uid);
-        dbEntry->setName(m_name);
-        dbEntry->save(ConfigDb::instance());
-    }
-    m_id = dbEntry->id();
-
     m_manager = new QNetworkAccessManager(this);
     connect(m_manager, &QNetworkAccessManager::finished, this, &TME::networkReplyFinished);
 }
@@ -40,7 +29,7 @@ void TME::retrivePart(const QString &userData)
     loadSettings();
 
     QString partNumber = userData;
-    static QRegularExpression bigQrRe("QTY:([0-9]*)\\sPN:([^\\s]*)\\sPO:([^\\s]*).*");
+    static QRegularExpression bigQrRe("QTY:([0-9]*)\\sPN:([^\\s]*)\\s(.*)PO:([^\\s]*).*");
     auto matches = bigQrRe.match(userData);
     if (matches.hasMatch()) {
         m_isQrDataBeingScanned = true;

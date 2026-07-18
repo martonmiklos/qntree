@@ -1,5 +1,6 @@
 #include "mouser.h"
 
+#include "db/gen_src/suppliers.h"
 #include "mousersettingsdialog.h"
 
 #include <QJsonArray>
@@ -9,12 +10,12 @@
 #include <QUrlQuery>
 #include <QSettings>
 
+
 Mouser::Mouser(QObject *parent)
     : AbstractSupplier(parent)
 {
     m_name = tr("Mouser");
     m_uid = QStringLiteral("e2e50b1f-6ce0-4cb8-b2f2-6df9e8840116");
-    m_id = -1;
 
     m_manager = new QNetworkAccessManager(this);
 }
