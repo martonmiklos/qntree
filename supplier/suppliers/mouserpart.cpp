@@ -15,7 +15,10 @@ void MouserPart::parseFromSearchResult(const QJsonObject &partJson)
     m_mpn = m_name;
     m_sku = partJson.value(QStringLiteral("MouserPartNumber")).toString();
     m_description = partJson.value(QStringLiteral("Description")).toString();
-    m_categoryName = partJson.value(QStringLiteral("Category")).toString();
+    m_categoryName = partJson.value(QStringLiteral("Category")).toString().trimmed();
+    m_categoryId = partJson.value(QStringLiteral("CategoryId")).toVariant().toString().trimmed();
+    if (m_categoryId.isEmpty())
+        m_categoryId = m_categoryName;
     m_manufacturerName = partJson.value(QStringLiteral("Manufacturer")).toString();
     m_supplierLink = partJson.value(QStringLiteral("ProductDetailUrl")).toString();
 
