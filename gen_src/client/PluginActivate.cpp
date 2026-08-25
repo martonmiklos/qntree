@@ -65,6 +65,34 @@ QJsonObject PluginActivate::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> PluginActivate::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> PluginActivate::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_active_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("active"), namePrefix), m_active);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> PluginActivate::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> PluginActivate::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_active_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("active"), namePrefix), m_active);
+    }
+    return files;
+}
+
 bool PluginActivate::isActive() const {
     return m_active;
 }

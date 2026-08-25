@@ -101,6 +101,58 @@ QJsonObject Config::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> Config::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> Config::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_key_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("key"), namePrefix), m_key);
+    }
+    if (m_env_var_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("env_var"), namePrefix), m_env_var);
+    }
+    if (m_config_key_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("config_key"), namePrefix), m_config_key);
+    }
+    if (m_source_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("source"), namePrefix), m_source);
+    }
+    if (m_accessed_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("accessed"), namePrefix), m_accessed);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> Config::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> Config::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_key_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("key"), namePrefix), m_key);
+    }
+    if (m_env_var_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("env_var"), namePrefix), m_env_var);
+    }
+    if (m_config_key_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("config_key"), namePrefix), m_config_key);
+    }
+    if (m_source_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("source"), namePrefix), m_source);
+    }
+    if (m_accessed_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("accessed"), namePrefix), m_accessed);
+    }
+    return files;
+}
+
 QString Config::getKey() const {
     return m_key;
 }

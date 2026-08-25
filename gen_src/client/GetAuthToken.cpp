@@ -83,6 +83,46 @@ QJsonObject GetAuthToken::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> GetAuthToken::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> GetAuthToken::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_token_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("token"), namePrefix), m_token);
+    }
+    if (m_name_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("name"), namePrefix), m_name);
+    }
+    if (m_expiry_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("expiry"), namePrefix), m_expiry);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> GetAuthToken::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> GetAuthToken::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_token_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("token"), namePrefix), m_token);
+    }
+    if (m_name_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("name"), namePrefix), m_name);
+    }
+    if (m_expiry_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("expiry"), namePrefix), m_expiry);
+    }
+    return files;
+}
+
 QString GetAuthToken::getToken() const {
     return m_token;
 }

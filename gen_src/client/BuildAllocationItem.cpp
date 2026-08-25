@@ -92,6 +92,52 @@ QJsonObject BuildAllocationItem::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> BuildAllocationItem::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> BuildAllocationItem::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_build_line_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("build_line"), namePrefix), m_build_line);
+    }
+    if (m_stock_item_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("stock_item"), namePrefix), m_stock_item);
+    }
+    if (m_quantity_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("quantity"), namePrefix), m_quantity);
+    }
+    if (m_output_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("output"), namePrefix), m_output);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> BuildAllocationItem::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> BuildAllocationItem::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_build_line_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("build_line"), namePrefix), m_build_line);
+    }
+    if (m_stock_item_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("stock_item"), namePrefix), m_stock_item);
+    }
+    if (m_quantity_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("quantity"), namePrefix), m_quantity);
+    }
+    if (m_output_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("output"), namePrefix), m_output);
+    }
+    return files;
+}
+
 qint32 BuildAllocationItem::getBuildLine() const {
     return m_build_line;
 }

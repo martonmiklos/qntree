@@ -74,6 +74,40 @@ QJsonObject GenericStateClass::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> GenericStateClass::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> GenericStateClass::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_status_class_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("status_class"), namePrefix), m_status_class);
+    }
+    if (m_values.size() > 0) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("values"), namePrefix), m_values);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> GenericStateClass::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> GenericStateClass::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_status_class_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("status_class"), namePrefix), m_status_class);
+    }
+    if (m_values.size() > 0) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("values"), namePrefix), m_values);
+    }
+    return files;
+}
+
 QString GenericStateClass::getStatusClass() const {
     return m_status_class;
 }

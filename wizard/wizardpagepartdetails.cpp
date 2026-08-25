@@ -25,6 +25,43 @@ WizardPagePartDetails::~WizardPagePartDetails()
     delete ui;
 }
 
+Nut::Row<SupplierCategoryMap> WizardPagePartDetails::findSavedCategoryBinding(int supplierId, const SupplierPart &part)
+{
+    const QString categoryKey = supplierCategoryMapKey(part);
+    const QString categoryName = part.categoryName().trimmed();
+
+    if (!categoryKey.isEmpty()) {
+        auto categoryMap = ConfigDb::instance()->supplier_category_map()
+        ->query()
+            ->where(SupplierCategoryMap::supplier_idField() == supplierId
+                    && SupplierCategoryMap::supplier_category_idField() == categoryKey)
+            ->first();
+        if (categoryMap)
+            return categoryMap;
+    }
+
+    if (!categoryName.isEmpty() && categoryKey == categoryName) {
+        auto categoryMap = ConfigDb::instance()->supplier_category_map()
+        ->query()
+            ->where(SupplierCategoryMap::supplier_idField() == supplierId
+                    && SupplierCategoryMap::supplier_category_nameField() == categoryName)
+            ->first();
+        if (categoryMap)
+            return categoryMap;
+    }
+
+    return Nut::Row<SupplierCategoryMap>();
+}
+
+QString WizardPagePartDetails::supplierCategoryMapKey(const SupplierPart &part)
+{
+    const QString categoryId = part.categoryId().trimmed();
+    if (!categoryId.isEmpty())
+        return categoryId;
+
+    return part.categoryName().trimmed();
+}
+
 void WizardPagePartDetails::update()
 {
     ui->lineEditIPN->setText(m_wizard->m_selectedPart.name());
@@ -46,16 +83,14 @@ void WizardPagePartDetails::update()
                         ->where(Suppliers::uuidField() == m_supplierUuid)
                         ->first();
     if (supplier) {
-        auto supplierId = supplier->id();
-        auto savedCategoryBinding = ConfigDb::instance()->supplier_category_map()
-                                        ->query()
-                                        ->where(SupplierCategoryMap::supplier_idField() == supplierId
-                                                && SupplierCategoryMap::supplier_category_idField() == m_wizard->m_selectedPart.categoryId())
-                                        ->first();
+        auto savedCategoryBinding = findSavedCategoryBinding(supplier->id(), m_wizard->m_selectedPart);
         if (savedCategoryBinding) {
             connect(m_wizard->partApi(), &InvenTree::PartApi::partCategoryRetrieveSignal, this, &WizardPagePartDetails::categoryDetailsRetrived);
             m_wizard->partApi()->partCategoryRetrieve(savedCategoryBinding->inventree_category_id());
         }
+    } else {
+        // supplier not found WTF??
+        Q_ASSERT(false);
     }
 
     auto existingManufacturerLink = ConfigDb::instance()->manufacturer_map()
@@ -145,13 +180,12 @@ void WizardPagePartDetails::categoryDetailsRetrived(InvenTree::Category category
 void WizardPagePartDetails::saveMapping()
 {
     if (ui->checkBoxSaveCategoryBinding->isChecked() && m_invenTreeTargetCategoryPk != -1) {
-        auto categoryMap = ConfigDb::instance()->supplier_category_map()
-        ->query()
-            ->where(SupplierCategoryMap::supplier_category_idField() == m_wizard->m_selectedPart.categoryId() &&
-                    SupplierCategoryMap::supplier_idField() == m_wizard->currentSupplierDbId())
-            ->first();
+        const QString supplierCategoryKey = supplierCategoryMapKey(m_wizard->m_selectedPart);
+        auto categoryMap = findSavedCategoryBinding(m_wizard->currentSupplierDbId(), m_wizard->m_selectedPart);
         if (categoryMap) {
             categoryMap->setInventree_category_id(m_invenTreeTargetCategoryPk);
+            categoryMap->setSupplier_category_id(supplierCategoryKey);
+            categoryMap->setSupplier_category_name(ui->labelSupplierCategory->text());
             categoryMap->save(ConfigDb::instance());
         } else {
             auto map = Nut::create<SupplierCategoryMap>();
@@ -162,7 +196,7 @@ void WizardPagePartDetails::saveMapping()
             if (supplier)
                 map->setSupplier_id(supplier->id());
             map->setInventree_category_id(m_invenTreeTargetCategoryPk);
-            map->setSupplier_category_id(m_wizard->m_selectedPart.categoryId());
+            map->setSupplier_category_id(supplierCategoryKey);
             map->setSupplier_category_name(ui->labelSupplierCategory->text());
 
             if (!map->save(ConfigDb::instance())) {
@@ -254,4 +288,3 @@ void WizardPagePartDetails::on_toolButtonSelectInvenTreeManufacturer_clicked()
     companySelectDialog->show();
     companySelectDialog->update();
 }
-

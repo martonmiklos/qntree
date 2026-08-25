@@ -384,9 +384,17 @@ void PartApi::partBomCopyCreate(const qint32 &id, const PartCopyBOM &part_copy_b
     {
 
         
-        QByteArray output = part_copy_bom.asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = part_copy_bom.asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = part_copy_bom.asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = part_copy_bom.asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -407,9 +415,9 @@ void PartApi::partBomCopyCreate(const qint32 &id, const PartCopyBOM &part_copy_b
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("g:read");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -433,9 +441,9 @@ void PartApi::partBomCopyCreate(const qint32 &id, const PartCopyBOM &part_copy_b
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("g:read");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -496,32 +504,6 @@ void PartApi::partBomCopyCreateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partBomCopyCreateSignalE(output, error_type, error_str);
-        Q_EMIT partBomCopyCreateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partBomCopyCreateSignalError(output, error_type, error_str);
         Q_EMIT partBomCopyCreateSignalErrorFull(worker, error_type, error_str);
     }
@@ -561,9 +543,17 @@ void PartApi::partBomValidatePartialUpdate(const qint32 &id, const ::InvenTree::
     if (patched_part_bom_validate.hasValue()){
 
         
-        QByteArray output = patched_part_bom_validate.value().asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = patched_part_bom_validate.value().asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = patched_part_bom_validate.value().asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = patched_part_bom_validate.value().asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -585,9 +575,9 @@ void PartApi::partBomValidatePartialUpdate(const qint32 &id, const ::InvenTree::
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:change:part");
     scopeClientCredentialsFlow.append("r:change:build");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -612,9 +602,9 @@ void PartApi::partBomValidatePartialUpdate(const qint32 &id, const ::InvenTree::
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:change:part");
     scopeAuthorizationFlow.append("r:change:build");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -677,32 +667,6 @@ void PartApi::partBomValidatePartialUpdateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partBomValidatePartialUpdateSignalE(output, error_type, error_str);
-        Q_EMIT partBomValidatePartialUpdateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partBomValidatePartialUpdateSignalError(output, error_type, error_str);
         Q_EMIT partBomValidatePartialUpdateSignalErrorFull(worker, error_type, error_str);
     }
@@ -761,9 +725,9 @@ void PartApi::partBomValidateRetrieve(const qint32 &id) {
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:view:part");
     scopeClientCredentialsFlow.append("r:view:build");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -788,9 +752,9 @@ void PartApi::partBomValidateRetrieve(const qint32 &id) {
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:view:part");
     scopeAuthorizationFlow.append("r:view:build");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -853,32 +817,6 @@ void PartApi::partBomValidateRetrieveCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partBomValidateRetrieveSignalE(output, error_type, error_str);
-        Q_EMIT partBomValidateRetrieveSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partBomValidateRetrieveSignalError(output, error_type, error_str);
         Q_EMIT partBomValidateRetrieveSignalErrorFull(worker, error_type, error_str);
     }
@@ -918,9 +856,17 @@ void PartApi::partBomValidateUpdate(const qint32 &id, const ::InvenTree::Optiona
     if (part_bom_validate.hasValue()){
 
         
-        QByteArray output = part_bom_validate.value().asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = part_bom_validate.value().asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = part_bom_validate.value().asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = part_bom_validate.value().asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -942,9 +888,9 @@ void PartApi::partBomValidateUpdate(const qint32 &id, const ::InvenTree::Optiona
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:change:part");
     scopeClientCredentialsFlow.append("r:change:build");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -969,9 +915,9 @@ void PartApi::partBomValidateUpdate(const qint32 &id, const ::InvenTree::Optiona
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:change:part");
     scopeAuthorizationFlow.append("r:change:build");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -1034,32 +980,6 @@ void PartApi::partBomValidateUpdateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partBomValidateUpdateSignalE(output, error_type, error_str);
-        Q_EMIT partBomValidateUpdateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partBomValidateUpdateSignalError(output, error_type, error_str);
         Q_EMIT partBomValidateUpdateSignalErrorFull(worker, error_type, error_str);
     }
@@ -1085,9 +1005,17 @@ void PartApi::partBulkPartialUpdate(const ::InvenTree::OptionalParam<PatchedPart
     if (patched_part.hasValue()){
 
         
-        QByteArray output = patched_part.value().asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = patched_part.value().asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = patched_part.value().asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = patched_part.value().asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -1109,9 +1037,9 @@ void PartApi::partBulkPartialUpdate(const ::InvenTree::OptionalParam<PatchedPart
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:change:part");
     scopeClientCredentialsFlow.append("r:change:build");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -1136,9 +1064,9 @@ void PartApi::partBulkPartialUpdate(const ::InvenTree::OptionalParam<PatchedPart
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:change:part");
     scopeAuthorizationFlow.append("r:change:build");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -1201,32 +1129,6 @@ void PartApi::partBulkPartialUpdateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partBulkPartialUpdateSignalE(output, error_type, error_str);
-        Q_EMIT partBulkPartialUpdateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partBulkPartialUpdateSignalError(output, error_type, error_str);
         Q_EMIT partBulkPartialUpdateSignalErrorFull(worker, error_type, error_str);
     }
@@ -1252,9 +1154,17 @@ void PartApi::partBulkUpdate(const Part &part) {
     {
 
         
-        QByteArray output = part.asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = part.asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = part.asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = part.asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -1276,9 +1186,9 @@ void PartApi::partBulkUpdate(const Part &part) {
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:change:part");
     scopeClientCredentialsFlow.append("r:change:build");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -1303,9 +1213,9 @@ void PartApi::partBulkUpdate(const Part &part) {
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:change:part");
     scopeAuthorizationFlow.append("r:change:build");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -1368,32 +1278,6 @@ void PartApi::partBulkUpdateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partBulkUpdateSignalE(output, error_type, error_str);
-        Q_EMIT partBulkUpdateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partBulkUpdateSignalError(output, error_type, error_str);
         Q_EMIT partBulkUpdateSignalErrorFull(worker, error_type, error_str);
     }
@@ -1419,9 +1303,17 @@ void PartApi::partCategoryBulkPartialUpdate(const ::InvenTree::OptionalParam<Pat
     if (patched_category.hasValue()){
 
         
-        QByteArray output = patched_category.value().asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = patched_category.value().asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = patched_category.value().asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = patched_category.value().asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -1443,9 +1335,9 @@ void PartApi::partCategoryBulkPartialUpdate(const ::InvenTree::OptionalParam<Pat
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:change:part_category");
     scopeClientCredentialsFlow.append("r:change:build");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -1470,9 +1362,9 @@ void PartApi::partCategoryBulkPartialUpdate(const ::InvenTree::OptionalParam<Pat
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:change:part_category");
     scopeAuthorizationFlow.append("r:change:build");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -1535,32 +1427,6 @@ void PartApi::partCategoryBulkPartialUpdateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partCategoryBulkPartialUpdateSignalE(output, error_type, error_str);
-        Q_EMIT partCategoryBulkPartialUpdateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partCategoryBulkPartialUpdateSignalError(output, error_type, error_str);
         Q_EMIT partCategoryBulkPartialUpdateSignalErrorFull(worker, error_type, error_str);
     }
@@ -1586,9 +1452,17 @@ void PartApi::partCategoryBulkUpdate(const Category &category) {
     {
 
         
-        QByteArray output = category.asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = category.asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = category.asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = category.asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -1610,9 +1484,9 @@ void PartApi::partCategoryBulkUpdate(const Category &category) {
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:change:part_category");
     scopeClientCredentialsFlow.append("r:change:build");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -1637,9 +1511,9 @@ void PartApi::partCategoryBulkUpdate(const Category &category) {
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:change:part_category");
     scopeAuthorizationFlow.append("r:change:build");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -1702,32 +1576,6 @@ void PartApi::partCategoryBulkUpdateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partCategoryBulkUpdateSignalE(output, error_type, error_str);
-        Q_EMIT partCategoryBulkUpdateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partCategoryBulkUpdateSignalError(output, error_type, error_str);
         Q_EMIT partCategoryBulkUpdateSignalErrorFull(worker, error_type, error_str);
     }
@@ -1753,9 +1601,17 @@ void PartApi::partCategoryCreate(const Category &category) {
     {
 
         
-        QByteArray output = category.asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = category.asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = category.asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = category.asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -1777,9 +1633,9 @@ void PartApi::partCategoryCreate(const Category &category) {
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:add:part_category");
     scopeClientCredentialsFlow.append("r:add:build");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -1804,9 +1660,9 @@ void PartApi::partCategoryCreate(const Category &category) {
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:add:part_category");
     scopeAuthorizationFlow.append("r:add:build");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -1869,32 +1725,6 @@ void PartApi::partCategoryCreateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partCategoryCreateSignalE(output, error_type, error_str);
-        Q_EMIT partCategoryCreateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partCategoryCreateSignalError(output, error_type, error_str);
         Q_EMIT partCategoryCreateSignalErrorFull(worker, error_type, error_str);
     }
@@ -1953,9 +1783,9 @@ void PartApi::partCategoryDestroy(const qint32 &id) {
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:delete:part_category");
     scopeClientCredentialsFlow.append("r:delete:build");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -1980,9 +1810,9 @@ void PartApi::partCategoryDestroy(const qint32 &id) {
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:delete:part_category");
     scopeAuthorizationFlow.append("r:delete:build");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -2044,32 +1874,6 @@ void PartApi::partCategoryDestroyCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partCategoryDestroySignalE(error_type, error_str);
-        Q_EMIT partCategoryDestroySignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partCategoryDestroySignalError(error_type, error_str);
         Q_EMIT partCategoryDestroySignalErrorFull(worker, error_type, error_str);
     }
@@ -2310,9 +2114,9 @@ void PartApi::partCategoryList(const qint32 &limit, const ::InvenTree::OptionalP
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:view:part_category");
     scopeClientCredentialsFlow.append("r:view:build");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -2337,9 +2141,9 @@ void PartApi::partCategoryList(const qint32 &limit, const ::InvenTree::OptionalP
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:view:part_category");
     scopeAuthorizationFlow.append("r:view:build");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -2402,32 +2206,6 @@ void PartApi::partCategoryListCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partCategoryListSignalE(output, error_type, error_str);
-        Q_EMIT partCategoryListSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partCategoryListSignalError(output, error_type, error_str);
         Q_EMIT partCategoryListSignalErrorFull(worker, error_type, error_str);
     }
@@ -2453,9 +2231,17 @@ void PartApi::partCategoryParametersCreate(const CategoryParameterTemplate &cate
     {
 
         
-        QByteArray output = category_parameter_template.asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = category_parameter_template.asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = category_parameter_template.asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = category_parameter_template.asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -2476,9 +2262,9 @@ void PartApi::partCategoryParametersCreate(const CategoryParameterTemplate &cate
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:add:part_category");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -2502,9 +2288,9 @@ void PartApi::partCategoryParametersCreate(const CategoryParameterTemplate &cate
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:add:part_category");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -2565,32 +2351,6 @@ void PartApi::partCategoryParametersCreateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partCategoryParametersCreateSignalE(output, error_type, error_str);
-        Q_EMIT partCategoryParametersCreateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partCategoryParametersCreateSignalError(output, error_type, error_str);
         Q_EMIT partCategoryParametersCreateSignalErrorFull(worker, error_type, error_str);
     }
@@ -2648,9 +2408,9 @@ void PartApi::partCategoryParametersDestroy(const qint32 &id) {
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:delete:part_category");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -2674,9 +2434,9 @@ void PartApi::partCategoryParametersDestroy(const qint32 &id) {
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:delete:part_category");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -2736,32 +2496,6 @@ void PartApi::partCategoryParametersDestroyCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partCategoryParametersDestroySignalE(error_type, error_str);
-        Q_EMIT partCategoryParametersDestroySignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partCategoryParametersDestroySignalError(error_type, error_str);
         Q_EMIT partCategoryParametersDestroySignalErrorFull(worker, error_type, error_str);
     }
@@ -2836,9 +2570,9 @@ void PartApi::partCategoryParametersList(const qint32 &limit, const ::InvenTree:
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:view:part_category");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -2862,9 +2596,9 @@ void PartApi::partCategoryParametersList(const qint32 &limit, const ::InvenTree:
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:view:part_category");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -2925,32 +2659,6 @@ void PartApi::partCategoryParametersListCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partCategoryParametersListSignalE(output, error_type, error_str);
-        Q_EMIT partCategoryParametersListSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partCategoryParametersListSignalError(output, error_type, error_str);
         Q_EMIT partCategoryParametersListSignalErrorFull(worker, error_type, error_str);
     }
@@ -2990,9 +2698,17 @@ void PartApi::partCategoryParametersPartialUpdate(const qint32 &id, const ::Inve
     if (patched_category_parameter_template.hasValue()){
 
         
-        QByteArray output = patched_category_parameter_template.value().asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = patched_category_parameter_template.value().asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = patched_category_parameter_template.value().asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = patched_category_parameter_template.value().asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -3013,9 +2729,9 @@ void PartApi::partCategoryParametersPartialUpdate(const qint32 &id, const ::Inve
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:change:part_category");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -3039,9 +2755,9 @@ void PartApi::partCategoryParametersPartialUpdate(const qint32 &id, const ::Inve
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:change:part_category");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -3102,32 +2818,6 @@ void PartApi::partCategoryParametersPartialUpdateCallback(HttpRequestWorker *wor
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partCategoryParametersPartialUpdateSignalE(output, error_type, error_str);
-        Q_EMIT partCategoryParametersPartialUpdateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partCategoryParametersPartialUpdateSignalError(output, error_type, error_str);
         Q_EMIT partCategoryParametersPartialUpdateSignalErrorFull(worker, error_type, error_str);
     }
@@ -3185,9 +2875,9 @@ void PartApi::partCategoryParametersRetrieve(const qint32 &id) {
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:view:part_category");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -3211,9 +2901,9 @@ void PartApi::partCategoryParametersRetrieve(const qint32 &id) {
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:view:part_category");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -3274,32 +2964,6 @@ void PartApi::partCategoryParametersRetrieveCallback(HttpRequestWorker *worker) 
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partCategoryParametersRetrieveSignalE(output, error_type, error_str);
-        Q_EMIT partCategoryParametersRetrieveSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partCategoryParametersRetrieveSignalError(output, error_type, error_str);
         Q_EMIT partCategoryParametersRetrieveSignalErrorFull(worker, error_type, error_str);
     }
@@ -3339,9 +3003,17 @@ void PartApi::partCategoryParametersUpdate(const qint32 &id, const CategoryParam
     {
 
         
-        QByteArray output = category_parameter_template.asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = category_parameter_template.asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = category_parameter_template.asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = category_parameter_template.asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -3362,9 +3034,9 @@ void PartApi::partCategoryParametersUpdate(const qint32 &id, const CategoryParam
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:change:part_category");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -3388,9 +3060,9 @@ void PartApi::partCategoryParametersUpdate(const qint32 &id, const CategoryParam
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:change:part_category");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -3451,32 +3123,6 @@ void PartApi::partCategoryParametersUpdateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partCategoryParametersUpdateSignalE(output, error_type, error_str);
-        Q_EMIT partCategoryParametersUpdateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partCategoryParametersUpdateSignalError(output, error_type, error_str);
         Q_EMIT partCategoryParametersUpdateSignalErrorFull(worker, error_type, error_str);
     }
@@ -3516,9 +3162,17 @@ void PartApi::partCategoryPartialUpdate(const qint32 &id, const ::InvenTree::Opt
     if (patched_category.hasValue()){
 
         
-        QByteArray output = patched_category.value().asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = patched_category.value().asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = patched_category.value().asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = patched_category.value().asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -3540,9 +3194,9 @@ void PartApi::partCategoryPartialUpdate(const qint32 &id, const ::InvenTree::Opt
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:change:part_category");
     scopeClientCredentialsFlow.append("r:change:build");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -3567,9 +3221,9 @@ void PartApi::partCategoryPartialUpdate(const qint32 &id, const ::InvenTree::Opt
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:change:part_category");
     scopeAuthorizationFlow.append("r:change:build");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -3632,32 +3286,6 @@ void PartApi::partCategoryPartialUpdateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partCategoryPartialUpdateSignalE(output, error_type, error_str);
-        Q_EMIT partCategoryPartialUpdateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partCategoryPartialUpdateSignalError(output, error_type, error_str);
         Q_EMIT partCategoryPartialUpdateSignalErrorFull(worker, error_type, error_str);
     }
@@ -3732,9 +3360,9 @@ void PartApi::partCategoryRetrieve(const qint32 &id, const ::InvenTree::Optional
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:view:part_category");
     scopeClientCredentialsFlow.append("r:view:build");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -3759,9 +3387,9 @@ void PartApi::partCategoryRetrieve(const qint32 &id, const ::InvenTree::Optional
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:view:part_category");
     scopeAuthorizationFlow.append("r:view:build");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -3824,32 +3452,6 @@ void PartApi::partCategoryRetrieveCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partCategoryRetrieveSignalE(output, error_type, error_str);
-        Q_EMIT partCategoryRetrieveSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partCategoryRetrieveSignalError(output, error_type, error_str);
         Q_EMIT partCategoryRetrieveSignalErrorFull(worker, error_type, error_str);
     }
@@ -3940,9 +3542,9 @@ void PartApi::partCategoryTreeList(const qint32 &limit, const ::InvenTree::Optio
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:view:part_category");
     scopeClientCredentialsFlow.append("r:view:build");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -3967,9 +3569,9 @@ void PartApi::partCategoryTreeList(const qint32 &limit, const ::InvenTree::Optio
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:view:part_category");
     scopeAuthorizationFlow.append("r:view:build");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -4032,32 +3634,6 @@ void PartApi::partCategoryTreeListCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partCategoryTreeListSignalE(output, error_type, error_str);
-        Q_EMIT partCategoryTreeListSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partCategoryTreeListSignalError(output, error_type, error_str);
         Q_EMIT partCategoryTreeListSignalErrorFull(worker, error_type, error_str);
     }
@@ -4097,9 +3673,17 @@ void PartApi::partCategoryUpdate(const qint32 &id, const Category &category) {
     {
 
         
-        QByteArray output = category.asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = category.asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = category.asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = category.asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -4121,9 +3705,9 @@ void PartApi::partCategoryUpdate(const qint32 &id, const Category &category) {
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:change:part_category");
     scopeClientCredentialsFlow.append("r:change:build");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -4148,9 +3732,9 @@ void PartApi::partCategoryUpdate(const qint32 &id, const Category &category) {
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:change:part_category");
     scopeAuthorizationFlow.append("r:change:build");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -4213,32 +3797,6 @@ void PartApi::partCategoryUpdateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partCategoryUpdateSignalE(output, error_type, error_str);
-        Q_EMIT partCategoryUpdateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partCategoryUpdateSignalError(output, error_type, error_str);
         Q_EMIT partCategoryUpdateSignalErrorFull(worker, error_type, error_str);
     }
@@ -4264,9 +3822,17 @@ void PartApi::partCreate(const Part &part) {
     {
 
         
-        QByteArray output = part.asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = part.asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = part.asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = part.asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -4288,9 +3854,9 @@ void PartApi::partCreate(const Part &part) {
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:add:part");
     scopeClientCredentialsFlow.append("r:add:build");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -4315,9 +3881,9 @@ void PartApi::partCreate(const Part &part) {
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:add:part");
     scopeAuthorizationFlow.append("r:add:build");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -4380,32 +3946,6 @@ void PartApi::partCreateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partCreateSignalE(output, error_type, error_str);
-        Q_EMIT partCreateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partCreateSignalError(output, error_type, error_str);
         Q_EMIT partCreateSignalErrorFull(worker, error_type, error_str);
     }
@@ -4464,9 +4004,9 @@ void PartApi::partDestroy(const qint32 &id) {
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:delete:part");
     scopeClientCredentialsFlow.append("r:delete:build");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -4491,9 +4031,9 @@ void PartApi::partDestroy(const qint32 &id) {
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:delete:part");
     scopeAuthorizationFlow.append("r:delete:build");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -4555,32 +4095,6 @@ void PartApi::partDestroyCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partDestroySignalE(error_type, error_str);
-        Q_EMIT partDestroySignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partDestroySignalError(error_type, error_str);
         Q_EMIT partDestroySignalErrorFull(worker, error_type, error_str);
     }
@@ -4606,9 +4120,17 @@ void PartApi::partInternalPriceCreate(const PartInternalPrice &part_internal_pri
     {
 
         
-        QByteArray output = part_internal_price.asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = part_internal_price.asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = part_internal_price.asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = part_internal_price.asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -4629,9 +4151,9 @@ void PartApi::partInternalPriceCreate(const PartInternalPrice &part_internal_pri
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:add:part");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -4655,9 +4177,9 @@ void PartApi::partInternalPriceCreate(const PartInternalPrice &part_internal_pri
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:add:part");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -4718,32 +4240,6 @@ void PartApi::partInternalPriceCreateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partInternalPriceCreateSignalE(output, error_type, error_str);
-        Q_EMIT partInternalPriceCreateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partInternalPriceCreateSignalError(output, error_type, error_str);
         Q_EMIT partInternalPriceCreateSignalErrorFull(worker, error_type, error_str);
     }
@@ -4801,9 +4297,9 @@ void PartApi::partInternalPriceDestroy(const qint32 &id) {
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:delete:part");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -4827,9 +4323,9 @@ void PartApi::partInternalPriceDestroy(const qint32 &id) {
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:delete:part");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -4889,32 +4385,6 @@ void PartApi::partInternalPriceDestroyCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partInternalPriceDestroySignalE(error_type, error_str);
-        Q_EMIT partInternalPriceDestroySignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partInternalPriceDestroySignalError(error_type, error_str);
         Q_EMIT partInternalPriceDestroySignalErrorFull(worker, error_type, error_str);
     }
@@ -5034,9 +4504,9 @@ void PartApi::partInternalPriceList(const qint32 &limit, const ::InvenTree::Opti
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:view:part");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -5060,9 +4530,9 @@ void PartApi::partInternalPriceList(const qint32 &limit, const ::InvenTree::Opti
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:view:part");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -5123,32 +4593,6 @@ void PartApi::partInternalPriceListCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partInternalPriceListSignalE(output, error_type, error_str);
-        Q_EMIT partInternalPriceListSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partInternalPriceListSignalError(output, error_type, error_str);
         Q_EMIT partInternalPriceListSignalErrorFull(worker, error_type, error_str);
     }
@@ -5188,9 +4632,17 @@ void PartApi::partInternalPricePartialUpdate(const qint32 &id, const ::InvenTree
     if (patched_part_internal_price.hasValue()){
 
         
-        QByteArray output = patched_part_internal_price.value().asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = patched_part_internal_price.value().asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = patched_part_internal_price.value().asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = patched_part_internal_price.value().asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -5211,9 +4663,9 @@ void PartApi::partInternalPricePartialUpdate(const qint32 &id, const ::InvenTree
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:change:part");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -5237,9 +4689,9 @@ void PartApi::partInternalPricePartialUpdate(const qint32 &id, const ::InvenTree
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:change:part");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -5300,32 +4752,6 @@ void PartApi::partInternalPricePartialUpdateCallback(HttpRequestWorker *worker) 
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partInternalPricePartialUpdateSignalE(output, error_type, error_str);
-        Q_EMIT partInternalPricePartialUpdateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partInternalPricePartialUpdateSignalError(output, error_type, error_str);
         Q_EMIT partInternalPricePartialUpdateSignalErrorFull(worker, error_type, error_str);
     }
@@ -5383,9 +4809,9 @@ void PartApi::partInternalPriceRetrieve(const qint32 &id) {
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:view:part");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -5409,9 +4835,9 @@ void PartApi::partInternalPriceRetrieve(const qint32 &id) {
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:view:part");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -5472,32 +4898,6 @@ void PartApi::partInternalPriceRetrieveCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partInternalPriceRetrieveSignalE(output, error_type, error_str);
-        Q_EMIT partInternalPriceRetrieveSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partInternalPriceRetrieveSignalError(output, error_type, error_str);
         Q_EMIT partInternalPriceRetrieveSignalErrorFull(worker, error_type, error_str);
     }
@@ -5537,9 +4937,17 @@ void PartApi::partInternalPriceUpdate(const qint32 &id, const PartInternalPrice 
     {
 
         
-        QByteArray output = part_internal_price.asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = part_internal_price.asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = part_internal_price.asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = part_internal_price.asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -5560,9 +4968,9 @@ void PartApi::partInternalPriceUpdate(const qint32 &id, const PartInternalPrice 
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:change:part");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -5586,9 +4994,9 @@ void PartApi::partInternalPriceUpdate(const qint32 &id, const PartInternalPrice 
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:change:part");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -5649,32 +5057,6 @@ void PartApi::partInternalPriceUpdateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partInternalPriceUpdateSignalE(output, error_type, error_str);
-        Q_EMIT partInternalPriceUpdateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partInternalPriceUpdateSignalError(output, error_type, error_str);
         Q_EMIT partInternalPriceUpdateSignalErrorFull(worker, error_type, error_str);
     }
@@ -6570,9 +5952,9 @@ void PartApi::partList(const qint32 &limit, const ::InvenTree::OptionalParam<QSt
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:view:part");
     scopeClientCredentialsFlow.append("r:view:build");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -6597,9 +5979,9 @@ void PartApi::partList(const qint32 &limit, const ::InvenTree::OptionalParam<QSt
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:view:part");
     scopeAuthorizationFlow.append("r:view:build");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -6662,32 +6044,6 @@ void PartApi::partListCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partListSignalE(output, error_type, error_str);
-        Q_EMIT partListSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partListSignalError(output, error_type, error_str);
         Q_EMIT partListSignalErrorFull(worker, error_type, error_str);
     }
@@ -6724,16 +6080,20 @@ void PartApi::partPartialUpdate(const qint32 &id, const ::InvenTree::OptionalPar
     worker->setWorkingDirectory(_workingDirectory);
     HttpRequestInput input(fullPath, "PATCH");
 
-
     if (patched_part.hasValue()){
-        if (patched_part.value().is_image_Set()) {
-            input.add_file_element(patched_part.value().getImage());
+
+        
+        QList<HttpFileElement> requestBodyFiles = patched_part.value().asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = patched_part.value().asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = patched_part.value().asJson().toUtf8();
+            input.request_body.append(output);
         }
-
-        QByteArray output = patched_part.value().asJson().toUtf8();
-        input.request_body.append(output);
-    }
-
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -6755,9 +6115,9 @@ void PartApi::partPartialUpdate(const qint32 &id, const ::InvenTree::OptionalPar
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:change:part");
     scopeClientCredentialsFlow.append("r:change:build");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -6782,9 +6142,9 @@ void PartApi::partPartialUpdate(const qint32 &id, const ::InvenTree::OptionalPar
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:change:part");
     scopeAuthorizationFlow.append("r:change:build");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -6847,32 +6207,6 @@ void PartApi::partPartialUpdateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partPartialUpdateSignalE(output, error_type, error_str);
-        Q_EMIT partPartialUpdateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partPartialUpdateSignalError(output, error_type, error_str);
         Q_EMIT partPartialUpdateSignalErrorFull(worker, error_type, error_str);
     }
@@ -6912,9 +6246,17 @@ void PartApi::partPricingPartialUpdate(const qint32 &id, const ::InvenTree::Opti
     if (patched_part_pricing.hasValue()){
 
         
-        QByteArray output = patched_part_pricing.value().asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = patched_part_pricing.value().asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = patched_part_pricing.value().asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = patched_part_pricing.value().asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -6935,9 +6277,9 @@ void PartApi::partPricingPartialUpdate(const qint32 &id, const ::InvenTree::Opti
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:change:part");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -6961,9 +6303,9 @@ void PartApi::partPricingPartialUpdate(const qint32 &id, const ::InvenTree::Opti
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:change:part");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -7024,32 +6366,6 @@ void PartApi::partPricingPartialUpdateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partPricingPartialUpdateSignalE(output, error_type, error_str);
-        Q_EMIT partPricingPartialUpdateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partPricingPartialUpdateSignalError(output, error_type, error_str);
         Q_EMIT partPricingPartialUpdateSignalErrorFull(worker, error_type, error_str);
     }
@@ -7107,9 +6423,9 @@ void PartApi::partPricingRetrieve(const qint32 &id) {
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:view:part");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -7133,9 +6449,9 @@ void PartApi::partPricingRetrieve(const qint32 &id) {
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:view:part");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -7196,32 +6512,6 @@ void PartApi::partPricingRetrieveCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partPricingRetrieveSignalE(output, error_type, error_str);
-        Q_EMIT partPricingRetrieveSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partPricingRetrieveSignalError(output, error_type, error_str);
         Q_EMIT partPricingRetrieveSignalErrorFull(worker, error_type, error_str);
     }
@@ -7261,9 +6551,17 @@ void PartApi::partPricingUpdate(const qint32 &id, const ::InvenTree::OptionalPar
     if (part_pricing.hasValue()){
 
         
-        QByteArray output = part_pricing.value().asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = part_pricing.value().asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = part_pricing.value().asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = part_pricing.value().asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -7284,9 +6582,9 @@ void PartApi::partPricingUpdate(const qint32 &id, const ::InvenTree::OptionalPar
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:change:part");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -7310,9 +6608,9 @@ void PartApi::partPricingUpdate(const qint32 &id, const ::InvenTree::OptionalPar
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:change:part");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -7373,32 +6671,6 @@ void PartApi::partPricingUpdateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partPricingUpdateSignalE(output, error_type, error_str);
-        Q_EMIT partPricingUpdateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partPricingUpdateSignalError(output, error_type, error_str);
         Q_EMIT partPricingUpdateSignalErrorFull(worker, error_type, error_str);
     }
@@ -7424,9 +6696,17 @@ void PartApi::partRelatedCreate(const PartRelation &part_relation) {
     {
 
         
-        QByteArray output = part_relation.asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = part_relation.asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = part_relation.asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = part_relation.asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -7447,9 +6727,9 @@ void PartApi::partRelatedCreate(const PartRelation &part_relation) {
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:add:part");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -7473,9 +6753,9 @@ void PartApi::partRelatedCreate(const PartRelation &part_relation) {
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:add:part");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -7536,32 +6816,6 @@ void PartApi::partRelatedCreateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partRelatedCreateSignalE(output, error_type, error_str);
-        Q_EMIT partRelatedCreateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partRelatedCreateSignalError(output, error_type, error_str);
         Q_EMIT partRelatedCreateSignalErrorFull(worker, error_type, error_str);
     }
@@ -7619,9 +6873,9 @@ void PartApi::partRelatedDestroy(const qint32 &id) {
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:delete:part");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -7645,9 +6899,9 @@ void PartApi::partRelatedDestroy(const qint32 &id) {
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:delete:part");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -7707,32 +6961,6 @@ void PartApi::partRelatedDestroyCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partRelatedDestroySignalE(error_type, error_str);
-        Q_EMIT partRelatedDestroySignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partRelatedDestroySignalError(error_type, error_str);
         Q_EMIT partRelatedDestroySignalErrorFull(worker, error_type, error_str);
     }
@@ -7882,9 +7110,9 @@ void PartApi::partRelatedList(const qint32 &limit, const ::InvenTree::OptionalPa
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:view:part");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -7908,9 +7136,9 @@ void PartApi::partRelatedList(const qint32 &limit, const ::InvenTree::OptionalPa
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:view:part");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -7971,32 +7199,6 @@ void PartApi::partRelatedListCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partRelatedListSignalE(output, error_type, error_str);
-        Q_EMIT partRelatedListSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partRelatedListSignalError(output, error_type, error_str);
         Q_EMIT partRelatedListSignalErrorFull(worker, error_type, error_str);
     }
@@ -8036,9 +7238,17 @@ void PartApi::partRelatedPartialUpdate(const qint32 &id, const ::InvenTree::Opti
     if (patched_part_relation.hasValue()){
 
         
-        QByteArray output = patched_part_relation.value().asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = patched_part_relation.value().asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = patched_part_relation.value().asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = patched_part_relation.value().asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -8059,9 +7269,9 @@ void PartApi::partRelatedPartialUpdate(const qint32 &id, const ::InvenTree::Opti
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:change:part");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -8085,9 +7295,9 @@ void PartApi::partRelatedPartialUpdate(const qint32 &id, const ::InvenTree::Opti
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:change:part");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -8148,32 +7358,6 @@ void PartApi::partRelatedPartialUpdateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partRelatedPartialUpdateSignalE(output, error_type, error_str);
-        Q_EMIT partRelatedPartialUpdateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partRelatedPartialUpdateSignalError(output, error_type, error_str);
         Q_EMIT partRelatedPartialUpdateSignalErrorFull(worker, error_type, error_str);
     }
@@ -8231,9 +7415,9 @@ void PartApi::partRelatedRetrieve(const qint32 &id) {
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:view:part");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -8257,9 +7441,9 @@ void PartApi::partRelatedRetrieve(const qint32 &id) {
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:view:part");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -8320,32 +7504,6 @@ void PartApi::partRelatedRetrieveCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partRelatedRetrieveSignalE(output, error_type, error_str);
-        Q_EMIT partRelatedRetrieveSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partRelatedRetrieveSignalError(output, error_type, error_str);
         Q_EMIT partRelatedRetrieveSignalErrorFull(worker, error_type, error_str);
     }
@@ -8385,9 +7543,17 @@ void PartApi::partRelatedUpdate(const qint32 &id, const PartRelation &part_relat
     {
 
         
-        QByteArray output = part_relation.asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = part_relation.asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = part_relation.asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = part_relation.asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -8408,9 +7574,9 @@ void PartApi::partRelatedUpdate(const qint32 &id, const PartRelation &part_relat
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:change:part");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -8434,9 +7600,9 @@ void PartApi::partRelatedUpdate(const qint32 &id, const PartRelation &part_relat
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:change:part");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -8497,32 +7663,6 @@ void PartApi::partRelatedUpdateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partRelatedUpdateSignalE(output, error_type, error_str);
-        Q_EMIT partRelatedUpdateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partRelatedUpdateSignalError(output, error_type, error_str);
         Q_EMIT partRelatedUpdateSignalErrorFull(worker, error_type, error_str);
     }
@@ -8581,9 +7721,9 @@ void PartApi::partRequirementsRetrieve(const qint32 &id) {
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:view:part");
     scopeClientCredentialsFlow.append("r:view:build");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -8608,9 +7748,9 @@ void PartApi::partRequirementsRetrieve(const qint32 &id) {
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:view:part");
     scopeAuthorizationFlow.append("r:view:build");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -8673,32 +7813,6 @@ void PartApi::partRequirementsRetrieveCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partRequirementsRetrieveSignalE(output, error_type, error_str);
-        Q_EMIT partRequirementsRetrieveSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partRequirementsRetrieveSignalError(output, error_type, error_str);
         Q_EMIT partRequirementsRetrieveSignalErrorFull(worker, error_type, error_str);
     }
@@ -8848,9 +7962,9 @@ void PartApi::partRetrieve(const qint32 &id, const ::InvenTree::OptionalParam<bo
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:view:part");
     scopeClientCredentialsFlow.append("r:view:build");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -8875,9 +7989,9 @@ void PartApi::partRetrieve(const qint32 &id, const ::InvenTree::OptionalParam<bo
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:view:part");
     scopeAuthorizationFlow.append("r:view:build");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -8940,32 +8054,6 @@ void PartApi::partRetrieveCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partRetrieveSignalE(output, error_type, error_str);
-        Q_EMIT partRetrieveSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partRetrieveSignalError(output, error_type, error_str);
         Q_EMIT partRetrieveSignalErrorFull(worker, error_type, error_str);
     }
@@ -8991,9 +8079,17 @@ void PartApi::partSalePriceCreate(const PartSalePrice &part_sale_price) {
     {
 
         
-        QByteArray output = part_sale_price.asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = part_sale_price.asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = part_sale_price.asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = part_sale_price.asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -9014,9 +8110,9 @@ void PartApi::partSalePriceCreate(const PartSalePrice &part_sale_price) {
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:add:part");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -9040,9 +8136,9 @@ void PartApi::partSalePriceCreate(const PartSalePrice &part_sale_price) {
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:add:part");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -9103,32 +8199,6 @@ void PartApi::partSalePriceCreateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partSalePriceCreateSignalE(output, error_type, error_str);
-        Q_EMIT partSalePriceCreateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partSalePriceCreateSignalError(output, error_type, error_str);
         Q_EMIT partSalePriceCreateSignalErrorFull(worker, error_type, error_str);
     }
@@ -9186,9 +8256,9 @@ void PartApi::partSalePriceDestroy(const qint32 &id) {
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:delete:part");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -9212,9 +8282,9 @@ void PartApi::partSalePriceDestroy(const qint32 &id) {
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:delete:part");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -9274,32 +8344,6 @@ void PartApi::partSalePriceDestroyCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partSalePriceDestroySignalE(error_type, error_str);
-        Q_EMIT partSalePriceDestroySignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partSalePriceDestroySignalError(error_type, error_str);
         Q_EMIT partSalePriceDestroySignalErrorFull(worker, error_type, error_str);
     }
@@ -9419,9 +8463,9 @@ void PartApi::partSalePriceList(const qint32 &limit, const ::InvenTree::Optional
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:view:part");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -9445,9 +8489,9 @@ void PartApi::partSalePriceList(const qint32 &limit, const ::InvenTree::Optional
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:view:part");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -9508,32 +8552,6 @@ void PartApi::partSalePriceListCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partSalePriceListSignalE(output, error_type, error_str);
-        Q_EMIT partSalePriceListSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partSalePriceListSignalError(output, error_type, error_str);
         Q_EMIT partSalePriceListSignalErrorFull(worker, error_type, error_str);
     }
@@ -9573,9 +8591,17 @@ void PartApi::partSalePricePartialUpdate(const qint32 &id, const ::InvenTree::Op
     if (patched_part_sale_price.hasValue()){
 
         
-        QByteArray output = patched_part_sale_price.value().asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = patched_part_sale_price.value().asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = patched_part_sale_price.value().asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = patched_part_sale_price.value().asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -9596,9 +8622,9 @@ void PartApi::partSalePricePartialUpdate(const qint32 &id, const ::InvenTree::Op
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:change:part");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -9622,9 +8648,9 @@ void PartApi::partSalePricePartialUpdate(const qint32 &id, const ::InvenTree::Op
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:change:part");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -9685,32 +8711,6 @@ void PartApi::partSalePricePartialUpdateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partSalePricePartialUpdateSignalE(output, error_type, error_str);
-        Q_EMIT partSalePricePartialUpdateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partSalePricePartialUpdateSignalError(output, error_type, error_str);
         Q_EMIT partSalePricePartialUpdateSignalErrorFull(worker, error_type, error_str);
     }
@@ -9768,9 +8768,9 @@ void PartApi::partSalePriceRetrieve(const qint32 &id) {
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:view:part");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -9794,9 +8794,9 @@ void PartApi::partSalePriceRetrieve(const qint32 &id) {
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:view:part");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -9857,32 +8857,6 @@ void PartApi::partSalePriceRetrieveCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partSalePriceRetrieveSignalE(output, error_type, error_str);
-        Q_EMIT partSalePriceRetrieveSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partSalePriceRetrieveSignalError(output, error_type, error_str);
         Q_EMIT partSalePriceRetrieveSignalErrorFull(worker, error_type, error_str);
     }
@@ -9922,9 +8896,17 @@ void PartApi::partSalePriceUpdate(const qint32 &id, const PartSalePrice &part_sa
     {
 
         
-        QByteArray output = part_sale_price.asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = part_sale_price.asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = part_sale_price.asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = part_sale_price.asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -9945,9 +8927,9 @@ void PartApi::partSalePriceUpdate(const qint32 &id, const PartSalePrice &part_sa
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:change:part");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -9971,9 +8953,9 @@ void PartApi::partSalePriceUpdate(const qint32 &id, const PartSalePrice &part_sa
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:change:part");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -10034,32 +9016,6 @@ void PartApi::partSalePriceUpdateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partSalePriceUpdateSignalE(output, error_type, error_str);
-        Q_EMIT partSalePriceUpdateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partSalePriceUpdateSignalError(output, error_type, error_str);
         Q_EMIT partSalePriceUpdateSignalErrorFull(worker, error_type, error_str);
     }
@@ -10118,9 +9074,9 @@ void PartApi::partSerialNumbersRetrieve(const qint32 &id) {
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:view:part");
     scopeClientCredentialsFlow.append("r:view:build");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -10145,9 +9101,9 @@ void PartApi::partSerialNumbersRetrieve(const qint32 &id) {
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:view:part");
     scopeAuthorizationFlow.append("r:view:build");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -10210,32 +9166,6 @@ void PartApi::partSerialNumbersRetrieveCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partSerialNumbersRetrieveSignalE(output, error_type, error_str);
-        Q_EMIT partSerialNumbersRetrieveSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partSerialNumbersRetrieveSignalError(output, error_type, error_str);
         Q_EMIT partSerialNumbersRetrieveSignalErrorFull(worker, error_type, error_str);
     }
@@ -10261,9 +9191,17 @@ void PartApi::partStocktakeBulkDestroy(const BulkRequest &bulk_request) {
     {
 
         
-        QByteArray output = bulk_request.asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = bulk_request.asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = bulk_request.asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = bulk_request.asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -10284,9 +9222,9 @@ void PartApi::partStocktakeBulkDestroy(const BulkRequest &bulk_request) {
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:delete:part");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -10310,9 +9248,9 @@ void PartApi::partStocktakeBulkDestroy(const BulkRequest &bulk_request) {
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:delete:part");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -10372,32 +9310,6 @@ void PartApi::partStocktakeBulkDestroyCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partStocktakeBulkDestroySignalE(error_type, error_str);
-        Q_EMIT partStocktakeBulkDestroySignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partStocktakeBulkDestroySignalError(error_type, error_str);
         Q_EMIT partStocktakeBulkDestroySignalErrorFull(worker, error_type, error_str);
     }
@@ -10423,9 +9335,17 @@ void PartApi::partStocktakeCreate(const PartStocktake &part_stocktake) {
     {
 
         
-        QByteArray output = part_stocktake.asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = part_stocktake.asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = part_stocktake.asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = part_stocktake.asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -10446,9 +9366,9 @@ void PartApi::partStocktakeCreate(const PartStocktake &part_stocktake) {
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:add:part");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -10472,9 +9392,9 @@ void PartApi::partStocktakeCreate(const PartStocktake &part_stocktake) {
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:add:part");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -10535,32 +9455,6 @@ void PartApi::partStocktakeCreateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partStocktakeCreateSignalE(output, error_type, error_str);
-        Q_EMIT partStocktakeCreateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partStocktakeCreateSignalError(output, error_type, error_str);
         Q_EMIT partStocktakeCreateSignalErrorFull(worker, error_type, error_str);
     }
@@ -10618,9 +9512,9 @@ void PartApi::partStocktakeDestroy(const qint32 &id) {
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:delete:part");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -10644,9 +9538,9 @@ void PartApi::partStocktakeDestroy(const qint32 &id) {
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:delete:part");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -10706,32 +9600,6 @@ void PartApi::partStocktakeDestroyCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partStocktakeDestroySignalE(error_type, error_str);
-        Q_EMIT partStocktakeDestroySignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partStocktakeDestroySignalError(error_type, error_str);
         Q_EMIT partStocktakeDestroySignalErrorFull(worker, error_type, error_str);
     }
@@ -10836,9 +9704,9 @@ void PartApi::partStocktakeList(const qint32 &limit, const ::InvenTree::Optional
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:view:part");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -10862,9 +9730,9 @@ void PartApi::partStocktakeList(const qint32 &limit, const ::InvenTree::Optional
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:view:part");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -10925,32 +9793,6 @@ void PartApi::partStocktakeListCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partStocktakeListSignalE(output, error_type, error_str);
-        Q_EMIT partStocktakeListSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partStocktakeListSignalError(output, error_type, error_str);
         Q_EMIT partStocktakeListSignalErrorFull(worker, error_type, error_str);
     }
@@ -10990,9 +9832,17 @@ void PartApi::partStocktakePartialUpdate(const qint32 &id, const ::InvenTree::Op
     if (patched_part_stocktake.hasValue()){
 
         
-        QByteArray output = patched_part_stocktake.value().asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = patched_part_stocktake.value().asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = patched_part_stocktake.value().asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = patched_part_stocktake.value().asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -11013,9 +9863,9 @@ void PartApi::partStocktakePartialUpdate(const qint32 &id, const ::InvenTree::Op
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:change:part");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -11039,9 +9889,9 @@ void PartApi::partStocktakePartialUpdate(const qint32 &id, const ::InvenTree::Op
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:change:part");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -11102,32 +9952,6 @@ void PartApi::partStocktakePartialUpdateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partStocktakePartialUpdateSignalE(output, error_type, error_str);
-        Q_EMIT partStocktakePartialUpdateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partStocktakePartialUpdateSignalError(output, error_type, error_str);
         Q_EMIT partStocktakePartialUpdateSignalErrorFull(worker, error_type, error_str);
     }
@@ -11185,9 +10009,9 @@ void PartApi::partStocktakeRetrieve(const qint32 &id) {
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:view:part");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -11211,9 +10035,9 @@ void PartApi::partStocktakeRetrieve(const qint32 &id) {
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:view:part");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -11274,32 +10098,6 @@ void PartApi::partStocktakeRetrieveCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partStocktakeRetrieveSignalE(output, error_type, error_str);
-        Q_EMIT partStocktakeRetrieveSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partStocktakeRetrieveSignalError(output, error_type, error_str);
         Q_EMIT partStocktakeRetrieveSignalErrorFull(worker, error_type, error_str);
     }
@@ -11339,9 +10137,17 @@ void PartApi::partStocktakeUpdate(const qint32 &id, const PartStocktake &part_st
     {
 
         
-        QByteArray output = part_stocktake.asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = part_stocktake.asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = part_stocktake.asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = part_stocktake.asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -11362,9 +10168,9 @@ void PartApi::partStocktakeUpdate(const qint32 &id, const PartStocktake &part_st
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:change:part");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -11388,9 +10194,9 @@ void PartApi::partStocktakeUpdate(const qint32 &id, const PartStocktake &part_st
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:change:part");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -11451,32 +10257,6 @@ void PartApi::partStocktakeUpdateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partStocktakeUpdateSignalE(output, error_type, error_str);
-        Q_EMIT partStocktakeUpdateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partStocktakeUpdateSignalError(output, error_type, error_str);
         Q_EMIT partStocktakeUpdateSignalErrorFull(worker, error_type, error_str);
     }
@@ -11502,9 +10282,17 @@ void PartApi::partTestTemplateCreate(const PartTestTemplate &part_test_template)
     {
 
         
-        QByteArray output = part_test_template.asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = part_test_template.asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = part_test_template.asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = part_test_template.asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -11525,9 +10313,9 @@ void PartApi::partTestTemplateCreate(const PartTestTemplate &part_test_template)
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:add:part");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -11551,9 +10339,9 @@ void PartApi::partTestTemplateCreate(const PartTestTemplate &part_test_template)
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:add:part");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -11614,32 +10402,6 @@ void PartApi::partTestTemplateCreateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partTestTemplateCreateSignalE(output, error_type, error_str);
-        Q_EMIT partTestTemplateCreateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partTestTemplateCreateSignalError(output, error_type, error_str);
         Q_EMIT partTestTemplateCreateSignalErrorFull(worker, error_type, error_str);
     }
@@ -11697,9 +10459,9 @@ void PartApi::partTestTemplateDestroy(const qint32 &id) {
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:delete:part");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -11723,9 +10485,9 @@ void PartApi::partTestTemplateDestroy(const qint32 &id) {
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:delete:part");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -11785,32 +10547,6 @@ void PartApi::partTestTemplateDestroyCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partTestTemplateDestroySignalE(error_type, error_str);
-        Q_EMIT partTestTemplateDestroySignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partTestTemplateDestroySignalError(error_type, error_str);
         Q_EMIT partTestTemplateDestroySignalErrorFull(worker, error_type, error_str);
     }
@@ -12020,9 +10756,9 @@ void PartApi::partTestTemplateList(const qint32 &limit, const ::InvenTree::Optio
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:view:part");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -12046,9 +10782,9 @@ void PartApi::partTestTemplateList(const qint32 &limit, const ::InvenTree::Optio
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:view:part");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -12109,32 +10845,6 @@ void PartApi::partTestTemplateListCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partTestTemplateListSignalE(output, error_type, error_str);
-        Q_EMIT partTestTemplateListSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partTestTemplateListSignalError(output, error_type, error_str);
         Q_EMIT partTestTemplateListSignalErrorFull(worker, error_type, error_str);
     }
@@ -12174,9 +10884,17 @@ void PartApi::partTestTemplatePartialUpdate(const qint32 &id, const ::InvenTree:
     if (patched_part_test_template.hasValue()){
 
         
-        QByteArray output = patched_part_test_template.value().asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = patched_part_test_template.value().asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = patched_part_test_template.value().asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = patched_part_test_template.value().asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -12197,9 +10915,9 @@ void PartApi::partTestTemplatePartialUpdate(const qint32 &id, const ::InvenTree:
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:change:part");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -12223,9 +10941,9 @@ void PartApi::partTestTemplatePartialUpdate(const qint32 &id, const ::InvenTree:
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:change:part");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -12286,32 +11004,6 @@ void PartApi::partTestTemplatePartialUpdateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partTestTemplatePartialUpdateSignalE(output, error_type, error_str);
-        Q_EMIT partTestTemplatePartialUpdateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partTestTemplatePartialUpdateSignalError(output, error_type, error_str);
         Q_EMIT partTestTemplatePartialUpdateSignalErrorFull(worker, error_type, error_str);
     }
@@ -12369,9 +11061,9 @@ void PartApi::partTestTemplateRetrieve(const qint32 &id) {
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:view:part");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -12395,9 +11087,9 @@ void PartApi::partTestTemplateRetrieve(const qint32 &id) {
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:view:part");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -12458,32 +11150,6 @@ void PartApi::partTestTemplateRetrieveCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partTestTemplateRetrieveSignalE(output, error_type, error_str);
-        Q_EMIT partTestTemplateRetrieveSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partTestTemplateRetrieveSignalError(output, error_type, error_str);
         Q_EMIT partTestTemplateRetrieveSignalErrorFull(worker, error_type, error_str);
     }
@@ -12523,9 +11189,17 @@ void PartApi::partTestTemplateUpdate(const qint32 &id, const PartTestTemplate &p
     {
 
         
-        QByteArray output = part_test_template.asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = part_test_template.asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = part_test_template.asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = part_test_template.asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -12546,9 +11220,9 @@ void PartApi::partTestTemplateUpdate(const qint32 &id, const PartTestTemplate &p
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:change:part");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -12572,9 +11246,9 @@ void PartApi::partTestTemplateUpdate(const qint32 &id, const PartTestTemplate &p
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:change:part");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -12635,32 +11309,6 @@ void PartApi::partTestTemplateUpdateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partTestTemplateUpdateSignalE(output, error_type, error_str);
-        Q_EMIT partTestTemplateUpdateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partTestTemplateUpdateSignalError(output, error_type, error_str);
         Q_EMIT partTestTemplateUpdateSignalErrorFull(worker, error_type, error_str);
     }
@@ -12750,9 +11398,9 @@ void PartApi::partThumbsList(const qint32 &limit, const ::InvenTree::OptionalPar
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("g:read");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -12776,9 +11424,9 @@ void PartApi::partThumbsList(const qint32 &limit, const ::InvenTree::OptionalPar
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("g:read");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -12839,32 +11487,6 @@ void PartApi::partThumbsListCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partThumbsListSignalE(output, error_type, error_str);
-        Q_EMIT partThumbsListSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partThumbsListSignalError(output, error_type, error_str);
         Q_EMIT partThumbsListSignalErrorFull(worker, error_type, error_str);
     }
@@ -12904,9 +11526,17 @@ void PartApi::partThumbsPartialUpdate(const qint32 &id, const ::InvenTree::Optio
     if (patched_part_thumb_serializer_update.hasValue()){
 
         
-        QByteArray output = patched_part_thumb_serializer_update.value().asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = patched_part_thumb_serializer_update.value().asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = patched_part_thumb_serializer_update.value().asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = patched_part_thumb_serializer_update.value().asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -12928,9 +11558,9 @@ void PartApi::partThumbsPartialUpdate(const qint32 &id, const ::InvenTree::Optio
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:change:part");
     scopeClientCredentialsFlow.append("r:change:build");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -12955,9 +11585,9 @@ void PartApi::partThumbsPartialUpdate(const qint32 &id, const ::InvenTree::Optio
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:change:part");
     scopeAuthorizationFlow.append("r:change:build");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -13020,32 +11650,6 @@ void PartApi::partThumbsPartialUpdateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partThumbsPartialUpdateSignalE(output, error_type, error_str);
-        Q_EMIT partThumbsPartialUpdateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partThumbsPartialUpdateSignalError(output, error_type, error_str);
         Q_EMIT partThumbsPartialUpdateSignalErrorFull(worker, error_type, error_str);
     }
@@ -13104,9 +11708,9 @@ void PartApi::partThumbsRetrieve(const qint32 &id) {
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:view:part");
     scopeClientCredentialsFlow.append("r:view:build");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -13131,9 +11735,9 @@ void PartApi::partThumbsRetrieve(const qint32 &id) {
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:view:part");
     scopeAuthorizationFlow.append("r:view:build");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -13196,32 +11800,6 @@ void PartApi::partThumbsRetrieveCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partThumbsRetrieveSignalE(output, error_type, error_str);
-        Q_EMIT partThumbsRetrieveSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partThumbsRetrieveSignalError(output, error_type, error_str);
         Q_EMIT partThumbsRetrieveSignalErrorFull(worker, error_type, error_str);
     }
@@ -13261,9 +11839,17 @@ void PartApi::partThumbsUpdate(const qint32 &id, const PartThumbSerializerUpdate
     {
 
         
-        QByteArray output = part_thumb_serializer_update.asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = part_thumb_serializer_update.asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = part_thumb_serializer_update.asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = part_thumb_serializer_update.asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -13285,9 +11871,9 @@ void PartApi::partThumbsUpdate(const qint32 &id, const PartThumbSerializerUpdate
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:change:part");
     scopeClientCredentialsFlow.append("r:change:build");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -13312,9 +11898,9 @@ void PartApi::partThumbsUpdate(const qint32 &id, const PartThumbSerializerUpdate
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:change:part");
     scopeAuthorizationFlow.append("r:change:build");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -13377,32 +11963,6 @@ void PartApi::partThumbsUpdateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partThumbsUpdateSignalE(output, error_type, error_str);
-        Q_EMIT partThumbsUpdateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partThumbsUpdateSignalError(output, error_type, error_str);
         Q_EMIT partThumbsUpdateSignalErrorFull(worker, error_type, error_str);
     }
@@ -13440,10 +12000,19 @@ void PartApi::partUpdate(const qint32 &id, const Part &part) {
     HttpRequestInput input(fullPath, "PUT");
 
     {
+
         
-        QByteArray output = part.asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = part.asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = part.asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = part.asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -13465,9 +12034,9 @@ void PartApi::partUpdate(const qint32 &id, const Part &part) {
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:change:part");
     scopeClientCredentialsFlow.append("r:change:build");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -13492,9 +12061,9 @@ void PartApi::partUpdate(const qint32 &id, const Part &part) {
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:change:part");
     scopeAuthorizationFlow.append("r:change:build");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -13557,32 +12126,6 @@ void PartApi::partUpdateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT partUpdateSignalE(output, error_type, error_str);
-        Q_EMIT partUpdateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT partUpdateSignalError(output, error_type, error_str);
         Q_EMIT partUpdateSignalErrorFull(worker, error_type, error_str);
     }

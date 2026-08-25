@@ -155,6 +155,94 @@ QJsonObject Attachment::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> Attachment::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> Attachment::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_pk_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_attachment.isSet()) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("attachment"), namePrefix), m_attachment);
+    }
+    if (m_filename_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("filename"), namePrefix), m_filename);
+    }
+    if (m_link_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("link"), namePrefix), m_link);
+    }
+    if (m_comment_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("comment"), namePrefix), m_comment);
+    }
+    if (m_upload_date_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("upload_date"), namePrefix), m_upload_date);
+    }
+    if (m_upload_user_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("upload_user"), namePrefix), m_upload_user);
+    }
+    if (m_user_detail.isSet()) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("user_detail"), namePrefix), m_user_detail);
+    }
+    if (m_file_size_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("file_size"), namePrefix), m_file_size);
+    }
+    if (m_model_type.isSet()) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("model_type"), namePrefix), m_model_type);
+    }
+    if (m_model_id_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("model_id"), namePrefix), m_model_id);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> Attachment::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> Attachment::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_pk_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_attachment.isSet()) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("attachment"), namePrefix), m_attachment);
+    }
+    if (m_filename_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("filename"), namePrefix), m_filename);
+    }
+    if (m_link_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("link"), namePrefix), m_link);
+    }
+    if (m_comment_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("comment"), namePrefix), m_comment);
+    }
+    if (m_upload_date_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("upload_date"), namePrefix), m_upload_date);
+    }
+    if (m_upload_user_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("upload_user"), namePrefix), m_upload_user);
+    }
+    if (m_user_detail.isSet()) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("user_detail"), namePrefix), m_user_detail);
+    }
+    if (m_file_size_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("file_size"), namePrefix), m_file_size);
+    }
+    if (m_model_type.isSet()) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("model_type"), namePrefix), m_model_type);
+    }
+    if (m_model_id_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("model_id"), namePrefix), m_model_id);
+    }
+    return files;
+}
+
 qint32 Attachment::getPk() const {
     return m_pk;
 }

@@ -92,6 +92,52 @@ QJsonObject SalesOrderSerialAllocation::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> SalesOrderSerialAllocation::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> SalesOrderSerialAllocation::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_line_item_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("line_item"), namePrefix), m_line_item);
+    }
+    if (m_quantity_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("quantity"), namePrefix), m_quantity);
+    }
+    if (m_serial_numbers_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("serial_numbers"), namePrefix), m_serial_numbers);
+    }
+    if (m_shipment_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("shipment"), namePrefix), m_shipment);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> SalesOrderSerialAllocation::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> SalesOrderSerialAllocation::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_line_item_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("line_item"), namePrefix), m_line_item);
+    }
+    if (m_quantity_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("quantity"), namePrefix), m_quantity);
+    }
+    if (m_serial_numbers_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("serial_numbers"), namePrefix), m_serial_numbers);
+    }
+    if (m_shipment_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("shipment"), namePrefix), m_shipment);
+    }
+    return files;
+}
+
 qint32 SalesOrderSerialAllocation::getLineItem() const {
     return m_line_item;
 }

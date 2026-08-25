@@ -238,9 +238,17 @@ void EmailApi::emailGenerateCreate(const GetSimpleLogin &get_simple_login) {
     {
 
         
-        QByteArray output = get_simple_login.asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = get_simple_login.asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = get_simple_login.asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = get_simple_login.asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -271,32 +279,6 @@ void EmailApi::emailGenerateCreateCallback(HttpRequestWorker *worker) {
         Q_EMIT emailGenerateCreateSignal(output);
         Q_EMIT emailGenerateCreateSignalFull(worker, output);
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT emailGenerateCreateSignalE(output, error_type, error_str);
-        Q_EMIT emailGenerateCreateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT emailGenerateCreateSignalError(output, error_type, error_str);
         Q_EMIT emailGenerateCreateSignalErrorFull(worker, error_type, error_str);
     }

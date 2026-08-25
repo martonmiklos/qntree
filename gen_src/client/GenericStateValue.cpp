@@ -110,6 +110,64 @@ QJsonObject GenericStateValue::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> GenericStateValue::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> GenericStateValue::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_key_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("key"), namePrefix), m_key);
+    }
+    if (m_logical_key_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("logical_key"), namePrefix), m_logical_key);
+    }
+    if (m_name_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("name"), namePrefix), m_name);
+    }
+    if (m_label_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("label"), namePrefix), m_label);
+    }
+    if (m_color_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("color"), namePrefix), m_color);
+    }
+    if (m_custom_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("custom"), namePrefix), m_custom);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> GenericStateValue::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> GenericStateValue::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_key_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("key"), namePrefix), m_key);
+    }
+    if (m_logical_key_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("logical_key"), namePrefix), m_logical_key);
+    }
+    if (m_name_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("name"), namePrefix), m_name);
+    }
+    if (m_label_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("label"), namePrefix), m_label);
+    }
+    if (m_color_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("color"), namePrefix), m_color);
+    }
+    if (m_custom_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("custom"), namePrefix), m_custom);
+    }
+    return files;
+}
+
 qint32 GenericStateValue::getKey() const {
     return m_key;
 }

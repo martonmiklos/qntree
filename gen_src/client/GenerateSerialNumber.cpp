@@ -83,6 +83,46 @@ QJsonObject GenerateSerialNumber::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> GenerateSerialNumber::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> GenerateSerialNumber::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_serial_number_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("serial_number"), namePrefix), m_serial_number);
+    }
+    if (m_part_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("part"), namePrefix), m_part);
+    }
+    if (m_quantity_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("quantity"), namePrefix), m_quantity);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> GenerateSerialNumber::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> GenerateSerialNumber::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_serial_number_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("serial_number"), namePrefix), m_serial_number);
+    }
+    if (m_part_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("part"), namePrefix), m_part);
+    }
+    if (m_quantity_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("quantity"), namePrefix), m_quantity);
+    }
+    return files;
+}
+
 QString GenerateSerialNumber::getSerialNumber() const {
     return m_serial_number;
 }

@@ -110,6 +110,64 @@ QJsonObject NotesImage::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> NotesImage::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> NotesImage::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_pk_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_image_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("image"), namePrefix), m_image);
+    }
+    if (m_user_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("user"), namePrefix), m_user);
+    }
+    if (m_date_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("date"), namePrefix), m_date);
+    }
+    if (m_model_type_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("model_type"), namePrefix), m_model_type);
+    }
+    if (m_model_id_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("model_id"), namePrefix), m_model_id);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> NotesImage::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> NotesImage::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_pk_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_image_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("image"), namePrefix), m_image);
+    }
+    if (m_user_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("user"), namePrefix), m_user);
+    }
+    if (m_date_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("date"), namePrefix), m_date);
+    }
+    if (m_model_type_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("model_type"), namePrefix), m_model_type);
+    }
+    if (m_model_id_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("model_id"), namePrefix), m_model_id);
+    }
+    return files;
+}
+
 qint32 NotesImage::getPk() const {
     return m_pk;
 }

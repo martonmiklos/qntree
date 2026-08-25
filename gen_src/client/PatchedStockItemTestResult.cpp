@@ -182,6 +182,112 @@ QJsonObject PatchedStockItemTestResult::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> PatchedStockItemTestResult::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> PatchedStockItemTestResult::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_pk_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_stock_item_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("stock_item"), namePrefix), m_stock_item);
+    }
+    if (m_result_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("result"), namePrefix), m_result);
+    }
+    if (m_value_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("value"), namePrefix), m_value);
+    }
+    if (m_attachment_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("attachment"), namePrefix), m_attachment);
+    }
+    if (m_notes_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("notes"), namePrefix), m_notes);
+    }
+    if (m_test_station_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("test_station"), namePrefix), m_test_station);
+    }
+    if (m_started_datetime_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("started_datetime"), namePrefix), m_started_datetime);
+    }
+    if (m_finished_datetime_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("finished_datetime"), namePrefix), m_finished_datetime);
+    }
+    if (m_user_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("user"), namePrefix), m_user);
+    }
+    if (m_user_detail.isSet()) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("user_detail"), namePrefix), m_user_detail);
+    }
+    if (m_date_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("date"), namePrefix), m_date);
+    }
+    if (m_r_template_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("template"), namePrefix), m_r_template);
+    }
+    if (m_template_detail.isSet()) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("template_detail"), namePrefix), m_template_detail);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> PatchedStockItemTestResult::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> PatchedStockItemTestResult::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_pk_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_stock_item_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("stock_item"), namePrefix), m_stock_item);
+    }
+    if (m_result_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("result"), namePrefix), m_result);
+    }
+    if (m_value_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("value"), namePrefix), m_value);
+    }
+    if (m_attachment_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("attachment"), namePrefix), m_attachment);
+    }
+    if (m_notes_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("notes"), namePrefix), m_notes);
+    }
+    if (m_test_station_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("test_station"), namePrefix), m_test_station);
+    }
+    if (m_started_datetime_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("started_datetime"), namePrefix), m_started_datetime);
+    }
+    if (m_finished_datetime_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("finished_datetime"), namePrefix), m_finished_datetime);
+    }
+    if (m_user_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("user"), namePrefix), m_user);
+    }
+    if (m_user_detail.isSet()) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("user_detail"), namePrefix), m_user_detail);
+    }
+    if (m_date_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("date"), namePrefix), m_date);
+    }
+    if (m_r_template_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("template"), namePrefix), m_r_template);
+    }
+    if (m_template_detail.isSet()) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("template_detail"), namePrefix), m_template_detail);
+    }
+    return files;
+}
+
 qint32 PatchedStockItemTestResult::getPk() const {
     return m_pk;
 }

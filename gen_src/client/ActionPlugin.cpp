@@ -74,6 +74,40 @@ QJsonObject ActionPlugin::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> ActionPlugin::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> ActionPlugin::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_action_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("action"), namePrefix), m_action);
+    }
+    if (m_data.size() > 0) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("data"), namePrefix), m_data);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> ActionPlugin::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> ActionPlugin::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_action_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("action"), namePrefix), m_action);
+    }
+    if (m_data.size() > 0) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("data"), namePrefix), m_data);
+    }
+    return files;
+}
+
 QString ActionPlugin::getAction() const {
     return m_action;
 }

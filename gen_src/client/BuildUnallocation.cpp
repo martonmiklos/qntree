@@ -74,6 +74,40 @@ QJsonObject BuildUnallocation::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> BuildUnallocation::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> BuildUnallocation::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_build_line_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("build_line"), namePrefix), m_build_line);
+    }
+    if (m_output_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("output"), namePrefix), m_output);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> BuildUnallocation::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> BuildUnallocation::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_build_line_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("build_line"), namePrefix), m_build_line);
+    }
+    if (m_output_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("output"), namePrefix), m_output);
+    }
+    return files;
+}
+
 qint32 BuildUnallocation::getBuildLine() const {
     return m_build_line;
 }

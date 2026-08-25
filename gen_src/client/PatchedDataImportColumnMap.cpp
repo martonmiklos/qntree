@@ -110,6 +110,64 @@ QJsonObject PatchedDataImportColumnMap::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> PatchedDataImportColumnMap::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> PatchedDataImportColumnMap::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_pk_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_session_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("session"), namePrefix), m_session);
+    }
+    if (m_column_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("column"), namePrefix), m_column);
+    }
+    if (m_field_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("field"), namePrefix), m_field);
+    }
+    if (m_label_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("label"), namePrefix), m_label);
+    }
+    if (m_description_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("description"), namePrefix), m_description);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> PatchedDataImportColumnMap::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> PatchedDataImportColumnMap::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_pk_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_session_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("session"), namePrefix), m_session);
+    }
+    if (m_column_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("column"), namePrefix), m_column);
+    }
+    if (m_field_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("field"), namePrefix), m_field);
+    }
+    if (m_label_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("label"), namePrefix), m_label);
+    }
+    if (m_description_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("description"), namePrefix), m_description);
+    }
+    return files;
+}
+
 qint32 PatchedDataImportColumnMap::getPk() const {
     return m_pk;
 }

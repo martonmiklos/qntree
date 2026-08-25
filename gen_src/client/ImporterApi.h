@@ -285,126 +285,46 @@ Q_SIGNALS:
     void importerSessionRetrieveSignalFull(HttpRequestWorker *worker, DataImportSession summary);
     void importerSessionUpdateSignalFull(HttpRequestWorker *worker, DataImportSession summary);
 
-    Q_DECL_DEPRECATED_X("Use importerColumnMappingListSignalError() instead")
-    void importerColumnMappingListSignalE(PaginatedDataImportColumnMapList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void importerColumnMappingListSignalError(PaginatedDataImportColumnMapList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use importerColumnMappingPartialUpdateSignalError() instead")
-    void importerColumnMappingPartialUpdateSignalE(DataImportColumnMap summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void importerColumnMappingPartialUpdateSignalError(DataImportColumnMap summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use importerColumnMappingRetrieveSignalError() instead")
-    void importerColumnMappingRetrieveSignalE(DataImportColumnMap summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void importerColumnMappingRetrieveSignalError(DataImportColumnMap summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use importerColumnMappingUpdateSignalError() instead")
-    void importerColumnMappingUpdateSignalE(DataImportColumnMap summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void importerColumnMappingUpdateSignalError(DataImportColumnMap summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use importerModelsListSignalError() instead")
-    void importerModelsListSignalE(QList<DataImporterModel> summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void importerModelsListSignalError(QList<DataImporterModel> summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use importerRowBulkDestroySignalError() instead")
-    void importerRowBulkDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void importerRowBulkDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use importerRowDestroySignalError() instead")
-    void importerRowDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void importerRowDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use importerRowListSignalError() instead")
-    void importerRowListSignalE(PaginatedDataImportRowList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void importerRowListSignalError(PaginatedDataImportRowList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use importerRowPartialUpdateSignalError() instead")
-    void importerRowPartialUpdateSignalE(DataImportRow summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void importerRowPartialUpdateSignalError(DataImportRow summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use importerRowRetrieveSignalError() instead")
-    void importerRowRetrieveSignalE(DataImportRow summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void importerRowRetrieveSignalError(DataImportRow summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use importerRowUpdateSignalError() instead")
-    void importerRowUpdateSignalE(DataImportRow summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void importerRowUpdateSignalError(DataImportRow summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use importerSessionAcceptFieldsCreateSignalError() instead")
-    void importerSessionAcceptFieldsCreateSignalE(DataImportSession summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void importerSessionAcceptFieldsCreateSignalError(DataImportSession summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use importerSessionAcceptRowsCreateSignalError() instead")
-    void importerSessionAcceptRowsCreateSignalE(DataImportAcceptRow summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void importerSessionAcceptRowsCreateSignalError(DataImportAcceptRow summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use importerSessionBulkDestroySignalError() instead")
-    void importerSessionBulkDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void importerSessionBulkDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use importerSessionCreateSignalError() instead")
-    void importerSessionCreateSignalE(DataImportSession summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void importerSessionCreateSignalError(DataImportSession summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use importerSessionDestroySignalError() instead")
-    void importerSessionDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void importerSessionDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use importerSessionListSignalError() instead")
-    void importerSessionListSignalE(PaginatedDataImportSessionList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void importerSessionListSignalError(PaginatedDataImportSessionList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use importerSessionPartialUpdateSignalError() instead")
-    void importerSessionPartialUpdateSignalE(DataImportSession summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void importerSessionPartialUpdateSignalError(DataImportSession summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use importerSessionRetrieveSignalError() instead")
-    void importerSessionRetrieveSignalE(DataImportSession summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void importerSessionRetrieveSignalError(DataImportSession summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use importerSessionUpdateSignalError() instead")
-    void importerSessionUpdateSignalE(DataImportSession summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void importerSessionUpdateSignalError(DataImportSession summary, QNetworkReply::NetworkError error_type, const QString &error_str);
 
-    Q_DECL_DEPRECATED_X("Use importerColumnMappingListSignalErrorFull() instead")
-    void importerColumnMappingListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void importerColumnMappingListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use importerColumnMappingPartialUpdateSignalErrorFull() instead")
-    void importerColumnMappingPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void importerColumnMappingPartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use importerColumnMappingRetrieveSignalErrorFull() instead")
-    void importerColumnMappingRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void importerColumnMappingRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use importerColumnMappingUpdateSignalErrorFull() instead")
-    void importerColumnMappingUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void importerColumnMappingUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use importerModelsListSignalErrorFull() instead")
-    void importerModelsListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void importerModelsListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use importerRowBulkDestroySignalErrorFull() instead")
-    void importerRowBulkDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void importerRowBulkDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use importerRowDestroySignalErrorFull() instead")
-    void importerRowDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void importerRowDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use importerRowListSignalErrorFull() instead")
-    void importerRowListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void importerRowListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use importerRowPartialUpdateSignalErrorFull() instead")
-    void importerRowPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void importerRowPartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use importerRowRetrieveSignalErrorFull() instead")
-    void importerRowRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void importerRowRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use importerRowUpdateSignalErrorFull() instead")
-    void importerRowUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void importerRowUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use importerSessionAcceptFieldsCreateSignalErrorFull() instead")
-    void importerSessionAcceptFieldsCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void importerSessionAcceptFieldsCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use importerSessionAcceptRowsCreateSignalErrorFull() instead")
-    void importerSessionAcceptRowsCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void importerSessionAcceptRowsCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use importerSessionBulkDestroySignalErrorFull() instead")
-    void importerSessionBulkDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void importerSessionBulkDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use importerSessionCreateSignalErrorFull() instead")
-    void importerSessionCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void importerSessionCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use importerSessionDestroySignalErrorFull() instead")
-    void importerSessionDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void importerSessionDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use importerSessionListSignalErrorFull() instead")
-    void importerSessionListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void importerSessionListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use importerSessionPartialUpdateSignalErrorFull() instead")
-    void importerSessionPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void importerSessionPartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use importerSessionRetrieveSignalErrorFull() instead")
-    void importerSessionRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void importerSessionRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use importerSessionUpdateSignalErrorFull() instead")
-    void importerSessionUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void importerSessionUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     void abortRequestsSignal();

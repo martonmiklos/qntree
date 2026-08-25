@@ -92,6 +92,52 @@ QJsonObject PluginConfigInstall::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> PluginConfigInstall::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> PluginConfigInstall::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_url_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("url"), namePrefix), m_url);
+    }
+    if (m_packagename_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("packagename"), namePrefix), m_packagename);
+    }
+    if (m_version_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("version"), namePrefix), m_version);
+    }
+    if (m_confirm_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("confirm"), namePrefix), m_confirm);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> PluginConfigInstall::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> PluginConfigInstall::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_url_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("url"), namePrefix), m_url);
+    }
+    if (m_packagename_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("packagename"), namePrefix), m_packagename);
+    }
+    if (m_version_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("version"), namePrefix), m_version);
+    }
+    if (m_confirm_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("confirm"), namePrefix), m_confirm);
+    }
+    return files;
+}
+
 QString PluginConfigInstall::getUrl() const {
     return m_url;
 }

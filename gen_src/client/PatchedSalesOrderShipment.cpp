@@ -209,6 +209,130 @@ QJsonObject PatchedSalesOrderShipment::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> PatchedSalesOrderShipment::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> PatchedSalesOrderShipment::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_pk_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_order_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("order"), namePrefix), m_order);
+    }
+    if (m_allocated_items_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("allocated_items"), namePrefix), m_allocated_items);
+    }
+    if (m_shipment_date_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("shipment_date"), namePrefix), m_shipment_date);
+    }
+    if (m_shipment_address_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("shipment_address"), namePrefix), m_shipment_address);
+    }
+    if (m_delivery_date_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("delivery_date"), namePrefix), m_delivery_date);
+    }
+    if (m_checked_by_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("checked_by"), namePrefix), m_checked_by);
+    }
+    if (m_reference_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("reference"), namePrefix), m_reference);
+    }
+    if (m_tracking_number_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("tracking_number"), namePrefix), m_tracking_number);
+    }
+    if (m_invoice_number_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("invoice_number"), namePrefix), m_invoice_number);
+    }
+    if (m_barcode_hash_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("barcode_hash"), namePrefix), m_barcode_hash);
+    }
+    if (m_link_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("link"), namePrefix), m_link);
+    }
+    if (m_notes_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("notes"), namePrefix), m_notes);
+    }
+    if (m_checked_by_detail.isSet()) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("checked_by_detail"), namePrefix), m_checked_by_detail);
+    }
+    if (m_customer_detail.isSet()) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("customer_detail"), namePrefix), m_customer_detail);
+    }
+    if (m_order_detail.isSet()) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("order_detail"), namePrefix), m_order_detail);
+    }
+    if (m_shipment_address_detail.isSet()) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("shipment_address_detail"), namePrefix), m_shipment_address_detail);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> PatchedSalesOrderShipment::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> PatchedSalesOrderShipment::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_pk_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_order_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("order"), namePrefix), m_order);
+    }
+    if (m_allocated_items_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("allocated_items"), namePrefix), m_allocated_items);
+    }
+    if (m_shipment_date_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("shipment_date"), namePrefix), m_shipment_date);
+    }
+    if (m_shipment_address_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("shipment_address"), namePrefix), m_shipment_address);
+    }
+    if (m_delivery_date_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("delivery_date"), namePrefix), m_delivery_date);
+    }
+    if (m_checked_by_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("checked_by"), namePrefix), m_checked_by);
+    }
+    if (m_reference_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("reference"), namePrefix), m_reference);
+    }
+    if (m_tracking_number_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("tracking_number"), namePrefix), m_tracking_number);
+    }
+    if (m_invoice_number_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("invoice_number"), namePrefix), m_invoice_number);
+    }
+    if (m_barcode_hash_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("barcode_hash"), namePrefix), m_barcode_hash);
+    }
+    if (m_link_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("link"), namePrefix), m_link);
+    }
+    if (m_notes_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("notes"), namePrefix), m_notes);
+    }
+    if (m_checked_by_detail.isSet()) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("checked_by_detail"), namePrefix), m_checked_by_detail);
+    }
+    if (m_customer_detail.isSet()) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("customer_detail"), namePrefix), m_customer_detail);
+    }
+    if (m_order_detail.isSet()) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("order_detail"), namePrefix), m_order_detail);
+    }
+    if (m_shipment_address_detail.isSet()) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("shipment_address_detail"), namePrefix), m_shipment_address_detail);
+    }
+    return files;
+}
+
 qint32 PatchedSalesOrderShipment::getPk() const {
     return m_pk;
 }

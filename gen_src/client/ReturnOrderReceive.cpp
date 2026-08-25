@@ -83,6 +83,46 @@ QJsonObject ReturnOrderReceive::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> ReturnOrderReceive::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> ReturnOrderReceive::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_items.size() > 0) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("items"), namePrefix), m_items);
+    }
+    if (m_location_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("location"), namePrefix), m_location);
+    }
+    if (m_note_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("note"), namePrefix), m_note);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> ReturnOrderReceive::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> ReturnOrderReceive::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_items.size() > 0) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("items"), namePrefix), m_items);
+    }
+    if (m_location_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("location"), namePrefix), m_location);
+    }
+    if (m_note_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("note"), namePrefix), m_note);
+    }
+    return files;
+}
+
 QList<ReturnOrderLineItemReceive> ReturnOrderReceive::getItems() const {
     return m_items;
 }

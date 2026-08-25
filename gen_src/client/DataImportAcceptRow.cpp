@@ -65,6 +65,34 @@ QJsonObject DataImportAcceptRow::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> DataImportAcceptRow::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> DataImportAcceptRow::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_rows.size() > 0) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("rows"), namePrefix), m_rows);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> DataImportAcceptRow::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> DataImportAcceptRow::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_rows.size() > 0) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("rows"), namePrefix), m_rows);
+    }
+    return files;
+}
+
 QList<qint32> DataImportAcceptRow::getRows() const {
     return m_rows;
 }

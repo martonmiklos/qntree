@@ -209,6 +209,130 @@ QJsonObject PatchedPluginUserSetting::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> PatchedPluginUserSetting::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> PatchedPluginUserSetting::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_pk_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_key_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("key"), namePrefix), m_key);
+    }
+    if (m_value_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("value"), namePrefix), m_value);
+    }
+    if (m_name_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("name"), namePrefix), m_name);
+    }
+    if (m_description_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("description"), namePrefix), m_description);
+    }
+    if (m_type_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("type"), namePrefix), m_type);
+    }
+    if (m_choices.size() > 0) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("choices"), namePrefix), m_choices);
+    }
+    if (m_model_name_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("model_name"), namePrefix), m_model_name);
+    }
+    if (m_model_filters.size() > 0) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("model_filters"), namePrefix), m_model_filters);
+    }
+    if (m_api_url_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("api_url"), namePrefix), m_api_url);
+    }
+    if (m_typ_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("typ"), namePrefix), m_typ);
+    }
+    if (m_units_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("units"), namePrefix), m_units);
+    }
+    if (m_required_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("required"), namePrefix), m_required);
+    }
+    if (m_confirm_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("confirm"), namePrefix), m_confirm);
+    }
+    if (m_confirm_text_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("confirm_text"), namePrefix), m_confirm_text);
+    }
+    if (m_plugin_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("plugin"), namePrefix), m_plugin);
+    }
+    if (m_user_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("user"), namePrefix), m_user);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> PatchedPluginUserSetting::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> PatchedPluginUserSetting::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_pk_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_key_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("key"), namePrefix), m_key);
+    }
+    if (m_value_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("value"), namePrefix), m_value);
+    }
+    if (m_name_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("name"), namePrefix), m_name);
+    }
+    if (m_description_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("description"), namePrefix), m_description);
+    }
+    if (m_type_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("type"), namePrefix), m_type);
+    }
+    if (m_choices.size() > 0) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("choices"), namePrefix), m_choices);
+    }
+    if (m_model_name_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("model_name"), namePrefix), m_model_name);
+    }
+    if (m_model_filters.size() > 0) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("model_filters"), namePrefix), m_model_filters);
+    }
+    if (m_api_url_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("api_url"), namePrefix), m_api_url);
+    }
+    if (m_typ_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("typ"), namePrefix), m_typ);
+    }
+    if (m_units_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("units"), namePrefix), m_units);
+    }
+    if (m_required_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("required"), namePrefix), m_required);
+    }
+    if (m_confirm_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("confirm"), namePrefix), m_confirm);
+    }
+    if (m_confirm_text_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("confirm_text"), namePrefix), m_confirm_text);
+    }
+    if (m_plugin_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("plugin"), namePrefix), m_plugin);
+    }
+    if (m_user_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("user"), namePrefix), m_user);
+    }
+    return files;
+}
+
 qint32 PatchedPluginUserSetting::getPk() const {
     return m_pk;
 }

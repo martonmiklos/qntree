@@ -92,6 +92,52 @@ QJsonObject IconPackage::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> IconPackage::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> IconPackage::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_name_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("name"), namePrefix), m_name);
+    }
+    if (m_prefix_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("prefix"), namePrefix), m_prefix);
+    }
+    if (m_fonts.size() > 0) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("fonts"), namePrefix), m_fonts);
+    }
+    if (m_icons.size() > 0) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("icons"), namePrefix), m_icons);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> IconPackage::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> IconPackage::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_name_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("name"), namePrefix), m_name);
+    }
+    if (m_prefix_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("prefix"), namePrefix), m_prefix);
+    }
+    if (m_fonts.size() > 0) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("fonts"), namePrefix), m_fonts);
+    }
+    if (m_icons.size() > 0) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("icons"), namePrefix), m_icons);
+    }
+    return files;
+}
+
 QString IconPackage::getName() const {
     return m_name;
 }

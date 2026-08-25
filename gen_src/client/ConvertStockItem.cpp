@@ -65,6 +65,34 @@ QJsonObject ConvertStockItem::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> ConvertStockItem::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> ConvertStockItem::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_part_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("part"), namePrefix), m_part);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> ConvertStockItem::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> ConvertStockItem::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_part_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("part"), namePrefix), m_part);
+    }
+    return files;
+}
+
 qint32 ConvertStockItem::getPart() const {
     return m_part;
 }

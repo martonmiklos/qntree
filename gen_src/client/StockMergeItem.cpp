@@ -65,6 +65,34 @@ QJsonObject StockMergeItem::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> StockMergeItem::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> StockMergeItem::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_item_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("item"), namePrefix), m_item);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> StockMergeItem::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> StockMergeItem::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_item_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("item"), namePrefix), m_item);
+    }
+    return files;
+}
+
 qint32 StockMergeItem::getItem() const {
     return m_item;
 }

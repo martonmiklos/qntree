@@ -245,6 +245,154 @@ QJsonObject PatchedCompany::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> PatchedCompany::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> PatchedCompany::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_pk_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_name_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("name"), namePrefix), m_name);
+    }
+    if (m_description_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("description"), namePrefix), m_description);
+    }
+    if (m_website_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("website"), namePrefix), m_website);
+    }
+    if (m_phone_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("phone"), namePrefix), m_phone);
+    }
+    if (m_email_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("email"), namePrefix), m_email);
+    }
+    if (m_currency_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("currency"), namePrefix), m_currency);
+    }
+    if (m_contact_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("contact"), namePrefix), m_contact);
+    }
+    if (m_link_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("link"), namePrefix), m_link);
+    }
+    if (m_image_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("image"), namePrefix), m_image);
+    }
+    if (m_active_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("active"), namePrefix), m_active);
+    }
+    if (m_is_customer_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("is_customer"), namePrefix), m_is_customer);
+    }
+    if (m_is_manufacturer_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("is_manufacturer"), namePrefix), m_is_manufacturer);
+    }
+    if (m_is_supplier_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("is_supplier"), namePrefix), m_is_supplier);
+    }
+    if (m_notes_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("notes"), namePrefix), m_notes);
+    }
+    if (m_parts_supplied_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("parts_supplied"), namePrefix), m_parts_supplied);
+    }
+    if (m_parts_manufactured_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("parts_manufactured"), namePrefix), m_parts_manufactured);
+    }
+    if (m_remote_image_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("remote_image"), namePrefix), m_remote_image);
+    }
+    if (m_primary_address.isSet()) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("primary_address"), namePrefix), m_primary_address);
+    }
+    if (m_tax_id_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("tax_id"), namePrefix), m_tax_id);
+    }
+    if (m_parameters.size() > 0) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("parameters"), namePrefix), m_parameters);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> PatchedCompany::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> PatchedCompany::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_pk_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_name_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("name"), namePrefix), m_name);
+    }
+    if (m_description_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("description"), namePrefix), m_description);
+    }
+    if (m_website_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("website"), namePrefix), m_website);
+    }
+    if (m_phone_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("phone"), namePrefix), m_phone);
+    }
+    if (m_email_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("email"), namePrefix), m_email);
+    }
+    if (m_currency_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("currency"), namePrefix), m_currency);
+    }
+    if (m_contact_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("contact"), namePrefix), m_contact);
+    }
+    if (m_link_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("link"), namePrefix), m_link);
+    }
+    if (m_image_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("image"), namePrefix), m_image);
+    }
+    if (m_active_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("active"), namePrefix), m_active);
+    }
+    if (m_is_customer_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("is_customer"), namePrefix), m_is_customer);
+    }
+    if (m_is_manufacturer_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("is_manufacturer"), namePrefix), m_is_manufacturer);
+    }
+    if (m_is_supplier_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("is_supplier"), namePrefix), m_is_supplier);
+    }
+    if (m_notes_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("notes"), namePrefix), m_notes);
+    }
+    if (m_parts_supplied_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("parts_supplied"), namePrefix), m_parts_supplied);
+    }
+    if (m_parts_manufactured_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("parts_manufactured"), namePrefix), m_parts_manufactured);
+    }
+    if (m_remote_image_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("remote_image"), namePrefix), m_remote_image);
+    }
+    if (m_primary_address.isSet()) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("primary_address"), namePrefix), m_primary_address);
+    }
+    if (m_tax_id_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("tax_id"), namePrefix), m_tax_id);
+    }
+    if (m_parameters.size() > 0) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("parameters"), namePrefix), m_parameters);
+    }
+    return files;
+}
+
 qint32 PatchedCompany::getPk() const {
     return m_pk;
 }

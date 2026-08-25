@@ -173,6 +173,106 @@ QJsonObject PatchedBuildItem::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> PatchedBuildItem::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> PatchedBuildItem::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_pk_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_build_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("build"), namePrefix), m_build);
+    }
+    if (m_build_line_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("build_line"), namePrefix), m_build_line);
+    }
+    if (m_install_into_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("install_into"), namePrefix), m_install_into);
+    }
+    if (m_stock_item_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("stock_item"), namePrefix), m_stock_item);
+    }
+    if (m_quantity_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("quantity"), namePrefix), m_quantity);
+    }
+    if (m_location_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("location"), namePrefix), m_location);
+    }
+    if (m_build_detail.isSet()) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("build_detail"), namePrefix), m_build_detail);
+    }
+    if (m_location_detail.isSet()) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("location_detail"), namePrefix), m_location_detail);
+    }
+    if (m_part_detail.isSet()) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("part_detail"), namePrefix), m_part_detail);
+    }
+    if (m_stock_item_detail.isSet()) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("stock_item_detail"), namePrefix), m_stock_item_detail);
+    }
+    if (m_supplier_part_detail.isSet()) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("supplier_part_detail"), namePrefix), m_supplier_part_detail);
+    }
+    if (m_bom_reference_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("bom_reference"), namePrefix), m_bom_reference);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> PatchedBuildItem::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> PatchedBuildItem::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_pk_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_build_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("build"), namePrefix), m_build);
+    }
+    if (m_build_line_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("build_line"), namePrefix), m_build_line);
+    }
+    if (m_install_into_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("install_into"), namePrefix), m_install_into);
+    }
+    if (m_stock_item_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("stock_item"), namePrefix), m_stock_item);
+    }
+    if (m_quantity_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("quantity"), namePrefix), m_quantity);
+    }
+    if (m_location_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("location"), namePrefix), m_location);
+    }
+    if (m_build_detail.isSet()) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("build_detail"), namePrefix), m_build_detail);
+    }
+    if (m_location_detail.isSet()) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("location_detail"), namePrefix), m_location_detail);
+    }
+    if (m_part_detail.isSet()) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("part_detail"), namePrefix), m_part_detail);
+    }
+    if (m_stock_item_detail.isSet()) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("stock_item_detail"), namePrefix), m_stock_item_detail);
+    }
+    if (m_supplier_part_detail.isSet()) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("supplier_part_detail"), namePrefix), m_supplier_part_detail);
+    }
+    if (m_bom_reference_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("bom_reference"), namePrefix), m_bom_reference);
+    }
+    return files;
+}
+
 qint32 PatchedBuildItem::getPk() const {
     return m_pk;
 }

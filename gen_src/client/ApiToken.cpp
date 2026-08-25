@@ -155,6 +155,94 @@ QJsonObject ApiToken::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> ApiToken::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> ApiToken::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_created_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("created"), namePrefix), m_created);
+    }
+    if (m_expiry_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("expiry"), namePrefix), m_expiry);
+    }
+    if (m_id_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("id"), namePrefix), m_id);
+    }
+    if (m_last_seen_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("last_seen"), namePrefix), m_last_seen);
+    }
+    if (m_name_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("name"), namePrefix), m_name);
+    }
+    if (m_token_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("token"), namePrefix), m_token);
+    }
+    if (m_active_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("active"), namePrefix), m_active);
+    }
+    if (m_revoked_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("revoked"), namePrefix), m_revoked);
+    }
+    if (m_user_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("user"), namePrefix), m_user);
+    }
+    if (m_user_detail.isSet()) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("user_detail"), namePrefix), m_user_detail);
+    }
+    if (m_in_use_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("in_use"), namePrefix), m_in_use);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> ApiToken::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> ApiToken::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_created_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("created"), namePrefix), m_created);
+    }
+    if (m_expiry_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("expiry"), namePrefix), m_expiry);
+    }
+    if (m_id_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("id"), namePrefix), m_id);
+    }
+    if (m_last_seen_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("last_seen"), namePrefix), m_last_seen);
+    }
+    if (m_name_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("name"), namePrefix), m_name);
+    }
+    if (m_token_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("token"), namePrefix), m_token);
+    }
+    if (m_active_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("active"), namePrefix), m_active);
+    }
+    if (m_revoked_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("revoked"), namePrefix), m_revoked);
+    }
+    if (m_user_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("user"), namePrefix), m_user);
+    }
+    if (m_user_detail.isSet()) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("user_detail"), namePrefix), m_user_detail);
+    }
+    if (m_in_use_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("in_use"), namePrefix), m_in_use);
+    }
+    return files;
+}
+
 QDateTime ApiToken::getCreated() const {
     return m_created;
 }

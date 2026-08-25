@@ -250,9 +250,17 @@ void AttachmentApi::attachmentBulkDestroy(const BulkRequest &bulk_request) {
     {
 
         
-        QByteArray output = bulk_request.asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = bulk_request.asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = bulk_request.asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = bulk_request.asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -273,9 +281,9 @@ void AttachmentApi::attachmentBulkDestroy(const BulkRequest &bulk_request) {
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("g:read");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -299,9 +307,9 @@ void AttachmentApi::attachmentBulkDestroy(const BulkRequest &bulk_request) {
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("g:read");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -361,32 +369,6 @@ void AttachmentApi::attachmentBulkDestroyCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT attachmentBulkDestroySignalE(error_type, error_str);
-        Q_EMIT attachmentBulkDestroySignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT attachmentBulkDestroySignalError(error_type, error_str);
         Q_EMIT attachmentBulkDestroySignalErrorFull(worker, error_type, error_str);
     }
@@ -412,9 +394,17 @@ void AttachmentApi::attachmentCreate(const Attachment &attachment) {
     {
 
         
-        QByteArray output = attachment.asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = attachment.asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = attachment.asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = attachment.asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -435,9 +425,9 @@ void AttachmentApi::attachmentCreate(const Attachment &attachment) {
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("g:read");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -461,9 +451,9 @@ void AttachmentApi::attachmentCreate(const Attachment &attachment) {
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("g:read");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -524,32 +514,6 @@ void AttachmentApi::attachmentCreateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT attachmentCreateSignalE(output, error_type, error_str);
-        Q_EMIT attachmentCreateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT attachmentCreateSignalError(output, error_type, error_str);
         Q_EMIT attachmentCreateSignalErrorFull(worker, error_type, error_str);
     }
@@ -607,9 +571,9 @@ void AttachmentApi::attachmentDestroy(const qint32 &id) {
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("g:read");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -633,9 +597,9 @@ void AttachmentApi::attachmentDestroy(const qint32 &id) {
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("g:read");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -695,32 +659,6 @@ void AttachmentApi::attachmentDestroyCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT attachmentDestroySignalE(error_type, error_str);
-        Q_EMIT attachmentDestroySignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT attachmentDestroySignalError(error_type, error_str);
         Q_EMIT attachmentDestroySignalErrorFull(worker, error_type, error_str);
     }
@@ -900,9 +838,9 @@ void AttachmentApi::attachmentList(const qint32 &limit, const ::InvenTree::Optio
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("g:read");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -926,9 +864,9 @@ void AttachmentApi::attachmentList(const qint32 &limit, const ::InvenTree::Optio
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("g:read");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -989,32 +927,6 @@ void AttachmentApi::attachmentListCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT attachmentListSignalE(output, error_type, error_str);
-        Q_EMIT attachmentListSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT attachmentListSignalError(output, error_type, error_str);
         Q_EMIT attachmentListSignalErrorFull(worker, error_type, error_str);
     }
@@ -1054,9 +966,17 @@ void AttachmentApi::attachmentPartialUpdate(const qint32 &id, const ::InvenTree:
     if (patched_attachment.hasValue()){
 
         
-        QByteArray output = patched_attachment.value().asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = patched_attachment.value().asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = patched_attachment.value().asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = patched_attachment.value().asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -1077,9 +997,9 @@ void AttachmentApi::attachmentPartialUpdate(const qint32 &id, const ::InvenTree:
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("g:read");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -1103,9 +1023,9 @@ void AttachmentApi::attachmentPartialUpdate(const qint32 &id, const ::InvenTree:
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("g:read");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -1166,32 +1086,6 @@ void AttachmentApi::attachmentPartialUpdateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT attachmentPartialUpdateSignalE(output, error_type, error_str);
-        Q_EMIT attachmentPartialUpdateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT attachmentPartialUpdateSignalError(output, error_type, error_str);
         Q_EMIT attachmentPartialUpdateSignalErrorFull(worker, error_type, error_str);
     }
@@ -1249,9 +1143,9 @@ void AttachmentApi::attachmentRetrieve(const qint32 &id) {
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("g:read");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -1275,9 +1169,9 @@ void AttachmentApi::attachmentRetrieve(const qint32 &id) {
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("g:read");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -1338,32 +1232,6 @@ void AttachmentApi::attachmentRetrieveCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT attachmentRetrieveSignalE(output, error_type, error_str);
-        Q_EMIT attachmentRetrieveSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT attachmentRetrieveSignalError(output, error_type, error_str);
         Q_EMIT attachmentRetrieveSignalErrorFull(worker, error_type, error_str);
     }
@@ -1403,9 +1271,17 @@ void AttachmentApi::attachmentUpdate(const qint32 &id, const Attachment &attachm
     {
 
         
-        QByteArray output = attachment.asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = attachment.asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = attachment.asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = attachment.asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -1426,9 +1302,9 @@ void AttachmentApi::attachmentUpdate(const qint32 &id, const Attachment &attachm
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("g:read");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -1452,9 +1328,9 @@ void AttachmentApi::attachmentUpdate(const qint32 &id, const Attachment &attachm
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("g:read");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -1515,32 +1391,6 @@ void AttachmentApi::attachmentUpdateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT attachmentUpdateSignalE(output, error_type, error_str);
-        Q_EMIT attachmentUpdateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT attachmentUpdateSignalError(output, error_type, error_str);
         Q_EMIT attachmentUpdateSignalErrorFull(worker, error_type, error_str);
     }

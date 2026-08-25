@@ -101,6 +101,58 @@ QJsonObject ErrorMessage::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> ErrorMessage::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> ErrorMessage::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_when_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("when"), namePrefix), m_when);
+    }
+    if (m_info_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("info"), namePrefix), m_info);
+    }
+    if (m_data_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("data"), namePrefix), m_data);
+    }
+    if (m_path_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("path"), namePrefix), m_path);
+    }
+    if (m_pk_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> ErrorMessage::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> ErrorMessage::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_when_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("when"), namePrefix), m_when);
+    }
+    if (m_info_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("info"), namePrefix), m_info);
+    }
+    if (m_data_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("data"), namePrefix), m_data);
+    }
+    if (m_path_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("path"), namePrefix), m_path);
+    }
+    if (m_pk_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    return files;
+}
+
 QDateTime ErrorMessage::getWhen() const {
     return m_when;
 }

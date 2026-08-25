@@ -164,6 +164,100 @@ QJsonObject PatchedLabelTemplate::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> PatchedLabelTemplate::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> PatchedLabelTemplate::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_pk_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_name_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("name"), namePrefix), m_name);
+    }
+    if (m_description_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("description"), namePrefix), m_description);
+    }
+    if (m_model_type.isSet()) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("model_type"), namePrefix), m_model_type);
+    }
+    if (m_r_template_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("template"), namePrefix), m_r_template);
+    }
+    if (m_filters_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("filters"), namePrefix), m_filters);
+    }
+    if (m_filename_pattern_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("filename_pattern"), namePrefix), m_filename_pattern);
+    }
+    if (m_enabled_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("enabled"), namePrefix), m_enabled);
+    }
+    if (m_revision_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("revision"), namePrefix), m_revision);
+    }
+    if (m_attach_to_model_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("attach_to_model"), namePrefix), m_attach_to_model);
+    }
+    if (m_width_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("width"), namePrefix), m_width);
+    }
+    if (m_height_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("height"), namePrefix), m_height);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> PatchedLabelTemplate::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> PatchedLabelTemplate::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_pk_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_name_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("name"), namePrefix), m_name);
+    }
+    if (m_description_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("description"), namePrefix), m_description);
+    }
+    if (m_model_type.isSet()) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("model_type"), namePrefix), m_model_type);
+    }
+    if (m_r_template_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("template"), namePrefix), m_r_template);
+    }
+    if (m_filters_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("filters"), namePrefix), m_filters);
+    }
+    if (m_filename_pattern_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("filename_pattern"), namePrefix), m_filename_pattern);
+    }
+    if (m_enabled_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("enabled"), namePrefix), m_enabled);
+    }
+    if (m_revision_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("revision"), namePrefix), m_revision);
+    }
+    if (m_attach_to_model_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("attach_to_model"), namePrefix), m_attach_to_model);
+    }
+    if (m_width_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("width"), namePrefix), m_width);
+    }
+    if (m_height_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("height"), namePrefix), m_height);
+    }
+    return files;
+}
+
 qint32 PatchedLabelTemplate::getPk() const {
     return m_pk;
 }

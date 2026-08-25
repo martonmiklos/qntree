@@ -272,6 +272,172 @@ QJsonObject PartPricing::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> PartPricing::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> PartPricing::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_currency_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("currency"), namePrefix), m_currency);
+    }
+    if (m_updated_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("updated"), namePrefix), m_updated);
+    }
+    if (m_scheduled_for_update_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("scheduled_for_update"), namePrefix), m_scheduled_for_update);
+    }
+    if (m_bom_cost_min_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("bom_cost_min"), namePrefix), m_bom_cost_min);
+    }
+    if (m_bom_cost_max_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("bom_cost_max"), namePrefix), m_bom_cost_max);
+    }
+    if (m_purchase_cost_min_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("purchase_cost_min"), namePrefix), m_purchase_cost_min);
+    }
+    if (m_purchase_cost_max_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("purchase_cost_max"), namePrefix), m_purchase_cost_max);
+    }
+    if (m_internal_cost_min_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("internal_cost_min"), namePrefix), m_internal_cost_min);
+    }
+    if (m_internal_cost_max_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("internal_cost_max"), namePrefix), m_internal_cost_max);
+    }
+    if (m_supplier_price_min_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("supplier_price_min"), namePrefix), m_supplier_price_min);
+    }
+    if (m_supplier_price_max_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("supplier_price_max"), namePrefix), m_supplier_price_max);
+    }
+    if (m_variant_cost_min_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("variant_cost_min"), namePrefix), m_variant_cost_min);
+    }
+    if (m_variant_cost_max_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("variant_cost_max"), namePrefix), m_variant_cost_max);
+    }
+    if (m_override_min_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("override_min"), namePrefix), m_override_min);
+    }
+    if (m_override_min_currency_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("override_min_currency"), namePrefix), m_override_min_currency);
+    }
+    if (m_override_max_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("override_max"), namePrefix), m_override_max);
+    }
+    if (m_override_max_currency_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("override_max_currency"), namePrefix), m_override_max_currency);
+    }
+    if (m_overall_min_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("overall_min"), namePrefix), m_overall_min);
+    }
+    if (m_overall_max_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("overall_max"), namePrefix), m_overall_max);
+    }
+    if (m_sale_price_min_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("sale_price_min"), namePrefix), m_sale_price_min);
+    }
+    if (m_sale_price_max_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("sale_price_max"), namePrefix), m_sale_price_max);
+    }
+    if (m_sale_history_min_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("sale_history_min"), namePrefix), m_sale_history_min);
+    }
+    if (m_sale_history_max_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("sale_history_max"), namePrefix), m_sale_history_max);
+    }
+    if (m_update_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("update"), namePrefix), m_update);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> PartPricing::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> PartPricing::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_currency_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("currency"), namePrefix), m_currency);
+    }
+    if (m_updated_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("updated"), namePrefix), m_updated);
+    }
+    if (m_scheduled_for_update_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("scheduled_for_update"), namePrefix), m_scheduled_for_update);
+    }
+    if (m_bom_cost_min_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("bom_cost_min"), namePrefix), m_bom_cost_min);
+    }
+    if (m_bom_cost_max_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("bom_cost_max"), namePrefix), m_bom_cost_max);
+    }
+    if (m_purchase_cost_min_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("purchase_cost_min"), namePrefix), m_purchase_cost_min);
+    }
+    if (m_purchase_cost_max_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("purchase_cost_max"), namePrefix), m_purchase_cost_max);
+    }
+    if (m_internal_cost_min_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("internal_cost_min"), namePrefix), m_internal_cost_min);
+    }
+    if (m_internal_cost_max_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("internal_cost_max"), namePrefix), m_internal_cost_max);
+    }
+    if (m_supplier_price_min_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("supplier_price_min"), namePrefix), m_supplier_price_min);
+    }
+    if (m_supplier_price_max_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("supplier_price_max"), namePrefix), m_supplier_price_max);
+    }
+    if (m_variant_cost_min_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("variant_cost_min"), namePrefix), m_variant_cost_min);
+    }
+    if (m_variant_cost_max_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("variant_cost_max"), namePrefix), m_variant_cost_max);
+    }
+    if (m_override_min_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("override_min"), namePrefix), m_override_min);
+    }
+    if (m_override_min_currency_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("override_min_currency"), namePrefix), m_override_min_currency);
+    }
+    if (m_override_max_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("override_max"), namePrefix), m_override_max);
+    }
+    if (m_override_max_currency_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("override_max_currency"), namePrefix), m_override_max_currency);
+    }
+    if (m_overall_min_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("overall_min"), namePrefix), m_overall_min);
+    }
+    if (m_overall_max_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("overall_max"), namePrefix), m_overall_max);
+    }
+    if (m_sale_price_min_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("sale_price_min"), namePrefix), m_sale_price_min);
+    }
+    if (m_sale_price_max_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("sale_price_max"), namePrefix), m_sale_price_max);
+    }
+    if (m_sale_history_min_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("sale_history_min"), namePrefix), m_sale_history_min);
+    }
+    if (m_sale_history_max_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("sale_history_max"), namePrefix), m_sale_history_max);
+    }
+    if (m_update_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("update"), namePrefix), m_update);
+    }
+    return files;
+}
+
 QString PartPricing::getCurrency() const {
     return m_currency;
 }

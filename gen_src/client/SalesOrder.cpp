@@ -353,6 +353,226 @@ QJsonObject SalesOrder::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> SalesOrder::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> SalesOrder::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_pk_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_created_by.isSet()) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("created_by"), namePrefix), m_created_by);
+    }
+    if (m_creation_date_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("creation_date"), namePrefix), m_creation_date);
+    }
+    if (m_issue_date_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("issue_date"), namePrefix), m_issue_date);
+    }
+    if (m_start_date_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("start_date"), namePrefix), m_start_date);
+    }
+    if (m_target_date_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("target_date"), namePrefix), m_target_date);
+    }
+    if (m_description_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("description"), namePrefix), m_description);
+    }
+    if (m_line_items_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("line_items"), namePrefix), m_line_items);
+    }
+    if (m_completed_lines_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("completed_lines"), namePrefix), m_completed_lines);
+    }
+    if (m_link_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("link"), namePrefix), m_link);
+    }
+    if (m_project_code_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("project_code"), namePrefix), m_project_code);
+    }
+    if (m_reference_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("reference"), namePrefix), m_reference);
+    }
+    if (m_responsible_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("responsible"), namePrefix), m_responsible);
+    }
+    if (m_contact_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("contact"), namePrefix), m_contact);
+    }
+    if (m_address_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("address"), namePrefix), m_address);
+    }
+    if (m_status_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("status"), namePrefix), m_status);
+    }
+    if (m_status_text_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("status_text"), namePrefix), m_status_text);
+    }
+    if (m_status_custom_key_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("status_custom_key"), namePrefix), m_status_custom_key);
+    }
+    if (m_barcode_hash_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("barcode_hash"), namePrefix), m_barcode_hash);
+    }
+    if (m_overdue_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("overdue"), namePrefix), m_overdue);
+    }
+    if (m_duplicate.isSet()) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("duplicate"), namePrefix), m_duplicate);
+    }
+    if (m_address_detail.isSet()) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("address_detail"), namePrefix), m_address_detail);
+    }
+    if (m_contact_detail.isSet()) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("contact_detail"), namePrefix), m_contact_detail);
+    }
+    if (m_project_code_detail.isSet()) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("project_code_detail"), namePrefix), m_project_code_detail);
+    }
+    if (m_project_code_label_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("project_code_label"), namePrefix), m_project_code_label);
+    }
+    if (m_responsible_detail.isSet()) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("responsible_detail"), namePrefix), m_responsible_detail);
+    }
+    if (m_customer_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("customer"), namePrefix), m_customer);
+    }
+    if (m_customer_reference_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("customer_reference"), namePrefix), m_customer_reference);
+    }
+    if (m_shipment_date_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("shipment_date"), namePrefix), m_shipment_date);
+    }
+    if (m_total_price_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("total_price"), namePrefix), m_total_price);
+    }
+    if (m_order_currency_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("order_currency"), namePrefix), m_order_currency);
+    }
+    if (m_shipments_count_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("shipments_count"), namePrefix), m_shipments_count);
+    }
+    if (m_completed_shipments_count_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("completed_shipments_count"), namePrefix), m_completed_shipments_count);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> SalesOrder::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> SalesOrder::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_pk_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_created_by.isSet()) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("created_by"), namePrefix), m_created_by);
+    }
+    if (m_creation_date_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("creation_date"), namePrefix), m_creation_date);
+    }
+    if (m_issue_date_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("issue_date"), namePrefix), m_issue_date);
+    }
+    if (m_start_date_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("start_date"), namePrefix), m_start_date);
+    }
+    if (m_target_date_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("target_date"), namePrefix), m_target_date);
+    }
+    if (m_description_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("description"), namePrefix), m_description);
+    }
+    if (m_line_items_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("line_items"), namePrefix), m_line_items);
+    }
+    if (m_completed_lines_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("completed_lines"), namePrefix), m_completed_lines);
+    }
+    if (m_link_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("link"), namePrefix), m_link);
+    }
+    if (m_project_code_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("project_code"), namePrefix), m_project_code);
+    }
+    if (m_reference_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("reference"), namePrefix), m_reference);
+    }
+    if (m_responsible_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("responsible"), namePrefix), m_responsible);
+    }
+    if (m_contact_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("contact"), namePrefix), m_contact);
+    }
+    if (m_address_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("address"), namePrefix), m_address);
+    }
+    if (m_status_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("status"), namePrefix), m_status);
+    }
+    if (m_status_text_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("status_text"), namePrefix), m_status_text);
+    }
+    if (m_status_custom_key_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("status_custom_key"), namePrefix), m_status_custom_key);
+    }
+    if (m_barcode_hash_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("barcode_hash"), namePrefix), m_barcode_hash);
+    }
+    if (m_overdue_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("overdue"), namePrefix), m_overdue);
+    }
+    if (m_duplicate.isSet()) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("duplicate"), namePrefix), m_duplicate);
+    }
+    if (m_address_detail.isSet()) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("address_detail"), namePrefix), m_address_detail);
+    }
+    if (m_contact_detail.isSet()) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("contact_detail"), namePrefix), m_contact_detail);
+    }
+    if (m_project_code_detail.isSet()) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("project_code_detail"), namePrefix), m_project_code_detail);
+    }
+    if (m_project_code_label_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("project_code_label"), namePrefix), m_project_code_label);
+    }
+    if (m_responsible_detail.isSet()) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("responsible_detail"), namePrefix), m_responsible_detail);
+    }
+    if (m_customer_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("customer"), namePrefix), m_customer);
+    }
+    if (m_customer_reference_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("customer_reference"), namePrefix), m_customer_reference);
+    }
+    if (m_shipment_date_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("shipment_date"), namePrefix), m_shipment_date);
+    }
+    if (m_total_price_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("total_price"), namePrefix), m_total_price);
+    }
+    if (m_order_currency_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("order_currency"), namePrefix), m_order_currency);
+    }
+    if (m_shipments_count_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("shipments_count"), namePrefix), m_shipments_count);
+    }
+    if (m_completed_shipments_count_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("completed_shipments_count"), namePrefix), m_completed_shipments_count);
+    }
+    return files;
+}
+
 qint32 SalesOrder::getPk() const {
     return m_pk;
 }

@@ -7,11 +7,9 @@ from inventree.part import Part, PartCategory
 inventree_api = InvenTreeAPI("http://localhost:8000", token="inv-cfdeb7eb1b8a30c013ecf21db9870816955dc557-20250325")
 
 
-def upload_part_datasheet(datasheet_url: str, part_ipn: int, part_pk: int, silent=False) -> str:
+def upload_part_datasheet(datasheet_url: str, part_pk: int, silent=False) -> str:
     ''' Upload InvenTree part attachment'''
     global inventree_api
-
-    datasheet_name = f'{part_ipn}.pdf'
 
     # Upload Datasheet to InvenTree
     part = Part(inventree_api, part_pk)
@@ -23,6 +21,8 @@ def upload_part_datasheet(datasheet_url: str, part_ipn: int, part_pk: int, silen
             return ''
     else:
         return ''
+f = open("/tmp/1.txt", "w")
+f.write("Now the file has more content!")
+f.close()
 
-
-upload_part_datasheet("/tmp/TEMPO16_MODEL_2015_with V2.0 RX board with GND connector.pdf", "1N4148-DIO", 421)
+upload_part_datasheet("/tmp/1.txt", 1)

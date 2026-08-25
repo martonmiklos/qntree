@@ -172,54 +172,22 @@ Q_SIGNALS:
     void settingsUserRetrieveSignalFull(HttpRequestWorker *worker, UserSettings summary);
     void settingsUserUpdateSignalFull(HttpRequestWorker *worker, UserSettings summary);
 
-    Q_DECL_DEPRECATED_X("Use settingsGlobalListSignalError() instead")
-    void settingsGlobalListSignalE(PaginatedGlobalSettingsList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void settingsGlobalListSignalError(PaginatedGlobalSettingsList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use settingsGlobalPartialUpdateSignalError() instead")
-    void settingsGlobalPartialUpdateSignalE(GlobalSettings summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void settingsGlobalPartialUpdateSignalError(GlobalSettings summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use settingsGlobalRetrieveSignalError() instead")
-    void settingsGlobalRetrieveSignalE(GlobalSettings summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void settingsGlobalRetrieveSignalError(GlobalSettings summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use settingsGlobalUpdateSignalError() instead")
-    void settingsGlobalUpdateSignalE(GlobalSettings summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void settingsGlobalUpdateSignalError(GlobalSettings summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use settingsUserListSignalError() instead")
-    void settingsUserListSignalE(PaginatedUserSettingsList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void settingsUserListSignalError(PaginatedUserSettingsList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use settingsUserPartialUpdateSignalError() instead")
-    void settingsUserPartialUpdateSignalE(UserSettings summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void settingsUserPartialUpdateSignalError(UserSettings summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use settingsUserRetrieveSignalError() instead")
-    void settingsUserRetrieveSignalE(UserSettings summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void settingsUserRetrieveSignalError(UserSettings summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use settingsUserUpdateSignalError() instead")
-    void settingsUserUpdateSignalE(UserSettings summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void settingsUserUpdateSignalError(UserSettings summary, QNetworkReply::NetworkError error_type, const QString &error_str);
 
-    Q_DECL_DEPRECATED_X("Use settingsGlobalListSignalErrorFull() instead")
-    void settingsGlobalListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void settingsGlobalListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use settingsGlobalPartialUpdateSignalErrorFull() instead")
-    void settingsGlobalPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void settingsGlobalPartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use settingsGlobalRetrieveSignalErrorFull() instead")
-    void settingsGlobalRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void settingsGlobalRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use settingsGlobalUpdateSignalErrorFull() instead")
-    void settingsGlobalUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void settingsGlobalUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use settingsUserListSignalErrorFull() instead")
-    void settingsUserListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void settingsUserListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use settingsUserPartialUpdateSignalErrorFull() instead")
-    void settingsUserPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void settingsUserPartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use settingsUserRetrieveSignalErrorFull() instead")
-    void settingsUserRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void settingsUserRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use settingsUserUpdateSignalErrorFull() instead")
-    void settingsUserUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void settingsUserUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     void abortRequestsSignal();

@@ -328,9 +328,17 @@ void StockApi::stockAddCreate(const StockAdd &stock_add) {
     {
 
         
-        QByteArray output = stock_add.asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = stock_add.asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = stock_add.asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = stock_add.asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -351,9 +359,9 @@ void StockApi::stockAddCreate(const StockAdd &stock_add) {
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("g:read");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -377,9 +385,9 @@ void StockApi::stockAddCreate(const StockAdd &stock_add) {
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("g:read");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -440,32 +448,6 @@ void StockApi::stockAddCreateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT stockAddCreateSignalE(output, error_type, error_str);
-        Q_EMIT stockAddCreateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT stockAddCreateSignalError(output, error_type, error_str);
         Q_EMIT stockAddCreateSignalErrorFull(worker, error_type, error_str);
     }
@@ -491,9 +473,17 @@ void StockApi::stockAssignCreate(const StockAssignment &stock_assignment) {
     {
 
         
-        QByteArray output = stock_assignment.asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = stock_assignment.asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = stock_assignment.asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = stock_assignment.asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -514,9 +504,9 @@ void StockApi::stockAssignCreate(const StockAssignment &stock_assignment) {
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("g:read");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -540,9 +530,9 @@ void StockApi::stockAssignCreate(const StockAssignment &stock_assignment) {
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("g:read");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -603,32 +593,6 @@ void StockApi::stockAssignCreateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT stockAssignCreateSignalE(output, error_type, error_str);
-        Q_EMIT stockAssignCreateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT stockAssignCreateSignalError(output, error_type, error_str);
         Q_EMIT stockAssignCreateSignalErrorFull(worker, error_type, error_str);
     }
@@ -654,9 +618,17 @@ void StockApi::stockBulkDestroy(const BulkRequest &bulk_request) {
     {
 
         
-        QByteArray output = bulk_request.asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = bulk_request.asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = bulk_request.asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = bulk_request.asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -678,9 +650,9 @@ void StockApi::stockBulkDestroy(const BulkRequest &bulk_request) {
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:delete:stock");
     scopeClientCredentialsFlow.append("r:delete:build");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -705,9 +677,9 @@ void StockApi::stockBulkDestroy(const BulkRequest &bulk_request) {
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:delete:stock");
     scopeAuthorizationFlow.append("r:delete:build");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -769,32 +741,6 @@ void StockApi::stockBulkDestroyCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT stockBulkDestroySignalE(error_type, error_str);
-        Q_EMIT stockBulkDestroySignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT stockBulkDestroySignalError(error_type, error_str);
         Q_EMIT stockBulkDestroySignalErrorFull(worker, error_type, error_str);
     }
@@ -820,9 +766,17 @@ void StockApi::stockChangeStatusCreate(const StockChangeStatus &stock_change_sta
     {
 
         
-        QByteArray output = stock_change_status.asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = stock_change_status.asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = stock_change_status.asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = stock_change_status.asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -843,9 +797,9 @@ void StockApi::stockChangeStatusCreate(const StockChangeStatus &stock_change_sta
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("g:read");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -869,9 +823,9 @@ void StockApi::stockChangeStatusCreate(const StockChangeStatus &stock_change_sta
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("g:read");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -932,32 +886,6 @@ void StockApi::stockChangeStatusCreateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT stockChangeStatusCreateSignalE(output, error_type, error_str);
-        Q_EMIT stockChangeStatusCreateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT stockChangeStatusCreateSignalError(output, error_type, error_str);
         Q_EMIT stockChangeStatusCreateSignalErrorFull(worker, error_type, error_str);
     }
@@ -997,9 +925,17 @@ void StockApi::stockConvertCreate(const qint32 &id, const ConvertStockItem &conv
     {
 
         
-        QByteArray output = convert_stock_item.asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = convert_stock_item.asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = convert_stock_item.asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = convert_stock_item.asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -1020,9 +956,9 @@ void StockApi::stockConvertCreate(const qint32 &id, const ConvertStockItem &conv
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("g:read");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -1046,9 +982,9 @@ void StockApi::stockConvertCreate(const qint32 &id, const ConvertStockItem &conv
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("g:read");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -1109,32 +1045,6 @@ void StockApi::stockConvertCreateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT stockConvertCreateSignalE(output, error_type, error_str);
-        Q_EMIT stockConvertCreateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT stockConvertCreateSignalError(output, error_type, error_str);
         Q_EMIT stockConvertCreateSignalErrorFull(worker, error_type, error_str);
     }
@@ -1160,9 +1070,17 @@ void StockApi::stockCountCreate(const StockCount &stock_count) {
     {
 
         
-        QByteArray output = stock_count.asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = stock_count.asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = stock_count.asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = stock_count.asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -1183,9 +1101,9 @@ void StockApi::stockCountCreate(const StockCount &stock_count) {
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("g:read");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -1209,9 +1127,9 @@ void StockApi::stockCountCreate(const StockCount &stock_count) {
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("g:read");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -1272,32 +1190,6 @@ void StockApi::stockCountCreateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT stockCountCreateSignalE(output, error_type, error_str);
-        Q_EMIT stockCountCreateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT stockCountCreateSignalError(output, error_type, error_str);
         Q_EMIT stockCountCreateSignalErrorFull(worker, error_type, error_str);
     }
@@ -1323,9 +1215,17 @@ void StockApi::stockCreate(const StockItem &stock_item) {
     {
 
         
-        QByteArray output = stock_item.asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = stock_item.asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = stock_item.asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = stock_item.asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -1347,9 +1247,9 @@ void StockApi::stockCreate(const StockItem &stock_item) {
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:add:stock");
     scopeClientCredentialsFlow.append("r:add:build");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -1374,9 +1274,9 @@ void StockApi::stockCreate(const StockItem &stock_item) {
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:add:stock");
     scopeAuthorizationFlow.append("r:add:build");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -1407,7 +1307,7 @@ void StockApi::stockCreateCallback(HttpRequestWorker *worker) {
         error_str = QString("%1, %2").arg(worker->error_str, QString(worker->response));
     }
     QList<StockItem> output;
-    const QString &json(worker->response) ;
+    QString json(worker->response);
     QByteArray array(json.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonArray jsonArray = doc.array();
@@ -1448,32 +1348,6 @@ void StockApi::stockCreateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT stockCreateSignalE(output, error_type, error_str);
-        Q_EMIT stockCreateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT stockCreateSignalError(output, error_type, error_str);
         Q_EMIT stockCreateSignalErrorFull(worker, error_type, error_str);
     }
@@ -1532,9 +1406,9 @@ void StockApi::stockDestroy(const qint32 &id) {
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:delete:stock");
     scopeClientCredentialsFlow.append("r:delete:build");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -1559,9 +1433,9 @@ void StockApi::stockDestroy(const qint32 &id) {
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:delete:stock");
     scopeAuthorizationFlow.append("r:delete:build");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -1623,32 +1497,6 @@ void StockApi::stockDestroyCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT stockDestroySignalE(error_type, error_str);
-        Q_EMIT stockDestroySignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT stockDestroySignalError(error_type, error_str);
         Q_EMIT stockDestroySignalErrorFull(worker, error_type, error_str);
     }
@@ -1688,9 +1536,17 @@ void StockApi::stockInstallCreate(const qint32 &id, const InstallStockItem &inst
     {
 
         
-        QByteArray output = install_stock_item.asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = install_stock_item.asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = install_stock_item.asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = install_stock_item.asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -1711,9 +1567,9 @@ void StockApi::stockInstallCreate(const qint32 &id, const InstallStockItem &inst
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("g:read");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -1737,9 +1593,9 @@ void StockApi::stockInstallCreate(const qint32 &id, const InstallStockItem &inst
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("g:read");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -1800,32 +1656,6 @@ void StockApi::stockInstallCreateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT stockInstallCreateSignalE(output, error_type, error_str);
-        Q_EMIT stockInstallCreateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT stockInstallCreateSignalError(output, error_type, error_str);
         Q_EMIT stockInstallCreateSignalErrorFull(worker, error_type, error_str);
     }
@@ -2936,9 +2766,9 @@ void StockApi::stockList(const qint32 &limit, const ::InvenTree::OptionalParam<Q
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:view:stock");
     scopeClientCredentialsFlow.append("r:view:build");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -2963,9 +2793,9 @@ void StockApi::stockList(const qint32 &limit, const ::InvenTree::OptionalParam<Q
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:view:stock");
     scopeAuthorizationFlow.append("r:view:build");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -3028,32 +2858,6 @@ void StockApi::stockListCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT stockListSignalE(output, error_type, error_str);
-        Q_EMIT stockListSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT stockListSignalError(output, error_type, error_str);
         Q_EMIT stockListSignalErrorFull(worker, error_type, error_str);
     }
@@ -3079,9 +2883,17 @@ void StockApi::stockLocationBulkPartialUpdate(const ::InvenTree::OptionalParam<P
     if (patched_location.hasValue()){
 
         
-        QByteArray output = patched_location.value().asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = patched_location.value().asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = patched_location.value().asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = patched_location.value().asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -3103,9 +2915,9 @@ void StockApi::stockLocationBulkPartialUpdate(const ::InvenTree::OptionalParam<P
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:change:stock_location");
     scopeClientCredentialsFlow.append("r:change:build");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -3130,9 +2942,9 @@ void StockApi::stockLocationBulkPartialUpdate(const ::InvenTree::OptionalParam<P
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:change:stock_location");
     scopeAuthorizationFlow.append("r:change:build");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -3195,32 +3007,6 @@ void StockApi::stockLocationBulkPartialUpdateCallback(HttpRequestWorker *worker)
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT stockLocationBulkPartialUpdateSignalE(output, error_type, error_str);
-        Q_EMIT stockLocationBulkPartialUpdateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT stockLocationBulkPartialUpdateSignalError(output, error_type, error_str);
         Q_EMIT stockLocationBulkPartialUpdateSignalErrorFull(worker, error_type, error_str);
     }
@@ -3246,9 +3032,17 @@ void StockApi::stockLocationBulkUpdate(const Location &location) {
     {
 
         
-        QByteArray output = location.asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = location.asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = location.asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = location.asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -3270,9 +3064,9 @@ void StockApi::stockLocationBulkUpdate(const Location &location) {
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:change:stock_location");
     scopeClientCredentialsFlow.append("r:change:build");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -3297,9 +3091,9 @@ void StockApi::stockLocationBulkUpdate(const Location &location) {
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:change:stock_location");
     scopeAuthorizationFlow.append("r:change:build");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -3362,32 +3156,6 @@ void StockApi::stockLocationBulkUpdateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT stockLocationBulkUpdateSignalE(output, error_type, error_str);
-        Q_EMIT stockLocationBulkUpdateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT stockLocationBulkUpdateSignalError(output, error_type, error_str);
         Q_EMIT stockLocationBulkUpdateSignalErrorFull(worker, error_type, error_str);
     }
@@ -3413,9 +3181,17 @@ void StockApi::stockLocationCreate(const Location &location) {
     {
 
         
-        QByteArray output = location.asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = location.asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = location.asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = location.asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -3437,9 +3213,9 @@ void StockApi::stockLocationCreate(const Location &location) {
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:add:stock_location");
     scopeClientCredentialsFlow.append("r:add:build");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -3464,9 +3240,9 @@ void StockApi::stockLocationCreate(const Location &location) {
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:add:stock_location");
     scopeAuthorizationFlow.append("r:add:build");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -3529,32 +3305,6 @@ void StockApi::stockLocationCreateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT stockLocationCreateSignalE(output, error_type, error_str);
-        Q_EMIT stockLocationCreateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT stockLocationCreateSignalError(output, error_type, error_str);
         Q_EMIT stockLocationCreateSignalErrorFull(worker, error_type, error_str);
     }
@@ -3613,9 +3363,9 @@ void StockApi::stockLocationDestroy(const qint32 &id) {
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:delete:stock_location");
     scopeClientCredentialsFlow.append("r:delete:build");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -3640,9 +3390,9 @@ void StockApi::stockLocationDestroy(const qint32 &id) {
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:delete:stock_location");
     scopeAuthorizationFlow.append("r:delete:build");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -3704,32 +3454,6 @@ void StockApi::stockLocationDestroyCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT stockLocationDestroySignalE(error_type, error_str);
-        Q_EMIT stockLocationDestroySignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT stockLocationDestroySignalError(error_type, error_str);
         Q_EMIT stockLocationDestroySignalErrorFull(worker, error_type, error_str);
     }
@@ -3985,9 +3709,9 @@ void StockApi::stockLocationList(const qint32 &limit, const ::InvenTree::Optiona
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:view:stock_location");
     scopeClientCredentialsFlow.append("r:view:build");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -4012,9 +3736,9 @@ void StockApi::stockLocationList(const qint32 &limit, const ::InvenTree::Optiona
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:view:stock_location");
     scopeAuthorizationFlow.append("r:view:build");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -4077,32 +3801,6 @@ void StockApi::stockLocationListCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT stockLocationListSignalE(output, error_type, error_str);
-        Q_EMIT stockLocationListSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT stockLocationListSignalError(output, error_type, error_str);
         Q_EMIT stockLocationListSignalErrorFull(worker, error_type, error_str);
     }
@@ -4142,9 +3840,17 @@ void StockApi::stockLocationPartialUpdate(const qint32 &id, const ::InvenTree::O
     if (patched_location.hasValue()){
 
         
-        QByteArray output = patched_location.value().asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = patched_location.value().asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = patched_location.value().asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = patched_location.value().asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -4166,9 +3872,9 @@ void StockApi::stockLocationPartialUpdate(const qint32 &id, const ::InvenTree::O
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:change:stock_location");
     scopeClientCredentialsFlow.append("r:change:build");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -4193,9 +3899,9 @@ void StockApi::stockLocationPartialUpdate(const qint32 &id, const ::InvenTree::O
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:change:stock_location");
     scopeAuthorizationFlow.append("r:change:build");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -4258,32 +3964,6 @@ void StockApi::stockLocationPartialUpdateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT stockLocationPartialUpdateSignalE(output, error_type, error_str);
-        Q_EMIT stockLocationPartialUpdateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT stockLocationPartialUpdateSignalError(output, error_type, error_str);
         Q_EMIT stockLocationPartialUpdateSignalErrorFull(worker, error_type, error_str);
     }
@@ -4358,9 +4038,9 @@ void StockApi::stockLocationRetrieve(const qint32 &id, const ::InvenTree::Option
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:view:stock_location");
     scopeClientCredentialsFlow.append("r:view:build");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -4385,9 +4065,9 @@ void StockApi::stockLocationRetrieve(const qint32 &id, const ::InvenTree::Option
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:view:stock_location");
     scopeAuthorizationFlow.append("r:view:build");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -4450,32 +4130,6 @@ void StockApi::stockLocationRetrieveCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT stockLocationRetrieveSignalE(output, error_type, error_str);
-        Q_EMIT stockLocationRetrieveSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT stockLocationRetrieveSignalError(output, error_type, error_str);
         Q_EMIT stockLocationRetrieveSignalErrorFull(worker, error_type, error_str);
     }
@@ -4566,9 +4220,9 @@ void StockApi::stockLocationTreeList(const qint32 &limit, const ::InvenTree::Opt
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:view:stock_location");
     scopeClientCredentialsFlow.append("r:view:build");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -4593,9 +4247,9 @@ void StockApi::stockLocationTreeList(const qint32 &limit, const ::InvenTree::Opt
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:view:stock_location");
     scopeAuthorizationFlow.append("r:view:build");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -4658,32 +4312,6 @@ void StockApi::stockLocationTreeListCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT stockLocationTreeListSignalE(output, error_type, error_str);
-        Q_EMIT stockLocationTreeListSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT stockLocationTreeListSignalError(output, error_type, error_str);
         Q_EMIT stockLocationTreeListSignalErrorFull(worker, error_type, error_str);
     }
@@ -4709,9 +4337,17 @@ void StockApi::stockLocationTypeCreate(const StockLocationType &stock_location_t
     {
 
         
-        QByteArray output = stock_location_type.asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = stock_location_type.asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = stock_location_type.asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = stock_location_type.asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -4732,9 +4368,9 @@ void StockApi::stockLocationTypeCreate(const StockLocationType &stock_location_t
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:add:stock_location");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -4758,9 +4394,9 @@ void StockApi::stockLocationTypeCreate(const StockLocationType &stock_location_t
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:add:stock_location");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -4821,32 +4457,6 @@ void StockApi::stockLocationTypeCreateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT stockLocationTypeCreateSignalE(output, error_type, error_str);
-        Q_EMIT stockLocationTypeCreateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT stockLocationTypeCreateSignalError(output, error_type, error_str);
         Q_EMIT stockLocationTypeCreateSignalErrorFull(worker, error_type, error_str);
     }
@@ -4904,9 +4514,9 @@ void StockApi::stockLocationTypeDestroy(const qint32 &id) {
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:delete:stock_location");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -4930,9 +4540,9 @@ void StockApi::stockLocationTypeDestroy(const qint32 &id) {
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:delete:stock_location");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -4992,32 +4602,6 @@ void StockApi::stockLocationTypeDestroyCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT stockLocationTypeDestroySignalE(error_type, error_str);
-        Q_EMIT stockLocationTypeDestroySignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT stockLocationTypeDestroySignalError(error_type, error_str);
         Q_EMIT stockLocationTypeDestroySignalErrorFull(worker, error_type, error_str);
     }
@@ -5122,9 +4706,9 @@ void StockApi::stockLocationTypeList(const qint32 &limit, const ::InvenTree::Opt
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:view:stock_location");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -5148,9 +4732,9 @@ void StockApi::stockLocationTypeList(const qint32 &limit, const ::InvenTree::Opt
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:view:stock_location");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -5211,32 +4795,6 @@ void StockApi::stockLocationTypeListCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT stockLocationTypeListSignalE(output, error_type, error_str);
-        Q_EMIT stockLocationTypeListSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT stockLocationTypeListSignalError(output, error_type, error_str);
         Q_EMIT stockLocationTypeListSignalErrorFull(worker, error_type, error_str);
     }
@@ -5276,9 +4834,17 @@ void StockApi::stockLocationTypePartialUpdate(const qint32 &id, const ::InvenTre
     if (patched_stock_location_type.hasValue()){
 
         
-        QByteArray output = patched_stock_location_type.value().asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = patched_stock_location_type.value().asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = patched_stock_location_type.value().asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = patched_stock_location_type.value().asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -5299,9 +4865,9 @@ void StockApi::stockLocationTypePartialUpdate(const qint32 &id, const ::InvenTre
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:change:stock_location");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -5325,9 +4891,9 @@ void StockApi::stockLocationTypePartialUpdate(const qint32 &id, const ::InvenTre
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:change:stock_location");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -5388,32 +4954,6 @@ void StockApi::stockLocationTypePartialUpdateCallback(HttpRequestWorker *worker)
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT stockLocationTypePartialUpdateSignalE(output, error_type, error_str);
-        Q_EMIT stockLocationTypePartialUpdateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT stockLocationTypePartialUpdateSignalError(output, error_type, error_str);
         Q_EMIT stockLocationTypePartialUpdateSignalErrorFull(worker, error_type, error_str);
     }
@@ -5471,9 +5011,9 @@ void StockApi::stockLocationTypeRetrieve(const qint32 &id) {
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:view:stock_location");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -5497,9 +5037,9 @@ void StockApi::stockLocationTypeRetrieve(const qint32 &id) {
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:view:stock_location");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -5560,32 +5100,6 @@ void StockApi::stockLocationTypeRetrieveCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT stockLocationTypeRetrieveSignalE(output, error_type, error_str);
-        Q_EMIT stockLocationTypeRetrieveSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT stockLocationTypeRetrieveSignalError(output, error_type, error_str);
         Q_EMIT stockLocationTypeRetrieveSignalErrorFull(worker, error_type, error_str);
     }
@@ -5625,9 +5139,17 @@ void StockApi::stockLocationTypeUpdate(const qint32 &id, const StockLocationType
     {
 
         
-        QByteArray output = stock_location_type.asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = stock_location_type.asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = stock_location_type.asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = stock_location_type.asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -5648,9 +5170,9 @@ void StockApi::stockLocationTypeUpdate(const qint32 &id, const StockLocationType
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:change:stock_location");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -5674,9 +5196,9 @@ void StockApi::stockLocationTypeUpdate(const qint32 &id, const StockLocationType
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:change:stock_location");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -5737,32 +5259,6 @@ void StockApi::stockLocationTypeUpdateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT stockLocationTypeUpdateSignalE(output, error_type, error_str);
-        Q_EMIT stockLocationTypeUpdateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT stockLocationTypeUpdateSignalError(output, error_type, error_str);
         Q_EMIT stockLocationTypeUpdateSignalErrorFull(worker, error_type, error_str);
     }
@@ -5802,9 +5298,17 @@ void StockApi::stockLocationUpdate(const qint32 &id, const Location &location) {
     {
 
         
-        QByteArray output = location.asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = location.asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = location.asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = location.asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -5826,9 +5330,9 @@ void StockApi::stockLocationUpdate(const qint32 &id, const Location &location) {
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:change:stock_location");
     scopeClientCredentialsFlow.append("r:change:build");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -5853,9 +5357,9 @@ void StockApi::stockLocationUpdate(const qint32 &id, const Location &location) {
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:change:stock_location");
     scopeAuthorizationFlow.append("r:change:build");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -5918,32 +5422,6 @@ void StockApi::stockLocationUpdateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT stockLocationUpdateSignalE(output, error_type, error_str);
-        Q_EMIT stockLocationUpdateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT stockLocationUpdateSignalError(output, error_type, error_str);
         Q_EMIT stockLocationUpdateSignalErrorFull(worker, error_type, error_str);
     }
@@ -5969,9 +5447,17 @@ void StockApi::stockMergeCreate(const StockMerge &stock_merge) {
     {
 
         
-        QByteArray output = stock_merge.asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = stock_merge.asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = stock_merge.asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = stock_merge.asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -5992,9 +5478,9 @@ void StockApi::stockMergeCreate(const StockMerge &stock_merge) {
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("g:read");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -6018,9 +5504,9 @@ void StockApi::stockMergeCreate(const StockMerge &stock_merge) {
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("g:read");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -6081,32 +5567,6 @@ void StockApi::stockMergeCreateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT stockMergeCreateSignalE(output, error_type, error_str);
-        Q_EMIT stockMergeCreateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT stockMergeCreateSignalError(output, error_type, error_str);
         Q_EMIT stockMergeCreateSignalErrorFull(worker, error_type, error_str);
     }
@@ -6146,9 +5606,17 @@ void StockApi::stockPartialUpdate(const qint32 &id, const ::InvenTree::OptionalP
     if (patched_stock_item.hasValue()){
 
         
-        QByteArray output = patched_stock_item.value().asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = patched_stock_item.value().asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = patched_stock_item.value().asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = patched_stock_item.value().asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -6170,9 +5638,9 @@ void StockApi::stockPartialUpdate(const qint32 &id, const ::InvenTree::OptionalP
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:change:stock");
     scopeClientCredentialsFlow.append("r:change:build");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -6197,9 +5665,9 @@ void StockApi::stockPartialUpdate(const qint32 &id, const ::InvenTree::OptionalP
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:change:stock");
     scopeAuthorizationFlow.append("r:change:build");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -6262,32 +5730,6 @@ void StockApi::stockPartialUpdateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT stockPartialUpdateSignalE(output, error_type, error_str);
-        Q_EMIT stockPartialUpdateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT stockPartialUpdateSignalError(output, error_type, error_str);
         Q_EMIT stockPartialUpdateSignalErrorFull(worker, error_type, error_str);
     }
@@ -6313,9 +5755,17 @@ void StockApi::stockRemoveCreate(const StockRemove &stock_remove) {
     {
 
         
-        QByteArray output = stock_remove.asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = stock_remove.asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = stock_remove.asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = stock_remove.asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -6336,9 +5786,9 @@ void StockApi::stockRemoveCreate(const StockRemove &stock_remove) {
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("g:read");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -6362,9 +5812,9 @@ void StockApi::stockRemoveCreate(const StockRemove &stock_remove) {
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("g:read");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -6425,32 +5875,6 @@ void StockApi::stockRemoveCreateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT stockRemoveCreateSignalE(output, error_type, error_str);
-        Q_EMIT stockRemoveCreateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT stockRemoveCreateSignalError(output, error_type, error_str);
         Q_EMIT stockRemoveCreateSignalErrorFull(worker, error_type, error_str);
     }
@@ -6585,9 +6009,9 @@ void StockApi::stockRetrieve(const qint32 &id, const ::InvenTree::OptionalParam<
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:view:stock");
     scopeClientCredentialsFlow.append("r:view:build");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -6612,9 +6036,9 @@ void StockApi::stockRetrieve(const qint32 &id, const ::InvenTree::OptionalParam<
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:view:stock");
     scopeAuthorizationFlow.append("r:view:build");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -6677,32 +6101,6 @@ void StockApi::stockRetrieveCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT stockRetrieveSignalE(output, error_type, error_str);
-        Q_EMIT stockRetrieveSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT stockRetrieveSignalError(output, error_type, error_str);
         Q_EMIT stockRetrieveSignalErrorFull(worker, error_type, error_str);
     }
@@ -6728,9 +6126,17 @@ void StockApi::stockReturnCreate(const StockReturn &stock_return) {
     {
 
         
-        QByteArray output = stock_return.asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = stock_return.asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = stock_return.asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = stock_return.asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -6751,9 +6157,9 @@ void StockApi::stockReturnCreate(const StockReturn &stock_return) {
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("g:read");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -6777,9 +6183,9 @@ void StockApi::stockReturnCreate(const StockReturn &stock_return) {
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("g:read");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -6840,32 +6246,6 @@ void StockApi::stockReturnCreateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT stockReturnCreateSignalE(output, error_type, error_str);
-        Q_EMIT stockReturnCreateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT stockReturnCreateSignalError(output, error_type, error_str);
         Q_EMIT stockReturnCreateSignalErrorFull(worker, error_type, error_str);
     }
@@ -6924,9 +6304,9 @@ void StockApi::stockSerialNumbersRetrieve(const qint32 &id) {
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:view:stock");
     scopeClientCredentialsFlow.append("r:view:build");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -6951,9 +6331,9 @@ void StockApi::stockSerialNumbersRetrieve(const qint32 &id) {
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:view:stock");
     scopeAuthorizationFlow.append("r:view:build");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -7016,32 +6396,6 @@ void StockApi::stockSerialNumbersRetrieveCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT stockSerialNumbersRetrieveSignalE(output, error_type, error_str);
-        Q_EMIT stockSerialNumbersRetrieveSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT stockSerialNumbersRetrieveSignalError(output, error_type, error_str);
         Q_EMIT stockSerialNumbersRetrieveSignalErrorFull(worker, error_type, error_str);
     }
@@ -7081,9 +6435,17 @@ void StockApi::stockSerializeCreate(const qint32 &id, const SerializeStockItem &
     {
 
         
-        QByteArray output = serialize_stock_item.asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = serialize_stock_item.asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = serialize_stock_item.asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = serialize_stock_item.asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -7104,9 +6466,9 @@ void StockApi::stockSerializeCreate(const qint32 &id, const SerializeStockItem &
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("g:read");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -7130,9 +6492,9 @@ void StockApi::stockSerializeCreate(const qint32 &id, const SerializeStockItem &
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("g:read");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -7163,7 +6525,7 @@ void StockApi::stockSerializeCreateCallback(HttpRequestWorker *worker) {
         error_str = QString("%1, %2").arg(worker->error_str, QString(worker->response));
     }
     QList<StockItem> output;
-    const QString &json(worker->response) ;
+    QString json(worker->response);
     QByteArray array(json.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonArray jsonArray = doc.array();
@@ -7202,32 +6564,6 @@ void StockApi::stockSerializeCreateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT stockSerializeCreateSignalE(output, error_type, error_str);
-        Q_EMIT stockSerializeCreateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT stockSerializeCreateSignalError(output, error_type, error_str);
         Q_EMIT stockSerializeCreateSignalErrorFull(worker, error_type, error_str);
     }
@@ -7271,9 +6607,9 @@ void StockApi::stockStatusRetrieve() {
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("g:read");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -7297,9 +6633,9 @@ void StockApi::stockStatusRetrieve() {
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("g:read");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -7360,32 +6696,6 @@ void StockApi::stockStatusRetrieveCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT stockStatusRetrieveSignalE(output, error_type, error_str);
-        Q_EMIT stockStatusRetrieveSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT stockStatusRetrieveSignalError(output, error_type, error_str);
         Q_EMIT stockStatusRetrieveSignalErrorFull(worker, error_type, error_str);
     }
@@ -7411,9 +6721,17 @@ void StockApi::stockTestBulkDestroy(const BulkRequest &bulk_request) {
     {
 
         
-        QByteArray output = bulk_request.asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = bulk_request.asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = bulk_request.asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = bulk_request.asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -7434,9 +6752,9 @@ void StockApi::stockTestBulkDestroy(const BulkRequest &bulk_request) {
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:delete:stock");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -7460,9 +6778,9 @@ void StockApi::stockTestBulkDestroy(const BulkRequest &bulk_request) {
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:delete:stock");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -7522,32 +6840,6 @@ void StockApi::stockTestBulkDestroyCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT stockTestBulkDestroySignalE(error_type, error_str);
-        Q_EMIT stockTestBulkDestroySignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT stockTestBulkDestroySignalError(error_type, error_str);
         Q_EMIT stockTestBulkDestroySignalErrorFull(worker, error_type, error_str);
     }
@@ -7573,9 +6865,17 @@ void StockApi::stockTestCreate(const StockItemTestResult &stock_item_test_result
     {
 
         
-        QByteArray output = stock_item_test_result.asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = stock_item_test_result.asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = stock_item_test_result.asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = stock_item_test_result.asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -7596,9 +6896,9 @@ void StockApi::stockTestCreate(const StockItemTestResult &stock_item_test_result
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:add:stock");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -7622,9 +6922,9 @@ void StockApi::stockTestCreate(const StockItemTestResult &stock_item_test_result
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:add:stock");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -7685,32 +6985,6 @@ void StockApi::stockTestCreateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT stockTestCreateSignalE(output, error_type, error_str);
-        Q_EMIT stockTestCreateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT stockTestCreateSignalError(output, error_type, error_str);
         Q_EMIT stockTestCreateSignalErrorFull(worker, error_type, error_str);
     }
@@ -7768,9 +7042,9 @@ void StockApi::stockTestDestroy(const qint32 &id) {
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:delete:stock");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -7794,9 +7068,9 @@ void StockApi::stockTestDestroy(const qint32 &id) {
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:delete:stock");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -7856,32 +7130,6 @@ void StockApi::stockTestDestroyCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT stockTestDestroySignalE(error_type, error_str);
-        Q_EMIT stockTestDestroySignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT stockTestDestroySignalError(error_type, error_str);
         Q_EMIT stockTestDestroySignalErrorFull(worker, error_type, error_str);
     }
@@ -8181,9 +7429,9 @@ void StockApi::stockTestList(const qint32 &limit, const ::InvenTree::OptionalPar
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:view:stock");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -8207,9 +7455,9 @@ void StockApi::stockTestList(const qint32 &limit, const ::InvenTree::OptionalPar
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:view:stock");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -8270,32 +7518,6 @@ void StockApi::stockTestListCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT stockTestListSignalE(output, error_type, error_str);
-        Q_EMIT stockTestListSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT stockTestListSignalError(output, error_type, error_str);
         Q_EMIT stockTestListSignalErrorFull(worker, error_type, error_str);
     }
@@ -8335,9 +7557,17 @@ void StockApi::stockTestPartialUpdate(const qint32 &id, const ::InvenTree::Optio
     if (patched_stock_item_test_result.hasValue()){
 
         
-        QByteArray output = patched_stock_item_test_result.value().asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = patched_stock_item_test_result.value().asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = patched_stock_item_test_result.value().asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = patched_stock_item_test_result.value().asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -8358,9 +7588,9 @@ void StockApi::stockTestPartialUpdate(const qint32 &id, const ::InvenTree::Optio
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:change:stock");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -8384,9 +7614,9 @@ void StockApi::stockTestPartialUpdate(const qint32 &id, const ::InvenTree::Optio
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:change:stock");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -8447,32 +7677,6 @@ void StockApi::stockTestPartialUpdateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT stockTestPartialUpdateSignalE(output, error_type, error_str);
-        Q_EMIT stockTestPartialUpdateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT stockTestPartialUpdateSignalError(output, error_type, error_str);
         Q_EMIT stockTestPartialUpdateSignalErrorFull(worker, error_type, error_str);
     }
@@ -8561,9 +7765,9 @@ void StockApi::stockTestRetrieve(const qint32 &id, const ::InvenTree::OptionalPa
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:view:stock");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -8587,9 +7791,9 @@ void StockApi::stockTestRetrieve(const qint32 &id, const ::InvenTree::OptionalPa
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:view:stock");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -8650,32 +7854,6 @@ void StockApi::stockTestRetrieveCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT stockTestRetrieveSignalE(output, error_type, error_str);
-        Q_EMIT stockTestRetrieveSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT stockTestRetrieveSignalError(output, error_type, error_str);
         Q_EMIT stockTestRetrieveSignalErrorFull(worker, error_type, error_str);
     }
@@ -8715,9 +7893,17 @@ void StockApi::stockTestUpdate(const qint32 &id, const StockItemTestResult &stoc
     {
 
         
-        QByteArray output = stock_item_test_result.asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = stock_item_test_result.asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = stock_item_test_result.asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = stock_item_test_result.asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -8738,9 +7924,9 @@ void StockApi::stockTestUpdate(const qint32 &id, const StockItemTestResult &stoc
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:change:stock");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -8764,9 +7950,9 @@ void StockApi::stockTestUpdate(const qint32 &id, const StockItemTestResult &stoc
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:change:stock");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -8827,32 +8013,6 @@ void StockApi::stockTestUpdateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT stockTestUpdateSignalE(output, error_type, error_str);
-        Q_EMIT stockTestUpdateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT stockTestUpdateSignalError(output, error_type, error_str);
         Q_EMIT stockTestUpdateSignalErrorFull(worker, error_type, error_str);
     }
@@ -9017,9 +8177,9 @@ void StockApi::stockTrackList(const qint32 &limit, const ::InvenTree::OptionalPa
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:view:stock");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -9043,9 +8203,9 @@ void StockApi::stockTrackList(const qint32 &limit, const ::InvenTree::OptionalPa
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:view:stock");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -9106,32 +8266,6 @@ void StockApi::stockTrackListCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT stockTrackListSignalE(output, error_type, error_str);
-        Q_EMIT stockTrackListSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT stockTrackListSignalError(output, error_type, error_str);
         Q_EMIT stockTrackListSignalErrorFull(worker, error_type, error_str);
     }
@@ -9189,9 +8323,9 @@ void StockApi::stockTrackRetrieve(const qint32 &id) {
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:view:stock");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -9215,9 +8349,9 @@ void StockApi::stockTrackRetrieve(const qint32 &id) {
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:view:stock");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -9278,32 +8412,6 @@ void StockApi::stockTrackRetrieveCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT stockTrackRetrieveSignalE(output, error_type, error_str);
-        Q_EMIT stockTrackRetrieveSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT stockTrackRetrieveSignalError(output, error_type, error_str);
         Q_EMIT stockTrackRetrieveSignalErrorFull(worker, error_type, error_str);
     }
@@ -9347,9 +8455,9 @@ void StockApi::stockTrackStatusRetrieve() {
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("g:read");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -9373,9 +8481,9 @@ void StockApi::stockTrackStatusRetrieve() {
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("g:read");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -9436,32 +8544,6 @@ void StockApi::stockTrackStatusRetrieveCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT stockTrackStatusRetrieveSignalE(output, error_type, error_str);
-        Q_EMIT stockTrackStatusRetrieveSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT stockTrackStatusRetrieveSignalError(output, error_type, error_str);
         Q_EMIT stockTrackStatusRetrieveSignalErrorFull(worker, error_type, error_str);
     }
@@ -9487,9 +8569,17 @@ void StockApi::stockTransferCreate(const StockTransfer &stock_transfer) {
     {
 
         
-        QByteArray output = stock_transfer.asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = stock_transfer.asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = stock_transfer.asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = stock_transfer.asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -9510,9 +8600,9 @@ void StockApi::stockTransferCreate(const StockTransfer &stock_transfer) {
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("g:read");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -9536,9 +8626,9 @@ void StockApi::stockTransferCreate(const StockTransfer &stock_transfer) {
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("g:read");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -9599,32 +8689,6 @@ void StockApi::stockTransferCreateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT stockTransferCreateSignalE(output, error_type, error_str);
-        Q_EMIT stockTransferCreateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT stockTransferCreateSignalError(output, error_type, error_str);
         Q_EMIT stockTransferCreateSignalErrorFull(worker, error_type, error_str);
     }
@@ -9664,9 +8728,17 @@ void StockApi::stockUninstallCreate(const qint32 &id, const UninstallStockItem &
     {
 
         
-        QByteArray output = uninstall_stock_item.asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = uninstall_stock_item.asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = uninstall_stock_item.asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = uninstall_stock_item.asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -9687,9 +8759,9 @@ void StockApi::stockUninstallCreate(const qint32 &id, const UninstallStockItem &
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("g:read");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -9713,9 +8785,9 @@ void StockApi::stockUninstallCreate(const qint32 &id, const UninstallStockItem &
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("g:read");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -9776,32 +8848,6 @@ void StockApi::stockUninstallCreateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT stockUninstallCreateSignalE(output, error_type, error_str);
-        Q_EMIT stockUninstallCreateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT stockUninstallCreateSignalError(output, error_type, error_str);
         Q_EMIT stockUninstallCreateSignalErrorFull(worker, error_type, error_str);
     }
@@ -9841,9 +8887,17 @@ void StockApi::stockUpdate(const qint32 &id, const StockItem &stock_item) {
     {
 
         
-        QByteArray output = stock_item.asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = stock_item.asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = stock_item.asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = stock_item.asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -9865,9 +8919,9 @@ void StockApi::stockUpdate(const qint32 &id, const StockItem &stock_item) {
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:change:stock");
     scopeClientCredentialsFlow.append("r:change:build");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -9892,9 +8946,9 @@ void StockApi::stockUpdate(const qint32 &id, const StockItem &stock_item) {
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:change:stock");
     scopeAuthorizationFlow.append("r:change:build");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -9957,32 +9011,6 @@ void StockApi::stockUpdateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT stockUpdateSignalE(output, error_type, error_str);
-        Q_EMIT stockUpdateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT stockUpdateSignalError(output, error_type, error_str);
         Q_EMIT stockUpdateSignalErrorFull(worker, error_type, error_str);
     }

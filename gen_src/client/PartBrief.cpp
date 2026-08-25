@@ -281,6 +281,178 @@ QJsonObject PartBrief::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> PartBrief::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> PartBrief::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_pk_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_ipn_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("IPN"), namePrefix), m_ipn);
+    }
+    if (m_barcode_hash_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("barcode_hash"), namePrefix), m_barcode_hash);
+    }
+    if (m_category_default_location_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("category_default_location"), namePrefix), m_category_default_location);
+    }
+    if (m_default_location_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("default_location"), namePrefix), m_default_location);
+    }
+    if (m_default_expiry_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("default_expiry"), namePrefix), m_default_expiry);
+    }
+    if (m_name_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("name"), namePrefix), m_name);
+    }
+    if (m_revision_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("revision"), namePrefix), m_revision);
+    }
+    if (m_full_name_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("full_name"), namePrefix), m_full_name);
+    }
+    if (m_description_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("description"), namePrefix), m_description);
+    }
+    if (m_image_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("image"), namePrefix), m_image);
+    }
+    if (m_thumbnail_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("thumbnail"), namePrefix), m_thumbnail);
+    }
+    if (m_active_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("active"), namePrefix), m_active);
+    }
+    if (m_locked_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("locked"), namePrefix), m_locked);
+    }
+    if (m_assembly_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("assembly"), namePrefix), m_assembly);
+    }
+    if (m_component_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("component"), namePrefix), m_component);
+    }
+    if (m_minimum_stock_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("minimum_stock"), namePrefix), m_minimum_stock);
+    }
+    if (m_is_template_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("is_template"), namePrefix), m_is_template);
+    }
+    if (m_purchaseable_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("purchaseable"), namePrefix), m_purchaseable);
+    }
+    if (m_salable_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("salable"), namePrefix), m_salable);
+    }
+    if (m_testable_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("testable"), namePrefix), m_testable);
+    }
+    if (m_trackable_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("trackable"), namePrefix), m_trackable);
+    }
+    if (m_r_virtual_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("virtual"), namePrefix), m_r_virtual);
+    }
+    if (m_units_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("units"), namePrefix), m_units);
+    }
+    if (m_pricing_max_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("pricing_max"), namePrefix), m_pricing_max);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> PartBrief::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> PartBrief::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_pk_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_ipn_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("IPN"), namePrefix), m_ipn);
+    }
+    if (m_barcode_hash_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("barcode_hash"), namePrefix), m_barcode_hash);
+    }
+    if (m_category_default_location_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("category_default_location"), namePrefix), m_category_default_location);
+    }
+    if (m_default_location_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("default_location"), namePrefix), m_default_location);
+    }
+    if (m_default_expiry_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("default_expiry"), namePrefix), m_default_expiry);
+    }
+    if (m_name_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("name"), namePrefix), m_name);
+    }
+    if (m_revision_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("revision"), namePrefix), m_revision);
+    }
+    if (m_full_name_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("full_name"), namePrefix), m_full_name);
+    }
+    if (m_description_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("description"), namePrefix), m_description);
+    }
+    if (m_image_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("image"), namePrefix), m_image);
+    }
+    if (m_thumbnail_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("thumbnail"), namePrefix), m_thumbnail);
+    }
+    if (m_active_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("active"), namePrefix), m_active);
+    }
+    if (m_locked_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("locked"), namePrefix), m_locked);
+    }
+    if (m_assembly_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("assembly"), namePrefix), m_assembly);
+    }
+    if (m_component_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("component"), namePrefix), m_component);
+    }
+    if (m_minimum_stock_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("minimum_stock"), namePrefix), m_minimum_stock);
+    }
+    if (m_is_template_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("is_template"), namePrefix), m_is_template);
+    }
+    if (m_purchaseable_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("purchaseable"), namePrefix), m_purchaseable);
+    }
+    if (m_salable_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("salable"), namePrefix), m_salable);
+    }
+    if (m_testable_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("testable"), namePrefix), m_testable);
+    }
+    if (m_trackable_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("trackable"), namePrefix), m_trackable);
+    }
+    if (m_r_virtual_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("virtual"), namePrefix), m_r_virtual);
+    }
+    if (m_units_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("units"), namePrefix), m_units);
+    }
+    if (m_pricing_max_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("pricing_max"), namePrefix), m_pricing_max);
+    }
+    return files;
+}
+
 qint32 PartBrief::getPk() const {
     return m_pk;
 }

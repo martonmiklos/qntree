@@ -146,6 +146,88 @@ QJsonObject PartRequirements::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> PartRequirements::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> PartRequirements::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_total_stock_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("total_stock"), namePrefix), m_total_stock);
+    }
+    if (m_unallocated_stock_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("unallocated_stock"), namePrefix), m_unallocated_stock);
+    }
+    if (m_can_build_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("can_build"), namePrefix), m_can_build);
+    }
+    if (m_ordering_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("ordering"), namePrefix), m_ordering);
+    }
+    if (m_building_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("building"), namePrefix), m_building);
+    }
+    if (m_scheduled_to_build_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("scheduled_to_build"), namePrefix), m_scheduled_to_build);
+    }
+    if (m_required_for_build_orders_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("required_for_build_orders"), namePrefix), m_required_for_build_orders);
+    }
+    if (m_allocated_to_build_orders_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("allocated_to_build_orders"), namePrefix), m_allocated_to_build_orders);
+    }
+    if (m_required_for_sales_orders_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("required_for_sales_orders"), namePrefix), m_required_for_sales_orders);
+    }
+    if (m_allocated_to_sales_orders_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("allocated_to_sales_orders"), namePrefix), m_allocated_to_sales_orders);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> PartRequirements::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> PartRequirements::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_total_stock_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("total_stock"), namePrefix), m_total_stock);
+    }
+    if (m_unallocated_stock_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("unallocated_stock"), namePrefix), m_unallocated_stock);
+    }
+    if (m_can_build_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("can_build"), namePrefix), m_can_build);
+    }
+    if (m_ordering_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("ordering"), namePrefix), m_ordering);
+    }
+    if (m_building_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("building"), namePrefix), m_building);
+    }
+    if (m_scheduled_to_build_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("scheduled_to_build"), namePrefix), m_scheduled_to_build);
+    }
+    if (m_required_for_build_orders_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("required_for_build_orders"), namePrefix), m_required_for_build_orders);
+    }
+    if (m_allocated_to_build_orders_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("allocated_to_build_orders"), namePrefix), m_allocated_to_build_orders);
+    }
+    if (m_required_for_sales_orders_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("required_for_sales_orders"), namePrefix), m_required_for_sales_orders);
+    }
+    if (m_allocated_to_sales_orders_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("allocated_to_sales_orders"), namePrefix), m_allocated_to_sales_orders);
+    }
+    return files;
+}
+
 double PartRequirements::getTotalStock() const {
     return m_total_stock;
 }

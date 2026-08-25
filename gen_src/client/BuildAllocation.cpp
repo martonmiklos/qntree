@@ -65,6 +65,34 @@ QJsonObject BuildAllocation::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> BuildAllocation::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> BuildAllocation::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_items.size() > 0) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("items"), namePrefix), m_items);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> BuildAllocation::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> BuildAllocation::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_items.size() > 0) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("items"), namePrefix), m_items);
+    }
+    return files;
+}
+
 QList<BuildAllocationItem> BuildAllocation::getItems() const {
     return m_items;
 }

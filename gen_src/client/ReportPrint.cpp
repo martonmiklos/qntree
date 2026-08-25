@@ -74,6 +74,40 @@ QJsonObject ReportPrint::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> ReportPrint::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> ReportPrint::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_r_template_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("template"), namePrefix), m_r_template);
+    }
+    if (m_items.size() > 0) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("items"), namePrefix), m_items);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> ReportPrint::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> ReportPrint::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_r_template_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("template"), namePrefix), m_r_template);
+    }
+    if (m_items.size() > 0) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("items"), namePrefix), m_items);
+    }
+    return files;
+}
+
 qint32 ReportPrint::getRTemplate() const {
     return m_r_template;
 }

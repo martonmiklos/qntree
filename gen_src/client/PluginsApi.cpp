@@ -292,9 +292,17 @@ void PluginsApi::pluginsActivatePartialUpdate(const QString &plugin, const ::Inv
     if (patched_plugin_activate.hasValue()){
 
         
-        QByteArray output = patched_plugin_activate.value().asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = patched_plugin_activate.value().asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = patched_plugin_activate.value().asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = patched_plugin_activate.value().asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -315,9 +323,9 @@ void PluginsApi::pluginsActivatePartialUpdate(const QString &plugin, const ::Inv
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("a:superuser");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -341,9 +349,9 @@ void PluginsApi::pluginsActivatePartialUpdate(const QString &plugin, const ::Inv
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("a:superuser");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -404,32 +412,6 @@ void PluginsApi::pluginsActivatePartialUpdateCallback(HttpRequestWorker *worker)
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT pluginsActivatePartialUpdateSignalE(output, error_type, error_str);
-        Q_EMIT pluginsActivatePartialUpdateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT pluginsActivatePartialUpdateSignalError(output, error_type, error_str);
         Q_EMIT pluginsActivatePartialUpdateSignalErrorFull(worker, error_type, error_str);
     }
@@ -469,9 +451,17 @@ void PluginsApi::pluginsActivateUpdate(const QString &plugin, const ::InvenTree:
     if (plugin_activate.hasValue()){
 
         
-        QByteArray output = plugin_activate.value().asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = plugin_activate.value().asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = plugin_activate.value().asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = plugin_activate.value().asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -492,9 +482,9 @@ void PluginsApi::pluginsActivateUpdate(const QString &plugin, const ::InvenTree:
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("a:superuser");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -518,9 +508,9 @@ void PluginsApi::pluginsActivateUpdate(const QString &plugin, const ::InvenTree:
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("a:superuser");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -581,32 +571,6 @@ void PluginsApi::pluginsActivateUpdateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT pluginsActivateUpdateSignalE(output, error_type, error_str);
-        Q_EMIT pluginsActivateUpdateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT pluginsActivateUpdateSignalError(output, error_type, error_str);
         Q_EMIT pluginsActivateUpdateSignalErrorFull(worker, error_type, error_str);
     }
@@ -664,9 +628,9 @@ void PluginsApi::pluginsAdminRetrieve(const QString &plugin) {
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("r:view:admin");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -690,9 +654,9 @@ void PluginsApi::pluginsAdminRetrieve(const QString &plugin) {
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("r:view:admin");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -753,32 +717,6 @@ void PluginsApi::pluginsAdminRetrieveCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT pluginsAdminRetrieveSignalE(output, error_type, error_str);
-        Q_EMIT pluginsAdminRetrieveSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT pluginsAdminRetrieveSignalError(output, error_type, error_str);
         Q_EMIT pluginsAdminRetrieveSignalErrorFull(worker, error_type, error_str);
     }
@@ -836,9 +774,9 @@ void PluginsApi::pluginsDestroy(const QString &plugin) {
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("a:superuser");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -862,9 +800,9 @@ void PluginsApi::pluginsDestroy(const QString &plugin) {
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("a:superuser");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -924,32 +862,6 @@ void PluginsApi::pluginsDestroyCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT pluginsDestroySignalE(error_type, error_str);
-        Q_EMIT pluginsDestroySignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT pluginsDestroySignalError(error_type, error_str);
         Q_EMIT pluginsDestroySignalErrorFull(worker, error_type, error_str);
     }
@@ -975,9 +887,17 @@ void PluginsApi::pluginsInstallCreate(const PluginConfigInstall &plugin_config_i
     {
 
         
-        QByteArray output = plugin_config_install.asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = plugin_config_install.asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = plugin_config_install.asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = plugin_config_install.asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -998,9 +918,9 @@ void PluginsApi::pluginsInstallCreate(const PluginConfigInstall &plugin_config_i
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("g:read");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -1024,9 +944,9 @@ void PluginsApi::pluginsInstallCreate(const PluginConfigInstall &plugin_config_i
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("g:read");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -1087,32 +1007,6 @@ void PluginsApi::pluginsInstallCreateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT pluginsInstallCreateSignalE(output, error_type, error_str);
-        Q_EMIT pluginsInstallCreateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT pluginsInstallCreateSignalError(output, error_type, error_str);
         Q_EMIT pluginsInstallCreateSignalErrorFull(worker, error_type, error_str);
     }
@@ -1307,9 +1201,9 @@ void PluginsApi::pluginsList(const qint32 &limit, const ::InvenTree::OptionalPar
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("g:read");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -1333,9 +1227,9 @@ void PluginsApi::pluginsList(const qint32 &limit, const ::InvenTree::OptionalPar
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("g:read");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -1396,32 +1290,6 @@ void PluginsApi::pluginsListCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT pluginsListSignalE(output, error_type, error_str);
-        Q_EMIT pluginsListSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT pluginsListSignalError(output, error_type, error_str);
         Q_EMIT pluginsListSignalErrorFull(worker, error_type, error_str);
     }
@@ -1447,9 +1315,17 @@ void PluginsApi::pluginsReloadCreate(const ::InvenTree::OptionalParam<PluginRelo
     if (plugin_reload.hasValue()){
 
         
-        QByteArray output = plugin_reload.value().asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = plugin_reload.value().asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = plugin_reload.value().asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = plugin_reload.value().asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -1470,9 +1346,9 @@ void PluginsApi::pluginsReloadCreate(const ::InvenTree::OptionalParam<PluginRelo
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("a:superuser");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -1496,9 +1372,9 @@ void PluginsApi::pluginsReloadCreate(const ::InvenTree::OptionalParam<PluginRelo
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("a:superuser");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -1559,32 +1435,6 @@ void PluginsApi::pluginsReloadCreateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT pluginsReloadCreateSignalE(output, error_type, error_str);
-        Q_EMIT pluginsReloadCreateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT pluginsReloadCreateSignalError(output, error_type, error_str);
         Q_EMIT pluginsReloadCreateSignalErrorFull(worker, error_type, error_str);
     }
@@ -1642,9 +1492,9 @@ void PluginsApi::pluginsRetrieve(const QString &plugin) {
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("g:read");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -1668,9 +1518,9 @@ void PluginsApi::pluginsRetrieve(const QString &plugin) {
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("g:read");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -1731,32 +1581,6 @@ void PluginsApi::pluginsRetrieveCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT pluginsRetrieveSignalE(output, error_type, error_str);
-        Q_EMIT pluginsRetrieveSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT pluginsRetrieveSignalError(output, error_type, error_str);
         Q_EMIT pluginsRetrieveSignalErrorFull(worker, error_type, error_str);
     }
@@ -1814,9 +1638,9 @@ void PluginsApi::pluginsSettingsList(const QString &plugin) {
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("g:read");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -1840,9 +1664,9 @@ void PluginsApi::pluginsSettingsList(const QString &plugin) {
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("g:read");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -1873,7 +1697,7 @@ void PluginsApi::pluginsSettingsListCallback(HttpRequestWorker *worker) {
         error_str = QString("%1, %2").arg(worker->error_str, QString(worker->response));
     }
     QList<PluginSetting> output;
-    const QString &json(worker->response) ;
+    QString json(worker->response);
     QByteArray array(json.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonArray jsonArray = doc.array();
@@ -1912,32 +1736,6 @@ void PluginsApi::pluginsSettingsListCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT pluginsSettingsListSignalE(output, error_type, error_str);
-        Q_EMIT pluginsSettingsListSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT pluginsSettingsListSignalError(output, error_type, error_str);
         Q_EMIT pluginsSettingsListSignalErrorFull(worker, error_type, error_str);
     }
@@ -2042,9 +1840,9 @@ void PluginsApi::pluginsSettingsListAll(const qint32 &limit, const ::InvenTree::
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("g:read");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -2068,9 +1866,9 @@ void PluginsApi::pluginsSettingsListAll(const qint32 &limit, const ::InvenTree::
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("g:read");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -2131,32 +1929,6 @@ void PluginsApi::pluginsSettingsListAllCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT pluginsSettingsListAllSignalE(output, error_type, error_str);
-        Q_EMIT pluginsSettingsListAllSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT pluginsSettingsListAllSignalError(output, error_type, error_str);
         Q_EMIT pluginsSettingsListAllSignalErrorFull(worker, error_type, error_str);
     }
@@ -2210,9 +1982,17 @@ void PluginsApi::pluginsSettingsPartialUpdate(const QString &key, const QString 
     if (patched_plugin_setting.hasValue()){
 
         
-        QByteArray output = patched_plugin_setting.value().asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = patched_plugin_setting.value().asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = patched_plugin_setting.value().asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = patched_plugin_setting.value().asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -2233,9 +2013,9 @@ void PluginsApi::pluginsSettingsPartialUpdate(const QString &key, const QString 
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("a:staff");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -2259,9 +2039,9 @@ void PluginsApi::pluginsSettingsPartialUpdate(const QString &key, const QString 
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("a:staff");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -2322,32 +2102,6 @@ void PluginsApi::pluginsSettingsPartialUpdateCallback(HttpRequestWorker *worker)
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT pluginsSettingsPartialUpdateSignalE(output, error_type, error_str);
-        Q_EMIT pluginsSettingsPartialUpdateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT pluginsSettingsPartialUpdateSignalError(output, error_type, error_str);
         Q_EMIT pluginsSettingsPartialUpdateSignalErrorFull(worker, error_type, error_str);
     }
@@ -2419,9 +2173,9 @@ void PluginsApi::pluginsSettingsRetrieve(const QString &key, const QString &plug
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("g:read");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -2445,9 +2199,9 @@ void PluginsApi::pluginsSettingsRetrieve(const QString &key, const QString &plug
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("g:read");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -2508,32 +2262,6 @@ void PluginsApi::pluginsSettingsRetrieveCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT pluginsSettingsRetrieveSignalE(output, error_type, error_str);
-        Q_EMIT pluginsSettingsRetrieveSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT pluginsSettingsRetrieveSignalError(output, error_type, error_str);
         Q_EMIT pluginsSettingsRetrieveSignalErrorFull(worker, error_type, error_str);
     }
@@ -2587,9 +2315,17 @@ void PluginsApi::pluginsSettingsUpdate(const QString &key, const QString &plugin
     {
 
         
-        QByteArray output = plugin_setting.asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = plugin_setting.asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = plugin_setting.asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = plugin_setting.asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -2610,9 +2346,9 @@ void PluginsApi::pluginsSettingsUpdate(const QString &key, const QString &plugin
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("a:staff");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -2636,9 +2372,9 @@ void PluginsApi::pluginsSettingsUpdate(const QString &key, const QString &plugin
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("a:staff");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -2699,32 +2435,6 @@ void PluginsApi::pluginsSettingsUpdateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT pluginsSettingsUpdateSignalE(output, error_type, error_str);
-        Q_EMIT pluginsSettingsUpdateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT pluginsSettingsUpdateSignalError(output, error_type, error_str);
         Q_EMIT pluginsSettingsUpdateSignalErrorFull(worker, error_type, error_str);
     }
@@ -2768,9 +2478,9 @@ void PluginsApi::pluginsStatusRetrieve() {
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("a:superuser");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -2794,9 +2504,9 @@ void PluginsApi::pluginsStatusRetrieve() {
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("a:superuser");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -2857,32 +2567,6 @@ void PluginsApi::pluginsStatusRetrieveCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT pluginsStatusRetrieveSignalE(output, error_type, error_str);
-        Q_EMIT pluginsStatusRetrieveSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT pluginsStatusRetrieveSignalError(output, error_type, error_str);
         Q_EMIT pluginsStatusRetrieveSignalErrorFull(worker, error_type, error_str);
     }
@@ -2940,9 +2624,9 @@ void PluginsApi::pluginsUiFeaturesList(const QString &feature) {
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("g:read");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -2966,9 +2650,9 @@ void PluginsApi::pluginsUiFeaturesList(const QString &feature) {
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("g:read");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -2999,7 +2683,7 @@ void PluginsApi::pluginsUiFeaturesListCallback(HttpRequestWorker *worker) {
         error_str = QString("%1, %2").arg(worker->error_str, QString(worker->response));
     }
     QList<PluginUIFeature> output;
-    const QString &json(worker->response) ;
+    QString json(worker->response);
     QByteArray array(json.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonArray jsonArray = doc.array();
@@ -3038,32 +2722,6 @@ void PluginsApi::pluginsUiFeaturesListCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT pluginsUiFeaturesListSignalE(output, error_type, error_str);
-        Q_EMIT pluginsUiFeaturesListSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT pluginsUiFeaturesListSignalError(output, error_type, error_str);
         Q_EMIT pluginsUiFeaturesListSignalErrorFull(worker, error_type, error_str);
     }
@@ -3103,9 +2761,17 @@ void PluginsApi::pluginsUninstallPartialUpdate(const QString &plugin, const ::In
     if (patched_plugin_uninstall.hasValue()){
 
         
-        QByteArray output = patched_plugin_uninstall.value().asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = patched_plugin_uninstall.value().asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = patched_plugin_uninstall.value().asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = patched_plugin_uninstall.value().asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -3126,9 +2792,9 @@ void PluginsApi::pluginsUninstallPartialUpdate(const QString &plugin, const ::In
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("a:superuser");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -3152,9 +2818,9 @@ void PluginsApi::pluginsUninstallPartialUpdate(const QString &plugin, const ::In
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("a:superuser");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -3215,32 +2881,6 @@ void PluginsApi::pluginsUninstallPartialUpdateCallback(HttpRequestWorker *worker
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT pluginsUninstallPartialUpdateSignalE(output, error_type, error_str);
-        Q_EMIT pluginsUninstallPartialUpdateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT pluginsUninstallPartialUpdateSignalError(output, error_type, error_str);
         Q_EMIT pluginsUninstallPartialUpdateSignalErrorFull(worker, error_type, error_str);
     }
@@ -3280,9 +2920,17 @@ void PluginsApi::pluginsUninstallUpdate(const QString &plugin, const ::InvenTree
     if (plugin_uninstall.hasValue()){
 
         
-        QByteArray output = plugin_uninstall.value().asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = plugin_uninstall.value().asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = plugin_uninstall.value().asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = plugin_uninstall.value().asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -3303,9 +2951,9 @@ void PluginsApi::pluginsUninstallUpdate(const QString &plugin, const ::InvenTree
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("a:superuser");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -3329,9 +2977,9 @@ void PluginsApi::pluginsUninstallUpdate(const QString &plugin, const ::InvenTree
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("a:superuser");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -3392,32 +3040,6 @@ void PluginsApi::pluginsUninstallUpdateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT pluginsUninstallUpdateSignalE(output, error_type, error_str);
-        Q_EMIT pluginsUninstallUpdateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT pluginsUninstallUpdateSignalError(output, error_type, error_str);
         Q_EMIT pluginsUninstallUpdateSignalErrorFull(worker, error_type, error_str);
     }
@@ -3475,9 +3097,9 @@ void PluginsApi::pluginsUserSettingsList(const QString &plugin) {
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("g:read");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -3501,9 +3123,9 @@ void PluginsApi::pluginsUserSettingsList(const QString &plugin) {
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("g:read");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -3534,7 +3156,7 @@ void PluginsApi::pluginsUserSettingsListCallback(HttpRequestWorker *worker) {
         error_str = QString("%1, %2").arg(worker->error_str, QString(worker->response));
     }
     QList<PluginUserSetting> output;
-    const QString &json(worker->response) ;
+    QString json(worker->response);
     QByteArray array(json.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonArray jsonArray = doc.array();
@@ -3573,32 +3195,6 @@ void PluginsApi::pluginsUserSettingsListCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT pluginsUserSettingsListSignalE(output, error_type, error_str);
-        Q_EMIT pluginsUserSettingsListSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT pluginsUserSettingsListSignalError(output, error_type, error_str);
         Q_EMIT pluginsUserSettingsListSignalErrorFull(worker, error_type, error_str);
     }
@@ -3652,9 +3248,17 @@ void PluginsApi::pluginsUserSettingsPartialUpdate(const QString &key, const QStr
     if (patched_plugin_user_setting.hasValue()){
 
         
-        QByteArray output = patched_plugin_user_setting.value().asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = patched_plugin_user_setting.value().asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = patched_plugin_user_setting.value().asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = patched_plugin_user_setting.value().asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -3675,9 +3279,9 @@ void PluginsApi::pluginsUserSettingsPartialUpdate(const QString &key, const QStr
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("g:read");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -3701,9 +3305,9 @@ void PluginsApi::pluginsUserSettingsPartialUpdate(const QString &key, const QStr
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("g:read");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -3764,32 +3368,6 @@ void PluginsApi::pluginsUserSettingsPartialUpdateCallback(HttpRequestWorker *wor
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT pluginsUserSettingsPartialUpdateSignalE(output, error_type, error_str);
-        Q_EMIT pluginsUserSettingsPartialUpdateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT pluginsUserSettingsPartialUpdateSignalError(output, error_type, error_str);
         Q_EMIT pluginsUserSettingsPartialUpdateSignalErrorFull(worker, error_type, error_str);
     }
@@ -3861,9 +3439,9 @@ void PluginsApi::pluginsUserSettingsRetrieve(const QString &key, const QString &
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("g:read");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -3887,9 +3465,9 @@ void PluginsApi::pluginsUserSettingsRetrieve(const QString &key, const QString &
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("g:read");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -3950,32 +3528,6 @@ void PluginsApi::pluginsUserSettingsRetrieveCallback(HttpRequestWorker *worker) 
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT pluginsUserSettingsRetrieveSignalE(output, error_type, error_str);
-        Q_EMIT pluginsUserSettingsRetrieveSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT pluginsUserSettingsRetrieveSignalError(output, error_type, error_str);
         Q_EMIT pluginsUserSettingsRetrieveSignalErrorFull(worker, error_type, error_str);
     }
@@ -4029,9 +3581,17 @@ void PluginsApi::pluginsUserSettingsUpdate(const QString &key, const QString &pl
     {
 
         
-        QByteArray output = plugin_user_setting.asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = plugin_user_setting.asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = plugin_user_setting.asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = plugin_user_setting.asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -4052,9 +3612,9 @@ void PluginsApi::pluginsUserSettingsUpdate(const QString &key, const QString &pl
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("g:read");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -4078,9 +3638,9 @@ void PluginsApi::pluginsUserSettingsUpdate(const QString &key, const QString &pl
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("g:read");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -4141,32 +3701,6 @@ void PluginsApi::pluginsUserSettingsUpdateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT pluginsUserSettingsUpdateSignalE(output, error_type, error_str);
-        Q_EMIT pluginsUserSettingsUpdateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT pluginsUserSettingsUpdateSignalError(output, error_type, error_str);
         Q_EMIT pluginsUserSettingsUpdateSignalErrorFull(worker, error_type, error_str);
     }

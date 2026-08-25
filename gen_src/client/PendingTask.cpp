@@ -128,6 +128,76 @@ QJsonObject PendingTask::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> PendingTask::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> PendingTask::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_pk_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_key_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("key"), namePrefix), m_key);
+    }
+    if (m_lock_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("lock"), namePrefix), m_lock);
+    }
+    if (m_task_id_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("task_id"), namePrefix), m_task_id);
+    }
+    if (m_name_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("name"), namePrefix), m_name);
+    }
+    if (m_func_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("func"), namePrefix), m_func);
+    }
+    if (m_args_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("args"), namePrefix), m_args);
+    }
+    if (m_kwargs_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("kwargs"), namePrefix), m_kwargs);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> PendingTask::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> PendingTask::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_pk_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_key_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("key"), namePrefix), m_key);
+    }
+    if (m_lock_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("lock"), namePrefix), m_lock);
+    }
+    if (m_task_id_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("task_id"), namePrefix), m_task_id);
+    }
+    if (m_name_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("name"), namePrefix), m_name);
+    }
+    if (m_func_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("func"), namePrefix), m_func);
+    }
+    if (m_args_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("args"), namePrefix), m_args);
+    }
+    if (m_kwargs_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("kwargs"), namePrefix), m_kwargs);
+    }
+    return files;
+}
+
 qint32 PendingTask::getPk() const {
     return m_pk;
 }

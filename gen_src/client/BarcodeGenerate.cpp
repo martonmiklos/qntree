@@ -74,6 +74,40 @@ QJsonObject BarcodeGenerate::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> BarcodeGenerate::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> BarcodeGenerate::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_model_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("model"), namePrefix), m_model);
+    }
+    if (m_pk_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> BarcodeGenerate::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> BarcodeGenerate::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_model_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("model"), namePrefix), m_model);
+    }
+    if (m_pk_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    return files;
+}
+
 QString BarcodeGenerate::getModel() const {
     return m_model;
 }

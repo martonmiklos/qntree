@@ -83,6 +83,46 @@ QJsonObject PluginRegistryError::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> PluginRegistryError::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> PluginRegistryError::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_stage_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("stage"), namePrefix), m_stage);
+    }
+    if (m_name_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("name"), namePrefix), m_name);
+    }
+    if (m_message_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("message"), namePrefix), m_message);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> PluginRegistryError::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> PluginRegistryError::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_stage_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("stage"), namePrefix), m_stage);
+    }
+    if (m_name_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("name"), namePrefix), m_name);
+    }
+    if (m_message_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("message"), namePrefix), m_message);
+    }
+    return files;
+}
+
 QString PluginRegistryError::getStage() const {
     return m_stage;
 }

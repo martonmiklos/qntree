@@ -110,6 +110,64 @@ QJsonObject LocationTree::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> LocationTree::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> LocationTree::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_pk_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_name_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("name"), namePrefix), m_name);
+    }
+    if (m_parent_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("parent"), namePrefix), m_parent);
+    }
+    if (m_icon_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("icon"), namePrefix), m_icon);
+    }
+    if (m_structural_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("structural"), namePrefix), m_structural);
+    }
+    if (m_sublocations_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("sublocations"), namePrefix), m_sublocations);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> LocationTree::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> LocationTree::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_pk_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_name_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("name"), namePrefix), m_name);
+    }
+    if (m_parent_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("parent"), namePrefix), m_parent);
+    }
+    if (m_icon_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("icon"), namePrefix), m_icon);
+    }
+    if (m_structural_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("structural"), namePrefix), m_structural);
+    }
+    if (m_sublocations_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("sublocations"), namePrefix), m_sublocations);
+    }
+    return files;
+}
+
 qint32 LocationTree::getPk() const {
     return m_pk;
 }

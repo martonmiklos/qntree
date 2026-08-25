@@ -137,6 +137,82 @@ QJsonObject FailedTask::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> FailedTask::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> FailedTask::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_pk_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_name_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("name"), namePrefix), m_name);
+    }
+    if (m_func_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("func"), namePrefix), m_func);
+    }
+    if (m_args_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("args"), namePrefix), m_args);
+    }
+    if (m_kwargs_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("kwargs"), namePrefix), m_kwargs);
+    }
+    if (m_started_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("started"), namePrefix), m_started);
+    }
+    if (m_stopped_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("stopped"), namePrefix), m_stopped);
+    }
+    if (m_attempt_count_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("attempt_count"), namePrefix), m_attempt_count);
+    }
+    if (m_result_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("result"), namePrefix), m_result);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> FailedTask::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> FailedTask::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_pk_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_name_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("name"), namePrefix), m_name);
+    }
+    if (m_func_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("func"), namePrefix), m_func);
+    }
+    if (m_args_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("args"), namePrefix), m_args);
+    }
+    if (m_kwargs_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("kwargs"), namePrefix), m_kwargs);
+    }
+    if (m_started_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("started"), namePrefix), m_started);
+    }
+    if (m_stopped_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("stopped"), namePrefix), m_stopped);
+    }
+    if (m_attempt_count_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("attempt_count"), namePrefix), m_attempt_count);
+    }
+    if (m_result_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("result"), namePrefix), m_result);
+    }
+    return files;
+}
+
 QString FailedTask::getPk() const {
     return m_pk;
 }

@@ -65,6 +65,34 @@ QJsonObject StockAssignmentItem::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> StockAssignmentItem::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> StockAssignmentItem::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_item_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("item"), namePrefix), m_item);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> StockAssignmentItem::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> StockAssignmentItem::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_item_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("item"), namePrefix), m_item);
+    }
+    return files;
+}
+
 qint32 StockAssignmentItem::getItem() const {
     return m_item;
 }

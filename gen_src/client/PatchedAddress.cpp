@@ -173,6 +173,106 @@ QJsonObject PatchedAddress::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> PatchedAddress::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> PatchedAddress::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_pk_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_company_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("company"), namePrefix), m_company);
+    }
+    if (m_title_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("title"), namePrefix), m_title);
+    }
+    if (m_primary_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("primary"), namePrefix), m_primary);
+    }
+    if (m_line1_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("line1"), namePrefix), m_line1);
+    }
+    if (m_line2_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("line2"), namePrefix), m_line2);
+    }
+    if (m_postal_code_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("postal_code"), namePrefix), m_postal_code);
+    }
+    if (m_postal_city_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("postal_city"), namePrefix), m_postal_city);
+    }
+    if (m_province_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("province"), namePrefix), m_province);
+    }
+    if (m_country_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("country"), namePrefix), m_country);
+    }
+    if (m_shipping_notes_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("shipping_notes"), namePrefix), m_shipping_notes);
+    }
+    if (m_internal_shipping_notes_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("internal_shipping_notes"), namePrefix), m_internal_shipping_notes);
+    }
+    if (m_link_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("link"), namePrefix), m_link);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> PatchedAddress::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> PatchedAddress::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_pk_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_company_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("company"), namePrefix), m_company);
+    }
+    if (m_title_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("title"), namePrefix), m_title);
+    }
+    if (m_primary_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("primary"), namePrefix), m_primary);
+    }
+    if (m_line1_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("line1"), namePrefix), m_line1);
+    }
+    if (m_line2_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("line2"), namePrefix), m_line2);
+    }
+    if (m_postal_code_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("postal_code"), namePrefix), m_postal_code);
+    }
+    if (m_postal_city_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("postal_city"), namePrefix), m_postal_city);
+    }
+    if (m_province_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("province"), namePrefix), m_province);
+    }
+    if (m_country_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("country"), namePrefix), m_country);
+    }
+    if (m_shipping_notes_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("shipping_notes"), namePrefix), m_shipping_notes);
+    }
+    if (m_internal_shipping_notes_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("internal_shipping_notes"), namePrefix), m_internal_shipping_notes);
+    }
+    if (m_link_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("link"), namePrefix), m_link);
+    }
+    return files;
+}
+
 qint32 PatchedAddress::getPk() const {
     return m_pk;
 }

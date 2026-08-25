@@ -74,6 +74,40 @@ QJsonObject BuildConsumeAllocation::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> BuildConsumeAllocation::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> BuildConsumeAllocation::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_build_item_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("build_item"), namePrefix), m_build_item);
+    }
+    if (m_quantity_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("quantity"), namePrefix), m_quantity);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> BuildConsumeAllocation::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> BuildConsumeAllocation::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_build_item_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("build_item"), namePrefix), m_build_item);
+    }
+    if (m_quantity_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("quantity"), namePrefix), m_quantity);
+    }
+    return files;
+}
+
 qint32 BuildConsumeAllocation::getBuildItem() const {
     return m_build_item;
 }

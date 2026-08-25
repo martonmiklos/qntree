@@ -65,6 +65,34 @@ QJsonObject BuildConsumeLineItem::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> BuildConsumeLineItem::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> BuildConsumeLineItem::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_build_line_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("build_line"), namePrefix), m_build_line);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> BuildConsumeLineItem::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> BuildConsumeLineItem::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_build_line_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("build_line"), namePrefix), m_build_line);
+    }
+    return files;
+}
+
 qint32 BuildConsumeLineItem::getBuildLine() const {
     return m_build_line;
 }

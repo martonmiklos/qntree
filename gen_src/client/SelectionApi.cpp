@@ -260,9 +260,17 @@ void SelectionApi::selectionCreate(const SelectionList &selection_list) {
     {
 
         
-        QByteArray output = selection_list.asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = selection_list.asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = selection_list.asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = selection_list.asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -283,9 +291,9 @@ void SelectionApi::selectionCreate(const SelectionList &selection_list) {
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("g:read");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -309,9 +317,9 @@ void SelectionApi::selectionCreate(const SelectionList &selection_list) {
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("g:read");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -372,32 +380,6 @@ void SelectionApi::selectionCreateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT selectionCreateSignalE(output, error_type, error_str);
-        Q_EMIT selectionCreateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT selectionCreateSignalError(output, error_type, error_str);
         Q_EMIT selectionCreateSignalErrorFull(worker, error_type, error_str);
     }
@@ -455,9 +437,9 @@ void SelectionApi::selectionDestroy(const qint32 &id) {
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("g:read");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -481,9 +463,9 @@ void SelectionApi::selectionDestroy(const qint32 &id) {
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("g:read");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -543,32 +525,6 @@ void SelectionApi::selectionDestroyCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT selectionDestroySignalE(error_type, error_str);
-        Q_EMIT selectionDestroySignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT selectionDestroySignalError(error_type, error_str);
         Q_EMIT selectionDestroySignalErrorFull(worker, error_type, error_str);
     }
@@ -608,9 +564,17 @@ void SelectionApi::selectionEntryCreate(const qint32 &id, const SelectionEntry &
     {
 
         
-        QByteArray output = selection_entry.asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = selection_entry.asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = selection_entry.asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = selection_entry.asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -631,9 +595,9 @@ void SelectionApi::selectionEntryCreate(const qint32 &id, const SelectionEntry &
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("g:read");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -657,9 +621,9 @@ void SelectionApi::selectionEntryCreate(const qint32 &id, const SelectionEntry &
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("g:read");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -720,32 +684,6 @@ void SelectionApi::selectionEntryCreateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT selectionEntryCreateSignalE(output, error_type, error_str);
-        Q_EMIT selectionEntryCreateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT selectionEntryCreateSignalError(output, error_type, error_str);
         Q_EMIT selectionEntryCreateSignalErrorFull(worker, error_type, error_str);
     }
@@ -817,9 +755,9 @@ void SelectionApi::selectionEntryDestroy(const qint32 &entrypk, const qint32 &id
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("g:read");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -843,9 +781,9 @@ void SelectionApi::selectionEntryDestroy(const qint32 &entrypk, const qint32 &id
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("g:read");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -905,32 +843,6 @@ void SelectionApi::selectionEntryDestroyCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT selectionEntryDestroySignalE(error_type, error_str);
-        Q_EMIT selectionEntryDestroySignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT selectionEntryDestroySignalError(error_type, error_str);
         Q_EMIT selectionEntryDestroySignalErrorFull(worker, error_type, error_str);
     }
@@ -1019,9 +931,9 @@ void SelectionApi::selectionEntryList(const qint32 &id, const qint32 &limit, con
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("g:read");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -1045,9 +957,9 @@ void SelectionApi::selectionEntryList(const qint32 &id, const qint32 &limit, con
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("g:read");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -1108,32 +1020,6 @@ void SelectionApi::selectionEntryListCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT selectionEntryListSignalE(output, error_type, error_str);
-        Q_EMIT selectionEntryListSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT selectionEntryListSignalError(output, error_type, error_str);
         Q_EMIT selectionEntryListSignalErrorFull(worker, error_type, error_str);
     }
@@ -1187,9 +1073,17 @@ void SelectionApi::selectionEntryPartialUpdate(const qint32 &entrypk, const qint
     if (patched_selection_entry.hasValue()){
 
         
-        QByteArray output = patched_selection_entry.value().asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = patched_selection_entry.value().asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = patched_selection_entry.value().asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = patched_selection_entry.value().asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -1210,9 +1104,9 @@ void SelectionApi::selectionEntryPartialUpdate(const qint32 &entrypk, const qint
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("g:read");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -1236,9 +1130,9 @@ void SelectionApi::selectionEntryPartialUpdate(const qint32 &entrypk, const qint
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("g:read");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -1299,32 +1193,6 @@ void SelectionApi::selectionEntryPartialUpdateCallback(HttpRequestWorker *worker
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT selectionEntryPartialUpdateSignalE(output, error_type, error_str);
-        Q_EMIT selectionEntryPartialUpdateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT selectionEntryPartialUpdateSignalError(output, error_type, error_str);
         Q_EMIT selectionEntryPartialUpdateSignalErrorFull(worker, error_type, error_str);
     }
@@ -1396,9 +1264,9 @@ void SelectionApi::selectionEntryRetrieve(const qint32 &entrypk, const qint32 &i
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("g:read");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -1422,9 +1290,9 @@ void SelectionApi::selectionEntryRetrieve(const qint32 &entrypk, const qint32 &i
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("g:read");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -1485,32 +1353,6 @@ void SelectionApi::selectionEntryRetrieveCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT selectionEntryRetrieveSignalE(output, error_type, error_str);
-        Q_EMIT selectionEntryRetrieveSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT selectionEntryRetrieveSignalError(output, error_type, error_str);
         Q_EMIT selectionEntryRetrieveSignalErrorFull(worker, error_type, error_str);
     }
@@ -1564,9 +1406,17 @@ void SelectionApi::selectionEntryUpdate(const qint32 &entrypk, const qint32 &id,
     {
 
         
-        QByteArray output = selection_entry.asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = selection_entry.asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = selection_entry.asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = selection_entry.asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -1587,9 +1437,9 @@ void SelectionApi::selectionEntryUpdate(const qint32 &entrypk, const qint32 &id,
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("g:read");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -1613,9 +1463,9 @@ void SelectionApi::selectionEntryUpdate(const qint32 &entrypk, const qint32 &id,
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("g:read");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -1676,32 +1526,6 @@ void SelectionApi::selectionEntryUpdateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT selectionEntryUpdateSignalE(output, error_type, error_str);
-        Q_EMIT selectionEntryUpdateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT selectionEntryUpdateSignalError(output, error_type, error_str);
         Q_EMIT selectionEntryUpdateSignalErrorFull(worker, error_type, error_str);
     }
@@ -1776,9 +1600,9 @@ void SelectionApi::selectionList(const qint32 &limit, const ::InvenTree::Optiona
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("g:read");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -1802,9 +1626,9 @@ void SelectionApi::selectionList(const qint32 &limit, const ::InvenTree::Optiona
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("g:read");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -1865,32 +1689,6 @@ void SelectionApi::selectionListCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT selectionListSignalE(output, error_type, error_str);
-        Q_EMIT selectionListSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT selectionListSignalError(output, error_type, error_str);
         Q_EMIT selectionListSignalErrorFull(worker, error_type, error_str);
     }
@@ -1930,9 +1728,17 @@ void SelectionApi::selectionPartialUpdate(const qint32 &id, const ::InvenTree::O
     if (patched_selection_list.hasValue()){
 
         
-        QByteArray output = patched_selection_list.value().asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = patched_selection_list.value().asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = patched_selection_list.value().asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = patched_selection_list.value().asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -1953,9 +1759,9 @@ void SelectionApi::selectionPartialUpdate(const qint32 &id, const ::InvenTree::O
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("g:read");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -1979,9 +1785,9 @@ void SelectionApi::selectionPartialUpdate(const qint32 &id, const ::InvenTree::O
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("g:read");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -2042,32 +1848,6 @@ void SelectionApi::selectionPartialUpdateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT selectionPartialUpdateSignalE(output, error_type, error_str);
-        Q_EMIT selectionPartialUpdateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT selectionPartialUpdateSignalError(output, error_type, error_str);
         Q_EMIT selectionPartialUpdateSignalErrorFull(worker, error_type, error_str);
     }
@@ -2125,9 +1905,9 @@ void SelectionApi::selectionRetrieve(const qint32 &id) {
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("g:read");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -2151,9 +1931,9 @@ void SelectionApi::selectionRetrieve(const qint32 &id) {
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("g:read");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -2214,32 +1994,6 @@ void SelectionApi::selectionRetrieveCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT selectionRetrieveSignalE(output, error_type, error_str);
-        Q_EMIT selectionRetrieveSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT selectionRetrieveSignalError(output, error_type, error_str);
         Q_EMIT selectionRetrieveSignalErrorFull(worker, error_type, error_str);
     }
@@ -2279,9 +2033,17 @@ void SelectionApi::selectionUpdate(const qint32 &id, const SelectionList &select
     {
 
         
-        QByteArray output = selection_list.asJson().toUtf8();
-        input.request_body.append(output);
-    }
+        QList<HttpFileElement> requestBodyFiles = selection_list.asFileElements();
+        if (!requestBodyFiles.isEmpty()) {
+            input.vars = selection_list.asFormVariables();
+            for (const auto &file : requestBodyFiles) {
+                input.add_file_element(file);
+            }
+        } else {
+            QByteArray output = selection_list.asJson().toUtf8();
+            input.request_body.append(output);
+        }
+            }
     for (auto keyValueIt = _defaultHeaders.keyValueBegin(); keyValueIt != _defaultHeaders.keyValueEnd(); keyValueIt++) {
         input.headers.insert(keyValueIt->first, keyValueIt->second);
     }
@@ -2302,9 +2064,9 @@ void SelectionApi::selectionUpdate(const qint32 &id, const SelectionList &select
     _credentialFlow.link();
     QStringList scopeClientCredentialsFlow;
     scopeClientCredentialsFlow.append("g:read");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -2328,9 +2090,9 @@ void SelectionApi::selectionUpdate(const qint32 &id, const SelectionList &select
     _authFlow.link();
     QStringList scopeAuthorizationFlow;
     scopeAuthorizationFlow.append("g:read");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -2391,32 +2153,6 @@ void SelectionApi::selectionUpdateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT selectionUpdateSignalE(output, error_type, error_str);
-        Q_EMIT selectionUpdateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT selectionUpdateSignalError(output, error_type, error_str);
         Q_EMIT selectionUpdateSignalErrorFull(worker, error_type, error_str);
     }

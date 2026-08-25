@@ -200,6 +200,124 @@ QJsonObject Location::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> Location::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> Location::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_pk_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_barcode_hash_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("barcode_hash"), namePrefix), m_barcode_hash);
+    }
+    if (m_name_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("name"), namePrefix), m_name);
+    }
+    if (m_level_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("level"), namePrefix), m_level);
+    }
+    if (m_description_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("description"), namePrefix), m_description);
+    }
+    if (m_parent_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("parent"), namePrefix), m_parent);
+    }
+    if (m_pathstring_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("pathstring"), namePrefix), m_pathstring);
+    }
+    if (m_items_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("items"), namePrefix), m_items);
+    }
+    if (m_sublocations_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("sublocations"), namePrefix), m_sublocations);
+    }
+    if (m_owner_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("owner"), namePrefix), m_owner);
+    }
+    if (m_icon_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("icon"), namePrefix), m_icon);
+    }
+    if (m_custom_icon_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("custom_icon"), namePrefix), m_custom_icon);
+    }
+    if (m_structural_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("structural"), namePrefix), m_structural);
+    }
+    if (m_external_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("external"), namePrefix), m_external);
+    }
+    if (m_location_type_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("location_type"), namePrefix), m_location_type);
+    }
+    if (m_location_type_detail.isSet()) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("location_type_detail"), namePrefix), m_location_type_detail);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> Location::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> Location::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_pk_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_barcode_hash_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("barcode_hash"), namePrefix), m_barcode_hash);
+    }
+    if (m_name_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("name"), namePrefix), m_name);
+    }
+    if (m_level_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("level"), namePrefix), m_level);
+    }
+    if (m_description_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("description"), namePrefix), m_description);
+    }
+    if (m_parent_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("parent"), namePrefix), m_parent);
+    }
+    if (m_pathstring_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("pathstring"), namePrefix), m_pathstring);
+    }
+    if (m_items_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("items"), namePrefix), m_items);
+    }
+    if (m_sublocations_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("sublocations"), namePrefix), m_sublocations);
+    }
+    if (m_owner_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("owner"), namePrefix), m_owner);
+    }
+    if (m_icon_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("icon"), namePrefix), m_icon);
+    }
+    if (m_custom_icon_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("custom_icon"), namePrefix), m_custom_icon);
+    }
+    if (m_structural_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("structural"), namePrefix), m_structural);
+    }
+    if (m_external_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("external"), namePrefix), m_external);
+    }
+    if (m_location_type_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("location_type"), namePrefix), m_location_type);
+    }
+    if (m_location_type_detail.isSet()) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("location_type_detail"), namePrefix), m_location_type_detail);
+    }
+    return files;
+}
+
 qint32 Location::getPk() const {
     return m_pk;
 }

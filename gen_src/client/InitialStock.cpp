@@ -74,6 +74,40 @@ QJsonObject InitialStock::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> InitialStock::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> InitialStock::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_quantity_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("quantity"), namePrefix), m_quantity);
+    }
+    if (m_location_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("location"), namePrefix), m_location);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> InitialStock::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> InitialStock::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_quantity_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("quantity"), namePrefix), m_quantity);
+    }
+    if (m_location_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("location"), namePrefix), m_location);
+    }
+    return files;
+}
+
 QString InitialStock::getQuantity() const {
     return m_quantity;
 }

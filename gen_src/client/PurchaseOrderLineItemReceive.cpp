@@ -146,6 +146,88 @@ QJsonObject PurchaseOrderLineItemReceive::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> PurchaseOrderLineItemReceive::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> PurchaseOrderLineItemReceive::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_line_item_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("line_item"), namePrefix), m_line_item);
+    }
+    if (m_location_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("location"), namePrefix), m_location);
+    }
+    if (m_quantity_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("quantity"), namePrefix), m_quantity);
+    }
+    if (m_batch_code_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("batch_code"), namePrefix), m_batch_code);
+    }
+    if (m_expiry_date_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("expiry_date"), namePrefix), m_expiry_date);
+    }
+    if (m_serial_numbers_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("serial_numbers"), namePrefix), m_serial_numbers);
+    }
+    if (m_status_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("status"), namePrefix), m_status);
+    }
+    if (m_packaging_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("packaging"), namePrefix), m_packaging);
+    }
+    if (m_note_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("note"), namePrefix), m_note);
+    }
+    if (m_barcode_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("barcode"), namePrefix), m_barcode);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> PurchaseOrderLineItemReceive::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> PurchaseOrderLineItemReceive::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_line_item_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("line_item"), namePrefix), m_line_item);
+    }
+    if (m_location_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("location"), namePrefix), m_location);
+    }
+    if (m_quantity_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("quantity"), namePrefix), m_quantity);
+    }
+    if (m_batch_code_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("batch_code"), namePrefix), m_batch_code);
+    }
+    if (m_expiry_date_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("expiry_date"), namePrefix), m_expiry_date);
+    }
+    if (m_serial_numbers_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("serial_numbers"), namePrefix), m_serial_numbers);
+    }
+    if (m_status_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("status"), namePrefix), m_status);
+    }
+    if (m_packaging_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("packaging"), namePrefix), m_packaging);
+    }
+    if (m_note_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("note"), namePrefix), m_note);
+    }
+    if (m_barcode_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("barcode"), namePrefix), m_barcode);
+    }
+    return files;
+}
+
 qint32 PurchaseOrderLineItemReceive::getLineItem() const {
     return m_line_item;
 }

@@ -164,6 +164,100 @@ QJsonObject DataOutput::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> DataOutput::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> DataOutput::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_pk_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_created_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("created"), namePrefix), m_created);
+    }
+    if (m_user_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("user"), namePrefix), m_user);
+    }
+    if (m_user_detail.isSet()) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("user_detail"), namePrefix), m_user_detail);
+    }
+    if (m_total_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("total"), namePrefix), m_total);
+    }
+    if (m_progress_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("progress"), namePrefix), m_progress);
+    }
+    if (m_complete_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("complete"), namePrefix), m_complete);
+    }
+    if (m_output_type_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("output_type"), namePrefix), m_output_type);
+    }
+    if (m_template_name_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("template_name"), namePrefix), m_template_name);
+    }
+    if (m_plugin_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("plugin"), namePrefix), m_plugin);
+    }
+    if (m_output_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("output"), namePrefix), m_output);
+    }
+    if (m_errors_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("errors"), namePrefix), m_errors);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> DataOutput::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> DataOutput::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_pk_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_created_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("created"), namePrefix), m_created);
+    }
+    if (m_user_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("user"), namePrefix), m_user);
+    }
+    if (m_user_detail.isSet()) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("user_detail"), namePrefix), m_user_detail);
+    }
+    if (m_total_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("total"), namePrefix), m_total);
+    }
+    if (m_progress_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("progress"), namePrefix), m_progress);
+    }
+    if (m_complete_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("complete"), namePrefix), m_complete);
+    }
+    if (m_output_type_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("output_type"), namePrefix), m_output_type);
+    }
+    if (m_template_name_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("template_name"), namePrefix), m_template_name);
+    }
+    if (m_plugin_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("plugin"), namePrefix), m_plugin);
+    }
+    if (m_output_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("output"), namePrefix), m_output);
+    }
+    if (m_errors_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("errors"), namePrefix), m_errors);
+    }
+    return files;
+}
+
 qint32 DataOutput::getPk() const {
     return m_pk;
 }

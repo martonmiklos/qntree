@@ -128,6 +128,76 @@ QJsonObject PatchedNewsFeedEntry::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> PatchedNewsFeedEntry::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> PatchedNewsFeedEntry::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_pk_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_feed_id_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("feed_id"), namePrefix), m_feed_id);
+    }
+    if (m_title_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("title"), namePrefix), m_title);
+    }
+    if (m_link_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("link"), namePrefix), m_link);
+    }
+    if (m_published_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("published"), namePrefix), m_published);
+    }
+    if (m_author_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("author"), namePrefix), m_author);
+    }
+    if (m_summary_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("summary"), namePrefix), m_summary);
+    }
+    if (m_read_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("read"), namePrefix), m_read);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> PatchedNewsFeedEntry::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> PatchedNewsFeedEntry::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_pk_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_feed_id_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("feed_id"), namePrefix), m_feed_id);
+    }
+    if (m_title_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("title"), namePrefix), m_title);
+    }
+    if (m_link_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("link"), namePrefix), m_link);
+    }
+    if (m_published_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("published"), namePrefix), m_published);
+    }
+    if (m_author_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("author"), namePrefix), m_author);
+    }
+    if (m_summary_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("summary"), namePrefix), m_summary);
+    }
+    if (m_read_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("read"), namePrefix), m_read);
+    }
+    return files;
+}
+
 qint32 PatchedNewsFeedEntry::getPk() const {
     return m_pk;
 }

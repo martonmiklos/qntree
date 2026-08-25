@@ -110,6 +110,64 @@ QJsonObject PatchedPartRelation::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> PatchedPartRelation::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> PatchedPartRelation::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_pk_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_part_1_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("part_1"), namePrefix), m_part_1);
+    }
+    if (m_part_1_detail.isSet()) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("part_1_detail"), namePrefix), m_part_1_detail);
+    }
+    if (m_part_2_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("part_2"), namePrefix), m_part_2);
+    }
+    if (m_part_2_detail.isSet()) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("part_2_detail"), namePrefix), m_part_2_detail);
+    }
+    if (m_note_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("note"), namePrefix), m_note);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> PatchedPartRelation::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> PatchedPartRelation::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_pk_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_part_1_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("part_1"), namePrefix), m_part_1);
+    }
+    if (m_part_1_detail.isSet()) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("part_1_detail"), namePrefix), m_part_1_detail);
+    }
+    if (m_part_2_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("part_2"), namePrefix), m_part_2);
+    }
+    if (m_part_2_detail.isSet()) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("part_2_detail"), namePrefix), m_part_2_detail);
+    }
+    if (m_note_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("note"), namePrefix), m_note);
+    }
+    return files;
+}
+
 qint32 PatchedPartRelation::getPk() const {
     return m_pk;
 }

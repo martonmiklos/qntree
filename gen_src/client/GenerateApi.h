@@ -110,18 +110,10 @@ Q_SIGNALS:
     void generateBatchCodeCreateSignalFull(HttpRequestWorker *worker, GenerateBatchCode summary);
     void generateSerialNumberCreateSignalFull(HttpRequestWorker *worker, GenerateSerialNumber summary);
 
-    Q_DECL_DEPRECATED_X("Use generateBatchCodeCreateSignalError() instead")
-    void generateBatchCodeCreateSignalE(GenerateBatchCode summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void generateBatchCodeCreateSignalError(GenerateBatchCode summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use generateSerialNumberCreateSignalError() instead")
-    void generateSerialNumberCreateSignalE(GenerateSerialNumber summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void generateSerialNumberCreateSignalError(GenerateSerialNumber summary, QNetworkReply::NetworkError error_type, const QString &error_str);
 
-    Q_DECL_DEPRECATED_X("Use generateBatchCodeCreateSignalErrorFull() instead")
-    void generateBatchCodeCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void generateBatchCodeCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use generateSerialNumberCreateSignalErrorFull() instead")
-    void generateSerialNumberCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void generateSerialNumberCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     void abortRequestsSignal();

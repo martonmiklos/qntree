@@ -102,12 +102,8 @@ Q_SIGNALS:
 
     void actionCreateSignalFull(HttpRequestWorker *worker, ActionPlugin summary);
 
-    Q_DECL_DEPRECATED_X("Use actionCreateSignalError() instead")
-    void actionCreateSignalE(ActionPlugin summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void actionCreateSignalError(ActionPlugin summary, QNetworkReply::NetworkError error_type, const QString &error_str);
 
-    Q_DECL_DEPRECATED_X("Use actionCreateSignalErrorFull() instead")
-    void actionCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void actionCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     void abortRequestsSignal();

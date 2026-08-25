@@ -209,6 +209,130 @@ QJsonObject SupplierPart::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> SupplierPart::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> SupplierPart::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_description_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("description"), namePrefix), m_description);
+    }
+    if (m_in_stock_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("in_stock"), namePrefix), m_in_stock);
+    }
+    if (m_link_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("link"), namePrefix), m_link);
+    }
+    if (m_active_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("active"), namePrefix), m_active);
+    }
+    if (m_manufacturer_part_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("manufacturer_part"), namePrefix), m_manufacturer_part);
+    }
+    if (m_mpn_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("MPN"), namePrefix), m_mpn);
+    }
+    if (m_note_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("note"), namePrefix), m_note);
+    }
+    if (m_pk_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_barcode_hash_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("barcode_hash"), namePrefix), m_barcode_hash);
+    }
+    if (m_packaging_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("packaging"), namePrefix), m_packaging);
+    }
+    if (m_pack_quantity_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("pack_quantity"), namePrefix), m_pack_quantity);
+    }
+    if (m_pack_quantity_native_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("pack_quantity_native"), namePrefix), m_pack_quantity_native);
+    }
+    if (m_part_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("part"), namePrefix), m_part);
+    }
+    if (m_sku_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("SKU"), namePrefix), m_sku);
+    }
+    if (m_supplier_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("supplier"), namePrefix), m_supplier);
+    }
+    if (m_updated_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("updated"), namePrefix), m_updated);
+    }
+    if (m_notes_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("notes"), namePrefix), m_notes);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> SupplierPart::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> SupplierPart::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_description_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("description"), namePrefix), m_description);
+    }
+    if (m_in_stock_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("in_stock"), namePrefix), m_in_stock);
+    }
+    if (m_link_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("link"), namePrefix), m_link);
+    }
+    if (m_active_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("active"), namePrefix), m_active);
+    }
+    if (m_manufacturer_part_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("manufacturer_part"), namePrefix), m_manufacturer_part);
+    }
+    if (m_mpn_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("MPN"), namePrefix), m_mpn);
+    }
+    if (m_note_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("note"), namePrefix), m_note);
+    }
+    if (m_pk_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_barcode_hash_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("barcode_hash"), namePrefix), m_barcode_hash);
+    }
+    if (m_packaging_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("packaging"), namePrefix), m_packaging);
+    }
+    if (m_pack_quantity_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("pack_quantity"), namePrefix), m_pack_quantity);
+    }
+    if (m_pack_quantity_native_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("pack_quantity_native"), namePrefix), m_pack_quantity_native);
+    }
+    if (m_part_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("part"), namePrefix), m_part);
+    }
+    if (m_sku_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("SKU"), namePrefix), m_sku);
+    }
+    if (m_supplier_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("supplier"), namePrefix), m_supplier);
+    }
+    if (m_updated_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("updated"), namePrefix), m_updated);
+    }
+    if (m_notes_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("notes"), namePrefix), m_notes);
+    }
+    return files;
+}
+
 QString SupplierPart::getDescription() const {
     return m_description;
 }

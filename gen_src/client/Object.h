@@ -14,7 +14,12 @@
 
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QList>
+#include <QMap>
 #include <QMetaType>
+#include <QString>
+
+#include "HttpFileElement.h"
 
 namespace InvenTree {
 
@@ -35,6 +40,24 @@ public:
     virtual QString asJson() const {
         QJsonDocument doc(jObj);
         return doc.toJson(QJsonDocument::Compact);
+    }
+
+    virtual QMap<QString, QString> asFormVariables() const {
+        return asFormVariables(QString());
+    }
+
+    virtual QMap<QString, QString> asFormVariables(const QString &namePrefix) const {
+        (void)namePrefix;
+        return QMap<QString, QString>();
+    }
+
+    virtual QList<HttpFileElement> asFileElements() const {
+        return asFileElements(QString());
+    }
+
+    virtual QList<HttpFileElement> asFileElements(const QString &namePrefix) const {
+        (void)namePrefix;
+        return QList<HttpFileElement>();
     }
 
     virtual void fromJson(const QString &jsonString) {

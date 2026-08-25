@@ -65,6 +65,34 @@ QJsonObject MachineRegistryStatus::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> MachineRegistryStatus::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> MachineRegistryStatus::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_registry_errors.size() > 0) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("registry_errors"), namePrefix), m_registry_errors);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> MachineRegistryStatus::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> MachineRegistryStatus::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_registry_errors.size() > 0) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("registry_errors"), namePrefix), m_registry_errors);
+    }
+    return files;
+}
+
 QList<MachineRegistryError> MachineRegistryStatus::getRegistryErrors() const {
     return m_registry_errors;
 }

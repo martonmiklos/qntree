@@ -92,6 +92,52 @@ QJsonObject Icon::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> Icon::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> Icon::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_name_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("name"), namePrefix), m_name);
+    }
+    if (m_category_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("category"), namePrefix), m_category);
+    }
+    if (m_tags.size() > 0) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("tags"), namePrefix), m_tags);
+    }
+    if (m_variants.size() > 0) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("variants"), namePrefix), m_variants);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> Icon::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> Icon::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_name_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("name"), namePrefix), m_name);
+    }
+    if (m_category_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("category"), namePrefix), m_category);
+    }
+    if (m_tags.size() > 0) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("tags"), namePrefix), m_tags);
+    }
+    if (m_variants.size() > 0) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("variants"), namePrefix), m_variants);
+    }
+    return files;
+}
+
 QString Icon::getName() const {
     return m_name;
 }

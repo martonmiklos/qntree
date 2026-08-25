@@ -300,132 +300,48 @@ Q_SIGNALS:
     void pluginsUserSettingsRetrieveSignalFull(HttpRequestWorker *worker, PluginUserSetting summary);
     void pluginsUserSettingsUpdateSignalFull(HttpRequestWorker *worker, PluginUserSetting summary);
 
-    Q_DECL_DEPRECATED_X("Use pluginsActivatePartialUpdateSignalError() instead")
-    void pluginsActivatePartialUpdateSignalE(PluginActivate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void pluginsActivatePartialUpdateSignalError(PluginActivate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use pluginsActivateUpdateSignalError() instead")
-    void pluginsActivateUpdateSignalE(PluginActivate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void pluginsActivateUpdateSignalError(PluginActivate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use pluginsAdminRetrieveSignalError() instead")
-    void pluginsAdminRetrieveSignalE(PluginAdminDetail summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void pluginsAdminRetrieveSignalError(PluginAdminDetail summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use pluginsDestroySignalError() instead")
-    void pluginsDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void pluginsDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use pluginsInstallCreateSignalError() instead")
-    void pluginsInstallCreateSignalE(PluginConfigInstall summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void pluginsInstallCreateSignalError(PluginConfigInstall summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use pluginsListSignalError() instead")
-    void pluginsListSignalE(PaginatedPluginConfigList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void pluginsListSignalError(PaginatedPluginConfigList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use pluginsReloadCreateSignalError() instead")
-    void pluginsReloadCreateSignalE(PluginReload summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void pluginsReloadCreateSignalError(PluginReload summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use pluginsRetrieveSignalError() instead")
-    void pluginsRetrieveSignalE(PluginConfig summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void pluginsRetrieveSignalError(PluginConfig summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use pluginsSettingsListSignalError() instead")
-    void pluginsSettingsListSignalE(QList<PluginSetting> summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void pluginsSettingsListSignalError(QList<PluginSetting> summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use pluginsSettingsListAllSignalError() instead")
-    void pluginsSettingsListAllSignalE(PaginatedPluginSettingList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void pluginsSettingsListAllSignalError(PaginatedPluginSettingList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use pluginsSettingsPartialUpdateSignalError() instead")
-    void pluginsSettingsPartialUpdateSignalE(PluginSetting summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void pluginsSettingsPartialUpdateSignalError(PluginSetting summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use pluginsSettingsRetrieveSignalError() instead")
-    void pluginsSettingsRetrieveSignalE(PluginSetting summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void pluginsSettingsRetrieveSignalError(PluginSetting summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use pluginsSettingsUpdateSignalError() instead")
-    void pluginsSettingsUpdateSignalE(PluginSetting summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void pluginsSettingsUpdateSignalError(PluginSetting summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use pluginsStatusRetrieveSignalError() instead")
-    void pluginsStatusRetrieveSignalE(PluginRegistryStatus summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void pluginsStatusRetrieveSignalError(PluginRegistryStatus summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use pluginsUiFeaturesListSignalError() instead")
-    void pluginsUiFeaturesListSignalE(QList<PluginUIFeature> summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void pluginsUiFeaturesListSignalError(QList<PluginUIFeature> summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use pluginsUninstallPartialUpdateSignalError() instead")
-    void pluginsUninstallPartialUpdateSignalE(PluginUninstall summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void pluginsUninstallPartialUpdateSignalError(PluginUninstall summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use pluginsUninstallUpdateSignalError() instead")
-    void pluginsUninstallUpdateSignalE(PluginUninstall summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void pluginsUninstallUpdateSignalError(PluginUninstall summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use pluginsUserSettingsListSignalError() instead")
-    void pluginsUserSettingsListSignalE(QList<PluginUserSetting> summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void pluginsUserSettingsListSignalError(QList<PluginUserSetting> summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use pluginsUserSettingsPartialUpdateSignalError() instead")
-    void pluginsUserSettingsPartialUpdateSignalE(PluginUserSetting summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void pluginsUserSettingsPartialUpdateSignalError(PluginUserSetting summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use pluginsUserSettingsRetrieveSignalError() instead")
-    void pluginsUserSettingsRetrieveSignalE(PluginUserSetting summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void pluginsUserSettingsRetrieveSignalError(PluginUserSetting summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use pluginsUserSettingsUpdateSignalError() instead")
-    void pluginsUserSettingsUpdateSignalE(PluginUserSetting summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void pluginsUserSettingsUpdateSignalError(PluginUserSetting summary, QNetworkReply::NetworkError error_type, const QString &error_str);
 
-    Q_DECL_DEPRECATED_X("Use pluginsActivatePartialUpdateSignalErrorFull() instead")
-    void pluginsActivatePartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void pluginsActivatePartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use pluginsActivateUpdateSignalErrorFull() instead")
-    void pluginsActivateUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void pluginsActivateUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use pluginsAdminRetrieveSignalErrorFull() instead")
-    void pluginsAdminRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void pluginsAdminRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use pluginsDestroySignalErrorFull() instead")
-    void pluginsDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void pluginsDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use pluginsInstallCreateSignalErrorFull() instead")
-    void pluginsInstallCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void pluginsInstallCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use pluginsListSignalErrorFull() instead")
-    void pluginsListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void pluginsListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use pluginsReloadCreateSignalErrorFull() instead")
-    void pluginsReloadCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void pluginsReloadCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use pluginsRetrieveSignalErrorFull() instead")
-    void pluginsRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void pluginsRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use pluginsSettingsListSignalErrorFull() instead")
-    void pluginsSettingsListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void pluginsSettingsListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use pluginsSettingsListAllSignalErrorFull() instead")
-    void pluginsSettingsListAllSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void pluginsSettingsListAllSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use pluginsSettingsPartialUpdateSignalErrorFull() instead")
-    void pluginsSettingsPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void pluginsSettingsPartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use pluginsSettingsRetrieveSignalErrorFull() instead")
-    void pluginsSettingsRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void pluginsSettingsRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use pluginsSettingsUpdateSignalErrorFull() instead")
-    void pluginsSettingsUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void pluginsSettingsUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use pluginsStatusRetrieveSignalErrorFull() instead")
-    void pluginsStatusRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void pluginsStatusRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use pluginsUiFeaturesListSignalErrorFull() instead")
-    void pluginsUiFeaturesListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void pluginsUiFeaturesListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use pluginsUninstallPartialUpdateSignalErrorFull() instead")
-    void pluginsUninstallPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void pluginsUninstallPartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use pluginsUninstallUpdateSignalErrorFull() instead")
-    void pluginsUninstallUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void pluginsUninstallUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use pluginsUserSettingsListSignalErrorFull() instead")
-    void pluginsUserSettingsListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void pluginsUserSettingsListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use pluginsUserSettingsPartialUpdateSignalErrorFull() instead")
-    void pluginsUserSettingsPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void pluginsUserSettingsPartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use pluginsUserSettingsRetrieveSignalErrorFull() instead")
-    void pluginsUserSettingsRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void pluginsUserSettingsRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use pluginsUserSettingsUpdateSignalErrorFull() instead")
-    void pluginsUserSettingsUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void pluginsUserSettingsUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     void abortRequestsSignal();

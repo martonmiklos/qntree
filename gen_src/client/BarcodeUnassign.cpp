@@ -146,6 +146,88 @@ QJsonObject BarcodeUnassign::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> BarcodeUnassign::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> BarcodeUnassign::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_build_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("build"), namePrefix), m_build);
+    }
+    if (m_manufacturerpart_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("manufacturerpart"), namePrefix), m_manufacturerpart);
+    }
+    if (m_supplierpart_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("supplierpart"), namePrefix), m_supplierpart);
+    }
+    if (m_purchaseorder_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("purchaseorder"), namePrefix), m_purchaseorder);
+    }
+    if (m_returnorder_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("returnorder"), namePrefix), m_returnorder);
+    }
+    if (m_salesorder_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("salesorder"), namePrefix), m_salesorder);
+    }
+    if (m_salesordershipment_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("salesordershipment"), namePrefix), m_salesordershipment);
+    }
+    if (m_part_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("part"), namePrefix), m_part);
+    }
+    if (m_stockitem_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("stockitem"), namePrefix), m_stockitem);
+    }
+    if (m_stocklocation_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("stocklocation"), namePrefix), m_stocklocation);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> BarcodeUnassign::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> BarcodeUnassign::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_build_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("build"), namePrefix), m_build);
+    }
+    if (m_manufacturerpart_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("manufacturerpart"), namePrefix), m_manufacturerpart);
+    }
+    if (m_supplierpart_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("supplierpart"), namePrefix), m_supplierpart);
+    }
+    if (m_purchaseorder_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("purchaseorder"), namePrefix), m_purchaseorder);
+    }
+    if (m_returnorder_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("returnorder"), namePrefix), m_returnorder);
+    }
+    if (m_salesorder_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("salesorder"), namePrefix), m_salesorder);
+    }
+    if (m_salesordershipment_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("salesordershipment"), namePrefix), m_salesordershipment);
+    }
+    if (m_part_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("part"), namePrefix), m_part);
+    }
+    if (m_stockitem_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("stockitem"), namePrefix), m_stockitem);
+    }
+    if (m_stocklocation_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("stocklocation"), namePrefix), m_stocklocation);
+    }
+    return files;
+}
+
 qint32 BarcodeUnassign::getBuild() const {
     return m_build;
 }

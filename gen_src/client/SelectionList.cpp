@@ -164,6 +164,100 @@ QJsonObject SelectionList::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> SelectionList::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> SelectionList::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_pk_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_name_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("name"), namePrefix), m_name);
+    }
+    if (m_description_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("description"), namePrefix), m_description);
+    }
+    if (m_active_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("active"), namePrefix), m_active);
+    }
+    if (m_locked_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("locked"), namePrefix), m_locked);
+    }
+    if (m_source_plugin_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("source_plugin"), namePrefix), m_source_plugin);
+    }
+    if (m_source_string_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("source_string"), namePrefix), m_source_string);
+    }
+    if (m_r_default.isSet()) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("default"), namePrefix), m_r_default);
+    }
+    if (m_created_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("created"), namePrefix), m_created);
+    }
+    if (m_last_updated_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("last_updated"), namePrefix), m_last_updated);
+    }
+    if (m_choices.size() > 0) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("choices"), namePrefix), m_choices);
+    }
+    if (m_entry_count_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("entry_count"), namePrefix), m_entry_count);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> SelectionList::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> SelectionList::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_pk_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_name_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("name"), namePrefix), m_name);
+    }
+    if (m_description_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("description"), namePrefix), m_description);
+    }
+    if (m_active_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("active"), namePrefix), m_active);
+    }
+    if (m_locked_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("locked"), namePrefix), m_locked);
+    }
+    if (m_source_plugin_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("source_plugin"), namePrefix), m_source_plugin);
+    }
+    if (m_source_string_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("source_string"), namePrefix), m_source_string);
+    }
+    if (m_r_default.isSet()) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("default"), namePrefix), m_r_default);
+    }
+    if (m_created_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("created"), namePrefix), m_created);
+    }
+    if (m_last_updated_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("last_updated"), namePrefix), m_last_updated);
+    }
+    if (m_choices.size() > 0) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("choices"), namePrefix), m_choices);
+    }
+    if (m_entry_count_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("entry_count"), namePrefix), m_entry_count);
+    }
+    return files;
+}
+
 qint32 SelectionList::getPk() const {
     return m_pk;
 }

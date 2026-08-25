@@ -74,6 +74,40 @@ QJsonObject PatchedUserSetPassword::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> PatchedUserSetPassword::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> PatchedUserSetPassword::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_password_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("password"), namePrefix), m_password);
+    }
+    if (m_override_warning_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("override_warning"), namePrefix), m_override_warning);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> PatchedUserSetPassword::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> PatchedUserSetPassword::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_password_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("password"), namePrefix), m_password);
+    }
+    if (m_override_warning_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("override_warning"), namePrefix), m_override_warning);
+    }
+    return files;
+}
+
 QString PatchedUserSetPassword::getPassword() const {
     return m_password;
 }

@@ -83,6 +83,46 @@ QJsonObject DuplicateOrder::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> DuplicateOrder::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> DuplicateOrder::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_order_id_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("order_id"), namePrefix), m_order_id);
+    }
+    if (m_copy_lines_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("copy_lines"), namePrefix), m_copy_lines);
+    }
+    if (m_copy_extra_lines_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("copy_extra_lines"), namePrefix), m_copy_extra_lines);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> DuplicateOrder::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> DuplicateOrder::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_order_id_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("order_id"), namePrefix), m_order_id);
+    }
+    if (m_copy_lines_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("copy_lines"), namePrefix), m_copy_lines);
+    }
+    if (m_copy_extra_lines_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("copy_extra_lines"), namePrefix), m_copy_extra_lines);
+    }
+    return files;
+}
+
 qint32 DuplicateOrder::getOrderId() const {
     return m_order_id;
 }

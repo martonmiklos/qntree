@@ -83,6 +83,46 @@ QJsonObject InstallStockItem::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> InstallStockItem::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> InstallStockItem::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_stock_item_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("stock_item"), namePrefix), m_stock_item);
+    }
+    if (m_quantity_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("quantity"), namePrefix), m_quantity);
+    }
+    if (m_note_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("note"), namePrefix), m_note);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> InstallStockItem::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> InstallStockItem::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_stock_item_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("stock_item"), namePrefix), m_stock_item);
+    }
+    if (m_quantity_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("quantity"), namePrefix), m_quantity);
+    }
+    if (m_note_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("note"), namePrefix), m_note);
+    }
+    return files;
+}
+
 qint32 InstallStockItem::getStockItem() const {
     return m_stock_item;
 }

@@ -65,6 +65,34 @@ QJsonObject PartThumbSerializerUpdate::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> PartThumbSerializerUpdate::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> PartThumbSerializerUpdate::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_image_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("image"), namePrefix), m_image);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> PartThumbSerializerUpdate::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> PartThumbSerializerUpdate::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_image_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("image"), namePrefix), m_image);
+    }
+    return files;
+}
+
 QString PartThumbSerializerUpdate::getImage() const {
     return m_image;
 }

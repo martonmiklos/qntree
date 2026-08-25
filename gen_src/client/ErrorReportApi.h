@@ -149,42 +149,18 @@ Q_SIGNALS:
     void errorReportRetrieveSignalFull(HttpRequestWorker *worker, ErrorMessage summary);
     void errorReportUpdateSignalFull(HttpRequestWorker *worker, ErrorMessage summary);
 
-    Q_DECL_DEPRECATED_X("Use errorReportBulkDestroySignalError() instead")
-    void errorReportBulkDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void errorReportBulkDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use errorReportDestroySignalError() instead")
-    void errorReportDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void errorReportDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use errorReportListSignalError() instead")
-    void errorReportListSignalE(PaginatedErrorMessageList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void errorReportListSignalError(PaginatedErrorMessageList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use errorReportPartialUpdateSignalError() instead")
-    void errorReportPartialUpdateSignalE(ErrorMessage summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void errorReportPartialUpdateSignalError(ErrorMessage summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use errorReportRetrieveSignalError() instead")
-    void errorReportRetrieveSignalE(ErrorMessage summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void errorReportRetrieveSignalError(ErrorMessage summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use errorReportUpdateSignalError() instead")
-    void errorReportUpdateSignalE(ErrorMessage summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void errorReportUpdateSignalError(ErrorMessage summary, QNetworkReply::NetworkError error_type, const QString &error_str);
 
-    Q_DECL_DEPRECATED_X("Use errorReportBulkDestroySignalErrorFull() instead")
-    void errorReportBulkDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void errorReportBulkDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use errorReportDestroySignalErrorFull() instead")
-    void errorReportDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void errorReportDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use errorReportListSignalErrorFull() instead")
-    void errorReportListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void errorReportListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use errorReportPartialUpdateSignalErrorFull() instead")
-    void errorReportPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void errorReportPartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use errorReportRetrieveSignalErrorFull() instead")
-    void errorReportRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void errorReportRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use errorReportUpdateSignalErrorFull() instead")
-    void errorReportUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void errorReportUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     void abortRequestsSignal();

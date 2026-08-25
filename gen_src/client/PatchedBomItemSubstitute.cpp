@@ -92,6 +92,52 @@ QJsonObject PatchedBomItemSubstitute::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> PatchedBomItemSubstitute::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> PatchedBomItemSubstitute::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_pk_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_bom_item_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("bom_item"), namePrefix), m_bom_item);
+    }
+    if (m_part_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("part"), namePrefix), m_part);
+    }
+    if (m_part_detail.isSet()) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("part_detail"), namePrefix), m_part_detail);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> PatchedBomItemSubstitute::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> PatchedBomItemSubstitute::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_pk_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_bom_item_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("bom_item"), namePrefix), m_bom_item);
+    }
+    if (m_part_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("part"), namePrefix), m_part);
+    }
+    if (m_part_detail.isSet()) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("part_detail"), namePrefix), m_part_detail);
+    }
+    return files;
+}
+
 qint32 PatchedBomItemSubstitute::getPk() const {
     return m_pk;
 }

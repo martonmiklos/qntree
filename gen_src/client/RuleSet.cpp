@@ -128,6 +128,76 @@ QJsonObject RuleSet::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> RuleSet::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> RuleSet::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_pk_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_name.isSet()) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("name"), namePrefix), m_name);
+    }
+    if (m_label_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("label"), namePrefix), m_label);
+    }
+    if (m_group_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("group"), namePrefix), m_group);
+    }
+    if (m_can_view_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("can_view"), namePrefix), m_can_view);
+    }
+    if (m_can_add_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("can_add"), namePrefix), m_can_add);
+    }
+    if (m_can_change_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("can_change"), namePrefix), m_can_change);
+    }
+    if (m_can_delete_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("can_delete"), namePrefix), m_can_delete);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> RuleSet::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> RuleSet::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_pk_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_name.isSet()) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("name"), namePrefix), m_name);
+    }
+    if (m_label_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("label"), namePrefix), m_label);
+    }
+    if (m_group_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("group"), namePrefix), m_group);
+    }
+    if (m_can_view_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("can_view"), namePrefix), m_can_view);
+    }
+    if (m_can_add_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("can_add"), namePrefix), m_can_add);
+    }
+    if (m_can_change_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("can_change"), namePrefix), m_can_change);
+    }
+    if (m_can_delete_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("can_delete"), namePrefix), m_can_delete);
+    }
+    return files;
+}
+
 qint32 RuleSet::getPk() const {
     return m_pk;
 }

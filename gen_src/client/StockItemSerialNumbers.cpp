@@ -74,6 +74,40 @@ QJsonObject StockItemSerialNumbers::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> StockItemSerialNumbers::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> StockItemSerialNumbers::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_next.isSet()) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("next"), namePrefix), m_next);
+    }
+    if (m_previous.isSet()) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("previous"), namePrefix), m_previous);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> StockItemSerialNumbers::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> StockItemSerialNumbers::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_next.isSet()) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("next"), namePrefix), m_next);
+    }
+    if (m_previous.isSet()) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("previous"), namePrefix), m_previous);
+    }
+    return files;
+}
+
 StockItem StockItemSerialNumbers::getNext() const {
     return m_next;
 }

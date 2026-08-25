@@ -101,6 +101,58 @@ QJsonObject MachineProperty::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> MachineProperty::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> MachineProperty::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_key_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("key"), namePrefix), m_key);
+    }
+    if (m_value_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("value"), namePrefix), m_value);
+    }
+    if (m_group_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("group"), namePrefix), m_group);
+    }
+    if (m_type.isSet()) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("type"), namePrefix), m_type);
+    }
+    if (m_max_progress_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("max_progress"), namePrefix), m_max_progress);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> MachineProperty::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> MachineProperty::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_key_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("key"), namePrefix), m_key);
+    }
+    if (m_value_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("value"), namePrefix), m_value);
+    }
+    if (m_group_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("group"), namePrefix), m_group);
+    }
+    if (m_type.isSet()) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("type"), namePrefix), m_type);
+    }
+    if (m_max_progress_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("max_progress"), namePrefix), m_max_progress);
+    }
+    return files;
+}
+
 QString MachineProperty::getKey() const {
     return m_key;
 }

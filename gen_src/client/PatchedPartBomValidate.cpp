@@ -119,6 +119,70 @@ QJsonObject PatchedPartBomValidate::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> PatchedPartBomValidate::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> PatchedPartBomValidate::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_pk_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_bom_validated_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("bom_validated"), namePrefix), m_bom_validated);
+    }
+    if (m_bom_checksum_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("bom_checksum"), namePrefix), m_bom_checksum);
+    }
+    if (m_bom_checked_by_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("bom_checked_by"), namePrefix), m_bom_checked_by);
+    }
+    if (m_bom_checked_by_detail.isSet()) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("bom_checked_by_detail"), namePrefix), m_bom_checked_by_detail);
+    }
+    if (m_bom_checked_date_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("bom_checked_date"), namePrefix), m_bom_checked_date);
+    }
+    if (m_r_valid_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("valid"), namePrefix), m_r_valid);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> PatchedPartBomValidate::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> PatchedPartBomValidate::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_pk_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_bom_validated_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("bom_validated"), namePrefix), m_bom_validated);
+    }
+    if (m_bom_checksum_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("bom_checksum"), namePrefix), m_bom_checksum);
+    }
+    if (m_bom_checked_by_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("bom_checked_by"), namePrefix), m_bom_checked_by);
+    }
+    if (m_bom_checked_by_detail.isSet()) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("bom_checked_by_detail"), namePrefix), m_bom_checked_by_detail);
+    }
+    if (m_bom_checked_date_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("bom_checked_date"), namePrefix), m_bom_checked_date);
+    }
+    if (m_r_valid_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("valid"), namePrefix), m_r_valid);
+    }
+    return files;
+}
+
 qint32 PatchedPartBomValidate::getPk() const {
     return m_pk;
 }

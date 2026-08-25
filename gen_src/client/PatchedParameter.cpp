@@ -155,6 +155,94 @@ QJsonObject PatchedParameter::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> PatchedParameter::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> PatchedParameter::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_pk_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_r_template_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("template"), namePrefix), m_r_template);
+    }
+    if (m_model_type.isSet()) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("model_type"), namePrefix), m_model_type);
+    }
+    if (m_model_id_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("model_id"), namePrefix), m_model_id);
+    }
+    if (m_data_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("data"), namePrefix), m_data);
+    }
+    if (m_data_numeric_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("data_numeric"), namePrefix), m_data_numeric);
+    }
+    if (m_note_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("note"), namePrefix), m_note);
+    }
+    if (m_updated_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("updated"), namePrefix), m_updated);
+    }
+    if (m_updated_by_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("updated_by"), namePrefix), m_updated_by);
+    }
+    if (m_template_detail.isSet()) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("template_detail"), namePrefix), m_template_detail);
+    }
+    if (m_updated_by_detail.isSet()) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("updated_by_detail"), namePrefix), m_updated_by_detail);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> PatchedParameter::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> PatchedParameter::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_pk_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_r_template_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("template"), namePrefix), m_r_template);
+    }
+    if (m_model_type.isSet()) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("model_type"), namePrefix), m_model_type);
+    }
+    if (m_model_id_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("model_id"), namePrefix), m_model_id);
+    }
+    if (m_data_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("data"), namePrefix), m_data);
+    }
+    if (m_data_numeric_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("data_numeric"), namePrefix), m_data_numeric);
+    }
+    if (m_note_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("note"), namePrefix), m_note);
+    }
+    if (m_updated_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("updated"), namePrefix), m_updated);
+    }
+    if (m_updated_by_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("updated_by"), namePrefix), m_updated_by);
+    }
+    if (m_template_detail.isSet()) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("template_detail"), namePrefix), m_template_detail);
+    }
+    if (m_updated_by_detail.isSet()) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("updated_by_detail"), namePrefix), m_updated_by_detail);
+    }
+    return files;
+}
+
 qint32 PatchedParameter::getPk() const {
     return m_pk;
 }

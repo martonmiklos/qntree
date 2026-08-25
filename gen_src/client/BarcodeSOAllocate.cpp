@@ -101,6 +101,58 @@ QJsonObject BarcodeSOAllocate::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> BarcodeSOAllocate::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> BarcodeSOAllocate::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_barcode_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("barcode"), namePrefix), m_barcode);
+    }
+    if (m_sales_order_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("sales_order"), namePrefix), m_sales_order);
+    }
+    if (m_line_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("line"), namePrefix), m_line);
+    }
+    if (m_shipment_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("shipment"), namePrefix), m_shipment);
+    }
+    if (m_quantity_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("quantity"), namePrefix), m_quantity);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> BarcodeSOAllocate::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> BarcodeSOAllocate::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_barcode_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("barcode"), namePrefix), m_barcode);
+    }
+    if (m_sales_order_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("sales_order"), namePrefix), m_sales_order);
+    }
+    if (m_line_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("line"), namePrefix), m_line);
+    }
+    if (m_shipment_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("shipment"), namePrefix), m_shipment);
+    }
+    if (m_quantity_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("quantity"), namePrefix), m_quantity);
+    }
+    return files;
+}
+
 QString BarcodeSOAllocate::getBarcode() const {
     return m_barcode;
 }

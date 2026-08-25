@@ -110,6 +110,64 @@ QJsonObject SelectionEntry::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> SelectionEntry::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> SelectionEntry::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_id_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("id"), namePrefix), m_id);
+    }
+    if (m_value_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("value"), namePrefix), m_value);
+    }
+    if (m_label_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("label"), namePrefix), m_label);
+    }
+    if (m_description_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("description"), namePrefix), m_description);
+    }
+    if (m_active_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("active"), namePrefix), m_active);
+    }
+    if (m_list_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("list"), namePrefix), m_list);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> SelectionEntry::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> SelectionEntry::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_id_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("id"), namePrefix), m_id);
+    }
+    if (m_value_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("value"), namePrefix), m_value);
+    }
+    if (m_label_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("label"), namePrefix), m_label);
+    }
+    if (m_description_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("description"), namePrefix), m_description);
+    }
+    if (m_active_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("active"), namePrefix), m_active);
+    }
+    if (m_list_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("list"), namePrefix), m_list);
+    }
+    return files;
+}
+
 qint32 SelectionEntry::getId() const {
     return m_id;
 }

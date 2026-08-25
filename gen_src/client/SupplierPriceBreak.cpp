@@ -119,6 +119,70 @@ QJsonObject SupplierPriceBreak::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> SupplierPriceBreak::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> SupplierPriceBreak::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_pk_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_part_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("part"), namePrefix), m_part);
+    }
+    if (m_quantity_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("quantity"), namePrefix), m_quantity);
+    }
+    if (m_price_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("price"), namePrefix), m_price);
+    }
+    if (m_price_currency_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("price_currency"), namePrefix), m_price_currency);
+    }
+    if (m_supplier_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("supplier"), namePrefix), m_supplier);
+    }
+    if (m_updated_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("updated"), namePrefix), m_updated);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> SupplierPriceBreak::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> SupplierPriceBreak::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_pk_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_part_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("part"), namePrefix), m_part);
+    }
+    if (m_quantity_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("quantity"), namePrefix), m_quantity);
+    }
+    if (m_price_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("price"), namePrefix), m_price);
+    }
+    if (m_price_currency_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("price_currency"), namePrefix), m_price_currency);
+    }
+    if (m_supplier_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("supplier"), namePrefix), m_supplier);
+    }
+    if (m_updated_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("updated"), namePrefix), m_updated);
+    }
+    return files;
+}
+
 qint32 SupplierPriceBreak::getPk() const {
     return m_pk;
 }

@@ -74,6 +74,40 @@ QJsonObject PluginAdminDetail::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> PluginAdminDetail::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> PluginAdminDetail::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_source_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("source"), namePrefix), m_source);
+    }
+    if (m_context_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("context"), namePrefix), m_context);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> PluginAdminDetail::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> PluginAdminDetail::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_source_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("source"), namePrefix), m_source);
+    }
+    if (m_context_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("context"), namePrefix), m_context);
+    }
+    return files;
+}
+
 QString PluginAdminDetail::getSource() const {
     return m_source;
 }

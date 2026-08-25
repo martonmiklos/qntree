@@ -101,6 +101,58 @@ QJsonObject ImportRequest::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> ImportRequest::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> ImportRequest::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_plugin_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("plugin"), namePrefix), m_plugin);
+    }
+    if (m_supplier_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("supplier"), namePrefix), m_supplier);
+    }
+    if (m_part_import_id_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("part_import_id"), namePrefix), m_part_import_id);
+    }
+    if (m_category_id_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("category_id"), namePrefix), m_category_id);
+    }
+    if (m_part_id_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("part_id"), namePrefix), m_part_id);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> ImportRequest::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> ImportRequest::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_plugin_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("plugin"), namePrefix), m_plugin);
+    }
+    if (m_supplier_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("supplier"), namePrefix), m_supplier);
+    }
+    if (m_part_import_id_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("part_import_id"), namePrefix), m_part_import_id);
+    }
+    if (m_category_id_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("category_id"), namePrefix), m_category_id);
+    }
+    if (m_part_id_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("part_id"), namePrefix), m_part_id);
+    }
+    return files;
+}
+
 QString ImportRequest::getPlugin() const {
     return m_plugin;
 }

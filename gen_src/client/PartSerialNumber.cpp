@@ -74,6 +74,40 @@ QJsonObject PartSerialNumber::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> PartSerialNumber::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> PartSerialNumber::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_latest_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("latest"), namePrefix), m_latest);
+    }
+    if (m_next_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("next"), namePrefix), m_next);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> PartSerialNumber::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> PartSerialNumber::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_latest_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("latest"), namePrefix), m_latest);
+    }
+    if (m_next_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("next"), namePrefix), m_next);
+    }
+    return files;
+}
+
 QString PartSerialNumber::getLatest() const {
     return m_latest;
 }

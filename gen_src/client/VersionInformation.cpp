@@ -101,6 +101,58 @@ QJsonObject VersionInformation::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> VersionInformation::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> VersionInformation::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_version_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("version"), namePrefix), m_version);
+    }
+    if (m_date_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("date"), namePrefix), m_date);
+    }
+    if (m_gh_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("gh"), namePrefix), m_gh);
+    }
+    if (m_text.size() > 0) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("text"), namePrefix), m_text);
+    }
+    if (m_latest_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("latest"), namePrefix), m_latest);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> VersionInformation::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> VersionInformation::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_version_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("version"), namePrefix), m_version);
+    }
+    if (m_date_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("date"), namePrefix), m_date);
+    }
+    if (m_gh_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("gh"), namePrefix), m_gh);
+    }
+    if (m_text.size() > 0) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("text"), namePrefix), m_text);
+    }
+    if (m_latest_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("latest"), namePrefix), m_latest);
+    }
+    return files;
+}
+
 QString VersionInformation::getVersion() const {
     return m_version;
 }

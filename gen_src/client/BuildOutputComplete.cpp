@@ -101,6 +101,58 @@ QJsonObject BuildOutputComplete::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> BuildOutputComplete::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> BuildOutputComplete::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_outputs.size() > 0) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("outputs"), namePrefix), m_outputs);
+    }
+    if (m_location_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("location"), namePrefix), m_location);
+    }
+    if (m_status_custom_key_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("status_custom_key"), namePrefix), m_status_custom_key);
+    }
+    if (m_accept_incomplete_allocation_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("accept_incomplete_allocation"), namePrefix), m_accept_incomplete_allocation);
+    }
+    if (m_notes_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("notes"), namePrefix), m_notes);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> BuildOutputComplete::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> BuildOutputComplete::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_outputs.size() > 0) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("outputs"), namePrefix), m_outputs);
+    }
+    if (m_location_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("location"), namePrefix), m_location);
+    }
+    if (m_status_custom_key_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("status_custom_key"), namePrefix), m_status_custom_key);
+    }
+    if (m_accept_incomplete_allocation_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("accept_incomplete_allocation"), namePrefix), m_accept_incomplete_allocation);
+    }
+    if (m_notes_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("notes"), namePrefix), m_notes);
+    }
+    return files;
+}
+
 QList<BuildOutputQuantity> BuildOutputComplete::getOutputs() const {
     return m_outputs;
 }

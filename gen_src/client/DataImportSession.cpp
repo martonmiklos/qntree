@@ -200,6 +200,124 @@ QJsonObject DataImportSession::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> DataImportSession::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> DataImportSession::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_pk_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_timestamp_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("timestamp"), namePrefix), m_timestamp);
+    }
+    if (m_data_file_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("data_file"), namePrefix), m_data_file);
+    }
+    if (m_update_records_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("update_records"), namePrefix), m_update_records);
+    }
+    if (m_model_type.isSet()) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("model_type"), namePrefix), m_model_type);
+    }
+    if (m_available_fields_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("available_fields"), namePrefix), m_available_fields);
+    }
+    if (m_status.isSet()) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("status"), namePrefix), m_status);
+    }
+    if (m_user_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("user"), namePrefix), m_user);
+    }
+    if (m_user_detail.isSet()) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("user_detail"), namePrefix), m_user_detail);
+    }
+    if (m_columns_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("columns"), namePrefix), m_columns);
+    }
+    if (m_column_mappings.size() > 0) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("column_mappings"), namePrefix), m_column_mappings);
+    }
+    if (m_field_defaults_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("field_defaults"), namePrefix), m_field_defaults);
+    }
+    if (m_field_overrides_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("field_overrides"), namePrefix), m_field_overrides);
+    }
+    if (m_field_filters_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("field_filters"), namePrefix), m_field_filters);
+    }
+    if (m_row_count_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("row_count"), namePrefix), m_row_count);
+    }
+    if (m_completed_row_count_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("completed_row_count"), namePrefix), m_completed_row_count);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> DataImportSession::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> DataImportSession::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_pk_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_timestamp_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("timestamp"), namePrefix), m_timestamp);
+    }
+    if (m_data_file_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("data_file"), namePrefix), m_data_file);
+    }
+    if (m_update_records_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("update_records"), namePrefix), m_update_records);
+    }
+    if (m_model_type.isSet()) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("model_type"), namePrefix), m_model_type);
+    }
+    if (m_available_fields_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("available_fields"), namePrefix), m_available_fields);
+    }
+    if (m_status.isSet()) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("status"), namePrefix), m_status);
+    }
+    if (m_user_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("user"), namePrefix), m_user);
+    }
+    if (m_user_detail.isSet()) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("user_detail"), namePrefix), m_user_detail);
+    }
+    if (m_columns_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("columns"), namePrefix), m_columns);
+    }
+    if (m_column_mappings.size() > 0) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("column_mappings"), namePrefix), m_column_mappings);
+    }
+    if (m_field_defaults_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("field_defaults"), namePrefix), m_field_defaults);
+    }
+    if (m_field_overrides_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("field_overrides"), namePrefix), m_field_overrides);
+    }
+    if (m_field_filters_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("field_filters"), namePrefix), m_field_filters);
+    }
+    if (m_row_count_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("row_count"), namePrefix), m_row_count);
+    }
+    if (m_completed_row_count_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("completed_row_count"), namePrefix), m_completed_row_count);
+    }
+    return files;
+}
+
 qint32 DataImportSession::getPk() const {
     return m_pk;
 }

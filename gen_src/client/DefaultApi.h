@@ -99,12 +99,8 @@ Q_SIGNALS:
 
     void rootRetrieveSignalFull(HttpRequestWorker *worker, InfoApi summary);
 
-    Q_DECL_DEPRECATED_X("Use rootRetrieveSignalError() instead")
-    void rootRetrieveSignalE(InfoApi summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void rootRetrieveSignalError(InfoApi summary, QNetworkReply::NetworkError error_type, const QString &error_str);
 
-    Q_DECL_DEPRECATED_X("Use rootRetrieveSignalErrorFull() instead")
-    void rootRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void rootRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     void abortRequestsSignal();

@@ -65,6 +65,34 @@ QJsonObject PurchaseOrderComplete::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> PurchaseOrderComplete::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> PurchaseOrderComplete::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_accept_incomplete_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("accept_incomplete"), namePrefix), m_accept_incomplete);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> PurchaseOrderComplete::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> PurchaseOrderComplete::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_accept_incomplete_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("accept_incomplete"), namePrefix), m_accept_incomplete);
+    }
+    return files;
+}
+
 bool PurchaseOrderComplete::isAcceptIncomplete() const {
     return m_accept_incomplete;
 }

@@ -128,6 +128,76 @@ QJsonObject MachineDriver::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> MachineDriver::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> MachineDriver::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_slug_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("slug"), namePrefix), m_slug);
+    }
+    if (m_name_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("name"), namePrefix), m_name);
+    }
+    if (m_description_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("description"), namePrefix), m_description);
+    }
+    if (m_provider_file_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("provider_file"), namePrefix), m_provider_file);
+    }
+    if (m_provider_plugin.size() > 0) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("provider_plugin"), namePrefix), m_provider_plugin);
+    }
+    if (m_is_builtin_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("is_builtin"), namePrefix), m_is_builtin);
+    }
+    if (m_machine_type_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("machine_type"), namePrefix), m_machine_type);
+    }
+    if (m_driver_errors.size() > 0) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("driver_errors"), namePrefix), m_driver_errors);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> MachineDriver::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> MachineDriver::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_slug_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("slug"), namePrefix), m_slug);
+    }
+    if (m_name_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("name"), namePrefix), m_name);
+    }
+    if (m_description_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("description"), namePrefix), m_description);
+    }
+    if (m_provider_file_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("provider_file"), namePrefix), m_provider_file);
+    }
+    if (m_provider_plugin.size() > 0) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("provider_plugin"), namePrefix), m_provider_plugin);
+    }
+    if (m_is_builtin_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("is_builtin"), namePrefix), m_is_builtin);
+    }
+    if (m_machine_type_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("machine_type"), namePrefix), m_machine_type);
+    }
+    if (m_driver_errors.size() > 0) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("driver_errors"), namePrefix), m_driver_errors);
+    }
+    return files;
+}
+
 QString MachineDriver::getSlug() const {
     return m_slug;
 }

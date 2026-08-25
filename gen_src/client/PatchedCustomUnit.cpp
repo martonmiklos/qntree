@@ -92,6 +92,52 @@ QJsonObject PatchedCustomUnit::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> PatchedCustomUnit::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> PatchedCustomUnit::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_pk_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_name_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("name"), namePrefix), m_name);
+    }
+    if (m_symbol_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("symbol"), namePrefix), m_symbol);
+    }
+    if (m_definition_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("definition"), namePrefix), m_definition);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> PatchedCustomUnit::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> PatchedCustomUnit::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_pk_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_name_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("name"), namePrefix), m_name);
+    }
+    if (m_symbol_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("symbol"), namePrefix), m_symbol);
+    }
+    if (m_definition_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("definition"), namePrefix), m_definition);
+    }
+    return files;
+}
+
 qint32 PatchedCustomUnit::getPk() const {
     return m_pk;
 }

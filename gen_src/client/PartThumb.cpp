@@ -74,6 +74,40 @@ QJsonObject PartThumb::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> PartThumb::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> PartThumb::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_image_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("image"), namePrefix), m_image);
+    }
+    if (m_count_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("count"), namePrefix), m_count);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> PartThumb::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> PartThumb::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_image_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("image"), namePrefix), m_image);
+    }
+    if (m_count_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("count"), namePrefix), m_count);
+    }
+    return files;
+}
+
 QString PartThumb::getImage() const {
     return m_image;
 }

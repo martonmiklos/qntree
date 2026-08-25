@@ -101,6 +101,58 @@ QJsonObject BuildAutoAllocation::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> BuildAutoAllocation::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> BuildAutoAllocation::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_location_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("location"), namePrefix), m_location);
+    }
+    if (m_exclude_location_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("exclude_location"), namePrefix), m_exclude_location);
+    }
+    if (m_interchangeable_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("interchangeable"), namePrefix), m_interchangeable);
+    }
+    if (m_substitutes_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("substitutes"), namePrefix), m_substitutes);
+    }
+    if (m_optional_items_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("optional_items"), namePrefix), m_optional_items);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> BuildAutoAllocation::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> BuildAutoAllocation::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_location_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("location"), namePrefix), m_location);
+    }
+    if (m_exclude_location_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("exclude_location"), namePrefix), m_exclude_location);
+    }
+    if (m_interchangeable_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("interchangeable"), namePrefix), m_interchangeable);
+    }
+    if (m_substitutes_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("substitutes"), namePrefix), m_substitutes);
+    }
+    if (m_optional_items_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("optional_items"), namePrefix), m_optional_items);
+    }
+    return files;
+}
+
 qint32 BuildAutoAllocation::getLocation() const {
     return m_location;
 }

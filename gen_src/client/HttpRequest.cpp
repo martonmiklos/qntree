@@ -17,6 +17,9 @@
 #include <QUrl>
 #include <QUuid>
 #include <QtGlobal>
+#include <QtAlgorithms>
+
+#include <utility>
 
 
 #include "HttpRequest.h"

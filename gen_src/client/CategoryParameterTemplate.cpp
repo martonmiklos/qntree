@@ -110,6 +110,64 @@ QJsonObject CategoryParameterTemplate::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> CategoryParameterTemplate::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> CategoryParameterTemplate::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_pk_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_category_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("category"), namePrefix), m_category);
+    }
+    if (m_category_detail.isSet()) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("category_detail"), namePrefix), m_category_detail);
+    }
+    if (m_r_template_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("template"), namePrefix), m_r_template);
+    }
+    if (m_template_detail.isSet()) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("template_detail"), namePrefix), m_template_detail);
+    }
+    if (m_default_value_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("default_value"), namePrefix), m_default_value);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> CategoryParameterTemplate::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> CategoryParameterTemplate::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_pk_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_category_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("category"), namePrefix), m_category);
+    }
+    if (m_category_detail.isSet()) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("category_detail"), namePrefix), m_category_detail);
+    }
+    if (m_r_template_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("template"), namePrefix), m_r_template);
+    }
+    if (m_template_detail.isSet()) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("template_detail"), namePrefix), m_template_detail);
+    }
+    if (m_default_value_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("default_value"), namePrefix), m_default_value);
+    }
+    return files;
+}
+
 qint32 CategoryParameterTemplate::getPk() const {
     return m_pk;
 }

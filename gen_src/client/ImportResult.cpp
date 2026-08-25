@@ -121,6 +121,64 @@ QJsonObject ImportResult::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> ImportResult::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> ImportResult::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_part_id_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("part_id"), namePrefix), m_part_id);
+    }
+    if (m_part_detail.isSet()) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("part_detail"), namePrefix), m_part_detail);
+    }
+    if (m_manufacturer_part_id_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("manufacturer_part_id"), namePrefix), m_manufacturer_part_id);
+    }
+    if (m_supplier_part_id_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("supplier_part_id"), namePrefix), m_supplier_part_id);
+    }
+    if (m_pricing.size() > 0) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("pricing"), namePrefix), m_pricing);
+    }
+    if (m_parameters.size() > 0) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("parameters"), namePrefix), m_parameters);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> ImportResult::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> ImportResult::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_part_id_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("part_id"), namePrefix), m_part_id);
+    }
+    if (m_part_detail.isSet()) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("part_detail"), namePrefix), m_part_detail);
+    }
+    if (m_manufacturer_part_id_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("manufacturer_part_id"), namePrefix), m_manufacturer_part_id);
+    }
+    if (m_supplier_part_id_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("supplier_part_id"), namePrefix), m_supplier_part_id);
+    }
+    if (m_pricing.size() > 0) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("pricing"), namePrefix), m_pricing);
+    }
+    if (m_parameters.size() > 0) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("parameters"), namePrefix), m_parameters);
+    }
+    return files;
+}
+
 qint32 ImportResult::getPartId() const {
     return m_part_id;
 }

@@ -74,6 +74,40 @@ QJsonObject LicenseView::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> LicenseView::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> LicenseView::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_backend.size() > 0) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("backend"), namePrefix), m_backend);
+    }
+    if (m_frontend.size() > 0) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("frontend"), namePrefix), m_frontend);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> LicenseView::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> LicenseView::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_backend.size() > 0) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("backend"), namePrefix), m_backend);
+    }
+    if (m_frontend.size() > 0) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("frontend"), namePrefix), m_frontend);
+    }
+    return files;
+}
+
 QList<QJsonValue> LicenseView::getBackend() const {
     return m_backend;
 }

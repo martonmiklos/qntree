@@ -92,6 +92,52 @@ QJsonObject VersionView::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> VersionView::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> VersionView::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_dev_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("dev"), namePrefix), m_dev);
+    }
+    if (m_up_to_date_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("up_to_date"), namePrefix), m_up_to_date);
+    }
+    if (m_version.isSet()) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("version"), namePrefix), m_version);
+    }
+    if (m_links.isSet()) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("links"), namePrefix), m_links);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> VersionView::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> VersionView::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_dev_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("dev"), namePrefix), m_dev);
+    }
+    if (m_up_to_date_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("up_to_date"), namePrefix), m_up_to_date);
+    }
+    if (m_version.isSet()) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("version"), namePrefix), m_version);
+    }
+    if (m_links.isSet()) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("links"), namePrefix), m_links);
+    }
+    return files;
+}
+
 bool VersionView::isDev() const {
     return m_dev;
 }

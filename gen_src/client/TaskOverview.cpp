@@ -92,6 +92,52 @@ QJsonObject TaskOverview::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> TaskOverview::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> TaskOverview::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_is_running_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("is_running"), namePrefix), m_is_running);
+    }
+    if (m_pending_tasks_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("pending_tasks"), namePrefix), m_pending_tasks);
+    }
+    if (m_scheduled_tasks_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("scheduled_tasks"), namePrefix), m_scheduled_tasks);
+    }
+    if (m_failed_tasks_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("failed_tasks"), namePrefix), m_failed_tasks);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> TaskOverview::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> TaskOverview::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_is_running_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("is_running"), namePrefix), m_is_running);
+    }
+    if (m_pending_tasks_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("pending_tasks"), namePrefix), m_pending_tasks);
+    }
+    if (m_scheduled_tasks_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("scheduled_tasks"), namePrefix), m_scheduled_tasks);
+    }
+    if (m_failed_tasks_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("failed_tasks"), namePrefix), m_failed_tasks);
+    }
+    return files;
+}
+
 bool TaskOverview::isIsRunning() const {
     return m_is_running;
 }

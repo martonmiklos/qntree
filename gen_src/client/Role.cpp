@@ -110,6 +110,64 @@ QJsonObject Role::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> Role::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> Role::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_user_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("user"), namePrefix), m_user);
+    }
+    if (m_username_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("username"), namePrefix), m_username);
+    }
+    if (m_roles.size() > 0) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("roles"), namePrefix), m_roles);
+    }
+    if (m_permissions.size() > 0) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("permissions"), namePrefix), m_permissions);
+    }
+    if (m_is_staff_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("is_staff"), namePrefix), m_is_staff);
+    }
+    if (m_is_superuser_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("is_superuser"), namePrefix), m_is_superuser);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> Role::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> Role::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_user_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("user"), namePrefix), m_user);
+    }
+    if (m_username_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("username"), namePrefix), m_username);
+    }
+    if (m_roles.size() > 0) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("roles"), namePrefix), m_roles);
+    }
+    if (m_permissions.size() > 0) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("permissions"), namePrefix), m_permissions);
+    }
+    if (m_is_staff_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("is_staff"), namePrefix), m_is_staff);
+    }
+    if (m_is_superuser_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("is_superuser"), namePrefix), m_is_superuser);
+    }
+    return files;
+}
+
 qint32 Role::getUser() const {
     return m_user;
 }

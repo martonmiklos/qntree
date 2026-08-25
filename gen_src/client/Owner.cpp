@@ -101,6 +101,58 @@ QJsonObject Owner::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> Owner::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> Owner::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_pk_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_owner_id_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("owner_id"), namePrefix), m_owner_id);
+    }
+    if (m_owner_model_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("owner_model"), namePrefix), m_owner_model);
+    }
+    if (m_name_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("name"), namePrefix), m_name);
+    }
+    if (m_label_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("label"), namePrefix), m_label);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> Owner::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> Owner::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_pk_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_owner_id_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("owner_id"), namePrefix), m_owner_id);
+    }
+    if (m_owner_model_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("owner_model"), namePrefix), m_owner_model);
+    }
+    if (m_name_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("name"), namePrefix), m_name);
+    }
+    if (m_label_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("label"), namePrefix), m_label);
+    }
+    return files;
+}
+
 qint32 Owner::getPk() const {
     return m_pk;
 }

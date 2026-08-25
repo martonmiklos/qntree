@@ -65,6 +65,34 @@ QJsonObject PatchedPluginUninstall::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> PatchedPluginUninstall::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> PatchedPluginUninstall::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_delete_config_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("delete_config"), namePrefix), m_delete_config);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> PatchedPluginUninstall::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> PatchedPluginUninstall::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_delete_config_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("delete_config"), namePrefix), m_delete_config);
+    }
+    return files;
+}
+
 bool PatchedPluginUninstall::isDeleteConfig() const {
     return m_delete_config;
 }

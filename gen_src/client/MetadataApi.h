@@ -149,42 +149,18 @@ Q_SIGNALS:
     void metadataRetrieveSignalFull(HttpRequestWorker *worker);
     void metadataUpdateSignalFull(HttpRequestWorker *worker);
 
-    Q_DECL_DEPRECATED_X("Use metadataPartialUpdateSignalError() instead")
-    void metadataPartialUpdateSignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void metadataPartialUpdateSignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use metadataPkPartialUpdateSignalError() instead")
-    void metadataPkPartialUpdateSignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void metadataPkPartialUpdateSignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use metadataPkRetrieveSignalError() instead")
-    void metadataPkRetrieveSignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void metadataPkRetrieveSignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use metadataPkUpdateSignalError() instead")
-    void metadataPkUpdateSignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void metadataPkUpdateSignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use metadataRetrieveSignalError() instead")
-    void metadataRetrieveSignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void metadataRetrieveSignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use metadataUpdateSignalError() instead")
-    void metadataUpdateSignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void metadataUpdateSignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
 
-    Q_DECL_DEPRECATED_X("Use metadataPartialUpdateSignalErrorFull() instead")
-    void metadataPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void metadataPartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use metadataPkPartialUpdateSignalErrorFull() instead")
-    void metadataPkPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void metadataPkPartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use metadataPkRetrieveSignalErrorFull() instead")
-    void metadataPkRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void metadataPkRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use metadataPkUpdateSignalErrorFull() instead")
-    void metadataPkUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void metadataPkUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use metadataRetrieveSignalErrorFull() instead")
-    void metadataRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void metadataRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use metadataUpdateSignalErrorFull() instead")
-    void metadataUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void metadataUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     void abortRequestsSignal();

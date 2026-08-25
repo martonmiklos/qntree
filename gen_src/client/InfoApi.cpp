@@ -263,6 +263,166 @@ QJsonObject InfoApi::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> InfoApi::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> InfoApi::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_server_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("server"), namePrefix), m_server);
+    }
+    if (m_id_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("id"), namePrefix), m_id);
+    }
+    if (m_version_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("version"), namePrefix), m_version);
+    }
+    if (m_instance_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("instance"), namePrefix), m_instance);
+    }
+    if (m_api_version_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("apiVersion"), namePrefix), m_api_version);
+    }
+    if (m_worker_running_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("worker_running"), namePrefix), m_worker_running);
+    }
+    if (m_worker_count_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("worker_count"), namePrefix), m_worker_count);
+    }
+    if (m_worker_pending_tasks_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("worker_pending_tasks"), namePrefix), m_worker_pending_tasks);
+    }
+    if (m_plugins_enabled_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("plugins_enabled"), namePrefix), m_plugins_enabled);
+    }
+    if (m_plugins_install_disabled_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("plugins_install_disabled"), namePrefix), m_plugins_install_disabled);
+    }
+    if (m_active_plugins_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("active_plugins"), namePrefix), m_active_plugins);
+    }
+    if (m_email_configured_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("email_configured"), namePrefix), m_email_configured);
+    }
+    if (m_debug_mode_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("debug_mode"), namePrefix), m_debug_mode);
+    }
+    if (m_docker_mode_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("docker_mode"), namePrefix), m_docker_mode);
+    }
+    if (m_default_locale_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("default_locale"), namePrefix), m_default_locale);
+    }
+    if (m_customize.isSet()) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("customize"), namePrefix), m_customize);
+    }
+    if (m_system_health_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("system_health"), namePrefix), m_system_health);
+    }
+    if (m_database_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("database"), namePrefix), m_database);
+    }
+    if (m_platform_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("platform"), namePrefix), m_platform);
+    }
+    if (m_installer_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("installer"), namePrefix), m_installer);
+    }
+    if (m_target_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("target"), namePrefix), m_target);
+    }
+    if (m_django_admin_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("django_admin"), namePrefix), m_django_admin);
+    }
+    if (m_settings.isSet()) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("settings"), namePrefix), m_settings);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> InfoApi::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> InfoApi::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_server_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("server"), namePrefix), m_server);
+    }
+    if (m_id_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("id"), namePrefix), m_id);
+    }
+    if (m_version_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("version"), namePrefix), m_version);
+    }
+    if (m_instance_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("instance"), namePrefix), m_instance);
+    }
+    if (m_api_version_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("apiVersion"), namePrefix), m_api_version);
+    }
+    if (m_worker_running_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("worker_running"), namePrefix), m_worker_running);
+    }
+    if (m_worker_count_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("worker_count"), namePrefix), m_worker_count);
+    }
+    if (m_worker_pending_tasks_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("worker_pending_tasks"), namePrefix), m_worker_pending_tasks);
+    }
+    if (m_plugins_enabled_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("plugins_enabled"), namePrefix), m_plugins_enabled);
+    }
+    if (m_plugins_install_disabled_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("plugins_install_disabled"), namePrefix), m_plugins_install_disabled);
+    }
+    if (m_active_plugins_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("active_plugins"), namePrefix), m_active_plugins);
+    }
+    if (m_email_configured_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("email_configured"), namePrefix), m_email_configured);
+    }
+    if (m_debug_mode_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("debug_mode"), namePrefix), m_debug_mode);
+    }
+    if (m_docker_mode_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("docker_mode"), namePrefix), m_docker_mode);
+    }
+    if (m_default_locale_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("default_locale"), namePrefix), m_default_locale);
+    }
+    if (m_customize.isSet()) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("customize"), namePrefix), m_customize);
+    }
+    if (m_system_health_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("system_health"), namePrefix), m_system_health);
+    }
+    if (m_database_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("database"), namePrefix), m_database);
+    }
+    if (m_platform_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("platform"), namePrefix), m_platform);
+    }
+    if (m_installer_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("installer"), namePrefix), m_installer);
+    }
+    if (m_target_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("target"), namePrefix), m_target);
+    }
+    if (m_django_admin_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("django_admin"), namePrefix), m_django_admin);
+    }
+    if (m_settings.isSet()) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("settings"), namePrefix), m_settings);
+    }
+    return files;
+}
+
 QString InfoApi::getServer() const {
     return m_server;
 }

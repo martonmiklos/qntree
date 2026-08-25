@@ -92,6 +92,52 @@ QJsonObject SerializeStockItem::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> SerializeStockItem::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> SerializeStockItem::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_quantity_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("quantity"), namePrefix), m_quantity);
+    }
+    if (m_serial_numbers_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("serial_numbers"), namePrefix), m_serial_numbers);
+    }
+    if (m_destination_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("destination"), namePrefix), m_destination);
+    }
+    if (m_notes_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("notes"), namePrefix), m_notes);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> SerializeStockItem::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> SerializeStockItem::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_quantity_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("quantity"), namePrefix), m_quantity);
+    }
+    if (m_serial_numbers_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("serial_numbers"), namePrefix), m_serial_numbers);
+    }
+    if (m_destination_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("destination"), namePrefix), m_destination);
+    }
+    if (m_notes_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("notes"), namePrefix), m_notes);
+    }
+    return files;
+}
+
 qint32 SerializeStockItem::getQuantity() const {
     return m_quantity;
 }

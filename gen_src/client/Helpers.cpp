@@ -137,6 +137,79 @@ QString toStringValue(const HttpFileElement &value) {
     return value.asJson();
 }
 
+QString toFlattenedFormVariableString(const QMap<QString, QString> &vars) {
+    QString strObject;
+    for (auto it = vars.constBegin(); it != vars.constEnd(); ++it) {
+        if (!strObject.isEmpty()) {
+            strObject.append(",");
+        }
+        strObject.append(it.key()).append("=").append(it.value());
+    }
+    return strObject;
+}
+
+QString toStringValue(const QJsonArray &value) {
+    QMap<QString, QString> vars;
+    insertFormVariable(vars, QString(), value);
+    return toFlattenedFormVariableString(vars);
+}
+
+QString toStringValue(const QJsonObject &value) {
+    QMap<QString, QString> vars;
+    insertFormVariable(vars, QString(), value);
+    return toFlattenedFormVariableString(vars);
+}
+
+QString toStringValue(const QJsonValue &value) {
+    if (value.isString()) {
+        return value.toString();
+    } else if (value.isBool()) {
+        return value.toBool() ? "true" : "false";
+    } else if (value.isDouble()) {
+        return QString::number(value.toDouble());
+    } else if (value.isArray()) {
+        return toStringValue(value.toArray());
+    } else if (value.isObject()) {
+        return toStringValue(value.toObject());
+    }
+    return QString();
+}
+
+QString toFormFieldName(const QString &fieldName, const QString &namePrefix) {
+    if (namePrefix.isEmpty()) {
+        return fieldName;
+    }
+    return QString("%1[%2]").arg(namePrefix, fieldName);
+}
+
+QString toIndexedFormFieldName(const QString &fieldName, int index) {
+    return QString("%1[%2]").arg(fieldName).arg(index);
+}
+
+void insertFormVariable(QMap<QString, QString> &vars, const QString &fieldName, const QJsonArray &value) {
+    int index = 0;
+    for (const auto &item : value) {
+        insertFormVariable(vars, toIndexedFormFieldName(fieldName, index), item);
+        ++index;
+    }
+}
+
+void insertFormVariable(QMap<QString, QString> &vars, const QString &fieldName, const QJsonObject &value) {
+    for (const QString &key : value.keys()) {
+        insertFormVariable(vars, toFormFieldName(key, fieldName), value.value(key));
+    }
+}
+
+void insertFormVariable(QMap<QString, QString> &vars, const QString &fieldName, const QJsonValue &value) {
+    if (value.isArray()) {
+        insertFormVariable(vars, fieldName, value.toArray());
+    } else if (value.isObject()) {
+        insertFormVariable(vars, fieldName, value.toObject());
+    } else {
+        vars.insert(fieldName, toStringValue(value));
+    }
+}
+
 QJsonValue toJsonValue(const QString &value) {
     return QJsonValue(value);
 }

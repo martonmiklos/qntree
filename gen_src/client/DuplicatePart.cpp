@@ -110,6 +110,64 @@ QJsonObject DuplicatePart::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> DuplicatePart::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> DuplicatePart::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_part_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("part"), namePrefix), m_part);
+    }
+    if (m_copy_image_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("copy_image"), namePrefix), m_copy_image);
+    }
+    if (m_copy_bom_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("copy_bom"), namePrefix), m_copy_bom);
+    }
+    if (m_copy_parameters_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("copy_parameters"), namePrefix), m_copy_parameters);
+    }
+    if (m_copy_notes_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("copy_notes"), namePrefix), m_copy_notes);
+    }
+    if (m_copy_tests_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("copy_tests"), namePrefix), m_copy_tests);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> DuplicatePart::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> DuplicatePart::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_part_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("part"), namePrefix), m_part);
+    }
+    if (m_copy_image_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("copy_image"), namePrefix), m_copy_image);
+    }
+    if (m_copy_bom_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("copy_bom"), namePrefix), m_copy_bom);
+    }
+    if (m_copy_parameters_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("copy_parameters"), namePrefix), m_copy_parameters);
+    }
+    if (m_copy_notes_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("copy_notes"), namePrefix), m_copy_notes);
+    }
+    if (m_copy_tests_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("copy_tests"), namePrefix), m_copy_tests);
+    }
+    return files;
+}
+
 qint32 DuplicatePart::getPart() const {
     return m_part;
 }

@@ -19,10 +19,13 @@
 #define PartSalePrice_H
 
 #include <QJsonObject>
+#include <QList>
+#include <QMap>
 
 #include <QString>
 
 #include "Enum.h"
+#include "HttpFileElement.h"
 #include "Object.h"
 
 namespace InvenTree {
@@ -35,6 +38,10 @@ public:
 
     QString asJson() const override;
     QJsonObject asJsonObject() const override;
+    QMap<QString, QString> asFormVariables() const override;
+    QMap<QString, QString> asFormVariables(const QString &namePrefix) const override;
+    QList<HttpFileElement> asFileElements() const override;
+    QList<HttpFileElement> asFileElements(const QString &namePrefix) const override;
     void fromJsonObject(QJsonObject json) override;
     void fromJson(const QString &jsonString) override;
 

@@ -65,6 +65,34 @@ QJsonObject MachineRegistryError::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> MachineRegistryError::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> MachineRegistryError::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_message_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("message"), namePrefix), m_message);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> MachineRegistryError::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> MachineRegistryError::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_message_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("message"), namePrefix), m_message);
+    }
+    return files;
+}
+
 QString MachineRegistryError::getMessage() const {
     return m_message;
 }

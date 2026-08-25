@@ -65,6 +65,34 @@ QJsonObject MachineRestart::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> MachineRestart::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> MachineRestart::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_ok_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("ok"), namePrefix), m_ok);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> MachineRestart::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> MachineRestart::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_ok_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("ok"), namePrefix), m_ok);
+    }
+    return files;
+}
+
 bool MachineRestart::isOk() const {
     return m_ok;
 }

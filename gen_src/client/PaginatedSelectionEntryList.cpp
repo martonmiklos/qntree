@@ -92,6 +92,52 @@ QJsonObject PaginatedSelectionEntryList::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> PaginatedSelectionEntryList::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> PaginatedSelectionEntryList::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_count_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("count"), namePrefix), m_count);
+    }
+    if (m_next_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("next"), namePrefix), m_next);
+    }
+    if (m_previous_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("previous"), namePrefix), m_previous);
+    }
+    if (m_results.size() > 0) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("results"), namePrefix), m_results);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> PaginatedSelectionEntryList::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> PaginatedSelectionEntryList::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_count_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("count"), namePrefix), m_count);
+    }
+    if (m_next_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("next"), namePrefix), m_next);
+    }
+    if (m_previous_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("previous"), namePrefix), m_previous);
+    }
+    if (m_results.size() > 0) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("results"), namePrefix), m_results);
+    }
+    return files;
+}
+
 qint32 PaginatedSelectionEntryList::getCount() const {
     return m_count;
 }

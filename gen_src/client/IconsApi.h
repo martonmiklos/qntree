@@ -102,12 +102,8 @@ Q_SIGNALS:
 
     void iconsListSignalFull(HttpRequestWorker *worker, PaginatedIconPackageList summary);
 
-    Q_DECL_DEPRECATED_X("Use iconsListSignalError() instead")
-    void iconsListSignalE(PaginatedIconPackageList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void iconsListSignalError(PaginatedIconPackageList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
 
-    Q_DECL_DEPRECATED_X("Use iconsListSignalErrorFull() instead")
-    void iconsListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void iconsListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     void abortRequestsSignal();

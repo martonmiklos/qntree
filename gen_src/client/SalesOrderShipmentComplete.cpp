@@ -101,6 +101,58 @@ QJsonObject SalesOrderShipmentComplete::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> SalesOrderShipmentComplete::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> SalesOrderShipmentComplete::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_shipment_date_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("shipment_date"), namePrefix), m_shipment_date);
+    }
+    if (m_delivery_date_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("delivery_date"), namePrefix), m_delivery_date);
+    }
+    if (m_tracking_number_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("tracking_number"), namePrefix), m_tracking_number);
+    }
+    if (m_invoice_number_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("invoice_number"), namePrefix), m_invoice_number);
+    }
+    if (m_link_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("link"), namePrefix), m_link);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> SalesOrderShipmentComplete::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> SalesOrderShipmentComplete::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_shipment_date_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("shipment_date"), namePrefix), m_shipment_date);
+    }
+    if (m_delivery_date_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("delivery_date"), namePrefix), m_delivery_date);
+    }
+    if (m_tracking_number_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("tracking_number"), namePrefix), m_tracking_number);
+    }
+    if (m_invoice_number_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("invoice_number"), namePrefix), m_invoice_number);
+    }
+    if (m_link_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("link"), namePrefix), m_link);
+    }
+    return files;
+}
+
 QDate SalesOrderShipmentComplete::getShipmentDate() const {
     return m_shipment_date;
 }

@@ -137,6 +137,82 @@ QJsonObject PartStocktake::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> PartStocktake::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> PartStocktake::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_pk_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_date_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("date"), namePrefix), m_date);
+    }
+    if (m_part_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("part"), namePrefix), m_part);
+    }
+    if (m_item_count_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("item_count"), namePrefix), m_item_count);
+    }
+    if (m_quantity_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("quantity"), namePrefix), m_quantity);
+    }
+    if (m_cost_min_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("cost_min"), namePrefix), m_cost_min);
+    }
+    if (m_cost_min_currency_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("cost_min_currency"), namePrefix), m_cost_min_currency);
+    }
+    if (m_cost_max_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("cost_max"), namePrefix), m_cost_max);
+    }
+    if (m_cost_max_currency_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("cost_max_currency"), namePrefix), m_cost_max_currency);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> PartStocktake::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> PartStocktake::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_pk_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_date_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("date"), namePrefix), m_date);
+    }
+    if (m_part_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("part"), namePrefix), m_part);
+    }
+    if (m_item_count_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("item_count"), namePrefix), m_item_count);
+    }
+    if (m_quantity_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("quantity"), namePrefix), m_quantity);
+    }
+    if (m_cost_min_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("cost_min"), namePrefix), m_cost_min);
+    }
+    if (m_cost_min_currency_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("cost_min_currency"), namePrefix), m_cost_min_currency);
+    }
+    if (m_cost_max_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("cost_max"), namePrefix), m_cost_max);
+    }
+    if (m_cost_max_currency_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("cost_max_currency"), namePrefix), m_cost_max_currency);
+    }
+    return files;
+}
+
 qint32 PartStocktake::getPk() const {
     return m_pk;
 }

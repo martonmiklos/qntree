@@ -74,6 +74,40 @@ QJsonObject UninstallStockItem::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> UninstallStockItem::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> UninstallStockItem::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_location_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("location"), namePrefix), m_location);
+    }
+    if (m_note_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("note"), namePrefix), m_note);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> UninstallStockItem::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> UninstallStockItem::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_location_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("location"), namePrefix), m_location);
+    }
+    if (m_note_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("note"), namePrefix), m_note);
+    }
+    return files;
+}
+
 qint32 UninstallStockItem::getLocation() const {
     return m_location;
 }

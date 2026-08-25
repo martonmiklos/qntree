@@ -1,5 +1,6 @@
 #pragma once
 
+#include "db/gen_src/supplier_category_map.h"
 #include "gen_src/client/PartApi.h"
 #include "inventreepartimportwizard.h"
 #include "inventreepartimportwizardpage.h"
@@ -37,7 +38,8 @@ private:
 
     bool validatePage() override;
     bool isComplete() const override;
-
+    Nut::Row<SupplierCategoryMap> findSavedCategoryBinding(int supplierId, const SupplierPart &part);
+    QString supplierCategoryMapKey(const SupplierPart &part);
 
 private slots:
     void checkCategorySelection(InvenTree::Category &category);

@@ -92,6 +92,52 @@ QJsonObject Customize::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> Customize::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> Customize::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_logo_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("logo"), namePrefix), m_logo);
+    }
+    if (m_splash_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("splash"), namePrefix), m_splash);
+    }
+    if (m_login_message_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("login_message"), namePrefix), m_login_message);
+    }
+    if (m_navbar_message_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("navbar_message"), namePrefix), m_navbar_message);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> Customize::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> Customize::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_logo_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("logo"), namePrefix), m_logo);
+    }
+    if (m_splash_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("splash"), namePrefix), m_splash);
+    }
+    if (m_login_message_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("login_message"), namePrefix), m_login_message);
+    }
+    if (m_navbar_message_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("navbar_message"), namePrefix), m_navbar_message);
+    }
+    return files;
+}
+
 QString Customize::getLogo() const {
     return m_logo;
 }

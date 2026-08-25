@@ -65,6 +65,34 @@ QJsonObject HealthCheckStatus::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> HealthCheckStatus::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> HealthCheckStatus::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_status.isSet()) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("status"), namePrefix), m_status);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> HealthCheckStatus::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> HealthCheckStatus::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_status.isSet()) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("status"), namePrefix), m_status);
+    }
+    return files;
+}
+
 HealthCheckStatusStatusEnum HealthCheckStatus::getStatus() const {
     return m_status;
 }

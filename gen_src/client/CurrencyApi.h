@@ -105,18 +105,10 @@ Q_SIGNALS:
     void currencyExchangeRetrieveSignalFull(HttpRequestWorker *worker, CurrencyExchange summary);
     void currencyRefreshCreateSignalFull(HttpRequestWorker *worker);
 
-    Q_DECL_DEPRECATED_X("Use currencyExchangeRetrieveSignalError() instead")
-    void currencyExchangeRetrieveSignalE(CurrencyExchange summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void currencyExchangeRetrieveSignalError(CurrencyExchange summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use currencyRefreshCreateSignalError() instead")
-    void currencyRefreshCreateSignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void currencyRefreshCreateSignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
 
-    Q_DECL_DEPRECATED_X("Use currencyExchangeRetrieveSignalErrorFull() instead")
-    void currencyExchangeRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void currencyExchangeRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use currencyRefreshCreateSignalErrorFull() instead")
-    void currencyRefreshCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void currencyRefreshCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     void abortRequestsSignal();

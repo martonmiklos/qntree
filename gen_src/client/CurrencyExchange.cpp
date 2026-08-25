@@ -83,6 +83,46 @@ QJsonObject CurrencyExchange::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> CurrencyExchange::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> CurrencyExchange::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_base_currency_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("base_currency"), namePrefix), m_base_currency);
+    }
+    if (m_exchange_rates.size() > 0) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("exchange_rates"), namePrefix), m_exchange_rates);
+    }
+    if (m_updated_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("updated"), namePrefix), m_updated);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> CurrencyExchange::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> CurrencyExchange::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_base_currency_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("base_currency"), namePrefix), m_base_currency);
+    }
+    if (m_exchange_rates.size() > 0) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("exchange_rates"), namePrefix), m_exchange_rates);
+    }
+    if (m_updated_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("updated"), namePrefix), m_updated);
+    }
+    return files;
+}
+
 QString CurrencyExchange::getBaseCurrency() const {
     return m_base_currency;
 }

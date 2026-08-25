@@ -110,6 +110,64 @@ QJsonObject APISearchView::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> APISearchView::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> APISearchView::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_search_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("search"), namePrefix), m_search);
+    }
+    if (m_search_regex_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("search_regex"), namePrefix), m_search_regex);
+    }
+    if (m_search_whole_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("search_whole"), namePrefix), m_search_whole);
+    }
+    if (m_search_notes_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("search_notes"), namePrefix), m_search_notes);
+    }
+    if (m_limit_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("limit"), namePrefix), m_limit);
+    }
+    if (m_offset_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("offset"), namePrefix), m_offset);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> APISearchView::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> APISearchView::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_search_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("search"), namePrefix), m_search);
+    }
+    if (m_search_regex_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("search_regex"), namePrefix), m_search_regex);
+    }
+    if (m_search_whole_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("search_whole"), namePrefix), m_search_whole);
+    }
+    if (m_search_notes_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("search_notes"), namePrefix), m_search_notes);
+    }
+    if (m_limit_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("limit"), namePrefix), m_limit);
+    }
+    if (m_offset_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("offset"), namePrefix), m_offset);
+    }
+    return files;
+}
+
 QString APISearchView::getSearch() const {
     return m_search;
 }

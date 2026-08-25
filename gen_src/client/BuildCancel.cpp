@@ -74,6 +74,40 @@ QJsonObject BuildCancel::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> BuildCancel::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> BuildCancel::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_remove_allocated_stock_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("remove_allocated_stock"), namePrefix), m_remove_allocated_stock);
+    }
+    if (m_remove_incomplete_outputs_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("remove_incomplete_outputs"), namePrefix), m_remove_incomplete_outputs);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> BuildCancel::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> BuildCancel::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_remove_allocated_stock_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("remove_allocated_stock"), namePrefix), m_remove_allocated_stock);
+    }
+    if (m_remove_incomplete_outputs_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("remove_incomplete_outputs"), namePrefix), m_remove_incomplete_outputs);
+    }
+    return files;
+}
+
 bool BuildCancel::isRemoveAllocatedStock() const {
     return m_remove_allocated_stock;
 }

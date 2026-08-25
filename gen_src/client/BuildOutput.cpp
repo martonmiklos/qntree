@@ -65,6 +65,34 @@ QJsonObject BuildOutput::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> BuildOutput::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> BuildOutput::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_output_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("output"), namePrefix), m_output);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> BuildOutput::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> BuildOutput::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_output_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("output"), namePrefix), m_output);
+    }
+    return files;
+}
+
 qint32 BuildOutput::getOutput() const {
     return m_output;
 }

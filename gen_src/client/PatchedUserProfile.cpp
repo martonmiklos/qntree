@@ -164,6 +164,100 @@ QJsonObject PatchedUserProfile::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> PatchedUserProfile::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> PatchedUserProfile::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_language_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("language"), namePrefix), m_language);
+    }
+    if (m_theme_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("theme"), namePrefix), m_theme);
+    }
+    if (m_widgets_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("widgets"), namePrefix), m_widgets);
+    }
+    if (m_displayname_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("displayname"), namePrefix), m_displayname);
+    }
+    if (m_position_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("position"), namePrefix), m_position);
+    }
+    if (m_status_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("status"), namePrefix), m_status);
+    }
+    if (m_location_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("location"), namePrefix), m_location);
+    }
+    if (m_active_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("active"), namePrefix), m_active);
+    }
+    if (m_contact_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("contact"), namePrefix), m_contact);
+    }
+    if (m_type.isSet()) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("type"), namePrefix), m_type);
+    }
+    if (m_organisation_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("organisation"), namePrefix), m_organisation);
+    }
+    if (m_primary_group_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("primary_group"), namePrefix), m_primary_group);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> PatchedUserProfile::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> PatchedUserProfile::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_language_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("language"), namePrefix), m_language);
+    }
+    if (m_theme_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("theme"), namePrefix), m_theme);
+    }
+    if (m_widgets_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("widgets"), namePrefix), m_widgets);
+    }
+    if (m_displayname_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("displayname"), namePrefix), m_displayname);
+    }
+    if (m_position_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("position"), namePrefix), m_position);
+    }
+    if (m_status_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("status"), namePrefix), m_status);
+    }
+    if (m_location_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("location"), namePrefix), m_location);
+    }
+    if (m_active_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("active"), namePrefix), m_active);
+    }
+    if (m_contact_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("contact"), namePrefix), m_contact);
+    }
+    if (m_type.isSet()) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("type"), namePrefix), m_type);
+    }
+    if (m_organisation_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("organisation"), namePrefix), m_organisation);
+    }
+    if (m_primary_group_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("primary_group"), namePrefix), m_primary_group);
+    }
+    return files;
+}
+
 QString PatchedUserProfile::getLanguage() const {
     return m_language;
 }

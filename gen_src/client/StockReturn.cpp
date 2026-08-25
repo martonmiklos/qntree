@@ -92,6 +92,52 @@ QJsonObject StockReturn::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> StockReturn::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> StockReturn::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_items.size() > 0) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("items"), namePrefix), m_items);
+    }
+    if (m_notes_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("notes"), namePrefix), m_notes);
+    }
+    if (m_location_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("location"), namePrefix), m_location);
+    }
+    if (m_merge_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("merge"), namePrefix), m_merge);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> StockReturn::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> StockReturn::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_items.size() > 0) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("items"), namePrefix), m_items);
+    }
+    if (m_notes_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("notes"), namePrefix), m_notes);
+    }
+    if (m_location_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("location"), namePrefix), m_location);
+    }
+    if (m_merge_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("merge"), namePrefix), m_merge);
+    }
+    return files;
+}
+
 QList<StockAdjustmentItem> StockReturn::getItems() const {
     return m_items;
 }

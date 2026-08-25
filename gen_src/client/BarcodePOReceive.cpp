@@ -110,6 +110,64 @@ QJsonObject BarcodePOReceive::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> BarcodePOReceive::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> BarcodePOReceive::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_barcode_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("barcode"), namePrefix), m_barcode);
+    }
+    if (m_supplier_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("supplier"), namePrefix), m_supplier);
+    }
+    if (m_purchase_order_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("purchase_order"), namePrefix), m_purchase_order);
+    }
+    if (m_location_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("location"), namePrefix), m_location);
+    }
+    if (m_line_item_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("line_item"), namePrefix), m_line_item);
+    }
+    if (m_auto_allocate_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("auto_allocate"), namePrefix), m_auto_allocate);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> BarcodePOReceive::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> BarcodePOReceive::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_barcode_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("barcode"), namePrefix), m_barcode);
+    }
+    if (m_supplier_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("supplier"), namePrefix), m_supplier);
+    }
+    if (m_purchase_order_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("purchase_order"), namePrefix), m_purchase_order);
+    }
+    if (m_location_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("location"), namePrefix), m_location);
+    }
+    if (m_line_item_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("line_item"), namePrefix), m_line_item);
+    }
+    if (m_auto_allocate_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("auto_allocate"), namePrefix), m_auto_allocate);
+    }
+    return files;
+}
+
 QString BarcodePOReceive::getBarcode() const {
     return m_barcode;
 }

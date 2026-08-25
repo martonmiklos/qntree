@@ -119,6 +119,70 @@ QJsonObject Contact::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> Contact::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> Contact::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_pk_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_company_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("company"), namePrefix), m_company);
+    }
+    if (m_company_name_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("company_name"), namePrefix), m_company_name);
+    }
+    if (m_name_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("name"), namePrefix), m_name);
+    }
+    if (m_phone_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("phone"), namePrefix), m_phone);
+    }
+    if (m_email_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("email"), namePrefix), m_email);
+    }
+    if (m_role_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("role"), namePrefix), m_role);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> Contact::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> Contact::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_pk_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_company_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("company"), namePrefix), m_company);
+    }
+    if (m_company_name_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("company_name"), namePrefix), m_company_name);
+    }
+    if (m_name_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("name"), namePrefix), m_name);
+    }
+    if (m_phone_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("phone"), namePrefix), m_phone);
+    }
+    if (m_email_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("email"), namePrefix), m_email);
+    }
+    if (m_role_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("role"), namePrefix), m_role);
+    }
+    return files;
+}
+
 qint32 Contact::getPk() const {
     return m_pk;
 }

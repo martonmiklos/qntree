@@ -268,120 +268,44 @@ Q_SIGNALS:
     void reportTemplateRetrieveSignalFull(HttpRequestWorker *worker, ReportTemplate summary);
     void reportTemplateUpdateSignalFull(HttpRequestWorker *worker, ReportTemplate summary);
 
-    Q_DECL_DEPRECATED_X("Use reportAssetCreateSignalError() instead")
-    void reportAssetCreateSignalE(ReportAsset summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void reportAssetCreateSignalError(ReportAsset summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use reportAssetDestroySignalError() instead")
-    void reportAssetDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void reportAssetDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use reportAssetListSignalError() instead")
-    void reportAssetListSignalE(PaginatedReportAssetList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void reportAssetListSignalError(PaginatedReportAssetList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use reportAssetPartialUpdateSignalError() instead")
-    void reportAssetPartialUpdateSignalE(ReportAsset summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void reportAssetPartialUpdateSignalError(ReportAsset summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use reportAssetRetrieveSignalError() instead")
-    void reportAssetRetrieveSignalE(ReportAsset summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void reportAssetRetrieveSignalError(ReportAsset summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use reportAssetUpdateSignalError() instead")
-    void reportAssetUpdateSignalE(ReportAsset summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void reportAssetUpdateSignalError(ReportAsset summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use reportPrintCreateSignalError() instead")
-    void reportPrintCreateSignalE(ReportPrint summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void reportPrintCreateSignalError(ReportPrint summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use reportSnippetCreateSignalError() instead")
-    void reportSnippetCreateSignalE(ReportSnippet summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void reportSnippetCreateSignalError(ReportSnippet summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use reportSnippetDestroySignalError() instead")
-    void reportSnippetDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void reportSnippetDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use reportSnippetListSignalError() instead")
-    void reportSnippetListSignalE(PaginatedReportSnippetList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void reportSnippetListSignalError(PaginatedReportSnippetList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use reportSnippetPartialUpdateSignalError() instead")
-    void reportSnippetPartialUpdateSignalE(ReportSnippet summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void reportSnippetPartialUpdateSignalError(ReportSnippet summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use reportSnippetRetrieveSignalError() instead")
-    void reportSnippetRetrieveSignalE(ReportSnippet summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void reportSnippetRetrieveSignalError(ReportSnippet summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use reportSnippetUpdateSignalError() instead")
-    void reportSnippetUpdateSignalE(ReportSnippet summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void reportSnippetUpdateSignalError(ReportSnippet summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use reportTemplateCreateSignalError() instead")
-    void reportTemplateCreateSignalE(ReportTemplate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void reportTemplateCreateSignalError(ReportTemplate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use reportTemplateDestroySignalError() instead")
-    void reportTemplateDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void reportTemplateDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use reportTemplateListSignalError() instead")
-    void reportTemplateListSignalE(PaginatedReportTemplateList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void reportTemplateListSignalError(PaginatedReportTemplateList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use reportTemplatePartialUpdateSignalError() instead")
-    void reportTemplatePartialUpdateSignalE(ReportTemplate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void reportTemplatePartialUpdateSignalError(ReportTemplate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use reportTemplateRetrieveSignalError() instead")
-    void reportTemplateRetrieveSignalE(ReportTemplate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void reportTemplateRetrieveSignalError(ReportTemplate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use reportTemplateUpdateSignalError() instead")
-    void reportTemplateUpdateSignalE(ReportTemplate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void reportTemplateUpdateSignalError(ReportTemplate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
 
-    Q_DECL_DEPRECATED_X("Use reportAssetCreateSignalErrorFull() instead")
-    void reportAssetCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void reportAssetCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use reportAssetDestroySignalErrorFull() instead")
-    void reportAssetDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void reportAssetDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use reportAssetListSignalErrorFull() instead")
-    void reportAssetListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void reportAssetListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use reportAssetPartialUpdateSignalErrorFull() instead")
-    void reportAssetPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void reportAssetPartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use reportAssetRetrieveSignalErrorFull() instead")
-    void reportAssetRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void reportAssetRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use reportAssetUpdateSignalErrorFull() instead")
-    void reportAssetUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void reportAssetUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use reportPrintCreateSignalErrorFull() instead")
-    void reportPrintCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void reportPrintCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use reportSnippetCreateSignalErrorFull() instead")
-    void reportSnippetCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void reportSnippetCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use reportSnippetDestroySignalErrorFull() instead")
-    void reportSnippetDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void reportSnippetDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use reportSnippetListSignalErrorFull() instead")
-    void reportSnippetListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void reportSnippetListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use reportSnippetPartialUpdateSignalErrorFull() instead")
-    void reportSnippetPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void reportSnippetPartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use reportSnippetRetrieveSignalErrorFull() instead")
-    void reportSnippetRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void reportSnippetRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use reportSnippetUpdateSignalErrorFull() instead")
-    void reportSnippetUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void reportSnippetUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use reportTemplateCreateSignalErrorFull() instead")
-    void reportTemplateCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void reportTemplateCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use reportTemplateDestroySignalErrorFull() instead")
-    void reportTemplateDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void reportTemplateDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use reportTemplateListSignalErrorFull() instead")
-    void reportTemplateListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void reportTemplateListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use reportTemplatePartialUpdateSignalErrorFull() instead")
-    void reportTemplatePartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void reportTemplatePartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use reportTemplateRetrieveSignalErrorFull() instead")
-    void reportTemplateRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void reportTemplateRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use reportTemplateUpdateSignalErrorFull() instead")
-    void reportTemplateUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void reportTemplateUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     void abortRequestsSignal();

@@ -110,6 +110,64 @@ QJsonObject CategoryTree::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> CategoryTree::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> CategoryTree::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_pk_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_name_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("name"), namePrefix), m_name);
+    }
+    if (m_parent_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("parent"), namePrefix), m_parent);
+    }
+    if (m_icon_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("icon"), namePrefix), m_icon);
+    }
+    if (m_structural_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("structural"), namePrefix), m_structural);
+    }
+    if (m_subcategories_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("subcategories"), namePrefix), m_subcategories);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> CategoryTree::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> CategoryTree::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_pk_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_name_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("name"), namePrefix), m_name);
+    }
+    if (m_parent_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("parent"), namePrefix), m_parent);
+    }
+    if (m_icon_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("icon"), namePrefix), m_icon);
+    }
+    if (m_structural_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("structural"), namePrefix), m_structural);
+    }
+    if (m_subcategories_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("subcategories"), namePrefix), m_subcategories);
+    }
+    return files;
+}
+
 qint32 CategoryTree::getPk() const {
     return m_pk;
 }

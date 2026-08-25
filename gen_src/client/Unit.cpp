@@ -92,6 +92,52 @@ QJsonObject Unit::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> Unit::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> Unit::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_name_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("name"), namePrefix), m_name);
+    }
+    if (m_is_alias_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("is_alias"), namePrefix), m_is_alias);
+    }
+    if (m_compatible_units.size() > 0) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("compatible_units"), namePrefix), m_compatible_units);
+    }
+    if (m_isdimensionless_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("isdimensionless"), namePrefix), m_isdimensionless);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> Unit::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> Unit::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_name_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("name"), namePrefix), m_name);
+    }
+    if (m_is_alias_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("is_alias"), namePrefix), m_is_alias);
+    }
+    if (m_compatible_units.size() > 0) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("compatible_units"), namePrefix), m_compatible_units);
+    }
+    if (m_isdimensionless_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("isdimensionless"), namePrefix), m_isdimensionless);
+    }
+    return files;
+}
+
 QString Unit::getName() const {
     return m_name;
 }

@@ -137,6 +137,82 @@ QJsonObject PluginUIFeature::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> PluginUIFeature::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> PluginUIFeature::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_plugin_name_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("plugin_name"), namePrefix), m_plugin_name);
+    }
+    if (m_feature_type_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("feature_type"), namePrefix), m_feature_type);
+    }
+    if (m_key_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("key"), namePrefix), m_key);
+    }
+    if (m_title_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("title"), namePrefix), m_title);
+    }
+    if (m_description_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("description"), namePrefix), m_description);
+    }
+    if (m_icon_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("icon"), namePrefix), m_icon);
+    }
+    if (m_options.size() > 0) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("options"), namePrefix), m_options);
+    }
+    if (m_context.size() > 0) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("context"), namePrefix), m_context);
+    }
+    if (m_source_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("source"), namePrefix), m_source);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> PluginUIFeature::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> PluginUIFeature::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_plugin_name_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("plugin_name"), namePrefix), m_plugin_name);
+    }
+    if (m_feature_type_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("feature_type"), namePrefix), m_feature_type);
+    }
+    if (m_key_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("key"), namePrefix), m_key);
+    }
+    if (m_title_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("title"), namePrefix), m_title);
+    }
+    if (m_description_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("description"), namePrefix), m_description);
+    }
+    if (m_icon_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("icon"), namePrefix), m_icon);
+    }
+    if (m_options.size() > 0) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("options"), namePrefix), m_options);
+    }
+    if (m_context.size() > 0) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("context"), namePrefix), m_context);
+    }
+    if (m_source_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("source"), namePrefix), m_source);
+    }
+    return files;
+}
+
 QString PluginUIFeature::getPluginName() const {
     return m_plugin_name;
 }

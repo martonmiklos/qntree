@@ -83,6 +83,46 @@ QJsonObject PluginReload::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> PluginReload::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> PluginReload::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_full_reload_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("full_reload"), namePrefix), m_full_reload);
+    }
+    if (m_force_reload_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("force_reload"), namePrefix), m_force_reload);
+    }
+    if (m_collect_plugins_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("collect_plugins"), namePrefix), m_collect_plugins);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> PluginReload::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> PluginReload::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_full_reload_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("full_reload"), namePrefix), m_full_reload);
+    }
+    if (m_force_reload_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("force_reload"), namePrefix), m_force_reload);
+    }
+    if (m_collect_plugins_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("collect_plugins"), namePrefix), m_collect_plugins);
+    }
+    return files;
+}
+
 bool PluginReload::isFullReload() const {
     return m_full_reload;
 }

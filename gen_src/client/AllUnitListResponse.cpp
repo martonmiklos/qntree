@@ -83,6 +83,46 @@ QJsonObject AllUnitListResponse::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> AllUnitListResponse::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> AllUnitListResponse::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_default_system_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("default_system"), namePrefix), m_default_system);
+    }
+    if (m_available_systems.size() > 0) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("available_systems"), namePrefix), m_available_systems);
+    }
+    if (m_available_units.size() > 0) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("available_units"), namePrefix), m_available_units);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> AllUnitListResponse::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> AllUnitListResponse::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_default_system_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("default_system"), namePrefix), m_default_system);
+    }
+    if (m_available_systems.size() > 0) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("available_systems"), namePrefix), m_available_systems);
+    }
+    if (m_available_units.size() > 0) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("available_units"), namePrefix), m_available_units);
+    }
+    return files;
+}
+
 QString AllUnitListResponse::getDefaultSystem() const {
     return m_default_system;
 }

@@ -789,408 +789,140 @@ Q_SIGNALS:
     void partThumbsUpdateSignalFull(HttpRequestWorker *worker, PartThumbSerializerUpdate summary);
     void partUpdateSignalFull(HttpRequestWorker *worker, Part summary);
 
-    Q_DECL_DEPRECATED_X("Use partBomCopyCreateSignalError() instead")
-    void partBomCopyCreateSignalE(PartCopyBOM summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partBomCopyCreateSignalError(PartCopyBOM summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partBomValidatePartialUpdateSignalError() instead")
-    void partBomValidatePartialUpdateSignalE(PartBomValidate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partBomValidatePartialUpdateSignalError(PartBomValidate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partBomValidateRetrieveSignalError() instead")
-    void partBomValidateRetrieveSignalE(PartBomValidate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partBomValidateRetrieveSignalError(PartBomValidate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partBomValidateUpdateSignalError() instead")
-    void partBomValidateUpdateSignalE(PartBomValidate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partBomValidateUpdateSignalError(PartBomValidate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partBulkPartialUpdateSignalError() instead")
-    void partBulkPartialUpdateSignalE(Part summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partBulkPartialUpdateSignalError(Part summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partBulkUpdateSignalError() instead")
-    void partBulkUpdateSignalE(Part summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partBulkUpdateSignalError(Part summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partCategoryBulkPartialUpdateSignalError() instead")
-    void partCategoryBulkPartialUpdateSignalE(Category summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partCategoryBulkPartialUpdateSignalError(Category summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partCategoryBulkUpdateSignalError() instead")
-    void partCategoryBulkUpdateSignalE(Category summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partCategoryBulkUpdateSignalError(Category summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partCategoryCreateSignalError() instead")
-    void partCategoryCreateSignalE(Category summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partCategoryCreateSignalError(Category summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partCategoryDestroySignalError() instead")
-    void partCategoryDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void partCategoryDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partCategoryListSignalError() instead")
-    void partCategoryListSignalE(PaginatedCategoryList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partCategoryListSignalError(PaginatedCategoryList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partCategoryParametersCreateSignalError() instead")
-    void partCategoryParametersCreateSignalE(CategoryParameterTemplate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partCategoryParametersCreateSignalError(CategoryParameterTemplate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partCategoryParametersDestroySignalError() instead")
-    void partCategoryParametersDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void partCategoryParametersDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partCategoryParametersListSignalError() instead")
-    void partCategoryParametersListSignalE(PaginatedCategoryParameterTemplateList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partCategoryParametersListSignalError(PaginatedCategoryParameterTemplateList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partCategoryParametersPartialUpdateSignalError() instead")
-    void partCategoryParametersPartialUpdateSignalE(CategoryParameterTemplate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partCategoryParametersPartialUpdateSignalError(CategoryParameterTemplate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partCategoryParametersRetrieveSignalError() instead")
-    void partCategoryParametersRetrieveSignalE(CategoryParameterTemplate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partCategoryParametersRetrieveSignalError(CategoryParameterTemplate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partCategoryParametersUpdateSignalError() instead")
-    void partCategoryParametersUpdateSignalE(CategoryParameterTemplate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partCategoryParametersUpdateSignalError(CategoryParameterTemplate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partCategoryPartialUpdateSignalError() instead")
-    void partCategoryPartialUpdateSignalE(Category summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partCategoryPartialUpdateSignalError(Category summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partCategoryRetrieveSignalError() instead")
-    void partCategoryRetrieveSignalE(Category summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partCategoryRetrieveSignalError(Category summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partCategoryTreeListSignalError() instead")
-    void partCategoryTreeListSignalE(PaginatedCategoryTreeList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partCategoryTreeListSignalError(PaginatedCategoryTreeList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partCategoryUpdateSignalError() instead")
-    void partCategoryUpdateSignalE(Category summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partCategoryUpdateSignalError(Category summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partCreateSignalError() instead")
-    void partCreateSignalE(Part summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partCreateSignalError(Part summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partDestroySignalError() instead")
-    void partDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void partDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partInternalPriceCreateSignalError() instead")
-    void partInternalPriceCreateSignalE(PartInternalPrice summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partInternalPriceCreateSignalError(PartInternalPrice summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partInternalPriceDestroySignalError() instead")
-    void partInternalPriceDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void partInternalPriceDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partInternalPriceListSignalError() instead")
-    void partInternalPriceListSignalE(PaginatedPartInternalPriceList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partInternalPriceListSignalError(PaginatedPartInternalPriceList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partInternalPricePartialUpdateSignalError() instead")
-    void partInternalPricePartialUpdateSignalE(PartInternalPrice summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partInternalPricePartialUpdateSignalError(PartInternalPrice summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partInternalPriceRetrieveSignalError() instead")
-    void partInternalPriceRetrieveSignalE(PartInternalPrice summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partInternalPriceRetrieveSignalError(PartInternalPrice summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partInternalPriceUpdateSignalError() instead")
-    void partInternalPriceUpdateSignalE(PartInternalPrice summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partInternalPriceUpdateSignalError(PartInternalPrice summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partListSignalError() instead")
-    void partListSignalE(PaginatedPartList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partListSignalError(PaginatedPartList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partPartialUpdateSignalError() instead")
-    void partPartialUpdateSignalE(Part summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partPartialUpdateSignalError(Part summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partPricingPartialUpdateSignalError() instead")
-    void partPricingPartialUpdateSignalE(PartPricing summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partPricingPartialUpdateSignalError(PartPricing summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partPricingRetrieveSignalError() instead")
-    void partPricingRetrieveSignalE(PartPricing summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partPricingRetrieveSignalError(PartPricing summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partPricingUpdateSignalError() instead")
-    void partPricingUpdateSignalE(PartPricing summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partPricingUpdateSignalError(PartPricing summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partRelatedCreateSignalError() instead")
-    void partRelatedCreateSignalE(PartRelation summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partRelatedCreateSignalError(PartRelation summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partRelatedDestroySignalError() instead")
-    void partRelatedDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void partRelatedDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partRelatedListSignalError() instead")
-    void partRelatedListSignalE(PaginatedPartRelationList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partRelatedListSignalError(PaginatedPartRelationList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partRelatedPartialUpdateSignalError() instead")
-    void partRelatedPartialUpdateSignalE(PartRelation summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partRelatedPartialUpdateSignalError(PartRelation summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partRelatedRetrieveSignalError() instead")
-    void partRelatedRetrieveSignalE(PartRelation summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partRelatedRetrieveSignalError(PartRelation summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partRelatedUpdateSignalError() instead")
-    void partRelatedUpdateSignalE(PartRelation summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partRelatedUpdateSignalError(PartRelation summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partRequirementsRetrieveSignalError() instead")
-    void partRequirementsRetrieveSignalE(PartRequirements summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partRequirementsRetrieveSignalError(PartRequirements summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partRetrieveSignalError() instead")
-    void partRetrieveSignalE(Part summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partRetrieveSignalError(Part summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partSalePriceCreateSignalError() instead")
-    void partSalePriceCreateSignalE(PartSalePrice summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partSalePriceCreateSignalError(PartSalePrice summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partSalePriceDestroySignalError() instead")
-    void partSalePriceDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void partSalePriceDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partSalePriceListSignalError() instead")
-    void partSalePriceListSignalE(PaginatedPartSalePriceList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partSalePriceListSignalError(PaginatedPartSalePriceList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partSalePricePartialUpdateSignalError() instead")
-    void partSalePricePartialUpdateSignalE(PartSalePrice summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partSalePricePartialUpdateSignalError(PartSalePrice summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partSalePriceRetrieveSignalError() instead")
-    void partSalePriceRetrieveSignalE(PartSalePrice summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partSalePriceRetrieveSignalError(PartSalePrice summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partSalePriceUpdateSignalError() instead")
-    void partSalePriceUpdateSignalE(PartSalePrice summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partSalePriceUpdateSignalError(PartSalePrice summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partSerialNumbersRetrieveSignalError() instead")
-    void partSerialNumbersRetrieveSignalE(PartSerialNumber summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partSerialNumbersRetrieveSignalError(PartSerialNumber summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partStocktakeBulkDestroySignalError() instead")
-    void partStocktakeBulkDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void partStocktakeBulkDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partStocktakeCreateSignalError() instead")
-    void partStocktakeCreateSignalE(PartStocktake summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partStocktakeCreateSignalError(PartStocktake summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partStocktakeDestroySignalError() instead")
-    void partStocktakeDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void partStocktakeDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partStocktakeListSignalError() instead")
-    void partStocktakeListSignalE(PaginatedPartStocktakeList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partStocktakeListSignalError(PaginatedPartStocktakeList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partStocktakePartialUpdateSignalError() instead")
-    void partStocktakePartialUpdateSignalE(PartStocktake summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partStocktakePartialUpdateSignalError(PartStocktake summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partStocktakeRetrieveSignalError() instead")
-    void partStocktakeRetrieveSignalE(PartStocktake summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partStocktakeRetrieveSignalError(PartStocktake summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partStocktakeUpdateSignalError() instead")
-    void partStocktakeUpdateSignalE(PartStocktake summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partStocktakeUpdateSignalError(PartStocktake summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partTestTemplateCreateSignalError() instead")
-    void partTestTemplateCreateSignalE(PartTestTemplate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partTestTemplateCreateSignalError(PartTestTemplate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partTestTemplateDestroySignalError() instead")
-    void partTestTemplateDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void partTestTemplateDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partTestTemplateListSignalError() instead")
-    void partTestTemplateListSignalE(PaginatedPartTestTemplateList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partTestTemplateListSignalError(PaginatedPartTestTemplateList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partTestTemplatePartialUpdateSignalError() instead")
-    void partTestTemplatePartialUpdateSignalE(PartTestTemplate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partTestTemplatePartialUpdateSignalError(PartTestTemplate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partTestTemplateRetrieveSignalError() instead")
-    void partTestTemplateRetrieveSignalE(PartTestTemplate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partTestTemplateRetrieveSignalError(PartTestTemplate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partTestTemplateUpdateSignalError() instead")
-    void partTestTemplateUpdateSignalE(PartTestTemplate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partTestTemplateUpdateSignalError(PartTestTemplate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partThumbsListSignalError() instead")
-    void partThumbsListSignalE(PaginatedPartThumbList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partThumbsListSignalError(PaginatedPartThumbList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partThumbsPartialUpdateSignalError() instead")
-    void partThumbsPartialUpdateSignalE(PartThumbSerializerUpdate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partThumbsPartialUpdateSignalError(PartThumbSerializerUpdate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partThumbsRetrieveSignalError() instead")
-    void partThumbsRetrieveSignalE(PartThumbSerializerUpdate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partThumbsRetrieveSignalError(PartThumbSerializerUpdate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partThumbsUpdateSignalError() instead")
-    void partThumbsUpdateSignalE(PartThumbSerializerUpdate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partThumbsUpdateSignalError(PartThumbSerializerUpdate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partUpdateSignalError() instead")
-    void partUpdateSignalE(Part summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partUpdateSignalError(Part summary, QNetworkReply::NetworkError error_type, const QString &error_str);
 
-    Q_DECL_DEPRECATED_X("Use partBomCopyCreateSignalErrorFull() instead")
-    void partBomCopyCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partBomCopyCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partBomValidatePartialUpdateSignalErrorFull() instead")
-    void partBomValidatePartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partBomValidatePartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partBomValidateRetrieveSignalErrorFull() instead")
-    void partBomValidateRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partBomValidateRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partBomValidateUpdateSignalErrorFull() instead")
-    void partBomValidateUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partBomValidateUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partBulkPartialUpdateSignalErrorFull() instead")
-    void partBulkPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partBulkPartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partBulkUpdateSignalErrorFull() instead")
-    void partBulkUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partBulkUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partCategoryBulkPartialUpdateSignalErrorFull() instead")
-    void partCategoryBulkPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partCategoryBulkPartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partCategoryBulkUpdateSignalErrorFull() instead")
-    void partCategoryBulkUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partCategoryBulkUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partCategoryCreateSignalErrorFull() instead")
-    void partCategoryCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partCategoryCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partCategoryDestroySignalErrorFull() instead")
-    void partCategoryDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partCategoryDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partCategoryListSignalErrorFull() instead")
-    void partCategoryListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partCategoryListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partCategoryParametersCreateSignalErrorFull() instead")
-    void partCategoryParametersCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partCategoryParametersCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partCategoryParametersDestroySignalErrorFull() instead")
-    void partCategoryParametersDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partCategoryParametersDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partCategoryParametersListSignalErrorFull() instead")
-    void partCategoryParametersListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partCategoryParametersListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partCategoryParametersPartialUpdateSignalErrorFull() instead")
-    void partCategoryParametersPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partCategoryParametersPartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partCategoryParametersRetrieveSignalErrorFull() instead")
-    void partCategoryParametersRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partCategoryParametersRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partCategoryParametersUpdateSignalErrorFull() instead")
-    void partCategoryParametersUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partCategoryParametersUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partCategoryPartialUpdateSignalErrorFull() instead")
-    void partCategoryPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partCategoryPartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partCategoryRetrieveSignalErrorFull() instead")
-    void partCategoryRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partCategoryRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partCategoryTreeListSignalErrorFull() instead")
-    void partCategoryTreeListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partCategoryTreeListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partCategoryUpdateSignalErrorFull() instead")
-    void partCategoryUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partCategoryUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partCreateSignalErrorFull() instead")
-    void partCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partDestroySignalErrorFull() instead")
-    void partDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partInternalPriceCreateSignalErrorFull() instead")
-    void partInternalPriceCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partInternalPriceCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partInternalPriceDestroySignalErrorFull() instead")
-    void partInternalPriceDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partInternalPriceDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partInternalPriceListSignalErrorFull() instead")
-    void partInternalPriceListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partInternalPriceListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partInternalPricePartialUpdateSignalErrorFull() instead")
-    void partInternalPricePartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partInternalPricePartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partInternalPriceRetrieveSignalErrorFull() instead")
-    void partInternalPriceRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partInternalPriceRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partInternalPriceUpdateSignalErrorFull() instead")
-    void partInternalPriceUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partInternalPriceUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partListSignalErrorFull() instead")
-    void partListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partPartialUpdateSignalErrorFull() instead")
-    void partPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partPartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partPricingPartialUpdateSignalErrorFull() instead")
-    void partPricingPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partPricingPartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partPricingRetrieveSignalErrorFull() instead")
-    void partPricingRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partPricingRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partPricingUpdateSignalErrorFull() instead")
-    void partPricingUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partPricingUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partRelatedCreateSignalErrorFull() instead")
-    void partRelatedCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partRelatedCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partRelatedDestroySignalErrorFull() instead")
-    void partRelatedDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partRelatedDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partRelatedListSignalErrorFull() instead")
-    void partRelatedListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partRelatedListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partRelatedPartialUpdateSignalErrorFull() instead")
-    void partRelatedPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partRelatedPartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partRelatedRetrieveSignalErrorFull() instead")
-    void partRelatedRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partRelatedRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partRelatedUpdateSignalErrorFull() instead")
-    void partRelatedUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partRelatedUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partRequirementsRetrieveSignalErrorFull() instead")
-    void partRequirementsRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partRequirementsRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partRetrieveSignalErrorFull() instead")
-    void partRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partSalePriceCreateSignalErrorFull() instead")
-    void partSalePriceCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partSalePriceCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partSalePriceDestroySignalErrorFull() instead")
-    void partSalePriceDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partSalePriceDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partSalePriceListSignalErrorFull() instead")
-    void partSalePriceListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partSalePriceListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partSalePricePartialUpdateSignalErrorFull() instead")
-    void partSalePricePartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partSalePricePartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partSalePriceRetrieveSignalErrorFull() instead")
-    void partSalePriceRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partSalePriceRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partSalePriceUpdateSignalErrorFull() instead")
-    void partSalePriceUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partSalePriceUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partSerialNumbersRetrieveSignalErrorFull() instead")
-    void partSerialNumbersRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partSerialNumbersRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partStocktakeBulkDestroySignalErrorFull() instead")
-    void partStocktakeBulkDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partStocktakeBulkDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partStocktakeCreateSignalErrorFull() instead")
-    void partStocktakeCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partStocktakeCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partStocktakeDestroySignalErrorFull() instead")
-    void partStocktakeDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partStocktakeDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partStocktakeListSignalErrorFull() instead")
-    void partStocktakeListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partStocktakeListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partStocktakePartialUpdateSignalErrorFull() instead")
-    void partStocktakePartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partStocktakePartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partStocktakeRetrieveSignalErrorFull() instead")
-    void partStocktakeRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partStocktakeRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partStocktakeUpdateSignalErrorFull() instead")
-    void partStocktakeUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partStocktakeUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partTestTemplateCreateSignalErrorFull() instead")
-    void partTestTemplateCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partTestTemplateCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partTestTemplateDestroySignalErrorFull() instead")
-    void partTestTemplateDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partTestTemplateDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partTestTemplateListSignalErrorFull() instead")
-    void partTestTemplateListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partTestTemplateListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partTestTemplatePartialUpdateSignalErrorFull() instead")
-    void partTestTemplatePartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partTestTemplatePartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partTestTemplateRetrieveSignalErrorFull() instead")
-    void partTestTemplateRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partTestTemplateRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partTestTemplateUpdateSignalErrorFull() instead")
-    void partTestTemplateUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partTestTemplateUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partThumbsListSignalErrorFull() instead")
-    void partThumbsListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partThumbsListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partThumbsPartialUpdateSignalErrorFull() instead")
-    void partThumbsPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partThumbsPartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partThumbsRetrieveSignalErrorFull() instead")
-    void partThumbsRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partThumbsRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partThumbsUpdateSignalErrorFull() instead")
-    void partThumbsUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partThumbsUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use partUpdateSignalErrorFull() instead")
-    void partUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void partUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     void abortRequestsSignal();

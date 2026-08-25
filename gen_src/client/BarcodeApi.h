@@ -195,72 +195,28 @@ Q_SIGNALS:
     void barcodeSoAllocateCreateSignalFull(HttpRequestWorker *worker, BarcodeSOAllocate summary);
     void barcodeUnlinkCreateSignalFull(HttpRequestWorker *worker, BarcodeUnassign summary);
 
-    Q_DECL_DEPRECATED_X("Use barcodeCreateSignalError() instead")
-    void barcodeCreateSignalE(Barcode summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void barcodeCreateSignalError(Barcode summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use barcodeGenerateCreateSignalError() instead")
-    void barcodeGenerateCreateSignalE(Barcode summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void barcodeGenerateCreateSignalError(Barcode summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use barcodeHistoryBulkDestroySignalError() instead")
-    void barcodeHistoryBulkDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void barcodeHistoryBulkDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use barcodeHistoryDestroySignalError() instead")
-    void barcodeHistoryDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void barcodeHistoryDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use barcodeHistoryListSignalError() instead")
-    void barcodeHistoryListSignalE(PaginatedBarcodeScanResultList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void barcodeHistoryListSignalError(PaginatedBarcodeScanResultList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use barcodeHistoryRetrieveSignalError() instead")
-    void barcodeHistoryRetrieveSignalE(BarcodeScanResult summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void barcodeHistoryRetrieveSignalError(BarcodeScanResult summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use barcodeLinkCreateSignalError() instead")
-    void barcodeLinkCreateSignalE(BarcodeAssign summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void barcodeLinkCreateSignalError(BarcodeAssign summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use barcodePoAllocateCreateSignalError() instead")
-    void barcodePoAllocateCreateSignalE(BarcodePOAllocate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void barcodePoAllocateCreateSignalError(BarcodePOAllocate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use barcodePoReceiveCreateSignalError() instead")
-    void barcodePoReceiveCreateSignalE(BarcodePOReceive summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void barcodePoReceiveCreateSignalError(BarcodePOReceive summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use barcodeSoAllocateCreateSignalError() instead")
-    void barcodeSoAllocateCreateSignalE(BarcodeSOAllocate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void barcodeSoAllocateCreateSignalError(BarcodeSOAllocate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use barcodeUnlinkCreateSignalError() instead")
-    void barcodeUnlinkCreateSignalE(BarcodeUnassign summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void barcodeUnlinkCreateSignalError(BarcodeUnassign summary, QNetworkReply::NetworkError error_type, const QString &error_str);
 
-    Q_DECL_DEPRECATED_X("Use barcodeCreateSignalErrorFull() instead")
-    void barcodeCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void barcodeCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use barcodeGenerateCreateSignalErrorFull() instead")
-    void barcodeGenerateCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void barcodeGenerateCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use barcodeHistoryBulkDestroySignalErrorFull() instead")
-    void barcodeHistoryBulkDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void barcodeHistoryBulkDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use barcodeHistoryDestroySignalErrorFull() instead")
-    void barcodeHistoryDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void barcodeHistoryDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use barcodeHistoryListSignalErrorFull() instead")
-    void barcodeHistoryListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void barcodeHistoryListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use barcodeHistoryRetrieveSignalErrorFull() instead")
-    void barcodeHistoryRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void barcodeHistoryRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use barcodeLinkCreateSignalErrorFull() instead")
-    void barcodeLinkCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void barcodeLinkCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use barcodePoAllocateCreateSignalErrorFull() instead")
-    void barcodePoAllocateCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void barcodePoAllocateCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use barcodePoReceiveCreateSignalErrorFull() instead")
-    void barcodePoReceiveCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void barcodePoReceiveCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use barcodeSoAllocateCreateSignalErrorFull() instead")
-    void barcodeSoAllocateCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void barcodeSoAllocateCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use barcodeUnlinkCreateSignalErrorFull() instead")
-    void barcodeUnlinkCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void barcodeUnlinkCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     void abortRequestsSignal();

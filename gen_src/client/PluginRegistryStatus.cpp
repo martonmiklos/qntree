@@ -74,6 +74,40 @@ QJsonObject PluginRegistryStatus::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> PluginRegistryStatus::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> PluginRegistryStatus::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_active_plugins_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("active_plugins"), namePrefix), m_active_plugins);
+    }
+    if (m_registry_errors.size() > 0) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("registry_errors"), namePrefix), m_registry_errors);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> PluginRegistryStatus::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> PluginRegistryStatus::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_active_plugins_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("active_plugins"), namePrefix), m_active_plugins);
+    }
+    if (m_registry_errors.size() > 0) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("registry_errors"), namePrefix), m_registry_errors);
+    }
+    return files;
+}
+
 qint32 PluginRegistryStatus::getActivePlugins() const {
     return m_active_plugins;
 }

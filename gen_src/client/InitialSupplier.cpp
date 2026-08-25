@@ -92,6 +92,52 @@ QJsonObject InitialSupplier::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> InitialSupplier::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> InitialSupplier::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_supplier_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("supplier"), namePrefix), m_supplier);
+    }
+    if (m_sku_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("sku"), namePrefix), m_sku);
+    }
+    if (m_manufacturer_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("manufacturer"), namePrefix), m_manufacturer);
+    }
+    if (m_mpn_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("mpn"), namePrefix), m_mpn);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> InitialSupplier::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> InitialSupplier::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_supplier_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("supplier"), namePrefix), m_supplier);
+    }
+    if (m_sku_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("sku"), namePrefix), m_sku);
+    }
+    if (m_manufacturer_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("manufacturer"), namePrefix), m_manufacturer);
+    }
+    if (m_mpn_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("mpn"), namePrefix), m_mpn);
+    }
+    return files;
+}
+
 qint32 InitialSupplier::getSupplier() const {
     return m_supplier;
 }

@@ -137,6 +137,82 @@ QJsonObject BarcodeScanResult::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> BarcodeScanResult::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> BarcodeScanResult::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_pk_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_data_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("data"), namePrefix), m_data);
+    }
+    if (m_timestamp_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("timestamp"), namePrefix), m_timestamp);
+    }
+    if (m_endpoint_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("endpoint"), namePrefix), m_endpoint);
+    }
+    if (m_context_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("context"), namePrefix), m_context);
+    }
+    if (m_response_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("response"), namePrefix), m_response);
+    }
+    if (m_result_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("result"), namePrefix), m_result);
+    }
+    if (m_user_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("user"), namePrefix), m_user);
+    }
+    if (m_user_detail.isSet()) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("user_detail"), namePrefix), m_user_detail);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> BarcodeScanResult::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> BarcodeScanResult::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_pk_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_data_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("data"), namePrefix), m_data);
+    }
+    if (m_timestamp_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("timestamp"), namePrefix), m_timestamp);
+    }
+    if (m_endpoint_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("endpoint"), namePrefix), m_endpoint);
+    }
+    if (m_context_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("context"), namePrefix), m_context);
+    }
+    if (m_response_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("response"), namePrefix), m_response);
+    }
+    if (m_result_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("result"), namePrefix), m_result);
+    }
+    if (m_user_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("user"), namePrefix), m_user);
+    }
+    if (m_user_detail.isSet()) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("user_detail"), namePrefix), m_user_detail);
+    }
+    return files;
+}
+
 qint32 BarcodeScanResult::getPk() const {
     return m_pk;
 }

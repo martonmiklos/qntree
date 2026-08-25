@@ -101,6 +101,58 @@ QJsonObject User::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> User::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> User::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_pk_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_username_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("username"), namePrefix), m_username);
+    }
+    if (m_first_name_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("first_name"), namePrefix), m_first_name);
+    }
+    if (m_last_name_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("last_name"), namePrefix), m_last_name);
+    }
+    if (m_email_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("email"), namePrefix), m_email);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> User::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> User::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_pk_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_username_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("username"), namePrefix), m_username);
+    }
+    if (m_first_name_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("first_name"), namePrefix), m_first_name);
+    }
+    if (m_last_name_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("last_name"), namePrefix), m_last_name);
+    }
+    if (m_email_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("email"), namePrefix), m_email);
+    }
+    return files;
+}
+
 qint32 User::getPk() const {
     return m_pk;
 }

@@ -316,9 +316,9 @@ void MetadataApi::metadataPartialUpdate(const QString &lookup_field, const QStri
     scopeClientCredentialsFlow.append("r:change:purchase_order");
     scopeClientCredentialsFlow.append("r:change:sales_order");
     scopeClientCredentialsFlow.append("r:change:return_order");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -350,9 +350,9 @@ void MetadataApi::metadataPartialUpdate(const QString &lookup_field, const QStri
     scopeAuthorizationFlow.append("r:change:purchase_order");
     scopeAuthorizationFlow.append("r:change:sales_order");
     scopeAuthorizationFlow.append("r:change:return_order");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -428,32 +428,6 @@ void MetadataApi::metadataPartialUpdateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT metadataPartialUpdateSignalE(error_type, error_str);
-        Q_EMIT metadataPartialUpdateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT metadataPartialUpdateSignalError(error_type, error_str);
         Q_EMIT metadataPartialUpdateSignalErrorFull(worker, error_type, error_str);
     }
@@ -533,9 +507,9 @@ void MetadataApi::metadataPkPartialUpdate(const qint32 &id, const QString &model
     scopeClientCredentialsFlow.append("r:change:purchase_order");
     scopeClientCredentialsFlow.append("r:change:sales_order");
     scopeClientCredentialsFlow.append("r:change:return_order");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -567,9 +541,9 @@ void MetadataApi::metadataPkPartialUpdate(const qint32 &id, const QString &model
     scopeAuthorizationFlow.append("r:change:purchase_order");
     scopeAuthorizationFlow.append("r:change:sales_order");
     scopeAuthorizationFlow.append("r:change:return_order");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -645,32 +619,6 @@ void MetadataApi::metadataPkPartialUpdateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT metadataPkPartialUpdateSignalE(error_type, error_str);
-        Q_EMIT metadataPkPartialUpdateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT metadataPkPartialUpdateSignalError(error_type, error_str);
         Q_EMIT metadataPkPartialUpdateSignalErrorFull(worker, error_type, error_str);
     }
@@ -750,9 +698,9 @@ void MetadataApi::metadataPkRetrieve(const qint32 &id, const QString &model) {
     scopeClientCredentialsFlow.append("r:view:purchase_order");
     scopeClientCredentialsFlow.append("r:view:sales_order");
     scopeClientCredentialsFlow.append("r:view:return_order");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -784,9 +732,9 @@ void MetadataApi::metadataPkRetrieve(const qint32 &id, const QString &model) {
     scopeAuthorizationFlow.append("r:view:purchase_order");
     scopeAuthorizationFlow.append("r:view:sales_order");
     scopeAuthorizationFlow.append("r:view:return_order");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -862,32 +810,6 @@ void MetadataApi::metadataPkRetrieveCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT metadataPkRetrieveSignalE(error_type, error_str);
-        Q_EMIT metadataPkRetrieveSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT metadataPkRetrieveSignalError(error_type, error_str);
         Q_EMIT metadataPkRetrieveSignalErrorFull(worker, error_type, error_str);
     }
@@ -967,9 +889,9 @@ void MetadataApi::metadataPkUpdate(const qint32 &id, const QString &model) {
     scopeClientCredentialsFlow.append("r:change:purchase_order");
     scopeClientCredentialsFlow.append("r:change:sales_order");
     scopeClientCredentialsFlow.append("r:change:return_order");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -1001,9 +923,9 @@ void MetadataApi::metadataPkUpdate(const qint32 &id, const QString &model) {
     scopeAuthorizationFlow.append("r:change:purchase_order");
     scopeAuthorizationFlow.append("r:change:sales_order");
     scopeAuthorizationFlow.append("r:change:return_order");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -1079,32 +1001,6 @@ void MetadataApi::metadataPkUpdateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT metadataPkUpdateSignalE(error_type, error_str);
-        Q_EMIT metadataPkUpdateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT metadataPkUpdateSignalError(error_type, error_str);
         Q_EMIT metadataPkUpdateSignalErrorFull(worker, error_type, error_str);
     }
@@ -1198,9 +1094,9 @@ void MetadataApi::metadataRetrieve(const QString &lookup_field, const QString &l
     scopeClientCredentialsFlow.append("r:view:purchase_order");
     scopeClientCredentialsFlow.append("r:view:sales_order");
     scopeClientCredentialsFlow.append("r:view:return_order");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -1232,9 +1128,9 @@ void MetadataApi::metadataRetrieve(const QString &lookup_field, const QString &l
     scopeAuthorizationFlow.append("r:view:purchase_order");
     scopeAuthorizationFlow.append("r:view:sales_order");
     scopeAuthorizationFlow.append("r:view:return_order");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -1310,32 +1206,6 @@ void MetadataApi::metadataRetrieveCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT metadataRetrieveSignalE(error_type, error_str);
-        Q_EMIT metadataRetrieveSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT metadataRetrieveSignalError(error_type, error_str);
         Q_EMIT metadataRetrieveSignalErrorFull(worker, error_type, error_str);
     }
@@ -1429,9 +1299,9 @@ void MetadataApi::metadataUpdate(const QString &lookup_field, const QString &loo
     scopeClientCredentialsFlow.append("r:change:purchase_order");
     scopeClientCredentialsFlow.append("r:change:sales_order");
     scopeClientCredentialsFlow.append("r:change:return_order");
-    auto token3 = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
-    if(token3.isValid())
-        input.headers.insert("Authorization", "Bearer " + token3.getToken());
+    auto tokenClientCredentialsFlow = _credentialFlow.getToken(scopeClientCredentialsFlow.join(" "));
+    if(tokenClientCredentialsFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenClientCredentialsFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -1463,9 +1333,9 @@ void MetadataApi::metadataUpdate(const QString &lookup_field, const QString &loo
     scopeAuthorizationFlow.append("r:change:purchase_order");
     scopeAuthorizationFlow.append("r:change:sales_order");
     scopeAuthorizationFlow.append("r:change:return_order");
-    auto token2 = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
-    if(token2.isValid())
-        input.headers.insert("Authorization", "Bearer " + token2.getToken());
+    auto tokenAuthorizationFlow = _authFlow.getToken(scopeAuthorizationFlow.join(" "));
+    if(tokenAuthorizationFlow.isValid())
+        input.headers.insert("Authorization", "Bearer " + tokenAuthorizationFlow.getToken());
 
     _latestWorker = new HttpRequestWorker(this, _manager);
     _latestWorker->setTimeOut(_timeOut);
@@ -1541,32 +1411,6 @@ void MetadataApi::metadataUpdateCallback(HttpRequestWorker *worker) {
 
 
     } else {
-
-#if defined(_MSC_VER)
-// For MSVC
-#pragma warning(push)
-#pragma warning(disable : 4996)
-#elif defined(__clang__)
-// For Clang
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#elif defined(__GNUC__)
-// For GCC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-#endif
-
-        Q_EMIT metadataUpdateSignalE(error_type, error_str);
-        Q_EMIT metadataUpdateSignalEFull(worker, error_type, error_str);
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#elif defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-
         Q_EMIT metadataUpdateSignalError(error_type, error_str);
         Q_EMIT metadataUpdateSignalErrorFull(worker, error_type, error_str);
     }

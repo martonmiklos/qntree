@@ -155,6 +155,94 @@ QJsonObject ScheduledTask::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> ScheduledTask::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> ScheduledTask::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_pk_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_name_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("name"), namePrefix), m_name);
+    }
+    if (m_func_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("func"), namePrefix), m_func);
+    }
+    if (m_args_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("args"), namePrefix), m_args);
+    }
+    if (m_kwargs_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("kwargs"), namePrefix), m_kwargs);
+    }
+    if (m_schedule_type.isSet()) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("schedule_type"), namePrefix), m_schedule_type);
+    }
+    if (m_repeats_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("repeats"), namePrefix), m_repeats);
+    }
+    if (m_last_run_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("last_run"), namePrefix), m_last_run);
+    }
+    if (m_next_run_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("next_run"), namePrefix), m_next_run);
+    }
+    if (m_success_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("success"), namePrefix), m_success);
+    }
+    if (m_task_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("task"), namePrefix), m_task);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> ScheduledTask::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> ScheduledTask::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_pk_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_name_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("name"), namePrefix), m_name);
+    }
+    if (m_func_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("func"), namePrefix), m_func);
+    }
+    if (m_args_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("args"), namePrefix), m_args);
+    }
+    if (m_kwargs_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("kwargs"), namePrefix), m_kwargs);
+    }
+    if (m_schedule_type.isSet()) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("schedule_type"), namePrefix), m_schedule_type);
+    }
+    if (m_repeats_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("repeats"), namePrefix), m_repeats);
+    }
+    if (m_last_run_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("last_run"), namePrefix), m_last_run);
+    }
+    if (m_next_run_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("next_run"), namePrefix), m_next_run);
+    }
+    if (m_success_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("success"), namePrefix), m_success);
+    }
+    if (m_task_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("task"), namePrefix), m_task);
+    }
+    return files;
+}
+
 qint32 ScheduledTask::getPk() const {
     return m_pk;
 }

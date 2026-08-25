@@ -101,6 +101,58 @@ QJsonObject ContentType::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> ContentType::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> ContentType::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_pk_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_app_label_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("app_label"), namePrefix), m_app_label);
+    }
+    if (m_model_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("model"), namePrefix), m_model);
+    }
+    if (m_app_labeled_name_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("app_labeled_name"), namePrefix), m_app_labeled_name);
+    }
+    if (m_is_plugin_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("is_plugin"), namePrefix), m_is_plugin);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> ContentType::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> ContentType::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_pk_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_app_label_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("app_label"), namePrefix), m_app_label);
+    }
+    if (m_model_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("model"), namePrefix), m_model);
+    }
+    if (m_app_labeled_name_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("app_labeled_name"), namePrefix), m_app_labeled_name);
+    }
+    if (m_is_plugin_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("is_plugin"), namePrefix), m_is_plugin);
+    }
+    return files;
+}
+
 qint32 ContentType::getPk() const {
     return m_pk;
 }

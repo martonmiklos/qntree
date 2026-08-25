@@ -92,6 +92,52 @@ QJsonObject Link::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> Link::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> Link::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_doc_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("doc"), namePrefix), m_doc);
+    }
+    if (m_code_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("code"), namePrefix), m_code);
+    }
+    if (m_app_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("app"), namePrefix), m_app);
+    }
+    if (m_bug_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("bug"), namePrefix), m_bug);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> Link::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> Link::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_doc_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("doc"), namePrefix), m_doc);
+    }
+    if (m_code_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("code"), namePrefix), m_code);
+    }
+    if (m_app_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("app"), namePrefix), m_app);
+    }
+    if (m_bug_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("bug"), namePrefix), m_bug);
+    }
+    return files;
+}
+
 QString Link::getDoc() const {
     return m_doc;
 }

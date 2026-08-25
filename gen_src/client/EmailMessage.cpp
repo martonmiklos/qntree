@@ -227,6 +227,142 @@ QJsonObject EmailMessage::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> EmailMessage::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> EmailMessage::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_pk_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_global_id_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("global_id"), namePrefix), m_global_id);
+    }
+    if (m_message_id_key_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("message_id_key"), namePrefix), m_message_id_key);
+    }
+    if (m_thread_id_key_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("thread_id_key"), namePrefix), m_thread_id_key);
+    }
+    if (m_thread_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("thread"), namePrefix), m_thread);
+    }
+    if (m_subject_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("subject"), namePrefix), m_subject);
+    }
+    if (m_body_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("body"), namePrefix), m_body);
+    }
+    if (m_to_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("to"), namePrefix), m_to);
+    }
+    if (m_sender_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("sender"), namePrefix), m_sender);
+    }
+    if (m_status_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("status"), namePrefix), m_status);
+    }
+    if (m_timestamp_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("timestamp"), namePrefix), m_timestamp);
+    }
+    if (m_headers_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("headers"), namePrefix), m_headers);
+    }
+    if (m_full_message_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("full_message"), namePrefix), m_full_message);
+    }
+    if (m_direction_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("direction"), namePrefix), m_direction);
+    }
+    if (m_priority.isSet()) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("priority"), namePrefix), m_priority);
+    }
+    if (m_error_code_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("error_code"), namePrefix), m_error_code);
+    }
+    if (m_error_message_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("error_message"), namePrefix), m_error_message);
+    }
+    if (m_error_timestamp_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("error_timestamp"), namePrefix), m_error_timestamp);
+    }
+    if (m_delivery_options_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("delivery_options"), namePrefix), m_delivery_options);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> EmailMessage::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> EmailMessage::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_pk_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_global_id_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("global_id"), namePrefix), m_global_id);
+    }
+    if (m_message_id_key_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("message_id_key"), namePrefix), m_message_id_key);
+    }
+    if (m_thread_id_key_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("thread_id_key"), namePrefix), m_thread_id_key);
+    }
+    if (m_thread_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("thread"), namePrefix), m_thread);
+    }
+    if (m_subject_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("subject"), namePrefix), m_subject);
+    }
+    if (m_body_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("body"), namePrefix), m_body);
+    }
+    if (m_to_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("to"), namePrefix), m_to);
+    }
+    if (m_sender_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("sender"), namePrefix), m_sender);
+    }
+    if (m_status_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("status"), namePrefix), m_status);
+    }
+    if (m_timestamp_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("timestamp"), namePrefix), m_timestamp);
+    }
+    if (m_headers_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("headers"), namePrefix), m_headers);
+    }
+    if (m_full_message_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("full_message"), namePrefix), m_full_message);
+    }
+    if (m_direction_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("direction"), namePrefix), m_direction);
+    }
+    if (m_priority.isSet()) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("priority"), namePrefix), m_priority);
+    }
+    if (m_error_code_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("error_code"), namePrefix), m_error_code);
+    }
+    if (m_error_message_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("error_message"), namePrefix), m_error_message);
+    }
+    if (m_error_timestamp_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("error_timestamp"), namePrefix), m_error_timestamp);
+    }
+    if (m_delivery_options_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("delivery_options"), namePrefix), m_delivery_options);
+    }
+    return files;
+}
+
 QString EmailMessage::getPk() const {
     return m_pk;
 }

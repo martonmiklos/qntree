@@ -155,6 +155,94 @@ QJsonObject MeUser::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> MeUser::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> MeUser::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_pk_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_username_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("username"), namePrefix), m_username);
+    }
+    if (m_first_name_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("first_name"), namePrefix), m_first_name);
+    }
+    if (m_last_name_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("last_name"), namePrefix), m_last_name);
+    }
+    if (m_email_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("email"), namePrefix), m_email);
+    }
+    if (m_groups.size() > 0) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("groups"), namePrefix), m_groups);
+    }
+    if (m_group_ids.size() > 0) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("group_ids"), namePrefix), m_group_ids);
+    }
+    if (m_is_staff_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("is_staff"), namePrefix), m_is_staff);
+    }
+    if (m_is_superuser_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("is_superuser"), namePrefix), m_is_superuser);
+    }
+    if (m_is_active_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("is_active"), namePrefix), m_is_active);
+    }
+    if (m_profile.isSet()) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("profile"), namePrefix), m_profile);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> MeUser::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> MeUser::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_pk_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_username_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("username"), namePrefix), m_username);
+    }
+    if (m_first_name_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("first_name"), namePrefix), m_first_name);
+    }
+    if (m_last_name_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("last_name"), namePrefix), m_last_name);
+    }
+    if (m_email_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("email"), namePrefix), m_email);
+    }
+    if (m_groups.size() > 0) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("groups"), namePrefix), m_groups);
+    }
+    if (m_group_ids.size() > 0) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("group_ids"), namePrefix), m_group_ids);
+    }
+    if (m_is_staff_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("is_staff"), namePrefix), m_is_staff);
+    }
+    if (m_is_superuser_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("is_superuser"), namePrefix), m_is_superuser);
+    }
+    if (m_is_active_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("is_active"), namePrefix), m_is_active);
+    }
+    if (m_profile.isSet()) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("profile"), namePrefix), m_profile);
+    }
+    return files;
+}
+
 qint32 MeUser::getPk() const {
     return m_pk;
 }

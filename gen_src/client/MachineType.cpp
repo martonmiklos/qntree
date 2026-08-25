@@ -110,6 +110,64 @@ QJsonObject MachineType::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> MachineType::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> MachineType::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_slug_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("slug"), namePrefix), m_slug);
+    }
+    if (m_name_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("name"), namePrefix), m_name);
+    }
+    if (m_description_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("description"), namePrefix), m_description);
+    }
+    if (m_provider_file_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("provider_file"), namePrefix), m_provider_file);
+    }
+    if (m_provider_plugin.size() > 0) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("provider_plugin"), namePrefix), m_provider_plugin);
+    }
+    if (m_is_builtin_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("is_builtin"), namePrefix), m_is_builtin);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> MachineType::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> MachineType::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_slug_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("slug"), namePrefix), m_slug);
+    }
+    if (m_name_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("name"), namePrefix), m_name);
+    }
+    if (m_description_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("description"), namePrefix), m_description);
+    }
+    if (m_provider_file_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("provider_file"), namePrefix), m_provider_file);
+    }
+    if (m_provider_plugin.size() > 0) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("provider_plugin"), namePrefix), m_provider_plugin);
+    }
+    if (m_is_builtin_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("is_builtin"), namePrefix), m_is_builtin);
+    }
+    return files;
+}
+
 QString MachineType::getSlug() const {
     return m_slug;
 }

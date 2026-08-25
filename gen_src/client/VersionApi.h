@@ -99,12 +99,8 @@ Q_SIGNALS:
 
     void versionRetrieveSignalFull(HttpRequestWorker *worker, VersionView summary);
 
-    Q_DECL_DEPRECATED_X("Use versionRetrieveSignalError() instead")
-    void versionRetrieveSignalE(VersionView summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void versionRetrieveSignalError(VersionView summary, QNetworkReply::NetworkError error_type, const QString &error_str);
 
-    Q_DECL_DEPRECATED_X("Use versionRetrieveSignalErrorFull() instead")
-    void versionRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void versionRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     void abortRequestsSignal();

@@ -74,6 +74,40 @@ QJsonObject ReturnOrderLineItemReceive::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> ReturnOrderLineItemReceive::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> ReturnOrderLineItemReceive::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_item_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("item"), namePrefix), m_item);
+    }
+    if (m_status_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("status"), namePrefix), m_status);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> ReturnOrderLineItemReceive::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> ReturnOrderLineItemReceive::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_item_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("item"), namePrefix), m_item);
+    }
+    if (m_status_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("status"), namePrefix), m_status);
+    }
+    return files;
+}
+
 qint32 ReturnOrderLineItemReceive::getItem() const {
     return m_item;
 }

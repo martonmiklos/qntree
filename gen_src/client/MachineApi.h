@@ -224,90 +224,34 @@ Q_SIGNALS:
     void machineTypesListSignalFull(HttpRequestWorker *worker, QList<MachineType> summary);
     void machineUpdateSignalFull(HttpRequestWorker *worker, MachineConfig summary);
 
-    Q_DECL_DEPRECATED_X("Use machineCreateSignalError() instead")
-    void machineCreateSignalE(MachineConfigCreate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void machineCreateSignalError(MachineConfigCreate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use machineDestroySignalError() instead")
-    void machineDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void machineDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use machineDriversListSignalError() instead")
-    void machineDriversListSignalE(QList<MachineDriver> summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void machineDriversListSignalError(QList<MachineDriver> summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use machineListSignalError() instead")
-    void machineListSignalE(PaginatedMachineConfigList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void machineListSignalError(PaginatedMachineConfigList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use machinePartialUpdateSignalError() instead")
-    void machinePartialUpdateSignalE(MachineConfig summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void machinePartialUpdateSignalError(MachineConfig summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use machineRestartCreateSignalError() instead")
-    void machineRestartCreateSignalE(MachineRestart summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void machineRestartCreateSignalError(MachineRestart summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use machineRetrieveSignalError() instead")
-    void machineRetrieveSignalE(MachineConfig summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void machineRetrieveSignalError(MachineConfig summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use machineSettingsListSignalError() instead")
-    void machineSettingsListSignalE(QList<MachineSetting> summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void machineSettingsListSignalError(QList<MachineSetting> summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use machineSettingsPartialUpdateSignalError() instead")
-    void machineSettingsPartialUpdateSignalE(MachineSetting summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void machineSettingsPartialUpdateSignalError(MachineSetting summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use machineSettingsRetrieveSignalError() instead")
-    void machineSettingsRetrieveSignalE(MachineSetting summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void machineSettingsRetrieveSignalError(MachineSetting summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use machineSettingsUpdateSignalError() instead")
-    void machineSettingsUpdateSignalE(MachineSetting summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void machineSettingsUpdateSignalError(MachineSetting summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use machineStatusRetrieveSignalError() instead")
-    void machineStatusRetrieveSignalE(MachineRegistryStatus summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void machineStatusRetrieveSignalError(MachineRegistryStatus summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use machineTypesListSignalError() instead")
-    void machineTypesListSignalE(QList<MachineType> summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void machineTypesListSignalError(QList<MachineType> summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use machineUpdateSignalError() instead")
-    void machineUpdateSignalE(MachineConfig summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void machineUpdateSignalError(MachineConfig summary, QNetworkReply::NetworkError error_type, const QString &error_str);
 
-    Q_DECL_DEPRECATED_X("Use machineCreateSignalErrorFull() instead")
-    void machineCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void machineCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use machineDestroySignalErrorFull() instead")
-    void machineDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void machineDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use machineDriversListSignalErrorFull() instead")
-    void machineDriversListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void machineDriversListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use machineListSignalErrorFull() instead")
-    void machineListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void machineListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use machinePartialUpdateSignalErrorFull() instead")
-    void machinePartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void machinePartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use machineRestartCreateSignalErrorFull() instead")
-    void machineRestartCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void machineRestartCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use machineRetrieveSignalErrorFull() instead")
-    void machineRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void machineRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use machineSettingsListSignalErrorFull() instead")
-    void machineSettingsListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void machineSettingsListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use machineSettingsPartialUpdateSignalErrorFull() instead")
-    void machineSettingsPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void machineSettingsPartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use machineSettingsRetrieveSignalErrorFull() instead")
-    void machineSettingsRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void machineSettingsRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use machineSettingsUpdateSignalErrorFull() instead")
-    void machineSettingsUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void machineSettingsUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use machineStatusRetrieveSignalErrorFull() instead")
-    void machineStatusRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void machineStatusRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use machineTypesListSignalErrorFull() instead")
-    void machineTypesListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void machineTypesListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use machineUpdateSignalErrorFull() instead")
-    void machineUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void machineUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     void abortRequestsSignal();

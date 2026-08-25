@@ -155,6 +155,94 @@ QJsonObject PartTestTemplate::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> PartTestTemplate::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> PartTestTemplate::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_pk_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_key_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("key"), namePrefix), m_key);
+    }
+    if (m_part_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("part"), namePrefix), m_part);
+    }
+    if (m_test_name_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("test_name"), namePrefix), m_test_name);
+    }
+    if (m_description_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("description"), namePrefix), m_description);
+    }
+    if (m_enabled_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("enabled"), namePrefix), m_enabled);
+    }
+    if (m_required_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("required"), namePrefix), m_required);
+    }
+    if (m_requires_value_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("requires_value"), namePrefix), m_requires_value);
+    }
+    if (m_requires_attachment_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("requires_attachment"), namePrefix), m_requires_attachment);
+    }
+    if (m_results_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("results"), namePrefix), m_results);
+    }
+    if (m_choices_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("choices"), namePrefix), m_choices);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> PartTestTemplate::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> PartTestTemplate::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_pk_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_key_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("key"), namePrefix), m_key);
+    }
+    if (m_part_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("part"), namePrefix), m_part);
+    }
+    if (m_test_name_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("test_name"), namePrefix), m_test_name);
+    }
+    if (m_description_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("description"), namePrefix), m_description);
+    }
+    if (m_enabled_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("enabled"), namePrefix), m_enabled);
+    }
+    if (m_required_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("required"), namePrefix), m_required);
+    }
+    if (m_requires_value_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("requires_value"), namePrefix), m_requires_value);
+    }
+    if (m_requires_attachment_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("requires_attachment"), namePrefix), m_requires_attachment);
+    }
+    if (m_results_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("results"), namePrefix), m_results);
+    }
+    if (m_choices_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("choices"), namePrefix), m_choices);
+    }
+    return files;
+}
+
 qint32 PartTestTemplate::getPk() const {
     return m_pk;
 }

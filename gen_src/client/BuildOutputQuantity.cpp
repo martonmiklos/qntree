@@ -74,6 +74,40 @@ QJsonObject BuildOutputQuantity::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> BuildOutputQuantity::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> BuildOutputQuantity::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_output_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("output"), namePrefix), m_output);
+    }
+    if (m_quantity_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("quantity"), namePrefix), m_quantity);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> BuildOutputQuantity::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> BuildOutputQuantity::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_output_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("output"), namePrefix), m_output);
+    }
+    if (m_quantity_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("quantity"), namePrefix), m_quantity);
+    }
+    return files;
+}
+
 qint32 BuildOutputQuantity::getOutput() const {
     return m_output;
 }

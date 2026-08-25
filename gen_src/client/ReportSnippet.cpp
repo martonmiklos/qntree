@@ -83,6 +83,46 @@ QJsonObject ReportSnippet::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> ReportSnippet::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> ReportSnippet::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_pk_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_snippet_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("snippet"), namePrefix), m_snippet);
+    }
+    if (m_description_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("description"), namePrefix), m_description);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> ReportSnippet::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> ReportSnippet::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_pk_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_snippet_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("snippet"), namePrefix), m_snippet);
+    }
+    if (m_description_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("description"), namePrefix), m_description);
+    }
+    return files;
+}
+
 qint32 ReportSnippet::getPk() const {
     return m_pk;
 }

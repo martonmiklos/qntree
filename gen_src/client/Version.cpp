@@ -119,6 +119,70 @@ QJsonObject Version::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> Version::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> Version::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_server_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("server"), namePrefix), m_server);
+    }
+    if (m_api_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("api"), namePrefix), m_api);
+    }
+    if (m_commit_hash_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("commit_hash"), namePrefix), m_commit_hash);
+    }
+    if (m_commit_date_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("commit_date"), namePrefix), m_commit_date);
+    }
+    if (m_commit_branch_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("commit_branch"), namePrefix), m_commit_branch);
+    }
+    if (m_python_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("python"), namePrefix), m_python);
+    }
+    if (m_django_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("django"), namePrefix), m_django);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> Version::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> Version::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_server_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("server"), namePrefix), m_server);
+    }
+    if (m_api_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("api"), namePrefix), m_api);
+    }
+    if (m_commit_hash_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("commit_hash"), namePrefix), m_commit_hash);
+    }
+    if (m_commit_date_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("commit_date"), namePrefix), m_commit_date);
+    }
+    if (m_commit_branch_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("commit_branch"), namePrefix), m_commit_branch);
+    }
+    if (m_python_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("python"), namePrefix), m_python);
+    }
+    if (m_django_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("django"), namePrefix), m_django);
+    }
+    return files;
+}
+
 QString Version::getServer() const {
     return m_server;
 }

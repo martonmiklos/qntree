@@ -101,6 +101,58 @@ QJsonObject StockMerge::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> StockMerge::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> StockMerge::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_items.size() > 0) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("items"), namePrefix), m_items);
+    }
+    if (m_location_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("location"), namePrefix), m_location);
+    }
+    if (m_notes_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("notes"), namePrefix), m_notes);
+    }
+    if (m_allow_mismatched_suppliers_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("allow_mismatched_suppliers"), namePrefix), m_allow_mismatched_suppliers);
+    }
+    if (m_allow_mismatched_status_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("allow_mismatched_status"), namePrefix), m_allow_mismatched_status);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> StockMerge::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> StockMerge::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_items.size() > 0) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("items"), namePrefix), m_items);
+    }
+    if (m_location_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("location"), namePrefix), m_location);
+    }
+    if (m_notes_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("notes"), namePrefix), m_notes);
+    }
+    if (m_allow_mismatched_suppliers_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("allow_mismatched_suppliers"), namePrefix), m_allow_mismatched_suppliers);
+    }
+    if (m_allow_mismatched_status_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("allow_mismatched_status"), namePrefix), m_allow_mismatched_status);
+    }
+    return files;
+}
+
 QList<StockMergeItem> StockMerge::getItems() const {
     return m_items;
 }

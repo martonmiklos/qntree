@@ -101,6 +101,58 @@ QJsonObject PartCopyBOM::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> PartCopyBOM::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> PartCopyBOM::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_part_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("part"), namePrefix), m_part);
+    }
+    if (m_remove_existing_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("remove_existing"), namePrefix), m_remove_existing);
+    }
+    if (m_include_inherited_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("include_inherited"), namePrefix), m_include_inherited);
+    }
+    if (m_skip_invalid_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("skip_invalid"), namePrefix), m_skip_invalid);
+    }
+    if (m_copy_substitutes_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("copy_substitutes"), namePrefix), m_copy_substitutes);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> PartCopyBOM::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> PartCopyBOM::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_part_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("part"), namePrefix), m_part);
+    }
+    if (m_remove_existing_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("remove_existing"), namePrefix), m_remove_existing);
+    }
+    if (m_include_inherited_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("include_inherited"), namePrefix), m_include_inherited);
+    }
+    if (m_skip_invalid_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("skip_invalid"), namePrefix), m_skip_invalid);
+    }
+    if (m_copy_substitutes_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("copy_substitutes"), namePrefix), m_copy_substitutes);
+    }
+    return files;
+}
+
 qint32 PartCopyBOM::getPart() const {
     return m_part;
 }

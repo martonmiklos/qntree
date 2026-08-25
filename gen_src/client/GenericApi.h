@@ -167,54 +167,22 @@ Q_SIGNALS:
     void genericStatusRetrieveSignalFull(HttpRequestWorker *worker, GenericStateClass summary);
     void genericStatusRetrieveAllSignalFull(HttpRequestWorker *worker, QMap<QString, QJsonValue> summary);
 
-    Q_DECL_DEPRECATED_X("Use genericStatusCustomCreateSignalError() instead")
-    void genericStatusCustomCreateSignalE(CustomState summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void genericStatusCustomCreateSignalError(CustomState summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use genericStatusCustomDestroySignalError() instead")
-    void genericStatusCustomDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void genericStatusCustomDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use genericStatusCustomListSignalError() instead")
-    void genericStatusCustomListSignalE(PaginatedCustomStateList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void genericStatusCustomListSignalError(PaginatedCustomStateList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use genericStatusCustomPartialUpdateSignalError() instead")
-    void genericStatusCustomPartialUpdateSignalE(CustomState summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void genericStatusCustomPartialUpdateSignalError(CustomState summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use genericStatusCustomRetrieveSignalError() instead")
-    void genericStatusCustomRetrieveSignalE(CustomState summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void genericStatusCustomRetrieveSignalError(CustomState summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use genericStatusCustomUpdateSignalError() instead")
-    void genericStatusCustomUpdateSignalE(CustomState summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void genericStatusCustomUpdateSignalError(CustomState summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use genericStatusRetrieveSignalError() instead")
-    void genericStatusRetrieveSignalE(GenericStateClass summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void genericStatusRetrieveSignalError(GenericStateClass summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use genericStatusRetrieveAllSignalError() instead")
-    void genericStatusRetrieveAllSignalE(QMap<QString, QJsonValue> summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void genericStatusRetrieveAllSignalError(QMap<QString, QJsonValue> summary, QNetworkReply::NetworkError error_type, const QString &error_str);
 
-    Q_DECL_DEPRECATED_X("Use genericStatusCustomCreateSignalErrorFull() instead")
-    void genericStatusCustomCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void genericStatusCustomCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use genericStatusCustomDestroySignalErrorFull() instead")
-    void genericStatusCustomDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void genericStatusCustomDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use genericStatusCustomListSignalErrorFull() instead")
-    void genericStatusCustomListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void genericStatusCustomListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use genericStatusCustomPartialUpdateSignalErrorFull() instead")
-    void genericStatusCustomPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void genericStatusCustomPartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use genericStatusCustomRetrieveSignalErrorFull() instead")
-    void genericStatusCustomRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void genericStatusCustomRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use genericStatusCustomUpdateSignalErrorFull() instead")
-    void genericStatusCustomUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void genericStatusCustomUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use genericStatusRetrieveSignalErrorFull() instead")
-    void genericStatusRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void genericStatusRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use genericStatusRetrieveAllSignalErrorFull() instead")
-    void genericStatusRetrieveAllSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void genericStatusRetrieveAllSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     void abortRequestsSignal();

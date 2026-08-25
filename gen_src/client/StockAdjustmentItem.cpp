@@ -101,6 +101,58 @@ QJsonObject StockAdjustmentItem::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> StockAdjustmentItem::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> StockAdjustmentItem::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_pk_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_quantity_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("quantity"), namePrefix), m_quantity);
+    }
+    if (m_batch_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("batch"), namePrefix), m_batch);
+    }
+    if (m_status_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("status"), namePrefix), m_status);
+    }
+    if (m_packaging_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("packaging"), namePrefix), m_packaging);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> StockAdjustmentItem::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> StockAdjustmentItem::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_pk_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_quantity_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("quantity"), namePrefix), m_quantity);
+    }
+    if (m_batch_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("batch"), namePrefix), m_batch);
+    }
+    if (m_status_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("status"), namePrefix), m_status);
+    }
+    if (m_packaging_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("packaging"), namePrefix), m_packaging);
+    }
+    return files;
+}
+
 qint32 StockAdjustmentItem::getPk() const {
     return m_pk;
 }

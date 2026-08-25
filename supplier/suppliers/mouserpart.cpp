@@ -11,6 +11,7 @@ void MouserPart::parseFromSearchResult(const QJsonObject &partJson)
     m_properties.clear();
     m_priceRanges.clear();
 
+
     m_name = partJson.value(QStringLiteral("ManufacturerPartNumber")).toString();
     m_mpn = m_name;
     m_sku = partJson.value(QStringLiteral("MouserPartNumber")).toString();

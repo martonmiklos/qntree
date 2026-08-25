@@ -74,6 +74,40 @@ QJsonObject PurchaseOrderReceive::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> PurchaseOrderReceive::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> PurchaseOrderReceive::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_items.size() > 0) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("items"), namePrefix), m_items);
+    }
+    if (m_location_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("location"), namePrefix), m_location);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> PurchaseOrderReceive::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> PurchaseOrderReceive::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_items.size() > 0) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("items"), namePrefix), m_items);
+    }
+    if (m_location_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("location"), namePrefix), m_location);
+    }
+    return files;
+}
+
 QList<PurchaseOrderLineItemReceive> PurchaseOrderReceive::getItems() const {
     return m_items;
 }

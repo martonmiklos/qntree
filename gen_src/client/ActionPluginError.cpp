@@ -74,6 +74,40 @@ QJsonObject ActionPluginError::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> ActionPluginError::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> ActionPluginError::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_error_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("error"), namePrefix), m_error);
+    }
+    if (m_action_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("action"), namePrefix), m_action);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> ActionPluginError::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> ActionPluginError::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_error_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("error"), namePrefix), m_error);
+    }
+    if (m_action_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("action"), namePrefix), m_action);
+    }
+    return files;
+}
+
 QString ActionPluginError::getError() const {
     return m_error;
 }

@@ -101,6 +101,58 @@ QJsonObject PatchedErrorMessage::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> PatchedErrorMessage::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> PatchedErrorMessage::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_when_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("when"), namePrefix), m_when);
+    }
+    if (m_info_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("info"), namePrefix), m_info);
+    }
+    if (m_data_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("data"), namePrefix), m_data);
+    }
+    if (m_path_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("path"), namePrefix), m_path);
+    }
+    if (m_pk_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> PatchedErrorMessage::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> PatchedErrorMessage::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_when_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("when"), namePrefix), m_when);
+    }
+    if (m_info_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("info"), namePrefix), m_info);
+    }
+    if (m_data_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("data"), namePrefix), m_data);
+    }
+    if (m_path_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("path"), namePrefix), m_path);
+    }
+    if (m_pk_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    return files;
+}
+
 QDateTime PatchedErrorMessage::getWhen() const {
     return m_when;
 }

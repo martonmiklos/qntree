@@ -83,6 +83,46 @@ QJsonObject Settings::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> Settings::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> Settings::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_sso_registration_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("sso_registration"), namePrefix), m_sso_registration);
+    }
+    if (m_registration_enabled_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("registration_enabled"), namePrefix), m_registration_enabled);
+    }
+    if (m_password_forgotten_enabled_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("password_forgotten_enabled"), namePrefix), m_password_forgotten_enabled);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> Settings::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> Settings::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_sso_registration_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("sso_registration"), namePrefix), m_sso_registration);
+    }
+    if (m_registration_enabled_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("registration_enabled"), namePrefix), m_registration_enabled);
+    }
+    if (m_password_forgotten_enabled_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("password_forgotten_enabled"), namePrefix), m_password_forgotten_enabled);
+    }
+    return files;
+}
+
 bool Settings::isSsoRegistration() const {
     return m_sso_registration;
 }

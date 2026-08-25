@@ -128,6 +128,76 @@ QJsonObject DataImportRow::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> DataImportRow::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> DataImportRow::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_pk_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_session_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("session"), namePrefix), m_session);
+    }
+    if (m_row_index_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("row_index"), namePrefix), m_row_index);
+    }
+    if (m_row_data_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("row_data"), namePrefix), m_row_data);
+    }
+    if (m_data_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("data"), namePrefix), m_data);
+    }
+    if (m_errors_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("errors"), namePrefix), m_errors);
+    }
+    if (m_r_valid_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("valid"), namePrefix), m_r_valid);
+    }
+    if (m_complete_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("complete"), namePrefix), m_complete);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> DataImportRow::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> DataImportRow::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_pk_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_session_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("session"), namePrefix), m_session);
+    }
+    if (m_row_index_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("row_index"), namePrefix), m_row_index);
+    }
+    if (m_row_data_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("row_data"), namePrefix), m_row_data);
+    }
+    if (m_data_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("data"), namePrefix), m_data);
+    }
+    if (m_errors_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("errors"), namePrefix), m_errors);
+    }
+    if (m_r_valid_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("valid"), namePrefix), m_r_valid);
+    }
+    if (m_complete_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("complete"), namePrefix), m_complete);
+    }
+    return files;
+}
+
 qint32 DataImportRow::getPk() const {
     return m_pk;
 }

@@ -99,12 +99,8 @@ Q_SIGNALS:
 
     void licenseRetrieveSignalFull(HttpRequestWorker *worker, LicenseView summary);
 
-    Q_DECL_DEPRECATED_X("Use licenseRetrieveSignalError() instead")
-    void licenseRetrieveSignalE(LicenseView summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void licenseRetrieveSignalError(LicenseView summary, QNetworkReply::NetworkError error_type, const QString &error_str);
 
-    Q_DECL_DEPRECATED_X("Use licenseRetrieveSignalErrorFull() instead")
-    void licenseRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void licenseRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     void abortRequestsSignal();

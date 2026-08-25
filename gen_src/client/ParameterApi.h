@@ -227,84 +227,32 @@ Q_SIGNALS:
     void parameterTemplateUpdateSignalFull(HttpRequestWorker *worker, ParameterTemplate summary);
     void parameterUpdateSignalFull(HttpRequestWorker *worker, Parameter summary);
 
-    Q_DECL_DEPRECATED_X("Use parameterBulkDestroySignalError() instead")
-    void parameterBulkDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void parameterBulkDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use parameterCreateSignalError() instead")
-    void parameterCreateSignalE(Parameter summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void parameterCreateSignalError(Parameter summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use parameterDestroySignalError() instead")
-    void parameterDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void parameterDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use parameterListSignalError() instead")
-    void parameterListSignalE(PaginatedParameterList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void parameterListSignalError(PaginatedParameterList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use parameterPartialUpdateSignalError() instead")
-    void parameterPartialUpdateSignalE(Parameter summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void parameterPartialUpdateSignalError(Parameter summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use parameterRetrieveSignalError() instead")
-    void parameterRetrieveSignalE(Parameter summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void parameterRetrieveSignalError(Parameter summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use parameterTemplateCreateSignalError() instead")
-    void parameterTemplateCreateSignalE(ParameterTemplate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void parameterTemplateCreateSignalError(ParameterTemplate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use parameterTemplateDestroySignalError() instead")
-    void parameterTemplateDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void parameterTemplateDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use parameterTemplateListSignalError() instead")
-    void parameterTemplateListSignalE(PaginatedParameterTemplateList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void parameterTemplateListSignalError(PaginatedParameterTemplateList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use parameterTemplatePartialUpdateSignalError() instead")
-    void parameterTemplatePartialUpdateSignalE(ParameterTemplate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void parameterTemplatePartialUpdateSignalError(ParameterTemplate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use parameterTemplateRetrieveSignalError() instead")
-    void parameterTemplateRetrieveSignalE(ParameterTemplate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void parameterTemplateRetrieveSignalError(ParameterTemplate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use parameterTemplateUpdateSignalError() instead")
-    void parameterTemplateUpdateSignalE(ParameterTemplate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void parameterTemplateUpdateSignalError(ParameterTemplate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use parameterUpdateSignalError() instead")
-    void parameterUpdateSignalE(Parameter summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void parameterUpdateSignalError(Parameter summary, QNetworkReply::NetworkError error_type, const QString &error_str);
 
-    Q_DECL_DEPRECATED_X("Use parameterBulkDestroySignalErrorFull() instead")
-    void parameterBulkDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void parameterBulkDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use parameterCreateSignalErrorFull() instead")
-    void parameterCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void parameterCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use parameterDestroySignalErrorFull() instead")
-    void parameterDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void parameterDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use parameterListSignalErrorFull() instead")
-    void parameterListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void parameterListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use parameterPartialUpdateSignalErrorFull() instead")
-    void parameterPartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void parameterPartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use parameterRetrieveSignalErrorFull() instead")
-    void parameterRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void parameterRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use parameterTemplateCreateSignalErrorFull() instead")
-    void parameterTemplateCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void parameterTemplateCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use parameterTemplateDestroySignalErrorFull() instead")
-    void parameterTemplateDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void parameterTemplateDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use parameterTemplateListSignalErrorFull() instead")
-    void parameterTemplateListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void parameterTemplateListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use parameterTemplatePartialUpdateSignalErrorFull() instead")
-    void parameterTemplatePartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void parameterTemplatePartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use parameterTemplateRetrieveSignalErrorFull() instead")
-    void parameterTemplateRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void parameterTemplateRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use parameterTemplateUpdateSignalErrorFull() instead")
-    void parameterTemplateUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void parameterTemplateUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use parameterUpdateSignalErrorFull() instead")
-    void parameterUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void parameterUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     void abortRequestsSignal();

@@ -137,6 +137,82 @@ QJsonObject ParameterTemplate::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> ParameterTemplate::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> ParameterTemplate::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_pk_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_name_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("name"), namePrefix), m_name);
+    }
+    if (m_units_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("units"), namePrefix), m_units);
+    }
+    if (m_description_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("description"), namePrefix), m_description);
+    }
+    if (m_model_type_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("model_type"), namePrefix), m_model_type);
+    }
+    if (m_checkbox_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("checkbox"), namePrefix), m_checkbox);
+    }
+    if (m_choices_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("choices"), namePrefix), m_choices);
+    }
+    if (m_selectionlist_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("selectionlist"), namePrefix), m_selectionlist);
+    }
+    if (m_enabled_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("enabled"), namePrefix), m_enabled);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> ParameterTemplate::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> ParameterTemplate::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_pk_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_name_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("name"), namePrefix), m_name);
+    }
+    if (m_units_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("units"), namePrefix), m_units);
+    }
+    if (m_description_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("description"), namePrefix), m_description);
+    }
+    if (m_model_type_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("model_type"), namePrefix), m_model_type);
+    }
+    if (m_checkbox_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("checkbox"), namePrefix), m_checkbox);
+    }
+    if (m_choices_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("choices"), namePrefix), m_choices);
+    }
+    if (m_selectionlist_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("selectionlist"), namePrefix), m_selectionlist);
+    }
+    if (m_enabled_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("enabled"), namePrefix), m_enabled);
+    }
+    return files;
+}
+
 qint32 ParameterTemplate::getPk() const {
     return m_pk;
 }

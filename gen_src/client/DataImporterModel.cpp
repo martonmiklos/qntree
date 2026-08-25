@@ -83,6 +83,46 @@ QJsonObject DataImporterModel::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> DataImporterModel::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> DataImporterModel::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_serializer_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("serializer"), namePrefix), m_serializer);
+    }
+    if (m_model_type_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("model_type"), namePrefix), m_model_type);
+    }
+    if (m_api_url_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("api_url"), namePrefix), m_api_url);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> DataImporterModel::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> DataImporterModel::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_serializer_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("serializer"), namePrefix), m_serializer);
+    }
+    if (m_model_type_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("model_type"), namePrefix), m_model_type);
+    }
+    if (m_api_url_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("api_url"), namePrefix), m_api_url);
+    }
+    return files;
+}
+
 QString DataImporterModel::getSerializer() const {
     return m_serializer;
 }

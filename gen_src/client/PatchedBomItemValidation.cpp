@@ -65,6 +65,34 @@ QJsonObject PatchedBomItemValidation::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> PatchedBomItemValidation::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> PatchedBomItemValidation::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_r_valid_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("valid"), namePrefix), m_r_valid);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> PatchedBomItemValidation::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> PatchedBomItemValidation::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_r_valid_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("valid"), namePrefix), m_r_valid);
+    }
+    return files;
+}
+
 bool PatchedBomItemValidation::isRValid() const {
     return m_r_valid;
 }

@@ -16,12 +16,16 @@
 #include <QDate>
 #include <QDateTime>
 #include <QJsonArray>
+#include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonValue>
 #include <QList>
 #include <QMap>
 #include <QSet>
+#include <QString>
 #include <QVariant>
+
+#include <type_traits>
 
 #include "Enum.h"
 #include "HttpFileElement.h"
@@ -37,6 +41,9 @@ QString toStringValue(const QList<T> &val);
 
 template <typename T>
 QString toStringValue(const QSet<T> &val);
+
+template <typename T>
+QString toStringValue(const QMap<QString, T> &val);
 
 template <typename T>
 bool fromStringValue(const QList<QString> &inStr, QList<T> &val);
@@ -77,6 +84,163 @@ QString toStringValue(const double &value);
 QString toStringValue(const Object &value);
 QString toStringValue(const Enum &value);
 QString toStringValue(const HttpFileElement &value);
+QString toStringValue(const QJsonArray &value);
+QString toStringValue(const QJsonObject &value);
+QString toStringValue(const QJsonValue &value);
+
+void insertFormVariable(QMap<QString, QString> &vars, const QString &fieldName, const QJsonArray &value);
+void insertFormVariable(QMap<QString, QString> &vars, const QString &fieldName, const QJsonObject &value);
+void insertFormVariable(QMap<QString, QString> &vars, const QString &fieldName, const QJsonValue &value);
+
+QString toFormFieldName(const QString &fieldName, const QString &namePrefix = QString());
+QString toIndexedFormFieldName(const QString &fieldName, int index);
+
+template <typename T>
+struct isQList : std::false_type {};
+
+template <typename T>
+struct isQList<QList<T>> : std::true_type {};
+
+template <typename T>
+struct isQSet : std::false_type {};
+
+template <typename T>
+struct isQSet<QSet<T>> : std::true_type {};
+
+template <typename T>
+struct isQStringMap : std::false_type {};
+
+template <typename T>
+struct isQStringMap<QMap<QString, T>> : std::true_type {};
+
+inline void mergeFormVariables(QMap<QString, QString> &vars, const QMap<QString, QString> &nestedVars) {
+    for (auto it = nestedVars.constBegin(); it != nestedVars.constEnd(); ++it) {
+        vars.insert(it.key(), it.value());
+    }
+}
+
+inline void mergeFileElements(QList<HttpFileElement> &files, const QList<HttpFileElement> &nestedFiles) {
+    for (const auto &file : nestedFiles) {
+        files.append(file);
+    }
+}
+
+template <typename T>
+typename std::enable_if<
+    !std::is_base_of<Object, T>::value &&
+    !std::is_same<HttpFileElement, T>::value &&
+    !isQList<T>::value &&
+    !isQSet<T>::value &&
+    !isQStringMap<T>::value,
+    void>::type insertFormVariable(QMap<QString, QString> &vars, const QString &fieldName, const T &value) {
+    vars.insert(fieldName, toStringValue(value));
+}
+
+template <typename T>
+typename std::enable_if<std::is_base_of<Object, T>::value, void>::type insertFormVariable(QMap<QString, QString> &vars, const QString &fieldName, const T &value) {
+    mergeFormVariables(vars, value.asFormVariables(fieldName));
+}
+
+template <typename T>
+typename std::enable_if<std::is_same<HttpFileElement, T>::value, void>::type insertFormVariable(QMap<QString, QString> &vars, const QString &fieldName, const T &value) {
+    (void)vars;
+    (void)fieldName;
+    (void)value;
+}
+
+template <typename T>
+void insertFormVariable(QMap<QString, QString> &vars, const QString &fieldName, const QList<T> &values) {
+    int index = 0;
+    for (const auto &value : values) {
+        //insertFormVariable(vars, toIndexedFormFieldName(fieldName, index), value);
+        ++index;
+    }
+}
+
+template <typename T>
+void insertFormVariable(QMap<QString, QString> &vars, const QString &fieldName, const QSet<T> &values) {
+    int index = 0;
+    for (const auto &value : values) {
+        insertFormVariable(vars, toIndexedFormFieldName(fieldName, index), value);
+        ++index;
+    }
+}
+
+template <typename T>
+void insertFormVariable(QMap<QString, QString> &vars, const QString &fieldName, const QMap<QString, T> &values) {
+    for (auto it = values.constBegin(); it != values.constEnd(); ++it) {
+        insertFormVariable(vars, toFormFieldName(it.key(), fieldName), it.value());
+    }
+}
+
+template <typename T>
+typename std::enable_if<
+    !std::is_base_of<Object, T>::value &&
+    !std::is_same<HttpFileElement, T>::value &&
+    !isQList<T>::value &&
+    !isQSet<T>::value &&
+    !isQStringMap<T>::value,
+    void>::type appendFileElements(QList<HttpFileElement> &files, const QString &fieldName, const T &value) {
+    (void)files;
+    (void)fieldName;
+    (void)value;
+}
+
+template <typename T>
+typename std::enable_if<std::is_base_of<Object, T>::value, void>::type appendFileElements(QList<HttpFileElement> &files, const QString &fieldName, const T &value) {
+    mergeFileElements(files, value.asFileElements(fieldName));
+}
+
+template <typename T>
+typename std::enable_if<std::is_same<HttpFileElement, T>::value, void>::type appendFileElements(QList<HttpFileElement> &files, const QString &fieldName, const T &value) {
+    if (!value.isSet()) {
+        return;
+    }
+    HttpFileElement file = value;
+    if (file.variable_name.isEmpty()) {
+        file.variable_name = fieldName;
+    }
+    files.append(file);
+}
+
+template <typename T>
+typename std::enable_if<std::is_same<HttpFileElement, T>::value, void>::type appendFileElements(QList<HttpFileElement> &files, const QString &fieldName, const QList<T> &values) {
+    for (const auto &value : values) {
+        appendFileElements(files, fieldName, value);
+    }
+}
+
+template <typename T>
+typename std::enable_if<!std::is_same<HttpFileElement, T>::value, void>::type appendFileElements(QList<HttpFileElement> &files, const QString &fieldName, const QList<T> &values) {
+    int index = 0;
+    for (const auto &value : values) {
+        appendFileElements(files, toIndexedFormFieldName(fieldName, index), value);
+        ++index;
+    }
+}
+
+template <typename T>
+typename std::enable_if<std::is_same<HttpFileElement, T>::value, void>::type appendFileElements(QList<HttpFileElement> &files, const QString &fieldName, const QSet<T> &values) {
+    for (const auto &value : values) {
+        appendFileElements(files, fieldName, value);
+    }
+}
+
+template <typename T>
+typename std::enable_if<!std::is_same<HttpFileElement, T>::value, void>::type appendFileElements(QList<HttpFileElement> &files, const QString &fieldName, const QSet<T> &values) {
+    int index = 0;
+    for (const auto &value : values) {
+        appendFileElements(files, toIndexedFormFieldName(fieldName, index), value);
+        ++index;
+    }
+}
+
+template <typename T>
+void appendFileElements(QList<HttpFileElement> &files, const QString &fieldName, const QMap<QString, T> &values) {
+    for (auto it = values.constBegin(); it != values.constEnd(); ++it) {
+        appendFileElements(files, toFormFieldName(it.key(), fieldName), it.value());
+    }
+}
 
 template <typename T>
 QString toStringValue(const QList<T> &val) {
@@ -141,6 +305,12 @@ QJsonValue toJsonValue(const QMap<QString, T> &val) {
         jObject.insert(itemkey, toJsonValue(val.value(itemkey)));
     }
     return jObject;
+}
+
+template <typename T>
+QString toStringValue(const QMap<QString, T> &val) {
+    QJsonDocument doc(toJsonValue(val).toObject());
+    return QString(doc.toJson(QJsonDocument::Compact));
 }
 
 bool fromStringValue(const QString &inStr, QString &value);

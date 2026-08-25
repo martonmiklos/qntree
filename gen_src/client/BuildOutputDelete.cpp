@@ -65,6 +65,34 @@ QJsonObject BuildOutputDelete::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> BuildOutputDelete::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> BuildOutputDelete::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_outputs.size() > 0) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("outputs"), namePrefix), m_outputs);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> BuildOutputDelete::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> BuildOutputDelete::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_outputs.size() > 0) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("outputs"), namePrefix), m_outputs);
+    }
+    return files;
+}
+
 QList<BuildOutput> BuildOutputDelete::getOutputs() const {
     return m_outputs;
 }

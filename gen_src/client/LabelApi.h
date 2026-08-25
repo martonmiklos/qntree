@@ -159,48 +159,20 @@ Q_SIGNALS:
     void labelTemplateRetrieveSignalFull(HttpRequestWorker *worker, LabelTemplate summary);
     void labelTemplateUpdateSignalFull(HttpRequestWorker *worker, LabelTemplate summary);
 
-    Q_DECL_DEPRECATED_X("Use labelPrintCreateSignalError() instead")
-    void labelPrintCreateSignalE(LabelPrint summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void labelPrintCreateSignalError(LabelPrint summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use labelTemplateCreateSignalError() instead")
-    void labelTemplateCreateSignalE(LabelTemplate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void labelTemplateCreateSignalError(LabelTemplate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use labelTemplateDestroySignalError() instead")
-    void labelTemplateDestroySignalE(QNetworkReply::NetworkError error_type, const QString &error_str);
     void labelTemplateDestroySignalError(QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use labelTemplateListSignalError() instead")
-    void labelTemplateListSignalE(PaginatedLabelTemplateList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void labelTemplateListSignalError(PaginatedLabelTemplateList summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use labelTemplatePartialUpdateSignalError() instead")
-    void labelTemplatePartialUpdateSignalE(LabelTemplate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void labelTemplatePartialUpdateSignalError(LabelTemplate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use labelTemplateRetrieveSignalError() instead")
-    void labelTemplateRetrieveSignalE(LabelTemplate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void labelTemplateRetrieveSignalError(LabelTemplate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use labelTemplateUpdateSignalError() instead")
-    void labelTemplateUpdateSignalE(LabelTemplate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
     void labelTemplateUpdateSignalError(LabelTemplate summary, QNetworkReply::NetworkError error_type, const QString &error_str);
 
-    Q_DECL_DEPRECATED_X("Use labelPrintCreateSignalErrorFull() instead")
-    void labelPrintCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void labelPrintCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use labelTemplateCreateSignalErrorFull() instead")
-    void labelTemplateCreateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void labelTemplateCreateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use labelTemplateDestroySignalErrorFull() instead")
-    void labelTemplateDestroySignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void labelTemplateDestroySignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use labelTemplateListSignalErrorFull() instead")
-    void labelTemplateListSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void labelTemplateListSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use labelTemplatePartialUpdateSignalErrorFull() instead")
-    void labelTemplatePartialUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void labelTemplatePartialUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use labelTemplateRetrieveSignalErrorFull() instead")
-    void labelTemplateRetrieveSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void labelTemplateRetrieveSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
-    Q_DECL_DEPRECATED_X("Use labelTemplateUpdateSignalErrorFull() instead")
-    void labelTemplateUpdateSignalEFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
     void labelTemplateUpdateSignalErrorFull(HttpRequestWorker *worker, QNetworkReply::NetworkError error_type, const QString &error_str);
 
     void abortRequestsSignal();

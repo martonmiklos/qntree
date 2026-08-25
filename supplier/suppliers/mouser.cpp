@@ -67,8 +67,9 @@ void Mouser::networkReplyFinished()
 {
     auto *reply = qobject_cast<QNetworkReply*>(sender());
     if (reply == m_imageReply) {
-        if (reply->error() == QNetworkReply::NoError)
+        if (reply->error() == QNetworkReply::NoError) {
             m_part.parseImageResponse(reply->readAll());
+        }
 
         emit supplierPartRetrived(m_part);
         reply->deleteLater();
@@ -108,7 +109,21 @@ void Mouser::networkReplyFinished()
                     m_imageReply->deleteLater();
                     m_imageReply = nullptr;
                 }
-                m_imageReply = m_manager->get(QNetworkRequest(imageUrl));
+                auto request = QNetworkRequest(imageUrl);
+                request.setRawHeader(
+                    "User-Agent",
+                    "Mozilla/5.0 (X11; Linux x86_64; rv:140.0) "
+                    "Gecko/20100101 Firefox/140.0");
+
+                request.setRawHeader(
+                    "Accept",
+                    "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+
+                request.setRawHeader("Sec-Fetch-Dest", "document");
+                request.setRawHeader("Pragma", "no-cache");
+                request.setRawHeader("Cache-Control", "no-cache");
+
+                m_imageReply = m_manager->get(request);
                 connect(m_imageReply, &QNetworkReply::finished, this, &Mouser::networkReplyFinished);
             } else {
                 emit supplierPartRetrived(m_part);

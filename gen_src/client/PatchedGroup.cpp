@@ -101,6 +101,58 @@ QJsonObject PatchedGroup::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> PatchedGroup::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> PatchedGroup::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_pk_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_name_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("name"), namePrefix), m_name);
+    }
+    if (m_permissions.size() > 0) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("permissions"), namePrefix), m_permissions);
+    }
+    if (m_roles.size() > 0) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("roles"), namePrefix), m_roles);
+    }
+    if (m_users.size() > 0) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("users"), namePrefix), m_users);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> PatchedGroup::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> PatchedGroup::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_pk_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_name_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("name"), namePrefix), m_name);
+    }
+    if (m_permissions.size() > 0) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("permissions"), namePrefix), m_permissions);
+    }
+    if (m_roles.size() > 0) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("roles"), namePrefix), m_roles);
+    }
+    if (m_users.size() > 0) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("users"), namePrefix), m_users);
+    }
+    return files;
+}
+
 qint32 PatchedGroup::getPk() const {
     return m_pk;
 }

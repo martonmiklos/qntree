@@ -173,6 +173,106 @@ QJsonObject MachineConfigCreate::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> MachineConfigCreate::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> MachineConfigCreate::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_pk_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_name_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("name"), namePrefix), m_name);
+    }
+    if (m_machine_type_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("machine_type"), namePrefix), m_machine_type);
+    }
+    if (m_driver_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("driver"), namePrefix), m_driver);
+    }
+    if (m_initialized_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("initialized"), namePrefix), m_initialized);
+    }
+    if (m_active_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("active"), namePrefix), m_active);
+    }
+    if (m_status_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("status"), namePrefix), m_status);
+    }
+    if (m_status_model_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("status_model"), namePrefix), m_status_model);
+    }
+    if (m_status_text_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("status_text"), namePrefix), m_status_text);
+    }
+    if (m_machine_errors.size() > 0) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("machine_errors"), namePrefix), m_machine_errors);
+    }
+    if (m_is_driver_available_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("is_driver_available"), namePrefix), m_is_driver_available);
+    }
+    if (m_restart_required_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("restart_required"), namePrefix), m_restart_required);
+    }
+    if (m_properties.size() > 0) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("properties"), namePrefix), m_properties);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> MachineConfigCreate::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> MachineConfigCreate::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_pk_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("pk"), namePrefix), m_pk);
+    }
+    if (m_name_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("name"), namePrefix), m_name);
+    }
+    if (m_machine_type_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("machine_type"), namePrefix), m_machine_type);
+    }
+    if (m_driver_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("driver"), namePrefix), m_driver);
+    }
+    if (m_initialized_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("initialized"), namePrefix), m_initialized);
+    }
+    if (m_active_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("active"), namePrefix), m_active);
+    }
+    if (m_status_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("status"), namePrefix), m_status);
+    }
+    if (m_status_model_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("status_model"), namePrefix), m_status_model);
+    }
+    if (m_status_text_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("status_text"), namePrefix), m_status_text);
+    }
+    if (m_machine_errors.size() > 0) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("machine_errors"), namePrefix), m_machine_errors);
+    }
+    if (m_is_driver_available_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("is_driver_available"), namePrefix), m_is_driver_available);
+    }
+    if (m_restart_required_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("restart_required"), namePrefix), m_restart_required);
+    }
+    if (m_properties.size() > 0) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("properties"), namePrefix), m_properties);
+    }
+    return files;
+}
+
 QString MachineConfigCreate::getPk() const {
     return m_pk;
 }

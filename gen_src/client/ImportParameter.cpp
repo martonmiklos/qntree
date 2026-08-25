@@ -92,6 +92,52 @@ QJsonObject ImportParameter::asJsonObject() const {
     return obj;
 }
 
+QMap<QString, QString> ImportParameter::asFormVariables() const {
+    return asFormVariables(QString());
+}
+
+QMap<QString, QString> ImportParameter::asFormVariables(const QString &namePrefix) const {
+    (void)namePrefix;
+    QMap<QString, QString> vars;
+
+    if (m_name_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("name"), namePrefix), m_name);
+    }
+    if (m_value_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("value"), namePrefix), m_value);
+    }
+    if (m_parameter_template_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("parameter_template"), namePrefix), m_parameter_template);
+    }
+    if (m_on_category_isSet) {
+        ::InvenTree::insertFormVariable(vars, ::InvenTree::toFormFieldName(QString("on_category"), namePrefix), m_on_category);
+    }
+    return vars;
+}
+
+QList<HttpFileElement> ImportParameter::asFileElements() const {
+    return asFileElements(QString());
+}
+
+QList<HttpFileElement> ImportParameter::asFileElements(const QString &namePrefix) const {
+    (void)namePrefix;
+    QList<HttpFileElement> files;
+
+    if (m_name_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("name"), namePrefix), m_name);
+    }
+    if (m_value_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("value"), namePrefix), m_value);
+    }
+    if (m_parameter_template_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("parameter_template"), namePrefix), m_parameter_template);
+    }
+    if (m_on_category_isSet) {
+        ::InvenTree::appendFileElements(files, ::InvenTree::toFormFieldName(QString("on_category"), namePrefix), m_on_category);
+    }
+    return files;
+}
+
 QString ImportParameter::getName() const {
     return m_name;
 }

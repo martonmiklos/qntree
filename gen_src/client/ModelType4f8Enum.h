@@ -19,9 +19,12 @@
 #define ModelType4f8Enum_H
 
 #include <QJsonObject>
+#include <QList>
+#include <QMap>
 
 
 #include "Enum.h"
+#include "HttpFileElement.h"
 #include "Object.h"
 
 namespace InvenTree {
