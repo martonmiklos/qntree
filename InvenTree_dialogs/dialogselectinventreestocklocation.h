@@ -14,7 +14,8 @@ class DialogSelectInvenTreeStockLocation : public QDialog
     Q_OBJECT
 
 public:
-    explicit DialogSelectInvenTreeStockLocation(InvenTree::StockApi *api, QWidget *parent = nullptr);
+    explicit DialogSelectInvenTreeStockLocation(InvenTree::StockApi *api, QWidget *parent = nullptr,
+                                                int selectedPk = 0);
     ~DialogSelectInvenTreeStockLocation();
 
     void setFilterForNonStructural(bool newFilterForNonStructural);

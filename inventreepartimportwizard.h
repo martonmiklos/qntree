@@ -79,6 +79,7 @@ public:
     void initPriceBreaks(int partPk, QList<InvenTree::SupplierPriceBreak> *breaks);
     void initAttachments(int partPk, QList<InvenTree::Attachment> *as);
     int currentSupplierDbId() const;
+    int targetCategoryDefaultLocationPk() const;
 
     InvenTree::CompanyApi *companyApi() const;
 
@@ -110,4 +111,3 @@ protected:
 private slots:
     void on_InvenTreePartImportWizard_currentIdChanged(int newPageId);
 };
-

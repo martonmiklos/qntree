@@ -3,7 +3,8 @@
 
 #include <QMessageBox>
 
-DialogSelectInvenTreeStockLocation::DialogSelectInvenTreeStockLocation(InvenTree::StockApi *api, QWidget *parent)
+DialogSelectInvenTreeStockLocation::DialogSelectInvenTreeStockLocation(InvenTree::StockApi *api, QWidget *parent,
+                                                                       int selectedPk)
     : QDialog(parent)
     , ui(new Ui::DialogSelectInvenTreeStockLocation)
 {
@@ -32,6 +33,9 @@ DialogSelectInvenTreeStockLocation::DialogSelectInvenTreeStockLocation(InvenTree
             });
     connect(ui->lineEditFilterSelector, &InventreeStockLocationPathLineEdit::locationSelected,
             this, [this](quint32 pk) { m_model->setSelectedPk(pk); });
+
+    if (selectedPk != 0)
+        m_model->setSelectedPk(selectedPk);
 }
 
 DialogSelectInvenTreeStockLocation::~DialogSelectInvenTreeStockLocation()

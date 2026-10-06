@@ -109,7 +109,8 @@ void StockLineWidget::on_toolButtonEditStockNote_clicked()
 
 void StockLineWidget::on_toolButtonChangeTargetLocation_clicked()
 {
-    auto dlg = new DialogSelectInvenTreeStockLocation(m_wizard->stockApi(), this);
+    auto dlg = new DialogSelectInvenTreeStockLocation(
+        m_wizard->stockApi(), this, m_wizard->targetCategoryDefaultLocationPk());
     dlg->show();
     connect(dlg, &DialogSelectInvenTreeStockLocation::stockLocationSelected,
             this, [=](int pk, const QString &locationName, const QString &locationPath) {
@@ -140,4 +141,3 @@ void StockLineWidget::on_checkBoxCreateStock_clicked(bool checked)
     }
     emit quantityChanged();
 }
-

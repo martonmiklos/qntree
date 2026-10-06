@@ -229,6 +229,11 @@ int InvenTreePartImportWizard::currentSupplierDbId() const
     return m_startPage->selectedSupplier()->getId();
 }
 
+int InvenTreePartImportWizard::targetCategoryDefaultLocationPk() const
+{
+    return m_partDetailsPage ? m_partDetailsPage->invenTreeTargetCategoryDefaultLocationPk() : -1;
+}
+
 InvenTree::CompanyApi *InvenTreePartImportWizard::companyApi() const
 {
     return m_companyApi;
@@ -254,6 +259,5 @@ void InvenTreePartImportWizard::on_InvenTreePartImportWizard_currentIdChanged(in
         m_uploader->start();
     }
 }
-
 
 

@@ -25,6 +25,7 @@ public:
     void setSupplierUuid(const QString &newSupplierUuid);
 
     int invenTreeTargetCategoryPk() const;
+    int invenTreeTargetCategoryDefaultLocationPk() const;
 
     QString summary() const override;
 
@@ -32,6 +33,7 @@ private:
     Ui::WizardPagePartDetails *ui;
     InvenTree::PartApi *m_partApi = nullptr;
     int m_invenTreeTargetCategoryPk = -1;
+    int m_invenTreeTargetCategoryDefaultLocationPk = -1;
     int m_invenTreeManufacturerPk = -1;
     QString m_invenTreeManufacturerName;
     QString m_supplierUuid;

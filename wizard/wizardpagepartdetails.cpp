@@ -74,6 +74,7 @@ void WizardPagePartDetails::update()
     ui->lineEditMpn->setText(m_wizard->m_selectedPart.mpn());
 
     m_invenTreeTargetCategoryPk = -1;
+    m_invenTreeTargetCategoryDefaultLocationPk = -1;
     ui->labelInvenTreeSelectedCategory->clear();
     ui->labelInvenTreeSelectedCategory->setToolTip(QString());
     emit completeChanged();
@@ -170,6 +171,7 @@ void WizardPagePartDetails::categoryDetailsRetrived(InvenTree::Category category
     ui->labelInvenTreeSelectedCategory->setText(category.getName());
     ui->labelInvenTreeSelectedCategory->setToolTip(category.getPathstring());
     m_invenTreeTargetCategoryPk = category.getPk();
+    m_invenTreeTargetCategoryDefaultLocationPk = category.getDefaultLocation();
     disconnect(m_wizard->partApi(),
                &InvenTree::PartApi::partCategoryRetrieveSignal, this,
                &WizardPagePartDetails::categoryDetailsRetrived);
@@ -214,6 +216,11 @@ void WizardPagePartDetails::setSupplierUuid(const QString &newSupplierUuid)
 int WizardPagePartDetails::invenTreeTargetCategoryPk() const
 {
     return m_invenTreeTargetCategoryPk;
+}
+
+int WizardPagePartDetails::invenTreeTargetCategoryDefaultLocationPk() const
+{
+    return m_invenTreeTargetCategoryDefaultLocationPk;
 }
 
 QString WizardPagePartDetails::summary() const
