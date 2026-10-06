@@ -12,10 +12,26 @@ DialogSelectInvenTreeStockLocation::DialogSelectInvenTreeStockLocation(InvenTree
 
     m_model = new InvenTreeStockLocationModel(api, this);
     ui->treeViewStockLocations->setModel(m_model);
+    connect(m_model, &InvenTreeStockLocationModel::requestExpand, ui->treeViewStockLocations,
+            [this](const QModelIndex &index) { ui->treeViewStockLocations->setExpanded(index, true); });
+    connect(m_model, &InvenTreeStockLocationModel::requestSelection, ui->treeViewStockLocations,
+            [this](const QModelIndex &index) {
+                ui->treeViewStockLocations->setCurrentIndex(index);
+                ui->treeViewStockLocations->scrollTo(index);
+            });
+    connect(m_model, &InvenTreeStockLocationModel::dataFetched, this,
+            [this] { ui->labelError->clear(); });
 
     m_settings.beginGroup("DialogSelectInvenTreeStockLocation");
     restoreGeometry(m_settings.value("geometry").toByteArray());
     m_settings.endGroup();
+
+    connect(api, &InvenTree::StockApi::stockLocationListSignalError, this,
+            [this](InvenTree::PaginatedLocationList, QNetworkReply::NetworkError, const QString &error) {
+                ui->labelError->setText(error);
+            });
+    connect(ui->lineEditFilterSelector, &InventreeStockLocationPathLineEdit::locationSelected,
+            this, [this](quint32 pk) { m_model->setSelectedPk(pk); });
 }
 
 DialogSelectInvenTreeStockLocation::~DialogSelectInvenTreeStockLocation()
@@ -36,10 +52,10 @@ void DialogSelectInvenTreeStockLocation::on_treeViewStockLocations_doubleClicked
     }
     emit stockLocationSelected(m_model->data(index, InvenTreeStockLocationModel::PkRole).toInt(),
                           m_model->data(index, Qt::DisplayRole).toString(),
-                               m_model->data(index, InvenTreeStockLocationModel::LocationPathRole).toString());}
+                               m_model->data(index, InvenTreeStockLocationModel::LocationPathRole).toString());
+}
 
 void DialogSelectInvenTreeStockLocation::setFilterForNonStructural(bool newFilterForNonStructural)
 {
     m_filterForNonStructural = newFilterForNonStructural;
 }
-

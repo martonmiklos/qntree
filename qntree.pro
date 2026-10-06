@@ -21,6 +21,7 @@ SOURCES += \
     db/config_db.cpp \
     dialog.cpp \
     inventreecategorypathlineedit.cpp \
+    inventreestocklocationpathlineedit.cpp \
     inventreepartimportwizard.cpp \
     inventreesettingsdialog.cpp \
     main.cpp \
@@ -67,6 +68,7 @@ HEADERS += \
     db/config_db.h \
     dialog.h \
     inventreecategorypathlineedit.h \
+    inventreestocklocationpathlineedit.h \
     inventreepartimportwizard.h \
     inventreesettingsdialog.h \
     mainwindow.h \
