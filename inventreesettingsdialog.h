@@ -5,6 +5,9 @@
 #include <QCompleter>
 #include <QStringListModel>
 
+class QNetworkAccessManager;
+class QNetworkReply;
+
 namespace Ui {
 class InventreeSettingsDialog;
 }
@@ -23,13 +26,20 @@ public:
     static constexpr const char* KEY_SERVER = "server_url";
     static constexpr const char* KEY_TOKEN  = "api_token";
     static constexpr const char* KEY_URL_LIST = "server_url_history";
+    static constexpr const char* KEY_CONNECTION_PROFILES = "connection_profiles";
 
 private slots:
     void saveSettings();
+    void saveConnectionProfile();
+    void loadConnectionProfile(const QString &profileName);
+    void deleteConnectionProfile();
+    void testConnection();
 
 private:
     void loadSettings();
     void setupCompleter();
+    void refreshConnectionProfiles(const QString &selectedProfile = QString());
+    QUrl healthCheckUrl(const QString &serverUrl) const;
 
 private:
     Ui::InventreeSettingsDialog *ui;
@@ -37,4 +47,6 @@ private:
     QSettings m_settings;
     QStringListModel *m_urlModel;
     QCompleter *urlCompleter;
+    QNetworkAccessManager *m_networkAccessManager;
+    QNetworkReply *m_testReply = nullptr;
 };

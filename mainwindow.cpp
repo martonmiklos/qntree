@@ -14,6 +14,8 @@ using namespace InvenTree;
 #include "supplier/suppliers/mousersettingsdialog.h"
 #include "supplier/suppliers/tmesettingsdialog.h"
 
+#include <QUrl>
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -75,6 +77,7 @@ void MainWindow::updateInvenTreeToken()
 {
     m_settings.beginGroup("InventTree");
     auto token = m_settings.value(InventreeSettingsDialog::KEY_TOKEN).toString();
+    const QUrl serverUrl(m_settings.value(InventreeSettingsDialog::KEY_SERVER).toString());
     m_settings.endGroup();
 
     m_partApi->addHeaders("Authorization", "Token " + token);
@@ -83,6 +86,14 @@ void MainWindow::updateInvenTreeToken()
     m_companyApi->addHeaders("Authorization", "Token " + token);
     m_companyApi->addHeaders("Authorization", "Token " + token);
     m_attachmentApi->addHeaders("Authorization", "Token " + token);
+
+    if (serverUrl.isValid() && !serverUrl.scheme().isEmpty() && !serverUrl.host().isEmpty()) {
+        m_partApi->setNewServerForAllOperations(serverUrl);
+        m_stockApi->setNewServerForAllOperations(serverUrl);
+        m_currencyApi->setNewServerForAllOperations(serverUrl);
+        m_companyApi->setNewServerForAllOperations(serverUrl);
+        m_attachmentApi->setNewServerForAllOperations(serverUrl);
+    }
 }
 
 void MainWindow::on_actionMouser_triggered()
