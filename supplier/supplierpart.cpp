@@ -101,3 +101,8 @@ qreal SupplierPart::quantity() const
     return m_quantity;
 }
 
+void SupplierPart::setQuantity(qreal quantity)
+{
+    m_quantity = quantity;
+}
+

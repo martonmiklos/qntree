@@ -4,6 +4,7 @@
 #include <QGuiApplication>
 #include <QClipboard>
 #include <QMimeData>
+#include <QRegularExpression>
 #include <QThread>
 
 #include "wizardpagestockandpricing.h"
@@ -48,10 +49,29 @@ bool WizardPageSupplierDataEnter::isComplete() const
 
 bool WizardPageSupplierDataEnter::validatePage()
 {
+    QString partNumber = ui->lineEditPartNumber->text().trimmed();
+    qreal scannedQuantity = 0;
+    bool hasScannedQuantity = false;
+
+    // Würth labels use 061P<part number>Q<quantity>1T<additional data>[)>].
+    // The final [)>] is the barcode marker; the data after 1T is not needed here.
+    static const QRegularExpression wurthBarcodePattern(
+        QStringLiteral("^061P(.+?)Q([0-9]+)1T.*\\[\\)>\\]$")
+    );
+    const QRegularExpressionMatch wurthMatch = wurthBarcodePattern.match(partNumber);
+    if (wurthMatch.hasMatch()) {
+        partNumber = wurthMatch.captured(1);
+        scannedQuantity = wurthMatch.captured(2).toDouble();
+        hasScannedQuantity = true;
+    }
+
     m_selectedSupplier = SupplierRegistry::instance()->getSupplierByUId(ui->comboBoxSupplier->currentData().toString());
     connect(m_selectedSupplier, &AbstractSupplier::supplierPartRetrived, this, [=](SupplierPart &part) {
         m_partDataRetrived = true;
         m_wizard->setSelectedPart(part);
+        if (hasScannedQuantity) {
+            m_wizard->m_selectedPart.setQuantity(scannedQuantity);
+        }
     });
 
     connect(m_selectedSupplier, &AbstractSupplier::partNotFound, this, [=]() {
@@ -71,7 +91,7 @@ bool WizardPageSupplierDataEnter::validatePage()
         ui->labelMessage->setText(tr("No part data found for the %1 partnumber").arg(ui->lineEditPartNumber->text()));
     });
 
-    m_selectedSupplier->retrivePart(ui->lineEditPartNumber->text().trimmed());
+    m_selectedSupplier->retrivePart(partNumber);
 
     connect(m_wizard->currencyApi(), &InvenTree::CurrencyApi::currencyExchangeRetrieveSignal, this, [=](InvenTree::CurrencyExchange summary) {
         // TODO

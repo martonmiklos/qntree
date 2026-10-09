@@ -45,6 +45,7 @@ public:
     SupplierAttachment* attachmentAt(int index);
 
     qreal quantity() const;
+    void setQuantity(qreal quantity);
 
 protected:
     QString m_sku;
