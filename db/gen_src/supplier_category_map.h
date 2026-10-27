@@ -17,6 +17,8 @@ class SupplierCategoryMap : public Nut::Table
 
   NUT_DECLARE_FIELD(QString, supplier_category_id, supplier_category_id, setSupplier_category_id, QString())
 
+  NUT_DECLARE_FIELD(QString, inventree_instance_uuid, inventree_instance_uuid, setInventree_instance_uuid, QString())
+
   NUT_DECLARE_FIELD(int, inventree_category_id, inventree_category_id, setInventree_category_id, 0)
 
   public:

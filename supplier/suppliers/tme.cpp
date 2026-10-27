@@ -6,28 +6,49 @@
 #include "qnetworkrequest.h"
 #include "supplier/suppliers/tmepart.h"
 #include "qjsonobject.h"
-#include "db/config_db.h"
-#include "tmesettingsdialog.h"
 
 #include <QRegularExpression>
 #include <QMessageAuthenticationCode>
 
+TME* TME::m_instance = nullptr;
+
 TME::TME(QObject *parent)
-    : AbstractSupplier{parent}
+    : AbstractSupplier("TME", "ac01ab15-a375-492c-94c2-f5c4fa16d6a3", parent)
 {
-    m_name = tr("TME");
-    m_uid = QStringLiteral("ac01ab15-a375-492c-94c2-f5c4fa16d6a3");
-
-    loadSettings();
-
-    m_manager = new QNetworkAccessManager(this);
     connect(m_manager, &QNetworkAccessManager::finished, this, &TME::networkReplyFinished);
+    loadSettings();
+}
+
+void TME::loadSettings()
+{
+    AbstractSupplier::loadSettings();
+
+    m_settings.beginGroup(QStringLiteral("Suppliers/TME"));
+    m_secret = m_settings.value(KEY_SECRET).toString();
+    m_token = m_settings.value(KEY_TOKEN).toString();
+    m_country = m_settings.value(KEY_COUNTRY, "HU").toString();
+    m_language = m_settings.value(KEY_LANGUAGE, "HU").toString();
+    m_currency = m_settings.value(KEY_CURRENCY, "EUR").toString();
+    m_useGrossPrices = m_settings.value(KEY_GROSS_PRICES, true).toBool();
+    m_settings.endGroup();
+}
+
+void TME::saveSettings()
+{
+    AbstractSupplier::saveSettings();
+
+    m_settings.beginGroup(QStringLiteral("Suppliers/TME"));
+    m_settings.setValue(KEY_SECRET, m_secret);
+    m_settings.setValue(KEY_TOKEN, m_token);
+    m_settings.setValue(KEY_COUNTRY, m_country);
+    m_settings.setValue(KEY_LANGUAGE, m_language);
+    m_settings.setValue(KEY_CURRENCY, m_currency);
+    m_settings.setValue(KEY_GROSS_PRICES, m_useGrossPrices);
+    m_settings.endGroup();
 }
 
 void TME::retrivePart(const QString &userData)
 {
-    loadSettings();
-
     QString partNumber = userData;
     static QRegularExpression bigQrRe("QTY:([0-9]*)\\sPN:([^\\s]*)\\s(.*)PO:([^\\s]*).*");
     auto matches = bigQrRe.match(userData);
@@ -89,20 +110,52 @@ QNetworkReply *TME::apiCall(const QString &action, QList<QPair<QString, QString>
 
 bool TME::grossPrices() const
 {
-    return m_grossPrices;
+    return m_useGrossPrices;
 }
 
 void TME::setGrossPrices(bool newGrossPrices)
 {
-    m_grossPrices = newGrossPrices;
+    m_useGrossPrices = newGrossPrices;
 }
 
-int TME::invenTreeId() const
+QString TME::secret() const
 {
-    m_settings.beginGroup(TMESettingsDialog::SETTINGS_GROUP);
-    const int invenTreeSupplierId = m_settings.value(TMESettingsDialog::KEY_INVENTREE_SUPPLIER_ID, 4).toInt();
-    m_settings.endGroup();
-    return invenTreeSupplierId;
+    return m_secret;
+}
+
+void TME::setSecret(const QString &newSecret)
+{
+    m_secret = newSecret;
+}
+
+QString TME::token() const
+{
+    return m_token;
+}
+
+void TME::setToken(const QString &newToken)
+{
+    m_token = newToken;
+}
+
+QString TME::country() const
+{
+    return m_country;
+}
+
+void TME::setCountry(const QString &newCountry)
+{
+    m_country = newCountry;
+}
+
+QString TME::language() const
+{
+    return m_language;
+}
+
+void TME::setLanguage(const QString &newLanguage)
+{
+    m_language = newLanguage;
 }
 
 QString TME::currency() const
@@ -115,17 +168,14 @@ void TME::setCurrency(const QString &newCurrency)
     m_currency = newCurrency;
 }
 
-void TME::loadSettings()
+TME *TME::instance(QObject *parent)
 {
-    m_settings.beginGroup(TMESettingsDialog::SETTINGS_GROUP);
-    m_secret = m_settings.value(TMESettingsDialog::KEY_SECRET).toString().trimmed();
-    m_token = m_settings.value(TMESettingsDialog::KEY_TOKEN).toString().trimmed();
-    m_country = m_settings.value(TMESettingsDialog::KEY_COUNTRY, "HU").toString().trimmed();
-    m_language = m_settings.value(TMESettingsDialog::KEY_LANGUAGE, "HU").toString().trimmed();
-    m_currency = m_settings.value(TMESettingsDialog::KEY_CURRENCY, "EUR").toString().trimmed();
-    m_grossPrices = m_settings.value(TMESettingsDialog::KEY_GROSS_PRICES, true).toBool();
-    m_settings.endGroup();
+    if (m_instance == nullptr) {
+        m_instance = new TME(parent);
+    }
+    return m_instance;
 }
+
 
 void TME::networkReplyFinished(QNetworkReply *reply)
 {

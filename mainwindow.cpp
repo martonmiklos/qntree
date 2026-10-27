@@ -6,6 +6,7 @@
 using namespace InvenTree;
 
 #include "inventreepartimportwizard.h"
+#include "inventreeprofilemanager.h"
 
 #include "db/config_db.h"
 
@@ -32,9 +33,11 @@ MainWindow::MainWindow(QWidget *parent)
     m_companyApi = new InvenTree::CompanyApi();
     m_companyApi = new InvenTree::CompanyApi();
     m_attachmentApi = new InvenTree::AttachmentApi();
-    updateInvenTreeToken();
 
+    InvenTreeProfileManager::instance(this);
     SupplierRegistry::instance(this);
+
+    updateInvenTreeToken();
 
     on_pushButtonImportParts_clicked();
 
@@ -75,9 +78,13 @@ void MainWindow::on_actionInvenTree_access_triggered()
 
 void MainWindow::updateInvenTreeToken()
 {
-    m_settings.beginGroup("InventTree");
+    m_settings.beginGroup(QStringLiteral("InvenTreeProfiles"));
+    m_settings.beginGroup(InvenTreeProfileManager::currentInstanceUuid());
+
     auto token = m_settings.value(InventreeSettingsDialog::KEY_TOKEN).toString();
     const QUrl serverUrl(m_settings.value(InventreeSettingsDialog::KEY_SERVER).toString());
+
+    m_settings.endGroup();
     m_settings.endGroup();
 
     m_partApi->addHeaders("Authorization", "Token " + token);
@@ -100,6 +107,7 @@ void MainWindow::on_actionMouser_triggered()
 {
     if (!m_mouserSettingsDialog)
         m_mouserSettingsDialog = new MouserSettingsDialog(this);
+    m_mouserSettingsDialog->loadSettings();
     m_mouserSettingsDialog->show();
 }
 
@@ -107,6 +115,7 @@ void MainWindow::on_actionTME_triggered()
 {
     if (!m_tmeSettingsDialog)
         m_tmeSettingsDialog = new TMESettingsDialog(this);
+    m_tmeSettingsDialog->loadSettings();
     m_tmeSettingsDialog->show();
 }
 
@@ -114,5 +123,6 @@ void MainWindow::on_actionElement14_triggered()
 {
     if (!m_element14SettingsDialog)
         m_element14SettingsDialog = new Element14SettingsDialog(this);
+    m_element14SettingsDialog->loadSettings();
     m_element14SettingsDialog->show();
 }

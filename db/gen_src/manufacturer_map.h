@@ -17,6 +17,8 @@ class ManufacturerMap : public Nut::Table
 
   NUT_DECLARE_FIELD(QString, manufacturer_name, manufacturer_name, setManufacturer_name, QString())
 
+  NUT_DECLARE_FIELD(QString, inventree_instance_uuid, inventree_instance_uuid, setInventree_instance_uuid, QString())
+
   public:
     Q_INVOKABLE ManufacturerMap( QObject *parent = nullptr );
 

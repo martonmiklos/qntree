@@ -1,6 +1,7 @@
 #include "inventreecategorypathlineedit.h"
 
 #include "inventreesettingsdialog.h"
+#include "inventreeprofilemanager.h"
 
 InventreeCategoryListModel::InventreeCategoryListModel(QObject *parent)
     : QAbstractListModel(parent)
@@ -50,8 +51,10 @@ InventreeCategoryPathLineEdit::InventreeCategoryPathLineEdit(QWidget *parent)
 {
     m_api = new InvenTree::PartApi();
     QSettings settings;
-    settings.beginGroup("InventTree");
+    settings.beginGroup(QStringLiteral("InvenTreeProfiles"));
+    settings.beginGroup(InvenTreeProfileManager::currentInstanceUuid());
     auto token = settings.value(InventreeSettingsDialog::KEY_TOKEN).toString();
+    settings.endGroup();
     settings.endGroup();
     m_api->addHeaders("Authorization", "Token " + token);
 

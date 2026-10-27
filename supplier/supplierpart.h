@@ -21,6 +21,8 @@ public:
     SupplierPart();
     QString name() const;
     QString categoryName() const;
+
+    // identifier of the category in the supplier's system (blank if not supported)
     QString categoryId() const;
     QString unit() const;
     QString description() const;

@@ -1,13 +1,13 @@
 #pragma once
 
-#include <QDialog>
-#include <QSettings>
+#include "suppliersettingsdialog.h"
+
 
 namespace Ui {
 class MouserSettingsDialog;
 }
 
-class MouserSettingsDialog : public QDialog
+class MouserSettingsDialog : public SupplierSettingsDialog
 {
     Q_OBJECT
 
@@ -15,16 +15,12 @@ public:
     explicit MouserSettingsDialog(QWidget *parent = nullptr);
     ~MouserSettingsDialog();
 
-    static constexpr const char *SETTINGS_GROUP = "Suppliers/Mouser";
-    static constexpr const char *KEY_API_KEY = "api_key";
-    static constexpr const char *KEY_INVENTREE_SUPPLIER_ID = "inventree_supplier_id";
+    void loadSettings() override;
+
 
 private slots:
-    void saveSettings();
+    void saveSettings() override;
 
 private:
-    void loadSettings();
-
     Ui::MouserSettingsDialog *ui;
-    QSettings m_settings;
 };

@@ -7,6 +7,7 @@
 #include "wizardpagestockandpricing.h"
 #include "stocklinewidget.h"
 #include "db/config_db.h"
+#include "inventreeprofilemanager.h"
 
 #include <QMessageBox>
 #include <QMenu>
@@ -27,24 +28,28 @@ WizardPagePartDetails::~WizardPagePartDetails()
 
 Nut::Row<SupplierCategoryMap> WizardPagePartDetails::findSavedCategoryBinding(int supplierId, const SupplierPart &part)
 {
-    const QString categoryKey = supplierCategoryMapKey(part);
+    const QString supplierCategoryId = part.categoryId().trimmed();
     const QString categoryName = part.categoryName().trimmed();
 
-    if (!categoryKey.isEmpty()) {
+    // if category ID is supported by the supplier try to match by name
+    if (!supplierCategoryId.isEmpty()) {
         auto categoryMap = ConfigDb::instance()->supplier_category_map()
-        ->query()
+            ->query()
             ->where(SupplierCategoryMap::supplier_idField() == supplierId
-                    && SupplierCategoryMap::supplier_category_idField() == categoryKey)
+                    && SupplierCategoryMap::supplier_category_idField() == supplierCategoryId
+                    && SupplierCategoryMap::inventree_instance_uuidField() == InvenTreeProfileManager::currentInstanceUuid())
             ->first();
         if (categoryMap)
             return categoryMap;
     }
 
-    if (!categoryName.isEmpty() && categoryKey == categoryName) {
+    // category ID is not supported try to find match by supplier category name
+    if (!categoryName.isEmpty() && supplierCategoryId.isEmpty()) {
         auto categoryMap = ConfigDb::instance()->supplier_category_map()
         ->query()
             ->where(SupplierCategoryMap::supplier_idField() == supplierId
-                    && SupplierCategoryMap::supplier_category_nameField() == categoryName)
+                    && SupplierCategoryMap::supplier_category_nameField() == categoryName
+                    && SupplierCategoryMap::inventree_instance_uuidField() == InvenTreeProfileManager::currentInstanceUuid())
             ->first();
         if (categoryMap)
             return categoryMap;
@@ -182,11 +187,11 @@ void WizardPagePartDetails::categoryDetailsRetrived(InvenTree::Category category
 void WizardPagePartDetails::saveMapping()
 {
     if (ui->checkBoxSaveCategoryBinding->isChecked() && m_invenTreeTargetCategoryPk != -1) {
-        const QString supplierCategoryKey = supplierCategoryMapKey(m_wizard->m_selectedPart);
         auto categoryMap = findSavedCategoryBinding(m_wizard->currentSupplierDbId(), m_wizard->m_selectedPart);
         if (categoryMap) {
             categoryMap->setInventree_category_id(m_invenTreeTargetCategoryPk);
-            categoryMap->setSupplier_category_id(supplierCategoryKey);
+            categoryMap->setInventree_instance_uuid(InvenTreeProfileManager::currentInstanceUuid());
+            categoryMap->setSupplier_category_id(m_wizard->m_selectedPart.categoryId().trimmed());
             categoryMap->setSupplier_category_name(ui->labelSupplierCategory->text());
             categoryMap->save(ConfigDb::instance());
         } else {
@@ -197,9 +202,12 @@ void WizardPagePartDetails::saveMapping()
                                 ->first();
             if (supplier)
                 map->setSupplier_id(supplier->id());
-            map->setInventree_category_id(m_invenTreeTargetCategoryPk);
-            map->setSupplier_category_id(supplierCategoryKey);
+
+            map->setSupplier_category_id(m_wizard->m_selectedPart.categoryId().trimmed());
             map->setSupplier_category_name(ui->labelSupplierCategory->text());
+
+            map->setInventree_instance_uuid(InvenTreeProfileManager::currentInstanceUuid());
+            map->setInventree_category_id(m_invenTreeTargetCategoryPk);
 
             if (!map->save(ConfigDb::instance())) {
                 QMessageBox::warning(this, tr("Error"), tr("Unable to save InvenTree - Supplier catergory relationship"));

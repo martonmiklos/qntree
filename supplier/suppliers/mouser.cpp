@@ -1,7 +1,6 @@
 #include "mouser.h"
 
 #include "db/gen_src/suppliers.h"
-#include "mousersettingsdialog.h"
 
 #include <QJsonArray>
 #include <QJsonDocument>
@@ -11,29 +10,40 @@
 #include <QSettings>
 
 
-Mouser::Mouser(QObject *parent)
-    : AbstractSupplier(parent)
-{
-    m_name = tr("Mouser");
-    m_uid = QStringLiteral("e2e50b1f-6ce0-4cb8-b2f2-6df9e8840116");
+Mouser* Mouser::m_instance = nullptr;
 
-    m_manager = new QNetworkAccessManager(this);
+Mouser::Mouser(QObject *parent)
+    : AbstractSupplier("Mouser", "e2e50b1f-6ce0-4cb8-b2f2-6df9e8840116", parent)
+{
+    loadSettings();
+}
+
+void Mouser::loadSettings()
+{
+    AbstractSupplier::loadSettings();
+
+    m_settings.beginGroup(QStringLiteral("Suppliers/Mouser"));
+    m_apiKey = m_settings.value(KEY_API_KEY).toString();
+    m_settings.endGroup();
+}
+
+void Mouser::saveSettings()
+{
+    m_settings.beginGroup(QStringLiteral("Suppliers/Mouser"));
+    m_settings.setValue(KEY_API_KEY, m_apiKey);
+    m_settings.endGroup();
 }
 
 void Mouser::retrivePart(const QString &partNumber)
 {
-    m_settings.beginGroup(MouserSettingsDialog::SETTINGS_GROUP);
-    const QString apiKey = m_settings.value(MouserSettingsDialog::KEY_API_KEY).toString().trimmed();
-    m_settings.endGroup();
-
-    if (apiKey.isEmpty()) {
+    if (m_apiKey.isEmpty()) {
         emit error(tr("Mouser API key is missing. Open settings and set it first."));
         return;
     }
 
     QUrl url(QStringLiteral("https://api.mouser.com/api/v1.0/search/partnumber"));
     QUrlQuery query;
-    query.addQueryItem(QStringLiteral("apiKey"), apiKey);
+    query.addQueryItem(QStringLiteral("apiKey"), m_apiKey);
     url.setQuery(query);
 
     QNetworkRequest request(url);
@@ -53,14 +63,6 @@ void Mouser::retrivePart(const QString &partNumber)
 
     m_partReply = m_manager->post(request, QJsonDocument(requestRoot).toJson(QJsonDocument::Compact));
     connect(m_partReply, &QNetworkReply::finished, this, &Mouser::networkReplyFinished);
-}
-
-int Mouser::invenTreeId() const
-{
-    m_settings.beginGroup(MouserSettingsDialog::SETTINGS_GROUP);
-    const int invenTreeSupplierId = m_settings.value(MouserSettingsDialog::KEY_INVENTREE_SUPPLIER_ID, 0).toInt();
-    m_settings.endGroup();
-    return invenTreeSupplierId;
 }
 
 void Mouser::networkReplyFinished()
@@ -133,4 +135,23 @@ void Mouser::networkReplyFinished()
 
     reply->deleteLater();
     m_partReply = nullptr;
+}
+
+Mouser *Mouser::instance(QObject *parent)
+{
+    if (m_instance == nullptr) {
+        m_instance = new Mouser(parent);
+    }
+    return m_instance;
+}
+
+
+QString Mouser::apiKey() const
+{
+    return m_apiKey;
+}
+
+void Mouser::setApiKey(const QString &newApiKey)
+{
+    m_apiKey = newApiKey;
 }

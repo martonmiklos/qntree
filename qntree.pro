@@ -21,12 +21,12 @@ SOURCES += \
     db/config_db.cpp \
     dialog.cpp \
     inventreecategorypathlineedit.cpp \
+    inventreeprofilemanager.cpp \
     inventreestocklocationpathlineedit.cpp \
     inventreepartimportwizard.cpp \
     inventreesettingsdialog.cpp \
     main.cpp \
     mainwindow.cpp \
-    supplier/abstractsupplier.cpp \
     supplier/supplierpart.cpp \
     supplier/supplierpartproperty.cpp \
     supplier/supplierregistry.cpp \
@@ -68,6 +68,7 @@ HEADERS += \
     db/config_db.h \
     dialog.h \
     inventreecategorypathlineedit.h \
+    inventreeprofilemanager.h \
     inventreestocklocationpathlineedit.h \
     inventreepartimportwizard.h \
     inventreesettingsdialog.h \
@@ -83,6 +84,7 @@ HEADERS += \
     supplier/suppliers/mouser.h \
     supplier/suppliers/mousersettingsdialog.h \
     supplier/suppliers/mouserpart.h \
+    supplier/suppliers/suppliersettingsdialog.h \
     supplier/suppliers/tme.h \
     supplier/suppliers/tmesettingsdialog.h \
     supplier/suppliers/tmepart.h \

@@ -1,6 +1,7 @@
 #include "inventreestocklocationpathlineedit.h"
 
 #include "inventreesettingsdialog.h"
+#include "inventreeprofilemanager.h"
 
 InventreeStockLocationListModel::InventreeStockLocationListModel(QObject *parent)
     : QAbstractListModel(parent)
@@ -38,9 +39,12 @@ InventreeStockLocationPathLineEdit::InventreeStockLocationPathLineEdit(QWidget *
 {
     m_api = new InvenTree::StockApi();
     QSettings settings;
-    settings.beginGroup("InventTree");
+    settings.beginGroup(QStringLiteral("InvenTreeProfiles"));
+    settings.beginGroup(InvenTreeProfileManager::currentInstanceUuid());
     const auto token = settings.value(InventreeSettingsDialog::KEY_TOKEN).toString();
     settings.endGroup();
+    settings.endGroup();
+
     m_api->addHeaders("Authorization", "Token " + token);
 
     m_model = new InventreeStockLocationListModel(this);

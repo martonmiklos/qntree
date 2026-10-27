@@ -6,9 +6,9 @@
 SupplierRegistry::SupplierRegistry(QObject *parent) :
     QObjectSingleton<SupplierRegistry>(parent)
 {
-    m_suppliers.append(new TME(this));
-    m_suppliers.append(new Mouser(this));
-    m_suppliers.append(new Element14(this));
+    m_suppliers.append(TME::instance(this));
+    m_suppliers.append(Mouser::instance(this));
+    m_suppliers.append(Element14::instance(this));
 }
 
 QList<QPair<QString, QString> > SupplierRegistry::getSuppliersDisplayInfo()
@@ -21,8 +21,9 @@ QList<QPair<QString, QString> > SupplierRegistry::getSuppliersDisplayInfo()
 
 AbstractSupplier *SupplierRegistry::getSupplierByUId(const QString &uid)
 {
-    for (auto supplier : m_suppliers)
+    for (auto supplier : m_suppliers) {
         if (supplier->uid() == uid)
             return supplier;
+    }
     return nullptr;
 }

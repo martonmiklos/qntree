@@ -15,6 +15,8 @@ class SupplierParameterMap : public Nut::Table
 
   NUT_DECLARE_FIELD(int, invenetree_part_category_parameter_type_id, invenetree_part_category_parameter_type_id, setInvenetree_part_category_parameter_type_id, 0)
 
+  NUT_DECLARE_FIELD(QString, inventree_instance_uuid, inventree_instance_uuid, setInventree_instance_uuid, QString())
+
   public:
     Q_INVOKABLE SupplierParameterMap( QObject *parent = nullptr );
 

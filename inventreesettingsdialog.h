@@ -26,7 +26,6 @@ public:
     static constexpr const char* KEY_SERVER = "server_url";
     static constexpr const char* KEY_TOKEN  = "api_token";
     static constexpr const char* KEY_URL_LIST = "server_url_history";
-    static constexpr const char* KEY_CONNECTION_PROFILES = "connection_profiles";
 
 private slots:
     void saveSettings();
@@ -35,10 +34,12 @@ private slots:
     void deleteConnectionProfile();
     void testConnection();
 
+    void on_InventreeSettingsDialog_accepted();
+
 private:
     void loadSettings();
     void setupCompleter();
-    void refreshConnectionProfiles(const QString &selectedProfile = QString());
+    void refreshConnectionProfiles();
     QUrl healthCheckUrl(const QString &serverUrl) const;
 
 private:
