@@ -29,6 +29,7 @@ void Mouser::loadSettings()
 
 void Mouser::saveSettings()
 {
+    AbstractSupplier::saveSettings();
     m_settings.beginGroup(QStringLiteral("Suppliers/Mouser"));
     m_settings.setValue(KEY_API_KEY, m_apiKey);
     m_settings.endGroup();

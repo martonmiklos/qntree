@@ -14,7 +14,6 @@ Element14* Element14::m_instance = nullptr;
 Element14::Element14(QObject *parent)
     : AbstractSupplier("element14", "5888c32b-2de8-435f-a63b-2c39de5d6b1d", parent)
 {
-    loadSettings();
 }
 
 void Element14::retrivePart(const QString &partNumber)
