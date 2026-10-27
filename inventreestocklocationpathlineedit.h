@@ -10,6 +10,7 @@ struct InventreeStockLocationItem
 {
     int id = -1;
     QString path;
+    QString description;
 };
 
 class InventreeStockLocationListModel : public QAbstractListModel

@@ -18,8 +18,13 @@ QVariant InventreeStockLocationListModel::data(const QModelIndex &index, int rol
     if (!index.isValid() || index.row() >= m_items.size())
         return {};
     const auto &item = m_items[index.row()];
-    if (role == Qt::DisplayRole || role == Qt::EditRole)
-        return item.path;
+    if (role == Qt::DisplayRole || role == Qt::EditRole) {
+        if (item.description.isEmpty()) {
+            return item.path;
+        } else {
+            return item.path + " (" + item.description + ")";
+        }
+    }
     if (role == IdRole)
         return item.id;
     return {};
@@ -30,7 +35,7 @@ void InventreeStockLocationListModel::setLocations(const InvenTree::PaginatedLoc
     beginResetModel();
     m_items.clear();
     for (const auto &location : list.getResults())
-        m_items.append({location.getPk(), location.getPathstring()});
+        m_items.append({location.getPk(), location.getPathstring(), location.getDescription()});
     endResetModel();
 }
 
